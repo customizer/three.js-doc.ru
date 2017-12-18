@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Константы</h2>
+<h3 id="1">Анимационные константы</h3>
+<h4 id="1.1">Цикличные режимы (loop modes)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('loop once - одноразовый цикл, т.е. однократное воспроизведение клипа','Arial,9',10,10,0xffffff,0xd69967)">THREE.LoopOnce</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('loop repeat - повторяющийся цикл, т.е. клип проигрывается выбранное количество раз (указанное в параметре repetitions), всякий раз переходя с конца клипа непосредственно на его начало','Arial,9',10,10,0xffffff,0xd69967)">THREE.LoopRepeat</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('loop pingpong - цикл пинг-понг, т.е. клип воспроизводится выбранное количество раз (указанное в параметре repetitions), проигрывая его поочередно вперед и назад','Arial,9',10,10,0xffffff,0xd69967)">THREE.LoopPingPong</a></pre>
+<h4 id="1.2">Режимы интерполяции (interpolation modes)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('interpolate discrete - дискретная (т.е. прерывистая, из отдельных частей) интерполяция','Arial,9',10,10,0xffffff,0xd69967)">THREE.InterpolateDiscrete</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('interpolate linear - линейная интерполяция','Arial,9',10,10,0xffffff,0xd69967)">THREE.InterpolateLinear</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('interpolate smooth - плавная (гладкая) интерполяция','Arial,9',10,10,0xffffff,0xd69967)">THREE.InterpolateSmooth</a></pre>
+<h4 id="1.3">Режимы окончания (ending modes)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('zero curvature ending - окончание с нулевой кривизной','Arial,9',10,10,0xffffff,0xd69967)">THREE.ZeroCurvatureEnding</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('zero slope ending - окончание с нулевым уклоном','Arial,9',10,10,0xffffff,0xd69967)">THREE.ZeroSlopeEnding</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('wrap around ending - окончание окружением оболочкой','Arial,9',10,10,0xffffff,0xd69967)">THREE.WrapAroundEnding</a></pre>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/constants.js.txt">constants.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br><br>
+
+
+<h3 id="2">Константы ядра</h3>
+<h4 id="2.1">Номер версии (revision number)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('сокращение от слова revision - ревизия, пересмотр, изменение','Arial,9',10,10,0xffffff,0xd69967)">THREE.REV</a></pre>
+<a href="https://github.com/mrdoob/three.js/releases" target="_blank">Номер текущей версии</a> <em>three.js</em>.
+<h4 id="2.2">Кнопки мышки (mouse buttons)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('mouse left - левая кнопка мышки','Arial,9',10,10,0xffffff,0xd69967)">THREE.MOUSE.LEFT</a></pre>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('mouse middle - средняя кнопка мышки','Arial,9',10,10,0xffffff,0xd69967)">THREE.MOUSE.MIDDLE</a></pre>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('mouse right - правая кнопка мышки','Arial,9',10,10,0xffffff,0xd69967)">THREE.MOUSE.RIGHT</a></pre>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/constants.js.txt">constants.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br><br>
+
+
+<h3 id="3">Константы настраиваемых уравнений смешивания</h3>
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/webgl_materials_blending_custom" target="_blank">materials / blending / custom</a></pre><br>
+
+<h4>Применение</h4>
+Константы работают со всеми типами материалов. Вначале устанавливается режим смешивания материалов (<tt>THREE.CustomBlending</tt>),
+затем устанавливается желаемые уравнение смешивания (<tt>Blending Equation</tt>), исходный фактор (<tt>Source Factor</tt>) и целевой фактор (<tt>Destination Factor</tt>).
+<pre>var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+material.blending = THREE.CustomBlending;
+material.blendEquation = THREE.AddEquation; // по умолчанию
+material.blendSrc = THREE.SrcAlphaFactor; // по умолчанию
+material.blendDst = THREE.OneMinusDstAlphaFactor; // по умолчанию</pre><br>
+
+<h4 id="3.1">Уравнения смешивания (blending equations)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('add equation - уравнение сложения','Arial,9',10,10,0xffffff,0xd69967)">THREE.AddEquation</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('subtract equation - уравнение вычитания','Arial,9',10,10,0xffffff,0xd69967)">THREE.SubtractEquation</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('reverse subtract equation - уравнение обратного вычитания','Arial,9',10,10,0xffffff,0xd69967)">THREE.ReverseSubtractEquation</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('min equation - уравнение минимизации','Arial,9',10,10,0xffffff,0xd69967)">THREE.MinEquation</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('max equation - уравнение максимизации','Arial,9',10,10,0xffffff,0xd69967)">THREE.MaxEquation</a></pre><br>
+
+<h4 id="3.2">Исходные факторы (source factors)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('zero factor - нулевой фактор','Arial,9',10,10,0xffffff,0xd69967)">THREE.ZeroFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('one factor - единичный фактор','Arial,9',10,10,0xffffff,0xd69967)">THREE.OneFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('source color factor - исходный фактор цвета','Arial,9',10,10,0xffffff,0xd69967)">THREE.SrcColorFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('one minus source color factor - исходный фактор цвета, за вычетом одного','Arial,9',10,10,0xffffff,0xd69967)">THREE.OneMinusSrcColorFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('source alpha factor - исходный фактор альфа-канала (прозрачность)','Arial,9',10,10,0xffffff,0xd69967)">THREE.SrcAlphaFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('one minus source alpha factor - исходный фактор альфа-канала (прозрачность), за вычетом одного','Arial,9',10,10,0xffffff,0xd69967)">THREE.OneMinusSrcAlphaFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('destination alpha factor - целевой фактор альфа-канала (прозрачность)','Arial,9',10,10,0xffffff,0xd69967)">THREE.DstAlphaFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('one minus destination alpha factor - целевой фактор альфа-канала (прозрачность), за вычетом одного','Arial,9',10,10,0xffffff,0xd69967)">THREE.OneMinusDstAlphaFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('destination color factor - целевой фактор цвета','Arial,9',10,10,0xffffff,0xd69967)">THREE.DstColorFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('one minus destination color factor - целевой фактор цвета, за вычетом одного','Arial,9',10,10,0xffffff,0xd69967)">THREE.OneMinusDstColorFactor</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('source alpha saturate factor - исходный фактор насыщения альфа-канала (прозрачность)','Arial,9',10,10,0xffffff,0xd69967)">THREE.SrcAlphaSaturateFactor</a></pre><br>
+
+<h4 id="3.3">Целевые факторы (destination factors)</h4>
+Все исходные факторы работают и как целевые, за исключением <tt>THREE.SrcAlphaSaturateFactor</tt>.<br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/constants.js.txt">constants.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br><br>
+
+
+<h3 id="4">Константы режима рисования</h3>
+Это действующие значения для свойства <a href="objects.htm#8drawMode" title="Mesh.drawMode">Mesh.drawMode</a>, и управляют тем, как список вершин будет интерпретирован после отправки в графический процессор (GPU).<br>
+Обратите внимание, что это все работает только когда <a href="objects.htm#8geometry" title="Mesh.geometry">Mesh.geometry</a> является <a href="core.htm#2" title="BufferGeometry">BufferGeometry</a>.
+Изменение констант, когда <a href="objects.htm#8geometry" title="Mesh.geometry">Mesh.geometry</a> является <a href="core.htm#7" title="Geometry">Geometry</a>, не окажет никакого влияния.
+
+<h4 id="4.1">Режимы рисования (draw modes)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('triangles draw mode - режим рисования треугольников','Arial,9',10,10,0xffffff,0xd69967)">THREE.TrianglesDrawMode</a></pre>
+<div class=blockindent>Этот режим устанавливается по умолчанию и приводит к тому, что каждые три последовательные вершины (v0, v1, v2), (v2, v3, v5), ... будут интерпретированы как отдельный треугольник.<br>
+Если число вершин не кратно 3, избыточные вершины игнорируются.</div>
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('triangle strip draw mode - режим рисования ленты треугольников','Arial,9',10,10,0xffffff,0xd69967)">THREE.TriangleStripDrawMode</a></pre>
+<div class=blockindent>Этот режим приведет к последовательности треугольников, соединенных в ленту, представленную как (v0, v1, v2), (v2, v1, v3), (v2, v3, v4), ... так что каждый предыдущий треугольник имеет две общие вершины с предыдущим треугольником.</div>
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('triangle fan draw mode - режим рисования треугольников как лопасти у вентилятора','Arial,9',10,10,0xffffff,0xd69967)">THREE.TriangleFanDrawMode</a></pre>
+<div class=blockindent>В результате этого режима появятся последовательности треугольников, в каждом из которых имеется одна общая вершина (подобно лопастям вентилятора - fan), представленные как (v0, v1, v2), (v0, v2, v3), (v0, v3, v4), и т.д.
+<div class=note><b>Примечание:</b> Этот режим не поддерживается <a href="https://en.wikipedia.org/wiki/DirectX#DirectX_10" target="_blank">DirectX10</a>. (Вот <a href="https://ru.wikipedia.org/wiki/DirectX" target="_blank">DirectX10 на русском языке</a>.)
+Браузеры Chrome и Firefox представляют WebGL на Windows при помощи <a href="https://en.wikipedia.org/wiki/ANGLE_(software)" target="_blank">ANGLE</a>, преобразовывая внутри себя этот режим в поддерживаемый, что, скорее всего приведет к снижению производительности этих браузеров.
+<div class=note_trans><b>Примечание переводчика:</b> ANGLE (Almost Native Graphics Layer Engine - практически встроенный движок графического слоя, а перевод самой аббревиатуры ANGLE - угол) это графический движок слоя абстракций, разработанный компанией Google, с открытым исходным кодом под лицензией BSD.
+Этот API в основном предназначен для обеспечения высокопроизводительной совместимости OpenGL с компьютерами Windows и веб-браузерами вроде Chromium, путем перевода вызовов OpenGL в Direct3D, который гораздо лучше поддерживается драйверами. Для ANGLE существует два внутренних визуализатора: самый старый использует Direct3D 9.0c, в то время как новый использует Direct3D 11.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><i>из вышеприведенной статьи англ. Википедии, перевод мой.</i></span></div></div></div><br>
+
+<h4>Применение</h4>
+<pre>var geometry = new THREE.Geometry();<br>
+geometry.vertices.push(
+	new THREE.Vector3( -10,  10, 0 ),
+	new THREE.Vector3( -10, -10, 0 ),
+	new THREE.Vector3(  10, -10, 0 ),
+	...
+);
+geometry.faces.push( new THREE.Face3( 0, 1, 2 ), ... );<br>
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );<br>
+var mesh = new THREE.Mesh( geometry, material );
+mesh.drawMode = THREE.TrianglesDrawMode; // default (по умолчанию)<br>
+scene.add( mesh );</pre>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/constants.js.txt">constants.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br>
+
+
+<h3 id="5">Константы материалов</h3>
+Эти константы определяют свойства, общие для всех типов материала, за исключением операций комбинирования текстур (Texture Combine Operations),
+которые применяются только к <a href="materials.htm#4combine" title="MeshBasicMaterial.combine">MeshBasicMaterial</a>, <a href="materials.htm#6combine" title="MeshLambertMaterial.combine">MeshLambertMaterial</a>
+и <a href="materials.htm#8combine" title="MeshPhongMaterial.combine">MeshPhongMaterial</a>.
+
+<h4 id="5.1">Сторона (side)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('front side - лицевая (передняя) сторона','Arial,9',10,10,0xffffff,0xd69967)">THREE.FrontSide</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('back side - оборотная (задняя) сторона','Arial,9',10,10,0xffffff,0xd69967)">THREE.BackSide</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('double side - две стороны','Arial,9',10,10,0xffffff,0xd69967)">THREE.DoubleSide</a></pre>
+Эти константы определяют какая сторона грани будет отображаться - передняя (front), задняя (back) или обе.
+По умолчанию используется <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">FrontSide</a>.
+
+<h4 id="5.2">Цвета (colors)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('no colors - нет цвета','Arial,9',10,10,0xffffff,0xd69967)">THREE.NoColors</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('face colors - цвета граней (сторон)','Arial,9',10,10,0xffffff,0xd69967)">THREE.FaceColors</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('vertex colors - цвета вершин','Arial,9',10,10,0xffffff,0xd69967)">THREE.VertexColors</a></pre>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">NoColors</a> используется по умолчанию и применяет ко всем граням (поверхностям) цвет материала.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">FaceColors</a> окрашивает грани (стороны) в соответствии со значением каждого цвета <a href="math.htm#3" title="Color">color</a> <a href="core.htm#5" title="Face3">Face3</a>.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">VertexColors</a> colors faces according to each <a href="core.htm#5" title="Face3">Face3</a> <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)">vertexColors</a> value.
+Это массив из трех значений <a href="math.htm#3" title="Color">color</a>, по одному для каждой вершины грани. one for each vertex in the face.<br>
+Смотрите пример <a href="https://threejs.org/examples/webgl_geometry_colors" target="_blank">geometry / colors</a>.
+
+<h4 id="5.3">Режим смешивания (blending mode)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('no blending - нет смешивания','Arial,9',10,10,0xffffff,0xd69967)">THREE.NoBlending</a>
+THREE.NormalBlending
+THREE.AdditiveBlending
+THREE.SubtractiveBlending
+THREE.MultiplyBlending
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('custom blending - настраиваемое смешивание','Arial,9',10,10,0xffffff,0xd69967)">THREE.CustomBlending</a></pre>
+Они управляют исходным и целевым уравнениями для RGB и Alpha материала These control the source and destination blending equations for the material's RGB and Alpha sent to the WebGLRenderer for use by WebGL.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">NormalBlending</a> используется по умолчанию.<br>
+Обратите внимание, что <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">CustomBlending</a> должен быть установлен для использования <a href="#2" title="CustomBlendingEquation"> Custom Blending Equations</a>.<br>
+Смотрите пример <a href="https://threejs.org/examples/webgl_materials_blending" target="_blank">materials / blending</a>.
+
+<h4 id="5.4">Режим глубины (depth mode)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('never depth - никогда нет глубины','Arial,9',10,10,0xffffff,0xd69967)">THREE.NeverDepth</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('always depth - глубина есть всегда','Arial,9',10,10,0xffffff,0xd69967)">THREE.AlwaysDepth</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('less depth - глубина','Arial,9',10,10,0xffffff,0xd69967)">THREE.LessDepth</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('less equal depth - глубина','Arial,9',10,10,0xffffff,0xd69967)">THREE.LessEqualDepth</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('greater equal depth - глубина','Arial,9',10,10,0xffffff,0xd69967)">THREE.GreaterEqualDepth</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('greater depth - глубина','Arial,9',10,10,0xffffff,0xd69967)">THREE.GreaterDepth</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('not equal depth - нет равной глубины','Arial,9',10,10,0xffffff,0xd69967)">THREE.NotEqualDepth</a></pre>
+Which depth function the material uses to compare incoming pixels Z-depth against the current Z-depth buffer value. Если результатом этого сравнения будет значение <tt>true</tt>, пиксель будет прорисован. If the result of the comparison is true, the pixel will be drawn.<br>
+[page:Materials NeverDepth</a> will never return true.<br>
+[page:Materials AlwaysDepth</a> will always return true.<br>
+[page:Materials LessDepth</a> will return true if the incoming pixel Z-depth is less than the current buffer Z-depth.<br>
+[page:Materials LessEqualDepth</a> is the default and will return true if the incoming pixel Z-depth is less than or equal to the current buffer Z-depth.<br>
+[page:Materials GreaterEqualDepth</a> will return true if the incoming pixel Z-depth is greater than or equal to the current buffer Z-depth.<br>
+[page:Materials GreaterDepth</a> will return true if the incoming pixel Z-depth is greater than the current buffer Z-depth.<br>
+[page:Materials NotEqualDepth</a> will return true if the incoming pixel Z-depth is equal to the current buffer Z-depth.<br>
+
+<h4 id="5.5">Операции комбинирования (совмещения) текстур</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('multiply operation - операция умножения','Arial,9',10,10,0xffffff,0xd69967)">THREE.MultiplyOperation</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('mix operation - операция смешивания','Arial,9',10,10,0xffffff,0xd69967)">THREE.MixOperation</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('add operation - операция сложения','Arial,9',10,10,0xffffff,0xd69967)">THREE.AddOperation</a></pre>
+Эти операции определяют каков будет результат при совмещении цвета поверхности с картой цвета среды (если существует),
+для таких материалов как <a href="materials.htm#4combine" title="MeshBasicMaterial.combine">MeshBasicMaterial</a>, <a href="materials.htm#6combine" title="MeshLambertMaterial.combine">MeshLambertMaterial</a> и <a href="materials.htm#8combine" title="MeshPhongMaterial.combine">MeshPhongMaterial</a>.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">MultiplyOperation</a> применяется по умолчанию и перемножает карту цвета среды и цвет поверхности.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">MixOperation</a> при смешивании двух цветов используется отражение.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">AddOperation</a> добавляет два цвета.
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/constants.js.txt">constants.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br>
+
+
+<h3 id="6">Константы WebGLRenderer</h3>
+<h4 id="6.1">Режимы выбраковки граней (cull face modes)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('cull face none - нет выбраковки граней','Arial,9',10,10,0xffffff,0xd69967)">THREE.CullFaceNone</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('cull face back - отбрасывается задняя грань','Arial,9',10,10,0xffffff,0xd69967)">THREE.CullFaceBack</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('cull face front - отбрасывается передняя грань','Arial,9',10,10,0xffffff,0xd69967)">THREE.CullFaceFront</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('cull face front back - отбрасываются грани впереди и сзади','Arial,9',10,10,0xffffff,0xd69967)">THREE.CullFaceFrontBack</a></pre>
+Эти константы используются методом <a href="renderers.htm#1setFaceCulling" title="WebGLRenderer.setFaceCulling">setFaceCulling</a> WebGLRenderer'а.<br>
+<div class=list><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">CullFaceNone</a> отключает выбраковку граней.</div>
+<div class=list><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">CullFaceBack</a> отбрасываются задние грани (эта константа применяется по умолчанию).</div>
+<div class=list><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">CullFaceFront</a> отбрасываются переднии грани.</div>
+<div class=list><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">CullFaceFrontBack</a> отбрасываются обе грани, и передняя и задняя.</div><br>
+
+<h4 id="6.2">Направление передней грани Front Face Direction</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('сокращение от front face direction clockwise - направление передних граней по часовой стрелке','Arial,9',10,10,0xffffff,0xd69967)">THREE.FrontFaceDirectionCW</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('сокращение от front face direction counter-clockwise - направление передних граней против часовой стрелки','Arial,9',10,10,0xffffff,0xd69967)">THREE.FrontFaceDirectionCCW</a></pre>
+Эти константы используются методом <a href="renderers.htm#1setFaceCulling" title="WebGLRenderer.setFaceCulling">setFaceCulling</a> WebGLRenderer'а.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">FrontFaceDirectionCW</a> sets the winding order for polygons to clockwise.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">FrontFaceDirectionCCW</a> sets the winding order for polygons to counter-clockwise (default).</div><br>
+
+<h4 id="6.3">Типы тени Shadow Types</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('basic shadow map - базовая карта тени','Arial,9',10,10,0xffffff,0xd69967)">THREE.BasicShadowMap</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('PCF shadow map - карта тени с фильтром процентного приближения - PCF','Arial,9',10,10,0xffffff,0xd69967)">THREE.PCFShadowMap</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('PCF soft shadow map - карта мягкой тени с фильтром процентного приближения','Arial,9',10,10,0xffffff,0xd69967)">THREE.PCFSoftShadowMap</a></pre>
+Эти константы определяют свойство <a href="renderers.htm#1shadowMap.type" title="WebGLRenderer.shadowMap.type">shadowMap.type</a> WebGLRenderer'а.<br>
+
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">BasicShadowMap</a> дает нефильтрованные карты теней - самые быстрые, но и самые низкокачественные. gives unfiltered shadow maps - fastest, but lowest quality.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">PCFShadowMap</a> фильтры теневых карт используют алгоритм Percentage-Closer Filtering - PCF (значение по умолчанию).<br>
+<!-- работа алгоритма заключается в том, что производится несколько тестов на затенение в окрестностях искомого фрагмента и для затенения используется среднее значение этих тестов, таким образом, граница тени будет более "мягкой". -->
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)">PCFSoftShadowMap</a> фильтры теневых карт используют алгоритм Percentage-Closer Soft Shadows (PCSS).</div>
+<!-- Технология создания теней PCSS позволяет сделать их более реалистичными и приближенными к жизни. Очертания теней растворяются по мере удаления от объекта, отбрасывающего тень. Использование технологии PCSS позволяет сделать очертания теней естественными и избежать «лесенок».  -->
+
+<h4 id="6.4">Tone Mapping</h4>
+<!-- HDR (High Dynamic Range) — технология широкодиапазонного представления цвета.
+
+До недавнего времени стандартно цвет в компьютерной графике представлялся 32 битами, по 8 бит на компонент (красный, зелёный, синий и альфа). Таким образом, каждая цветовая компонента может принимать 256 различных оттенков. Практика показала, что при таком количестве оттенков человеческий глаз не способен различить погрешности отображения. Проще говоря, такой точности хватало.
+
+Однако теперь, в связи с появлением более сложных технологий освещения, появилась необходимость большей точности вычислений. В результате появилась технология HDR. Суть её заключается в использовании 16 бит на компонент (исключение составляет только самый конец конвейера — экран, где используется по-прежнему 8-битная точность, для реализации эффекта HDR применяют 16-битные текстуры специального формата). Кроме того, яркость компонента представляется не числом с фиксированной точкой, а с плавающей, в результате чего появляется возможность работать с очень большими и очень малыми значениями при довольно высокой точности. В итоге, становится возможным работать с такими эффектами, как световые блики, ослепление ярким светом и пр.
+
+
+Чаще всего термин HDR употребляется в отношении получения, хранения и обработки растровых изображений. Широко используемые на сегодняшний день цифровые технологии исторически основаны на 8-битных целочисленных форматах представления и обработки данных, что даёт весьма узкий динамический диапазон, часто называемый SDR (англ. Standard Dynamic Range) или LDR (англ. Low Dynamic Range). Для сравнения, отношение наиболее яркого к наименее яркому (но ещё не чёрному) цветам для sRGB составляет порядка 3 000:1, в то время как реальные сцены часто имеют динамический диапазон яркости в 1 000 000:1 и выше, при этом и в тенях и в свете глаз способен (из-за световой адаптации к яркости) различить детали. Применение техники HDR позволяет работать с полным диапазоном яркости сцены, устраняя исторические ограничения. -->
+Отображение тонов цвета (tone mapping) - это процесс преобразования диапазона яркостей HDR к LDR диапазону, отображаемому устройством вывода, например, монитором или принтером,
+так как вывод HDR изображений на них потребует преобразования динамического диапазона и цветового охвата модели HDR в соответствующий динамический диапазон LDR, чаще всего модель RGB.
+Ведь диапазон яркости, представленный в HDR, очень широк, это несколько порядков абсолютного динамического диапазона единовременно, в одной сцене.
+А диапазон, который можно воспроизвести на привычных устройствах вывода (мониторах, телевизорах), составляет лишь около двух порядков динамического диапазона.<br><br>
+
+Преобразование из HDR в LDR и называется tone mapping, оно выполняется с потерями и имитирует свойства человеческого зрения.
+<!-- тональное отображение (англ. tone mapping), при котором закон преобразования яркости пикселей может быть разным для различных частей изображения (имитация градиентного фильтра). Существуют разные алгоритмы с разными дополнительными эффектами и возможностями по управлению пользователем этим процессом. В результате применения алгоритмов могут образовываться ореолы в районе границ между светлыми и тёмными областями, тёмные по природе объекты могут стать неестественно светлыми. -->
+
+<br><br>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="no tone mapping - нет отображения тонов">THREE.NoToneMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="linear tone mapping - линейное преобразование отображения тонов">THREE.LinearToneMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="Reinhard tone mapping - преобразование отображения тонов по Рейнгарду">THREE.ReinhardToneMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="uncharted 2 tone mapping - uncharted 2 отображение тонов">THREE.Uncharted2ToneMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="cineon tone mapping - преобразование cineon отображения тонов">THREE.CineonToneMapping</a></pre>
+Эти константы определяют свойство <a href="renderers.htm#1toneMapping" title="WebGLRenderer.toneMapping">toneMapping</a> WebGLRenderer'а.
+Они используются для приведения внешнего вида изображения в расширенном динамическом диапазоне (high dynamic range - HDR) к возможному отображению их в низком динамическом диапазоне (low dynamic range - LDR) стандартного компьютерного монитора или экрана мобильного устройства.<br><br>
+
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="no tone mapping - нет отображения тонов">NoToneMapping</a> отключает отображение тонов.<br>
+Значением по умолчанию является <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="linear tone mapping - линейное отображение тонов">LinearToneMapping</a>.<br>
+Смотрите пример <a href="https://threejs.org/examples/webgl_tonemapping" target="_blank">отображения тонов</a>.</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/constants.js.txt">constants.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br>
+
+
+<h3 id="7">Константы текстур</h3>
+<h4 id="7.1">Режимы картирования (Mapping Modes)</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="UV mapping - ">THREE.UVMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="cube reflection mapping - ">THREE.CubeReflectionMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="cube refraction mapping - ">THREE.CubeRefractionMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="equirectangular reflection mapping - ">THREE.EquirectangularReflectionMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="equirectangular refraction mapping - ">THREE.EquirectangularRefractionMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="spherical reflection mapping - ">THREE.SphericalReflectionMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="cube UV reflection mapping - ">THREE.CubeUVReflectionMapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="cube UV refraction mapping - ">THREE.CubeUVRefractionMapping</a></pre>
+Эти константы определяют режим отображения текстуры.These define the texture's mapping mode.<br>
+Значением по умолчанию является <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="UV mapping - ">THREE.UVMapping</a></tt>, при которой текстура накладывается на поверхность объекта в соответствии с координатами UV сетки (mesh).<br>
+Остальные константы определяют типы The rest define environment mapping types.<br>
+
+[page:Constant CubeReflectionMapping] and [page:Constant CubeRefractionMapping] are for use with a [page:CubeTexture CubeTexture], which is made up of six textures, one for each face of the cube.<br>
+[page:Constant CubeReflectionMapping] is the default for a [page:CubeTexture CubeTexture].<br><br>
+
+[page:Constant EquirectangularReflectionMapping] and [page:Constant EquirectangularRefractionMapping] are for use with an equirectangular environment map.<br><br>
+[page:Constant SphericalReflectionMapping] is for use with a spherical reflection map.<br><br>
+Смотрите пример <a href="https://threejs.org/examples/webgl_materials_envmaps" target="_blank">materials / envmaps</a>.<br><br>
+
+<h4 id="7.2">Wrapping Modes</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="repeat wrapping - повторение оболочки">THREE.RepeatWrapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="clamp to edge wrapping - стыковать с краем оболочки">THREE.ClampToEdgeWrapping</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="mirrored repeat wrapping - зеркальное повторение оболочки">THREE.MirroredRepeatWrapping</a></pre>
+Эти константы определяют свойства текстур
+These define the texture's [page:Texture.wrapS wrapS] and [page:Texture.wrapT wrapT] properties, which define horizontal and vertical texture wrapping.<br><br>
+С константой <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="repeat wrapping - повторение оболочки">RepeatWrapping</a></tt> текстура будет попросту повторяться до бесконечности.<br><br>
+По умолчанию применяется константа <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="clamp to edge wrapping - стыковать с краем оболочки">ClampToEdgeWrapping</a></tt>.
+Последний пиксел текстуры растягивается до края сетки (mesh).
+The last pixel of the texture stretches to the edge of the mesh.<br><br>
+С константой <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="mirrored repeat wrapping - зеркальное повторение оболочки">MirroredRepeatWrapping</a></tt> текстура будет повторяться бесконечно, зеркально отображаясь при каждом повторе.
+With [page:constant MirroredRepeatWrapping] the texture will repeats to infinity, mirroring on each repeat.
+
+<h4 id="7.3">Magnification Filters</h4>
+<pre>THREE.NearestFilter
+THREE.LinearFilter</pre>
+For use with a texture's [page:Texture.magFilter magFilter]	property, these define the texture magnification function to be used when the pixel being textured maps to an area less than or equal to one texture element (texel).<br><br>
+[page:constant NearestFilter] returns the value of the texture element that is nearest (in Manhattan distance) to the specified texture coordinates.<br><br>
+[page:constant LinearFilter] is the default and returns the weighted average of the four texture elements that are closest to the specified texture coordinates,
+and can include items wrapped or repeated from other parts of a texture, depending on the values of [page:Texture.wrapS wrapS] and [page:Texture.wrapT wrapT], and on the exact mapping.
+
+<h4 id="7.4">Minification Filters</h4>
+<pre>THREE.NearestFilter
+THREE.NearestMipMapNearestFilter
+THREE.NearestMipMapLinearFilter
+THREE.LinearFilter
+THREE.LinearMipMapNearestFilter
+THREE.LinearMipMapLinearFilter</pre>
+For use with a texture's [page:Texture.minFilter minFilter]	property, these define the texture minifying function that is used whenever the pixel being textured maps to an area greater than one texture element (texel).<br><br>
+In addition to [page:constant NearestFilter] and [page:constant LinearFilter], the following four functions can be used for minification:<br><br>
+[page:constant NearestMipMapNearestFilter] chooses the mipmap that most closely matches the size of the pixel being textured and uses the [page:constant NearestFilter] criterion (the texel nearest to the center of the pixel) to produce a texture value.<br><br>
+[page:constant NearestMipMapLinearFilter] chooses the two mipmaps that most closely match the size of the pixel being textured and uses the [page:constant NearestFilter] criterion to produce a texture value from each mipmap.
+The final texture value is a weighted average of those two values.<br><br>
+[page:constant LinearMipMapNearestFilter] chooses the mipmap that most closely matches the size of the pixel being textured and uses the [page:constant LinearFilter] criterion
+(a weighted average of the four texels that are closest to the center of the pixel) to produce a texture value.<br><br>
+[page:constant LinearMipMapLinearFilter] is the default and chooses the two mipmaps that most closely match the size of the pixel being textured and uses the [page:constant LinearFilter] criterion
+to produce a texture value from each mipmap. The final texture value is a weighted average of those two values.<br><br>
+See the [example:webgl_materials_texture_filters materials / texture / filters] example.
+
+<h4 id="7.5">Типы</h4>
+<pre>THREE.UnsignedByteType
+THREE.ByteType
+THREE.ShortType
+THREE.UnsignedShortType
+THREE.IntType
+THREE.UnsignedIntType
+THREE.FloatType
+THREE.HalfFloatType
+THREE.UnsignedShort4444Type
+THREE.UnsignedShort5551Type
+THREE.UnsignedShort565Type
+THREE.UnsignedInt248Type</pre>
+For use with a texture's [page:Texture.type type]	property, which must correspond to the correct format. See below for details.<br><br>
+[page:constant UnsignedByteType] is the default.
+
+<h4 id="7.6">Форматы</h4>
+<pre>THREE.AlphaFormat
+THREE.RGBFormat
+THREE.RGBAFormat
+THREE.LuminanceFormat
+THREE.LuminanceAlphaFormat
+THREE.RGBEFormat
+THREE.DepthFormat
+THREE.DepthStencilFormat</pre>
+For use with a texture's [page:Texture.format format]	property, these define how elements of a 2d texture, or *texels*, are read by shaders.<br><br>
+[page:constant AlphaFormat] discards the red, green and blue components and reads just the alpha component.
+The [page:Texture.type type] must be [page:constant UnsignedByteType].<br><br>
+[page:constant RGBFormat] discards the alpha components and reads the red, green and blue components.
+The [page:Texture.type type] must be [page:constant UnsignedByteType] or [page:constant UnsignedShort565Type].<br><br>
+[page:constant RGBAFormat] is the default and reads the red, green, blue and alpha components.
+The [page:Texture.type type] must be [page:constant UnsignedByteType], [page:constant UnsignedShort4444Type] or [page:constant THREE.UnsignedShort5551Type].<br><br>
+[page:constant LuminanceFormat] reads each element as a single luminance component.
+This is then converted to a floating point, clamped to the range [0,1], and then assembled into an RGBA element by placing the luminance value in the red, green and blue channels, and attaching 1.0 to the alpha channel.
+The [page:Texture.type type] must be [page:constant UnsignedByteType].<br><br>
+[page:constant LuminanceAlphaFormat] reads each element as a luminance/alpha double.
+The same process occurs as for the [page:constant LuminanceFormat], except that the alpha channel may have values other than *1.0*. The [page:Texture.type type] must be [page:constant UnsignedByteType].<br><br>
+[page:constant RGBEFormat] is identical to [page:constant RGBAFormat].<br><br>
+[page:constant DepthFormat] reads each element as a single depth value, converts it to floating point, and clamps to the range [0,1].
+The [page:Texture.type type] must be [page:constant UnsignedIntType] or [page:constant UnsignedShortType].
+This is the default for [page:DepthTexture DepthTexture].<br><br>
+[page:constant DepthStencilFormat] reads each element is a pair of depth and stencil values.
+The depth component of the pair is interpreted as in [page:constant DepthFormat].
+The stencil component is interpreted based on the depth + stencil internal format.
+The [page:Texture.type type] must be [page:constant UnsignedInt248Type].<br><br>
+Note that the texture must have the correct [page:Texture.type type] set, as described above.
+See <a href="https://developer.mozilla.org/en/docs/Web/API/WebGLRenderingContext/texImage2D">this page</a> for details.
+
+<h4 id="7.7">DDS / ST3C Compressed Texture Formats</h4>
+<pre>THREE.RGB_S3TC_DXT1_Format
+THREE.RGBA_S3TC_DXT1_Format
+THREE.RGBA_S3TC_DXT3_Format
+THREE.RGBA_S3TC_DXT5_Format</pre>
+For use with a [page:CompressedTexture CompressedTexture]'s [page:Texture.format format] property, these require support for the <a href="https://www.khronos.org/registry/webgl/extensions/WEBGL_compressed_texture_s3tc/">WEBGL_compressed_texture_s3tc</a> extension. <br>
+According to <a href="http://webglstats.com/">WebglStats</a>, as of February 2016 over 80% of WebGL enabled devices support this extension.<br><br>
+There are four <a href="https://en.wikipedia.org/wiki/S3_Texture_Compression">S3TC</a> formats available via this extension. These are:<br>
+[page:constant RGB_S3TC_DXT1_Format]: A DXT1-compressed image in an RGB image format.<br>
+[page:constant RGBA_S3TC_DXT1_Format]: A DXT1-compressed image in an RGB image format with a simple on/off alpha value.<br>
+[page:constant RGBA_S3TC_DXT3_Format]: A DXT3-compressed image in an RGBA image format. Compared to a 32-bit RGBA texture, it offers 4:1 compression.<br>
+[page:constant RGBA_S3TC_DXT5_Format]: A DXT5-compressed image in an RGBA image format. It also provides a 4:1 compression, but differs to the DXT3 compression in how the alpha compression is done.
+
+<h4 id="7.8">PVRTC Compressed Texture Formats</h4>
+<pre>THREE.RGB_PVRTC_4BPPV1_Format
+THREE.RGB_PVRTC_2BPPV1_Format
+THREE.RGBA_PVRTC_4BPPV1_Format
+THREE.RGBA_PVRTC_2BPPV1_Format</pre>
+For use with a [page:CompressedTexture CompressedTexture]'s [page:Texture.format format] property, these require support for the <a href="https://www.khronos.org/registry/webgl/extensions/WEBGL_compressed_texture_pvrtc/">WEBGL_compressed_texture_pvrtc</a> extension. <br>
+According to <a href="http://webglstats.com/">WebglStats</a>, as of February 2016 less than 8% of WebGL enabled devices support this extenstion.
+PVRTC is typically only available on mobile devices with PowerVR chipsets, which are mainly Apple devices.<br><br>
+There are four <a href="https://en.wikipedia.org/wiki/PVRTC">PVRTC</a> formats available via this extension. These are:<br>
+[page:constant RGB_PVRTC_4BPPV1_Format]: RGB compression in 4-bit mode. One block for each 4?4 pixels.<br>
+[page:constant RGB_PVRTC_2BPPV1_Format]: RGB compression in 2-bit mode. One block for each 8?4 pixels.<br>
+[page:constant RGBA_PVRTC_4BPPV1_Format]: RGBA compression in 4-bit mode. One block for each 4?4 pixels.<br>
+[page:constant RGBA_PVRTC_2BPPV1_Format]: RGBA compression in 2-bit mode. One block for each 8?4 pixels.
+
+<h4 id="7.9">ETC Compressed Texture Format</h4>
+<pre>THREE.RGB_ETC1_Format</pre>
+For use with a [page:CompressedTexture CompressedTexture]'s [page:Texture.format format] property, these require support for the <a href="https://www.khronos.org/registry/webgl/extensions/WEBGL_compressed_texture_etc1/">WEBGL_compressed_texture_etc1</a> extension. <br>
+According to <a href="http://webglstats.com/">WebglStats</a>, as of February 2016 just over 13% of WebGL enabled devices support this extenstion.
+
+<h4 id="7.10">Кодирование Encoding</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="linear encoding - линейное кодирование">LinearEncoding</a>
+THREE.sRGBEncoding
+THREE.GammaEncoding
+THREE.RGBEEncoding
+THREE.LogLuvEncoding
+THREE.RGBM7Encoding
+THREE.RGBM16Encoding
+THREE.RGBDEncoding
+THREE.BasicDepthPacking
+THREE.RGBADepthPacking</pre>
+Для использования со свойством <tt><a href="textures.htm#6encoding" title="Texture.encoding">encoding</a></tt> <tt>Texture</tt>.<br><br>
+If the encoding type is changed after the texture has already been used by a material, you will need to set [page:Material.needsUpdate Material.needsUpdate] to *true* to make the material recompile.<br><br>
+Значением по умолчанию является <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="linear encoding - линейное кодирование">LinearEncoding</a>.
+Значения, отличные от данных, действительны только для карт материала, <tt>envMap</tt> и <tt>emissiveMap</tt>.
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/constants.js.txt">constants.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

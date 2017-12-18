@@ -1,0 +1,1296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Геометрические элементы</h2>
+В этом разделе рассматриваются ...<br><br>
+Система координат ...
+<br><br>
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="1">BoxBufferGeometry</h3>
+This is the <a href="core.htm#2" title="BufferGeometry">BufferGeometry</a> port of <a href="#2" title="BoxGeometry">BoxGeometry</a>.<br>
+<img src="img/BoxGeometry1.png" width=450><br>
+<div class="caption">Куб с размером стороны равной 20 и числом сегментов по умолчанию, т.е. 1.</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );</pre><br><br>
+
+<h4>Конструктор</h4>
+<pre>BoxBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="depth - глубина">depth</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="width segments - сегменты (части) по ширине">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height segments - сегменты (части) по высоте">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="depth segments - сегменты (части) по глубине">depthSegments</a> )</pre>
+<div class=list><tt>width</tt> — ширина куба, размер сторон по оси <tt>X</tt>.</div>
+<div class=list><tt>height</tt> — высота куба, т.е. размер сторон по оси <tt>Y</tt>.</div>
+<div class=list><tt>depth</tt> — глубина куба, т.е. размер сторон по оси <tt>Z</tt>.</div>
+<div class=list><tt>widthSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по ширине. По умолчанию значение равно <tt>1</tt>.</div>
+<div class=list><tt>heightSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по высоте. По умолчанию значение равно <tt>1</tt>.</div>
+<div class=list><tt>depthSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по глубине. По умолчанию значение равно <tt>1</tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="1parameters" title="parameters - параметры">.parameters</pre>
+Используем код вышеприведенного примера как основу:
+Using the above example code above as our basis:
+<pre>geometry.parameters;
+   // outputs an object {width: 1, height: 1, depth: 1, widthSegments: undefined, heightSegments: undefined}
+   // параметры объекта {width: 1, height: 1, depth: 1, widthSegments: undefined, heightSegments: undefined}
+cube.geometry.parameters; // как указано выше
+cube.geometry.parameters.width; // === 1, т.е. ширина равна 1
+cube.geometry.parameters.widthSegments // === undefined, т.е. неопределено и используется значение по умолчанию</pre></div<br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/BoxBufferGeometry.js.txt">BoxBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/tree/dev/src/geometries/BoxBufferGeometry.js" target="_blank">BoxBufferGeometry.js на github.com</a></div><br>
+
+
+<span class="right_side"><a href="core.htm#7" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="2">BoxGeometry</h3>
+<tt>BoxGeometry</tt> is the quadrilateral primitive geometry class. Обычно он используется для построения куба или параллелипипеда с размерами, представленными аргументами конструктора <tt>width</tt> - ширина, <tt>height</tt> - высота, и <tt>depth</tt> - глубина.<br>
+<img src="img/BoxGeometry2.png" width=450><br>
+<div class="caption">Куб со стороной равной 20, разделенной на 4 сегмента.</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );</pre><br><br>
+
+<h4>Конструктор</h4>
+<pre>BoxGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="depth - глубина">depth</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="width segments - сегменты (части) по ширине">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height segments - сегменты (части) по высоте">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="depth segments - сегменты (части) по глубине">depthSegments</a> )</pre>
+<div class=list><tt>width</tt> — ширина куба, размер сторон по оси <tt>X</tt>.</div>
+<div class=list><tt>height</tt> — высота куба, т.е. размер сторон по оси <tt>Y</tt>.</div>
+<div class=list><tt>depth</tt> — глубина куба, т.е. размер сторон по оси <tt>Z</tt>.</div>
+<div class=list><tt>widthSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по ширине. По умолчанию значение равно <tt>1</tt>.</div>
+<div class=list><tt>heightSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по высоте. По умолчанию значение равно <tt>1</tt>.</div>
+<div class=list><tt>depthSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по глубине. По умолчанию значение равно <tt>1</tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre>.parameters</pre>
+Using the above example code above as our basis:
+<pre>geometry.parameters; // outputs an object {width: 1, height: 1, depth: 1, widthSegments: undefined, heightSegments: undefined}
+cube.geometry.parameters; // as above
+cube.geometry.parameters.width; // === 1
+cube.geometry.parameters.widthSegments // === undefined.</pre></div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/BoxGeometry.js.txt">BoxGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/tree/dev/src/geometries/BoxGeometry.js" target="_blank">BoxGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="3">CircleBufferGeometry</h3>
+Это порт <a href="core.htm#2">BufferGeometry</a> из <a href="#4">CircleGeometry</a>.<br>
+<img src="img/CircleGeometry1.png" width=500><br>
+<div class="caption">Круг с радиусом 20 и 32 сегментами, остальные параметры по умолчанию.<br><span style="font-size:80%; font-style:italic;">Обратите внимание на более светлую границу между сегментами, справа.<br>Так обозначен <tt>thetaStart</tt> — начальный угол.</span></div><br>
+<h4>Пример</h4>
+<pre>var geometry = new THREE.CircleBufferGeometry( 5, 32 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var circle = new THREE.Mesh( geometry, material );
+scene.add( circle );</pre>
+<h4>Конструктор</h4>
+<pre>CircleBufferGeometry(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">segments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaLength</a>)</pre>
+<div class=list><tt>radius</tt> — радиус круга, значение по умолчанию равно <tt>50</tt>.</div>
+<div class=list><tt>segments</tt> — число сегментов (треугольников), минимальное значение равно <tt>3</tt>, значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол для первого сегмента, значение по умолчанию равно <tt>0</tt> (положение на 3 часа).</div>
+<div class=list><tt>thetaLength</tt> — центральный угол (часто называемый theta) кругового сектора. Значение по умолчанию равно <tt>2*Pi</tt>, что составляет полный круг.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/CircleBufferGeometry.js.txt">CircleBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/CircleGeometry.js" target="_blank">CircleBufferGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="4">CircleGeometry</h3>
+CircleGeometry (геометрия круга) это простая форма эвклидовой геометрии. Она построена из нескольких треугольных сегментов, расположенных вокруг центральной точки и is a simple shape of Euclidean geometry.  It is contructed from a number of triangular segments that are oriented around a central point and extend as far out as a given radius.
+It is built counter-clockwise from a start angle and a given central angle.  It can also be used to create regular polygons, where the number of segments determines the number of sides.<br>
+<img src="img/CircleGeometry1.png" width=500><br>
+<div class="caption">Круг с радиусом 20 и 32 сегментами, остальные параметры по умолчанию.<br><span style="font-size:80%; font-style:italic;">Обратите внимание на более светлую границу между сегментами, справа.<br>Так обозначен <tt>thetaStart</tt> — начальный угол.</span></div><br>
+<h4>Пример</h4>
+<pre>var geometry = new THREE.CircleGeometry( 5, 32 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var circle = new THREE.Mesh( geometry, material );
+scene.add( circle );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>CircleGeometry(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">segments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaLength</a>)</pre>
+<div class=list><tt>radius</tt> — радиус круга, значение по умолчанию равно <tt>50</tt>.</div>
+<div class=list><tt>segments</tt> — число сегментов (треугольников), минимальное значение равно <tt>3</tt>, значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол для первого сегмента, значение по умолчанию равно <tt>0</tt> (положение на 3 часа).</div>
+<div class=list><tt>thetaLength</tt> — центральный угол (часто называемый theta) кругового сектора. Значение по умолчанию равно <tt>2*Pi</tt>, что составляет полный круг.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/CircleGeometry.js.txt">CircleGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/CircleGeometry.js" target="_blank">CircleGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="5">ConeBufferGeometry</h3>
+This is the [page:BufferGeometry] port of [page:ConeGeometry].<br>
+<img src="img/ConeGeometry1.png" width=300><br>
+<div class="caption">Конус</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.ConeBufferGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var cone = new THREE.Mesh( geometry, material );
+scene.add( cone );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>ConeBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">radiusSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)">openEnded</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaLength</a> )</pre>
+<div class=list><tt>radius</tt> — радиус основания конуса, значение по умолчанию равно 20.</div>
+<div class=list><tt>height</tt> — высота конуса, значение по умолчанию равно 100.</div>
+<div class=list><tt>radiusSegments</tt> — число сегментов-граней по окружности конуса, значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>heightSegments</tt> — число рядов граней по высоте конуса. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt>openEnded</tt> — логическое значение, показывающее будет ли основание конуса открытым или закрытым. Значением по умолчанию является <tt>false</tt>, т.е. конус закрыт.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол первого сегмента в основании конуса, значение по умолчанию равно <tt>0</tt> (позиция на три часа).</div>
+<div class=list><tt>thetaLength</tt> — центральный угол (зачастую называемый <tt>theta</tt> - тэта) сектора круга в основании конуса. По умолчанию равен <tt>2*Pi</tt>, что делает конус завершенным.</div><br>
+<script language="javascript">document.write (prop_1);</script>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/ConeBufferGeometry.js.txt">ConeBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/ConeBufferGeometry.js" target="_blank">ConeBufferGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="6">ConeGeometry</h3>
+Класс для построения конических фигур.<br>
+<img src="img/ConeGeometry2.png" width=300><br>
+<div class="caption">Конус</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.ConeGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var cone = new THREE.Mesh( geometry, material );
+scene.add( cone );</pre>
+
+<h4>Конструктор</h4>
+<pre>ConeGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">radiusSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)">openEnded</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaLength</a> )</pre>
+<div class=list><tt>radius</tt> — радиус основания конуса, значение по умолчанию равно 20.</div>
+<div class=list><tt>height</tt> — высота конуса, значение по умолчанию равно 100.</div>
+<div class=list><tt>radiusSegments</tt> — число сегментов-граней по окружности конуса, значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>heightSegments</tt> — число рядов граней по высоте конуса. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt>openEnded</tt> — логическое значение, показывающее будет ли основание конуса открытым или закрытым. Значением по умолчанию является <tt>false</tt>, т.е. конус закрыт.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол первого сегмента в основании конуса, значение по умолчанию равно <tt>0</tt> (позиция на три часа).</div>
+<div class=list><tt>thetaLength</tt> — центральный угол (зачастую называемый <tt>theta</tt> - тэта) сектора круга в основании конуса. По умолчанию равен <tt>2*Pi</tt>, что делает конус завершенным.</div><br>
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/ConeGeometry.js.txt">ConeGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/ConeGeometry.js" target="_blank">ConeGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="7">CylinderBufferGeometry</h3>
+This is the [page:BufferGeometry] port of [page:CylinderGeometry].<br>
+<img src="img/CylinderGeometry1.png" width=300><br>
+<div class="caption">Цилиндр с шестью гранями и закрытыми основаниями</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.CylinderBufferGeometry( 5, 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var cylinder = new THREE.Mesh( geometry, material );
+scene.add( cylinder );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>CylinderBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius top - радиус верха (цилиндра)">radiusTop</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius bottom - радиус низа (цилиндра)">radiusBottom</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="radius segments - сегменты по радиусу">radiusSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height segments - сегменты по высоте">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="open ended - открытые концы">openEnded</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="theta start - начало (угла) тэта">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="theta length - длина (дуги угла) тэта">thetaLength</a> )</pre>
+<div class=list><tt>radiusTop</tt> — радиус цилиндра по верху. Значение по умолчанию равно <tt>20</tt>.</div>
+<div class=list><tt>radiusBottom</tt> — радиус цилиндра по низу. Значение по умолчанию равно <tt>20</tt>.</div>
+<div class=list><tt>height</tt> — высота цилиндра. Значение по умолчанию равно <tt>100</tt>.</div>
+<div class=list><tt>radiusSegments</tt> — число сегментов-граней по окружности цилиндра. Значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>heightSegments</tt> — число рядов граней по высоте цилиндра. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt>openEnded</tt> — логическое значение, показывающее будут ли основания цилиндра открытыми или закрытыми. Значением по умолчанию является <tt>false</tt>, т.е. цилиндр закрыт.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол первого сегмента в основании цилиндра, значение по умолчанию равно <tt>0</tt> (позиция на три часа).</div>
+<div class=list><tt>thetaLength</tt> — центральный угол (зачастую называемый <tt>theta</tt> - тэта) сектора круга в основании цилиндра. По умолчанию равен <tt>2*Pi</tt>, что делает цилиндр завершенным.</div><br>
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/CylinderBufferGeometry.js.txt">CylinderBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/CylinderBufferGeometry.js" target="_blank">CylinderBufferGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="8">CylinderGeometry</h3>
+Класс для построения фигур цилиндрической формы.<br>
+<img src="img/CylinderGeometry2.png" width=300><br>
+<div class="caption">Цилиндр с открытыми основаниями с 16 сегментами-гранями по окружности и четырьмя сегментами по высоте</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var cylinder = new THREE.Mesh( geometry, material );
+scene.add( cylinder );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>CylinderGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius top - радиус верха (цилиндра)">radiusTop</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius bottom - радиус низа (цилиндра)">radiusBottom</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="radius segments - сегменты по радиусу">radiusSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height segments - сегменты по высоте">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="open ended - открытые концы">openEnded</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="theta start - начало (угла) тэта">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="theta length - длина (дуги угла) тэта">thetaLength</a> )</pre>
+<div class=list><tt>radiusTop</tt> — радиус цилиндра по верху. Значение по умолчанию равно <tt>20</tt>.</div>
+<div class=list><tt>radiusBottom</tt> — радиус цилиндра по низу. Значение по умолчанию равно <tt>20</tt>.</div>
+<div class=list><tt>height</tt> — высота цилиндра. Значение по умолчанию равно <tt>100</tt>.</div>
+<div class=list><tt>radiusSegments</tt> — число сегментов-граней по окружности цилиндра. Значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>heightSegments</tt> — число рядов граней по высоте цилиндра. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt>openEnded</tt> — логическое значение, показывающее будут ли основания цилиндра открытыми или закрытыми. Значением по умолчанию является <tt>false</tt>, т.е. цилиндр закрыт.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол первого сегмента в основании цилиндра, значение по умолчанию равно <tt>0</tt> (позиция на три часа).</div>
+<div class=list><tt>thetaLength</tt> — центральный угол (зачастую называемый <tt>theta</tt> - тэта) сектора круга в основании цилиндра. По умолчанию равен <tt>2*Pi</tt>, что делает цилиндр завершенным.</div><br>
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/CylinderGeometry.js.txt">CylinderGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/CylinderGeometry.js" target="_blank">CylinderGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#24" title="Переход к родительскому классу"><tt>PolyhedronBufferGeometry &rarr;</tt></a></span>
+<h3 id="9">DodecahedronBufferGeometry</h3>
+A class for generating a dodecahedron geometries.<br>
+<img src="img/DodecahedronGeometry.png" width=300><br>
+<div class="caption">Додекаэдр</div><br>
+
+<h4>Конструктор</h4><br>
+<pre>DodecahedronBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="detail - части">detail</a> )</pre>
+<div class=list><tt>radius</tt> — радиус додекаэдра. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt>detail</tt> — Значение по умолчанию равно <tt>0</tt>. Установка здесь значения большего <tt>0</tt>, добавит вершин и это будет уже не додекаэдр.</div>
+<div class=blockindent><img src="img/DodecahedronGeometry1.png" width=300><br>
+<div class="caption">При установке значения аргумента <tt>detail</tt> равным <tt>3</tt>,<br>получается вот такой &#171;додекаэдр&#187;.</div></div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="9parameters"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">.parameters</a></pre>
+Объект со всеми параметрами, которые были использованы для построения этой геометрической фигуры.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/DodecahedronBufferGeometry.js.txt">DodecahedronBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/DodecahedronBufferGeometry.js" target="_blank">DodecahedronBufferGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="10">DodecahedronGeometry</h3>
+Класс для построения геометрических фигур в виде додекаэдра (двенадцатигранника).<br>
+<img src="img/DodecahedronGeometry.png" width=300><br>
+<div class="caption">Додекаэдр</div><br>
+
+<h4>Конструктор</h4><br>
+<pre>DodecahedronGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="detail - части">detail</a> )</pre>
+<div class=list><tt>radius</tt> — радиус додекаэдра. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt>detail</tt> — Значение по умолчанию равно <tt>0</tt>. Установка здесь значения большего <tt>0</tt>, добавит вершин и это будет уже не додекаэдр.</div>
+<div class=blockindent><img src="img/DodecahedronGeometry1.png" width=300><br>
+<div class="caption">При установке значения аргумента <tt>detail</tt> равным <tt>3</tt>,<br>получается вот такой &#171;додекаэдр&#187;.</div></div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="10parameters"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">.parameters</a></pre>
+Объект со всеми параметрами, которые были использованы для построения этой геометрической фигуры.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/DodecahedronGeometry.js.txt">DodecahedronGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/DodecahedronGeometry.js" target="_blank">DodecahedronGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="11">EdgesGeometry</h3>
+Этот объект может использоваться в качестве вспомогательного для отображения кромок <a href="core.htm#7" title="Geometry">геометрического</a> объекта.
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxBufferGeometry( 100, 100, 100 );
+var edges = new THREE.EdgesGeometry( geometry );
+var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff } ) );
+scene.add( line );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">helpers</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>EdgesGeometry( <a href="core.htm#7" title="Geometry">geometry</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="threshold angle - пороговый угол">thresholdAngle</a> )</pre>
+<div class=list><tt>geometry</tt> — любой геометрический объект.</div>
+<div class=list><tt>thresholdAngle</tt> — кромка отображается только в том случае, если угол (в градусах) между нормалями соседних граней превышает данное значение. По умолчанию оно равно <tt>1</tt> градусу.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/EdgesGeometry.js.txt">EdgesGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/EdgesGeometry.js" target="_blank">EdgesGeometry.js на github.com</a></div><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="12">ExtrudeGeometry</h3>
+Creates extruded geometry from a path shape.<br>
+<img src="img/ExtrudeGeometry.png" width=500><br>
+<div class="caption">ExtrudeGeometry</div><br>
+
+<h4>Пример</h4>
+<pre>var length = 12, width = 8;<br>
+var shape = new THREE.Shape();
+shape.moveTo( 0,0 );
+shape.lineTo( 0, width );
+shape.lineTo( length, width );
+shape.lineTo( length, 0 );
+shape.lineTo( 0, 0 );<br>
+var extrudeSettings = {
+	steps: 2,
+	amount: 16,
+	bevelEnabled: true,
+	bevelThickness: 1,
+	bevelSize: 1,
+	bevelSegments: 1
+};<br>
+var geometry = new THREE.ExtrudeGeometry( shape, data );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material ) ;
+scene.add( mesh );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>ExtrudeGeometry([page:Array shapes], [page:Object options])</pre>
+<div class=list><tt>shapes</tt> — форма или массив форм. Shape or an array of shapes.</div>
+<div class=list><tt>options</tt> — объект, который может содержать следующие параметры:</div>
+<div class=blockindent>
+<ul><li><tt>curveSegments</tt> —  int. number of points on the curves</li>
+<li><tt>steps</tt> —  int. number of points used for subdividing segements of extrude spline</li>
+<li><tt>amount</tt> —  int. Depth to extrude the shape</li>
+<li><tt>bevelEnabled</tt> —  bool. turn on bevel</li>
+<li><tt>bevelThickness</tt> —  float. how deep into the original shape bevel goes</li>
+<li><tt>bevelSize</tt> —  float. how far from shape outline is bevel</li>
+<li><tt>bevelSegments</tt> —  int. number of bevel layers</li>
+<li><tt>extrudePath</tt> —  THREE.CurvePath. 3d spline path to extrude shape along. (creates Frames if frames aren't defined)</li>
+<li><tt>frames</tt> —  THREE.TubeGeometry.FrenetFrames.  containing arrays of tangents, normals, binormals</li>
+<li><tt>material</tt> —  int. material index for front and back faces</li>
+<li><tt>extrudeMaterial</tt> —  int. material index for extrusion and beveled faces</li>
+<li><tt>UVGenerator</tt> —  Object. object that provides UV generator functions</li></ul></div>
+This object extrudes an 2D shape to an 3D geometry.<br><br>
+
+<h4>Свойства</h4>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="12addShapeList">[method:null addShapeList]([page:Array shapes], [page:Object options] )</pre>
+<div class=list>shapes — An Array of shapes to add.</div>
+<div class=list>options — Object that can contain the following parameters.</div>
+<div class=blockindent>
+<ul><li>curveSegments —  int. number of points on the curves</li>
+<li>steps —  int. number of points used for subdividing segements of extrude spline</li>
+<li>amount —  int. Depth to extrude the shape</li>
+<li>bevelEnabled —  bool. turn on bevel</li>
+<li>bevelThickness —  float. how deep into the original shape bevel goes</li>
+<li>bevelSize —  float. how far from shape outline is bevel</li>
+<li>bevelSegments —  int. number of bevel layers</li>
+<li>extrudePath —  THREE.CurvePath. 3d spline path to extrude shape along. (creates Frames if (frames aren't defined)</li>
+<li>frames —  THREE.TubeGeometry.FrenetFrames.  containing arrays of tangents, normals, binormals</li>
+<li>material —  int. material index for front and back faces</li>
+<li>extrudeMaterial —  int. material index for extrusion and beveled faces</li>
+<li>UVGenerator —  Object. object that provides UV generator functions</li></ul></div>
+Adds the shapes to the list to extrude.<br><br>
+
+<h3>[method:null addShape]([page:Shape shape], [page:Object options])</h3>
+<div class=list>shape — A shape to add.</div>
+<div class=list>options — Object that can contain the following parameters.</div>
+<div class=blockindent>
+<ul><li>curveSegments —  int. number of points on the curves</li>
+<li>steps —  int. number of points used for subdividing segements of extrude spline</li>
+<li>amount —  int. Depth to extrude the shape</li>
+<li>bevelEnabled —  bool. turn on bevel</li>
+<li>bevelThickness —  float. how deep into the original shape bevel goes</li>
+<li>bevelSize —  float. how far from shape outline is bevel</li>
+<li>bevelSegments —  int. number of bevel layers</li>
+<li>extrudePath —  THREE.CurvePath. 3d spline path to extrude shape along. (creates Frames if (frames aren't defined)</li>
+<li>frames —  THREE.TubeGeometry.FrenetFrames.  containing arrays of tangents, normals, binormals</li>
+<li>material —  int. material index for front and back faces</li>
+<li>extrudeMaterial —  int. material index for extrusion and beveled faces</li>
+<li>UVGenerator —  Object. object that provides UV generator functions</li></ul></div>
+Add the shape to the list to extrude.</div><br>
+
+<h4>Source</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+
+
+[page:PolyhedronBufferGeometry] &rarr;
+<h3 id="14">IcosahedronBufferGeometry</h3>
+A class for generating an icosahedron geometry.<br>
+<img src="img/IcosahedronGeometry.png" width=350><br>
+<div class="caption">Икосаэдр</div><br>
+
+  <h4>Конструктор</h4>
+<h3>IcosahedronBufferGeometry([page:Float radius], [page:Integer detail])</h3>
+		<div>
+		radius — Default is 1. <br>
+		detail — Default is 0.  Setting this to a value greater than 0 adds more vertices making it no longer an icosahedron.  When detail is greater than 1, it's effectively a sphere.</div>
+<h4>Свойства</h4>
+<h3>[property:Object parameters]</h3>
+<div>An object with all of the parameters that were used to generate the geometry.</div>
+<h4>Source</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="15">IcosahedronGeometry</h3>
+A class for generating an icosahedron geometry.<br>
+<img src="img/IcosahedronGeometry1.png" width=350><br>
+<div class="caption">"Икосаэдр" со значением <tt>detail</tt> равном <tt>3</tt></div><br>
+
+<h4>Конструктор</h4>
+<h3>IcosahedronGeometry([page:Float radius], [page:Integer detail])</h3>
+		<div>
+		radius — Default is 1. <br>
+		detail — Default is 0.  Setting this to a value greater than 0 adds more vertices making it no longer an icosahedron.  When detail is greater than 1, it's effectively a sphere.
+		</div>
+<h4>Свойства</h4>
+<h3>[property:Object parameters]</h3>
+<div>An object with all of the parameters that were used to generate the geometry.</div>
+<h4>Source</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="16">LatheBufferGeometry</h3>
+This is the [page:BufferGeometry] port of [page:LatheGeometry].<br>
+<img src="img/LatheGeometry.png" width=500><br>
+<div class="caption">Lathe</div><br>
+
+<h4>Пример</h4>
+<pre>var points = [];
+for ( var i = 0; i &lt; 10; i ++ ) {
+  points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5, ( i - 5 ) * 2 ) );
+}
+var geometry = new THREE.LatheBufferGeometry( points );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var lathe = new THREE.Mesh( geometry, material );
+scene.add( lathe );</pre>
+
+  <h4>Конструктор</h4>
+
+		<h3>LatheBufferGeometry([page:Array points], [page:Integer segments], [page:Float phiStart], [page:Float phiLength])</h3>
+		<div>
+		points — Array of Vector2s. The x-coordinate of each point must be greater than zero.<br>
+		segments — the number of circumference segments to generate. Default is 12.<br>
+		phiStart — the starting angle in radians. Default is 0.<br>
+		phiLength — the radian (0 to 2PI) range of the lathed section 2PI is a closed lathe, less than 2PI is a portion. Default is 2PI.
+		</div>
+		<div>
+		This creates a LatheBufferGeometry based on the parameters.
+		</div>
+<h4>Source</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="17">LatheGeometry</h3>
+Class for generating meshes with axial symmetry. Possible uses include donuts, pipes, vases etc. The lathe rotate around the Y axis.<br>
+<img src="img/LatheGeometry.png" width=500><br>
+<div class="caption">Lathe</div><br>
+
+<h4>Пример</h4>
+<pre>var points = [];
+for ( var i = 0; i &lt; 10; i ++ ) {
+points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5, ( i - 5 ) * 2 ) );
+}
+var geometry = new THREE.LatheGeometry( points );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var lathe = new THREE.Mesh( geometry, material );
+scene.add( lathe );</pre>
+
+<h4>Конструктор</h4>
+<pre>LatheGeometry([page:Array points], [page:Integer segments], [page:Float phiStart], [page:Float phiLength])</pre>
+<div class=blockindent><tt>points</tt> — Array of Vector2s. The x-coordinate of each point must be greater than zero.<br>
+segments — the number of circumference segments to generate. Default is 12.<br>
+phiStart — the starting angle in radians. Default is 0.<br>
+phiLength — the radian (0 to 2PI) range of the lathed section 2PI is a closed lathe, less than 2PI is a portion. Default is 2PI.</div>
+		This creates a LatheBufferGeometry based on the parameters.
+<h4>Source</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+[page:PolyhedronBufferGeometry] &rarr;
+<h3 id="18">OctahedronBufferGeometry</h3>
+A class for generating an octahedron geometry.<br>
+<img src="img/OctahedronGeometry.png" width=300><br>
+<div class="caption">Octahedron</div><br>
+
+<h4>Конструктор</h4>
+<h3>OctahedronBufferGeometry([page:Float radius], [page:Integer detail])</h3>
+<div>radius — Radius of the octahedron. Default is 1.<br>
+detail — Default is 0.  Setting this to a value greater than zero add vertices making it no longer an octahedron.</div>
+
+<h4>Свойства</h4>
+<h3>[property:Object parameters]</h3>
+<div>An object with all of the parameters that were used to generate the geometry.</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="19">OctahedronGeometry</h3>
+A class for generating an octahedron geometry.<br>
+<img src="img/OctahedronGeometry1.png" width=350><br>
+<div class="caption">Octahedron</div><br>
+
+<h4>Конструктор</h4>
+<h3>OctahedronGeometry([page:Float radius], [page:Integer detail])</h3>
+<div>radius — Radius of the octahedron. Default is 1.<br>
+detail — Default is 0.  Setting this to a value greater than zero add vertices making it no longer an octahedron.</div>
+
+<h4>Свойства</h4>
+<h3>[property:Object parameters]</h3>
+		<div>
+		An object with all of the parameters that were used to generate the geometry.
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="20">ParametricBufferGeometry</h3>
+Generate geometry representing a parametric surface.<br>
+<img src="img/ParametricGeometry.png" width=250><br>
+<div class="caption">Parametric</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.ParametricBufferGeometry( THREE.ParametricGeometries.klein, 25, 25 );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );</pre>
+
+<h4>Конструктор</h4>
+<h3>ParametricBufferGeometry([page:Function func], [page:Integer slices], [page:Integer stacks])</h3>
+		<div>
+		func — A function that takes in a [page:Float u] and [page:Float v] value each between 0 and 1 and returns a [page:Vector3]<br>
+		slices — The count of slices to use for the parametric function <br>
+		stacks — The count of stacks to use for the parametric function
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="21">ParametricGeometry</h3>
+Generate geometry representing a parametric surface.<br>
+<img src="img/ParametricGeometry.png" width=250><br>
+<div class="caption">Parametric</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.ParametricGeometry( THREE.ParametricGeometries.klein, 25, 25 );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );</pre>
+
+<h4>Конструктор</h4>
+<h3>ParametricGeometry([page:Function func], [page:Integer slices], [page:Integer stacks])</h3>
+		<div>
+		func — A function that takes in a [page:Float u] and [page:Float v] value each between 0 and 1 and returns a [page:Vector3]<br>
+		slices — The count of slices to use for the parametric function <br>
+		stacks — The count of stacks to use for the parametric function
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="22">PlaneBufferGeometry</h3>
+This is the [page:BufferGeometry] port of [page:PlaneGeometry].<br>
+<img src="img/PlaneGeometry.png" width=350><br>
+<div class="caption">PlaneGeometry</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.PlaneBufferGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+var plane = new THREE.Mesh( geometry, material );
+scene.add( plane );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>PlaneBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="width segments - сегменты по ширине">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height segments - сегменты по высоте">heightSegments</a> )</pre>
+<div class=list><tt>width</tt> — ширина по оси <tt>X</tt>.</div>
+<div class=list><tt>height</tt> — высота по оси <tt>Y</tt>.</div>
+<div class=list><tt>widthSegments</tt> — количество сегментов (частей) по ширине (дополнительный, необязательный параметр). По умолчанию равен <tt>1</tt>.</div>
+<div class=list><tt>heightSegments</tt> — количество сегментов по высоте (дополнительный, необязательный параметр). По умолчанию равен <tt>1</tt>.</div><br>
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/PlaneBufferGeometry.js.txt">PlaneBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/PlaneGeometry.js" target="_blank">PlaneBufferGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="23">PlaneGeometry</h3>
+Класс для построения плоских геометрических фигур.<br>
+<img src="img/PlaneGeometry.png" width=350><br>
+<div class="caption">PlaneGeometry</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.PlaneGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+var plane = new THREE.Mesh( geometry, material );
+scene.add( plane );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>PlaneBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="width segments - сегменты по ширине">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height segments - сегменты по высоте">heightSegments</a> )</pre>
+<div class=list><tt>width</tt> — ширина по оси <tt>X</tt>.</div>
+<div class=list><tt>height</tt> — высота по оси <tt>Y</tt>.</div>
+<div class=list><tt>widthSegments</tt> — количество сегментов (частей) по ширине (дополнительный, необязательный параметр). По умолчанию равен <tt>1</tt>.</div>
+<div class=list><tt>heightSegments</tt> — количество сегментов по высоте (дополнительный, необязательный параметр). По умолчанию равен <tt>1</tt>.</div><br>
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/PlaneGeometry.js.txt">PlaneGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/PlaneGeometry.js" target="_blank">PlaneGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="24">PolyhedronBufferGeometry</h3>
+A polyhedron is a solid in three dimensions with flat faces. This class will take an array of vertices,
+			project them onto a sphere, and then divide them up to the desired level of detail. This class is used
+			by [page:DodecahedronBufferGeometry], [page:IcosahedronBufferGeometry], [page:OctahedronBufferGeometry],
+			and [page:TetrahedronBufferGeometry] to generate their respective geometries.
+
+
+  <h4>Пример</h4>
+<pre>
+var verticesOfCube = [
+    -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
+    -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
+];
+
+var indicesOfFaces = [
+    2,1,0,    0,3,2,
+    0,4,7,    7,3,0,
+    0,1,5,    5,4,0,
+    1,2,6,    6,5,1,
+    2,3,7,    7,6,2,
+    4,5,6,    6,7,4
+];
+
+var geometry = new THREE.PolyhedronBufferGeometry( verticesOfCube, indicesOfFaces, 6, 2 );
+</pre>
+
+<h4>Конструктор</h4>
+<h3>PolyhedronBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="vertices - вершины">vertices</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="faces - грани">faces</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="detail - часть">detail</a> )</h3>
+<div class=list>vertices — [page:Array] of points of the form [1,1,1, -1,-1,-1, ... ]</div>
+<div class=list>faces — [page:Array] of indices that make up the faces of the form [0,1,2, 2,3,0, ... ]</div>
+<div class=list>radius — [page:Float] - The radius of the final shape</div>
+<div class=list>detail — [page:Integer] - How many levels to subdivide the geometry. The more detail, the smoother the shape.</div>
+
+<h4>Свойства</h4>
+
+<h3>[property:Object parameters]</h3>
+<div>
+An object with all of the parameters that were used to generate the geometry.
+</div>
+
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="24">PolyhedronGeometry</h3>
+A polyhedron is a solid in three dimensions with flat faces. This class will take an array of vertices, project them onto a sphere, and then divide them up to the desired level of detail.
+
+<h4>Пример</h4>
+<pre>
+var verticesOfCube = [
+    -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
+    -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
+];
+
+var indicesOfFaces = [
+    2,1,0,    0,3,2,
+    0,4,7,    7,3,0,
+    0,1,5,    5,4,0,
+    1,2,6,    6,5,1,
+    2,3,7,    7,6,2,
+    4,5,6,    6,7,4
+];
+
+var geometry = new THREE.PolyhedronGeometry( verticesOfCube, indicesOfFaces, 6, 2 );</pre>
+
+<h4>Конструктор</h4>
+<pre>PolyhedronGeometry([page:Array vertices], [page:Array faces], [page:Float radius], [page:Integer detail])</pre>
+		<div>
+		vertices — [page:Array] of points of the form [1,1,1, -1,-1,-1, ... ] <br>
+		faces — [page:Array] of indices that make up the faces of the form [0,1,2, 2,3,0, ... ] <br>
+		radius — [page:Float] - The radius of the final shape <br>
+		detail — [page:Integer] - How many levels to subdivide the geometry. The more detail, the smoother the shape.</div>
+
+<h4>Свойства</h4>
+<pre>[property:Object parameters]</pre>
+An object with all of the parameters that were used to generate the geometry.
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/PolyhedronGeometry.js.txt">PolyhedronGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/PolyhedronGeometry.js" target="_blank">PolyhedronGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="25">RingBufferGeometry</h3>
+This is the [page:BufferGeometry] port of [page:RingGeometry].<br>
+<img src="img/RingGeometry.png" width=350><br>
+<div class="caption">Кольцо</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.RingBufferGeometry( 1, 5, 32 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre>
+
+<h4>Конструктор</h4>
+<pre>RingBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="inner radius - внутренний радиус">innerRadius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="outer radius - наружный радиус">outerRadius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="theta segments - сегменты по углу тэта, т.е. по окружности">thetaSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="phi segments - сегменты по углу фи, т.е. по радиусу">phiSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="theta start - начальный угол тэта">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="theta length - длина дуги по углу тэта">thetaLength</a> )</pre>
+<div class=list><tt>innerRadius</tt> — внутренний радиус кольца. Значение по умолчанию равно&nbsp;<tt>20</tt>.</div>
+<div class=list><tt>outerRadius</tt> — наружный радиус кольца. Значение по умолчанию равно&nbsp;<tt>50</tt>.</div>
+<div class=list><tt>thetaSegments</tt> — число сегментов по окружности кольца. Чем больше число сегментов, тем более круглым будет кольцо. Минимальное значение равно <tt>3</tt>. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt>phiSegments</tt> — число сегментов по радиусу кольца (в толщину). Минимальное значение равно&nbsp;<tt>1</tt>. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>thetaLength</tt> — центральный угол. Значение по умолчанию равно&nbsp;<tt>Math.PI&nbsp;*&nbsp;2</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/RingBufferGeometry.js.txt">RingBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/RingGeometry.js" target="_blank">RingGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="26">RingGeometry</h3>
+Класс для построения двумерной кольцевой фигуры.<br>
+<img src="img/RingGeometry.png" width=350><br>
+<div class="caption">Кольцо</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.RingGeometry( 1, 5, 32 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre>
+
+<h4>Конструктор</h4>
+<pre>RingGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="">innerRadius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="">outerRadius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">thetaSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">phiSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="">thetaLength</a> )</pre>
+<div class=list><tt>innerRadius</tt> — Default is 0, but it doesn't work right when innerRadius is set to 0.</div>
+<div class=list><tt>outerRadius</tt> — Значение по умолчанию равно <tt>50</tt>.</div>
+<div class=list><tt>thetaSegments</tt> — Number of segments.  A higher number means the ring will be more round.  Minimum is 3. Значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>phiSegments</tt> — Minimum is 1. Значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>thetaStart</tt> — Начальный угол. Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt>thetaLength</tt> — Центральный угол. Значение по умолчанию равно <tt>Math.PI * 2</tt>.</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/RingGeometry.js.txt">RingGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/RingGeometry.js" target="_blank">RingGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="27">ShapeGeometry</h3>
+Creates a one-sided polygonal geometry from one or more path shapes. Similar to [page:ExtrudeGeometry].
+
+<iframe id="scene" src="scenes/geometry-browser.html#ShapeGeometry"></iframe>
+
+<h4>Пример</h4>
+<pre>var length = 16, width = 12;<br>
+var shape = new THREE.Shape();
+shape.moveTo( 0,0 );
+shape.lineTo( 0, width );
+shape.lineTo( length, width );
+shape.lineTo( length, 0 );
+shape.lineTo( 0, 0 );<br>
+var geometry = new THREE.ShapeGeometry( shape );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material ) ;
+scene.add( mesh );</pre>
+
+<h4>Конструктор</h4>
+<pre>ShapeGeometry([page:Array shapes], [page:Object options])</pre>
+<div class=list><tt>shapes</tt> — [page:Array] of shapes, or a single [page:Shape shape]</div>
+<div class=list><tt>options</tt> — Optional options [page:Object object]</div>
+<div class=blockindent>
+<ul style="list-style-type:none;"><li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="curve segments - число сегментов кривой">curveSegments</a></tt> - число сегментов в форме - значение по умолчанию равно <tt>12</tt></li>
+<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="material - материал">material</a></tt> - индекс материала из списка материалов</li>
+<li>UVGenerator</a></tt> - A UV generator, defaults to [page:ExtrudeGeometry]'s WorldUVGenerator</li></ul></div><br>
+
+<h4>Методы</h4>
+<pre>.addShapeList([page:Array shapes], [page:Object options]) [page:this]</pre>
+		<div>
+		shapes — [page:Array] of [page:Shape shapes] <br>
+		options — See options in constructor
+		</div>
+		<div>
+		Adds a list of shapes to the geometry.
+		</div>
+
+<pre>[method:null addShape]([page:Shape shape], [page:Object options])</pre>
+		<div>
+		shape — [page:Shape] <br>
+		options — See options in constructor
+		</div>
+		<div>
+		Adds a single shape to the geometry
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+<a name=27></a>
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3>SphereBufferGeometry</h3>
+This is the <a href="core.htm#2" title="BufferGeometry">BufferGeometry</a> port of <a href="#28" title="SphereGeometry">SphereGeometry</a>.<br>
+<img src="img/SphereGeometry.png" width=450><br>
+<div class="caption">Сфера</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var sphere = new THREE.Mesh( geometry, material );
+scene.add( sphere );</pre>
+
+<h4>Конструктор</h4>
+<pre>SphereBufferGeometry(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">phiStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">phiLength</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaLength</a>)</pre>
+<div class=blockindent><tt>radius</tt> — радиус сферы, значение по умолчанию равно 50.<br>
+<tt>widthSegments</tt> — number of horizontal segments. Minimum value is 3, and the default is 8.<br>
+<tt>heightSegments</tt> — number of vertical segments. Minimum value is 2, and the default is 6.<br>
+<tt>phiStart</tt> — specify horizontal starting angle. Default is 0.<br>
+<tt>phiLength</tt> — specify horizontal sweep angle size. Default is Math.PI * 2.<br>
+<tt>thetaStart</tt> — specify vertical starting angle. Default is 0.<br>
+<tt>thetaLength</tt> — specify vertical sweep angle size. Default is Math.PI.</div>
+The geometry is created by sweeping and calculating vertexes around the Y axis (horizontal sweep) and the Z axis (vertical sweep). Thus, incomplete spheres (akin to <em>'sphere slices'</em>) can be created through the use of different values of phiStart, phiLength, thetaStart and thetaLength, in order to define the points in which we start (or end) calculating those vertices.
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/SphereBufferGeometry.js.txt">SphereBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/tree/dev/src/geometries/SphereBufferGeometry.js" target="_blank">SphereBufferGeometry.js на Гитхабе</a></div><br>
+
+<a name=28></a>
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3>SphereGeometry (геометрия сферы)</h3>
+Класс для генерации сферической геометрии.<br>
+<img src="img/SphereGeometry.png" width=450><br>
+<div class="caption">Сфера</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var sphere = new THREE.Mesh( geometry, material );
+scene.add( sphere );</pre>
+
+<h4>Конструктор</h4>
+<pre>SphereGeometry(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">phiStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">phiLength</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaLength</a>)</pre>
+<div class=blockindent><tt>radius</tt> — радиус сферы, значение по умолчанию равно 50.<br>
+<tt>widthSegments</tt> — количество горизонтальных сегментов. Минимальное значение равно 3, значение по умолчанию 8.<br>
+<tt>heightSegments</tt> — количество вертикальных сегментов. Минимальное значение равно 2, значение по умолчанию 6.<br>
+<tt>phiStart</tt> — устанавливает начальный угол по горизонтали specify horizontal starting angle, значение по умолчанию равно 0.<br>
+<tt>phiLength</tt> — определяет размер угла ометания по горизонтали specify horizontal sweep angle size, значение по умолчанию равно Math.PI * 2.<br>
+<tt>thetaStart</tt> — specify vertical starting angle, значение по умолчанию равно 0.<br>
+<tt>thetaLength</tt> — specify vertical sweep angle size, значение по умолчанию равно Math.PI.</div>
+Геометрия создается путем обхода и вычисления вершин вокруг оси Y (горизонтальный обход) и оси Z (вертикальный обход).
+Таким образом, неполные сферы (вроде <em>'ломтиков или кусков сферы'</em> - sphere slices) могут быть созданы через использование разных значений <tt>phiStart</tt>, <tt>phiLength</tt>, <tt>thetaStart</tt> и <tt>thetaLength</tt>, для определения точек, с которых начинается (или заканчивается) вычисление этих вершин.
+The geometry is created by sweeping and calculating vertexes around the Y axis (horizontal sweep) and the Z axis (vertical sweep). Thus, incomplete spheres (akin to <em>'sphere slices'</em>) can be created through the use of different values of phiStart, phiLength, thetaStart and thetaLength, in order to define the points in which we start (or end) calculating those vertices.
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/SphereGeometry.js.txt">SphereGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/tree/dev/src/geometries/SphereGeometry.js" target="_blank">SphereGeometry.js на Гитхабе</a></div><br>
+
+<a name=29></a>
+<span class="right_side"><a href="#22" title="Переход к родительскому классу"><tt>PolyhedronBufferGeometry &rarr;</tt></a></span>
+<h3>TetrahedronBufferGeometry</h3>
+Класс для создания геометрии тетраэдра (четырехгранника).
+A class for generating a tetrahedron geometries.<br>
+<img src="img/TetrahedronGeometry.png" width=300><br>
+<div class="caption">Tetrahedron</div><br>
+
+<h4>Конструктор</h4>
+<pre>TetrahedronBufferGeometry(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">detail</a>)</pre>
+<div class=blockindent><tt>radius</tt> — "Радиус" тетраэдра - скорее это длина ребра тетраэдра. По умолчанию равен 1.<br>
+<tt>detail</tt> — По умолчанию равен 0. Установка значения для этого параметра больше нуля добавит вершин и это будет уже не тетраэдр.<br>
+Например, вот <tt>detail</tt> равен 5.<br>
+<img src="img/TetrahedronGeometry5.png" width="200"></div>
+<h4>Свойства</h4>
+<pre>.<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)">parameters</a></pre>
+An object with all of the parameters that were used to generate the geometry.
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+<a name=30></a>
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3>TetrahedronGeometry</h3>
+A class for generating a tetrahedron geometries.
+<img src="img/TetrahedronGeometry1.png" width=300><br>
+<div class="caption">Tetrahedron</div><br>
+
+<h4>Конструктор</h4>
+<pre>TetrahedronGeometry([page:Float radius], [page:Integer detail])</pre>
+		<div>
+		radius — Radius of the tetrahedron. Default is 1.<br>
+		detail — Default is 0. Setting this to a value greater than 0 adds vertices making it no longer a tetrahedron.
+		</div>
+
+<h4>Свойства</h4>
+<pre>[property:Object parameters]</pre>
+An object with all of the parameters that were used to generate the geometry.
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+		[page:ExtrudeBufferGeometry] &rarr;
+
+<h3 id="34">TextBufferGeometry</h3>
+A class for generating text as a single geometry. It is constructed by providing a string of text, and a hash of
+			parameters consisting of a loaded [page:Font] and settings for the geometry's parent [page:ExtrudeBufferGeometry].
+			See the [page:Font], [page:FontLoader] and [page:Creating_Text] pages for additional details.<br>
+<img src="img/TextGeometry.png" width=650><br>
+<div class="caption">Text</div><br>
+
+<h4>Examples</h4>
+
+		<div>
+		[example:webgl_geometry_text geometry / text ]<br/>
+		[example:webgl_geometry_text2 geometry / text2 ]
+		</div>
+
+<pre>var loader = new THREE.FontLoader();<br>
+loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {<br>
+
+	var geometry = new THREE.TextBufferGeometry( 'Hello three.js!', {
+		font: font,
+		size: 80,
+		height: 5,
+		curveSegments: 12,
+		bevelEnabled: true,
+		bevelThickness: 10,
+		bevelSize: 8,
+		bevelSegments: 5
+	} );
+} );</pre>
+
+
+<h4>Конструктор</h4><br>
+<h3>TextBufferGeometry([page:String text], [page:Object parameters])</h3>
+		<div>
+		text — The text that needs to be shown. <br />
+		parameters — Object that can contains the following parameters.
+		<ul>
+			<li>font — an instance of THREE.Font.</li>
+			<li>size — Float. Size of the text. Default is 100.</li>
+			<li>height — Float. Thickness to extrude text.  Default is 50.</li>
+			<li>curveSegments — Integer. Number of points on the curves. Default is 12.</li>
+			<li>bevelEnabled — Boolean. Turn on bevel. Default is False.</li>
+			<li>bevelThickness — Float. How deep into text bevel goes. Default is 10.</li>
+			<li>bevelSize — Float. How far from text outline is bevel. Default is 8.</li>
+			<li>bevelSegments — Integer. Number of bevel segments. Default is 3.</li>
+		</ul>
+		</div>
+
+		<h2>Available Fonts</h2>
+
+		<div>
+		TextGeometry uses <a href='http://gero3.github.io/facetype.js/' target="_top">typeface.json</a> generated fonts.
+		Some existing fonts can be found located in <b>/examples/fonts</b> and must be included in the page.
+		</div>
+
+<table><tr><th>Font</th><th>Weight</th><th>Style</th><th>File Path</th></tr>
+<tr><td>helvetiker</td><td>normal</td><td>normal</td><td>/examples/fonts/helvetiker_regular.typeface.json</td></tr>
+<tr><td>helvetiker</td><td>bold</td><td>normal</td><td>/examples/fonts/helvetiker_bold.typeface.json</td></tr>
+<tr><td>optimer</td><td>normal</td><td>normal</td><td>/examples/fonts/optimer_regular.typeface.json</td></tr>
+<tr><td>optimer</td><td>bold</td><td>normal</td><td>/examples/fonts/optimer_bold.typeface.json</td></tr>
+<tr><td>gentilis</td><td>normal</td><td>normal</td><td>/examples/fonts/gentilis_regular.typeface.json</td></tr>
+<tr><td>gentilis</td><td>bold</td><td>normal</td><td>/examples/fonts/gentilis_bold.typeface.json</td></tr>
+<tr><td>droid sans</td><td>normal</td><td>normal</td><td>/examples/fonts/droid/droid_sans_regular.typeface.json</td></tr>
+<tr><td>droid sans</td><td>bold</td><td>normal</td><td>/examples/fonts/droid/droid_sans_bold.typeface.json</td></tr>
+<tr><td>droid serif</td><td>normal</td><td>normal</td><td>/examples/fonts/droid/droid_serif_regular.typeface.json</td></tr>
+<tr><td>droid serif</td><td>bold</td><td>normal</td><td>/examples/fonts/droid/droid_serif_bold.typeface.json</td></tr></table>
+
+<h2>Source</h2>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+
+
+[page:ExtrudeGeometry] &rarr;
+<h3 id="35">TextGeometry</h3>
+This object creates a 3D object of text as a single object.<br>
+<img src="img/TextGeometry.png" width=650><br>
+<div class="caption">Text</div><br>
+
+<h4>Пример</h4>
+<div>
+[example:webgl_geometry_text geometry / text ]<br>
+[example:webgl_geometry_text2 geometry / text2 ]
+</div>
+
+<h4>Конструктор</h4>
+<pre>TextGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="text - текст">text</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt>text</tt> — Текст, который нужно показать.</div>
+<div class=list><tt>parameters</tt> — объект, который может содержать следующие параметры:
+<ul><li><tt>font</tt> — THREE.Font.</li>
+<li><tt>size</tt> — число с плавающей запятой. Size of the text.</li>
+<li><tt>height</tt> — число с плавающей запятой. Thickness to extrude text. Значение по умолчанию равно <tt>50</tt>.</li>
+<li><tt>curveSegments</tt> — целое число. Number of points on the curves. Значение по умолчанию равно <tt>12</tt>.</li>
+<li><tt>bevelEnabled</tt> — логическое значение. Turn on bevel. Значением по умолчанию является <tt>false</tt>.</li>
+<li><tt>bevelThickness</tt> — число с плавающей запятой. How deep into text bevel goes. Значение по умолчанию равно <tt>10</tt>.</li>
+<li><tt>bevelSize</tt> — число с плавающей запятой. How far from text outline is bevel. Значение по умолчанию равно <tt>8</tt>.</li></ul></div><br>
+
+<h4>Доступные шрифты</h4>
+<tt>TextGeometry</tt> использует шрифты, сгенерированные <a href='http://gero3.github.io/facetype.js/' target="_blank">typeface.json</a>.<br>
+Несколько имеющихся шрифтов можно найти в <b>/examples/fonts</b> и они должны быть включены в коде страницы.
+<table class="tbl_1" border="1" cellpadding="5px">
+<tr class="head"><td>Font<br>шрифт</td><td>Weight<br>плотность</td><td>Style<br>стиль</td><td>File Path<br>путь к файлу</td></tr>
+<tr><td>helvetiker</td><td>normal</td><td>normal</td><td>/examples/fonts/helvetiker_regular.typeface.json</td></tr>
+<tr><td>helvetiker</td><td>bold</td><td>normal</td><td>/examples/fonts/helvetiker_bold.typeface.json</td></tr>
+<tr><td>optimer</td><td>normal</td><td>normal</td><td>/examples/fonts/optimer_regular.typeface.json</td></tr>
+<tr><td>optimer</td><td>bold</td><td>normal</td><td>/examples/fonts/optimer_bold.typeface.json</td></tr>
+<tr><td>gentilis</td><td>normal</td><td>normal</td><td>/examples/fonts/gentilis_regular.typeface.json</td></tr>
+<tr><td>gentilis</td><td>bold</td><td>normal</td><td>/examples/fonts/gentilis_bold.typeface.json</td></tr>
+<tr><td>droid&nbsp;sans</td><td>normal</td><td>normal</td><td>/examples/fonts/droid/droid_sans_regular.typeface.json</td></tr>
+<tr><td>droid&nbsp;sans</td><td>bold</td><td>normal</td><td>/examples/fonts/droid/droid_sans_bold.typeface.json</td></tr>
+<tr><td>droid&nbsp;serif</td><td>normal</td><td>normal</td><td>/examples/fonts/droid/droid_serif_regular.typeface.json</td></tr>
+<tr><td>droid&nbsp;serif</td><td>bold</td><td>normal</td><td>/examples/fonts/droid/droid_serif_bold.typeface.json</td></tr></table>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="36">TorusBufferGeometry</h3>
+This is the [page:BufferGeometry] port of [page:TorusGeometry].
+<img src="img/TorusGeometry.png" width=400><br>
+<div class="caption">Тор</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.TorusBufferGeometry( 10, 3, 16, 100 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torus = new THREE.Mesh( geometry, material );
+scene.add( torus );</pre>
+
+<h4>Конструктор</h4>
+<pre>TorusBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="tube - труба">tube</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="tubular segments - сегменты по длине трубы">tubularSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="radial segments - радиальные сегменты">radialSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="arc - дуга">arc</a> )</pre>
+		<div>
+		radius — Default is 100. <br>
+		tube — Diameter of the tube.  Default is 40. <br>
+		radialSegments — Default is 8 <br>
+		tubularSegments — Default is 6. <br>
+		arc — Central angle.  Default is Math.PI * 2.
+		</div>
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="37">TorusGeometry</h3>
+A class for generating torus geometries<br>
+<img src="img/TorusGeometry.png" width=400><br>
+<div class="caption">Тор</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torus = new THREE.Mesh( geometry, material );
+scene.add( torus );</pre>
+
+<h4>Конструктор</h4>
+<pre>TorusGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="tube - труба">tube</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="tubular segments - сегменты по длине трубы">tubularSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="radial segments - радиальные сегменты">radialSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="arc - дуга">arc</a> )</pre>
+		<div>
+		radius — Default is 100. <br>
+		tube — Diameter of the tube.  Default is 40. <br>
+		radialSegments — Default is 8 <br>
+		tubularSegments — Default is 6. <br>
+		arc — Central angle.  Default is Math.PI * 2.
+		</div>
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="38">TorusKnotBufferGeometry</h3>
+This is the [page:BufferGeometry] port of [page:TorusKnotGeometry].<br>
+<img src="img/TorusKnotGeometry.png" width=500><br>
+<div class="caption">Кольцо с узлом</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.TorusKnotBufferGeometry( 10, 3, 100, 16 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torusKnot = new THREE.Mesh( geometry, material );
+scene.add( torusKnot );</pre>
+
+<h4>Конструктор</h4>
+<pre>TorusKnotBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="tube - труба">tube</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="tubular segments - сегменты по длине трубы">tubularSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="radial segments - радиальные сегменты">radialSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="p - ">p</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="q - ">q</a>)</pre>
+<ul><li>radius — Default is 100.</li>
+<li>tube — Diameter of the tube. Default is 40.</li>
+<li>tubularSegments — Default is 64.</li>
+<li>radialSegments — Default is 8.</li>
+<li>p — This value determines, how many times the geometry winds around its axis of rotational symmetry. Default is 2.</li>
+<li>q — This value determines, how many times the geometry winds around a circle in the interior of the torus. Default is 3.</li></ul>
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="39">TorusKnotGeometry</h3>
+Это геометрический объект в виде кольца с узлом, конкретная форма которого определяется парой <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B7%D0%B0%D0%B8%D0%BC%D0%BD%D0%BE_%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%8B%D0%B5_%D1%87%D0%B8%D1%81%D0%BB%D0%B0" target="_blank" title="Целые числа называются взаимно простыми, если они не имеют никаких общих делителей, кроме ±1.">взаимно простых целых чисел</a>, <tt>p</tt> и <tt>q</tt>. Если числа <tt>p</tt> и <tt>q</tt> не взаимно простые, получится
+Creates a torus knot, the particular shape of which is defined by a pair of coprime integers, p and q.  If p and q are not coprime, the result will be a torus link.<br>
+<img src="img/TorusKnotGeometry.png" width=500><br>
+<div class="caption">Кольцо с узлом</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torusKnot = new THREE.Mesh( geometry, material );
+scene.add( torusKnot );</pre>
+
+<h4>Конструктор</h4>
+<pre>TorusKnotGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="tube - труба">tube</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="tubular segments - ">tubularSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="radial segments - ">radialSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="p - ">p</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="q - ">q</a>)</pre>
+<div class=list><tt>radius</tt> — радиус кольца (тора), значение по умолчанию равно <tt>100</tt>.</div>
+<div class=list><tt>tube</tt> — диаметр трубы, из которой сделано кольцо. Значение по умолчанию равно <tt>40</tt>.</div>
+<div class=list><tt>tubularSegments</tt> — число сегментов трубы,т.е на сколько сегментов разделена труба по всей длине кольца. Значение по умолчанию равно <tt>64</tt>.</div>
+<div class=list><tt>radialSegments</tt> — число сегментов трубы по радиусу (т.е. при значении 3 - труба будет треугольной в сечении, при 4 - квадратной и т.д.) Значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>p</tt> — данное значение определяет, сколько оборотов делает труба вокруг центральной оси кольца. This value determines, how many times the geometry winds around its axis of rotational symmetry. Значение по умолчанию равно <tt>2</tt>.
+<table><tr><td><img src="img/p1.png" width=100><br><div class="caption">p=1, q=1</div></td>
+<td><img src="img/p2.png" width=100><br><div class="caption">p=2, q=1</div></td>
+<td><img src="img/p3.png" width=100><br><div class="caption">p=3, q=1</div></td>
+<td><img src="img/p4.png" width=100><br><div class="caption">p=4, q=1</div></td></table></div>
+<div class=list><tt>q</tt> — данное значение определяет, сколько оборотов сделает труба вдоль окружности кольца. This value determines, how many times the geometry winds around a circle in the interior of the torus. Значение по умолчанию равно <tt>3</tt>.
+<table><tr><td><img src="img/p1.png" width=100><br><div class="caption">p=1, q=1</div></td>
+<td><img src="img/q2.png" width=100><br><div class="caption">p=1, q=2</div></td>
+<td><img src="img/q3.png" width=100><br><div class="caption">p=1, q=3</div></td>
+<td><img src="img/q4.png" width=100><br><div class="caption">p=1, q=4</div></td></table></div><br>
+
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="40">TubeBufferGeometry</h3>
+Creates a tube that extrudes along a 3d curve.<br>
+<img src="img/TubeGeometry.png" width=300><br>
+<div class="caption">Труба</div><br>
+
+<h4>Пример</h4>
+<pre>var CustomSinCurve = THREE.Curve.create(
+	function ( scale ) { //custom curve constructor
+		this.scale = ( scale === undefined ) ? 1 : scale;
+	},
+	function ( t ) { //getPoint: t is between 0-1
+		var tx = t * 3 - 1.5;
+		var ty = Math.sin( 2 * Math.PI * t );
+		var tz = 0;
+		return new THREE.Vector3( tx, ty, tz ).multiplyScalar( this.scale );
+	}
+);<br>
+var path = new CustomSinCurve( 10 );
+var geometry = new THREE.TubeBufferGeometry( path, 20, 2, 8, false );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre>
+
+<h4>Конструктор</h4>
+<pre>TubeBufferGeometry ( <a href="extras.htm#3.1" title="Curve. path - путь, контур">path</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="tubular segments - сегменты трубы">tubularSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="radius segments - радиальные сегменты">radiusSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="closed - закрыто">closed</a> )</pre>
+		<div>
+		path — [page:Curve] - A path that inherits from the [page:Curve] base class<br>
+		tubularSegments — [page:Integer] - The number of segments that make up the tube, default is 64<br>
+		radius — [page:Float] - The radius of the tube, default is 1<br>
+		radiusSegments — [page:Integer] - The number of segments that make up the cross-section, default is 8 <br>
+		closed — [page:Boolean] Is the tube open or closed, default is false <br>
+		</div>
+
+<h4>Свойства</h4>
+<pre>[property:Object parameters]</pre>
+An object with all of the parameters that were used to generate the geometry.
+
+<pre>[property:Array tangents]</pre>
+An array of [page:Vector3] tangents
+
+<pre>[property:Array normals]</pre>
+An array of [page:Vector3] normals
+<pre>[property:Array binormals]</pre>
+An array of [page:Vector3] binormals
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="41">TubeGeometry</h3>
+Creates a tube that extrudes along a 3d curve.<br>
+<img src="img/TubeGeometry.png" width=300><br>
+<div class="caption">Труба</div><br>
+
+<h4>Пример</h4>
+<pre>var CustomSinCurve = THREE.Curve.create(
+	function ( scale ) { //custom curve constructor
+		this.scale = ( scale === undefined ) ? 1 : scale;
+	},
+	function ( t ) { //getPoint: t is between 0-1
+		var tx = t * 3 - 1.5;
+		var ty = Math.sin( 2 * Math.PI * t );
+		var tz = 0;
+		return new THREE.Vector3( tx, ty, tz ).multiplyScalar( this.scale );
+	}
+);<br>
+var path = new CustomSinCurve( 10 );
+var geometry = new THREE.TubeGeometry( path, 20, 2, 8, false );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>TubeGeometry( <a href="extras.htm#3.1" title="Curve. path - путь, контур">path</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="tubular segments - сегменты трубы">tubularSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="radius segments - радиальные сегменты">radiusSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="closed - закрыто">closed</a> )</pre>
+<div class=list>path — [page:Curve] - A path that inherits from the [page:Curve] base class</div>
+<div class=list>tubularSegments — [page:Integer] - The number of segments that make up the tube, default is 64</div>
+<div class=list>radius — [page:Float] - The radius of the tube, default is 1</div>
+<div class=list>radiusSegments — [page:Integer] - The number of segments that make up the cross-section, default is 8</div>
+<div class=list>closed — [page:Boolean] Is the tube open or closed, default is false</div><br>
+
+<h4>Свойства</h4>
+<h3>[property:Object parameters]</h3>
+		<div>
+		An object with all of the parameters that were used to generate the geometry.
+		</div>
+
+		<h3>[property:Array tangents]</h3>
+		<div>
+		An array of [page:Vector3] tangents
+		</div>
+
+		<h3>[property:Array normals]</h3>
+		<div>
+		An array of [page:Vector3] normals
+		</div>
+
+		<h3>[property:Array binormals]</h3>
+		<div>
+		An array of [page:Vector3] binormals
+		</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/TubeGeometry.js.txt">TubeGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TubeGeometry.js" target="_blank">TubeGeometry.js на github.com</a></div><br>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="42">WireframeGeometry</h3>
+Этот геометрический объект можно использовать в качестве вспомогательного для просмотра любого объекта <a href="core.htm#7" title="Geometry">Geometry</a> в виде каркаса (wireframe).<br><br>
+<h4>Пример</h4><br>
+<pre>var geometry = new THREE.SphereBufferGeometry( 100, 100, 100 );<br>
+var wireframe = new THREE.WireframeGeometry( geometry );<br>
+var line = new THREE.LineSegments( wireframe );
+line.material.depthTest = false;
+line.material.opacity = 0.25;
+line.material.transparent = true;<br>
+scene.add( line );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">helpers</a></pre><br>
+<h4>Конструктор</h4><br>
+<pre>WireframeGeometry( <a href="core.htm#7" title="Geometry">geometry</a> )</pre>
+<div class=list><tt>geometry</tt> — любой геометрический объект.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/geometries/WireframeGeometry.js.txt">WireframeGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/WireframeGeometry.js" target="_blank">WireframeGeometry.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

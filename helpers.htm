@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Вспомогательные элементы <code>three.js</code></h2>
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="1">ArrowHelper</h3>
+Объект трехмерной (3D) стрелки для визуализации направлений.<br>
+<img src="img/arrowAndGrid.png" width=600><br>
+<div class="caption">Сетка и стрелка</div><br>
+
+<h4>Пример</h4><br>
+<pre>var dir = new THREE.Vector3( 1, 2, 0 );<br>
+// normalize the direction vector (convert to vector of length 1)
+// нормализуем вектор направления (конвертируем в вектор единичной длины)
+dir.normalize();<br>
+var origin = new THREE.Vector3( 0, 0, 0 );
+var length = 1;
+var hex = 0xffff00;<br>
+var arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+scene.add( arrowHelper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometries" target="_blank">WebGL / geometries</a>
+<a href="https://threejs.org/examples/#webgl_geometry_normals" target="_blank">WebGL / geometry / normals</a>
+<a href="https://threejs.org/examples/#webgl_shadowmesh" target="_blank">WebGL / shadowmesh</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>ArrowHelper(<a href="math.htm#19" title="Vector3">dir</a>, <a href="math.htm#19" title="Vector3">origin</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="length - длина">length</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="hex - сокращение англ. слова hexadecimal - шестнадцатиричный">hex</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов head length - длина головки">headLength</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов head width - ширина головки">headWidth</a> )</pre>
+<div class=list><tt><a href="math.htm#19" title="Vector3">dir</a></tt> -- направление из <tt>origin</tt> (т.е из начальной точки стрелки). Должен быть единичным вектором.</div>
+<div class=list><tt><a href="math.htm#19" title="Vector3">origin</a></tt> -- точка из которой начинается стрелка.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="length - длина">length</a></tt> -- длина стрелки. Значением по умолчанию является <tt>1</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="hex - сокращение англ. слова hexadecimal - шестнадцатиричный">hex</a></tt> -- шестнадцатиричное значение, определяющее цвет. Значение по умолчанию равно <tt>0xffff00</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов head length - длина головки">headLength</a></tt> -- длина наконечника стрелки. Значение по умолчанию равно <tt>0.2 * length</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов head width - ширина головки">headWidth</a></tt> -- ширина наконечника стрелки. Значение по умолчанию равно <tt>0.2 * headLength</tt>.</div><br>
+<h4>Свойства</h4><br>
+Для информации об общих свойствах посмотрите базовый класс <a href="core.htm#14" title="Object3D">Object3D</a>.
+<div class=blockindent><br>
+<pre id="1line"><a href="objects.htm#4" title="line - линия. Родительский класс - Line">.line</a></pre>
+Содержит линейную часть <tt>arrowHelper</tt>.<br><br>
+<pre id="1cone"><a href="objects.htm#8" title="cone - конус. Родительский класс - Mesh">.cone</a></pre>
+Содержит коническую часть <tt>arrowHelper</tt>.</div><br>
+<h4>Методы</h4><br>
+Для информации об общих методах посмотрите базовый класс <a href="core.htm#14" title="Object3D">Object3D</a>.
+<div class=blockindent><br>
+<pre id="1setColor"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set color - установить цвет">.setColor</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="hex - сокращение англ. слова hexadecimal - шестнадцатиричный">hex</a> )</pre>
+<div class=indent1><tt>hex</tt> -- шестнадцатиричное значение, определяющее цвет.</div>
+Устанавливает цвет <tt>arrowHelper</tt>.<br><br>
+<pre id="1setLength"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов set length - установить длину">.setLength</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="length - длина">length</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов head length - длина головки">headLength</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов head width - ширина головки">headWidth</a> )</pre>
+<div class=indent1><tt>length</tt> -- желаемая длина стрелки.</div>
+<div class=indent1><tt>headLength</tt> -- длина наконечника стрелки.</div>
+<div class=indent1><tt>headWidth</tt> -- ширина наконечника стрелки.</div>
+Устанавливает длину <tt>arrowHelper</tt>.<br><br>
+<pre id="1setDirection"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов set direction - установить направление">.setDirection</a>( <a href="math.htm#19" title="Vector3">dir</a> )</pre>
+<div class=indent1><tt>dir</tt> -- желаемое направление. Должен быть единичным вектором.</div>
+Устанавливает направление <tt>arrowHelper</tt>.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/ArrowHelper.js.txt">ArrowHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/ArrowHelper.js" target="_blank">ArrowHelper.js на github.com</a></div><br><br>
+
+<span class="right_side"><a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="2">AxesHelper</h3>
+Объект для визуализации трех осей координат простым способом.<br>
+Ось <tt>X</tt> красного цвета, ось <tt>Y</tt> - зеленая, ось <tt>Z</tt> - синяя.<br>
+<img src="img/axisAndPolarGrid.png" width=600><br>
+<div class="caption">Оси координат и полярная сетка</div><br>
+<h4>Пример</h4><br>
+<pre>var axesHelper = new THREE.AxesHelper( 5 );
+scene.add( axesHelper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometries" target="_blank">WebGL / geometries</a>
+<a href="https://threejs.org/examples/#webgl_geometries2" target="_blank">WebGL / geometries2</a>
+<a href="https://threejs.org/examples/#webgl_geometry_convex" target="_blank">WebGL / geometry / convex</a>
+<a href="https://threejs.org/examples/#webgl_geometry_spline_editor" target="_blank">WebGL / geometry / spline / editor</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>AxesHelper( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a></tt> -- длина линий, представляющих оси (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div><br>
+<h4>Свойства</h4><br>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#6" title="LineSegments">LineSegments</a></tt>.<br><br>
+<h4>Методы</h4><br>
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#6" title="LineSegments">LineSegments</a></tt>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/AxesHelper.js.txt">AxesHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/AxesHelper.js" target="_blank">AxesHelper.js на github.com</a></div><br><br>
+
+<span class="right_side"><a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="3">BoxHelper</h3>
+Вспомогательный объект для отображения вокруг какого-либо объекта ограничительного каркаса из линий, сориентированного по осям мира.<br>
+Обратите внимание, для того чтобы это работало, объект должен иметь либо <a href="core.htm#7" title="Geometry">Geometry</a>, либо <a href="core.htm#2" title="Geometry">BufferGeometry</a>, так что со <a href="objects.htm#12" title="Sprite">спрайтами</a> он не будет работать.<br>
+<img src="img/boxHelper.png" width=300><br>
+<div class="caption">BoxHelper вокруг икосаэдра</div><br>
+<h4>Пример</h4><br>
+<pre>var sphere = new THREE.SphereGeometry();
+var object = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( 0xff0000 ) );
+var box = new THREE.BoxHelper( object, 0xffff00 );
+scene.add( box );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL / helpers</a>
+<a href="https://threejs.org/examples/#webgl_loader_nrrd" target="_blank">WebGL / loader / nrrd</a>
+<a href="https://threejs.org/examples/#webgl_buffergeometry_drawcalls" target="_blank">advanced / buffergeometry / drawcalls</a></pre><br>
+<h4>Конструктор</h4><br>
+<pre>BoxHelper( <a href="core.htm#14" title="Object3D">object</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a> )</pre>
+<div class=list><tt><a href="core.htm#14" title="Object3D">object</a></tt> -- трехмерный (3D) объект, который нужно показать в ограничивающем его каркасе из линий, ориентированном по осям мира (дополнительный, необязательный параметр).</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt> -- шестнадцатиричное значение, определяющее цвет каркаса (сторон параллелипипеда) (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>0xffff00</tt>.</div>
+Создает новый каркас, ограничивающий переданный объект. Внутри, для вычисления размеров, используется метод <tt><a href="math.htm#2" title="Box3.setFromObject">Box3.setFromObject</a></tt>.
+Обратите внимание на то, что при этом в каркас включаются все дочерние объекты.<br><br>
+<h4>Свойства</h4><br>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#6" title="LineSegments">LineSegments</a></tt>.<br><br>
+<h4>Методы</h4><br>
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#6" title="LineSegments">LineSegments</a></tt>.
+<div class=blockindent><br>
+<pre id="3update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a>()</pre>
+Обновляет геометрию вспомогательного объекта в соответствии с размерами объекта, включая любые дочерние объекты. Смотрите описание метода <tt><a href="math.htm#2" title="Box3.setFromObject">Box3.setFromObject</a></tt>.<br><br>
+<pre id="3setFromObject"><a href="#3" title="BoxHelper">.setFromObject</a>( <a href="core.htm#14" title="Object3D">object</a> )</pre>
+<div class=indent1><tt><a href="core.htm#14" title="Object3D">object</a></tt> -- трехмерный (3D) объект, вокруг которого создается вспомогательный объект.</div>
+Обновляет каркас ограничивающего параллелипипеда для переданного объекта.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/BoxHelper.js.txt">BoxHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/BoxHelper.js" target="_blank">BoxHelper.js на github.com</a></div><br><br>
+
+<span class="right_side"><a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="4">CameraHelper</h3>
+Этот вспомогательный объект для определения того, что попадает в объем усеченной пирамиды, который будет видим камере.<br>
+Он показывает эту область видимости камеры при помощи <a href="objects.htm#6" title="LineSegments"><tt>LineSegments</tt></a>.<br><br>
+<h4>Пример</h4><br>
+<pre>var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+var helper = new THREE.CameraHelper( camera );
+scene.add( helper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_camera" target="_blank">WebGL / camera</a>
+<a href="https://threejs.org/examples/#webgl_geometry_extrude_splines" target="_blank">WebGL / extrude / splines</a></pre><br>
+<h4>Конструктор</h4><br>
+<pre>CameraHelper( <a href="cameras.htm#1" title="Camera">camera</a> )</pre>
+<div class=list><tt><a href="cameras.htm#1" title="Camera">camera</a></tt> -- камера, область видимости которой, нужно показать.</div>
+Создает новый <tt>CameraHelper</tt> для указанной камеры.<br><br>
+<h4>Свойства</h4><br>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#6" title="LineSegments">LineSegments</a></tt>.
+<div class=blockindent><br>
+<pre id="4camera"><a href="cameras.htm#1" title="Camera">.camera</a></pre>
+Камера, область видимости которой нужно показать.<br><br>
+<pre id="4pointMap"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="point map - карта точек">.pointMap</a></pre>
+Здесь содержаться точки, используемые для визуализации области видимости камеры.<br><br>
+<pre id="4matrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix - матрица">.matrix</a></pre>
+Обратитесь к <a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">camera.matrixWorld</a>.<br><br>
+<pre id="4matrixAutoUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix auto update - автоматическое обновление матрицы">.matrixAutoUpdate</a></pre>
+Смотрите описание свойства <tt><a href="core.htm#14matrixAutoUpdate" title="Object3D.matrixAutoUpdate">Object3D.matrixAutoUpdate</a></tt>.
+Установите здесь значение <tt>false</tt>, так как этот вспомогательный объект использует <tt><a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a></tt> камеры.</div><br>
+<h4>Методы</h4><br>
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#6" title="LineSegments">LineSegments</a></tt>.
+<div class=blockindent><br>
+<pre id="4update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a>()</pre>
+Метод обновляет вспомогательный объект, основываясь на <tt>projectionMatrix</tt> камеры.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/CameraHelper.js.txt">CameraHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/CameraHelper.js" target="_blank">CameraHelper.js на github.com</a></div><br><br>
+
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="5">DirectionalLightHelper</h3>
+Вспомогательный объект для помощи с отображением на сцене эффекта <tt><a href="lights.htm#2" title="DirectionalLight">DirectionalLight</a></tt>, т.е. направленного света.<br>
+Он состоит из плоскости и линии, представляющих положение и направление света.<br><br>
+<h4>Пример</h4><br>
+<pre>var light = new THREE.DirectionalLight( 0xFFFFFF );
+var helper = new THREE.DirectionalLightHelper( light, 5 );
+scene.add( helper );</pre><br>
+<h4>Конструктор</h4><br>
+<pre>DirectionalLightHelper( <a href="lights.htm#2" title="DirectionalLight. light - свет">light</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a> )</pre>
+<div class=list><tt><a href="lights.htm#2" title="DirectionalLight. light - свет">light</a></tt> -- свет, который нужно показать.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a></tt> -- размер плоскости (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt> -- если этот параметр не установлен, вспомогательный объект примет цвет освещения (дополнительный, необязательный параметр).</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="core.htm#14" title="Object3D">Object3D</a></tt>.
+<div class=blockindent><br>
+<pre id="5lightPlane"><a href="objects.htm#4" title="Line. light plane - плоскость света">.lightPlane</a></pre>
+Содержит сетку (mesh) линии, показывающую расположение направленного света.<br><br>
+<pre id="5light"><a href="lights.htm#2" title="DirectionalLight. light - свет">.light</a></pre>
+Ссылка на отображаемый <tt><a href="lights.htm#2" title="DirectionalLight">directionalLight</a></tt>.<br><br>
+<pre id="5matrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix - матрица">.matrix</a></pre>
+Ссылка на <tt><a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a></tt> освещения.<br><br>
+<pre id="5matrixWorld"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix auto update - автоматическое обновление матрицы">.matrixAutoUpdate</a></pre>
+Смотрите описание <tt><a href="core.htm#14matrixAutoUpdate" title="Object3D.matrixAutoUpdate">Object3D.matrixAutoUpdate</a></tt>. Установите здесь значение <tt>false</tt>, так как вспомогательный элемент использует <tt><a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a></tt> освещения.<br><br>
+<pre id="5color"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">.color</a></pre>
+Параметр цвета, переданный в конструктор. Значение по умолчанию неопределено. Если его не изменить, цвет вспомогательного объекта будет обновлен при следующем вызове обновления.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <tt><a href="core.htm#14" title="Object3D">Object3D</a></tt>.
+<div class=blockindent><br>
+<pre id="5dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - размещать">.dispose</a>()</pre>
+Dispose of the directionalLightHelper.<br><br>
+
+<pre id="5update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновить">.update</a>()</pre>
+Updates the helper to match the position and direction of the [page:.light directionalLight] being visualized.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/DirectionalLightHelper.js.txt">DirectionalLightHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/DirectionalLightHelper.js" target="_blank">DirectionalLightHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="6">FaceNormalsHelper</h3>
+Показывает <a href="#1" title="ArrowHelper">стрелки</a> для визуализации нормалей <a href="core.htm#6" title="Face3">граней</a> объекта.
+Требуется, чтобы нормали граней были указаны для всех <a href="core.htm#6" title="Face3">граней</a> или были вычислены с помощью метода <tt><a href="core.htm#7computeFaceNormals" title="Geometry.computeFaceNormals">computeFaceNormals</a></tt>.<br>
+Обратите внимание, что этот вспомогательный объект работает только с объектами, чья геометрия является экземпляром <tt><a href="core.htm#7" title="Geometry">Geometry</a></tt>. Для <tt><a href="core.htm#2" title="BufferGeometry">BufferGeometry</a></tt> вместо него используйте <tt><a href="#14" title="VertexNormalsHelper">VertexNormalsHelper</a></tt>.<br>
+<img src="img/normals.png" width=300><br>
+<div class="caption">Нормали к вершинам (красные) и граням (зеленые)</div><br>
+
+<h4>Пример</h4><br>
+<pre>geometry = new THREE.BoxGeometry( 10, 10, 10, 2, 2, 2 );
+material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+box = new THREE.Mesh( geometry, material );<br>
+helper = new THREE.FaceNormalsHelper( box, 2, 0x00ff00, 1 );<br>
+scene.add( box );
+scene.add( helper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL / helpers</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>FaceNormalsHelper( <a href="core.htm#14" title="Object3D">object</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - ширина (толщина) линии">linewidth</a> )</pre>
+
+<div class=list><tt><a href="core.htm#14" title="Object3D">object</a></tt> -- объект для которого нужно отобразить нормали к граням.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a></tt> -- длина стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt> -- шестнадцатиричное значение цвета стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>0xffff00</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - ширина (толщина) линии">linewidth</a></tt> -- ширина линий стрелок (дополнительный, необязательный параметр).  Значение по умолчанию равно <tt>1</tt>.</div><br>
+
+<h4>Свойства</h4><br>
+Для информации об общих свойствах посмотрите базовый класс <a href="objects.htm#6" title="LineSegments">LineSegments</a>.
+<div class=blockindent><br>
+<pre id="6matrixAutoUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix auto update - автоматическое обновление матрицы">.matrixAutoUpdate</a></pre>
+Посмотрите описание <a href="core.htm#14matrixAutoUpdate" title="Object3D.matrixAutoUpdate">Object3D.matrixAutoUpdate</a>. Установите данное свойство как <tt>false</tt>, так как этот вспомогательный элемент использует <a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a> объекта.<br><br>
+<pre id="6object"><a href="core.htm#14" title="Object3D">.object</a></pre>
+Объект, для которого должны быть показаны нормали граней.<br><br>
+<pre id="6size"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">.size</a></pre>
+Длина стрелок, значение по умолчанию равно <tt>1</tt>.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <a href="objects.htm#6" title="LineSegments">LineSegments</a>.
+<div class=blockindent><br>
+<pre id="6update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a>()</pre>
+Обновляет предпросмотр нормалей граней на основе перемещения объекта.
+Updates the face normal preview based on movement of the object.</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/FaceNormalsHelper.js.txt">FaceNormalsHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/FaceNormalsHelper.js" target="_blank">FaceNormalsHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="objects.htm#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
+<h3 id="7">GridHelper</h3>
+<tt>GridHelper</tt> - это объект для установки сеток. Сетка является двумерным массивом линий.<br>
+<img src="img/arrowAndGrid.png" width=600><br>
+<div class="caption">Сетка и стрелка</div><br>
+
+<h4>Пример</h4>
+<pre>var size = 10;
+var divisions = 10;<br>
+var gridHelper = new THREE.GridHelper( size, divisions );
+scene.add( gridHelper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">Пример использования различных вспомогательных элементов</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>GridHelper( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="divisions - разделы">divisions</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)" title="color center line - цвет осевой (центральной) линии">colorCenterLine</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)" title="color grid - цвет сетки">colorGrid</a> )</pre>
+<div class=list><tt>size</tt> -- размер стороны сетки. Значение по умолчанию равно <tt>10</tt>.</div>
+<div class=list><tt>divisions</tt> -- число ячеек на каждой стороне сетки. Значение по умолчанию равно <tt>10</tt>.</div>
+<div class=list><tt>colorCenterLine</tt> -- цвет осевой (центральной) линии. Это может быть как шестнадцатиричное значение  <a href="math.htm#3" title="Color">цвета</a>, так и название цвета в CSS. Значение по умолчанию равно <tt>0x444444</tt>.</div>
+<div class=list><tt>colorGrid</tt> -- цвет линий сетки. Это может быть как шестнадцатиричное значение  <a href="math.htm#3" title="Color">цвета</a>, так и название цвета в CSS. Значение по умолчанию равно <tt>0x888888</tt>.</div>
+Создает новый <tt>GridHelper</tt> размером <tt>size</tt> с <tt>divisions</tt> ячеек с каждой стороны. Цвета являются необязательными аргументами.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/GridHelper.js.txt">GridHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/GridHelper.js" target="_blank">GridHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="8">HemisphereLightHelper</h3>
+Создает видимый вспомогательный элемент, состоящий из сферической <a href="objects.htm#8" title="Mesh">сетки</a> для отображения зоны освещения от <tt><a href="lights.htm#3" title="HemisphereLight">HemisphereLight</a></tt>.<br><br>
+
+<h4>Пример</h4>
+<pre>var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+var helper = new THREE.HemisphereLightHelper( light, 5 );
+scene.add( helper );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>HemisphereLightHelper( <a href="lights.htm#3" title="HemisphereLight">light</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="sphere size - размер сферы">sphereSize</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a> )</pre>
+<div class=list><tt><a href="lights.htm#3" title="HemisphereLight">light</a></tt> -- освещение, которое нужно визуализировать.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="sphere size - размер сферы">sphereSize</a></tt> -- Размер сетки, используемой для визуализации освещения.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
+
+<h4>Свойства</h4><br>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="core.htm#14" title="Object3D">Object3D</a></tt>.
+<div class=blockindent><br>
+<pre id="8light"><a href="lights.htm#3" title="HemisphereLight">.light</a></pre>
+Reference to the HemisphereLight being visualized.<br><br>
+
+<pre id="8matrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix - матрица">.matrix</a></pre>
+Reference to the hemisphereLight's [page:Object3D.matrixWorld matrixWorld].<br><br>
+
+<pre id="8matrixAutoUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix auto update - автоматическое обновление матрицы">.matrixAutoUpdate</a></pre>
+Смотрите свойство <tt><a href="core.htm#14matrixAutoUpdate" title="Object3D.matrixAutoUpdate">Object3D.matrixAutoUpdate</a></tt>. Set to *false* here as the helper is using the hemisphereLight's [page:Object3D.matrixWorld matrixWorld].<br><br>
+
+<pre id="8color"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">.color</a></pre>
+Параметр цвета, переданный в конструктор. По умолчанию значение равно <tt>undefined</tt>, т.е. неопределено. Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове обновления.</div><br>
+
+<h4>Методы</h4><br>
+Для информации об общих методах посмотрите базовый класс <tt><a href="core.htm#14" title="Object3D">Object3D</a></tt>.
+<div class=blockindent><br>
+<pre id="8dispose">[method:null .dispose</a>()</pre>
+Dispose of the hemisphereLightHelper.</pre></pre>
+<pre id="8update">[method:null .update</a>()</pre>
+Updates the helper to match the position and direction of the [page:.light].</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/HemisphereLightHelper.js.txt">HemisphereLightHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/HemisphereLightHelper.js" target="_blank">HemisphereLightHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="objects.htm#8" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
+<h3 id="9">PointLightHelper</h3>
+Создает видимый вспомогательный элемент, состоящий из сферической <a href="objects.htm#8" title="Mesh">сетки</a> для отображения зоны освещения от <a href="lights.htm#5" title="PointLight">PointLight</a> - точечного освещения.<br><br>
+
+<h4>Пример</h4>
+<pre>var pointLight = new THREE.PointLight( 0xff0000, 1, 100 );
+pointLight.position.set( 10, 10, 10 );
+scene.add( pointLight );<br>
+var sphereSize = 1;
+var pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+scene.add( pointLightHelper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL /  helpers</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>PointLightHelper( <a href="lights.htm#5" title="PointLight">light</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="sphere size - размер сферы">sphereSize</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a> )</pre>
+<div class=list><tt><a href="lights.htm#5" title="PointLight">light</a></tt> -- освещение, которое нужно визуализировать.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="sphere size - размер сферы">sphereSize</a></tt> -- Размер сферы вспомогательного элемента. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#8" title="Mesh">Mesh</a></tt>.
+<div class=blockindent><br>
+<pre id="9light"><a href="lights.htm#5" title="PointLight">.light</a></pre>
+Точечное освещение (<tt><a href="lights.htm#5" title="PointLight">PointLight</a></tt>), которое нужно визуализировать.<br><br>
+<pre id="9matrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix - матрица">.matrix</a></pre>
+Ссылка на <tt><a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a></tt>, отображаемого точечного освещения.<br><br>
+<pre id="9matrixAutoUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix auto update - автоматическое обновление матрицы">.matrixAutoUpdate</a></pre>
+Смотрите описание <tt><a href="core.htm#14matrixAutoUpdate" title="Object3D.matrixAutoUpdate">Object3D.matrixAutoUpdate</a></tt>.
+Установите здесь значение <tt>false</tt>, так как вспомогательный элемент использует <tt><a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a></tt> точечного освещения.<br><br>
+<pre id="9color"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">.color</a></pre>
+Параметр цвета, переданный в конструктор. По умолчанию значение равно <tt>undefined</tt>, т.е. неопределено. Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове обновления.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#8" title="Mesh">Mesh</a></tt>.
+<div class=blockindent><br>
+<pre id="9dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - размещать">.dispose</a>()</pre>
+Dispose of the pointLightHelper.<br><br>
+
+<pre id="9update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a>()</pre>
+Метод обновляет вспомогательный элемент в соответствии с позицией <tt><a href="#9light" title="PointLightHelper.light">.light</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/PointLightHelper.js.txt">PointLightHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/PointLightHelper.js" target="_blank">PointLightHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="objects.htm#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
+<h3 id="10">PolarGridHelper</h3>
+<tt>PolarGridHelper</tt> - это объект для установки сеток. Сетка является двумерным массивом линий.<br>
+<img src="img/axisAndPolarGrid.png" width=600><br>
+<div class="caption">Оси координат и полярная сетка</div><br>
+
+<h4>Пример</h4>
+<pre>var radius = 10;
+var radials = 16;
+var circles = 8;
+var divisions = 64;<br>
+var helper = new THREE.PolarGridHelper( radius, radials, circles, divisions );
+scene.add( helper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">Пример использования разных вспомогательных элементов</a></pre><br>
+
+
+<h4>Конструктор</h4>
+<pre>PolarGridHelper( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="radials - радиалы">radials</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="circles - круги">circles</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="divisions - разделы">divisions</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color1</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color2</a> )</pre>
+<div class=list><tt>radius</tt> -- радиус полярной сетки. Он может быть любым положительный числом. Значение по умолчанию равно <tt>10</tt>.</div>
+<div class=list><tt>radials</tt> -- число радиальных линий. Оно может быть любым положительным целым числом. Значение по умолчанию равно <tt>16</tt>.</div>
+<div class=list><tt>circles</tt> -- число окружностей. Это может быть любое положительное целое число. Значение по умолчанию равно <tt>8</tt>.</div>
+<div class=list><tt>divisions</tt> -- число отрезков линии, из которых составлена каждая из окружностей. Это можеть быть любое положительное целое число, равное 3 или большее. Значение по умолчанию равно <tt>64</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> То есть, при значении <tt>divisions</tt> равному <tt>3</tt> окружности будут треугольниками, при <tt>8</tt> - восьмиугольниками. С увеличением значения <tt>divisions</tt>, окружности становятся все более "круглыми".</div></div>
+<div class=list><tt>color1</tt> -- Первый цвет, используемый для элементов сетки. Это может быть как шестнадцатиричное значение  <a href="math.htm#3" title="Color">цвета</a>, так и название цвета в CSS. Значение по умолчанию равно <tt>0x444444</tt>.</div>
+<div class=list><tt>color2</tt> -- Второй цвет, используемый для элементов сетки. Это может быть как шестнадцатиричное значение  <a href="math.htm#3" title="Color">цвета</a>, так и название цвета в CSS. Значение по умолчанию равно <tt>0x888888</tt>.</div>
+Создает новый <tt>PolarGridHelper</tt> с радиусом, определенным в параметре <tt>radius</tt>, числом лучей (радиалов), указанных в параметре <tt>radials</tt>, и числом окружностей, переданных в <tt>circles</tt>,
+где каждая окружность состоит из отрезков, число которых указано в <tt>divisions</tt>. Аргументы со значениями цвета являются дополнительными, необязательными.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/PolarGridHelper.js.txt">PolarGridHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/PolarGridHelper.js" target="_blank">PolarGridHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="11">RectAreaLightHelper</h3>
+Создает видимый вспомогательный элемент для отображения зоны освещения от <tt><a href="lights.htm#6" title="RectAreaLight">RectAreaLight</a></tt>.
+
+<h4>Пример</h4>
+<pre>var light = new THREE.RectAreaLight( 0xffffbb, 1.0, 5, 5 );
+var helper = new THREE.RectAreaLightHelper( light );
+scene.add( helper );</pre>
+
+<h4>Конструктор</h4>
+<pre>RectAreaLightHelper( <a href="lights.htm#6" title="RectAreaLight">light</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a>)</pre>
+<div class=list><tt><a href="lights.htm#6" title="RectAreaLight">light</a></tt> -- освещение, которое нужно визуализировать.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
+
+<h4>Свойства</h4><br>
+Для информации об общих свойствах посмотрите базовый класс <a href="core.htm#14" title="Object3D">Object3D</a>.
+<div class=blockindent><br>
+<pre id="11light"><a href="lights.htm#6" title="RectAreaLight">.light</a></pre>
+Ссылка на <tt><a href="lights.htm#6" title="RectAreaLight">RectAreaLight</a></tt>, который нужно визуализировать.<br><br>
+<pre id="11color">.color</pre>
+The color parameter passed in the constructor. Default is undefined. If this is changed, the helper's color will update the next time update is called.
+</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <a href="core.htm#14" title="Object3D">Object3D</a>.
+<div class=blockindent><br>
+<pre id="11dispose">[method:null dispose</a>()</pre>
+Dispose of the rectAreaLightHelper.<br><br>
+
+<pre id="11update">[method:null update</a>()</pre>
+Updates the helper to match the position and direction of the [page:.light].</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/RectAreaLightHelper.js.txt">RectAreaLightHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/RectAreaLightHelper.js" target="_blank">RectAreaLightHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> &nbsp; <a href="objects.htm#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a> &nbsp; <a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="12">SkeletonHelper</h3>
+Вспомогательный объект для помощи с визуализацией объекта <tt><a href="objects.htm#10" title="Skeleton">Skeleton</a></tt>. Визуализация производится при помощи <tt><a href="materials.htm#1" title="LineBasicMaterial">LineBasicMaterial</a></tt>.<br>
+<img src="img/SkeletonHelper.png" width=600><br>
+<div class="caption">Вспомогательный элемент для скелета</div><br>
+
+<h4>Пример</h4><br>
+<pre>var helper = new THREE.SkeletonHelper( mesh );
+helper.material.linewidth = 3;
+scene.add( helper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_animation_skinning_blending" target="_blank">animation / skinning / blending</a>
+<a href="https://threejs.org/examples/#wwebgl_animation_skinning_morph" target="_blank">animation / skinning / morph</a>
+<a href="https://threejs.org/examples/#webgl_loader_bvh" target="_blank">loader / bvh</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>SkeletonHelper( object )</pre>
+<div class=blockindent>
+<tt>object</tt> -- может быть любым объектом, имеющим в качестве вложенного объекта, массив [page:Bone Bone]s.<br>
+Например, <tt><a href="objects.htm#10" title="Skeleton">Skeleton</a></tt> или <tt><a href="objects.htm#11" title="SkinnedMesh">SkinnedMesh</a></tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="12bones"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="bones - кости">.bones</a></pre>
+Список костей, которые вспомогательный элемент представляет как <tt><a href="objects.htm#4" title="Line">линии</a></tt>.<br><br>
+<pre id="12root"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="root - корень">.root</a></pre>
+Объект, переданный в конструктор.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/SkeletonHelper.js.txt">SkeletonHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/SkeletonHelper.js" target="_blank">SkeletonHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="13">SpotLightHelper</h3>
+Показывает вспомогательный объект в виде конуса для <a href="lights.htm#7" title="spotlight - прожектор">SpotLight</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var spotLight = new THREE.SpotLight( 0xffffff );
+spotLight.position.set( 10, 10, 10 );
+scene.add( spotLight );<br>
+var spotLightHelper = new THREE.SpotLightHelper( spotLight );
+scene.add( spotLightHelper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_lights_spotlights" target="_blank">lights / spotlights</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>SpotLightHelper(<a href="lights.htm#7" title="SpotLight. light - освещение">light</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a> )</pre>
+<div class=list><tt>light</tt> -- <a href="lights.htm#7" title="spotlight - прожектор">SpotLight</a>, конус света которого нужно показать.</div>
+<div class=list><tt>color</tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах посмотрите базовый класс <a href="core.htm#14" title="Object3D">Object3D</a>.
+<div class=blockindent><br>
+<pre id="13cone">[property:LineSegments .cone</a></pre>
+[page:LineSegments] used to visualize the light.<br><br>
+
+<pre id="13light">[property:SpotLight .light</a></pre>
+Reference to the [page:SpotLight] being visualized.<br><br>
+
+<pre id="13matrix">[property:object .matrix</a></pre>
+Reference to the spotLight's [page:Object3D.matrixWorld matrixWorld].<br><br>
+
+<pre id="13">[property:object .matrixAutoUpdate</a></pre>
+See [page:Object3D.matrixAutoUpdate]. Set to *false* here as the helper is using the spotLight's [page:Object3D.matrixWorld matrixWorld].</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <a href="core.htm#14" title="Object3D">Object3D</a>.
+<div class=blockindent><br>
+<pre id="13dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - размещение">.dispose</a>()</pre>
+Disposes of the light helper.<br><br>
+
+<pre id="13update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a>()</pre>
+Updates the light helper.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/SpotLightHelper.js.txt">SpotLightHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/SpotLightHelper.js" target="_blank">SpotLightHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="objects.htm#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
+<h3 id="14">VertexNormalsHelper</h3>
+Отображает <a href="#1" title="ArrowHelper">стрелки</a> для визуализации векторов нормалей к вершинам объекта.
+Требуется, чтобы нормали были указаны в <a href="core.htm#1" title="BufferAttribute">custom attribute</a> или были вычислены с помощью метода <a href="core.htm#7computeVertexNormals" title="Geometry.computeVertexNormals">computeVertexNormals</a>.<br>
+В отличие от <a href="#6" title="FaceNormalsHelper">FaceNormalsHelper</a>, данный класс работает с <a href="core.htm#2" title="BufferGeometry">BufferGeometry</a>.<br>
+<img src="img/normals.png" width=300><br>
+<div class="caption">Нормали к вершинам (красные) и граням (зеленые)</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxGeometry( 10, 10, 10, 2, 2, 2 );
+var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+var box = new THREE.Mesh( geometry, material );<br>
+var helper = new THREE.VertexNormalsHelper( box, 2, 0x00ff00, 1 );<br>
+scene.add( box );
+scene.add( helper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL / helpers</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>VertexNormalsHelper( <a href="core.htm#14" title="Object3D">object</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - ширина линий">linewidth</a> )</pre>
+<div class=list><tt><a href="core.htm#14" title="Object3D">object</a></tt> -- объект, для которого нужно показать нормали вершин.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">size</a></tt> -- длина стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt> -- шестнадцатиричное значение цвета стрелок. Значение по умолчанию равно <tt>0xff0000</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - ширина линий">linewidth</a></tt> -- ширина линий стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#6" title="LineSegments">LineSegments</a></tt>.
+<div class=blockindent><br>
+<pre id="14matrixAutoUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="matrix auto update - автоматическое обновление матрицы">.matrixAutoUpdate</a></pre>
+Смотрите <a href="core.htm#14matrixAutoUpdate" title="Object3D.matrixAutoUpdate">Object3D.matrixAutoUpdate</a>. Установите его как <tt>false</tt>, так как данный вспомогательный элемент использует <a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a> объекта.<br><br>
+<pre id="14object"><a href="core.htm#14" title="Object3D">.object</a></pre>
+Объект, для которого нужно показать нормали вершин.<br><br>
+<pre id="14size"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">.size</a></pre>
+Длина стрелок. Значение по умолчанию равно <tt>1</tt>.</div><br>
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#6" title="LineSegments">LineSegments</a></tt>.
+<div class=blockindent><br>
+<pre id="14update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a>()</pre>
+Обновляет предпросмотр нормалей вершин, основанный на перемещении объекта.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/helpers/VertexNormalsHelper.js.txt">VertexNormalsHelper.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/VertexNormalsHelper.js" target="_blank">VertexNormalsHelper.js на github.com</a></div>
+<br><br>
+</body></html>

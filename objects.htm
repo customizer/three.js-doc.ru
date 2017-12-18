@@ -1,0 +1,615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Объекты</h2>
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="1">Bone</h3>
+Кость (bone) является частью скелета (<a href="#9" title="Skeleton">Skeleton</a>). Скелет, в свою очередь, используется "сеткой, покрытой кожей" (<a href="#10" title="SkinnedMesh">SkinnedMesh</a>). Кости практически одинаковы с пустым <a href="core.htm#8" title="Object3D">Object3D</a>.
+
+<h4>Пример</h4>
+<pre>var root = new THREE.Bone();
+var child = new THREE.Bone();<br>
+root.add( child );
+child.position.y = 5;</pre>
+
+<h4>Конструктор</h4>
+<pre>Bone( <a href="#10" title="SkinnedMesh">skin</a> )</pre>
+<div class=blockindent><tt>skin</tt> — (дополнительный, необязательный аргумент) <a href="#10" title="SkinnedMesh">SkinnedMesh</a> которой принадлежит кость.</div>
+
+<h4>Свойства</h4>
+<pre><a href="#10" title="SkinnedMesh">.skin</a></pre>
+An optional reference to the [page:SkinnedMesh].
+
+<h4>Методы</h4>
+<pre><a href="#1" title="Bone">.clone</a>()</pre>
+Возвращает клона данного объекта <tt>Bone</tt> и его потомков.
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/objects/Bone.js.txt">Bone.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Bone.js" target="_blank">Bone.js на github.com</a></div><br>
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="2">Group</h3>
+Данный объект (группа) практически идентичен <a href="core.htm#8" title="Object3D">Object3D</a>. Его назначение сделать работу с группой объектов синтаксически яснее.
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );<br>
+var cubeA = new THREE.Mesh( geometry, material );
+cubeA.position.set( 100, 100, 0 );<br>
+var cubeB = new THREE.Mesh( geometry, material );
+cubeA.position.set( -100, -100, 0 );<br>
+// create a group and add the two cubes
+// These cubes can now be rotated / scaled etc as a group
+// создаем группу и добавляем два куба
+// Эти кубы теперь можно вращать/масштабировать и т.д. как группу
+var group = new THREE.Group();
+group.add( cubeA );
+group.add( cubeB )<br>
+scene.add( group );</pre>
+
+<h4>Конструктор</h4>
+<pre>Group( )</pre>
+
+<h4>Свойства</h4>
+Свойства одинаковы со свойствами <a href="core.htm#8" title="Object3D">Object3D</a>, за исключением:
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">.type</a></pre>
+Строка 'Group'. Она не должна изменяться.
+
+<h4>Методы</h4>
+Методы одинаковы с методами <a href="core.htm#8" title="Object3D">Object3D</a>.
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/objects/Group.js.txt">Group.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Group.js" target="_blank">Group.js на github.com</a></div><br>
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="3">LensFlare</h3>
+Создает имитацию блика объектива камеры, зависящего от направления освещения.
+Creates a simulated lens flare that tracks a light.
+<div class="note">Примечание: Для работы LensFlare у <a href="renderers.htm#1.2" title="WebGLRenderer">WebGLRenderer</a> аргумент <tt>alpha</tt> должен быть установлен как <tt>true</tt>.</div>
+
+<h4>Пример</h4>
+<div>[example:webgl_lensflares lensflares]</div>
+
+<h4>Конструктор</h4>
+<pre>LensFlare( [page:Texture texture], [page:Float size], [page:Float distance], [page:Materials blending], [page:Color color] )</pre>
+<div class=blockindent><tt>texture</tt> — THREE.Texture (optional) <br>
+<tt>size</tt> — size in pixels (-1 = use texture.width) <br>
+<tt>distance</tt> — (0-1) from light source (0 = at light source) <br>
+<tt>blending</tt> — [page:Materials Blending Mode] - Defaults to THREE.NormalBlending <br>
+<tt>color</tt> — The color of the lens flare.</div>
+Automatically adds a lens flare to the lensFlares array if a texture is set.
+
+<h4>Свойства</h4>
+
+
+
+		<pre>[property:array lensFlares]</pre>
+		<div>
+		The array of flares as set by [page:LensFlare.add]
+		</div>
+
+		<pre>[property:Vector3 positionScreen]</pre>
+		<div>
+		The position of the lens flare on the screen.
+		</div>
+
+		<pre>[property:Function customUpdateCallback]</pre>
+		<div>
+		A custom update callback
+		</div>
+
+  <h4>Методы</h4>
+
+
+		<pre>[method:null add]( [page:Texture texture], [page:Float size], [page:Float distance], [page:Materials blending], [page:Color color] )</pre>
+		<div>
+		Adds a lens flare. See the constructor for details on the parameters.
+		</div>
+
+
+		<pre>[method:null updateLensFlares]()</pre>
+		<div>
+		Updates the lens flare based on the [page:LensFlare.positionScreen positionScreen] property.
+		</div>
+
+		<pre>[method:Lens Flare clone]()</pre>
+		<div>
+		Returns a clone of this LensFlare object and its descendants.
+		</div>
+
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="4">Line</h3>
+Непрерывная линия.
+
+<h4>Пример</h4>
+
+<pre>var material = new THREE.LineBasicMaterial({
+	color: 0x0000ff
+});<br>
+var geometry = new THREE.Geometry();
+geometry.vertices.push(
+	new THREE.Vector3( -10, 0, 0 ),
+	new THREE.Vector3( 0, 10, 0 ),
+	new THREE.Vector3( 10, 0, 0 )
+);<br>
+var line = new THREE.Line( geometry, material );
+scene.add( line );</pre>
+
+<h4>Конструктор</h4>
+<pre>Line( [page:Geometry geometry], [page:Material material] )</pre>
+
+		<div>
+		geometry — Vertices representing the line segment(s).<br>
+		material — Material for the line. Default is [page:LineBasicMaterial LineBasicMaterial].<br>
+		</div>
+
+		<div>If no material is supplied, a randomized line material will be created and assigned to the object.</div>
+
+
+  <h4>Свойства</h4>
+
+		<pre>[property:Geometry geometry]</pre>
+		<div>
+		Vertices representing the line segment(s).
+		</div>
+
+		<pre>[property:Material material]</pre>
+		<div>
+		Material for the line.
+		</div>
+
+
+  <h4>Методы</h4>
+
+		<pre>[method:Array raycast]( [page:Raycaster raycaster], [page:Array intersects] )</pre>
+		<div>
+		Get intersections between a casted ray and this Line. [page:Raycaster.intersectObject] will call this method.
+		</div>
+
+		<pre>[method:Line clone]()</pre>
+		<div>
+		Returns a clone of this Line object and its descendants.
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> &nbsp; <a href="#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
+<h3 id="5">LineLoop</h3>
+A continuous line that connects back to the start.
+
+<span class="right_side"><a href="#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
+<h3 id="6">LineSegments</h3>
+A series of lines drawn between pairs of vertices.</div>
+
+<h4>Конструктор</h4>
+<pre>LineSegments( [page:Geometry geometry], [page:Material material] )</pre>
+
+		<div>
+		geometry — Pair(s) of vertices representing each line segment(s).<br>
+		material — Material for the line. Default is [page:LineBasicMaterial LineBasicMaterial].
+		</div>
+
+		<div>If no material is supplied, a randomized line material will be created and assigned to the object.</div>
+
+
+  <h4>Свойства</h4>
+
+		<pre>[property:Geometry geometry]</pre>
+		<div>
+		Pair(s) of vertices representing the line segment(s).
+		</div>
+
+		<pre>[property:Material material]</pre>
+		<div>
+		Material for the line.
+		</div>
+
+
+  <h4>Методы</h4>
+
+		<pre>[method:Array raycast]( [page:Raycaster raycaster], [page:Array intersects] )</pre>
+		<div>
+		Get intersections between a casted ray and this Line. [page:Raycaster.intersectObject] will call this method.
+		</div>
+
+		<pre>[method:LineSegments clone]()</pre>
+		<div>
+		Returns a clone of this LineSegments object and its descendants.
+		</div>
+
+<h4>Source</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="7">LOD</h3>
+Level of Detail - Show meshes with more or less geometry based on distance.
+
+<h4>Пример</h4>
+
+		<div>
+		[example:webgl_lod LOD]
+		</div>
+
+		<pre>
+		var lod = new THREE.LOD();
+
+		//Create 5 levels of spheres
+		for( var i = 0; i &lt; 5; i++ ) {
+
+			var geometry = new THREE.IcosahedronGeometry( 10, 5 - i )
+
+			new THREE.Mesh( geometry, material );
+
+			lod.addLevel( mesh, i * 50 );
+
+		}
+		</pre>
+
+<h4>Конструктор</h4>
+<pre>LOD()</pre>
+
+<h4>Свойства</h4>
+
+<pre>[property:array levels]</pre>
+		<div>
+		An array of [page:object level] objects
+		</div>
+		<div>
+		level is an object with two properties.
+		</div>
+		<div>
+		distance -- The distance at which to display this level of detail<br>
+		object -- The Object3D which will be displayed
+		</div>
+
+  <h4>Методы</h4>
+
+
+
+		<pre>[method:null addLevel]( [page:Object3D mesh], [page:Float distance] )</pre>
+		<div>
+		mesh -- The Object3D to display <br>
+		distance -- The distance at which to display this level of detail
+		</div>
+		<div>
+		Adds a mesh that will display at a certain distance and greater. Typically the further away the distance,
+		the lower the detail on the mesh.
+		</div>
+
+		<pre>[method:Object3D getObjectForDistance]( [page:Float distance] )</pre>
+		<div>
+		Get a reference to the first [page:Object3D] (mesh) that is greater than supplied distance.
+		</div>
+
+		<pre>[method:null update]( [page:Camera camera] )</pre>
+		<div>
+		camera -- The current camera
+		</div>
+		<div>
+		Update the visiblility of the level of detail based on the distance from the camera.
+		</div>
+
+		<pre>[method:LOD clone]()</pre>
+		<div>
+		Returns a clone of this LOD object and its associated distance specific objects.
+		</div>
+
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="8">Mesh</h3>
+Base class for Mesh objects, such as [page:MorphAnimMesh] and [page:SkinnedMesh].
+
+<h4>Пример</h4>
+<code>var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+		var mesh = new THREE.Mesh( geometry, material );
+		scene.add( mesh );
+		</code>
+
+
+  <h4>Конструктор</h4>
+
+		<pre>[name]( [page:Geometry geometry], [page:Material material] )</pre>
+
+		<div>
+		geometry — An instance of [page:Geometry].<br>
+		material — An instance of [page:Material] (optional).
+		</div>
+
+
+  <h4>Свойства</h4>
+
+		<pre>[property:Geometry geometry]</pre>
+
+		<div>An instance of [page:Geometry], defining the object's structure.</div>
+
+		<pre>[property:Material material]</pre>
+
+		<div>An instance of [page:Material], defining the object's appearance. Default is a [page:MeshBasicMaterial] with wireframe mode enabled and randomised colour.</div>
+
+		<pre>[property:Array morphTargetInfluences]</pre>
+
+		<div>
+		An array of weights typically from 0-1 that specify how much of the morph is applied.
+		Undefined by default, but reset to a blank array by [page:Mesh.updateMorphTargets updateMorphTargets].
+		</div>
+
+		<pre>[property:Array morphTargetDictionary]</pre>
+
+		<div>
+		A dictionary of morphTargets based on the morphTarget.name property.
+		Undefined by default, but rebuilt [page:Mesh.updateMorphTargets updateMorphTargets].
+		</div>
+
+		<pre>[property:Integer drawMode]</pre>
+
+		<div>
+		Determines how the mesh triangles are constructed from the vertices. See the draw mode [page:DrawModes constants] for all possible values. Default is [page:DrawModes TrianglesDrawMode].
+		</div>
+
+  <h4>Методы</h4>
+
+		<pre>[method:null updateMorphTargets]()</pre>
+		<div>
+		Updates the morphtargets to have no influence on the object. Resets the
+		[page:Mesh.morphTargetInfluences morphTargetInfluences],
+		[page:Mesh.morphTargetDictionary morphTargetDictionary], and
+		[page:Mesh.morphTargetBase morphTargetBase] properties.
+		</div>
+
+		<pre>[method:Array raycast]( [page:Raycaster raycaster], [page:Array intersects] )</pre>
+		<div>
+		Get intersections between a casted ray and this mesh. [page:Raycaster.intersectObject] will call this method.
+		</div>
+
+		<pre>[method:Mesh clone]()</pre>
+		<div>
+		Returns a clone of this Mesh object and its descendants.
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="9">Points</h3>
+
+		<div class="desc">A class for displaying points. For example, if using the [page:WebGLRenderer], the points are displayed using GL_POINTS.</div>
+
+
+  <h4>Конструктор</h4>
+
+		<pre>Points( [page:Geometry geometry], [page:Material material] )</pre>
+
+		<div>
+		geometry — An instance of [page:Geometry].<br>
+		material — An instance of [page:Material] (optional).
+		</div>
+
+
+  <h4>Свойства</h4>
+
+		<pre>[property:Geometry geometry]</pre>
+
+		<div>An instance of [page:Geometry], where each vertex designates the position the points.</div>
+
+		<pre>[property:Material material]</pre>
+
+		<div>An instance of [page:Material], defining the object's appearance. Default is a [page:PointsMaterial] with randomised colour.</div>
+
+
+  <h4>Методы</h4>
+
+		<pre>[method:Array raycast]( [page:Raycaster raycaster], [page:Array intersects] )</pre>
+		<div>
+		Get intersections between a casted ray and this Points. [page:Raycaster.intersectObject] will call this method.
+		</div>
+
+		<pre>[method:Points clone]()</pre>
+		<div>
+		Returns a clone of this Points object and its descendants.
+		</div>
+
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<h3 id="10">Skeleton</h3>
+Use an array of [page:Bone bones] to create a skeleton that can be used by a [page:SkinnedMesh]. WebGL only.
+
+<h4>Пример</h4>
+<pre>// Create a simple "arm"<br>
+var bones = [];<br>
+var shoulder = new THREE.Bone();
+var elbow = new THREE.Bone();
+var hand = new THREE.Bone();<br>
+shoulder.add( elbow );
+elbow.add( hand );<br>
+bones.push( shoulder );
+bones.push( elbow );
+bones.push( hand );<br>
+shoulder.position.y = -5;
+elbow.position.y = 0;
+hand.position.y = 5;<br>
+var armSkeleton = new THREE.Skeleton( bones );<br>
+// See THREE.SkinnedMesh for an example of usage with a mesh</pre>
+
+<h4>Конструктор</h4>
+<pre>Skeleton( [page:Array bones], [page:Array boneInverses], [page:Boolean useVertexTexture]  )</pre>
+<div class=blockindent><tt>bones</tt> — The array of [page:bone bones]<br/>
+boneInverses — (optional) An array of [page:Matrix4 Matrix4s]<br/>
+useVertexTexture — (optional) Whether or not to use a vertex texture in the shader.</div>
+The constructor automatically sets up all of the properties below.
+
+<h4>Свойства</h4>
+<pre>[property:Array bones]</pre>
+The array of [page:bone bones]
+
+<pre>[property:Boolean useVertexTexture]</pre>
+Whether or not to use a vertex texture in the shader, set in the constructor. Not all devices
+		support floating point pixel textures. If this option is set then the bone matrices will be packed into
+		a texture and sent to the shader. This method allows a much larger set of bones to be used. Otherwise
+		the vertex shader will use uniforms, which do not allow for as many bones to be used. The exact
+		numbers vary between devices.
+
+
+<pre>[property:Array boneInverses]</pre>
+An array of [page:Matrix4 Matrix4s] that represent the inverse of the matrixWorld of the individual bones.
+
+<pre>[property:Integer boneTextureWidth]</pre>
+The width of the vertex data texture.
+
+<pre>[property:Integer boneTextureHeight]</pre>
+The height of the vertex data texture.
+
+<pre>[property:Float32Array boneMatrices]</pre>
+The array buffer holding the bone data when using a vertex texture.
+
+<pre>[property:DataTexture boneTexture]</pre>
+The [page:DataTexture] holding the bone data when using a vertex texture.
+
+<h4>Методы</h4>
+<pre>[method:null calculateInverses]()</pre>
+Generates the boneInverses.
+
+<pre>[method:null pose]()</pre>
+Returns the skeleton to the base pose.
+
+<pre>[method:null update]()</pre>
+Updates the [page:Float32Array boneMatrices] and [page:DataTexture boneTexture] after changing the bones.
+		This is called automatically by the [page:WebGLRenderer] if the skeleton is used with a [page:SkinnedMesh].
+
+<pre>[method:Skeleton clone]()</pre>
+Returns a clone of this Skeleton object.
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="11">SkinnedMesh</h3>
+A mesh that has a [page:Skeleton] with [page:Bone bones] that can then be used to animate the vertices of the geometry.
+
+<!-- 		<iframe id="scene" src="scenes/bones-browser.html"></iframe> -->
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.CylinderGeometry( 5, 5, 5, 5, 15, 5, 30 );<br>
+//Create the skin indices and skin weights
+for ( var i = 0; i &lt; geometry.vertices.length; i ++ ) {<br>
+  // Imaginary functions to calculate the indices and weights
+  // This part will need to be changed depending your skeleton and model
+  var skinIndex = calculateSkinIndex( geometry.vertices, i );
+  var skinWeight = calculateSkinWeight( geometry.vertices, i );<br>
+  // Ease between each bone
+  geometry.skinIndices.push( new THREE.Vector4( skinIndex, skinIndex + 1, 0, 0 ) );
+  geometry.skinWeights.push( new THREE.Vector4( 1 - skinWeight, skinWeight, 0, 0 ) );<br>
+}<br>
+var mesh = THREE.SkinnedMesh( geometry, material );<br>
+// See example from THREE.Skeleton for the armSkeleton
+var rootBone = armSkeleton.bones[ 0 ];
+mesh.add( rootBone );<br>
+// Bind the skeleton to the mesh
+mesh.bind( armSkeleton );<br>
+// Move the bones and manipulate the model
+armSkeleton.bones[ 0 ].rotation.x = -0.1;
+armSkeleton.bones[ 1 ].rotation.x = 0.2;</pre>
+
+<h4>Конструктор</h4>
+<pre>SkinnedMesh( [page:Geometry geometry], [page:Material material], [page:boolean useVertexTexture] )</pre>
+<div class=blockindent><tt>geometry</tt> — An instance of [page:Geometry]. [page:Geometry.skinIndices] and [page:Geometry.skinWeights] should be set.<br>
+        material — An instance of [page:Material] (optional).<br>
+		useVertexTexture -- Defines whether a vertex texture can be used (optional).</div>
+
+<h4>Свойства</h4>
+<pre>[property:array bones]</pre>
+This contains the array of bones for this mesh. These should be set in the constructor.
+
+<pre>[property:Matrix4 identityMatrix]</pre>
+This is an identityMatrix to calculate the bones matrices from.
+
+<pre>[property:boolean useVertexTexture]</pre>
+The boolean defines whether a vertex texture is used to calculate the bones. This boolean shouldn't be changed after constructor.
+
+<pre>[property:array boneMatrices]</pre>
+This array of matrices contains the matrices of the bones. These get calculated in the constructor.
+
+<pre>[property:string bindMode]</pre>
+Either "attached" or "detached". "attached" uses the [page:SkinnedMesh.matrixWorld] property for the base transform matrix of the bones. "detached" uses the [page:SkinnedMesh.bindMatrix].
+
+<pre>[property:Matrix4 bindMatrix]</pre>
+The base matrix that is used for the bound bone transforms.
+
+<pre>[property:Matrix4 inverseBindMatrix]</pre>
+The inverse of the bindMatrix.
+
+<h4>Методы</h4>
+<pre>[method:null bind]( [page:Skeleton skeleton], [page:Matrix4 bindMatrix] )</pre>
+<div class=blockindent><tt>skeleton</tt> — [page:Skeleton]<br>
+bindMatrix — [page:Matrix4] that represents the base transform of the skeleton</div>
+Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
+
+<pre>[method:null normalizeSkinWeights]()</pre>
+Normalizes the [page:Geometry.skinWeights] vectors. Does not affect [page:BufferGeometry].
+
+<pre>[method:null pose]()</pre>
+This method sets the skinned mesh in the rest pose.
+
+<pre>[method:Bone addBone]( [page:Bone bone] )</pre>
+<div class=blockindent><tt>bone</tt> — This is the bone that needs to be added. (optional)</div>
+This method adds the bone to the skinned mesh when it is provided. It creates a new bone and adds that when no bone is given.
+
+<pre>[method:SkinnedMesh clone]()</pre>
+Returns a clone of this SkinnedMesh object and its descendants.</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="12">Sprite</h3>
+Спрайт это плоскость на трехмерной сцене, которая всегда стоит перед камерой.<br>
+Спрайты не отбрасывают тени, так что установка <tt>castShadow = true</tt> не даст никакого эффекта.
+
+<h4>Пример</h4>
+<pre>var map = new THREE.TextureLoader().load( "sprite.png" );
+  var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff, fog: true } );
+  var sprite = new THREE.Sprite( material );
+  scene.add( sprite );</pre>
+
+<h4>Конструктор</h4>
+<pre>Sprite( <a href="materials.htm#3" title="Material">material</a> )</pre>
+<div class=blockindent><tt>material</tt> — экземпляр <tt><a href="materials.htm#3" title="Material">Material</a></tt> (дополнительный, необязательный аргумент).</div>
+Создает новый объект <tt>Sprite</tt> с указанным материалом <tt>material</tt>.
+
+<h4>Свойства</h4>
+<pre>[property:SpriteMaterial material]</pre>
+An instance of [page:Material], defining the object's appearance. Значение по умолчанию равно [page:SpriteMaterial], который является белой плоскостью.
+
+<h4>Методы</h4>
+<pre>[method:Sprite clone]()</pre>
+Возвращает клон данного объекта Sprite и его потомков.
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+
+<br><br>
+</body></html>

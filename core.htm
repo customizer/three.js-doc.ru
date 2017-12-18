@@ -1,0 +1,1643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Основные элементы <code>three.js</code></h2>
+В этом разделе описаны ...
+<h3 id="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BufferAttribute</h3>
+Данный класс сохраняет данные атрибута (такие как положения вершин, индексы граней, нормали, цвета, текстурные координаты
+(<a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank" title="соответствие между координатами на поверхности трёхмерного объекта (X, Y, Z) и координатами на текстуре (U, V - эти буквы обозначают оси двумерной текстуры, потому что «X», «Y» и «Z» уже используются для обозначения осей 3D-объекта в пространстве модели). Значения U и V обычно изменяются от 0 до 1.">UV</a>)
+и все атрибуты, установленные пользователем), связанного с <tt><a href="#2" title="BufferGeometry">BufferGeometry</a></tt>, который позволяет более эффективное прохождение всех этих данных к <a class=popupspot href="JavaScript:hhctrl.TextPopup('сокращение от англ. слов graphics processing unit - блок графических вычислений или графический процессор или попросту - процессор видеокарты','Arial,9',10,10,0xffffff,0xd69967)">GPU</a>. Посмотрите эту страницу для дополнительных сведений и примеров использования.<br><br>
+Данные хранятся как векторы произвольной длины (определяемые <tt><a href="#1itemSize" title="BufferAttribute.itemSize">itemSize</a></tt>), и вообще в методах, описанных ниже, если передаются с индексом, то он автоматически умножается на длину вектора.<br><br>
+<h4 id="constructor1">Конструктор</h4>
+<pre>BufferAttribute( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_typearray,'Arial,9',10,10,0xffffff,0xd69967)">array</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">itemSize</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)">normalized</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_typearray,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова array - массив">array</a></tt> -- должен быть TypedArray (<a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Typed_arrays" target="_blank">типизированным массивом</a>).
+Используется для создания экземпляра буфера.<br>
+В этом массиве должно быть (<tt>itemSize</tt>&nbsp;*&nbsp;<tt>numVertices</tt>) элементов, где <tt>numVertices</tt> - это число вершин в соответствующей <a href="#2">BufferGeometry</a>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов item size - размер элемента">itemSize</a></tt> -- число значений массива, связанного с конкретной вершиной. Например, если данный атрибут хранит 3-компонентный вектор (такой как <tt>position</tt> - положение, <tt>normal</tt> - нормаль, или <tt>color</tt> - цвет), тогда <tt>itemSize</tt> должен быть равен 3.</div>
+
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова normalized - нормализованный, нормированный, т.е. приведенный к какой-то норме">normalized</a></tt> -- (дополнительный, необязательный атрибут) - показывает как базовые данные в буфере сопоставлены со значениями в коде <a class=popupspot href="JavaScript:hhctrl.TextPopup('сокращение от англ. слов OpenGL Shading Language — язык высокого уровня для программирования шейдеров. Синтаксис языка базируется на языке программирования ANSI C, однако, из-за его специфической направленности, из него были исключены многие возможности, для упрощения языка и повышения производительности. В язык включены дополнительные функции и типы данных, например для работы с векторами и матрицами.\r\nОсновное преимущество GLSL перед другими шейдерными языками — переносимость кода между платформами и ОС.','Arial,9',10,10,0xffffff,0xd69967)">GLSL</a>.
+Например, если массив является экземпляром <tt>UInt16Array</tt>, а атрибут <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)">normalized</a></tt> установлен как <tt>true</tt>, то значения от <tt>0</tt> до <tt>+65535</tt> в данных массива будут отображены в атрибуте GLSL как значения от <tt>0.0f</tt> до <tt>+1.0f</tt>.
+Массив <tt>Int16Array</tt> (со знаком) от <tt>-32767</tt> до <tt>+32767</tt> будет сопоставлен как <tt>-1.0f</tt> - <tt>+1.0f</tt>. Если <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)">normalized</a></tt> установлен как <tt>false</tt> значения будут конвертированы в числа с плавающей запятой, которые содержат точное значение, т.е. <tt>32767</tt> станет <tt>32767.0f</tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="1array"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_typearray,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова array - массив">.array</a></pre>
+Массив удерживает данные, хранящиеся в буфере.<br><br>
+<pre id="1count"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова count - счет, подсчет">.count</a></pre>
+Хранит длину массива деленную на <tt><a href="#itemSize" title="BufferAttribute.itemSize">.itemSize</a></tt>.<br>
+Если буфер хранит 3-компонентный вектор (как например положение, нормали или цвет), то в этом случае будет подсчитано число таких хранящихся векторов.<br><br>
+<pre id="1dynamic"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова dynamic - динамический">.dynamic</a></pre>
+Определяет, будет ли буфер динамическим или нет. Значение по умолчанию равно <tt>false</tt>.<br>
+При установленном значении <tt>false</tt>, GPU сообщается, что скорее всего, содержимое буфера, будет часто использоваться, но не часто изменяться. Это соответствует флагу <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData" target="_blank">gl.STATIC_DRAW</a></tt>.
+Если же установлено значение <tt>true</tt>, GPU сообщается, что содержимое буфера, вероятно будет как часто использоваться, так и часто изменяться. Это соответствует флагу <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData" target="_blank">gl.DYNAMIC_DRAW</a></tt>.
+<div class=note_trans><b>Примечание переводчика:</b> перевод части статьи по ссылке выше<br>
+<tt>gl.STATIC_DRAW</tt>: содержимое буфера, возможно, будет часто использоваться, но не часто изменяться. Содержимое записывается в буфер, но не считывается.<br>
+<tt>gl.DYNAMIC_DRAW</tt>: содержимое буфера, возможно, будет часто использоваться и часто изменяться. Содержимое записывается в буфер, но не считывается.</div><br>
+
+<pre id="1isBufferAttribute"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is buffer attribute - является буферным атрибутом">.isBufferAttribute</a></pre>
+Используется для проверки является ли данный класс или производные от него <tt>BufferAttribute</tt>. Значение по умолчанию равно <tt>true</tt>.<br>
+Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+<pre id="1itemSize"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов item size - размер элемента">.itemSize</a></pre>
+Длина векторов, сохраняемых в <tt><a href="#array" title="BufferAttribute.array">array</a></tt>.<br><br>
+<pre id="1name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="name - имя, название">.name</a></pre>
+Дополнительное имя для экземпляра данного атрибута. По умолчанию это пустая строка.<br><br>
+<pre id="1needsUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов needs update - требуется обновление">.needsUpdate</a></pre>
+Флаг, показывающий что данный атрибут был изменен и должен быть повторно отправлен в графический процессор (GPU). Установите его как <tt>true</tt> при изменении значения массива.<br>
+Установка этого значения как <tt>true</tt> также увеличивает <tt><a href="#version" title="BufferAttribute.version">version</a></tt>.<br><br>
+<pre id="1normalized"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова normalized - нормализованный, нормированный, т.е. приведенный к какой-то норме">.normalized</a></pre>
+Указывает каким образом базовые данные в буфере соответствуют значениям в коде GLSL. Подробности смотрите выше, в <a href="#constructor1">описании конструктора</a>.<br><br>
+<pre id="1onUploadCallback"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов on upload callback - на загрузку функции обратного вызова">.onUploadCallback</a></pre>
+Функция обратного вызова, выполняемая после того, как визуализатор (renderer) передал данные массива атрибутов в GPU.<br><br>
+<pre id="1updateRange"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов update range - диапазон обновления">.updateRange</a></pre>
+Объект содержит:
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова offset - смещение">offset</a></tt>: позиция, с которой начинается обновление, значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова count - счет, подсчет">count</a></tt>: значение по умолчанию равно <tt>-1</tt>, что означает не использовать диапазон обновления.</div>
+Данное свойство может быть использовано для отдельного обновления некоторых компонентов хранящихся векторов (например, только для компонента относящегося к цвету).<br><br>
+<pre id="1uuid"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">.uuid</a></pre>
+<a href="https://ru.wikipedia.org/wiki/UUID" target="_blank" title="сокращение от англ. слов Universally Unique Identifier - универсальный уникальный идентификатор">UUID</a> данного экземпляра объекта. Он присваивается автоматически и не должен редактироваться.<br><br>
+<pre id="1version"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова version - версия, вариант">.version</a></pre>
+Номер версии, увеличивающийся каждый раз, когда свойство <tt><a href="#needsUpdate" title="BufferAttribute.needsUpdate">needsUpdate</a></tt> устанавливается как <tt>true</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="1clone"><a href="#1" title="от англ. слова clone - клон, двойник">.clone ()</a></pre>
+Возвращает копию данного <tt>bufferAttribute</tt>.<br><br>
+<pre id="1copyArray"><a href="#1" title="от англ. слова copy array - копировать массив">.copyArray</a> ( array )</pre>
+Копирует, заданный здесь, массив (который может быть обычным массивом или типизированным - TypedArray) в массив <tt><a href="#array" title="BufferAttribute.array">array</a></tt>.
+Если копируется <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Typed_arrays" target="_blank">типизированный массив</a> (TypedArray),
+ознакомьтесь на <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set" target="_blank">TypedArray.set</a> с примечаниями по требованиям.
+<a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set" target="_blank">Вот TypedArray.set</a> на русском языке.<br><br>
+<pre id="1copyAt"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов copy at - копировать в">.copyAt</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">index1</a>, <a href="#1" title="BufferAttribute">bufferAttribute</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">index2</a> )</pre>
+Копирует вектор из <tt>bufferAttribute[index2]</tt> в <tt><a href="#array" title="BufferAttribute.array">array</a>[index1]</tt>.<br><br>
+<pre id="1copyColorsArray"><a href="#1" title="BufferAttribute. copy colors array - копировать массив (значений) цвета">.copyColorsArray</a> ( colors )</pre>
+Копирует массив, представленный значениями цвета в формате RGB, в <tt><a href="#array" title="BufferAttribute.array">array</a></tt>.<br><br>
+<pre id="1copyIndicesArray"><a href="#1" title="BufferAttribute. copy indices array - копировать массив индексов">.copyIndicesArray</a> ( indices )</pre>
+Копирует массив, представленный индексами <a href="#6" title="Face3">Face3</a>, в <tt><a href="#array" title="BufferAttribute.array">array</a></tt>.<br><br>
+<pre id="1copyVector2sArray"><a href="#1" title="BufferAttribute. copy vector2s array - копировать массив двумерных векторов">.copyVector2sArray</a> ( vectors )</pre>
+Копирует массив, представленный векторами <a href="math.htm#18" title="Vector2">Vector2</a>, в <tt><a href="#array" title="BufferAttribute.array">array</a></tt>.<br><br>
+<pre id="1copyVector3sArray"><a href="#1" title="BufferAttribute. copy vector3s array - копировать массив трехмерных векторов">.copyVector3sArray</a> ( vectors )</pre>
+Копирует массив, представленный векторами <a href="math.htm#19" title="Vector3">Vector3</a>, в <tt><a href="#array" title="BufferAttribute.array">array</a></tt>.<br><br>
+<pre id="1copyVector4sArray"><a href="#1" title="BufferAttribute. copy vector4s array - копировать массив четырехмерных векторов">.copyVector4sArray</a> ( vectors )</pre>
+Копирует массив, представленный векторами <a href="math.htm#20" title="Vector4">Vector4</a>, в <tt><a href="#array" title="BufferAttribute.array">array</a></tt>.<br><br>
+<pre id="1getX"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слов get X coordinate - получить координату по оси X">.getX</a> ( index )</pre>
+Возвращает компоненту <tt>x</tt> вектора по заданному индексу.<br><br>
+<pre id="1getY"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слов get Y coordinate - получить координату по оси Y">.getY</a> ( index )</pre>
+Возвращает компоненту <tt>y</tt> вектора по заданному индексу.<br><br>
+<pre id="1getZ"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слов get Z coordinate - получить координату по оси Z">.getZ</a> ( index )</pre>
+Возвращает компоненту <tt>z</tt> вектора по заданному индексу.<br><br>
+<pre id="1getW"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слов get W coordinate - получить компонент W">.getW</a> ( index )</pre>
+Возвращает компоненту <tt>w</tt> вектора по заданному индексу.<br><br>
+
+<pre id="1onUpload"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="on upload - на загрузку">.onUpload</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">callback</a> )</pre>
+Устанавливает значение свойства <tt><a href="#onUploadCallback">onUploadCallback</a></tt>.<br>
+В примере <tt><a href="https://threejs.org/examples/#webgl_buffergeometry" target="_blank">WebGL / Buffergeometry</a></tt> этот метод используется для высвобождения памяти после того, как буфер был передан GPU.<br><br>
+
+<pre id="1set"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set - установить">.set</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)">value</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">offset</a> )</pre>
+<div class=list><tt>value</tt> -- массив или типизированный массив, из которого копируются значения.</div>
+<div class=list><tt>offset</tt> -- индекс массива <tt><a href="#array" title="BufferAttribute.array">array</a></tt>, с которого начинается копирование, (дополнительный, необязательный аргумент).</div>
+Метод вызывает метод <tt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set" target="_blank">TypedArray.set</a>( value, offset )</tt> на данный <tt><a href="#1array" title="BufferAttribute.array">array</a></tt>.<br>
+
+
+В частности, посмотрите эту страничку насчет требований к <tt>value</tt> в <tt>TypedArray</tt>. <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set" target="_blank">Вот здесь</a> она на русском языке.<br><br>
+
+<pre id="1setArray"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set array - установить массив">.setArray</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_typearray,'Arial,9',10,10,0xffffff,0xd69967)" title="array - массив">array</a> )</pre>
+Устанавливает массив <tt><a href="#1array" title="BufferAttribute.array">array</a></tt> в типизированный массив <tt>TypedArray</tt>, переданный в аргументе.<br>
+После установки массива, <tt><a href="#1needsUpdate" title="BufferAttribute.needsUpdate">needsUpdate</a></tt> должен быть установлен как <tt>true</tt>.<br><br>
+
+<pre id="1setDynamic">.<a href="#1" title="BufferAttribute. set dynamic - установить (свойство) dynamic">setDynamic</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a> )</pre>
+Метод устанавливает значение свойства <tt><a href="#1dynamic" title="BufferAttribute.dynamic">dynamic</a></tt>.<br><br>
+<pre id="1setX"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set X - установить (координату) X">.setX</a>( index, x )</pre>
+Устанавливает компонент <tt>x</tt> вектора по заданному индексу.<br><br>
+<pre id="1setY"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set Y - установить (координату) Y">.setY</a>( index, y )</pre>
+Устанавливает компонент <tt>y</tt> вектора по заданному индексу.<br><br>
+<pre id="1setZ"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set Z - установить (координату) Z">.setZ</a>( index, z )</pre>
+Устанавливает компонент <tt>z</tt> вектора по заданному индексу.<br><br>
+<pre id="1setW"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set W - установить (координату) W">.setW</a>( index, w )</pre>
+Устанавливает компонент <tt>w</tt> вектора по заданному индексу.<br><br>
+<pre id="1setXY"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set X Y - установить (координаты) X, Y">.setXY</a>( index, x, y )</pre>
+Устанавливает компоненты вектора <tt>x</tt>, и <tt>y</tt> по заданному индексу.<br><br>
+<pre id="1setXYZ"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set X Y Z  - установить (координаты) X, Y, Z">.setXYZ</a>( index, x, y, z )</pre>
+Устанавливает компоненты вектора <tt>x</tt>, <tt>y</tt>, и <tt>z</tt> по заданному индексу.<br><br>
+<pre id="1setXYZW"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set X Y Z W - установить (координаты) X, Y, Z, W">.setXYZW</a>( index, x, y, z, w )</pre>
+Устанавливает компоненты вектора <tt>x</tt>, <tt>y</tt>, <tt>z</tt> и <tt>w</tt> по заданному индексу.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/BufferAttribute.js.txt">BufferAttribute.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/BufferAttribute.js" target="_blank">BufferAttribute.js на github.com</a></div><br>
+
+<span class="right_side"><a href="#1" title="Переход к родительскому классу"><tt>BufferAttribute &rarr;</tt></a></span>
+<h3 id="1.1">Типы BufferAttribute</h3>
+В three.js имеются девять типов BufferAttribute. Они соответствуют <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" target="_blank">типизированным массивам</a> в JavaScript.
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 64-битных чисел с плавающей точкой IEEE-стандарта','Arial,9',10,10,0xffffff,0xd69967)">THREE.Float64BufferAttribute</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 32-битных чисел с плавающей точкой IEEE-стандарта','Arial,9',10,10,0xffffff,0xd69967)">THREE.Float32BufferAttribute</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 32-битных беззнаковых чисел','Arial,9',10,10,0xffffff,0xd69967)">THREE.Uint32BufferAttribute</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 32-битных целых чисел','Arial,9',10,10,0xffffff,0xd69967)">THREE.Int32BufferAttribute</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 16-битных беззнаковых целых чисел','Arial,9',10,10,0xffffff,0xd69967)">THREE.Uint16BufferAttribute</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 16-битных целых чисел с дополнением до двух','Arial,9',10,10,0xffffff,0xd69967)">THREE.Int16BufferAttribute</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 8-битных беззнаковых целых чисел (фиксированных от 0 до 255)','Arial,9',10,10,0xffffff,0xd69967)">THREE.Uint8ClampedBufferAttribute</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 8-битных беззнаковых целых чисел','Arial,9',10,10,0xffffff,0xd69967)">THREE.Uint8BufferAttribute</a>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('массив 8-битных целых чисел с дополнением до двух','Arial,9',10,10,0xffffff,0xd69967)">THREE.Int8BufferAttribute</a></pre><br>
+<h4>Конструктор</h4>
+Все вышеперечисленное вызывается одним и тем же способом.
+<pre>TypedBufferAttribute( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="array - массив">array</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="item size - размер элемента">itemSize</a> )</pre>
+<div class=list><tt>array</tt> -- это может быть типизированный или нетипизированный (обычный) массив. Он будет преобразован в массив указанного типа.</div>
+<div class=list><tt>itemSize</tt> -- число значений массива, которые должны быть увязаны с конкретной вершиной.</div><br>
+<h4>Свойства</h4><br>
+Унаследованные свойства смотрите на странице <a href="#1">BufferAttribute</a>.<br><br>
+<h4>Методы</h4><br>
+Унаследованные методы смотрите на странице <a href="#1">BufferAttribute</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/BufferAttribute.js.txt">BufferAttribute.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/BufferAttribute.js" target="_blank">BufferAttribute.js на github.com</a></div><br>
+
+<h3 id="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BufferGeometry</h3>
+Данный класс является эффективной альтернативой <a href="#7">Geometry</a>, так как он сохраняет внутри буферов все данные, включая положения вершин, индексы граней, нормали, цвета, текстурные координаты
+(<a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank" title="соответствие между координатами на поверхности трёхмерного объекта (X, Y, Z) и координатами на текстуре (U, V - эти буквы обозначают оси двумерной текстуры, потому что «X», «Y» и «Z» уже используются для обозначения осей 3D-объекта в пространстве модели). Значения U и V обычно изменяются от 0 до 1.">UV</a>)
+и все атрибуты, установленные пользователем); это снижает затраты на прохождение всех этих данных к <a class=popupspot href="JavaScript:hhctrl.TextPopup('сокращение от англ. слов graphics processing unit - блок графических вычислений или графический процессор или попросту - процессор видеокарты','Arial,9',10,10,0xffffff,0xd69967)">GPU</a>.
+При этом, работать с <tt>BufferGeometry</tt> сложнее, чем с <tt><a href="#7">Geometry</a></tt>;
+вместо того, чтобы обращаться к данным расположения как к объектам <tt><a href="math.htm#19">Vector3</a></tt>, а к данным о цвете как к объектам <tt><a href="math.htm#3">Color</a></tt> и так далее, нужно обращаться к необработанным данным (raw data) из соответствующего <a href="#1">буфера атрибутов</a>.
+Это делает <tt>BufferGeometry</tt> наиболее подходящим для статических объектов, где вам не нужно управлять геометрическими свойствами объекта после его создания.
+
+<h4>Пример</h4>
+<img src="img/square.png" width="400px"><br>
+<pre>var geometry = new THREE.BufferGeometry();
+// create a simple square shape. We duplicate the bottom left and top right
+// vertices because each vertex needs to appear once per triangle.
+// создадим простую форму - квадрат. Нижняя левая и верхняя правая вершины
+// повторяются, поскольку в обоих треугольниках есть каждая из этих вершин.
+var vertices = new Float32Array( [
+-1.0, -1.0,  1.0,
+ 1.0, -1.0,  1.0,
+ 1.0,  1.0,  1.0,<br>
+ 1.0,  1.0,  1.0,
+-1.0,  1.0,  1.0,
+-1.0, -1.0,  1.0
+] );<br>
+// itemSize = 3 because there are 3 values (components) per vertex
+// itemSize = 3, потому что имеется 3 значения (компонента, т.е. составные части) на каждую вершину
+geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+var mesh = new THREE.Mesh( geometry, material );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_buffergeometry" target="_blank">Complex mesh with non-indexed faces</a> (сложная сетка с неиндексированными гранями),
+<a href="https://threejs.org/examples/#webgl_buffergeometry_uint" target="_blank">Complex mesh with indexed faces</a> (сложная сетка с индексированными гранями),
+<a href="https://threejs.org/examples/#webgl_buffergeometry_lines" target="_blank">Lines</a> (линии),
+<a href="https://threejs.org/examples/#webgl_buffergeometry_lines_indexed" target="_blank">Indexed Lines</a> (индексированные линии),
+<a href="https://threejs.org/examples/#webgl_buffergeometry_custom_attributes_particles" target="_blank">Particles</a> (частицы), и
+<a href="https://threejs.org/examples/#webgl_buffergeometry_rawshader" target="_blank">Raw Shaders</a> (необработанные шейдеры).</pre>
+
+<h4 id="AccessingAttributes">Обращение к атрибутам Accessing attributes</h4>
+WebGL хранит данные, связанные с отдельными вершинами геометрии в <em>атрибутах</em>.
+WebGL stores data associated with individual vertices of a geometry in <em>attributes</em>.
+Примеры включают положение вершины, вектор нормали вершины, цвет вершины и т.д.
+Examples include the position of the vertex, the normal vector for the vertex, the vertex color, and so on.
+При использовании <a href="#7" title="Geometry">Geometry</a>, <a href="renderers.htm#1" title="WebGLRenderer">рендерер</a> берет на себя заботу о переносе этой информации в буферы типизированного массива и отправлении этих данных в шейдер.
+When using [page:Geometry], the [page:WebGLRenderer renderer] takes care of wrapping up this information into typed array buffers and sending this data to the shader.
+С BufferGeometry все эти данные хранятся в буферах, связанных с отдельными атрибутами.
+With BufferGeometry, all of this data is stored in buffers associated with an individual attributes.
+Это значит, что для получения данных о положении, связанных с вершиной (например), нужно вызвать метод <tt><a href="#getAttribute" title="BufferGeometry.getAttribute">.getAttribute</a></tt> для доступа к <a href="#1" title="BufferAttribute">атрибуту</a> <tt><a href="#position" title="position - положение, позиция">position</a></tt>, затем обращаться к отдельным координатам <tt>x</tt>, <tt>y</tt>, и <tt>z</tt>.
+This means that to get the position data associated with a vertex (for instance), you must call [page:.getAttribute] to access the 'position' [page:BufferAttribute attribute], then access the individual x, y, and z coordinates of the position.<br><br>
+Различными элементами этого класса устанавливаются следующие атрибуты:
+<div class=blockindent>
+<pre id="position"><a href="#1" title="BufferAttribute">position</a> (itemSize: 3)</pre>
+Содержит координаты <tt>x</tt>, <tt>y</tt>, и <tt>z</tt> каждой вершины данной геометрии. Устанавливается при помощи <a href="#fromGeometry" title="BufferGeometry.fromGeometry">.fromGeometry</a>().<br><br>
+
+<pre id="normal"><a href="#1" title="BufferAttribute">normal</a> (itemSize: 3)</pre>
+Содержит компоненты x, y и z вектора нормали грани или вершины для каждой вершины в данной геометрии. Устанавливается при помощи <a href="#fromGeometry" title="BufferGeometry.fromGeometry">.fromGeometry</a>().<br><br>
+
+<pre id="color"><a href="#1" title="BufferAttribute">color</a> (itemSize: 3)</pre>
+Содержит каналы красного, зеленого и синего цвета каждой вершины в данной геометрии. Устанавливается при помощи <a href="#fromGeometry" title="BufferGeometry.fromGeometry">.fromGeometry</a>().<br><br>
+
+<pre id="index"><a href="#1" title="BufferAttribute">index</a> (itemSize: 1)</pre>
+Allows for vertices to be re-used across multiple triangles; this is called using "indexed triangles," and works much the same as it does in [page:Geometry]: each triangle is associated with the index of three vertices. This attribute therefore stores the index of each vertex for each triangular face.</div>
+If this attribute is not set, the [page:WebGLRenderer renderer] assumes that each three contiguous positions represent a single triangle.<br><br>
+In addition to the the built-in attributes, you can set your own custom attributes using the addAttribute method. With [page:Geometry], these attributes are set and stored on the [page:Material]. In BufferGeometry, the attributes are stored with the geometry itself. Note that you still need to set the attributes information on the material as well, but the value of each attribute is stored in the BufferGeometry.<br><br>
+
+<h4>Конструктор</h4>
+<pre>BufferGeometry()</pre>
+Конструктор создает новый BufferGeometry, а также задает некоторым свойствам значение по умолчанию.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="attributes"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hashmap,'Arial,9',10,10,0xffffff,0xd69967)">.attributes</a></pre>
+У этой хеш-карты имя атрибута устанавливается как идентификатор, а в качестве значения устанавливается <a href="#1" title="BufferAttribute">буфер</a>.
+Вместо непосредственного обращения к данному свойству, для доступа к атрибутам этой геометрии используйте методы <a href="#2addAttribute" title="BufferGeometry.addAttribute">addAttribute</a> и <a href="#2getAttribute" title="BufferGeometry.getAttribute">getAttribute</a>.
+This hashmap has as id the name of the attribute to be set and as value the buffer to set it to. Rather than accessing this property directly, use addAttribute and getAttribute to access attributes of this geometry.</div>
+
+
+<div class=note_trans><b>Примечание переводчика:</b> Вот чуть более подробно о хешировании, хеш-таблицах (хеш-картах) и ассоциативных таблицах. <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Хеширование или хэширование (англ. hashing) — преобразование массива входных данных произвольной длины в (выходную) битовую строку фиксированной длины, выполняемое определённым алгоритмом.
+Функция, реализующая алгоритм и выполняющая преобразование, называется «хеш-функцией» или «функцией свёртки». Исходные данные называются входным массивом, «ключом» или «сообщением».
+Результат преобразования (выходные данные) называется «хешем», «хеш-кодом», «хеш-суммой», «сводкой сообщения».<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://ru.wikipedia.org/wiki/%D0%A5%D0%B5%D1%88%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span><br>
+<!-- HashMap — основан на хэш-таблицах, реализует интерфейс Map (что подразумевает хранение данных в виде пар ключ/значение). -->
+Хеш-таблица — это структура данных, реализующая интерфейс ассоциативного массива, а именно, она позволяет хранить пары (ключ, значение) и выполнять три операции: операцию добавления новой пары, операцию поиска и операцию удаления пары по ключу.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://ru.wikipedia.org/wiki/%D0%A5%D0%B5%D1%88-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span><br>
+В информатике, хеш-таблицей (hash table) или хеш-картой (hash map) называется структура данных, которая реализует ассоциативный массив с абстрактным типом данных, и может сопоставлять ключи и значения.
+Хеш-таблица использует хеш-функцию для вычисления индекса в массиве
+In computing, a hash table (hash map) is a data structure which implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.<br>
+В идеале хеш-функция будет присваивать каждому ключу свое уникальное  хеш-значение, но большинство конструкций хеш-таблиц применяет несовершенную хеш-функцию, которая может вызывать хеш-коллизии, когда она создает одинаковый индекс для более чем одного ключа.
+Такие коллизии должны каким-то образом улаживаться.
+Ideally, the hash function will assign each key to a unique bucket, but most hash table designs employ an imperfect hash function, which might cause hash collisions where the hash function generates the same index for more than one key. Such collisions must be accommodated in some way.<br>
+В хорошо подобранной хеш-таблице средние затраты (количество инструкций) на каждый поиск не зависит от числа элементов, хранящихся в таблице. Большинство проектов хеш-таблиц также позволяет произвольные вставки и удаления пар ключ-значение, при неизменных (amortized[2]) средних затратах на операцию.
+In a well-dimensioned hash table, the average cost (number of instructions) for each lookup is independent of the number of elements stored in the table. Many hash table designs also allow arbitrary insertions and deletions of key-value pairs, at (amortized[2]) constant average cost per operation.<br>
+Во многих случаях хеш-таблицы оказываются более эффективными, чем поисковые деревья или любые другие структуры просмотра таблиц. Поэтому они широко используются во многих видах компьютерных программ, в частности для ассоциативных массивос, индексирования баз данных, кэшей и наборов.
+In many situations, hash tables turn out to be more efficient than search trees or any other table lookup structure. For this reason, they are widely used in many kinds of computer software, particularly for associative arrays, database indexing, caches, and sets.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://en.wikipedia.org/wiki/Hash_table' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span><br>
+
+Ассоциативный массив — абстрактный тип данных (интерфейс к хранилищу данных), позволяющий хранить пары вида «(ключ, значение)» и поддерживающий операции добавления пары, а также поиска и удаления пары по ключу:
+<pre>INSERT(ключ, значение)
+FIND(ключ)
+REMOVE(ключ)</pre>
+Предполагается, что ассоциативный массив не может хранить две пары с одинаковыми ключами.<br>
+
+В паре ( k , v ) {\displaystyle (k,v)} (k, v) значение v {\displaystyle v} v называется значением, ассоциированным с ключом k {\displaystyle k} k. Семантика и названия вышеупомянутых операций в разных реализациях ассоциативного массива могут отличаться.<br>
+
+Операция FIND(ключ) возвращает значение, ассоциированное с заданным ключом, или некоторый специальный объект UNDEF, означающий, что значения, ассоциированного с заданным ключом, нет. Две другие операции ничего не возвращают (за исключением, возможно, информации о том, успешно ли была выполнена данная операция).<br>
+
+Ассоциативный массив с точки зрения интерфейса удобно рассматривать как обычный массив, в котором в качестве индексов можно использовать не только целые числа, но и значения других типов — например, строки.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://ru.wikipedia.org/wiki/%D0%90%D1%81%D1%81%D0%BE%D1%86%D0%B8%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span></div></div><br>
+
+
+
+<div class=blockindent>
+<pre id="2boundingBox"><a href="math.htm#2" title="Box3">.boundingBox</a></pre>
+Ограничительная рамка для bufferGeometry, которая может быть рассчитана при помощи метода <a href="#2computeBoundingBox" title="BufferGeometry.computeBoundingBox">.computeBoundingBox</a>().
+Значением по умолчанию является <tt>null</tt>.<br><br>
+<pre id="2boundingSphere"><a href="math.htm#15" title="Sphere">.boundingSphere</a></pre>
+Ограничительная сфера для bufferGeometry, которая может быть рассчитана при помощи метода <a href="#2computeBoundingSphere" title="BufferGeometry.computeBoundingSphere">.computeBoundingSphere</a>(). Значением по умолчанию является <tt>null</tt>.<br><br>
+<pre id="2drawRange"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="draw range - область рисования">.drawRange</a></pre>
+Используется для определения, какая часть геометрии должна быть визуализирована. Это свойство не устанавливается напрямую, взамен используйте метод <a href="#2setDrawRange" title="BufferGeometry.setDrawRange">.setDrawRange</a>.<br>
+Значением по умолчанию является <tt>{ start: 0, count: Infinity }</tt>.<br><br>
+<pre id="2groups"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="groups - группы">.groups</a></pre>
+Разделите геометрию на группы, каждая из которых будет отображаться в отдельном вызове рисования WebGL. Это позволяет использовать с bufferGeometry массив материалов.
+Split the geometry into groups, each of which will be rendered in a separate WebGL draw call. This allows an array of materials to be used with the bufferGeometry.<br>
+Каждая группа представляет собой объект в виде:
+<pre>{ <a class=popupspot href="JavaScript:hhctrl.TextPopup('start - начало','Arial,9',10,10,0xffffff,0xd69967)">start</a>: <a class=popupspot href="JavaScript:hhctrl.TextPopup('integer - целое число','Arial,9',10,10,0xffffff,0xd69967)">Integer</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup('count - счет','Arial,9',10,10,0xffffff,0xd69967)">count</a>: <a class=popupspot href="JavaScript:hhctrl.TextPopup('integer - целое число','Arial,9',10,10,0xffffff,0xd69967)">Integer</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup('material index - индекс материала','Arial,9',10,10,0xffffff,0xd69967)">materialIndex</a>: <a class=popupspot href="JavaScript:hhctrl.TextPopup('integer - целое число','Arial,9',10,10,0xffffff,0xd69967)">Integer</a> }</pre>
+где <tt>start</tt> указывает индекс первой вершины в этом вызове рисования, <tt>count</tt> определяет количество включенных вершин, а <tt>materialIndex</tt> устанавливает индекс используемого массива материала.<br>
+Для добавления групп, вместо непосредственного изменения массива <tt>groups</tt>, используйте метод <tt><a href="#2.addGroup" title="BufferGeometry.addGroup">.addGroup</a></tt>.<br><br>
+
+<pre id="2id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слова identifier - идентификатор">.id</a></pre>
+Уникальное число для данного экземпляра <tt>bufferGeometry</tt>.<br><br>
+<pre id="2index"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">.index</a></pre>
+Описание этого свойства смотрите выше, в разделе "<a href="#AccessingAttributes">Accessing Attributes</a>". Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="2isBufferGeometry"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is buffer geometry - является буферной геометрией">.isBufferGeometry</a></pre>
+Используется для проверки, является ли данный класс и производные от него буферными геометриями (BufferGeometry). Значением по умолчанию является <tt>true</tt>.
+Это свойство нельзя изменять, поскольку оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="2MaxIndex">.MaxIndex</a></pre>
+Максимальное допустимое количество вершин, установлено как <tt>65535</tt>.
+Maximum number of vertices allowed, set to 65535.<br><br>
+
+<pre id="2morphAttributes">.morphAttributes</a></pre>
+Хеш-карта BufferAttributes, содержащая сведения о morphTargets геометрии.
+Hashmap of BufferAttributes holding details of the geometry's morphTargets.<br><br>
+
+<pre id="2name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="name - имя, название">.name</a></pre>
+Необязательное (дополнительное) имя для данного экземпляра <tt>bufferGeometry</tt>. Значением по умолчанию является пустая строка.<br><br>
+
+<pre id="2uuid"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение англ. слов Universally Unique Identifier - универсальный уникальный идентификатор">.uuid</a></pre>
+<a href="https://ru.wikipedia.org/wiki/UUID" target="_blank" title="сокращение от англ. слов Universally Unique Identifier - универсальный уникальный идентификатор">UUID</a> данного экземпляра объекта. Он присваивается автоматически и не должен изменяться.</div><br>
+
+<h4>Методы</h4><br>
+В данном классе возможно применение методов <tt><a href="#5" title="EventDispatcher">EventDispatcher</a></tt>.
+<div class=blockindent><br>
+<pre id="2addAttribute"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="add attribute - добавить атрибут">.addAttribute</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="name - имя, название">name</a>, <a href="#1" title="BufferAttribute" title="attribute - атрибут">attribute</a> )</pre>
+Метод добавляет атрибут в заданную геометрию. Использование этого метода лучше использования свойства атрибутов, так как для ускорения перебора поддерживается внутренний массив <a href="#attributes" title="BufferGeometry.attributes">атрибутов</a>.<br><br>
+<pre id="2addGroup"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="add group - добавить группу">.addGroup</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="start - начало">start</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="count - счет">count</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="material index - индекс материала">materialIndex</a> )</pre>
+Добавляет группу в заданную геометрию; подробности смотрите в свойстве <a href="#groups" title="BufferGeometry.groups">groups</a>.<br><br>
+
+<pre id="2applyMatrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов apply matrix - применение матрицы">.applyMatrix</a>( [page:Matrix4 matrix</a> )</pre>
+Передает преобразование матрицы непосредственно в координаты вершин.
+Bakes matrix transform directly into vertex coordinates.<br><br>
+
+<pre id="2center"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="center - центр">.center</a> ()</pre>
+Центрирует геометрию, основываясь на ограничительной рамке.
+Center the geometry based on the bounding box.
+
+<pre id="2clone"><a href="#2" title="BufferGeometry, clone - клон, двойник, аналог">.clone</a>()</pre>
+Создает клон данной BufferGeometry.
+
+<pre id="2copy"><a href="#2" title="BufferGeometry, copy - копия, копировать">.copy</a>( <a href="#2">bufferGeometry</a> )</pre>
+Копирует другую BufferGeometry в данную BufferGeometry.
+
+<pre id="2clearGroups"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов clear groups - очистка групп">.clearGroups</a>( )</pre>
+Удаляет все группы.
+
+<pre id="2computeBoundingBox"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов compute bounding box - вычислить ограничительную рамку">.computeBoundingBox</a>()</pre>
+Вычисляет ограничительную рамку геометрии и обновляет атрибут <a href="#2boundingBox" title="BufferGeometry.boundingBox">.boundingBox</a>.<br>
+Ограничительные рамки не рассчитываются по умолчанию. Они должны быть вычислены явно, в противном случае они равны <tt>null</tt>.
+
+<pre id="2computeBoundingSphere"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов compute bounding sphere - вычислить ограничительную сферу">.computeBoundingSphere</a>()</pre>
+Вычисляет ограничительную сферу геометрии и обновляет атрибут <a href="#2boundingSphere" title="BufferGeometry.boundingSphere">.boundingSphere</a>.<br>
+Ограничительные сферы не рассчитываются по умолчанию. Они должны быть вычислены явно, в противном случае они равны <tt>null</tt>.
+
+<pre id="2computeVertexNormals"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов compute vertex normals - вычислить нормали вершин">.computeVertexNormals</a>()</pre>
+Вычисляет нормали вершин путем усреднения нормалей граней.
+
+<pre id="2dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - удалить, устранить">.dispose</a>()</pre>
+Выводит объект из памяти.<br>
+Этот метод вызывается когда во время работы приложения нужно удалить определенную bufferGeometry.
+
+<pre id="2fromDirectGeometry"><a href="#2" title="объект BufferGeometry, от англ. слов from direct geometry - из прямой геометрии">.fromDirectGeometry</a> ( <a href="#7" title="Geometry">Geometry</a> )</pre>
+Заполняет этот <tt>BufferGeometry</tt> данными из объекта <tt><a href="#4" title="DirectGeometry">DirectGeometry</a></tt>.
+<div class="note">Примечание: <tt><a href="#4" title="DirectGeometry">DirectGeometry</a></tt> используется в основном в качестве посредника для конвертирования между <tt><a href="#7" title="Geometry">Geometry</a></tt> и <tt>BufferGeometry</tt>.</div>
+
+<pre id="2fromGeometry"><a href="#2" title="объект BufferGeometry, от англ. слов from geometry - из геометрии">.fromGeometry</a> ( <a href="#7" title="Geometry">Geometry</a> )</pre>
+Заполняет этот <tt>BufferGeometry</tt> данными из объекта <tt><a href="#7" title="Geometry">Geometry</a></tt>.
+
+<pre id="2getAttribute"><a href="#1" title="BufferAttribute, от англ. слов get attribute - получить атрибут">.getAttribute</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="name - имя, название">name</a> )</pre>
+Возвращает <tt><a href="#1" title="BufferAttribute">атрибут</a></tt> с указанным именем.
+
+<pre id="2getIndex"><a href="#1" title="BufferAttribute, от англ. слов get index - получить индекс">.getIndex</a>( )</pre>
+Возвращает <tt><a href="#2index" title="BufferGeometry.index">.index</a></tt> - индекс буфера.
+
+<pre id="2lookAt"><a href="#2" title="BufferGeometry, от англ. слов look at - смотреть на">.lookAt</a> ( <a href="math.htm#19" title="Vector3">vector</a> )</pre>
+<div class=blockindent><tt>vector</tt> - A world vector to look at.</div>
+Поворачивает геометрию к лицевой точке в пространстве. Обычно выполняется как одноразовая операция, и не в процессе цикла. Используйте метод
+Rotates the geometry to face point in space. This is typically done as a one time operation, and not during a loop
+Use <a href="#14lookAt" title="Object3D.lookAt">Object3D.lookAt</a> for typical real-time mesh usage.
+
+<pre id="2merge"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="merge - сливать, объединять">merge</a>( <a href="#2" title="BufferGeometry">bufferGeometry</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="offset - смещение">offset</a> )</pre>
+Объединение с другой BufferGeometry с дополнительным смещением, от которого начинается слияние.
+
+<pre id="2normalizeNormals"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов normalize normals - нормализовать нормали">.normalizeNormals</a>( )</pre>
+Every normal vector in a geometry will have a magnitude of 1. This will correct lighting on the geometry surfaces.
+
+<pre id="2removeAttribute"><a href="#1" title="BufferAttribute, от англ. слов remove attribute - удалить атрибут">.removeAttribute</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="name - имя, название">name</a> )</pre>
+Удаляет <tt><a href="#1" title="BufferAttribute">атрибут</a></tt> с указанным именем.
+
+<pre id="2rotateX"><a href="#2" title="BufferGeometry, rotate X - поворот (по оси) X">rotateX</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radians</a> )</pre>
+Поворот геометрии вокруг оси <tt>X</tt>. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>Для обычного поворота сетки (mesh) в реальном времени используйте свойство <a href="#14rotation" title="Object3D.rotation">Object3D.rotation</a>.
+
+<pre id="2rotateY"><a href="#2" title="BufferGeometry, rotate Y - поворот (по оси) Y">rotateY</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radians</a> )</pre>
+Поворот геометрии вокруг оси <tt>Y</tt>. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>Для обычного поворота сетки (mesh) в реальном времени используйте свойство <a href="#14rotation" title="Object3D.rotation">Object3D.rotation</a>.
+
+<pre id="2rotateZ"><a href="#2" title="BufferGeometry, rotate Z - поворот (по оси) Z">rotateZ</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radians</a> )</pre>
+Поворот геометрии вокруг оси <tt>Z</tt>. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>Для обычного поворота сетки (mesh) в реальном времени используйте свойство <a href="#14rotation" title="Object3D.rotation">Object3D.rotation</a>.
+
+<pre id="2scale"><a href="#2" title="BufferGeometry, scale - масштаб">scale</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">x</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">y</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">z</a> )</pre>
+Масштабирует данные геометрии. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>Для обычного масштабирования сетки (mesh) в реальном времени используйте свойство <a href="#14scale" title="Object3D.scale">Object3D.scale</a>.
+
+<pre id="2setIndex"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов set index - установить индекс">.setIndex</a> ( <a href="#1" title="BufferAttribute, index - индекс">index</a> )</pre>
+Устанавливает <tt><a href="#2index" title="BufferGeometry.index">.index</a></tt> - индекс буфера.
+
+<pre id="2setDrawRange"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов set draw range - установить диапазон рисования">.setDrawRange</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="start - начало">start</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="count - счет">count</a> )</pre>
+Устанавливает значение свойства буфера <tt><a href="#2drawRange" title="BufferGeometry.drawRange">.drawRange</a></tt>. See that property for details.
+
+<pre id="2setFromObject"><a href="#2" title="BufferGeometry">.setFromObject</a> ( <a href="#14" title="Object3D">object</a> )</pre>
+Устанавливает атрибуты из <a href="#14" title="Object3D">Object3D</a> для данной <tt>BufferGeometry</tt>.
+
+<pre id="2toJSON"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="to JSON - сокр. от англ. слов to JavaScript Object Notation, — то есть, в текстовый формат описания объекта, основанный на JavaScript">.toJSON</a>( )</pre>
+Возвращает необработанное представление объекта <tt>BufferGeometry</tt>.
+
+<pre id="2toNonIndexed"><a href="#2" title="BufferGeometry">.toNonIndexed</a>( )</pre>
+Возвращает неиндексированную версию индексированной BufferGeometry.
+
+<pre id="2translate"><a href="#2" title="BufferGeometry">.translate</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">x</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">y</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">z</a> )</pre>
+Перевод (смещение) координат геометрии. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>Для обычного перевода координат сетки (mesh) в реальном времени используйте свойство <a href="#14position" title="Object3D.position">Object3D.position</a>.
+
+<pre id="2updateFromObject"><a href="#2" title="BufferGeometry">.updateFromObject</a> ( <a href="#14" title="Object3D">object</a> )</pre>
+Обновляет для данной <tt>BufferGeometry</tt> атрибуты из <a href="#14" title="Object3D">Object3D</a>.</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/BufferGeometry.js.txt">BufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/BufferGeometry.js" target="_blank">BufferGeometry.js на github.com</a></div><br>
+
+
+<h3 id="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clock</h3>
+Объект для отслеживания времени. Он использует метод <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" target="_blank">performance.now()</a></tt>, если такая возможность имеется,
+в противном случае он обращается к менее точному методу <tt><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Date/now" target="_blank">Date.now()</a></tt>.
+Вот описание методов <tt><a href="https://developer.mozilla.org/ru/docs/Web/API/Performance/now" target="_blank">performance.now()</a></tt> и <tt><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/now" target="_blank">Date.now()</a></tt> на русском языке.<br><br>
+
+
+<h4>Конструктор</h4><br>
+<pre>Clock( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов auto start - автоматический запуск">autoStart</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов auto start - автоматический запуск">autoStart</a></tt> — определяет, будет ли отсчет времени запускаться автоматически, (дополнительный, необязательный аргумент). Значением по умолчанию является <tt>true</tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class="blockindent"><br>
+<pre id="3autoStart"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов auto start - автоматический запуск">.autoStart</a></pre>
+Если значение свойства установлено как <tt>true</tt>, при первом вызове обновления автоматически запускается отсчет времени. Значением по умолчанию является <tt>true</tt>.<br><br>
+
+<pre id="3startTime"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов start time - начальное время">.startTime</a></pre>
+Здесь хранится время последнего вызова метода <a href="#start" title="Clock.start">start</a>.
+Holds the time at which the clock's start method was last called.
+When the clock is running, It holds the start time of the clock.<br>
+Отсчет идет от количества миллисекунд, прошедших с 00:00:00 UTC 1 января 1970 года.<br><br>
+
+<pre id="3oldTime"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов old time - старое время">.oldTime</a></pre>
+When the clock is running, It holds the previous time from a update.<br>
+This counted from the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC.
+
+<pre id="3elapsedTime"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов elapsed time - прошедшее время">.elapsedTime</a></pre>
+When the clock is running, It holds the time elapsed between the start of the clock to the previous update.<br>
+This counted from the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC.
+
+<pre id="3running"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова running - ход, работа">.running</a></pre>
+Данное свойство отслеживает, запущены часы или нет.
+This property keeps track whether the clock is running or not.</div>
+
+<h4>Методы</h4>
+<div class="blockindent">
+<pre id="3start"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова start - начало, старт">.start</a>()</pre>
+Запускает отсчет времени. Also sets the startTime and oldTime to the current time, устанавливает elapsedTime в 0, а <tt><a href="#running" title="Clock.running">running</a></tt> как <tt>true</tt>.
+
+<pre id="3stop"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова stop - стоп, остановка">.stop</a>()</pre>
+Останавливает отсчет времени и устанавливает свойство <tt><a href="#oldTime" title="Clock.oldTime">oldTime</a></tt> на текущее время.
+
+<pre id="3getElapsedTime"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов get elapsed time - получить истекшее время">.getElapsedTime</a>()</pre>
+
+Get the seconds passed since the clock started and sets oldTime to the current time.
+If autoStart is true and the clock is not running, also starts the clock.
+
+<pre id="3getDelta"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов get delta - получить дельту, т.е. разницу, в данном случае - во времени">.getDelta</a>()</pre>
+Get the seconds passed since the time oldTime was set and sets oldTime to the current time.
+Если отсчет времени не запущен, а <a href="#3autoStart" title="Clock.autoStart">autoStart</a> установлен как <tt>true</tt> также запускает отсчет времени.</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/Clock.js.txt">Clock.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Clock.js" target="_blank">Clock.js на github.com</a></div><br>
+
+
+<h3 id="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DirectGeometry</h3>
+Данный класс используется внутри <code>three.js</code> для конвертирования из <tt><a href="#7">Geometry</a></tt> в <tt><a href="#2">BufferGeometry</a></tt>.
+
+<h4>Конструктор</h4>
+<pre>DirectGeometry()</pre>
+Создает новую <tt>DirectGeometry</tt>.
+<h4>Свойства</h4>
+<div class=blockindent>
+<pre id="4id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова identifier - идентификатор">.id</a></pre>
+Уникальное число для данного экземпляра <tt>DirectGeometry</tt>.
+<pre id="4name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова name - имя, название">.name</a></pre>
+Дополнительное, необязательное имя. Значением по умолчанию является пустая строка.
+<pre id="4type"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова type - тип">.type</a></pre>
+Строка 'DirectGeometry'.
+<pre id="4indices"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова indices - индексы">.indices</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<pre id="4vertices"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова vertices - вершины">.vertices</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<pre id="4normals"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова normals - нормали, т.е. нормаль к кривой линии (поверхности) в данной ее точке - прямая, проходящая через эту точку и перпендикулярная к касательной прямой (касательной плоскости) в этой точке кривой (поверхности). Плоская гладкая кривая имеет в каждой точке единственную нормаль, расположенную в плоскости кривой. ">.normals</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<pre id="4colors"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова colors - цвета">.colors</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<pre id="4uvs"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. сокращения uv - координаты U и V, буква s означает, что координаты во множественном числе">.uvs</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<div class=note_trans><b>Примечание переводчика:</b> <a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">UV</a> это текстурные координаты, соответствующие координатам на поверхности трёхмерного объекта (X, Y, Z).
+Буквы «U», «V» обозначают оси двумерной текстуры, потому что «X», «Y» и «Z» уже используются для обозначения осей 3D-объекта в пространстве модели. Значения U и V обычно изменяются от 0 до 1.</div>
+<pre id="4uvs2"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. сокращения uv - координаты U и V, буква s означает, что координаты во множественном числе">.uvs2</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<pre id="4groups"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. groups - группы">.groups</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<pre id="4morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов morphing targets - цели морфинга (трансформации)">.morphTargets</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<div class=note_trans><b>Примечание переводчика:</b> <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%80%D1%84%D0%B8%D0%BD%D0%B3" target="_blank">морфинг</a> (англ. morphing, трансформация) — технология в компьютерной анимации, визуальный эффект, создающий впечатление плавной трансформации одного объекта в другой.
+Цели морфинга - это набор последовательных изменений объекта. Исходный объект, зачастую называется затравочным (seed object).</div>
+<pre id="4skinWeights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов skin weights - веса оболочки">.skinWeights</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<div class=note_trans><b>Примечание переводчика:</b> <a href="" target="_blank">морфинг</a>.</div>
+<pre id="4skinIndices"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов skin indices - индексы оболочки">.skinIndices</a></pre>
+Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" title="DirectGeometry.fromGeometry">.fromGeometry</a>().
+<pre id="4boundingBox"><a href="math.htm#2" title="от англ. слов bounding box - ограничительная рамка. Box3">.boundingBox</a></pre>
+Bounding box for the bufferGeometry, which can be calculated with .computeBoundingBox(). Значением по умолчанию является <tt>null</tt>.
+<pre id="4boundingSphere"><a href="math.htm#15" title="от англ. слов bounding sphere - ограничительная сфера. Sphere">.boundingSphere</a></pre>
+Bounding sphere for the bufferGeometry, which can be calculated with .computeBoundingSphere(). Значением по умолчанию является <tt>null</tt>.
+<pre id="4verticesNeedUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов vertices need update - вершины, которые нужно обновить">.verticesNeedUpdate</a></pre>
+Значением по умолчанию является <tt>false</tt>.
+<pre id="4normalsNeedUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов normals need update - нормали, которые нужно обновить">.normalsNeedUpdate</a></pre>
+Значением по умолчанию является <tt>false</tt>.
+<pre id="4colorsNeedUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов colors need update - цвета, которые нужно обновить">.colorsNeedUpdate</a></pre>
+Значением по умолчанию является <tt>false</tt>.
+<pre id="4uvsNeedUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов uvs need update - текстурные координаты, которые нужно обновить">.uvsNeedUpdate</a></pre>
+Значением по умолчанию является <tt>false</tt>.
+<pre id="4groupsNeedUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов groups need update - группы, которые нужно обновить">.groupsNeedUpdate</a></pre>
+Значением по умолчанию является <tt>false</tt>.</div>
+<h4>Методы</h4>
+В данном классе возможно применение методов <tt><a href="#5" title="EventDispatcher">EventDispatcher</a></tt>.
+<div class=blockindent>
+<pre id="4computeBoundingBox"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов compute bounding box - вычисление ограничивающей рамки">.computeBoundingBox</a> ( )</pre>
+Смотрите <tt><a href="#7Geometry.computeBoundingBox" title="Geometry.computeBoundingBox">Geometry.computeBoundingBox</a></tt>.
+<pre id="4computeBoundingSphere"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов compute bounding sphere - вычисление ограничивающей сферы">.computeBoundingSphere</a> ( )</pre>
+Смотрите <tt><a href="#7Geometry.computeBoundingSphere" title="Geometry.computeBoundingSphere">Geometry.computeBoundingSphere</a></tt>.
+<pre id="4computeGroups"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов compute bounding groups - вычисление групп">.computeGroups</a> ( <a href="7" title="Geometry">geometry</a> )</pre>
+Вычисляет части геометрии с разными materialIndex</a></tt>. Смотрите <a href="#2BufferGeometry.groups" title="BufferGeometry.groups">BufferGeometry.groups</a></tt>.
+<pre id="4dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова dispose - располагать, размещать">.dispose</a> ( )</pre>
+Удаляет объект из памяти. Этот метод вызывается, если во время работы приложения нужно удалить <tt>directGeometry</tt>.
+<pre id="4fromGeometry"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова from geometry - из геометрии">.fromGeometry</a> ( <a href="7" title="Geometry">geometry</a> )</pre>
+Переход на экземпляр <a href="7" title="Geometry">Geometry</a> для конвертирования.</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/DirectGeometry.js.txt">DirectGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/DirectGeometry.js" target="_blank">DirectGeometry.js на github.com</a></div><br>
+
+
+<h3 id="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EventDispatcher</h3>
+События JavaScript для пользовательских объектов.<br>
+<a href="https://github.com/mrdoob/eventdispatcher.js" target="_blank">EventDispatcher на Гитхабе</a>.
+<h4>Пример</h4>
+<pre>// Adding events to a custom object
+// Добавляем события в пользовательский объект
+var Car = function () {
+    this.start = function () {
+        this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
+    };
+};<br>
+// Mixin the EventDispatcher.prototype with the custom object prototype
+// Объединяем EventDispatcher.prototype с прототипом пользовательского объекта
+Object.assign( Car.prototype, EventDispatcher.prototype );<br>
+// Using events with the custom object
+// Использование событий с пользовательским объектом
+var car = new Car();
+car.addEventListener( 'start', function ( event ) {
+    alert( event.message );
+} );<br>
+car.start();</pre><br>
+<h4>Конструктор</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup('от англ. слов add event dispatcher - диспетчер событий','Arial,9',10,10,0xffffff,0xd69967)">EventDispatcher</a>()</pre>
+Создает объект <tt>EventDispatcher</tt>.<br><br>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="5addEventListener"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов add event listener - добавить приемник событий">.addEventListener</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова type - тип">type</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова listener - слушатель, приемник">listener</a> )</pre>
+<div class=list><tt>type</tt> - тип принимаемого события.</div>
+<div class=list><tt>listener</tt> - функция, вызываемая при запуске события.</div>
+Добавляет приемник к типу события.<br><br>
+<pre id="5hasEventListener"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов has event listener - имеется приемник событий">hasEventListener</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова type - тип">type</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова listener - слушатель, приемник">listener</a> )</pre>
+<div class=list><tt>type</tt> - тип принимаемого события.</div>
+<div class=list><tt>listener</tt> - функция, вызываемая при запуске события.</div>
+Проверяет, добавлен ли приемник к типу события.<br><br>
+<pre id="5removeEventListener"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов remove event listener - удалить приемник событий">removeEventListenerremove( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова type - тип">type</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова listener - слушатель, приемник">listener</a> )</pre>
+<div class=list><tt>type</tt> - тип приемника удаляемого события.</div>
+<div class=list><tt>listener</tt> - функция удаляемого приемника.</div>
+Удаляет приемник из типа события.<br><br>
+<pre id="5dispatchEvent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов dispatch event - рассылка события">dispatchEvent</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова event - событие">event</a> )</pre>
+<div class=list><tt>event</tt> - запускаемое событие.</div>
+Запускает тип события.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/EventDispatcher.js.txt">EventDispatcher.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/EventDispatcher.js" target="_blank">EventDispatcher.js на github.com</a></div><br>
+
+
+<h3 id="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Face3</h3>
+Треугольная грань, используемая в <a href="#7" title="Geometry"><tt>Geometry</tt></a>. Грани создаются автоматически для всех стандартных типов геометрии, однако, если строится нестандартная геометрия, их придется создавать вручную.<br><br>
+
+<h4>Пример</h4><br>
+<pre>var material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );<br>
+// create a triangular geometry
+// создадим геометрию треугольника
+var geometry = new THREE.Geometry();
+geometry.vertices.push( new THREE.Vector3( -50, -50, 0 ) );
+geometry.vertices.push( new THREE.Vector3(  50, -50, 0 ) );
+geometry.vertices.push( new THREE.Vector3(  50,  50, 0 ) );<br>
+// create a new face using vertices 0, 1, 2
+// создаем новую грань, используя вершины 0, 1, 2
+var normal = new THREE.Vector3( 0, 1, 0 ); // optional (необязательно)
+var color = new THREE.Color( 0xffaa00 ); // optional (необязательно)
+var materialIndex = 0; // optional (необязательно)
+var face = new THREE.Face3( 0, 1, 2, normal, color, materialIndex );<br>
+// add the face to the geometry's faces array
+// добавляем грань к массиву граней геометрии
+geometry.faces.push( face );<br>
+// the face normals and vertex normals can be calculated automatically if not supplied above
+// если выше не предоставлена, то нормали граней и вершин могут вычисляться автоматически
+geometry.computeFaceNormals();
+geometry.computeVertexNormals();<br>
+scene.add( new THREE.Mesh( geometry, material ) );</pre>
+
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#misc_ubiquity_test" target="_blank">ubiquity / test</a>
+<a href="https://threejs.org/examples/#svg_sandbox" target="_blank">svg / sandbox</a>
+<a href="https://threejs.org/examples/#webgl_exporter_obj" target="_blank">WebGL / exporter / obj</a>
+<a href="https://threejs.org/examples/#webgl_shaders_vector" target="_blank">WebGL / shaders / vector</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>Face3( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">a</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">b</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">c</a>, [page:Vector3 normal], [page:Color color], <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">materialIndex</a> )</pre>
+<div class=list><tt>a</tt> — индекс вершины A.</div>
+<div class=list><tt>b</tt> — индекс вершины B.</div>
+<div class=list><tt>c</tt> — индекс вершины C.</div>
+<div class=list><tt>normal</tt> — нормаль грани или массив нормалей вершин.</div>
+<div class=list><tt>color</tt> — цвет грани или массив цветов вершин.</div>
+<div class=list><tt>materialIndex</tt> — индекс материала.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="6a"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">.a</a></pre>
+Индекс вершины A.<br><br>
+<pre id="6b"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">.b</a></pre>
+Индекс вершины B.<br><br>
+<pre id="6c"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">.c</a></pre>
+Индекс вершины C.<br><br>
+<pre id="6normal"><a href="math.htm#19" title="Vector3">.normal</a></pre>
+Нормаль грани.<br><br>
+<pre id="6color"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)">.color</a></pre>
+Цвет грани.<br><br>
+<pre id="6vertexNormals"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)">.vertexNormals</a></pre>
+Массив из 3 нормалей вершин.<br><br>
+<pre id="6vertexColors"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)">.vertexColors</a></pre>
+Массив из 3 цветов вершин.<br><br>
+
+<pre id="6materialIndex"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">.materialIndex</a></pre>
+Material index (points to [page:MultiMaterial MultiMaterial.materials]).</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="6clone"><a href="6" title="Face3">.clone</a>( )</pre>
+Создает новый клон объекта Face3.<br><br>
+<pre id="6copy"><a href="6" title="Face3">.copy</a>( <a href="6" title="Face3">face3</a> )</pre>
+Копирует в эту треугольную грань параметры другой треугольной грани (Face3).</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/Face3.js.txt">Face3.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Face3.js" target="_blank">Face3.js на github.com</a></div><br>
+
+
+<h3 id="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Geometry</h3>
+Основной класс для всех геометрий (но не для <a href="#2" title="BufferGeometry">BufferGeometries</a>). Также его можно использовать напрямую для построения собственных и нестандартных геометрий.<br>
+С Geometry работать легче, чем с <a href="#2" title="BufferGeometry">BufferGeometries</a>, так как она хранит атрибуты, такие как вершины, грани, цвета и тому подобное непосредственно у себя (а не в буферах), хотя она, как правило, работает медленней.
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.Geometry();<br>
+geometry.vertices.push(
+	new THREE.Vector3( -10,  10, 0 ),
+	new THREE.Vector3( -10, -10, 0 ),
+	new THREE.Vector3(  10, -10, 0 )
+);<br>
+geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );<br>
+geometry.computeBoundingSphere();</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_minecraft" target="_blank">WebGL / geometry / minecraft</a>,
+<a href="https://threejs.org/examples/#webgl_geometry_minecraft_ao" target="_blank">WebGL / geometry / minecraft / ao</a>,
+<a href="https://threejs.org/examples/#webgl_geometry_nurbs" target="_blank">WebGL / geometry / nurbs</a>,
+<a href="https://threejs.org/examples/#webgl_geometry_spline_editor" target="_blank">WebGL / geometry / spline / editor</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_cubes_gpu" target="_blank">WebGL / interactive / cubes / gpu</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_lines" target="_blank">WebGL / interactive / lines</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_raycasting_points" target="_blank">WebGL / interactive / raycasting / points</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_voxelpainter" target="_blank">WebGL / interactive / voxelpainter</a>,
+<a href="https://threejs.org/examples/#webgl_morphnormals" target="_blank">WebGL / morphNormals</a>.</pre><br>
+
+<h4>Конструктор</h4>
+<pre>Geometry()</pre>
+Конструктор не принимает аргументов.
+
+<h4>Свойства</h4>
+<div class=blockindent>
+<pre id="7boundingBox"><a href="math.htm#2" title="от англ. слова bounding box - ограничительная рамка">.boundingBox</a></pre>
+Ограничительная рамка для Geometry, которую можно вычислить методом <a href="#7computeBoundingBox" title="Geometry.computeBoundingBox">.computeBoundingBox</a>. Значением по умолчанию является <tt>null</tt>.
+
+<pre id="7boundingSphere"><a href="math.htm#2" title="от англ. слова bounding sphere - ограничительная сфера">.boundingSphere</a></pre>
+Ограничительная сфера для Geometry, которую можно вычислить методом <a href="#7computeBoundingSphere" title="Geometry.computeBoundingSphere">.computeBoundingSphere</a>. Значением по умолчанию является <tt>null</tt>.
+
+<pre id="7colors"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова colors - цвета">.colors</a></pre>
+Массив значений <a href="math.htm#3" title="Color">цвета</a> вершин, в соответствии с их числом и порядком.<br>
+Это свойство используется <a href="objects.htm#9" title="Points - точки">точками</a> и <a href="objects.htm#4" title="Line - линия">линией</a>,
+а также любыми классами, производными от их, такие как <a href="objects.htm#6" title="LineSegments - отрезки линии">LineSegments</a> и различные <a href="helpers.htm" title="helpers - помощники">вспомогательные элементы</a>.
+<a href="objects.htm#8" title="Mesh - сетка">Сетки</a> взамен этого свойства используют <a href="#6" title="Face3.vertexColors - цвета вершин треугольной грани">Face3.vertexColors</a>.<br>
+Чтобы задать обновление этого массива, нужно установить свойство <a href="#7colorsNeedUpdate">Geometry.colorsNeedUpdate</a> как <tt>true</tt>.
+
+<pre id="7faces"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова faces - грани">.faces</a></pre>
+Массив <a href="#6" title="Face3">граней</a>.<br>
+Массив граней описывает, как для формирования граней соединяется каждая вершина модели. Кроме того, в нем содержится информация о цвете и нормалях граней и вершин.<br>
+Чтобы задать обновление этого массива, нужно установить свойство <a href="#7elementsNeedUpdate">Geometry.elementsNeedUpdate</a> как <tt>true</tt>.
+
+<pre id="7faceVertexUvs">.faceVertexUvs</a></pre>
+Array of face UV layers, used for mapping textures onto the geometry.
+Each UV layer is an array of UVs matching the order and number of vertices in faces.<br>
+Чтобы задать обновление этого массива, нужно установить свойство <a href="#7uvsNeedUpdate">Geometry.uvsNeedUpdate</a> как <tt>true</tt>.
+
+<pre id="7id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокр. англ. слова identifier - идентификатор">.id</a></pre>
+Уникальный номер для данного экземпляра геометрии.
+
+<pre id="7isGeometry"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is geometry - является геометрией">.isGeometry</a></pre>
+Используется для проверки, является ли данный класс и его производные геометриями. Значением по умолчанию является <tt>true</tt>.<br>
+Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.
+
+<pre id="7lineDistances"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов line distances - линейные расстояния">.lineDistances</a></pre>
+Массив содержит расстояния между вершинами для геометрий Line.
+An array containing distances between vertices for Line geometries. This is required for LineSegments / LineDashedMaterial to render correctly. Line distances can be generated automatically with .computeLineDistances.
+
+
+
+
+
+<pre id="7name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова name - имя, название">.name</a></pre>
+Имя данной геометрии. Значением по умолчанию является пустая строка ("").
+
+
+<pre>[property:Array morphTargets]</pre>
+Array of morph targets. Each morph target is a Javascript object:
+		<code>{ name: "targetName", vertices: [ new THREE.Vector3(), ... ] }</code>
+		Morph vertices match number and order of primary vertices.
+
+<pre>[property:Array morphNormals]</pre>
+Array of morph normals. Morph normals have similar structure as morph targets, each normal set is a Javascript object:
+		<code>morphNormal = { name: "NormalName", normals: [ new THREE.Vector3(), ... ] }</code>
+
+<pre>[property:Array skinWeights]</pre>
+When working with a [page:SkinnedMesh], each vertex can have up to 4 [page:Bone bones] affecting it.
+		The skinWeights property is an array of weight values that correspond to the order of the vertices in
+		the geometry. So for instance, the first skinWeight would correspond to the first vertex in the geometry.
+		Since each vertex can be modified by 4 bones, a [page:Vector4] is used to represent the skin weights
+		for that vertex.<br><br>
+The values of the vector should typically be between 0 and 1. For instance when set to 0 the bone
+		transformation will have no affect. When set to 0.5 it will have 50% affect. When set to 100%, it will
+		have 100% affect. If there is only 1 bone associated with the vertex then you only need to worry about
+		the first component of the vector, the rest can be ignored and set to 0.
+
+<pre>[property:Array skinIndices]</pre>
+Just like the skinWeights property, the skinIndices' values correspond to the geometry's vertices.
+		Each vertex can have up to 4 bones associated with it. So if you look at the first vertex, and the
+		first skinIndex, this will tell you the bones associated with that vertex. For example the first vertex
+		could have a value of <strong>( 10.05, 30.10, 12.12 )</strong>. Then the first skin index could have the
+		value of <strong>( 10, 2, 0, 0 )</strong>. The first skin weight could have the value of
+		<strong>( 0.8, 0.2, 0, 0 )</strong>. In affect this would take the first vertex, and then the bone
+		<strong>mesh.bones[10]</strong> and apply it 80% of the way. Then it would take the bone <strong>skeleton.bones[2]</strong>
+		and apply it 20% of the way. The next two values have a weight of 0, so they would have no affect.<br><br>
+In code another example could look like this:
+<pre>// e.g.
+geometry.skinIndices[15] = new THREE.Vector4(   0,   5,   9, 0 );
+geometry.skinWeights[15] = new THREE.Vector4( 0.2, 0.5, 0.3, 0 );<br>
+// corresponds with the following vertex
+geometry.vertices[15];<br>
+// these bones will be used like so:
+skeleton.bones[0]; // weight of 0.2
+skeleton.bones[5]; // weight of 0.5
+skeleton.bones[9]; // weight of 0.3
+skeleton.bones[10]; // weight of 0</pre>
+
+<pre>[property:Boolean verticesNeedUpdate]</pre>
+Set to *true* if the vertices array has been updated.
+
+<pre>[property:Boolean elementsNeedUpdate]</pre>
+Set to *true* if the faces array has been updated.
+
+<pre>[property:Boolean uvsNeedUpdate]</pre>
+Set to *true* if the uvs array has been updated.
+
+<pre>[property:Boolean normalsNeedUpdate]</pre>
+Set to *true* if the normals array has been updated.
+
+<pre>[property:Boolean colorsNeedUpdate]</pre>
+Set to *true* if the colors array or a face3 color has been updated.
+
+<pre>[property:Boolean groupsNeedUpdate]</pre>
+Set to *true* if a face3 materialIndex has been updated.
+
+<pre>[property:Boolean lineDistancesNeedUpdate]</pre>
+Set to *true* if the linedistances array has been updated.
+</div>
+
+<h4>Методы</h4>
+<pre>[page:EventDispatcher EventDispatcher] methods are available on this class.</pre>
+<pre>[method:null applyMatrix]( [page:Matrix4 matrix] )</pre>
+Bakes matrix transform directly into vertex coordinates.
+
+<pre>[method:null center] ()</pre>
+Center the geometry based on the bounding box.
+
+		<pre>[method:Geometry rotateX] ( [page:Float radians] )</pre>
+		<div>
+		Rotate the geometry about the X axis. This is typically done as a one time operation, and not during a loop
+    Use [page:Object3D.rotation] for typical real-time mesh rotation.
+		</div>
+
+		<pre>[method:Geometry rotateY] ( [page:Float radians] )</pre>
+		<div>
+		Rotate the geometry about the Y axis. This is typically done as a one time operation, and not during a loop
+    Use [page:Object3D.rotation] for typical real-time mesh rotation.
+		</div>
+
+		<pre>[method:Geometry rotateZ] ( [page:Float radians] )</pre>
+		<div>
+		Rotate the geometry about the Z axis. This is typically done as a one time operation, and not during a loop
+    Use [page:Object3D.rotation] for typical real-time mesh rotation.
+		</div>
+
+		<pre>[method:Geometry translate] ( [page:Float x], [page:Float y], [page:Float z] )</pre>
+		<div>
+		Translate the geometry. This is typically done as a one time operation, and not during a loop
+    Use [page:Object3D.position] for typical real-time mesh translation.
+		</div>
+
+		<pre>[method:Geometry scale] ( [page:Float x], [page:Float y], [page:Float z] )</pre>
+		<div>
+		Scale the geometry data. This is typically done as a one time operation, and not during a loop
+    Use [page:Object3D.scale] for typical real-time mesh scaling.
+		</div>
+
+		<pre>[method:Geometry lookAt] ( [page:Vector3 vector] )</pre>
+		<div>
+		vector - A world vector to look at.<br>
+		</div>
+		<div>
+		Rotates the geometry to face point in space. This is typically done as a one time operation, and not during a loop
+    Use [page:Object3D.lookAt] for typical real-time mesh usage.
+		</div>
+
+		<pre>[method:null computeFaceNormals]()</pre>
+		<div>
+		Computes face normals.
+		</div>
+
+		<pre>[method:null computeVertexNormals]( [page:Boolean areaWeighted] )</pre>
+		<div>
+		areaWeighted - If true the contribution of each face normal to the vertex normal is weighted by the area of the face. Default is true.
+		</div>
+		<div>
+		Computes vertex normals by averaging face normals.<br>
+		Face normals must be existing / computed beforehand.
+		</div>
+
+		<pre>[method:null computeMorphNormals]()</pre>
+		<div>
+		Computes morph normals.
+		</div>
+
+		<pre>[method:null computeBoundingBox]()</pre>
+		<div>
+		Computes bounding box of the geometry, updating [page:Geometry Geometry.boundingBox] attribute.
+		</div>
+
+		<pre>[method:null computeBoundingSphere]()</pre>
+		<div>
+		Computes bounding sphere of the geometry, updating [page:Geometry Geometry.boundingSphere] attribute.
+		</div>
+
+		<div>Neither bounding boxes or bounding spheres are computed by default. They need to be explicitly computed, otherwise they are *null*.</div>
+
+		<pre>[method:null merge]( [page:Geometry geometry], [page:Matrix4 matrix], [page:Integer materialIndexOffset] )</pre>
+		<div>Merge two geometries or geometry and geometry from object (using object's transform)</div>
+
+		<pre>[method:null mergeVertices]()</pre>
+		<div>
+		Checks for duplicate vertices using hashmap.<br>
+		Duplicated vertices are removed and faces' vertices are updated.
+		</div>
+
+		<pre>[method:null normalize]()</pre>
+		<div>
+		Normalize the geometry. <br>
+		Make the geometry centered and has a bounding sphere whose radius equals to 1.0.
+		</div>
+
+		<pre>[method:Geometry clone]()</pre>
+		<div>
+		Creates a new clone of the Geometry.
+		</div>
+
+		<div>This method copies only vertices, faces and uvs. It does not copy any other properties of the geometry.</div>
+
+<pre>[method:null dispose]()</pre>
+Removes The object from memory. <br>
+Don't forget to call this method when you remove a geometry because it can cause memory leaks.
+
+<pre>[method:null computeLineDistances]()</pre>
+Compute distances between vertices for Line geometries.
+</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/Geometry.js.txt">Geometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Geometry.js" target="_blank">Geometry.js на github.com</a></div><br>
+
+<span class="right_side"><a href="#1" title="Переход к родительскому классу"><tt>BufferAttribute &rarr;</tt></a></span>
+<h3 id="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InstancedBufferAttribute</h3>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('Инстанцирование (англ. instantiation) — создание экземпляра класса. В отличие от слова «создание», применяется не к объекту, а к классу. То есть, говорят: (в виртуальной среде) создать экземпляр класса или, другими словами, инстанцировать класс.','Arial,9',10,10,0xffffff,0xd69967)">Инстанцированная</a> версия <tt><a href="#1" title="BufferAttribute">BufferAttribute</a></tt> (то есть, это экземпляр класса <tt>BufferAttribute</tt>).
+An instanced version of BufferAttribute.
+<h4>Конструктор</h4>
+<pre>InstancedBufferAttribute( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_typearray,'Arial,9',10,10,0xffffff,0xd69967)" title="array - массив">array</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов item size - размер элемента">itemSize</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов mesh per attribute - сетка под атрибут">meshPerAttribute</a> )</pre>
+
+<h4>Свойства</h4>
+Смотрите наследуемые свойства в описании <tt><a href="#1" title="BufferAttribute">BufferAttribute</a></tt>.
+<div class=blockindent>
+<pre id="8meshPerAttribute"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов mesh per attribute - ">.meshPerAttribute</a></pre>
+Значение по умолчанию равно <tt>1</tt>.
+
+<pre id="8isInstancedBufferAttribute"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is instanced buffer attribute - является инстанцированным буферным атрибутом">.isInstancedBufferAttribute</a></pre>
+Значение по умолчанию равно <tt>true</tt>.</div>
+
+<h4>Методы</h4>
+Смотрите наследуемые методы в описании <tt><a href="#1" title="BufferAttribute">BufferAttribute</a></tt>.
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/InstancedBufferAttribute.js.txt">InstancedBufferAttribute.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/InstancedBufferAttribute.js" target="_blank">InstancedBufferAttribute.js на github.com</a></div><br>
+
+<span class="right_side"><a href="#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InstancedBufferGeometry</h3>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup('Инстанцирование (англ. instantiation) — создание экземпляра класса. В отличие от слова «создание», применяется не к объекту, а к классу. То есть, говорят: (в виртуальной среде) создать экземпляр класса или, другими словами, инстанцировать класс.','Arial,9',10,10,0xffffff,0xd69967)">Инстанцированная</a> версия <tt><a href="#2" title="BufferGeometry">BufferGeometry</a></tt> (то есть, это экземпляр класса <tt>BufferGeometry</tt>).
+An instanced version of BufferGeometry.
+<h4>Конструктор</h4>
+<pre>InstancedBufferGeometry( )</pre>
+
+<h4>Свойства</h4>
+Смотрите наследуемые свойства в описании <tt><a href="#2" title="BufferGeometry">BufferGeometry</a></tt>.
+<div class=blockindent>
+<pre id="9maxInstancedCount"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов max instanced count - максимальное число инстанцированных экземпляров">.maxInstancedCount</a></pre>
+Значение по умолчанию равно <tt>undefined*</tt>, т.е. не определено.
+<pre id="9isInstancedBufferGeometry"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is instanced buffer geometry - является инстанцированной буферной геометрией">.isInstancedBufferGeometry</a></pre>
+Значение по умолчанию равно <tt>true</tt>.</div>
+
+<h4>Методы</h4>
+Смотрите наследуемые методы в описании <tt><a href="#2" title="BufferGeometry">BufferGeometry</a></tt>.
+<div class=blockindent>
+<pre id="9addGroup"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов add group - добавить группу">.addGroup</a>( start</a>, count</a>, materialIndex</a> )</pre>
+</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/InstancedBufferGeometry.js.txt">InstancedBufferGeometry.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/InstancedBufferGeometry.js" target="_blank">InstancedBufferGeometry.js на github.com</a></div><br>
+
+<span class="right_side"><a href="core.htm#11" title="Переход к родительскому классу"><tt>InterleavedBuffer &rarr;</tt></a></span>
+<h3 id="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InstancedInterleavedBuffer</h3>
+Инстанцированная версия <tt><a href="#11" title="InterleavedBuffer">InterleavedBuffer</a></tt>.
+<h4>Конструктор</h4>
+<pre>InstancedInterleavedBuffer( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_typearray,'Arial,9',10,10,0xffffff,0xd69967)" title="array - массив">array</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов item size - размер элемента">itemSize</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов mesh per attribute - сетка по атрибуту">meshPerAttribute</a> )</pre>
+
+<h4>Свойства</h4>
+Смотрите наследуемые свойства в описании <tt><a href="#11" title="InterleavedBuffer">InterleavedBuffer</a></tt>.
+<div class=blockindent>
+<pre id="10meshPerAttribute"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов mesh per attribute - сетка по атрибуту">.meshPerAttribute</a></pre>
+Значение по умолчанию равно <tt>1</tt>.
+
+<pre id="10isInstancedInterleavedBuffer"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is instanced interleaved buffer - является инстанцированным, чередующимся буфером">.isInstancedInterleavedBuffer</a></pre>
+Значение по умолчанию равно <tt>true</tt>.</div>
+
+<h4>Методы</h4>
+Смотрите наследуемые методы в описании <tt><a href="#11" title="InterleavedBuffer">InterleavedBuffer</a></tt>.
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/InstancedInterleavedBuffer.js.txt">InstancedInterleavedBuffer.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/InstancedInterleavedBuffer.js" target="_blank">InstancedInterleavedBuffer.js на github.com</a></div><br>
+
+
+<h3 id="11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InterleavedBuffer</h3>
+<h4>Конструктор</h4>
+InterleavedBuffer( array, stride )
+<pre>InterleavedBuffer( [page:TypedArray array</a>, [page:Integer stride</a> )</pre>
+
+<h4>Свойства</h4>
+<div class=blockindent>
+<pre id="10array">[property:Array array</a></pre>
+
+<pre id="10stride">[property:Integer stride</a></pre>
+
+<pre id="10count">[property:Integer count</a></pre>
+Gives the total number of elements in the array.
+
+<pre id="10dynamic">[property:Boolean dynamic</a></pre>
+Значение по умолчанию равно <tt>false</tt>.
+
+<pre id="10updateRange">[property:Object updateRange</a></pre>
+Object containing offset and count.
+
+<pre id="10updateRange.offset">[property:Number updateRange.offset</a></pre>
+Значение по умолчанию равно <tt>0</tt>.
+
+<pre id="10updateRange.count">[property:Number updateRange.count</a></pre>
+Значение по умолчанию равно <tt>-1</tt>.
+
+<pre id="10version">[property:Integer version</a></pre>
+A version number, incremented every time the needsUpdate property is set to true.
+
+<pre id="10isInterleavedBuffer">[property:Integer isInterleavedBuffer</a></pre>
+Значение по умолчанию равно <tt>true</tt>.
+
+<pre id="10needsUpdate">[property:Integer needsUpdate</a></pre>
+Значение по умолчанию равно <tt>false</tt>. Setting this to true increments [page:InterleavedBuffer.version version].</div>
+
+<h4>Методы</h4>
+<div class=blockindent>
+<h3>[method:null setArray</a> ( [page:TypedArray array</a> ) </h3>
+<div class=blockindent><tt>array</tt> - must be  a Typed Array.</div>
+
+<h3>[method:InterleavedBuffer setDynamic] ( [page:Boolean value] ) </h3>
+Set [page:InterleavedBuffer.dynamic dynamic] to value.
+
+<h3>[method:InterleavedBuffer copy]( source ) </h3>
+Copy the array, count, stride and value of dynamic to this.
+
+<h3>[method:InterleavedBuffer copyAt]( index1, attribute, index2 ) </h3>
+
+<h3>[method:InterleavedBuffer set]( value, offset ) </h3>
+		</div>
+
+<h3>[method:InterleavedBuffer clone]( index, x, y ) </h3>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/InterleavedBuffer.js.txt">InterleavedBuffer.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBuffer.js" target="_blank">InterleavedBuffer.js на github.com</a></div><br>
+
+
+<h3 id="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InterleavedBufferAttribute</h3>
+<h4>Конструктор</h4>
+InterleavedBufferAttribute( interleavedBuffer, itemSize, offset, normalized )
+<h3>[name]( [page:InterleavedBuffer interleavedBuffer], [page:Integer itemSize], [page:Integer offset], [page:Boolean normalized] )</h3>
+
+<h4>Свойства</h4>
+<div class=blockindent>
+<h3>[property:InterleavedBuffer data]</h3>
+The [page:InterleavedBuffer InterleavedBuffer] instance passed in the constructor.
+
+<h3>[property:Integer itemSize]</h3>
+
+<h3>[property:Integer offset]</h3>
+
+<h3>[property:Boolean normalized]</h3>
+Значение по умолчанию равно <tt>true</tt>.
+
+<h3>[property:Boolean isInterleavedBufferAttribute]</h3>
+Значение по умолчанию равно <tt>true</tt>.</div>
+
+<h4>Методы</h4>
+<div class=blockindent>
+<h3>[method:Integer count]()</h3>
+The value of [page:InterleavedBufferAttribute.data data].count.
+
+<h3>[method:Array array]()</h3>
+The value of [page:InterleavedBufferAttribute.data data].array.
+
+<h3>[method:null getX]( index ) </h3>
+
+<h3>[method:null getY]( index ) </h3>
+
+<h3>[method:null getZ]( index ) </h3>
+
+<h3>[method:null getW]( index ) </h3>
+
+<h3>[method:null setX]( index, x ) </h3>
+
+<h3>[method:null setY]( index, y ) </h3>
+
+<h3>[method:null setZ]( index, z ) </h3>
+
+<h3>[method:null setXY]( index, x, y ) </h3>
+
+<h3>[method:null setXYZ]( index, x, y, z ) </h3>
+
+<h3>[method:null setXYZW]( index, x, y, z, w ) </h3>
+</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/InterleavedBufferAttribute.js.txt">InterleavedBufferAttribute.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBufferAttribute.js" target="_blank">InterleavedBufferAttribute.js на github.com</a></div><br>
+
+
+<h3 id="13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Layers</h3>
+<!-- A Layers object assigns an Object3D to 1 or more of 32 layers numbered 0 to 31 - internally the layers are stored as a bit mask, and by default all Object3Ds are a member of layer 0.<br>
+
+This can be used to control visibility - an object must share a layer with a camera to be visible when that camera's view is renderered.<br>
+
+All classes that inherit from Object3D have an Object3D.layers property which is an instance of this class.  -->
+Объект предоставляет битовую маску и методы допуска, используемые для управления видимостью <a href="#14" title="Object3D">Object3D</a>.
+An object providing a bit mask and accessor methods used to control an Object3D's visibility. A Layers object assigns an Object3D to 0 or more of 32 layers numbered 0 to 31.<br><br>
+
+This is used to control visibility - an object must share a layer with a camera to be visible when that camera's view is renderered.<br><br>
+
+All classes that inherit from Object3D have a .layers property which is an instance of this class.
+An object providing a bit mask and accessor method used to control an [page:Object3D]'s visibility.
+		A [page:Layers] object assigns an [page:Object3D] to 0 or more of 32 layers numbered 0 to 31.
+
+<h4>Конструктор</h4>
+<pre>Layers()</pre>
+Создает новый объект <tt>Layers</tt>, принадлежность которого установлена изначально на слой <tt>0</tt>.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="13mask"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="mask - маска">.mask</a></pre>
+Битовая маска, в которой хранится к каким из 32 слоев принадлежит этот объект в данный момент.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="13disable"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="disable - отключить, запретить">.disable</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="layer - слой">layer</a> )</pre>
+<div class=list><tt>layer</tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
+Метод удаляет принадлежность объекта к данному слою (указанному в <tt>layer</tt>).<br><br>
+<pre id="13enable"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="enable - включить, разрешить">.enable</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="layer - слой">layer</a> )</pre>
+<div class=list><tt>layer</tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
+Метод добавляет принадлежность объекта к данному слою (указанному в <tt>layer</tt>).<br><br>
+
+<pre id="13set"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set - установить">set</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="layer - слой">layer</a> )</pre>
+<div class=list><tt>layer</tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
+Метод устанавливает принадлежность объекта к указанному слою (в аргументе <tt>layer</tt>) и удаляет принадлежность ко всем другим слоям.<br><br>
+
+<pre id="13test">.test</a> ( layers</a> )</pre>
+layers - a Layers object
+
+Returns true if this and the passed layers object are members of the same set of layers.
+
+<pre id="13toggle"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="toggle - переключить">.toggle</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="layer - слой">layer</a> )</pre>
+<div class=list><tt>layer</tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
+Метод переключает принадлежность к слою.</div><br>
+
+<h3>[method:Boolean test]( [page:Integer layers] )</h3>
+<div class=blockindent>layers - a 32bit bit mask of layer numbers.</div>
+Returns true if *layers* and .mask have any bits set in common.</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/Layers.js.txt">Layers.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Layers.js" target="_blank">Layers.js на github.com</a></div><br><br>
+
+
+<h3 id="14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Object3D</h3>
+<b>Object3D</b> является базовым классом для большинства объектов <em>three.js</em> и предоставляет набор свойств и методов для управления объектами в трехмерном пространстве.<br>
+Обратите внимание, что имеется возможность для группировки объектов с помощью метода <tt><a href="#14add" title="Object3D.add">.add( object )</a></tt>, который добавляет объект в качестве дочернего, но, тем не менее, для этого лучше использовать класс <tt><a href="objects.htm#2" title="Group">Group</a></tt>.<br><br>
+<h4>Конструктор</h4>
+<pre>Object3D()</pre>
+Конструктор не принимает аргументов.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent>
+<pre id="14castShadow"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="cast shadow - бросать тень">.castShadow</a></pre>
+Будет ли объект представлен в теневой карте. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="14children"><a href="#14" title="Object3D. children - дети, здесь имеются ввиду дочерние объекты, т.е. объекты, являющиеся производными от объекта-родителя">.children</a></pre>
+Массив дочерних объектов. Для информации о группировке объектов вручную, смотрите <a href="objects.htm#2" title="Group">Group</a>.<br><br>
+
+<pre id="14frustumCulled"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов frustum culled  - ">.frustumCulled</a></pre>
+When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible. Значением по умолчанию является <tt>true</tt>.
+
+<pre id="14id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слова identifier - идентификатор">.id</a></pre>
+только для чтения - Уникальное число для данного экземпляра объекта<br><br>
+<pre id="14isObject"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is object - является объектом">.isObject</a></pre>
+Используется для проверки, является ли этот класс или классы, производные от него, трехмерными объектами (Object3D). Значением по умолчанию является <tt>true</tt>.<br>
+Это свойство нельзя изменять, так как оно используется для оптимизации внутри <em>three.js</em>.
+<pre id="14layers"><a href="#13" title="Layers. layers - слои, уровни">.layers</a></pre>
+The layer membership of the object. Объект отображается только в том случае, если имеет хотя бы один слой, используемый совместно с <a href="cameras.htm#1" title="Camera">камерой</a>. The object is only visible if it has at least one layer in common with the Camera in use.
+
+<pre id="14matrix"><a href="math.htm#11" title="Matrix4">.matrix</a></pre>
+The local transform matrix.
+
+
+
+
+
+<pre id="14renderOrder"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="render order - порядок отображения">.renderOrder</a></pre>
+This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently. Sorting is from lowest to highest renderOrder. Значением по умолчанию является <tt>0</tt>.<br><br>
+
+<pre id="14uuid"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слов  universally unique identifier  - универсальный уникальный идентификатор">.uuid</a></pre>
+
+		[link:http://en.wikipedia.org/wiki/Universally_unique_identifier UUID] of this object instance.
+		This gets automatically assigned, so this shouldn't be edited.
+
+
+<pre>[property:String name]</pre>
+Optional name of the object (doesn't need to be unique).
+
+<pre>[property:Object3D parent]</pre>
+Object's parent in the scene graph.
+
+<pre>[property:Object3D children]</pre>
+Array with object's children.
+
+<pre>[property:Vector3 position]</pre>
+Object's local position.
+
+<pre id="14rotation">[property:Euler rotation]</pre>
+Object's local rotation (<a href="https://en.wikipedia.org/wiki/Euler_angles" target="_blank">Euler angles</a>), in radians.
+
+<pre>[property:Vector3 scale]</pre>
+Object's local scale.
+
+<pre>[property:Vector3 up]</pre>
+Up direction. Default is THREE.Vector3( 0, 1, 0 ).
+
+<a name=matrix></a>
+<h4>.matrix</h4>
+Local transform.
+
+<a name=quaternion></a>
+<pre>[property:Quaternion quaternion]</pre>
+Object's local rotation as [page:Quaternion Quaternion].
+
+<pre>[property:Boolean visible]</pre>
+Object gets rendered if *true*. default – true
+
+<pre>[property:Boolean castShadow]</pre>
+Gets rendered into shadow map.
+<div class=blockindent>default – false</div>
+
+<pre>[property:Boolean receiveShadow]</pre>
+Material gets baked in shadow receiving.
+<div class=blockindent>default – false</div>
+
+<pre>[property:Boolean frustumCulled]</pre>
+When this is set, it checks every frame if the object is in the frustum of the camera. Otherwise the object gets drawn every frame even if it isn't visible.
+<div class=blockindent>default – true</div>
+
+<pre>[property:Boolean matrixAutoUpdate]</pre>
+When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.
+<div>default – true</div>
+
+<pre>[property:Boolean matrixWorldNeedsUpdate]</pre>
+When this is set, it calculates the matrixWorld in that frame and resets this property to false.
+<div class=blockindent>default – false</div>
+
+<pre>[property:object userData]</pre>
+An object that can be used to store custom data about the Object3d. It should not hold references to functions as these will not be cloned.
+
+<pre>[property:Matrix4 matrixWorld]</pre>
+The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.</div><br>
+
+<h4>Статические свойства</h4><br>
+Static properties and methods are defined per class rather than per instance of that class. This means that changing Object3D.DefaultUp or Object3D.DefaultMatrixAutoUpdate will change the values of up and matrixAutoUpdate for every	instance of Object3D (or derived classes) created after the change has been made (already created Object3Ds will not be affected).
+<div class=blockindent><br>
+<pre id="14DefaultUp">.DefaultUp</pre>
+The default up direction for objects, also used as the default position for DirectionalLight, HemisphereLight and Spotlight (which creates lights shining from the top down).<br>
+По умолчанию устанавливается как <tt>( 0, 1, 0 )</tt>.<br><br>
+
+<pre id="14DefaultMatrixAutoUpdate">.DefaultMatrixAutoUpdate</pre>
+The default setting for matrixAutoUpdate for newly created Object3Ds.</div><br>
+
+<h4>Методы</h4>
+В данном классе возможно применение методов <tt><a href="#5" title="EventDispatcher">EventDispatcher</a></tt>.
+<div class=blockindent>
+<pre id="14add"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="add - добавить">.add</a> ( <a href="#14" title="Object3D">object</a>, ... )</pre>
+Метод добавляет заданный объект в качестве дочернего к этому объекту. Можно добавлять произвольное количество объектов.<br>
+Посмотрите описание класса <tt><a href="objects.htm#2" title="Group">Group</a></tt> для получения информации о группировке объектов вручную.<br><br>
+
+<pre id="14applyMatrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="apply matrix - применить матрицу">.applyMatrix</a> ( <a href="math.htm#11" title="Matrix4. matrix - матрица">matrix</a> )</pre>
+Применяет матричное преобразование к объекту и обновляет положение объекта, угол поворота объекта и масштаб объекта.<br><br>
+
+<pre id="14applyQuaternion"><a href="#14" title="Object3D. apply quaternion - применить кватернион">.applyQuaternion</a> ( quaternion )</pre>
+Applies the rotation represented by the quaternion to the object.
+
+
+<pre id="14">[method:null translateX]( [page:Float distance] )</pre>
+<div class=blockindent>distance - Distance.</div>
+Translates object along x axis by distance.
+
+<pre>[method:null translateY]( [page:Float distance] )</pre>
+<div class=blockindent>distance - Distance.</div>
+Translates object along y axis by distance.
+
+<pre>[method:null translateZ]( [page:Float distance] )</pre>
+<div class=blockindent>distance - Distance.</div>
+Translates object along z axis by distance.
+
+<pre>[method:null rotateX]( [page:Float rad] )</pre>
+<div class=blockindent>rad - the angle to rotate in radians.</div>
+Rotates the object around x axis in local space.
+
+<pre>[method:null rotateY]( [page:Float rad] )</pre>
+<div class=blockindent>rad - the angle to rotate in radians.</div>
+Rotates the object around y axis in local space.
+
+<pre>[method:null rotateZ]( [page:Float rad] )</pre>
+<div class=blockindent>rad - the angle to rotate in radians.</div>
+Rotates the object around z axis in local space.
+
+<pre>[method:Vector3 localToWorld]( [page:Vector3 vector] )</pre>
+<div class=blockindent>vector - A local vector.</div>
+Updates the vector from local space to world space.
+
+<pre>[method:Vector3 worldToLocal]( [page:Vector3 vector] )</pre>
+<div class=blockindent>vector - A world vector.</div>
+Updates the vector from world space to local space.
+
+<pre>[method:null lookAt]( [page:Vector3 vector] )</pre>
+<div class=blockindent>vector - A world vector to look at.</div>
+Rotates object to face point in space.
+
+<pre>[method:null remove]( [page:Object3D object], ... )</pre>
+<div class=blockindent>object - An object.</div>
+Removes *object* as child of this object. An arbitrary number of objects may be removed.
+
+<pre>[method:null traverse]( [page:Function callback] )</pre>
+<div class=blockindent>callback - A function with as first argument an object3D object.</div>
+Executes the callback on this object and all descendants.
+
+<pre>[method:null traverseVisible]( [page:Function callback] )</pre>
+<div class=blockindent>callback - A function with as first argument an object3D object.</div>
+Like traverse, but the callback will only be executed for visible objects.
+Descendants of invisible objects are not traversed.
+
+<pre>[method:null traverseAncestors]( [page:Function callback] )</pre>
+<div class=blockindent>callback - A function with as first argument an object3D object.</div>
+Executes the callback on all ancestors.
+
+<pre>[method:null updateMatrix]()</pre>
+Updates local transform.
+
+<pre>[method:null updateMatrixWorld]( [page:Boolean force] )</pre>
+Updates global transform of the object and its children.
+
+<pre>[method:Object3D clone]( [page:Boolean recursive] )</pre>
+<div class=blockindent>recursive -- if true, descendants of the object are also cloned. Default is true.</div>
+Returns a clone of this object and optionaly all descendants.
+
+
+<pre>[method:Object3D getObjectByName]( [page:String name] )</pre>
+<div>
+name -- String to match to the children's Object3d.name property. <br>
+</div>
+<div>
+Searches through the object's children and returns the first with a matching name.
+</div>
+
+<pre>[method:Object3D getObjectById]( [page:Integer id] )</pre>
+<div>
+id -- Unique number of the object instance<br>
+</div>
+<div>
+Searches through the object's children and returns the first with a matching id.
+</div>
+
+<pre>[method:Vector3 getWorldPosition]( [page:Vector3 optionalTarget] )</pre>
+<div>
+optionalTarget — Optional target to set the result. Otherwise, a new `Vector3` is instantiated. (optional)<br>
+</div>
+<div>
+Returns a vector representing the position of the object in world space.
+</div>
+
+<pre>[method:Quaternion getWorldQuaternion]( [page:Quaternion optionalTarget] )</pre>
+<div>
+optionalTarget — Optional target to set the result. Otherwise, a new `Quaternion` is instantiated. (optional)<br>
+</div>
+<div>
+Returns a quaternion representing the rotation of the object in world space.
+</div>
+
+<pre>[method:Euler getWorldRotation]( [page:Euler optionalTarget] )</pre>
+<div>
+optionalTarget — Optional target to set the result. Otherwise, a new `Euler` is instantiated. (optional)<br>
+</div>
+<div>
+Returns the euler angles representing the rotation of the object in world space.
+</div>
+
+<pre>[method:Vector3 getWorldScale]( [page:Vector3 optionalTarget] )</pre>
+<div>
+optionalTarget — Optional target to set the result. Otherwise, a new `Vector3` is instantiated. (optional)<br>
+</div>
+<div>
+Returns a vector of the scaling factors applied to the object for each axis in world space.
+</div>
+
+<pre>[method:Vector3 getWorldDirection]( [page:Vector3 optionalTarget] )</pre>
+<div>
+optionalTarget — Optional target to set the result. Otherwise, a new `Vector3` is instantiated. (optional)<br>
+</div>
+<div>
+Returns a vector representing the direction of object's positive z-axis in world space.
+</div>
+
+<pre>[method:Object3D translateOnAxis]( [page:Vector3 axis], [page:Float distance] )</pre>
+<div>
+axis -- A normalized vector in object space.<br>
+distance -- The distance to translate.
+</div>
+<div>
+Translate an object by distance along an axis in object space. The axis is assumed to be normalized.
+</div>
+
+<pre>[method:Object3D rotateOnAxis]( [page:Vector3 axis], [page:Float angle] )</pre>
+<div>
+axis -- A normalized vector in object space. <br>
+angle -- The angle in radians.
+</div>
+<div>
+Rotate an object along an axis in object space. The axis is assumed to be normalized.
+</div>
+
+<pre>[method:Array raycast]( [page:Raycaster raycaster], [page:Array intersects] )</pre>
+
+Abstract method to get intersections between a casted ray and this object. Subclasses such as [page:Mesh], [page:Line], and [page:Points] implement this method in order to participate in raycasting.
+
+.traverseAncestors ( callback )
+callback - A function with as first argument an object3D object.
+
+Executes the callback on all ancestors.
+
+<pre id="14updateMatrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов update matrix - обновить матрицу">.updateMatrix</a>()</pre>
+Обновление локального преобразования. Update the local transform.
+
+<pre id="14updateMatrixWorld"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов update matrix world - обновить матрицу мира">.updateMatrixWorld</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова force - сила, принудительно">force</a> )</pre>
+Обновление глобальных преобразований объекта и его дочерних объектов.<br><br>
+
+<pre id="14worldToLocal"><a href="math.htm#19" title="Vector3. worldToLocal">.world to local - </a> ( <a href="math.htm#19" title="Vector3. vector - вектор">vector</a> )</pre>
+<div class=list><tt>vector</tt> - A world vector.</div>
+Метод обновляет вектор из
+Updates the vector from world space to local space.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/Object3D.js.txt">Object3D.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Object3D.js" target="_blank">Object3D.js на github.com</a></div><br><br>
+
+
+<h3 id="15">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Raycaster</h3>
+<div class=note_trans><b>Примечание переводчика:</b> Raycasting в переводе на русский - бросание луча (ray - луч, casting - бросание). <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Следовательно, raycaster - это тот, кто бросает лучи. В русском языке для перевода слова raycaster есть такие слова как излучатель и облучатель, а для raycasting - излучение, облучение, но прижилась озвучка английский слов - рейкастер, рейкастинг.<br><br>
+В основу рейкастинга положена идея испускать лучи из «глаз» наблюдателя, один луч на пиксель, и находить самый близкий объект, который блокирует путь распространения этого луча.
+Используя свойства материала и эффект света в сцене, алгоритм рейкастинга может определить затенение данного объекта. Предположение в упрощении основано на том, что если поверхность размещена перед светом, то свет достигнет поверхности и не будет блокирован или находиться в тени.
+Затенение поверхности вычисляется, используя алгоритмы затенения традиционной компьютерной трёхмерной графики.
+Одним из преимуществ рейкастинга является способность легко обрабатывать неплоские поверхности и сплошные тела вроде сферы или конуса.
+Если математическая поверхность может быть пересечена лучом, то она может быть отрендерена, используя рейкастинг. Сложные объекты могут быть созданы с использованием методов моделирования сплошных тел и легко отрендерены.</div></div>
+Данный класс предназначен для оказания помощи с <a href="https://en.wikipedia.org/wiki/Ray_casting" target="_blank">raycasting</a>. <a href="https://ru.wikipedia.org/wiki/Ray_casting" target="_blank">Вот описание рейкастинга</a> в Википедии на русском языке.
+Рейкастинг используется для выборки курсором мышки (вычисляет какие из объектов в трехмерном пространстве накрывает курсор мышки) среди других объектов.
+This class is designed to assist with raycasting. Raycasting is used for mouse picking (working out what objects in the 3d space the mouse is over) amongst other things.
+Этот класс упрощает рейкастинг. Рейкастинг используется для выбора и многого другого.
+This class makes raycasting easier. Raycasting is used for picking and more.
+
+<h4>Пример</h4>
+<pre>var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();<br>
+function onMouseMove( event ) {<br>
+  // calculate mouse position in normalized device coordinates
+  // (-1 to +1) for both components
+  // вычисляем положение курсора мышки в нормализованной
+  // системе координат (от -1 до +1) для обоих компонентов<br>
+  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;<br>
+}<br>
+function render() {<br>
+  // update the picking ray with the camera and mouse position
+  // обновляем луч выборки с позиций камеры и курсора мышки
+  raycaster.setFromCamera( mouse, camera );<br>
+  // calculate objects intersecting the picking ray
+  // вычисляем объекты, пересекающие луч выборки
+  var intersects = raycaster.intersectObjects( scene.children );<br>
+  for ( var i = 0; i &lt; intersects.length; i++ ) {<br>
+    intersects[ i ].object.material.color.set( 0xff0000 );<br>
+  }<br>
+  renderer.render( scene, camera );<br>
+}<br>
+window.addEventListener( 'mousemove', onMouseMove, false );<br>
+window.requestAnimationFrame(render);</pre>
+
+<h5>Больше примеров:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_interactive_cubes" target="_blank">Raycasting to a Mesh</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_cubes_ortho" target="_blank">Raycasting to a Mesh in using an OrthographicCamera</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_buffergeometry" target="_blank">Raycasting to a Mesh with BufferGeometry</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_lines" target="_blank">Raycasting to a Line</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_raycasting_points" target="_blank">Raycasting to Points</a>,
+<a href="https://threejs.org/examples/#webgl_geometry_terrain_raycast" target="_blank">Terrain raycasting</a>,
+<a href="https://threejs.org/examples/#webgl_octree_raycasting" target="_blank">Raycasting using an octree</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_voxelpainter" target="_blank">Raycasting to paint voxels</a>,
+<a href="https://threejs.org/examples/#webgl_raycast_texture" target="_blank">Raycast to a Texture</a></pre>
+
+<h4>Конструктор</h4>
+<pre>Raycaster( <a href="math.htm#19" title="Vector3">origin</a>, <a href="math.htm#19" title="Vector3">direction</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">near</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">far</a> ) {</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector3,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова origin - начало, источник">origin</a></tt> -- Начальный вектор, из которого берется луч.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector3,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова direction - направление">direction</a></tt> — Направляющий вектор, который задает направление лучу. Должен быть нормализован.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова near - близко">near</a></tt> — Все возвращаемые результаты должны быть дальше <tt>near</tt>. <tt>near</tt> не может быть отрицательным. Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова far - далеко">far</a></tt> — Все возвращаемые результаты должны быть ближе <tt>far</tt>. <tt>far</tt> не может быть меньше <tt>near</tt>. Значение по умолчанию равно <tt>Infinity</tt> (бесконечность).</div>
+Данный метод создает новый объект raycaster.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="far"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова far - далеко">.far</a></pre>
+Фактор дальности рейкастера. Это значение показывает какие объекты можно отбросить из-за расстояния (то есть, они не будут отображаться, так как их не видно из-за большого расстояния до них).
+Данное значение не должно быть отрицательным, а также быть больше значения свойства <tt>near</tt>.<br><br>
+<pre id="linePrecision"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов line precision - линейная точность">.linePrecision</a></pre>
+Фактор точности рейкастера при пересечении объектов <a href="objects.htm#4" title="Line - линия">Line</a>.<br><br>
+<pre id="near"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова near - близко">.near</a></pre>
+Фактор близости рейкастера. Это значение показывает какие объекты можно отбросить из-за расстояния (то есть, они не будут отображаться, так как до них слишком близко).
+Данное значение не должно быть отрицательным, а также быть меньше значения свойства <tt>far</tt>.<br><br>
+<pre id="params"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение англ. слова parameters - параметры">.params</a></pre>
+Это объект со следующими свойствами:
+<pre>{
+  Mesh: {},
+  Line: {},
+  LOD: {},
+  Points: { threshold: 1 },
+  Sprite: {}
+}</pre><br>
+<pre id="ray"><a href="math.htm#14" title="ray - луч">.ray</a></pre>
+<a href="math.htm#14" title="Ray">Луч</a>, используемый для рейкастинга.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="set"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение англ. слова set - устанавливать">set</a>( <a href="math.htm#19" title="Vector3">origin</a>, <a href="math.htm#19" title="Vector3">direction</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector3,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова origin - начало, источник">origin</a></tt> -- Начальный вектор, из которого берется луч.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector3,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова direction - направление">direction</a></tt> -- Нормализованный вектор направления, который задает направление луча.</div>
+Метод обновляет луч (ray) с новыми значениями <tt>origin</tt> и <tt>direction</tt>.<br><br>
+
+<pre id="setFromCamera"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов set from camera - установка от (позиции) камеры">setFromCamera</a>( <a href="math.htm#18" title="Vector2">coords</a>, <a href="cameras.htm#1" title="Camera">camera</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector2,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение англ. слова coordinates - координаты">coords</a></tt> — 2D coordinates of the mouse, in normalized device coordinates (NDC) -- компоненты <tt>X</tt> и <tt>Y</tt> должны быть между <tt>-1</tt> и <tt>1</tt>.</div>
+<div class=list><tt><a href="cameras.htm#1" title="Camera">camera</a></tt> -- камера, из которой должен исходить луч.</div>
+Метод обновляет луч (ray) с новыми координатами курсора мышки и камерой.<br><br>
+
+<pre id="intersectObject"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов intersect object - объект пересечения">intersectObject</a>( <a href="#14" title="Object3D">object</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова recursive - рекурсивный">recursive</a> )</pre>
+<div class=list><tt><a href="#14" title="object - объект">object</a></tt> — The object to check for intersection with the ray.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова recursive - рекурсивный">recursive</a></tt> -- If true, it also checks all descendants. Otherwise it only checks intersecton with the object. По умолчанию значение равно <tt>false</tt>.</div>
+
+Checks all intersection between the ray and the object with or without the descendants. Intersections are returned sorted by distance, closest first. An array of intersections is returned...
+<pre>[ { distance, point, face, faceIndex, indices, object }, ... ]</pre>
+
+<div class=blockindent><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова distance - расстояние">distance</a></tt> -- расстояние между началом луча и точкой пересечения<br>
+[page:Vector3 point</a></tt> -- точка пересечения, in world coordinates<br>
+[page:Face3 face</a></tt> -- пересекаемая грань<br>
+<tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов face index - индексы граней">faceIndex</a></tt> -- индекс пересекаемой грани<br>
+<tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова indices - индексы, указатели">indices</a></tt> -- индексы вершин, включенных в пересекаемую грань<br>
+[page:Object3D object</a></tt> -- пересекаемый объект <br>
+[page:Vector2 uv</a></tt> -- координаты U,V точки пересечения</div>
+
+When intersecting a [page:Mesh] with a [page:BufferGeometry], the *faceIndex* will be *undefined*, and *indices* will be set; when intersecting a [page:Mesh] with a [page:Geometry], *indices* will be *undefined*.<br><br>
+
+*Raycaster* delegates to the [page:Object3D.raycast raycast] method of the passed object, when evaluating whether the ray intersects the object or not. This allows [page:Mesh meshes] to respond differently to ray casting than [page:Line lines] and [page:Points pointclouds].<br><br>
+
+*Note* that for meshes, faces must be pointed towards the origin of the [page:.ray ray] in order to be detected; intersections of the ray passing through the back of a face will not be detected. To raycast against both faces of an object, you'll want to set the [page:Mesh.material material]'s [page:Material.side side] property to *THREE.DoubleSide*.
+		</div>
+
+<pre>[method:Array intersectObjects]( [page:Array objects], [page:Boolean recursive] )</pre>
+<div class=blockindent>[page:Array objects] — The objects to check for intersection with the ray.<br>
+[page:Boolean recursive] — If true, it also checks all descendants of the objects. Otherwise it only checks intersecton with the objects. Default is false.</div>
+Checks all intersection between the ray and the objects with or without the descendants. Intersections are returned sorted by distance, closest first. Intersections are of the same form as those returned by [page:.intersectObject].
+</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/Raycaster.js.txt">Raycaster.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Raycaster.js" target="_blank">Raycaster.js на github.com</a></div><br>
+
+
+<h3 id="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Uniform</h3>
+Uniform'ы являются глобальными переменными <a href="https://www.opengl.org/documentation/glsl/" target="_blank">GLSL</a>. Они передаются в шейдерные программы.
+<!-- https://www.khronos.org/opengl/wiki/Uniform_(GLSL)
+A uniform is a global GLSL variable declared with the "uniform" storage qualifier. These act as parameters that the user of a shader program can pass to that program. They are stored in a program object.
+
+Uniforms are so named because they do not change from one execution of a shader program to the next within a particular rendering call. This makes them unlike shader stage inputs and outputs, which are often different for each invocation of a program stage.-->
+<h4>Пример</h4>
+При объявлении uniform из <a href="materials.htm#14">ShaderMaterial</a>, он объявляется по значению или по объекту.
+<pre>uniforms: {
+	time: { value: 1.0 },
+	resolution: new THREE.Uniform(new THREE.Vector2())
+}</pre>
+
+<h4>Типы Uniform</h4>
+Каждый uniform должен иметь свойство <tt>value</tt>. Тип этого <tt>value</tt> должен соответствовать типу переменной uniform в коде GLSL, как указано для примитивных типов GLSL в таблице ниже.
+The type of the value must correspond to the type of the uniform variable in the GLSL code as specified for the primitive GLSL types in the table below.
+Поддерживаются также структуры и массивы uniform. Массивы примитивных типов GLSL должны либо указываться как массивы соответствующих объектов THREE, либо как двумерный массив, содержащий данные всех объектов.
+
+Uniform structures and arrays are also supported. GLSL arrays of primitive type must either be specified as an array of the corresponding THREE objects or as a flat array containing the data of all the objects.
+Другими словами; примитивы GLSL в массивах не должны быть представлены массивами. Это правило не применяется транзитивно.
+<!-- Транзитивность
+    (от лат. transitivus — переходный)
+            одно из свойств логического отношения величин. Отношение а * b называется транзитивным, если из а * b и b * c вытекает, что а * c. Например, отношение равенства (а = b) транзитивно, так как из а = b и b = с вытекает а = с. Аналогично, транзитивным является отношение <<a больше b>> (а > b). Отношение же <<a не равно b>> (a ? b) не транзитивно, так как из a ? b и b ? c ещё не вытекает a ? c. В геометрии транзитивным является отношение параллельности между двумя прямыми (если ? параллельна ?, а ? параллельна ?, то и ? параллельна ?), отношение же перпендикулярности прямых не транзитивно.
+http://dic.academic.ru/dic.nsf/bse/140735/%D0%A2%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C
+https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C -->
+In other words; GLSL primitives in arrays must not be represented by arrays. This rule does not apply transitively.
+Массив из массивов vec2, каждый из которых длиной в пять векторов, должен быть массивом массивов либо из пяти объектов Vector2, либо из десяти чисел.
+An array of vec2 arrays, each with a length of five vectors, must be an array of arrays, of either five Vector2 objects or ten numbers. <br>
+<span class="caption_top">Типы Uniform</span>
+<table class="tbl_1" border="1" cellpadding="5px" width="90%">
+<tr class="head"><td>Типы GLSL</td><td>Типы JavaScript</td></tr>
+<tr valign="top"><td>int</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup('','Arial,9',10,10,0xffffff,0xd69967)" title="number - число">Number</a></td></tr>
+<tr valign="top"><td>float</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup('','Arial,9',10,10,0xffffff,0xd69967)" title="number - число">Number</a></td></tr>
+<tr valign="top"><td>bool</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup('','Arial,9',10,10,0xffffff,0xd69967)" title="boolean - логическое (булево) значение">Boolean</a></td></tr>
+<tr valign="top"><td>bool</td><td>[page:Number</a></td></tr>
+<tr valign="top"><td>vec2</td><td><a href="math.htm#18" title="Vector2">THREE.Vector2</a></td></tr>
+<tr valign="top"><td>vec2</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup('массив из 32-разрядных чисел с плавающей запятой','Arial,9',10,10,0xffffff,0xd69967)">Float32Array</a> (*)</td></tr>
+<tr valign="top"><td>vec2</td><td>[page:Array Array</a> (*)</td></tr>
+<tr valign="top"><td>vec3</td><td>[page:Vector3 THREE.Vector3</a></td></tr>
+<tr valign="top"><td>vec3</td><td>[page:Color THREE.Color]</td></tr>
+<tr valign="top"><td>vec3</td><td>[page:Float32Array Float32Array] (*)</td></tr>
+<tr valign="top"><td>vec3</td><td>[page:Array Array] (*)</td></tr>
+<tr valign="top"><td>vec4</td><td>[page:Vector4 THREE.Vector4]</td></tr>
+<tr valign="top"><td>vec4</td><td>[page:Quaternion THREE.Quaternion]</td></tr>
+<tr valign="top"><td>vec4</td><td>[page:Float32Array Float32Array] (*)</td></tr>
+<tr valign="top"><td>vec4</td><td>[page:Array Array] (*)</td></tr>
+<tr valign="top"><td>mat2</td><td>[page:Float32Array Float32Array] (*)</td></td>
+<tr valign="top"><td>mat2</td><td>[page:Array Array] (*)</td></td>
+<tr valign="top"><td>mat3</td><td>[page:Matrix3 THREE.Matrix3]</td></tr>
+<tr valign="top"><td>mat3</td><td>[page:Float32Array Float32Array] (*)</td></tr>
+<tr valign="top"><td>mat3</td><td>[page:Array Array] (*)</td></tr>
+<tr valign="top"><td>mat4</td><td>[page:Matrix3 THREE.Matrix4]</td></tr>
+<tr valign="top"><td>mat4</td><td>[page:Float32Array Float32Array] (*)</td></tr>
+<tr valign="top"><td>mat4</td><td>[page:Array Array</a> (*)</td></tr>
+<tr valign="top"><td>ivec2, bvec2</td><td>[page:Float32Array Float32Array</a> (*)</td></tr>
+<tr valign="top"><td>ivec2, bvec2</td><td>[page:Array Array</a> (*)</td></tr>
+<tr valign="top"><td>ivec3, bvec3</td><td>[page:Int32Array Int32Array</a> (*)</td></tr>
+<tr valign="top"><td>ivec3, bvec3</td><td>[page:Array Array</a> (*)</td></tr>
+<tr valign="top"><td>ivec4, bvec4</td><td>[page:Int32Array Int32Array</a> (*)</td></tr>
+<tr valign="top"><td>ivec4, bvec4</td><td>[page:Array Array</a> (*)</td></tr>
+<tr valign="top"><td>sampler2D</td><td>[page:Texture THREE.Texture</a></td></tr>
+<tr valign="top"><td>samplerCube</td><td>[page:CubeTexture THREE.CubeTexture</a></tr></tr></table>
+<span class="caption">(*) Same for an (innermost) array (dimension) of the same GLSL type, содержащего компоненты всех векторов или матриц в массиве.</span><br><br>
+
+<h4>Конструктор</h4><br>
+<pre>Uniform( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова value - значение">value</a> )</pre>
+<div class=list><tt>value</tt> -- Объект, содержащий значение для установки в uniform. Его тип должен быть одним из типов Uniform описанных выше.</div><br>
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="16value"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова value - значение">.value</a></pre>
+Текущее значение uniform.<br><br>
+
+<pre id="16dynamic"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="dynamic - динамический, активный">.dynamic</a></pre>
+Sets wether this uniform is updated at each render call when used by a renderer.
+		You must set this attribute by calling [page:.onUpdate].</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="16">.clone ()</pre>
+Возвращает клона данного uniform. Если свойство value uniform является объектом с методом clone(), то это используется, в противном случае, значение копируется по назначению. Значения массива являются общими для клонов Uniform.<br><br>
+В качестве примера использования данного метода посмотрите <a href="https://threejs.org/examples/#webgldeferred_animation" target="_blank">WebGL deferred animation</a>.
+Returns a clone of this uniform.
+If the uniform's value property is an Object with a clone() method, this is used, otherwise the value is copied by assigment. Array values are shared between cloned Uniforms.
+
+See WebGL deferred animation for an example of this method in use.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/core/Uniform.js.txt">Uniform.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Uniform.js" target="_blank">Uniform.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h1>Сборочные инструменты</h1>
+<h2 id="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Проверка с помощью NPM</h2>
+<div class="note_trans">NPM - сокращение англ. слов Node.js Package Manager — менеджер пакетов, входящий в состав Node.js</div>
+В данной статье рассказывается как получить three.js в среде <a href="https://nodejs.org/en/" target="_blank">node.js</a>, так чтобы можно было выполнять автоматические проверки.
+Тестирование можно запускать из командной строки или с помощью автоматизированных инструментов непрерывной интеграции
+<a href="#" onmouseover="show('сокращение от англ. слов Continuous Integration (CI), т.е.<br>непрерывная интеграция — это практика разработки<br>программного обеспечения, которая заключается в<br>слиянии рабочих копий в общую основную ветвь<br>разработки несколько раз в день и выполнении частых<br>автоматизированных сборок проекта для скорейшего<br>выявления и решения интеграционных проблем.');" onmouseout="hide()">(CI)</a>,
+вроде <a href="https://travis-ci.org/" target="_blank">Travis</a>.
+<div class="note_trans">Более подробно про непрерывную интеграцию можно посмотреть в <a href="https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F" target="_blank">Википедии</a> или на <a href="https://habrahabr.ru/post/190412/" target="_blank">Хабрахабре</a>.</div>
+<h3>Сокращенный вариант</h3>
+Если вам привычна работа с node и npm,
+<pre>$ npm install three --save-dev</pre>
+и к своей проверке добавьте
+<pre>var THREE = require('three');</pre>
+
+<h3>Создание проекта для тестирования с нуля Create a testable project from scratch</h3>
+Если эти инструменты вам незнакомы, вот краткое руководство (для Linux процесс установки будет немного отличаться от работы в Windows, но команды NPM идентичны).
+If you're not familiar with these tools, here's a quick guide (for linux, the installation process will be slightly different using windows, but the NPM commands are identical).
+
+<h4>Basic setup</h4>
+<ol><li>Устанавливаем <a href="https://www.npmjs.org/" target="_blank">npm</a> и nodejs. Кратчайший путь обычно выглядит приблизительно так
+<pre>$ sudo apt-get install -y npm nodejs-legacy
+# fix any problems with SSL in the default registry URL
+$ npm config set registry http://registry.npmjs.org/</pre></li>
+<li>Делаем каталог нового проекта
+<pre>$ mkdir test-example; cd test-example</pre></li>
+<li>Запрашиваем npm для создания файла нового проекта to create a new project file for you:
+<pre>$ npm init</pre>
+and accept all defaults by hitting Enter on all the prompts. This will create package.json.</li>
+<li>Try and start the test feature with
+<pre>$ npm test</pre>
+This will fail, which is expected. If you look in the package.json, the definition of the test script is
+<pre>"test": "echo \"Error: no test specified\" && exit 1"</pre></li></ol>
+
+<h3>Добавляем <tt>mocha</tt></h3>
+<div class=note_trans>Mocha (произносится как мокко - сорт кофе) - это многофункциональная среда для тестирования JavaScript, работающая на Node.js и в браузере, что делает асинхронное тестирование простым и интересным.
+Тестирование Mocha запускается поочередно, позволяя гибко и точно сообщать, а также сопоставлять неперехваченные исключения с правильными тестовыми примерами.</div>
+We're going to use <a href="https://mochajs.org/" target="_blank">mocha</a>.
+<ol><li>Устанавливаем <tt>mocha</tt> с помощью
+<pre>$ npm install mocha --save-dev</pre>
+Notice that node_modules/ is created and your dependencies appear in there.
+Also notice that your package.json has been updated: the property devDependencies is added and updated by the use of --save-dev.</li>
+<li>Edit package.json to use mocha for testing. When test is invoked, we just want to run mocha and specify a verbose reporter. By default this will run anything in test/ (not having directory test/ can run into npm ERR!, create it by mkdir test)
+<pre>"test": "mocha --reporter list"</pre></li>
+<li>Перезапускаем тест с помощью
+<pre>$ npm test.</pre>
+Теперь он должен быть успешным,
+This should now succeed, reporting 0 passing (1ms) or similar.</li></ol>
+
+<h3>Добавление three.js</h3>
+<ol><li>Let's pull in our three.js dependency with
+<pre>$ npm install three --save-dev</pre>
+<ul><li>Если нужна другая версия three.js, используйте
+<pre>$ npm show three versions</pre>
+чтобы посмотреть, какая доступна. to see what's available. To tell npm the right one, use
+<pre>$ npm install three@0.84.0 --save</pre>
+(0.84.0 in this example). --save makes this a dependency of this project, rather than dev dependency. Для более подробных сведений смотрите документацию <a href="https://www.npmjs.org/doc/json.html" target="_blank">здесь</a>.</li></ul></li>
+<li>Mocha will look for tests in test/, so let's
+<pre>$ mkdir test.</pre></li>
+<li>Finally we actually need a JS test to run. Let's add a simple test that will verify that the three.js object is available and working. Create test/verify-three.js containing:
+<pre>var THREE = require('three');
+var assert = require("assert");<br>
+describe('The THREE object', function() {
+  it('should have a defined BasicShadowMap constant', function() {
+    assert.notEqual('undefined', THREE.BasicShadowMap);
+  }),<br>
+  it('should be able to construct a Vector3 with default of x=0', function() {
+    var vec3 = new THREE.Vector3();
+    assert.equal(0, vec3.x);
+  })
+})</pre></li>
+<li>Finally let's test again with $ npm test. This should run the tests above and succeed, showing something like:
+<pre>The THREE object should have a defined BasicShadowMap constant: 0ms
+The THREE object should be able to construct a Vector3 with default of x=0: 0ms
+2 passing (8ms)</pre></li></ol>
+
+<h3>Добавляем свой собственный код</h3>
+Нужно сделать три вещи:
+<ol><li>Написать тест для ожидаемого поведения своего кода и разместить его в test/. <a href="https://github.com/air/encounter/blob/master/test/Physics-test.js" target="_blank">Вот пример</a> из реального проекта.</li>
+<li>Экспортируйте свой действующий код таким образом, чтобы nodejs мог его видеть, для использования в сочетании с require. Смотрите <a href="https://github.com/air/encounter/blob/master/js/Physics.js" target="_blank">пример здесь</a>.
+Export your functional code in such a way that nodejs can see it, for use in conjunction with require.
+See it [link:https://github.com/air/encounter/blob/master/js/Physics.js here].</li>
+<li>Require your code into the test file, in the same way we did a require('three') in the example above.</li></ol>
+Пункты 2 и 3 будут зависеть от того, как вы управляете своим кодом. В примере Physics.js, приведенном ниже, Items 2 and 3 will vary depending on how you manage your code. In the example of Physics.js given above, the export part is right at the end. We assign an object to module.exports:
+<pre>//=============================================================================
+// make available in nodejs
+//=============================================================================
+if (typeof exports !== 'undefined')
+{
+  module.exports = Physics;
+}</pre>
+
+<h4>Работа с зависимостями Dealing with dependencies</h4>
+Если вы уже пользовались чем-то умным, вроде <a href="http://requirejs.org/" target="_blank" title="RequireJS - это загрузчик модулей и файлов JavaScript. Он оптимизирован для работы в браузере, но может использоваться и в других средах JavaScript, вроде Rhino и Node. Использование модульного загрузчика скрипта, подобного RequireJS, повышает скорость и качество кода.">require.js</a> или <a href="http://browserify.org/" target="_blank">browserify</a>, пропустите эту часть.
+If you're already using something clever like require.js or browserify, skip this part.<br><br>
+Обычно, проект three.js запускается в браузере. Следовательно, загрузка модуля браузером выполняет множество скриптовых тегов. Отдельные файлы проекта не должны беспокоиться о зависимостях.
+Module loading is hence done by the browser executing a bunch of script tags. Your individual files don't have to worry about dependencies.
+Однако, в контексте nodejs нет файла index.html, увязывающего все вместе, так что
+In a nodejs context however, there is no index.html binding everything together, so you have to be explicit.<br><br>
+Если экспортируется модуль, зависящий от других файлов, нужно указать node о их загрузке.
+If you're exporting a module that depends on other files, you're going to have to tell node to load them.<br>
+Вот один из подходов:
+<ol><li>В начале кода модуля проверьте, находитесь ли вы в среде nodejs.</li>
+<li>Если это так, явно объявите зависимости. If so, explicitly declare your dependencies.</li>
+<li>Если нет, то вероятно вы в браузере, так что больше ничего не нужно делать.If not, you're probably in a browser so you don't need to do anything else.</li></ol>
+Пример кода из Physics.js:
+<pre>//=============================================================================
+// setup for server-side testing
+//=============================================================================
+if (typeof require === 'function') // test for nodejs environment
+{
+  var THREE = require('three');
+  var MY3 = require('./MY3.js');
+}</pre>
+
+<br><br>
+</body></html>

@@ -1,0 +1,981 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Загрузчики</h2>
+<h3 id="1">AnimationLoader</h3>
+Класс для загрузки анимации в формате JSON. Для загрузки файлов, внутри класса, используется <a href="#8" title="FileLoader">FileLoader</a>.
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.AnimationLoader();<br>
+// load a resource (загрузка ресурса)
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  'animations/animation.js',
+  // Function when resource is loaded
+  // функция, вызываемая при загрузке ресурса
+  function ( animation ) {
+    // do something with the animation
+    // здесь выполняется какая-нибудь анимация
+  },
+  // Function called when download progresses
+  // функция, вызываемая при процессе загрузки
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+  },
+  // Function called when download errors
+  // функция, вызываемая при ошибке загрузки
+  function ( xhr ) {
+    console.log( 'An error happened' );
+  }
+);</pre>
+
+<h4>Конструктор</h4>
+<pre>AnimationLoader( <a href="#16.2" title="LoadingManager">manager</a> )</pre>
+<div class=blockindent>
+<tt><a href="#16.2" title="LoadingManager">manager</a></tt> — The <a href="#16.2" title="LoadingManager">loadingManager</a> for the loader to use. По умолчанию это <a href="#16.1" title="LoadingManager">THREE.DefaultLoadingManager</a>.</div>
+Создает новый AnimationLoader.
+
+<h4>Свойства</h4>
+<div class=blockindent>
+<pre id="1manager"><a href="#16.2" title="LoadingManager">.manager</a></pre>
+The [page:LoadingManager loadingManager] the loader is using. По умолчанию это [page:DefaultLoadingManager].</div>
+
+<h4>Методы</h4>
+<div class=blockindent>
+<pre id="1load"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)">.load</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">url</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onLoad</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onProgress</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onError</a> )</pre>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">url</a></tt> — путь или URL к файлу. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<!-- https://ru.wikipedia.org/wiki/URI
+https://ru.wikipedia.org/wiki/Data:_URL -->
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onLoad</a></tt> — Функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженная <a href="animation.htm#1" title="Animation">анимация</a>.</div>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onProgress</a></tt> — Функция, которая будет вызываться пока идет процесс загрузки. Аргументом будет экземпляр XMLHttpRequest, что содержит байты .<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="total - полный (размер ресурса)">total</a> и .<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="loaded - загружено, в данном случае размер загруженного ресурса">loaded</a>.</div>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onError</a></tt> — Функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Начинает загрузку с URL-адреса и передает загруженную анимацию функции, указанной в <tt>onLoad</tt>.<br><br>
+
+<pre id="1parse"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)">.parse</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup('объект JSON','Arial,9',10,10,0xffffff,0xd69967)">json</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onLoad</a> )</pre>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup('объект JSON','Arial,9',10,10,0xffffff,0xd69967)">json</a></tt> — обязателен</div>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onLoad</a></tt> — функция, вызываемая по завершении разбора (парсинга) JSON объекта.</div>
+Анализирует (разбирает) объект JSON и передает результаты в <tt>onLoad</tt>. Отдельные клипы объекта будут обработаны с помощью метода <tt><a href="animation.htm#2parse" title="AnimationClip.parse">AnimationClip.parse</a></tt>.</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/AnimationLoader.js.txt">AnimationLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/AnimationLoader.js" target="_blank">AnimationLoader.js на github.com</a></div><br>
+
+
+<h3 id="2">AudioLoader</h3>
+Класс для загрузки <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">AudioBuffer</a>. Для загрузки файлов, внутри класса, используется <a href="#8" title="FileLoader">FileLoader</a>.
+<h4>Пример</h4>
+<pre>// instantiate a listener (создаем экземпляр слушателя)
+var audioListener = new THREE.AudioListener();<br>
+// add the listener to the camera (добавляем слушателя к камере)
+camera.add( audioListener );<br>
+// instantiate audio object (создаем экземпляр аудиообъекта)
+var oceanAmbientSound = new THREE.Audio( audioListener );<br>
+// add the audio object to the scene (добавляем к сцене аудиообъект)
+scene.add( oceanAmbientSound );<br>
+// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.AudioLoader();<br>
+// load a resource (загружаем ресурс)
+loader.load(
+  // resource URL (адрес ресурса)
+  'audio/ambient_ocean.ogg',
+  // Function when resource is loaded
+  // функция, вызываемая после загрузки ресурса
+  function ( audioBuffer ) {
+    // set the audio object buffer to the loaded object
+    // устанавливаем буфер аудиообъекта для загруженного объекта
+    oceanAmbientSound.setBuffer( audioBuffer );<br>
+    // play the audio - воспроизводим аудио
+    oceanAmbientSound.play();
+  },
+  // Function called when download progresses
+  // функция, вызываемая во время выполнения загрузки
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+  },
+  // Function called when download errors
+  // функция, вызываемая при ошибках загрузки
+  function ( xhr ) {
+    console.log( 'An error happened' );
+  }
+);</pre>
+
+<h4>Конструктор</h4>
+<pre>AudioLoader( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">context</a>, <a href="#16.2" title="LoadingManager">manager</a> )</pre>
+<div class="blockindent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)"><tt>context</tt></a> — <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">AudioContext</a> for the loader to use.
+Значением по умолчанию является <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">window.AudioContext</a>.<br>
+<tt><a href="#16.2" title="LoadingManager">manager</a></tt> — <a href="#16.2" title="LoadingManager">loadingManager</a> for the loader to use. По умолчанию это <a href="#16.1" title="LoadingManager">THREE.DefaultLoadingManager</a>.</div>
+Создает новый AudioLoader.
+
+<h4>Свойства</h4>
+<pre id="2manager"><a href="#16.2" title="LoadingManager">.manager</a></pre>
+The loadingManager the loader is using. По умолчанию это <a href="#16.1" title="LoadingManager">THREE.DefaultLoadingManager</a>.
+
+<h4>Методы</h4>
+<pre id="2load"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)">load</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">url</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onLoad</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onProgress</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)">onError</a> )</pre>
+<div class="blockindent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)"><tt>url</tt></a> — обязательный аргумент.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)"><tt>onLoad</tt></a> — Будет вызываться при завершении загрузки. Аргументом должен быть загруженный текст ответа.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)"><tt>onProgress</tt></a> — Будет вызываться во время процесса загрузки.
+Аргументом должен быть экземпляр XmlHttpRequest, который содержит байты <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">.total</a> и <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">.loaded</a>.<br>
+<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)"><tt>onError</tt></a> — будет вызываться в случае ошибок при загрузке.</div>
+Начинает загрузку из <tt>url</tt> и передает загруженный <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">AudioBuffer</a> в <tt>onLoad</tt>.
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/AudioLoader.js.txt">AudioLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/AudioLoader.js" target="_blank">AudioLoader.js на github.com</a></div><br>
+
+
+<h3 id="3">BufferGeometryLoader</h3>
+Загрузчик для загрузки <a href="core.htm#2" title="BufferGeometry">BufferGeometry</a>. Для загрузки файлов, внутри класса, используется <a href="#8" title="FileLoader">FileLoader</a>.
+
+<h4>Пример</h4>
+<a href="https://threejs.org/examples/#webgl_geometry_colors_lookuptable" target="_blank">WebGL / geometry / colors / lookuptable</a>
+
+<pre>// instantiate a loader
+var loader = new THREE.BufferGeometryLoader();<br>
+// load a resource
+loader.load(
+	// resource URL
+	'models/json/pressure.json',
+	// Function when resource is loaded
+	function ( geometry ) {
+		var material = new THREE.MeshLambertMaterial( { color: 0xF5F5F5 } );
+		var object = new THREE.Mesh( geometry, material );
+		scene.add( object );
+	},
+	// Function called when download progresses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+	// Function called when download errors
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);</pre>
+
+<h4>Конструктор</h4>
+<pre>BufferGeometryLoader( [page:LoadingManager manager] )</pre>
+<div class="blockindent">[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
+Creates a new BufferGeometryLoader.
+
+<h4>Свойства</h4>
+
+<h4>Методы</h4>
+<pre>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+<div class="blockindent">[page:String url] — required<br>
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:BufferGeometry].<br>
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XmlHttpRequest instance, that contain .[page:Integer total] and .[page:Integer loaded] bytes.<br>
+		[page:Function onError] — Will be called when load errors.</div>
+Begin loading from url and call onLoad with the parsed response content.
+
+<pre>[method:BufferGeometry parse]( [page:Object json] )</pre>
+<div class="blockindent">[page:Object json] — The <em>JSON</em> structure to parse.</div>
+Parse a <em>JSON</em> structure and return a [page:BufferGeometry].
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/BufferGeometryLoader.js.txt">BufferGeometryLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/BufferGeometryLoader.js" target="_blank">BufferGeometryLoader.js на github.com</a></div><br>
+
+
+<h3 id="4">Cache</h3>
+Простая система кэширования, используемая внутри <a href="#8" title="FileLoader">FileLoader</a>.
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_text_earcut" target="_blank">WebGL / geometry / text / earcut</a>
+<a href="https://threejs.org/examples/#webgl_interactive_instances_gpu" target="_blank">WebGL / interactive / instances / gpu</a>
+<a href="https://threejs.org/examples/#webgl_loader_ttf" target="_blank">WebGL / loader / ttf</a></pre>
+
+<h4>Применение</h4>
+Чтобы включить кэширование во всех загрузчиках, использующих <a href="#8" title="FileLoader">FileLoader</a>, установите
+<pre>THREE.Cache.enabled = true</pre>
+
+<h4>Свойства</h4>
+<div class=blockindent>
+<pre id="4enabled"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="enabled - включено">.enabled</a></pre>
+Свойство определяет, будет ли включено кэширование. Значением по умолчанию является <tt>false</tt>.
+
+<pre id="4files"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="files - файлы">.files</a></pre>
+Объект, удерживающий кэшированные файлы.
+An [page:Object object] that holds cached files.</div>
+
+<h4>Методы</h4>
+<div class=blockindent>
+<pre id="4add"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="add - добавить">.add</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="key - ключ">key</a>, file )</pre>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="key - ключ">key</a></tt> — the [page:String key] to reference the cached file by.</div>
+<div class=indent1>[page:Object file] — файл, который нужно кэшировать.</div>
+
+Adds a cache entry with a key to reference the file. If this key already holds a file, it is overwritten.
+
+<pre id="4get"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="get - получить">.get</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="key - ключ">key</a> )</pre>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="key - ключ">key</a></tt> — строковый ключ.</div>
+Метод получает значение [page:String key]. Если ключа не существует, возвращается значение <tt>undefined</tt>, т.е. неопределено.
+<pre id="4remove"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="remove - удалить">.remove</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="key - ключ">key</a> )</pre>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="key - ключ">key</a></tt> — строковый ключ, связанный с кэшированным файлом.</div>
+Удаляет кэшированный файл, связанный с данным ключом.
+<pre id="4clear"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="clear - очистить">.clear</a>()</pre>
+Удаляет все значения из кэша.</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/Cache.js.txt">Cache.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/Cache.js" target="_blank">Cache.js на github.com</a></div><br>
+
+
+<h3 id="5">CompressedTextureLoader</h3>
+Abstract base class for block based textures loader (dds, pvr, ...).
+This uses the [page:FileLoader] internally for loading files.
+
+<h4>Примеры</h4>
+See the [link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/DDSLoader.js DDSLoader]
+			and [link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PVRLoader.js PVRLoader]
+			for examples of derived classes.
+
+<h4>Конструктор</h4>
+
+<h3>CompressedTextureLoader( [page:LoadingManager manager] )</h3>
+		<div>
+[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use.
+Default is [page:LoadingManager THREE.DefaultLoadingManager].<br>
+
+Создает новый CompressedTextureLoader.</div>
+
+<h4>Свойства</h4>
+
+		<h3>[property:LoadingManager manager]</h3>
+		<div>
+			The [page:LoadingManager loadingManager] the loader is using. Default is [page:DefaultLoadingManager].
+		</div>
+
+		<h3>[property:String path]</h3>
+		<div>The base path from which files will be loaded. See [page:.setPath]. Default is *undefined*.</div>
+
+<h4>Методы</h4>
+
+		<h3>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</h3>
+		<div>
+		[page:String url] — the path or URL to the file. This can also be a
+			[link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs Data URI].<br />
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded texture.<br />
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total] and .[page:Integer loaded] bytes.<br />
+		[page:Function onError] — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and pass the loaded texture to onLoad.
+		</div>
+
+		<h3>[method:FileLoader setPath]( [page:String path] )</h3>
+		<div>
+			Set the base path or URL from which to load files. This can be useful if
+			you are loading many textures from the same directory.
+		</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/CompressedTextureLoader.js.txt">CompressedTextureLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/CompressedTextureLoader.js" target="_blank">CompressedTextureLoader.js на github.com</a></div><br>
+
+
+<h3 id="6">CubeTextureLoader</h3>
+			Class for loading a [page:CubeTexture CubeTexture].
+			This uses the [page:ImageLoader] internally for loading files.
+		</div>
+
+<h4>Пример</h4>
+
+		<div>
+			[example:webgl_materials_cubemap materials / cubemap]<br />
+			[example:webgl_materials_cubemap_balls_reflection materials / cubemap / balls / reflection]<br />
+			[example:webgl_materials_cubemap_balls_refraction materials / cubemap / balls / refraction]<br />
+			[example:webgl_materials_cubemap_dynamic materials / cubemap / dynamic]<br />
+			[example:webgl_materials_cubemap_dynamic2 materials / cubemap / dynamic2]<br />
+			[example:webgl_materials_cubemap_refraction materials / cubemap / refraction]
+		</div>
+
+<pre>var scene = new THREE.Scene();
+scene.background = new THREE.CubeTextureLoader()
+	.setPath( 'textures/cubeMaps/' )
+	.load( [
+				'1.png',
+				'2.png',
+				'3.png',
+				'4.png',
+				'5.png',
+				'6.png'
+			] );</pre>
+
+<h4>Конструктор</h4>
+<h3>CubeTextureLoader( [page:LoadingManager manager] )</h3>
+		<div>
+		[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].<br /><br />
+Создает новый CubeTextureLoader.
+		</div>
+
+<h4>Свойства</h4>
+
+		<h3>[property:String crossOrigin]</h3>
+		<div>
+		If set, assigns the [link:https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes crossOrigin]
+	 attribute of the image to the value of *crossOrigin*,
+		prior to starting the load. Default is *undefined*.
+		</div>
+
+		<h3>[property:LoadingManager manager]</h3>
+		<div>
+			The [page:LoadingManager loadingManager] the loader is using. Default is [page:DefaultLoadingManager].
+		</div>
+
+		<h3>[property:String path]</h3>
+		<div>The base path from which files will be loaded. See [page:.setPath]. Default is *undefined*.</div>
+
+<h4>Методы</h4>
+
+		<h3>[method:null load]( [page:String urls], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</h3>
+		<div>
+		[page:String urls] — array of 6 urls to images, one for each side of the CubeTexture. These can also be
+			[link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs Data URIs].<br />
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Texture texture].<br />
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total] and .[page:Integer loaded] bytes.<br />
+		[page:Function onError] — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and pass the loaded [page:Texture texture] to onLoad.
+		</div>
+
+		<h3>[method:null setCrossOrigin]( [page:String value] )</h3>
+		<div>		Set the [page:.crossOrigin] attribute.</div>
+
+		<h3>[method:FileLoader setPath]( [page:String path] )</h3>
+		<div>
+			Set the base path or URL from which to load files. This can be useful if
+			you are loading many textures from the same directory.
+		</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/CubeTextureLoader.js.txt">CubeTextureLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/CubeTextureLoader.js" target="_blank">CubeTextureLoader.js на github.com</a></div><br>
+
+
+<h3 id="7">DataTextureLoader</h3>
+Abstract base class to load generic binary textures formats (rgbe, hdr, ...).
+This uses the [page:FileLoader] internally for loading files, and creates a new
+		[page:DataTexture].
+		</div>
+
+<h4>Примеры</h4>
+See the [link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/RGBELoader.js RGBELoader] for an example of a derived class.
+
+<h4>Конструктор</h4>
+<h3>DataTextureLoader( [page:LoadingManager manager] )</h3>
+		<div>
+		[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use.
+		Default is [page:LoadingManager THREE.DefaultLoadingManager].<br>
+Создаение нового DataTextureLoader.
+		</div>
+
+<h4>Свойства</h4>
+
+		<h3>[property:LoadingManager manager]</h3>
+		<div>
+		The [page:LoadingManager loadingManager] the loader is using. Default is [page:DefaultLoadingManager].
+		</div>
+
+<h4>Методы</h4>
+
+		<h3>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</h3>
+		<div>
+		[page:String url] — the path or URL to the file. This can also be a
+			[link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs Data URI].<br />
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded texture.<br />
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total] and .[page:Integer loaded] bytes.<br />
+		[page:Function onError] — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and pass the loaded texture to onLoad.
+		</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/DataTextureLoader.js.txt">DataTextureLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/DataTextureLoader.js" target="_blank">DataTextureLoader.js на github.com</a></div><br>
+
+
+<h3 id="8">FileLoader</h3>
+A low level class for loading resources with XmlHttpRequest, used internaly by most loaders.
+
+<h4>Конструктор</h4>
+<pre>FileLoader( [page:LoadingManager manager] )</pre>
+<div class="blockindent">[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
+Creates a new FileLoader.
+
+<h4>Свойства</h4>
+<pre>[property:Cache cache]</pre>
+A [page:Cache cache] instance that hold the response from each request made through this loader, so each file is requested once.
+
+<pre>[property:String responseType]</pre>
+Can be set to change the response type.
+
+<h4>Методы</h4>
+<pre>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+<div class="blockindent">[page:String url] — required<br>
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded text response.<br>
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XmlHttpRequest instance, that contain .[page:Integer total] and .[page:Integer loaded] bytes.<br>
+		[page:Function onError] — Will be called when load errors.</div>
+Begin loading from url and return the [page:String text] response that will contain the data.
+
+<pre>[method:null setCrossOrigin]( [page:String value] )</pre>
+<div class="blockindent">[page:String value] — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.</div>
+
+<pre>[method:null setResponseType]( [page:String value] )</pre>
+<div class="blockindent">[page:String value] — the empty string (default), "arraybuffer", "blob", "document", "json", or "text".</div>
+
+<h4>Пример</h4>
+[example:webgl_morphtargets_human]
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/FileLoader.js.txt">FileLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/FileLoader.js" target="_blank">FileLoader.js на github.com</a></div><br>
+
+
+<h3 id="9">FontLoader</h3>
+
+		Class for loading a font in JSON format. Returns a [page:Font Font], which is an
+		array of [page:Shape Shape]s representing the font.
+		This uses the [page:FileLoader] internally for loading files. <br /><br />
+
+		You can convert fonts online using [link:https://gero3.github.io/facetype.js/ facetype.js]
+		</div>
+
+		<h2>Examples</h2>
+
+		<div>
+		[example:webgl_geometry_text_shapes geometry / text / shapes ]<br/>
+		[example:webgl_geometry_text geometry / text ]<br />
+		[example:webgl_geometry_text_earcut geometry / text / earcut]<br />
+		[example:webgl_geometry_text_pnltri geometry / text / pnltri]<br />
+		</div>
+
+<pre>var loader = new THREE.FontLoader();
+var font = loader.load(
+	// resource URL
+	'fonts/helvetiker_bold.typeface.json'
+	// Function when resource is loaded
+	function ( font ) {
+		// do something with the font
+		scene.add( font );
+	},
+	// Function called when download progresses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+	// Function called when download errors
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);</pre>
+
+		<h2>Constructor</h2>
+
+		<h3>FontLoader( [page:LoadingManager manager] )</h3>
+		<div>
+		[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].<br /><br />
+		Creates a new FontLoader.
+		</div>
+
+		<h2>Properties</h2>
+
+		<h3>[property:LoadingManager manager]</h3>
+		<div>
+			The [page:LoadingManager loadingManager] the loader is using. Default is [page:DefaultLoadingManager].
+		</div>
+
+
+		<h2>Methods</h2>
+
+		<h3>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</h3>
+		<div>
+		[page:String url] — the path or URL to the file. This can also be a
+			[link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs Data URI].<br />
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Texture texture].<br />
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total] and .[page:Integer loaded] bytes.<br />
+		[page:Function onError] — Will be called when load errors.<br /><br />
+
+		Begin loading from url and pass the loaded [page:Texture texture] to onLoad.
+		</div>
+
+		<h3>[method:Font parse]( [page:Object json] )</h3>
+		<div>
+		[page:Object json] — The <em>JSON</em> structure to parse.<br /><br />
+		Parse a <em>JSON</em> structure and return a [page:Font].
+		</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/FontLoader.js.txt">FontLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/FontLoader.js" target="_blank">FontLoader.js на github.com</a></div><br>
+
+
+<h3 id="10">ImageLoader</h3>
+Загрузчик для загрузки [page:Image].
+
+<h4>Конструктор</h4>
+<pre>ImageLoader( [page:LoadingManager manager] )</pre>
+<div class="blockindent">[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
+Создает новый ImageLoader.
+
+<h4>Свойства</h4>
+<pre>[property:String crossOrigin]</pre>
+The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
+
+<h4>Методы</h4>
+<pre>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+<div class="blockindent">[page:String url] — required<br>
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Image image].<br>
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the progress event.<br>
+		[page:Function onError] — Will be called when load errors.</div>
+Begin loading from url and return the [page:Image image] object that will contain the data.
+
+<pre>[method:null setCrossOrigin]( [page:String value] )</pre>
+<div class="blockindent">[page:String value] — The crossOrigin string.</div>
+The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
+
+<h4>Пример</h4>
+<pre>// instantiate a loader
+var loader = new THREE.ImageLoader();<br>
+// load a image resource
+loader.load(
+	// resource URL
+	'textures/skyboxsun25degtest.png',
+	// Function when resource is loaded
+	function ( image ) {
+		// do something with it<br>
+		// like drawing a part of it on a canvas
+		var canvas = document.createElement( 'canvas' );
+		var context = canvas.getContext( '2d' );
+		context.drawImage( image, 100, 100 );
+	},
+	// Function called when download progresses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+	// Function called when download errors
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);</pre>
+
+[example:webgl_shaders_ocean]
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/ImageLoader.js.txt">ImageLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/ImageLoader.js" target="_blank">ImageLoader.js на github.com</a></div><br>
+
+
+<h3 id="11">JSONLoader</h3>
+Загрузчик для загрузки объектов в JSON формате.
+
+<h4>Конструктор</h4>
+<pre>JSONLoader( [page:LoadingManager manager] )</pre>
+<div class="blockindent">[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
+Созадет новый JSONLoader.
+
+<h4>Методы</h4>
+<pre>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+<div class="blockindent">[page:String url] — required.<br>
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded text response.<br>
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XmlHttpRequest instance, that contain .[page:Integer total] and .[page:Integer loaded] bytes.<br>
+		[page:Function onError] — Will be called when load errors.</div>
+Begin loading from url and pass the <em>JSON</em> to onLoad.
+
+<pre>[method:null setTexturePath]( [page:String texturePath] )</pre>
+<div class="blockindent">[page:String texturePath] — Base path for textures.</div>
+Set the base path for textures.
+
+<pre>[method:Object3D parse]( [page:Object json], [page:String texturePath] )</pre>
+<div class="blockindent">[page:String json] — JSON object to parse.<br>
+		[page:String texturePath] — Base path for textures.</div>
+Parse a <em>JSON</em> structure and return an [page:object] containing the parsed [page:Geometry geometry] and [page:Array materials].
+
+<h4>Пример</h4>
+<pre>// instantiate a loader
+var loader = new THREE.JSONLoader();<br>
+// load a resource
+loader.load(
+	// resource URL
+	'models/animated/monster/monster.js',
+	// Function when resource is loaded
+	function ( geometry, materials ) {
+		var material = new THREE.MultiMaterial( materials );
+		var object = new THREE.Mesh( geometry, material );
+		scene.add( object );
+	}
+);</pre>
+
+[example:webgl_loader_json_blender]
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/JSONLoader.js.txt">JSONLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/JSONLoader.js" target="_blank">JSONLoader.js на github.com</a></div><br>
+
+
+<h3 id="12">Loader</h3>
+Base class for implementing loaders.
+
+<h4>Конструктор</h4>
+<pre>Loader()</pre>
+Creates a new Loader. This should be called as base class.
+
+<h4>Свойства</h4>
+<pre>[property:Function onLoadStart]</pre>
+		<div>Will be called when load starts.</div>
+		<div>The default is a function with empty body.</div>
+
+		<pre>[property:Function onLoadProgress]</pre>
+		<div>Will be called while load progresses.</div>
+		<div>The default is a function with empty body.</div>
+
+		<pre>[property:Function onLoadComplete]</pre>
+		<div>Will be called when load completes.</div>
+		<div>The default is a function with empty body.</div>
+
+		<pre>[property:string crossOrigin]</pre>
+		<div>
+		The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
+		</div>
+
+  <h4>Методы</h4>
+
+		<pre>[method:Material createMaterial]( [page:object m], [page:string texturePath] )</pre>
+		<div>
+		[page:Object m] — The parameters to create the material. <br>
+		[page:String texturePath] — The base path of the textures.
+		</div>
+		<div>
+		Creates the Material based on the parameters m.
+		</div>
+
+		<pre>[method:Array initMaterials]( [page:Array materials], [page:string texturePath] )</pre>
+		<div>
+		[page:Array materials] — an array of parameters to create materials. <br>
+		[page:String texturePath] —  The base path of the textures.
+		</div>
+		<div>
+		Creates an array of [page:Material] based on the array of parameters m. The index of the parameters decide the correct index of the materials.
+		</div>
+
+<pre>[method:String extractUrlBase]( [page:string url] )</pre>
+<div>[page:String url] —  The url to extract the base url from.</div>
+Extract the base from the URL.
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/loaders/Loader.js.txt">Loader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/Loader.js" target="_blank">Loader.js на github.com</a></div><br>
+
+
+<h3 id="13">MaterialLoader</h3>
+A loader for loading a [page:Material] in JSON format.
+
+<h4>Конструктор</h4>
+<pre>MaterialLoader( [page:LoadingManager manager] )</pre>
+<div>[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
+Создает новый MaterialLoader.
+
+<h4>Методы</h4>
+<pre>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+<div>[page:String url] — required<br>
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Material].<br>
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the progress event.<br>
+		[page:Function onError] — Will be called when load errors.</div>
+Begin loading from url and return the [page:Material] object that will contain the data.
+
+<pre>[method:Material parse]( [page:Object json] )</pre>
+<div>[page:Object json] — The json object containing the parameters of the Material.</div>
+Parse a <em>JSON</em> structure and create a new [page:Material] of the type [page:String json.type] with parameters defined in the json object.
+
+
+<h4>Пример</h4>
+<pre>// instantiate a loader
+var loader = new THREE.MaterialLoader();<br>
+// load a resource
+loader.load(
+	// resource URL
+	'path/to/material.json',
+	// Function when resource is loaded
+	function ( material ) {
+		object.material = material;
+	},
+	// Function called when download progresses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+	// Function called when download errors
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);</pre>
+
+<h4>Source</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+
+
+<h3 id="14">ObjectLoader</a></h3>
+A loader for loading a JSON resource. Unlike the [page:JSONLoader], this one make use of the <em>.type</em> attributes of objects to map them to their original classes.
+
+<h4>Конструктор</h4>
+<pre>ObjectLoader( [page:LoadingManager manager] )</pre>
+		<div>
+		[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].
+		</div>
+Создает новый ObjectLoader.
+
+<h4>Свойства</h4>
+
+<h4>Методы</h4>
+<pre>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+		<div>
+		[page:String url] — required<br>
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Object3D object].<br>
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XmlHttpRequest instance, that contain .[page:Integer total] and .[page:Integer loaded] bytes.<br>
+		[page:Function onError] — Will be called when load errors.<br>
+		</div>
+		<div>
+		Begin loading from url and call onLoad with the parsed response content.
+		</div>
+
+
+		<pre>[method:Object3D parse]( [page:Object json] )</pre>
+		<div>
+		[page:Object json] — required. The JSON source to parse<br>
+		</div>
+		<div>
+		Parse a <em>JSON</em> content and return a threejs object.
+		</div>
+
+		<pre>[method:null setCrossOrigin]( [page:String value] )</pre>
+		<div>
+		[page:String value] — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
+		</div>
+
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.ObjectLoader();<br>
+// assuming we loaded a JSON structure from elsewhere
+// предполагаем, что структура JSON загружена из другого места
+var object = loader.parse( a_json_object );<br>
+scene.add( object );</pre>
+
+		[example:webgl_loader_msgpack]
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+
+
+<h3 id="15">TextureLoader</a></h3>
+Класс для загрузки [page:Texture texture].</div>
+
+<h4>Конструктор</h4>
+<pre>TextureLoader( [page:LoadingManager manager] )</pre>
+		<div>
+		[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].
+		</div>
+Создает новый <tt>TextureLoader</tt>.
+
+  <h4>Свойства</h4>
+
+<pre>[property:String crossOrigin]</pre>
+<div>
+		default — *null*.<br>
+		If set, assigns the *crossOrigin* attribute of the image to the value of *crossOrigin*, prior to starting the load.
+		</div>
+
+<h4>Методы</h4>
+<pre>[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+		<div>
+		[page:String url] — required<br>
+		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Texture texture].<br>
+		[page:Function onProgress] — Will be called while load progresses. The argument will be the XmlHttpRequest instance, that contain .[page:Integer total] and .[page:Integer loaded] bytes.<br>
+		[page:Function onError] — Will be called when load errors.<br>
+		</div>
+Begin loading from url and pass the loaded [page:Texture texture] to onLoad.
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.TextureLoader();<br>
+// load a resource (загружаем ресурс)
+loader.load(
+	// resource URL (URL-адрес ресурса)
+	'textures/land_ocean_ice_cloud_2048.jpg',
+	// Function when resource is loaded
+    // функция, вызываемая после загрузки ресурса
+	function ( texture ) {
+		// do something with the texture
+		var material = new THREE.MeshBasicMaterial( {
+			map: texture
+		 } );
+	},
+	// Function called when download progresses
+	// функция, вызываемая в процессе загрузки
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+	// Function called when download errors
+	// функция, вызываемая в случае ошибок загрузки
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);</pre>
+
+		[example:canvas_geometry_earth]
+
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+
+<h2 id="16">Менеджеры загрузки</a></h2>
+<h3 id="16.1">DefaultLoadingManager</a></h3>
+A global instance of the [page:LoadingManager LoadingManager], used by most loaders when no custom manager has been specified.<br>
+This will be sufficient for most purposes, however there may be times when you desire seperate loading managers for say, textures and models.
+
+<h4>Пример</h4>
+<div>[example:webgl_loader_scene WebGL / loader / scene]</div>
+
+<div>You can optionally set the [page:LoadingManager.onStart onStart], [page:LoadingManager.onLoad onLoad],
+			[page:LoadingManager.onProgress onProgress], [page:LoadingManager.onStart onError] functions for the manager.
+			These will then apply to any loaders using the DefaultLoadingManager.<br>
+Note that these shouldn't be confused with the similarly named functions of individual loaders, as they are intended for displaying information about the overall status of loading, rather than dealing with the data that has been loaded.
+		</div>
+
+<pre>THREE.DefaultLoadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};<br>
+THREE.DefaultLoadingManager.onLoad = function ( ) {
+	console.log( 'Loading Complete!');
+};<br>
+THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+	console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};<br>
+THREE.DefaultLoadingManager.onError = function ( url ) {
+	console.log( 'There was an error loading ' + url );
+};</pre>
+
+<h4>Свойства</h4>
+See the [page:LoadingManager LoadingManager] page for details of properties.
+
+<h4>Методы</h4>
+See the [page:LoadingManager LoadingManager] page for details of methods.
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/loaders/LoadingManager.js src/loaders/LoadingManager.js]
+
+
+<h3 id="16.2">LoadingManager</a></h3>
+Handles and keeps track of loaded and pending data. A default global instance of this class is created and used by loaders if not supplied manually - see [page:DefaultLoadingManager].<br>
+In general that should be sufficient, however there are times when it can be useful to have seperate loaders - for example if you want to show seperate loading bars for objects and textures.
+
+<h4>Пример</h4>
+<div>
+[example:webgl_loader_babylon WebGL / loader / babylon]<br>
+[example:webgl_loader_fbx WebGL / loader / fbx]<br>
+[example:webgl_loader_obj WebGL / loader / obj]<br>
+[example:webgl_materials_reflectivity WebGL / materials / reflectivity]<br>
+[example:webgl_postprocessing_outline WebGL / postprocesing / outline]<br>
+[example:webgl_terrain_dynamic WebGL / terrain / dynamic]</div>
+
+
+<pre>var manager = new THREE.LoadingManager();
+manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};<br>
+manager.onLoad = function ( ) {
+	console.log( 'Loading complete!');
+};<br>
+manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+	console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};<br>
+manager.onError = function ( url ) {
+	console.log( 'There was an error loading ' + url );
+};<br>
+var loader = new THREE.OBJLoader( manager );
+loader.load( 'file.obj', function ( object ) {
+	//
+} );</pre>
+
+<h4>Конструктор</h4>
+<pre>LoadingManager( [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+<div>[page:Function onLoad] — (optional) this function will be called when all loaders are done.<br>
+[page:Function onProgress] — (optional) this function will be called when an item is complete.<br>
+[page:Function onError] — (optional) this function will be called a loader encounters errors.</div>
+Создает новый LoadingManager.
+
+<h4>Свойства</h4>
+
+<pre>[property:Function onStart]</pre>
+		<div>
+			This function will be called when loading starts.
+			The arguments are:<br />
+			[page:String url] — The url of the item just loaded.<br />
+			[page:Integer itemsLoaded] — the number  of items already loaded so far.<br />
+			[page:Iteger itemsTotal] — the total amount of items to be loaded.<br /><br />
+
+			By default this is undefined.
+		</div>
+
+		<h3>[property:Function onLoad]</h3>
+		<div>
+			This function will be called when all loading is completed. By default this is undefined,
+			unless passed in the constructor.
+		</div>
+
+		<h3>[property:Function onProgress]</h3>
+		<div>
+		This function will be called when an item is complete.
+		The arguments are:<br />
+		[page:String url] — The url of the item just loaded.<br />
+		[page:Integer itemsLoaded] — the number  of items already loaded so far.<br />
+		[page:Iteger itemsTotal] — the total amount of items to be loaded.<br /><br />
+
+		By default this is undefined, unless passed in the constructor.
+		</div>
+
+		<h3>[property:Function onError]</h3>
+		<div>
+			This function will be called when any item errors, with the argument:<br />
+			[page:String url] — The url of the item that errored.<br /><br />
+
+			By default this is undefined, unless passed in the constructor.
+		</div>
+
+<h4>Методы</h4>
+
+		<div>
+			<em>Note: The following methods are designed to be called internally by loaders. You shouldn't call
+			them directly.</em>
+		</div>
+
+		<h3>[method:null itemStart]( [page:String url] )</h3>
+		<div>
+		[page:String url] — the url to load<br /><br />
+
+		This should be called by any loader used by the manager when the loader starts loading an url.
+		</div>
+
+		<h3>[method:null itemEnd]( [page:String url] )</h3>
+		<div>
+		[page:String url] — the loaded url<br /><br />
+
+		This should be called by any loader used by the manager when the loader ended loading an url.
+		</div>
+
+
+		<h3>[method:null itemError]( [page:String url] )</h3>
+		<div>
+		[page:String url] — the loaded url<br /><br />
+
+		This should be called by any loader used by the manager when the loader errors loading an url.
+		</div>
+
+<h4>Source</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/loaders/LoadingManager.js src/loaders/LoadingManager.js]
+
+
+<br><br>
+</body></html>

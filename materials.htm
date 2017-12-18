@@ -1,0 +1,1478 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+<script type="text/javascript">
+var note_0 = 'Аргумент <tt>parameters</tt> (параметры) является объектом с одним или несколькими свойствами, определяющими внешний вид материала.'
+var note_1 = '<br>Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).<br>'
++'Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br>'
+var note_2 = '<br>При работе с некоторыми визуализаторами, данная настройка может не иметь никакого влияния. Например, она игнорируется рендерером <a href="renderers.htm#1.1" title="CanvasRenderer">Canvas</a>, но работает с рендерером <a href="renderers.htm#1.2" title="WebGLRenderer">WebGL</a>.<br>'
+var note_3 = '<br>Из-за ограничений в <a href="https://code.google.com/p/angleproject" target="_blank">слое ANGLE</a> с визуализатором (рендерером) <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> в операционных системах на основе Windows толщина линии (т.е. значение параметра <tt>linewidth</tt>) всегда будет равна <tt>1</tt>, независимо от установленного значения.'
++'<div class=note_trans><b>Примечание переводчика:</b> ANGLE (Almost Native Graphics Layer Engine - практически встроенный движок графического слоя, а перевод самой аббревиатуры ANGLE - угол) это графический движок слоя абстракций, разработанный компанией Google, с открытым исходным кодом под лицензией BSD.'
++'Этот API в основном предназначен для обеспечения высокопроизводительной совместимости OpenGL с компьютерами Windows и веб-браузерами вроде Chromium, путем перевода вызовов OpenGL в Direct3D, который гораздо лучше поддерживается драйверами. Для ANGLE существует два внутренних визуализатора: самый старый использует Direct3D 9.0c, в то время как новый использует Direct3D 11.<br><br>'
++'<span style="float:right; margin-top:-16px; background-color:#ffffe8;"><i>из статьи англ. Википедии о <a href="https://en.wikipedia.org/wiki/ANGLE_(software)" target="_blank">ANGLE</a>, перевод мой.</i></span></div>'
+</script>
+</head>
+<body>
+<h2 class=head1>Материалы</h2>
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="1">LineBasicMaterial</h3>
+Материал для рисования геометрических фигур в каркасном стиле обычными линиями.<br><br>
+<h4>Пример</h4>
+<pre>var material = new THREE.LineBasicMaterial( {
+  color: 0xffffff,
+  linewidth: 1,
+  linecap: 'round', // ignored by WebGLRenderer (игнорируется WebGLRenderer'ом)
+  linejoin:  'round' // ignored by WebGLRenderer (игнорируется WebGLRenderer'ом)
+} );</pre>
+
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_buffergeometry_drawcalls" target="_blank">WebGL / buffergeometry / drawcalls</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_lines" target="_blank">WebGL / buffergeometry / lines</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_lines_indexed" target="_blank">WebGL / buffergeometry / lines / indexed</a>
+<a href="https://threejs.org/examples/webgl_decals" target="_blank">WebGL / decals</a>
+<a href="https://threejs.org/examples/webgl_geometry_nurbs" target="_blank">WebGL / geometry / nurbs</a>
+<a href="https://threejs.org/examples/webgl_geometry_shapes" target="_blank">WebGL / geometry / shapes</a>
+<a href="https://threejs.org/examples/webgl_geometry_spline_editor" target="_blank">WebGL / geometry / spline / editor</a>
+<a href="https://threejs.org/examples/webgl_interactive_buffergeometry" target="_blank">WebGL / interactive / buffergeometry</a>
+<a href="https://threejs.org/examples/webgl_interactive_voxelpainter" target="_blank">WebGL / interactive / voxelpainter</a>
+<a href="https://threejs.org/examples/webgl_lines_colors" target="_blank">WebGL / lines / colors</a>
+<a href="https://threejs.org/examples/webgl_lines_cubes" target="_blank">WebGL / lines / cubes</a>
+<a href="https://threejs.org/examples/webgl_lines_dashed" target="_blank">WebGL / lines / dashed</a>
+<a href="https://threejs.org/examples/webgl_lines_sphere" target="_blank">WebGL / lines / sphere</a>
+<a href="https://threejs.org/examples/webgl_lines_splines" target="_blank">WebGL / lines / splines</a>
+<a href="https://threejs.org/examples/webgl_materials" target="_blank">WebGL / materials</a>
+<a href="https://threejs.org/examples/webgl_physics_rope" target="_blank">WebGL / physics / rope</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>LineBasicMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="1color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
+<a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
+<pre id="1isLineBasicMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is line basic material - является материалом обычных линий">.isLineBasicMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалом обычных линий. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+<pre id="1lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="1linewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - толщина линии">.linewidth</a></pre>
+Свойство управляет толщиной линии. Значение по умолчанию <tt>1</tt>.
+<script>document.write(note_3);</script><br>
+
+<pre id="1linecap"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="line cap - конец линии">.linecap</a></pre>
+Определяет внешний вид концов линии. Возможные значения: <tt>butt</tt> (торец), <tt>round</tt> (круглый) и <tt>square</tt> (квадратный). Значение по умолчанию <tt>round</tt> - круглый.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank"><tt>linecap</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
+Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank">статья о <tt>linecap</tt></a> на русском языке.<br>
+<table>
+<tr><td><div class=note_trans><b>Примечание переводчика:</b> Вот нарисованы три линии с разными значениями <tt>linecap</tt>. Для наглядности добавлены две направляющие. Каждая линия будет начинаться и заканчиваться этими направляющими.<br>
+Левая линия будет использовать для <tt>linecap</tt> значение <tt>butt</tt>. Она не будет выходить за направляющие. Средняя линия будет нарисована со значением <tt>round</tt>. За направляющие будут выходить полукруги с диаметром равным толщине линии. Правая линия будет использовать значение <tt>square</tt>. Она будет выходить за направляющие на поля с шириной равной толщине линии и высотой равной половине толщины.</div></td><td><img src="img/linecap.png" width="150px"></td></tr></table>
+
+<pre id="1linejoin"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="line join - соединение линии">.linejoin</a></pre>
+Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt> (<a class=popupspot href="JavaScript:hhctrl.TextPopup('митра - головной убор, часть богослужебного облачения в ряде христианских церквей.\r\nВ данном случае это остроконечная католическая митра (в православии митра округлая), что и определяет вид соединения линий.','Arial,9',10,10,0xffffff,0xd69967)" title="">митра</a>). Значение по умолчанию <tt>round</tt> - круглый.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
+Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br>
+<table><tr><td><div class=note_trans><b>Примечание переводчика:</b> <tt>miter</tt> соединяет линии в одной точке, расширяя для этого их границы и заполняя пространство ромбами.<br>
+<tt>round</tt> скругляет углы засчет добавления сектора с центром в точке пересечения линий и радиусом равным толщине линии.<br>
+<tt>bevel</tt> "срезает" угол, рисуя треугольник с вершинами в точке пересечения линий и крайних точках каждой линии.</div></td><td><img src="img/linejoin.png" width="200px"></td></tr></table></div><br>
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#3" title="Material"><tt>Material</tt></a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/LineBasicMaterial.js.txt">LineBasicMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/LineBasicMaterial.js" target="_blank">LineBasicMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="2">LineDashedMaterial</h3>
+Материал для рисования геометрических фигур в каркасном стиле пунктирными линиями.<br><br>
+<h4>Пример</h4>
+<pre>var material = new THREE.LineDashedMaterial( {
+  color: 0xffffff,
+  linewidth: 1,
+  scale: 1,
+  dashSize: 3,
+  gapSize: 1,
+} );</pre>
+
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_lines_dashed" target="_blank">WebGL / lines / dashed</a>
+<a href="https://threejs.org/examples/canvas_lines_dashed" target="_blank">Canvas / lines /dashed</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>LineDashedMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="2color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
+<a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
+<pre id="2dashSize"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="dash size - размер штриха">.dashSize</a></pre>
+Размер штриха, по умолчанию равен <tt>3</tt>. Это сумма размеров самого штриха и зазора между штрихами.<br><br>
+<pre id="2gapSize"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="gap size - размер зазора (между штрихами)">.gapSize</a></pre>
+Размер зазора (расстояния) между штрихами, по умолчанию равен <tt>1</tt>.<br><br>
+<pre id="2isLineDashedMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is line dashed material - является материалом штриховых линий">.isLineDashedMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалом штриховых линий. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+<pre id="2lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="2linewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - толщина линии">.linewidth</a></pre>
+Управляет толщиной линии. Значение по умолчанию <tt>1</tt>.
+<script>document.write(note_3);</script><br>
+
+<pre id="2scale"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="scale - масштаб">.scale</a></pre>
+The scale штриховой части линии.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#3" title="Material"><tt>Material</tt></a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/LineDashedMaterial.js.txt">LineDashedMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/LineDashedMaterial.js" target="_blank">LineDashedMaterial.js на github.com</a></div><br><br>
+
+
+<h3 id="3">Material</h3>
+Абстрактный, базовый класс для материалов.<br>
+Материалы описывают внешний вид <a href="#3" title="Object">объектов</a>. Они определены (в основном) независимыми от визуализатора (рендерера), так что не придется переписывать материалы, если вы решили использовать другой визуализатор.<br>
+Перечисленные ниже свойства и методы наследуются всеми другими типами материала (хотя и могут иметь разные значения по умолчанию).<br><br>
+<h4>Конструктор</h4>
+<pre>Material()</pre>
+Конструктор создает общий (универсальный) материал.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="3alphaTest"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="alpha test - проверка альфа(канала)">.alphaTest</a></pre>
+Устанавливает значение альфа-канала (определяет прозрачность), которое будет использоваться при прохождении проверки состояния альфа-канала.
+Если непрозрачность (свойство <tt><a href="#3opacity" title="Material.opacity">opacity</a></tt>) будет меньше заданного здесь значения, материал не будет отображаться.<br>
+Значение по умолчанию <tt>0</tt>.<br><br>
+<pre id="3blendDst"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending destination - целевое смешивание">.blendDst</a></pre>
+Целевое смешивание. Значением по умолчанию является <tt><a href="constants.htm#3" title="CustomBlendingEquation">OneMinusSrcAlphaFactor</a></tt>. Все возможные значения смотрите в описании констант <a href="constants.htm#3.3" title="CustomBlendingEquation">целевых факторов смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" title="Material.blending">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" title="CustomBlending">CustomBlending</a></tt>.<br><br>
+<pre id="3blendDstAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending destination alpha - альфа(канал) целевого смешивания">.blendDstAlpha</a></pre>
+Прозрачность для <tt><a href="#3blendDst" title="Material.blendDst">blendDst</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+<pre id="3blendEquation"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending equation - уравнение смешивания">.blendEquation</a></pre>
+Уравнение смешивания, используемое при применении смешивания. Значением по умолчанию является <tt><a href="constants.htm#3" title="CustomBlendingEquation">AddEquation</a></tt>. Все возможные значения смотрите в описании констант <a href="constants.htm#3.1" title="Константы настраиваемых уравнений смешивания">уравнений смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" title="Material.blending">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" title="CustomBlending">CustomBlending</a></tt>.<br><br>
+<pre id="3blendEquationAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending equation alpha - уравнение смешивания альфа(канала)">.blendEquationAlpha</a></pre>
+Прозрачность для <tt><a href="#3blendEquation" title="Material.blendEquation">blendEquation</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+<pre id="3blending"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="blending - смешивание">.blending</a></pre>
+Свойство определяет какое смешивание будет использоваться при отображении объектов с этим материалом.
+При использовании настраиваемых свойств <tt><a href="#3blendSrc" title="Material.blendSrc">blendSrc</a></tt>, <tt><a href="#3blendDst" title="Material.blendDst">blendDst</a></tt> или <tt><a href="#3blendEquation" title="Material.blendEquation">blendEquation</a></tt>,
+оно должно быть установлено как <tt><a href="constants.htm#5.3" title="CustomBlending">CustomBlending</a></tt>.<br>
+Все возможные значения смотрите в описании констант <a href="constants.htm#5.3" title="Константы материалов - режим смешивания">режима смешивания</a>. Значением по умолчанию является <tt><a href="constants.htm#5.3" title="Константы материалов - режим смешивания">NormalBlending</a></tt>.<br><br>
+<pre id="3blendSrc"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending source - исходное смешивание">.blendSrc</a></pre>
+Исходное смешивание. Значением по умолчанию является <tt><a href="constants.htm#3.2" title="Константы настраиваемых уравнений смешивания - исходные факторы">SrcAlphaFactor</a></tt>.
+Все возможные значения смотрите в описании констант <a href="constants.htm#3.2" title="Константы настраиваемых уравнений смешивания - исходные факторы">режима смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" title="Material.blending">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" title="CustomBlending">CustomBlending</a></tt>.<br><br>
+<pre id="3blendSrcAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending source alpha - исходное смешивание альфа(канала)">.blendSrcAlpha</a></pre>
+Прозрачность для <tt><a href="#3blendSrc" title="Material.blendSrc">blendSrc</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="3clipIntersection"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="clip intersection - ">.clipIntersection</a></pre>
+Изменяет поведение плоскостей отсечения так, что обрезается только их пересечение, а не их соединение.
+Changes the behavior of clipping planes so that only their intersection is clipped, rather than their union. Значение по умолчанию <tt>false</tt>.<br><br>
+
+<pre id="3clippingPlanes">.clippingPlanes</a></pre>
+User-defined clipping planes specified as THREE.Plane objects in world space. These planes apply to the objects this material is attached to. Points in space whose signed distance to the plane is negative are clipped (not rendered).
+Смотрите пример <a href="https://threejs.org/examples/webgl_clipping_intersection.html" target="_blank">WebGL / clipping /intersection</a>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="3clipShadows"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="clip shadows - обрезать тени">.clipShadows</a></pre>
+Свойство определяет, обрезать ли тени в соответствии с плоскостями отсечения, указанными на этом материале. Defines whether to clip shadows according to the clipping planes specified on this material. Значение по умолчанию <tt>false</tt>.<br><br>
+
+<pre id="3colorWrite"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="color write - ">.colorWrite</a></pre>
+Будет ли отображаться цвет материала. Это свойство можно использовать в соединении со свойством сетки (mesh) <tt><a href="core.htm#14renderOrder" title="Object3D.renderOrder">renderOrder</a></tt> для создания невидимых объектов, закрывающих другие объекты.
+Whether to render the material's color. This can be used in conjunction with a mesh's .renderOrder property to create invisible objects that occlude other objects. Значение по умолчанию <tt>true</tt>.<br><br>
+
+<pre id="3customDepthMaterial"><a href="#3" title="Material. custom depth material - настраиваемая глубина материала">.customDepthMaterial</a></pre>
+Custom depth material to be used by this material when rendering to the depth map.
+Для правильного отображения теней при направленном (<a href="lights.htm#2" title="DirectionalLight">DirectionalLight</a>) или прожекторном (<a href="lights.htm#7" title="SpotLight">SpotLight</a>) освещении, требуется указывать <tt>customDepthMaterial</a></tt>, если было:
+<ol style="list-style-type:lower-alpha;"><li>изменение позиций вершин в шейдере вершин,</li>
+<li>использование карты смещения,</li>
+<li>использование карты прозрачности (alpha map) с проверкой прозрачности (<tt><a href="#3alphaTest" title="Material.alphaTest">alphaTest</a></tt>), или</li>
+<li>использовалась прозрачная текстура с проверкой прозрачности (<tt><a href="#3alphaTest" title="Material.alphaTest">alphaTest</a></tt>).</li></ol>
+Значением по умолчанию является <tt>undefined</tt>.<br><br>
+
+<pre id="3customDistanceMaterial"><a href="#3" title="Material. custom distance material - ">.customDistanceMaterial</a></pre>
+Тоже самое, что и <tt>customDepthMaterial</tt>, но используется с точечным освещением (<a href="lights.htm#5" title="PointLight">PointLight</a>). Значением по умолчанию является <tt>undefined</tt>.<br><br>
+
+<pre id="3defines">.defines</a></pre>
+Custom defines to be injected into the shader. These are passed in form of an object literal, with key/value pairs. { MY_CUSTOM_DEFINE: '' , PI2: Math.PI * 2 }. The pairs are defined in both vertex and fragment shaders. Значением по умолчанию является <tt>undefined</tt>.<br><br>
+
+<pre id="3depthFunc">.depthFunc</a></pre>
+Which depth function to use. Default is LessEqualDepth. See the depth mode constants for all possible values.<br><br>
+
+<pre id="3depthTest">.depthTest</a></pre>
+Whether to have depth test enabled when rendering this material. Значение по умолчанию <tt>true</tt>.<br><br>
+
+<pre id="3depthWrite"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="depth write - записывать глубину">.depthWrite</a></pre>
+Whether rendering this material has any effect on the depth buffer. Значение по умолчанию <tt>true</tt>.<br>
+
+When drawing 2D overlays it can be useful to disable the depth writing in order to layer several things together without creating z-index artifacts.<br><br>
+
+<pre id="3dithering"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="dithering - размывание">.dithering</a></pre>
+Whether to apply dithering to the color to remove the appearance of banding. Значение по умолчанию <tt>false</tt>.<br><br>
+
+<pre id="3flatShading"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="flat shading - плоское затенение">.flatShading</a></pre>
+Define whether the material is rendered with flat shading. Значение по умолчанию <tt>false</tt>.<br><br>
+
+<pre id="3fog"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="fog - туман">.fog</a></pre>
+Свойство определяет, будет ли материал подвержен влиянию тумана. Значение по умолчанию <tt>true</tt>.<br><br>
+<pre id="3id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова identifier - идентификатор">.id</a></pre>
+Уникальное число-идентификатор для данного экземпляра материала.<br><br>
+<pre id="3isMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is material - является материалом">.isMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалами. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+<pre id="3lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значение по умолчанию <tt>true</tt>.<br><br>
+<pre id="name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="name - имя, название">.name</a></pre>
+Дополнительное, необязательное название объекта (необязательно быть уникальным). По умолчанию это пустая строка ("").<br><br>
+
+<pre id="3needsUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="needs update - требуется обновление">.needsUpdate</a></pre>
+Specifies that the material needs to be updated at the WebGL level. Set it to true if you made changes that need to be reflected in WebGL.<br>
+При создании экземпляра нового материала, данное свойство автоматически устанавливается как <tt>true</tt>.<br><br>
+
+<pre id="3opacity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="opacity - непрозрачность">.opacity</a></pre>
+Число с плавающей запятой (float) в диапазоне <tt>0.0 - 1.0</tt>, показывающее насколько прозрачен материал. Значение <tt>0.0</tt> указывает на полную прозрачность, а <tt>1.0</tt> - на полную непрозрачность.
+Значение по умолчанию равно <tt>1.0</tt>.<br>
+Если свойство <tt><a href="#3transparent" title="Material.transparent">transparent</a></tt> материала не установлено как <tt>true</tt>, материал будет оставаться полностью непрозрачным и данное значение будет влиять только на его цвет.<br><br>
+
+<pre id="3overdraw"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="overdraw - превышение">.overdraw</a></pre>
+Amount of triangle expansion at draw time. This is a workaround for cases when gaps appear between triangles when using CanvasRenderer. 0.5 tends to give good results across browsers. Значение по умолчанию <tt>0</tt>.<br><br>
+
+<pre id="3polygonOffset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="polygon offset - смещение полигона">.polygonOffset</a></pre>
+Свойство устанавливает, будет ли использоваться смещение полигонов. Значение по умолчанию <tt>false</tt>. Это свойство соответствует свойству WebGL <tt>GL_POLYGON_OFFSET_FILL</tt>.<br><br>
+<!--
+glPolygonOffset — set the scale and units used to calculate depth values
+
+Description
+
+When GL_POLYGON_OFFSET_FILL, GL_POLYGON_OFFSET_LINE, or GL_POLYGON_OFFSET_POINT is enabled, each fragment's depth value will be offset after it is interpolated from the depth values of the appropriate vertices. The value of the offset is factor?DZ+r?units
+, where DZ is a measurement of the change in depth relative to the screen area of the polygon, and r
+
+is the smallest value that is guaranteed to produce a resolvable offset for a given implementation. The offset is added before the depth test is performed and before the value is written into the depth buffer.
+
+glPolygonOffset is useful for rendering hidden-line images, for applying decals to surfaces, and for rendering solids with highlighted edges.
+https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glPolygonOffset.xhtml
+http://www.opengl-master.ru/function.php?id=42 -->
+
+<pre id="3polygonOffsetFactor"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="polygon offset factor - коэффициент масштабирования смещения полигонов">.polygonOffsetFactor</a></pre>
+Устанавливает <a class=popupspot href="JavaScript:hhctrl.TextPopup('коэффициент масштабирования, который используется для создания переменного смещения глубины для каждого полигона','Arial,9',10,10,0xffffff,0xd69967)">коэффициент масштабирования</a> смещения полигонов. Значение по умолчанию <tt>0</tt>.<br><br>
+
+<pre id="3polygonOffsetUnits"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="polygon offset units - блоки смещения полигонов">.polygonOffsetUnits</a></pre>
+<!-- Is multiplied by an implementation - specific value to create a constant depth offset    -->
+Устанавливает блоки смещения полигонов. Значение по умолчанию <tt>0</tt>.<br><br>
+
+<pre id="3precision"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="precision - точность">.precision</a></pre>
+Свойство переопределяет точность по умолчанию визуализатора для данного материала. Может быть <tt title="сокращ. от англ. слов high precision - высокая точность">highp</tt>, <tt title="сокращ. от англ. слов medium precision - средняя точность">mediump</tt> или <tt title="сокращ. от англ. слов low precision - низкая точность">lowp</a></tt>. Значение по умолчанию равно <tt>null</tt>.<br><br>
+
+<pre id="3premultipliedAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="premultiplied alpha - ">.premultipliedAlpha</a></pre>
+Whether to premultiply the alpha (transparency) value. Посмотрите отличия в примере <a href="https://threejs.org/examples/#webgl_materials_transparency" target="_blank">WebGL / Materials / Transparency</a>. Значение по умолчанию <tt>false</tt>.<br><br>
+
+<pre id="3side"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="side - сторона">.side</a></pre>
+Свойство определяет сторону грани, которая будет отображаться, - передняя, задняя или обе. Значение по умолчанию <tt><a href="constants.htm#5.1" title="Константы материала. front side - передняя сторона">THREE.FrontSide</a></tt>.
+Остальные варианты это <tt><a href="constants.htm#5.1" title="Константы материала. back side - задняя сторона">THREE.BackSide</a></tt> и <tt><a href="constants.htm#5.1" title="Константы материала. double side - две стороны">THREE.DoubleSide</a></tt>.<br><br>
+<pre id="3transparent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="transparent - прозрачность">.transparent</a></pre>
+Определяет будет ли данный материал прозрачным или нет. Данное свойство влияет на процесс визуализации, так как прозрачные объекты нуждаются в специальной обработке и отображаются после непрозрачных объектов.<br>
+Если данное свойство установлено как <tt>true</tt>, степень прозрачности материала определяется настройкой значения свойства <tt><a href="#3opacity" title="Material.opacity">opacity</a></tt>.<br>
+Значение по умолчанию <tt>false</tt>.<br><br>
+<pre id="3type"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="type - тип">.type</a></pre>
+Значением этого свойства является строка <tt>Material</tt>. Она не должна изменяться и может использоваться для поиска на сцене всех объектов данного типа.<br><br>
+<pre id="3uuid"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слов universally unique identifier - универсальный уникальный идентификатор">.uuid</a></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" title="сокращ. от англ. слов universally unique identifier - универсальный уникальный идентификатор">UUID</a> данного экземпляра материала. Он присваивается автоматически и не должен быть изменен.<br>
+Вот <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">статья Википедии про UUID</a> на русском языке.<br><br>
+<pre id="3vertexColors">.vertexColors</a></pre>
+Свойство определяет, как окрашиваются вершины, путем задания способа заполнения атрибута цвета.
+Возможными значениями являются <tt><a href="constants.htm#5.2" title="Константы материалов. no colors - не окрашено">THREE.NoColors</a></tt>,
+<tt><a href="constants.htm#5.2" title="Константы материалов. face colors - цвета граней">THREE.FaceColors</a></tt> и <tt><a href="constants.htm#5.2" title="Константы материалов. vertex colors - цвета вершин">THREE.VertexColors</a></tt>.
+Значение по умолчанию <tt title="Константы материалов. no colors - не окрашено">THREE.NoColors</tt>.<br><br>
+<pre id="3visible"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="visible - видимый">.visible</a></pre>
+Свойство определяет, будет ли данный материал видимым. Значение по умолчанию <tt>true</tt>.<br><br>
+<pre id="3userData"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="user data - пользовательские данные">.userData</a></pre>
+Этот объект может использоваться для хранения пользовательских данных о материале. В нем нельзя хранить ссылки на функции, так как они не будут клонироваться.</div><br>
+
+<h4>Методы</h4>
+В этом классе доступны методы <tt><a href="core.htm#5" title="EventDispatcher">EventDispatcher</a></tt>.
+<div class=blockindent><br>
+<pre id="3clone"><a href="#3" title="Material. clone - клонировать, клон">.clone</a> ( )</pre>
+Возвращает новый материал с теми же параметрами как у данного материала.<br><br>
+<pre id="3copy"><a href="#3" title="Material. copy- копировать">.copy</a> ( <a href="#3" title="Material. material - материал">material</a> )</pre>
+Метод копирует параметры из переданного материала (параметр <tt>material</tt>) в данный материал.<br><br>
+
+<pre id="3dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - ">.dispose</a> ( )</pre>
+This disposes the material. Textures of a material don't get disposed. These needs to be disposed by <a href="textures.htm#6" title="Texture">Texture</a>.<br><br>
+
+<pre id="3setValues"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set values - установить значения">.setValues</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="values - значения">values</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="values - значения">values</a></tt> -- контейнер с параметрами.</div>
+Метод устанавливает свойства на основе значений, переданных в аргументе.<br><br>
+<pre id="3toJSON"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="to JSON - в (формат) JSON">.toJSON</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова metadata - метаданные, т.е. дополнительные сведения, прилагаемые к данным">meta</a> )</pre>
+<div class=list><tt>meta</tt> -- объект, содержащий <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5" target="_blank">метаданные</a> для материала, вроде текстур или изображений.</div>
+Конвертирует материал в формат <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">JSON</a> для <em>three.js</em>.<br><br>
+<pre id="3update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a> ( )</pre>
+Метод вызывает для материала <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispatch event - отправить событие">.dispatchEvent</a> ( { type: '<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">update</a>' })</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/Material.js.txt">Material.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/Material.js" target="_blank">Material.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="4">MeshBasicMaterial</h3>
+Материал для рисования геометрических элементов в
+A material for drawing geometries in a simple shaded (flat or wireframe) way.<br>
+На этот материал не влияет освещение.
+This material is not affected by lights.
+A material for drawing geometries in a simple shaded (flat or wireframe) way.<br>
+По умолчанию будет отображаться в виде плоских многоугольников. Чтобы нарисовать сетку в виде каркаса, просто установите свойство <tt><a href="#4wireframe" title="MeshBasicMaterial.wireframe">wireframe</tt></a> как <tt>true</tt>.<br><br>
+
+<!--
+<iframe id="scene" src="scenes/material-browser.html#MeshBasicMaterial"></iframe>  -->
+
+<h4>Конструктор</h4>
+<pre>MeshBasicMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет). Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="4alphaMap"><a href="textures.htm#6" title="Texture. alpha map - карта альфа-канала, т.е. карта прозрачности">.alphaMap</a></pre>
+Альфа-карта представляет собой текстуру в оттенках серого, которая управляет непрозрачностью по всей поверхности (черный цвет: полностью прозрачный; белый: полностью непрозрачный). Значением по умолчанию является <tt>null</tt>.<br>
+Используется только цвет текстуры, альфа-канал (если он существует) игнорируется.
+Для текстур <a href="https://ru.wikipedia.org/wiki/RGB" target="_blank">RGB</a> и <a href="https://en.wikipedia.org/wiki/RGBA_color_space" target="_blank">RGBA</a> визуализатор <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a>
+будет использовать канал зеленого цвета
+For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats.
+из-за дополнительного бита точности, предоставляемого зеленым каналом, в сжатом DXT и несжатом RGB 565 форматах.
+Текстуры только с каналом яркости и яркости/прозрачности (альфа-канал) также будут работать как и ожидалось.
+Luminance-only and luminance/alpha textures will also still work as expected.
+<!-- https://ru.wikipedia.org/wiki/S3TC
+https://en.wikipedia.org/wiki/S3_Texture_Compression -->
+<br><br>
+
+<pre id="4aoMap"><a href="textures.htm#6" title="Texture. aoMap это сокращ. англ. слов ambient occlusion map - карта перекрытия (затенения) при общем (фоновом) освещении">.aoMap</a></pre>
+Канал красного цвета используется в данной текстуре в качестве ambient occlusion map. Значением по умолчанию является <tt>null</tt>.
+The aoMap requires a second set of UVs, and consequently will ignore the repeat and offset Texture properties.<br>
+Статья в русской Википедии о <a href="https://ru.wikipedia.org/wiki/Ambient_occlusion" target="_blank">эффекте перекрытия</a> (модели затенения) при фоновом освещении. А <a href="https://en.wikipedia.org/wiki/Ambient_occlusion" target="_blank">это</a> в английской.<br><br>
+
+<pre id="4aoMapIntensity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов ambient occlusion map intensity ">.aoMapIntensity</a></pre>
+Интенсивность затенения при общем (фоновом) освещении. Значение по умолчанию равно <tt>1</tt>. Нулевое значение означает отсутствие эффекта перекрытия (затенения).<br><br>
+
+<pre id="4color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
+<a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию установлен как белый (<tt>0xffffff</tt> - <tt>white</tt>).<br><br>
+
+<pre id="4combine"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="combine - комбинирование, совмещение">.combine</a></pre>
+How to combine the result of the surface's color with the environment map, if any.<br>
+Возможными значениями являются <tt><a href="constants.htm#5.5" title="Константы материалов. multiply - умножать">THREE.Multiply</a></tt> (значение по умолчанию), <tt><a href="constants.htm#5.5" title="Константы материалов. mix operation - операция смешивания">THREE.MixOperation</a></tt> и <tt><a href="constants.htm#5.5" title="Константы материалов. add operation - операция сложения">THREE.AddOperation</a></tt>. Если выбрано смешивание (<tt>THREE.MixOperation</tt>), то свойство <tt><a href="#4reflectivity" title="MeshBasicMaterial.reflectivity">reflectivity</a></tt> будет использовано для смешивания двух цветов.
+If mix is chosen, the <a href="#4reflectivity" title="MeshBasicMaterial.reflectivity. reflectivity - коэффициент отражения, способность к отражению">reflectivity</a> is used to blend between the two colors.<br><br>
+
+<pre id="4isMeshBasicMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh basic material - является основным материалом сетки">.isMeshBasicMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, основными материалами сетки. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="4envMap">.envMap</a></pre>
+Карта окружения (environment map). Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="4lightMap"><a href="textures.htm#6" title="Texture. light map - карта освещения">.lightMap</a></pre>
+Карта освещения. Значением по умолчанию является <tt>null</tt>. Свойство <tt>lightMap</tt> требует второго набора <a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">UV координат</a> и, следовательно,
+будет игнорировать свойства <tt><a href="textures.htm#6repeat" title="Texture.repeat (repeat - повторение)">repeat</a></tt> и <tt><a href="textures.htm#6offset" title="Texture.offset (offset - смещение)">offset</a></tt> текстуры.<br><br>
+
+<pre id="4lightMapIntensity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="light map intensity - интенсивность карты освещения">.lightMapIntensity</a></pre>
+Intensity of the baked light. Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="4lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство определяет, будет ли материал зависеть от освещения. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="4map"><a href="textures.htm#6" title="Texture. map - карта">.map</a></pre>
+Карта цвета. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="4morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph targets - ">.morphTargets</a></pre>
+Define whether the material uses morphTargets. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="4reflectivity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="reflectivity - способность к отражению, коэффициент отражения">.reflectivity</a></pre>
+How much the environment map affects the surface; also see .combine. The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).<br><br>
+
+<pre id="4refractionRatio"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="refraction ratio - коэффициент преломления">.refractionRatio</a></pre>
+The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material. It is used with environment mapping modes THREE.CubeRefractionMapping and THREE.EquirectangularRefractionMapping. The refraction ratio should not exceed 1. Значение по умолчанию равно <tt>0.98</tt>.<br><br>
+
+<pre id="4skinning"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="skinning - ">.skinning</a></pre>
+Define whether the material uses skinning. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="4specularMap"><a href="textures.htm#6" title="Texture. specular map - карта отражения">.specularMap</a></pre>
+Карта отражений используемая материалом. Значением по умолчанию является <tt>null</tt>.<br><br>
+<pre id="4wireframe"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe - каркас">.wireframe</a></pre>
+Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и визуализация происходит при помощи плоских многоугольников).<br><br>
+<pre id="4wireframeLinecap"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line cap - конец линии каркаса">.wireframeLinecap</a></pre>
+Определяет внешний вид концов линии. Возможные значения: <tt>butt</tt> (торец), <tt>round</tt> (круглый) и <tt>square</tt> (квадратный). Значение по умолчанию <tt>round</tt> - круглый.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank"><tt>linecap</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
+Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank">статья о <tt>linecap</tt></a> на русском языке.<br><br>
+<pre id="4wireframeLinejoin"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line join - соединение линий каркаса">.wireframeLinejoin</a></pre>
+Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt> (<a class=popupspot href="JavaScript:hhctrl.TextPopup('митра - головной убор, часть богослужебного облачения в ряде христианских церквей.\r\nВ данном случае это остроконечная католическая митра (в православии митра округлая), что и определяет вид соединения линий.','Arial,9',10,10,0xffffff,0xd69967)" title="">митра</a>). Значение по умолчанию <tt>round</tt> - круглый.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
+Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br><br>
+<pre id="4wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линии каркаса">.wireframeLinewidth</a></pre>
+Управляет толщиной линии каркаса. Значение по умолчанию равно <tt>1</tt>.
+<script>document.write(note_3);</script></div><br>
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/MeshBasicMaterial.js.txt">MeshBasicMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshBasicMaterial.js" target="_blank">MeshBasicMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="5">MeshDepthMaterial</h3>
+Материал для рисования геометрических элементов фигуры в глубину. Глубина зависит от ближней и дальней плоскостей отсечения камеры.
+A material for drawing geometry by depth. Depth is based off of the camera near and far plane. White is nearest, black is farthest.
+<!--
+<iframe id="scene" src="scenes/material-browser.html#MeshDepthMaterial"></iframe> -->
+
+<h4>Конструктор</h4>
+<pre>MeshDepthMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="5alphaMap">.alphaMap</a></pre>
+The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.<br>
+
+Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.<br><br>
+
+<pre id="5depthPacking">.depthPacking</a></pre>
+Encoding for depth packing. Default is BasicDepthPacking.<br><br>
+
+<pre id="5displacementMap">.displacementMap</a></pre>
+The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.<br><br>
+
+<pre id="5displacementScale">.displacementScale</a></pre>
+How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied. Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="5displacementBias">.displacementBias</a></pre>
+The offset of the displacement map's values on the mesh's vertices. Without a displacement map set, this value is not applied. Значение по умолчанию равно <tt>0</tt>.<br><br>
+
+<pre id="5fog"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="fog - туман">.fog</a></pre>
+Свойство определяет, будет ли материал подвержен влиянию тумана. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="5isMeshDepthMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh depth material - является материалом сетки с прорисовкой глубины">.isMeshDepthMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалами сетки с прорисовкой глубины. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+<pre id="5lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.
+<pre id="5map"><a href="textures.htm#6" title="Texture. map - карта">.map</a></pre>
+Карта цвета. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="5morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph targets - ">.morphTargets</a></pre>
+Свойство определяет, будет ли материал использовать <tt>morphTargets</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="5skinning"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="skinning - ">.skinning</a></pre>
+Свойство определяет, будет ли материал использовать skinning. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="5wireframe"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe - каркас">.wireframe</a></pre>
+Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и объект отображен плавно затушеванным).<br><br>
+<pre id="5wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линии каркаса">.wireframeLinewidth</a></pre>
+Управляет толщиной линии каркаса. Значение по умолчанию равно <tt>1</tt>.
+<script>document.write(note_3);</script></div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/MeshDepthMaterial.js.txt">MeshDepthMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshDepthMaterial.js" target="_blank">MeshDepthMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="6">MeshLambertMaterial</h3>
+Материал для матовых поверхностей, без
+A material for non-shiny surfaces, without specular highlights.<br>
+
+The material uses a non-physically based Lambertian model for calculating reflectance. This can simulate some surfaces (such as untreated wood or stone) well, but cannot simulate shiny surfaces with specular highlights (such as varnished wood).<br>
+
+Shading is calculated using a Gouraud shading model. This calculates shading per vertex (i.e. in the vertex shader) and interpolates the results over the polygon's faces.<br>
+
+Due to the simplicity of the reflectance and illumination models, performance will be greater when using this material over the MeshPhongMaterial, MeshStandardMaterial or MeshPhysicalMaterial, at the cost of some graphical accuracy.<br><br>
+
+<!--
+<iframe id="scene" src="scenes/material-browser.html#MeshLambertMaterial"></iframe>  -->
+
+<h4>Конструктор</h4>
+<pre>MeshLambertMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre>[property:Color color]</pre>
+Diffuse color of the material. Default is white.
+
+<pre>[property:Texture map]</pre>
+Set color texture map. Default is null.
+
+<pre>[property:Texture lightMap]</pre>
+Set light map. Default is null. The lightMap requires a second set of UVs.
+
+<pre>[property:Float lightMapIntensity]</pre>
+TODO
+
+<pre>[property:Texture aoMap]</pre>
+Set ambient occlusion map. Default is null. The aoMap requires a second set of UVs.
+
+<pre>[property:Float aoMapIntensity]</pre>
+TODO
+
+<pre>[property:Color emissive]</pre>
+Emissive (light) color of the material, essentially a solid color unaffected by other lighting. Default is black.
+
+<pre>[property:Texture emissiveMap]</pre>
+Set emisssive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
+
+<pre>[property:Float emissiveIntensity]</pre>
+Intensity of the emissive light. Modulates the emissive color. Default is 1.
+
+<pre>[property:Texture specularMap]</pre>
+Since this material does not have a specular component, the specular value affects only how much of the environment map affects the surface. Default is null.
+
+<pre>[property:Texture alphaMap]</pre>
+The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.<br>
+Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the [page:WebGLRenderer WebGL] renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
+
+<pre>[property:TextureCube envMap]</pre>
+Set env map. Default is null.
+
+		<pre>[property:Integer combine]</pre>
+		<div>How to combine the result of the surface's color with the environment map, if any.</div>
+
+		<div>Options are [page:Textures THREE.Multiply] (default), [page:Textures THREE.MixOperation], [page:Textures THREE.AddOperation]. If mix is chosen, the reflectivity is used to blend between the two colors.</div>
+
+		<pre>[property:Float reflectivity]</pre>
+		<div>How much the environment map affects the surface; also see "combine".</div>
+
+		<pre>[property:Float refractionRatio]</pre>
+		<div>The index of refraction for an environment map using [page:Textures THREE.CubeRefractionMapping]. Default is *0.98*.</div>
+
+		<pre>[property:Boolean fog]</pre>
+		<div>Define whether the material color is affected by global fog settings. Default is *true*.</div>
+		<div>This setting might not have any effect when used with certain renderers. For example, it is ignored with the [page:CanvasRenderer Canvas] renderer, but does work with the [page:WebGLRenderer WebGL] renderer.</div>
+
+		<pre>[property:Boolean wireframe]</pre>
+		<div>Whether the triangles' edges are displayed instead of surfaces. Default is *false*.</div>
+
+		<pre>[property:Float wireframeLinewidth]</pre>
+		<div>Line thickness for wireframe mode. Default is *1.0*.</div>
+		<div>Due to limitations in the <a href="https://code.google.com/p/angleproject/" target="_blank">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value.</div>
+
+		<pre>[property:String wireframeLinecap]</pre>
+		<div>Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.</div>
+		<div>This setting might not have any effect when used with certain renderers. For example, it is ignored with the [page:WebGLRenderer WebGL] renderer, but does work with the [page:CanvasRenderer Canvas] renderer.</div>
+
+		<pre>[property:String wireframeLinejoin]</pre>
+		<div>Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.</div>
+		<div>This setting might not have any effect when used with certain renderers. For example, it is ignored with the [page:WebGLRenderer WebGL] renderer, but does work with the [page:CanvasRenderer Canvas] renderer.</div>
+
+		<pre>[property:Integer vertexColors]</pre>
+		<div>Define how the vertices gets colored. Possible values are THREE.NoColors, THREE.FaceColors and THREE.VertexColors. Default is THREE.NoColors.</div>
+		<div>This setting might not have any effect when used with certain renderers. For example, it is ignored with the [page:CanvasRenderer Canvas] renderer, but does work with the [page:WebGLRenderer WebGL] renderer.</div>
+
+		<pre>[property:Boolean skinning]</pre>
+		<div>Define whether the material uses skinning. Default is *false*.</div>
+
+		<pre>[property:Boolean morphTargets]</pre>
+		<div>Define whether the material uses morphTargets. Default is *false*.</div>
+
+		<pre>[property:boolean morphNormals]</pre>
+Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the [page:Geometry]
+			to the shader. Default is *false*.
+		</div>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/MeshLambertMaterial.js.txt">MeshLambertMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshLambertMaterial.js" target="_blank">MeshLambertMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="7">MeshNormalMaterial</h3>
+Материал, который сопоставляет векторы нормалей в RGB цвета.
+A material that maps the normal vectors to RGB colors.
+<!--
+<iframe id="scene" src="scenes/material-browser.html#MeshNormalMaterial"></iframe> -->
+
+<h4>Конструктор</h4>
+<pre>MeshNormalMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="7fog"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="fog - туман">.fog</a></pre>
+Свойство устанавливает, будет или нет материал подвержен влиянию тумана. По умолчанию значение равно <tt>false</tt>.<br><br>
+
+<pre id="7isMeshNormalMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh normal material - является материалом ">.isMeshNormalMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него,  материалом нормалей сетки. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="7lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство устанавливает, будет или нет освещение влиять на материал. По умолчанию значение равно <tt>false</tt>.<br><br>
+
+<pre id="7morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph targets - ">.morphTargets</a></pre>
+Define whether the material uses morphTargets. По умолчанию значение равно <tt>false</tt>.<br><br>
+
+<pre id="7wireframe"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe - каркас">.wireframe</a></pre>
+Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и объект ровно закрашен).<br><br>
+
+<pre id="7wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линий каркаса">.wireframeLinewidth</a></pre>
+Свойство управляет толщиной линий каркаса. Значение по умолчанию равно <tt>1</tt>.<br>
+Из-за ограничений в <a href="https://code.google.com/p/angleproject" target="_blank">слое ANGLE</a> в операционных системах на основе Windows ширина линии всегда будет равна <tt>1</tt>, независимо от установленного значения.
+<div class=note_trans><b>Примечание переводчика:</b> ANGLE (Almost Native Graphics Layer Engine - практически встроенный движок графического слоя, а перевод самой аббревиатуры ANGLE - угол) это графический движок слоя абстракций, разработанный компанией Google, с открытым исходным кодом под лицензией BSD.
+Этот API в основном предназначен для обеспечения высокопроизводительной совместимости OpenGL с компьютерами Windows и веб-браузерами вроде Chromium, путем перевода вызовов OpenGL в Direct3D, который гораздо лучше поддерживается драйверами. Для ANGLE существует два внутренних визуализатора: самый старый использует Direct3D 9.0c, в то время как новый использует Direct3D 11.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><i>из статьи англ. Википедии о <a href="https://en.wikipedia.org/wiki/ANGLE_(software)" target="_blank">ANGLE</a>, перевод мой.</i></span></div></div><br>
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/MeshNormalMaterial.js.txt">MeshNormalMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshNormalMaterial.js" target="_blank">MeshNormalMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="8">MeshPhongMaterial</h3>
+A material for shiny surfaces, evaluated per pixel.
+<!--
+<iframe id="scene" src="scenes/material-browser.html#MeshPhongMaterial"></iframe>  -->
+
+<h4>Конструктор</h4>
+<pre>MeshPhongMaterial( [page:Object parameters] )</pre>
+		<div>
+		parameters -- an object with one or more of the material's properties defining the material's appearance.
+		</div>
+		<div>
+		color — geometry color in hexadecimal. Default is 0xffffff.<br>
+		specular — Set specular color. Default is 0x111111 .<br>
+		shininess — Set shininess Default is 30.<br>
+		map — Set texture map. Default is null.<br>
+		lightMap — Set light map. Default is null.<br>
+		lightMapIntensity — Set light map intensity. Default is 1.<br>
+		aoMap — Set ao map. Default is null.<br>
+		aoMapIntensity — Set ao map intensity. Default is 1.<br>
+		emissive - Set emissive color. Default is 0x000000.<br>
+		emissiveMap — Set emissive map. Default is null.<br>
+		emissiveIntensity — Set emissive map intensity. Default is 1.<br>
+		bumpMap — Set bump map. Default is null.<br>
+		bumpScale — Set bump map scale. Default is 1.<br>
+		normalMap — Set normal map. Default is null.<br>
+		normalScale — Set normal map scale. Default is (1, 1).<br>
+		displacementMap — Set displacement map. Default is null.<br>
+		displacementScale — Set displacement scale. Default is 1.<br>
+		displacementBias — Set displacement offset. Default is 0.<br>
+		specularMap — Set specular map. Default is null.<br>
+		alphaMap — Set alpha map. Default is null.<br>
+		envMap — Set env map. Default is null.<br>
+		combine — Set combine operation. Default is THREE.MultiplyOperation.<br>
+		reflectivity — Set reflectivity. Default is 1.<br>
+		refractionRatio — Set refraction ratio. Default is 0.98.<br>
+		fog — Define whether the material color is affected by global fog settings. Default is true.<br>
+		shading — Define shading type. Default is THREE.SmoothShading.<br>
+		wireframe — render geometry as wireframe. Default is false.<br>
+		wireframeLinewidth — Line thickness. Default is 1.<br>
+		wireframeLinecap — Define appearance of line ends. Default is 'round'.<br>
+		wireframeLinejoin — Define appearance of line joints. Default is 'round'.<br>
+		vertexColors — Define how the vertices gets colored. Default is THREE.NoColors.<br>
+		skinning — Define whether the material uses skinning. Default is false.<br>
+		morphTargets — Define whether the material uses morphTargets. Default is false.<br>
+		morphNormals — Define whether the material uses morphNormals. Default is false.
+		</div>
+		<div>
+		Example:<br>
+		materials.push( new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } ) );
+
+		</div>
+
+
+  <h4>Свойства</h4>
+		<div>See the base [page:Material] class for common properties.</div>
+
+		<pre>[property:Color color]</pre>
+		<div>
+		Diffuse color of the material. Default is white.<br>
+		</div>
+
+		<pre>[property:Color specular]</pre>
+		<div>
+		Specular color of the material, i.e., how shiny the material is and the color of its shine. Setting this the same color as the diffuse value (times some intensity) makes the material more metallic-looking; setting this to some gray makes the material look more plastic. Default is dark gray.<br>
+		</div>
+
+		<pre>[property:Float shininess]</pre>
+		<div>How shiny the specular highlight is; a higher value gives a sharper highlight. Default is *30*.</div>
+
+		<pre>[property:Texture map]</pre>
+		<div>Set color texture map. Default is null. The texture map color is modulated by the diffuse color.</div>
+
+		<pre>[property:Texture lightMap]</pre>
+		<div>Set light map. Default is null. The lightMap requires a second set of UVs.</div>
+
+		<pre>[property:Float lightMapIntensity]</pre>
+		<div>TODO</div>
+
+		<pre>[property:Texture aoMap]</pre>
+		<div>Set ambient occlusion map. Default is null. The aoMap requires a second set of UVs.</div>
+
+		<pre>[property:Float aoMapIntensity]</pre>
+		<div>TODO</div>
+
+		<pre>[property:Color emissive]</pre>
+		<div>
+		Emissive (light) color of the material, essentially a solid color unaffected by other lighting. Default is black.<br>
+		</div>
+
+		<pre>[property:Texture emissiveMap]</pre>
+		<div>Set emisssive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.</div>
+
+		<pre>[property:Float emissiveIntensity]</pre>
+		<div>Intensity of the emissive light. Modulates the emissive color. Default is 1.</div>
+
+		<pre>[property:Texture bumpMap]</pre>
+		<div>
+			The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+			Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will
+			be ignored.
+		</div>
+
+		<pre>[property:Float bumpScale]</pre>
+		<div>
+			How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
+		</div>
+
+		<pre>[property:Texture normalMap]</pre>
+		<div>
+			The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change
+			the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.
+		</div>
+
+		<pre>[property:Vector2 normalScale]</pre>
+		<div>
+			How much the normal map affects the material. Typical ranges are 0-1. Default is (1,1).
+		</div>
+
+		<pre>[property:Texture displacementMap]</pre>
+		<div>
+			The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry.
+			The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
+		</div>
+
+		<pre>[property:Float displacementScale]</pre>
+		<div>
+			How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied. Default is 1.
+		</div>
+
+		<pre>[property:Float displacementBias]</pre>
+		<div>
+			The offset of the displacement map's values on the mesh's vertices. Without a displacement map set, this value is not applied. Default is 0.
+		</div>
+
+		<pre>[property:Texture specularMap]</pre>
+		<div>The specular map value affects both how much the specular surface highlight contributes and how much of the environment map affects the surface. Default is null.</div>
+
+		<pre>[property:Texture alphaMap]</pre>
+		<div>The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.</div>
+		<div>Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the [page:WebGLRenderer WebGL] renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.</div>
+
+		<pre>[property:TextureCube envMap]</pre>
+		<div>Set env map. Default is null.</div>
+
+		<pre>[property:Integer combine]</pre>
+		<div>How to combine the result of the surface's color with the environment map, if any.</div>
+
+		<div>Options are [page:Textures THREE.MultiplyOperation] (default), [page:Textures THREE.MixOperation], [page:Textures THREE.AddOperation]. If mix is chosen, the reflectivity is used to blend between the two colors.</div>
+
+		<pre>[property:Float reflectivity]</pre>
+		<div>How much the environment map affects the surface; also see "combine".</div>
+
+		<pre>[property:Float refractionRatio]</pre>
+		<div>The index of refraction for an environment map using [page:Textures THREE.CubeRefractionMapping]. Default is *0.98*.</div>
+
+		<pre>[property:Boolean fog]</pre>
+		<div>Define whether the material color is affected by global fog settings. Default is *true*.</div>
+		<div>This setting might not have any effect when used with certain renderers. For example, it is ignored with the [page:CanvasRenderer Canvas] renderer, but does work with the [page:WebGLRenderer WebGL] renderer.</div>
+
+		<pre>[property:Integer shading]</pre>
+		<div>How the triangles of a curved surface are rendered: as a smooth surface, as flat separate facets, or no shading at all.</div>
+
+		<div>Options are [page:Materials THREE.SmoothShading] (default), [page:Materials THREE.FlatShading].</div>
+
+		<pre>[property:Boolean wireframe]</pre>
+		<div>Whether the triangles' edges are displayed instead of surfaces. Default is *false*.</div>
+
+		<pre>[property:Float wireframeLinewidth]</pre>
+		<div>Line thickness for wireframe mode. Default is *1.0*.</div>
+		<div>Due to limitations in the <a href="https://code.google.com/p/angleproject/" target="_blank">ANGLE layer</a>, on Windows platforms linewidth will always be 1 regardless of the set value.</div>
+
+		<pre>[property:String wireframeLinecap]</pre>
+		<div>Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.</div>
+		<div>This setting might not have any effect when used with certain renderers. For example, it is ignored with the [page:WebGLRenderer WebGL] renderer, but does work with the [page:CanvasRenderer Canvas] renderer.</div>
+
+		<pre>[property:String wireframeLinejoin]</pre>
+		<div>Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.</div>
+		<div>This setting might not have any effect when used with certain renderers. For example, it is ignored with the [page:WebGLRenderer WebGL] renderer, but does work with the [page:CanvasRenderer Canvas] renderer.</div>
+
+		<pre>[property:Integer vertexColors]</pre>
+		<div>Define how the vertices gets colored. Possible values are THREE.NoColors, THREE.FaceColors and THREE.VertexColors. Default is THREE.NoColors.</div>
+		<div>This setting might not have any effect when used with certain renderers. For example, it is ignored with the [page:CanvasRenderer Canvas] renderer, but does work with the [page:WebGLRenderer WebGL] renderer.</div>
+
+		<pre>[property:Boolean skinning]</pre>
+		<div>Define whether the material uses skinning. Default is *false*.</div>
+
+		<pre>[property:Boolean morphTargets]</pre>
+		<div>Define whether the material uses morphTargets. Default is *false*.</div>
+
+<pre>[property:boolean morphNormals]</pre>
+Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the [page:Geometry] to the shader. Default is *false*.
+
+<h4>Методы</h4>
+<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/MeshPhongMaterial.js.txt">MeshPhongMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshPhongMaterial.js" target="_blank">MeshPhongMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a>&nbsp;&nbsp;<a href="#10" title="Переход к родительскому классу: MeshStandardMaterial"><tt>MeshStandardMaterial &rarr;</tt></a></span>
+<h3 id="9">MeshPhysicalMaterial</h3>
+Расширение <a href="#10" title="MeshStandardMaterial"><tt>MeshStandardMaterial</tt></a>, позволяющее увеличить регулировку способности к отражению. reflectivity.<br>
+Обратите внимание, что при использовании этого материала, для достижения наилучших результатов, всегда следует указывать карту окружения.
+Note that for best results you should always specify an environment map when using this material.<br><br>
+<!-- <iframe id="scene" src="scenes/material-browser.html#MeshStandardMaterial"></iframe> -->
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/webgl_materials_variations_physical" target="_blank">webgl / materials / variations / physical</a>
+<a href="https://threejs.org/examples/webgl_materials_reflectivity" target="_blank">webgl / materials / reflectivity</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>MeshPhysicalMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a> и <a href="#10" title="MeshStandardMaterial">MeshStandardMaterial</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовые классы <a href="#3" title="Material">Material</a> и <a href="#10" title="MeshStandardMaterial">MeshStandardMaterial</a>.
+<div class=blockindent><br>
+<pre id="9clearCoat"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="clear coat - ">.clearCoat</a></pre>
+ClearCoat level, from 0.0 to 1.0. Значение по умолчанию равно <tt>0.0</tt>.<br><br>
+
+<pre id="9clearCoatRoughness"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="clear coat roughness - ">.clearCoatRoughness</a></pre>
+How rough the clearCoat appears, from 0.0 to 1.0. Значение по умолчанию равно <tt>0.0</tt>.<br><br>
+
+<pre id="9isMeshPhysicalMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh physical material - является физическим материалом сетки">.isMeshPhysicalMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, физическим материалом сетки. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+<pre id="9defines"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="defines - определить, установить">.defines</a></pre>
+Объект в виде:
+<pre>{ 'PHYSICAL': '' };</pre>
+Он используется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGLRenderer</a>'ом для выбора шейдеров.<br><br>
+
+<pre id="9reflectivity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="reflectivity - отражательная способность (коэффициент отражения)">.reflectivity</a></pre>
+Степень отражения, возможны значения от <tt>0.0</tt> до <tt>1.0</tt>. Значение по умолчанию равно <tt>0.5</tt>.<br>
+Свойство моделирует способность к отражению света неметаллических материалов. Оно не работает если свойство <tt><a href="#10metalness" title="MeshStandardMaterial.metalness">metalness</a></tt> равно <tt>1.0</tt>.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовые классы <a href="#3" title="Material">Material</a> и <a href="#10" title="MeshStandardMaterial">MeshStandardMaterial</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/MeshPhysicalMaterial.js.txt">MeshPhysicalMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshPhysicalMaterial.js" target="_blank">MeshPhysicalMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="10">MeshStandardMaterial</h3>
+Стандартный, физически обоснованный материал, using Metallic-Roughness workflow.<br>
+Physically based rendering (PBR) has recently become the standard in many 3D applications, such as Unity, Unreal and 3D Studio Max.
+
+This approach differs from older approaches in that instead of using approximations for the way in which light interacts with a surface, a physically correct model is used. The idea is that, instead of tweaking materials to look good under specific lighting, a material can be created that will react 'correctly' under all lighting scenarios.
+
+In practice this gives a more accurate and realistic looking result than the MeshLambertMaterial or MeshPhongMaterial, at the cost of being somewhat more computationally expensive.
+
+Shading is calculated in the same way as for the MeshPhongMaterial, using a Phong shading model. This calculates shading per pixel (i.e. in the fragment shader, AKA pixel shader) which gives more accurate results than the Gouraud model used by MeshLambertMaterial, at the cost of some performance.
+
+Note that for best results you should always specify an environment map when using this material.
+
+For a non-technical introduction to the concept of PBR and how to set up a PBR material, check out these articles by the people at marmoset:
+
+<ul><li><a href="https://www.marmoset.co/posts/basic-theory-of-physically-based-rendering/" target="_blank">Basic Theory of Physically Based Rendering</a></li>
+<li><a href="https://www.marmoset.co/posts/physically-based-rendering-and-you-can-too/" target="_blank">Physically Based Rendering and You Can Too</a></li></ul>
+Технические подробности подхода, используемого в <em>three.js</em> (и большинстве других систем PBR),
+можно найти в <a href="https://disney-animation.s3.amazonaws.com/library/s2012_pbs_disney_brdf_notes_v2.pdf" target="_blank">этой статье</a> (pdf) от диснеевской студии анимации, написанную Брентом Барли (Brent Burley).<br><br>
+
+<h4>Конструктор</h4>
+<pre>MeshStandardMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="10alphaMap"><a href="textures.htm#6" title="Texture. alpha map - карта альфа-канала, т.е. карта прозрачности">.alphaMap</a></pre>
+Альфа-карта представляет собой текстуру в оттенках серого, которая управляет непрозрачностью по всей поверхности (черный цвет: полностью прозрачный; белый: полностью непрозрачный). Значением по умолчанию является <tt>null</tt>.<br>
+Используется только цвет текстуры, альфа-канал (если он существует) игнорируется. Для текстур RGB и RGBA визуализатор WebGL будет использовать канал зеленого цвета
+Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.<br><br>
+
+<pre id="10aoMap"><a href="textures.htm#6" title="Texture. aoMap это сокращ. англ. слов ambient occlusion map - карта ">.aoMap</a></pre>
+<!-- https://ru.wikipedia.org/wiki/Ambient_occlusion -->
+Канал красного цвета используется в данной структуре в качестве
+The red channel of this texture is used as the ambient occlusion map. Значением по умолчанию является <tt>null</tt>. The aoMap requires a second set of UVs, and consequently will ignore the repeat and offset Texture properties.<br><br>
+
+<pre id="10aoMapIntensity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слов ambient occlusion map intensity - интенсивность">.aoMapIntensity</a></pre>
+Intensity of the ambient occlusion effect. Значение по умолчанию равно <tt>1</tt>. Zero is no occlusion effect.<br><br>
+
+<pre id="10bumpMap">.bumpMap</a></pre>
+The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights. Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.<br><br>
+
+<pre id="10bumpScale">.bumpScale</a></pre>
+How much the bump map affects the material. Typical ranges are 0-1. Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="10color">.color</a></pre>
+Color of the material, by default set to white (0xffffff).<br><br>
+
+<pre id="10defines">.defines</a></pre>
+An object of the form:
+<pre>{ 'STANDARD': '' };</pre>
+This is used by the WebGLRenderer for selecting shaders.<br><br>
+
+<pre id="10displacementMap">.displacementMap</a></pre>
+The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.<br><br>
+
+<pre id="10displacementScale">.displacementScale</a></pre>
+How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied. Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="10displacementBias">.displacementBias</a></pre>
+The offset of the displacement map's values on the mesh's vertices. Without a displacement map set, this value is not applied. Значение по умолчанию равно <tt>0</tt>.<br><br>
+
+<pre id="10emissive">.emissive</a></pre>
+Emissive (light) color of the material, essentially a solid color unaffected by other lighting. Default is black.<br><br>
+
+<pre id="10emissiveMap">.emissiveMap</a></pre>
+Set emisssive (glow) map. Значением по умолчанию является <tt>null</tt>. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.<br><br>
+
+<pre id="10emissiveIntensity">.emissiveIntensity</a></pre>
+Intensity of the emissive light. Modulates the emissive color. Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="10envMap">.envMap</a></pre>
+The environment map. Значением по умолчанию является <tt>null</tt>. Note that in order for the material roughness property to correctly blur out the environment map, the shader must have access to mipmaps of the env texture.
+TextureCubes created with default settings are correctly configured; if adjusting texture parameters manually, ensure minFilter is set to one of the MipMap options, and that mip maps have not been otherwise forcibly disabled.<br><br>
+
+<pre id="10envMapIntensity">.envMapIntensity</a></pre>
+Scales the effect of the environment map by multiplying its color.<br><br>
+
+<pre id="10isMeshStandardMaterial">.isMeshStandardMaterial</a></pre>
+Used to check whether this or derived classes are mesh standard materials. Значением по умолчанию является <tt>true</tt>.<br>
+You should not change this, as it used internally for optimisation.<br><br>
+
+<pre id="10lightMap">.lightMap</a></pre>
+The light map. Значением по умолчанию является <tt>null</tt>. The lightMap requires a second set of UVs, and consequently will ignore the repeat and offset Texture properties.<br><br>
+
+<pre id="10lightMapIntensity">.lightMapIntensity</a></pre>
+Intensity of the baked light. Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="10map">.map</a></pre>
+The color map. Значением по умолчанию является <tt>null</tt>. The texture map color is modulated by the diffuse .color.<br><br>
+
+<pre id="10metalness"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="metalness - металличность, т.е. степень внешнего сходства с металлом">.metalness</a></pre>
+Свойство определяет, насколько материал похож на металл.
+Для неметаллических материалов, вроде дерева или камня, используется значение <tt>0.0</tt>, для металлических - используется <tt>1.0</tt>, остальные материалы (обычно) в промежутке между этими значениями.
+Значение по умолчанию равно <tt>0.5</tt>. Значение между <tt>0.0</tt> и <tt>1.0</tt> может использоваться для передачи вида ржавого металла. Если также представлено свойство <tt>metalnessMap</tt>, оба значения перемножаются.<br><br>
+
+<pre id="10metalnessMap"><a href="textures.htm#6" title="Texture">.metalnessMap</a></pre>
+Канал синего цвета данной текстуры используется для передачи изменения металличности (свойство <tt>metalness</tt>) этого материала.<br><br>
+
+<pre id="10morphNormals"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph normals - ">.morphNormals</a></pre>
+Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the Geometry	to the shader. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="10morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph targets - ">.morphTargets</a></pre>
+Define whether the material uses morphTargets. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="10normalMap">.normalMap</a></pre>
+The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.<br><br>
+
+<pre id="10normalScale">.normalScale</a></pre>
+How much the normal map affects the material. Typical ranges are 0-1. Default is a Vector2 set to (1,1).<br><br>
+
+<pre id="10refractionRatio">.refractionRatio</a></pre>
+The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material. It is used with environment mapping modes THREE.CubeRefractionMapping and THREE.EquirectangularRefractionMapping. The refraction ratio should not exceed 1. Значение по умолчанию равно <tt>0.98</tt>.<br><br>
+
+<pre id="10roughness">.roughness</a></pre>
+How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse. Значение по умолчанию равно <tt>0.5</tt>. If roughnessMap is also provided, both values are multiplied.<br><br>
+
+<pre id="10roughnessMap">.roughnessMap</a></pre>
+The green channel of this texture is used to alter the roughness of the material.<br><br>
+
+<pre id="10skinning">.skinning</a></pre>
+Define whether the material uses skinning. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="10wireframe"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe - каркас">.wireframe</a></pre>
+Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и визуализация происходит при помощи плоских многоугольников - полигонов).<br><br>
+<pre id="10wireframeLinecap"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line cap - окончание линии каркаса">.wireframeLinecap</a></pre>
+Свойство определяет внешний вид концов линий. Возможные значения: "butt" (торец), "round" (круглый) и "square" (прямоугольный). Значением по умолчанию является <tt>round</tt>.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap" target="_blank"><tt>lineCap</tt> в 2D Canvas</a> и оно игнорируется WebGL визуализатором (рендерером).
+Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineCap" target="_blank">статья о <tt>lineCap</tt></a> на русском языке.<br><br>
+<pre id="10wireframeLinejoin"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line join - соединение линии каркаса">.wireframeLinejoin</a></pre>
+Свойство определяет внешний вид соединений линий. Возможные значения: "round" (округление), "bevel" (скос) и "miter" (митра). Значением по умолчанию является <tt>round</tt>.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется WebGL визуализатором (рендерером).
+Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br><br>
+<pre id="10wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линии каркаса">.wireframeLinewidth</a></pre>
+Свойство управляет толщиной линий каркаса. Значение по умолчанию равно <tt>1</tt>.<br>
+Из-за ограничений в <a href="https://code.google.com/p/angleproject" target="_blank">слое ANGLE</a> в операционных системах на основе Windows ширина линии всегда будет равна <tt>1</tt>, независимо от установленного значения.
+<div class=note_trans><b>Примечание переводчика:</b> ANGLE (Almost Native Graphics Layer Engine - практически встроенный движок графического слоя, а перевод самой аббревиатуры ANGLE - угол) это графический движок слоя абстракций, разработанный компанией Google, с открытым исходным кодом под лицензией BSD.
+Этот API в основном предназначен для обеспечения высокопроизводительной совместимости OpenGL с компьютерами Windows и веб-браузерами вроде Chromium, путем перевода вызовов OpenGL в Direct3D, который гораздо лучше поддерживается драйверами. Для ANGLE существует два внутренних визуализатора: самый старый использует Direct3D 9.0c, в то время как новый использует Direct3D 11.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><i>из статьи англ. Википедии о <a href="https://en.wikipedia.org/wiki/ANGLE_(software)" target="_blank">ANGLE</a>, перевод мой.</i></span></div></div><br>
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/MeshStandardMaterial.js.txt">MeshStandardMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshStandardMaterial.js" target="_blank">MeshStandardMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a>&nbsp;&nbsp;<a href="#8" title="Переход к родительскому классу: MeshPhongMaterial"><tt>MeshPhongMaterial &rarr;</tt></a></span>
+<h3 id="11">MeshToonMaterial</h3>
+Расширение <a href="#8" title="MeshPhongMaterial"><tt>MeshPhongMaterial</tt></a> с with toon shading.<br><br>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/webgl_materials_variations_toon" target="_blank">webgl / materials / variations / toon</a></pre><br>
+<h4>Конструктор</h4>
+<pre>MeshToonMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a> и <a href="#10" title="MeshStandardMaterial">MeshStandardMaterial</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовые классы <a href="#3" title="Material">Material</a> и <a href="#8" title="MeshPhongMaterial">MeshPhongMaterial</a>.
+<div class=blockindent><br>
+<pre id="11gradientMap"><a href="textures.htm#6" title="Texture. gradient map - карта градиента">.gradientMap</a></pre>
+Карта градиента для Gradient map for the toon shading. По умолчанию значение равно <tt>null</tt>.<br><br>
+
+<pre id="11isMeshToonMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh toon material - является тонированным материалом сетки">.isMeshToonMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, тонированным материалом сетки. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.</div><br>
+
+<pre id="11defines"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="defines - ">.defines</a></pre>
+Объект в виде:
+<pre>{ 'TOON': '' };</pre>
+Он используется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGLRenderer</a>'ом для выбора шейдеров.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовые классы <a href="#3" title="Material">Material</a> и <a href="#8" title="MeshPhongMaterial">MeshPhongMaterial</a>.
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/MeshToonMaterial.js.txt">MeshToonMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshToonMaterial.js" target="_blank">MeshToonMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="12">PointsMaterial</h3>
+Материал, по умолчанию используемый классом <a href="objects.htm#9" title="Points">Points</a>.<br><br>
+<h4>Пример</h4>
+<pre>// This will add a starfield to the background of a scene
+// Этот код добавит звездное поле на задний план сцены
+var starsGeometry = new THREE.Geometry();<br>
+for ( var i = 0; i &lt; 10000; i ++ ) {
+  var star = new THREE.Vector3();
+  star.x = THREE.Math.randFloatSpread( 2000 );
+  star.y = THREE.Math.randFloatSpread( 2000 );
+  star.z = THREE.Math.randFloatSpread( 2000 );<br>
+  starsGeometry.vertices.push( star );
+}<br>
+var starsMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
+var starField = new THREE.Points( starsGeometry, starsMaterial );<br>
+scene.add( starField );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/misc_controls_fly" target="_blank">misc / controls / fly</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_drawcalls" target="_blank">webgl / buffergeometry / drawcalls</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_points" target="_blank">webgl / BufferGeometry / points</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_points_interleaved" target="_blank">webgl / BufferGeometry / points / interleaved</a>
+<a href="https://threejs.org/examples/webgl_camera" target="_blank">webgl / camera</a>
+<a href="https://threejs.org/examples/webgl_geometry_convex" target="_blank">webgl / geometry / convex</a>
+<a href="https://threejs.org/examples/webgl_geometry_shapes" target="_blank">webgl / geometry / shapes</a>
+<a href="https://threejs.org/examples/webgl_interactive_raycasting_points" target="_blank">webgl / interactive / raycasting / points</a>
+<a href="https://threejs.org/examples/webgl_multiple_elements_text" target="_blank">webgl / multiple / elements / text</a>
+<a href="https://threejs.org/examples/webgl_points_billboards" target="_blank">webgl / points / billboards</a>
+<a href="https://threejs.org/examples/webgl_points_billboards_colors" target="_blank">webgl / points / billboards / colors</a>
+<a href="https://threejs.org/examples/webgl_points_dynamic" target="_blank">webgl / points / dynamic</a>
+<a href="https://threejs.org/examples/webgl_points_random" target="_blank">webgl / points / random</a>
+<a href="https://threejs.org/examples/webgl_points_sprites" target="_blank">webgl / points / sprites</a>
+<a href="https://threejs.org/examples/webgl_trails" target="_blank">webgl / trails</a></pre><br>
+<h4>Конструктор</h4>
+<pre>PointsMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="12"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
+<a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
+<pre id="12isPointsMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is points material - является материалом точек">.isPointsMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалом точек. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+<pre id="12lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="12map"><a href="textures.htm#6" title="Texture. map - карта">.map</a></pre>
+Свойство устанавливает цвет точек используя данные из <a href="textures.htm#6" title="Texture">Texture</a>.<br><br>
+<pre id="12size"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="size - размер">.size</a></pre>
+Свойство устанавливает размер точек. Значение по умолчанию равно <tt>1.0</tt>.<br><br>
+<pre id="12sizeAttenuation"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="size attenuation - затухание (уменьшение) размера">.sizeAttenuation</a></pre>
+Свойство определяет, будет ли размер точек уменьшаться с расстоянием. Значением по умолчанию является <tt>true</tt>.</div><br>
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/PointsMaterial.js.txt">PointsMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/PointsMaterial.js" target="_blank">PointsMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#14" title="Переход к родительскому классу: ShaderMaterial"><tt>ShaderMaterial &rarr;</tt></a></span>
+<h3 id="13">RawShaderMaterial</h3>
+Данный класс работает также как класс <a href="#14" title="ShaderMaterial">ShaderMaterial</a>, за исключением того, что определения встроенных атрибутов и uniform не добавляются к коду шейдера GLSL автоматически.
+ except that definitions of built-in uniforms and attributes are not automatically prepended to the GLSL shader code.<br><br>
+<h4>Пример</h4>
+<pre>var material = new THREE.RawShaderMaterial( {<br>
+  uniforms: {
+    time: { value: 1.0 }
+  },
+  vertexShader: document.getElementById( 'vertexShader' ).textContent,
+  fragmentShader: document.getElementById( 'fragmentShader' ).textContent,<br>
+} );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_buffergeometry_rawshader" target="_blank">WebGL / buffergeometry / rawshader</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_instancing_billboards" target="_blank">WebGL / buffergeometry / instancing / billboards</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_instancing_dynamic" target="_blank">WebGL / buffergeometry / instancing / dynamic</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_instancing_interleaved_dynamic" target="_blank">WebGL / buffergeometry / instancing / interleaved / dynamic</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_instancing" target="_blank">WebGL / buffergeometry / instancing</a>
+<a href="https://threejs.org/examples/webgl_interactive_instances_gpu" target="_blank">WebGL / interactive / instances / gpu</a>
+<a href="https://threejs.org/examples/webgl_raymarching_reflect" target="_blank">WebGL / raymarching / reflect</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>RawShaderMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a> и <a href="#14" title="ShaderMaterial">ShaderMaterial</a>).</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовые классы <a href="#3" title="Material">Material</a> и <a href="#14" title="ShaderMaterial">ShaderMaterial</a>.
+<div class=blockindent><br>
+<pre id="13isRawShaderMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is raw shader material - является материалом необработанных шейдеров">.isRawShaderMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалами необработанных шейдеров. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовые классы <a href="#3" title="Material">Material</a> и <a href="#14" title="ShaderMaterial">ShaderMaterial</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/RawShaderMaterial.js.txt">RawShaderMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/RawShaderMaterial.js" target="_blank">RawShaderMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="14">ShaderMaterial</h3>
+Материал отображаемый с помощью собственных (заказных) шейдеров. Шейдер - это небольшая программа, написанная на языке <a href="https://www.opengl.org/documentation/glsl/" target="_blank">GLSL</a>
+для запуска на <a class=popupspot href="JavaScript:hhctrl.TextPopup('сокращ. англ. слов graphics processing unit - блок графической обработки, т.е. видеокарта','Arial,9',10,10,0xffffff,0xd69967)">GPU</a>.
+Можно использовать заказной шейдер, если требуется:
+<ul><li>реализовать эффект не включенный ни в один из встроенных <a href="#3" title="Material">материалов</a></li>
+<li>для повышения производительности объединить несколько объектов в одной <tt><a href="core.htm#7" title="Geometry">Geometry</a></tt> или <tt><a href="core.htm#2" title="BufferGeometry">BufferGeometry</a></tt></li></ul>
+При использовании <tt>ShaderMaterial</tt> нужно учитывать следующие замечания:
+<ul><li>A *ShaderMaterial* will only be rendered properly by [page:WebGLRenderer], since the GLSL code in the *vertexShader* and *fragmentShader* properties must be compiled and run on the GPU using WebGL.</li>
+<li>Начиная с версии THREE r72, больше не поддерживается прямое назначение атрибутов в <tt>ShaderMaterial</tt>. A [page:BufferGeometry] instance (instead of a [page:Geometry] instance) must be used instead, using [page:BufferAttribute] instances to define custom attributes.</li>
+<li>Начиная с версии THREE r77, экземпляры <a href="renderers.htm#1.2" title="WebGLRenderTarget">WebGLRenderTarget</a> или <a href="renderers.htm#1.3" title="WebGLRenderTargetCube">WebGLRenderTargetCube</a> не должны больше использоваться как uniforms.
+Вместо этого нужно воспользоваться их свойством <a href="textures.htm#6" title="Texture">texture</a>.</li>
+<li>Встроенные атрибуты и uniforms передаются шейдерам вместе с кодом. Если не требуется, чтобы <a href="dev-ref.htm#2.1" title="WebGLProgram">WebGLProgram</a> добавляла что-либо к коду шейдера, вместо данного класса можно использовать <a href="#13" title="RawShaderMaterial">RawShaderMaterial</a>.</li></ul><br>
+
+<h4>Пример</h4>
+<pre>var material = new THREE.ShaderMaterial( {<br>
+  uniforms: {<br>
+    time: { value: 1.0 },
+    resolution: { value: new THREE.Vector2() }<br>
+  },<br>
+  vertexShader: document.getElementById( 'vertexShader' ).textContent,
+  fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+} );</pre>
+<h5>Другие примеры</h5>
+<div><a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
+<div style='display:none;'>
+<pre><a href="https://threejs.org/examples/webgl_animation_cloth" target="_blank">webgl / animation / cloth</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_custom_attributes_particles" target="_blank">webgl / buffergeometry / custom / attributes / particles</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_selective_draw" target="_blank">webgl / buffergeometry / selective / draw</a>
+<a href="https://threejs.org/examples/webgl_custom_attributes" target="_blank">webgl / custom / attributes</a>
+<a href="https://threejs.org/examples/webgl_custom_attributes_lines" target="_blank">webgl / custom / attributes / lines</a>
+<a href="https://threejs.org/examples/webgl_custom_attributes_points" target="_blank">webgl / custom / attributes / points</a>
+<a href="https://threejs.org/examples/webgl_custom_attributes_points2" target="_blank">webgl / custom / attributes / points2</a>
+<a href="https://threejs.org/examples/webgl_custom_attributes_points3" target="_blank">webgl / custom / attributes / points3</a>
+<a href="https://threejs.org/examples/webgl_depth_texture" target="_blank">webgl / depth / texture</a>
+<a href="https://threejs.org/examples/webgl_gpgpu_birds" target="_blank">webgl / gpgpu / birds</a>
+<a href="https://threejs.org/examples/webgl_gpgpu_protoplanet" target="_blank">webgl / gpgpu / protoplanet</a>
+<a href="https://threejs.org/examples/webgl_gpgpu_water" target="_blank">webgl / gpgpu / water</a>
+<a href="https://threejs.org/examples/webgl_hdr" target="_blank">webgl / hdr</a>
+<a href="https://threejs.org/examples/webgl_interactive_points" target="_blank">webgl / interactive / points</a>
+<a href="https://threejs.org/examples/webgl_kinect" target="_blank">webgl / kinect</a>
+<a href="https://threejs.org/examples/webgl_lights_hemisphere" target="_blank">webgl / lights / hemisphere</a>
+<a href="https://threejs.org/examples/webgl_marchingcubes" target="_blank">webgl / marchingcubes</a>
+<a href="https://threejs.org/examples/webgl_materials_bumpmap_skin" target="_blank">webgl / materials / bumpmap / skin</a>
+<a href="https://threejs.org/examples/webgl_materials_envmaps" target="_blank">webgl / materials / envmaps</a>
+<a href="https://threejs.org/examples/webgl_materials_lightmap" target="_blank">webgl / materials / lightmap</a>
+<a href="https://threejs.org/examples/webgl_materials_parallaxmap" target="_blank">webgl / materials / parallaxmap</a>
+<a href="https://threejs.org/examples/webgl_materials_shaders_fresnel" target="_blank">webgl / materials / shaders / fresnel</a>
+<a href="https://threejs.org/examples/webgl_materials_skin" target="_blank">webgl / materials / skin</a>
+<a href="https://threejs.org/examples/webgl_materials_texture_hdr" target="_blank">webgl / materials / texture / hdr</a>
+<a href="https://threejs.org/examples/webgl_materials_wireframe" target="_blank">webgl / materials / wireframe</a>
+<a href="https://threejs.org/examples/webgl_modifier_tessellation" target="_blank">webgl / modifier / tessellation</a>
+<a href="https://threejs.org/examples/webgl_nearestneighbour" target="_blank">webgl / nearestneighbour</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_dof2" target="_blank">webgl / postprocessing / dof2</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_godrays" target="_blank">webgl / postprocessing / godrays</a></pre></div></div><br>
+
+<h4>Шейдеры вершин и фрагментов</h4>
+Для любого материала можно задать два разных вида шейдеров:
+<ul><li>Вначале запускается <em>вершинный шейдер</em> (vertex shader); он принимает атрибуты, вычисляет/управляет положение каждой отдельной вершиной и передает дополнительные данные  шейдеру фрагмента.</li>
+<li>Вторым номером запускается <em>шейдер фрагмента</em> (fragment shader); он устанавливает цвет каждого отдельного фрагмента (пикселя) отображаемого на экране.</li></ul>
+В шейдерах существует три типа переменных: униформы (uniforms), атрибуты (attributes) и вариации (varyings):
+<ul><li>Униформы (<tt>uniforms</tt>) - это переменные, что имеют однообразное значение для всех вершин; освещение, туман и карты тени - вот примеры данных, которые будут храниться в униформах.
+Uniforms can be accessed by both the vertex shader and the fragment shader.</li>
+<li>Атрибуты (<tt>attributes</tt>) - это переменные, связанные с каждой вершиной - например, положение вершины, нормаль к грани и цвет вершины - это все примеры данных, которые будут хранится в атрибутах. Атрибуты могут быть доступны <b>только</b> внутри вершинного шейдера.</li>
+<li>Вариации (<tt>varyings</tt>) - это переменные, которые передаются из вершинного шейдера в шейдер фрагмента. Для каждого фрагмента значение каждой вариации будет плавно интерполироваться из значений смежных вершин.</li></ul>
+Обратите внимание, что <b>внутри</b> собственно самого шейдера, униформы и атрибуты действуют как константы; можно только изменять их значения передачей различных значений в буферы из JavaScript кода.
+Note that <b>within</b> the shader itself, uniforms and attributes act like constants; you can only modify their values by passing different values to the buffers from your JavaScript code.<br><br>
+
+<h4>Встроенные атрибуты и униформы</h4>
+По умолчанию <a href="renderers.htm#1.1" title="WebGLRenderer">WebGLRenderer</a> предоставляет шейдерам множество атрибутов и униформов; определения этих переменных добавляются в код <tt>fragmentShader</tt> и <tt>vertexShader</tt> с помощью <a href="dev-ref.htm#2.1" title="WebGLProgram">WebGLProgram</a> при компиляции шейдера; отдельно объявлять их самих не требуется.
+Подробнее об этих переменных смотрите в описании <a href="dev-ref.htm#2.1" title="WebGLProgram">WebGLProgram</a>.<br><br>
+Некоторые из этих униформ или атрибутов (например связанные с освещением, туманом и т.д.) требуют установки свойств материала,
+чтобы <a href="renderers.htm#1.1" title="WebGLRenderer">WebGLRenderer</a> мог скопировать соответствующие значения для GPU - не забудьте установить эти флаги, если хотите в своем собственном шейдере использовать данные функции.<br><br>
+Если не требуется, чтобы <a href="dev-ref.htm#2.1" title="WebGLProgram">WebGLProgram</a> добавляла что-либо к коду шейдера, вместо данного класса можно использовать <a href="#13" title="RawShaderMaterial">RawShaderMaterial</a>.
+
+<h4>Настраиваемые атрибуты и униформы Custom attributes and uniforms</h4>
+Оба типа переменных (и настраиваемые атрибуты, и униформы), должны быть объявлены в GLSL коде шейдера (внутри <tt>vertexShader</tt> и/или <tt>fragmentShader</tt>).
+Both custom attributes and uniforms must be declared in your GLSL shader code (within *vertexShader* and/or *fragmentShader*). Custom uniforms must be defined in <emph>both</emph> the *uniforms* property of your *ShaderMaterial*, whereas any custom attributes must be defined via [page:BufferAttribute] instances. Note that *varying*s only need to be declared within the shader code (not within the material).<br><br>
+To declare a custom attribute, please reference the [page:BufferGeometry] page for an overview, and the [page:BufferAttribute] page for a detailed look at the *BufferAttribute* API.<br><br>
+При создании собственных атрибутов имейте ввиду, что каждый типизированный массив, для хранения данных вашего атрибута, должен быть кратным размеру вашего типа данных.
+Например, если типом атрибута будет <tt><a href="math.htm#19" title="Vector3">THREE.Vector3</a></tt> и в вашей <tt><a href="core.htm#2" title="BufferGeometry">BufferGeometry</a></tt> имеется <tt>3000</tt> вершин,
+то величина создаваемого типизированного массива должна иметь длину <tt>3000 * 3</tt> или <tt>9000</tt> (т.е. одно значение на каждый элемент).
+When creating your attributes, each typed array that you create to hold your attribute's data must be a multiple of your data type's size. For example, if your attribute is a [page:Vector3 THREE.Vector3] type, and you have 3000 vertices in your [page:BufferGeometry], your typed array value must be created with a length of 3000 * 3, or 9000 (one value per-component).
+Для справки ниже приведена таблица размеров для каждого типа данных:<br>
+
+<span class="caption_top"><a id="attribute-sizes">Размеры атрибутов</a></span>
+<table class="tbl_1" border="1" cellpadding="5px">
+<tr class="head"><td>Тип GLSL<br>GLSL type</td><td>Тип JavaScript<br>JavaScript type</td><td>Размер<br>Size</td></tr>
+<tr align=center><td>float</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="number - число">Number</a></td><td>1</td></tr>
+<tr align=center><td>vec2</td><td><a href="math.htm#18" title="Vector2">THREE.Vector2</a></td><td>2</td></tr>
+<tr align=center><td>vec3</td><td><a href="math.htm#19" title="Vector3">THREE.Vector3</a></td><td>3</td></tr>
+<tr align=center><td>vec3</td><td><a href="math.htm#3" title="Color">THREE.Color</a></td><td>3</td></tr>
+<tr align=center><td>vec4</td><td><a href="math.htm#20" title="Vector4">THREE.Vector4</a></td><td>4</td></tr></table>
+
+Note that attribute buffers are <b>not</b> refreshed automatically when their values change. To update custom attributes, set the *needsUpdate* flag to true on the [page:BufferAttribute] of the geometry (see [page:BufferGeometry] for further details).<br><br>
+To declare a custom [page:Uniform], use the *uniforms* property:
+<pre>uniforms: {
+	time: { value: 1.0 },
+	resolution: { value: new THREE.Vector2() }
+}</pre>
+
+
+<h4>Конструктор</h4>
+<pre>ShaderMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="14clipping"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="clipping - обрезать">.clipping</a></pre>
+Свойство определяет, будет ли данный материал поддерживать обрезку;
+Defines whether this material supports clipping; true to let the renderer pass the clippingPlanes uniform. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="14defaultAttributeValues"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="default attribute values - значение атрибута по умолчанию">.defaultAttributeValues</a></pre>
+When the rendered geometry doesn't include these attributes but the material does, these default values will be passed to the shaders. This avoids errors when buffer data is missing.
+<pre>this.defaultAttributeValues = {
+  'color': [ 1, 1, 1 ],
+  'uv': [ 0, 0 ],
+  'uv2': [ 0, 0 ]
+};</pre><br>
+
+<pre id="14defines"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="defines - определяет">.defines</a></pre>
+Defines custom constants using *#define* directives within the GLSL code for both the vertex shader and the fragment shader; each key/value pair yields another directive:
+<pre>defines: {
+  FOO: 15,
+  BAR: true
+}</pre>
+yields the lines
+<pre>#define FOO 15
+#define BAR true</pre>
+in the GLSL code.<br><br>
+
+<pre id="14extensions"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="extensions - расширения">.extensions</a></pre>
+Объект со следующими свойствами:
+<pre>this.extensions = {
+  derivatives: false, // set to use derivatives (установить при использовании производных)
+  fragDepth: false, // set to use fragment depth values (установить при использовании значений глубины фрагмента)
+  drawBuffers: false, // set to use draw buffers (установить при использовании буферов рисования)
+  shaderTextureLOD: false // set to use shader texture LOD (установить при использовании )
+};</pre><br>
+
+<pre id="14fog"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="fog - туман">.fog</a></pre>
+Define whether the material color is affected by global fog settings; true to pass fog uniforms to the shader. По умолчанию значение равно <tt>false</tt>.<br><br>
+
+<pre id="14fragmentShader"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="fragment shader - шейдер фрагмента">.fragmentShader</a></pre>
+Fragment shader GLSL code. This is the actual code for the shader. In the example above, the vertexShader and fragmentShader code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.<br><br>
+
+<pre id="14index0AttributeName"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="index 0 attribute name - ">.index0AttributeName</a></pre>
+If set, this calls gl.bindAttribLocation to bind a generic vertex index to an attribute variable. По умолчанию значение равно <tt>undefined</tt>.<br><br>
+
+<pre id="14isShaderMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is shader material - является материалом шейдера">.isShaderMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалами шейдера. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="14lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Defines whether this material uses lighting; true to pass uniform data related to lighting to this shader. По умолчанию значение равно <tt>false</tt>.
+
+<pre id="14linewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - ширина линии">.linewidth</a></pre>
+Controls wireframe thickness. По умолчанию значение равно <tt>1</tt>.<br>
+
+Due to limitations in the ANGLE layer, on Windows platforms linewidth will always be 1 regardless of the set value.
+
+<pre id="14morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph targets - ">.morphTargets</a></pre>
+Defines whether the material uses morphTargets; true morphTarget attributes to this shader
+
+<pre id="14morphNormals"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph normals - ">.morphNormals</a></pre>
+Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the Geometry to the shader. По умолчанию значение равно <tt>false</tt>.
+
+<pre id="14program"><a href="dev-ref.htm#2.1" title="WebGLProgram. program - программа">.program</a></pre>
+The compiled shader program associated with this material, generated by WebGLRenderer. You should not need to access this property.
+
+<pre id="14flatShading"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="flat shading - ">.flatShading</a></pre>
+Define whether the material is rendered with flat shading. Default is false.<br><br>
+
+<pre id="14skinning"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="skinning - ">.skinning</a></pre>
+Define whether the material uses skinning; true to pass skinning attributes to the shader. Default is false.<br><br>
+
+<pre id="14uniforms"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="uniforms - ">.uniforms</a></pre>
+An object of the form:
+<pre>{ "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }</pre>
+specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form
+<pre>{ value: 1.0 }</pre>
+where value is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.<br><br>
+
+<pre id="14vertexColors"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="vertex colors - цвета вершин">.vertexColors</a></pre>
+Свойство определяет, как окрашиваются вершины, путем задания способа заполнения атрибута цвета.
+Define how the vertices are colored, by defining how the colors attribute gets populated.
+Возможными значениями являются <tt><a href="constants.htm#5.2" title="Константы материалов. no colors - не окрашено">THREE.NoColors</a></tt>, <tt><a href="constants.htm#5.2" title="Константы материалов. face colors - цвета граней">THREE.FaceColors</a></tt> и <tt><a href="constants.htm#5.2" title="Константы материалов. vertex colors - цвета вершин">THREE.VertexColors</a></tt>. Значение по умолчанию <tt>THREE.NoColors</tt>.<br><br>
+
+<pre id="14vertexShader"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="vertex shader - вершинный шейдер">.vertexShader</a></pre>
+Код GLSL вершинного шейдера. Для шейдера он является действующим кодом. В примере выше, код вершинного шейдера (<tt>vertexShader</tt>) и шейдера фрагмента (<tt>fragmentShader</tt>) извлекается из <a href="https://ru.wikipedia.org/wiki/Document_Object_Model" target="_blank">DOM</a>;
+вместо этого, он мог быть передан напрямую, в виде строки или загружен через <a href="https://ru.wikipedia.org/wiki/AJAX" target="_blank">AJAX</a>.<br><br>
+<pre id="14wireframe"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe - каркас">.wireframe</a></pre>
+Отображать ли геометрию как каркас Render geometry as wireframe (применяется <tt>GL_LINES</tt> вместо <tt>GL_TRIANGLES</tt>). Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и визуализация происходит при помощи плоских многоугольников).<br><br>
+<pre id="14wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линии каркаса">.wireframeLinewidth</a></pre>
+Свойство управляет толщиной линий каркаса. Значением по умолчанию является <tt>1</tt>.<br>
+Из-за ограничений в <a href="https://code.google.com/p/angleproject" target="_blank">слое ANGLE</a> в операционных системах на основе Windows ширина линии всегда будет равна <tt>1</tt>, независимо от установленного значения.
+<div class=note_trans><b>Примечание переводчика:</b> ANGLE (Almost Native Graphics Layer Engine - практически встроенный движок графического слоя, а перевод самой аббревиатуры ANGLE - угол) это графический движок слоя абстракций, разработанный компанией Google, с открытым исходным кодом под лицензией BSD.
+Этот API в основном предназначен для обеспечения высокопроизводительной совместимости OpenGL с компьютерами Windows и веб-браузерами вроде Chromium, путем перевода вызовов OpenGL в Direct3D, который гораздо лучше поддерживается драйверами. Для ANGLE существует два внутренних визуализатора: самый старый использует Direct3D 9.0c, в то время как новый использует Direct3D 11.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><i>из статьи англ. Википедии о <a href="https://en.wikipedia.org/wiki/ANGLE_(software)" target="_blank">ANGLE</a>, перевод мой.</i></span></div></div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+<div class=blockindent><br>
+<pre id="14clone"><a href="#14" title="ShaderMaterial">.clone</a>( ) <a href="#14" title="ShaderMaterial">this</a></pre>
+Generates a shallow copy of this material. Обратите внимание на то, что <tt>vertexShader</tt> и <tt>fragmentShader</tt> копируются <b>по ссылке</b>, as are the definitions of the *attributes*; this means that clones of the material will share the same compiled [page:WebGLProgram].
+А вот униформы копируются <b>по значению</b>, что позволяет иметь различные наборы униформ для разных копий материала.
+However, the *uniforms* are copied <b>by value</b>, which allows you to have different sets of uniforms for different copies of the material.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/ShaderMaterial.js.txt">ShaderMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/ShaderMaterial.js" target="_blank">ShaderMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a>&nbsp;&nbsp;<a href="#14" title="Переход к родительскому классу: ShaderMaterial"><tt>ShaderMaterial &rarr;</tt></a></span>
+<h3 id="15">ShadowMaterial</h3>
+Данный материал может принимать тени, но в остальном он полностью прозрачен (На русский язык shadow material можно перевести как теневой материал, или материал для тени).<br><br>
+
+<h4>Пример</h4>
+<pre>var planeGeometry = new THREE.PlaneGeometry( 2000, 2000 );
+planeGeometry.rotateX( - Math.PI / 2 );<br>
+var planeMaterial = new THREE.ShadowMaterial();
+planeMaterial.opacity = 0.2;<br>
+var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.position.y = -200;
+plane.receiveShadow = true;
+scene.add( plane );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_geometry_spline_editor" target="_blank">geometry / spline / editor</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>ShadowMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a> и <a href="#14" title="ShaderMaterial">ShaderMaterial</a>).</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовые классы <a href="#3" title="Material">Material</a> и <a href="#14" title="ShaderMaterial">ShaderMaterial</a>.
+<div class=blockindent><br>
+<pre id="15isShadowMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is shadow material - является теневым материалом">.isShadowMaterial</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, теневыми материалами. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+<pre id="15lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство устанавливает, будет или нет освещение влиять на материал. Значением по умолчанию является <tt>true</tt>.<br><br>
+<pre id="15transparent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="transparent - прозрачный">.transparent</a></pre>
+Определяет будет ли данный материал прозрачным или нет. Значением по умолчанию является <tt>true</tt>.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовые классы <a href="#3" title="Material">Material</a> и <a href="#14" title="ShaderMaterial">ShaderMaterial</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/ShadowMaterial.js.txt">ShadowMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/ShadowMaterial.js" target="_blank">ShadowMaterial.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="16">SpriteMaterial</h3>
+Материал для использования со <a href="objects.htm#12" title="Sprite">Sprite</a>.<br><br>
+<h4>Пример</h4>
+<pre>var spriteMap = new THREE.TextureLoader().load( 'textures/sprite.png' );<br>
+var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap, color: 0xffffff } );<br>
+var sprite = new THREE.Sprite( spriteMaterial );
+sprite.scale.set(200, 200, 1)<br>
+scene.add( sprite );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_sprites" target="_blank">WebGL / sprites</a>
+<a href="https://threejs.org/examples/misc_ubiquity_test" target="_blank">misc / ubiquity / test</a>
+<a href="https://threejs.org/examples/misc_ubiquity_test2" target="_blank">misc / ubiquity / test2</a>
+<a href="https://threejs.org/examples/software_sandbox" target="_blank">software / sandbox</a>
+<a href="https://threejs.org/examples/svg_sandbox" target="_blank">svg / sandbox</a>
+<a href="https://threejs.org/examples/webgl_materials_cubemap_dynamic" target="_blank">webgl / materials / cubemap / dynamic</a></pre><br>
+<h4>Конструктор</h4>
+<pre>SpriteMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
+Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет). Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+<div class=blockindent><br>
+<pre id="16color"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_color,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">.color</a></pre>
+<a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию устанавливается как белый цвет (<tt>0xffffff</tt>). Карта текстуры (<a href="#16map" title="SpriteMaterial.map">map</a>) перемножается с этим цветом.<br><br>
+<pre id="16fog"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="fog - туман">.fog</a></pre>
+Свойство устанавливает, будет или нет туман на сцене влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="16lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+Свойство устанавливает, будет или нет освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="16map"><a href="textures.htm#6" title="Texture">.map</a></pre>
+Карта текстуры. Значением по умолчанию является <tt>null</tt>.<br><br>
+<pre id="16rotation"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="rotation - поворот">.rotation</a></pre>
+Угол поворота спрайта, в радианах. Значением по умолчанию является <tt>0</tt>.</div><br>
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/materials/SpriteMaterial.js.txt">SpriteMaterial.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/SpriteMaterial.js" target="_blank">SpriteMaterial.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

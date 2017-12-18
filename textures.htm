@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Текстуры</h2>
+<div class=note_trans>Текстура — растровое изображение, накладываемое на поверхность полигональной модели для придания ей цвета, окраски или иллюзии рельефа.<br><a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>
+Приблизительно использование текстур можно легко представить как рисунок на поверхности скульптурного изображения. Использование текстур позволяет воспроизвести малые объекты поверхности, создание которых полигонами оказалось бы чрезмерно ресурсоёмким. Например, шрамы на коже, складки на одежде, мелкие камни и прочие предметы на поверхности стен и почвы.<br><br>
+
+Качество текстурированной поверхности определяется текселями — количеством пикселей на минимальную единицу текстуры. Так как сама по себе текстура является изображением, разрешение текстуры и её формат играют большую роль, которая впоследствии сказывается на общем впечатлении от качества графики в 3D-приложении.<br><br>
+
+Метод проецирования текстур для использования в трёхмерной графике впервые был предложен Эдвином Катмуллом в 1974 году[1].<br><br>
+
+Существует технология parallax mapping для создания трёхмерного описания текстурированной поверхности с использованием карт смещения.<br>
+https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BA%D1%81%D1%82%D1%83%D1%80%D0%B0_(%D1%82%D1%80%D1%91%D1%85%D0%BC%D0%B5%D1%80%D0%BD%D0%B0%D1%8F_%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0)<br><br>
+
+
+Текстура — изображение, воспроизводящее визуальные свойства каких-либо поверхностей или объектов. В отличие от рисунка, к текстуре не применяются нормы и требования композиции, поскольку текстура сама по себе художественным произведением не является, хотя и может иногда выступать доминантой в художественном произведении.<br><br>
+
+Текстуру, окрестности всех точек которой визуально подобны друг другу, называют равномерной текстурой (гомогенной текстурой).<br><br>
+В компьютерной графике текстурами часто называют растровые цифровые изображения, содержащие текстурные элементы.<br><br>
+
+Текстуру часто ошибочно называют фоном. Понятие фона относится к перспективному месту на изображении, заднему плану. Текстура же в этом смысле — это изображение, визуально отображающее совокупность свойств поверхности какого-либо объекта — реального или вымышленного.<br><br>
+
+Понятия «текстура» и «фактура» применительно к свойствам какой-либо поверхности используются синонимично. Иногда словом "фактура" называют совокупность тактильных свойств, а текстурой — совокупность свойств визуальных. Однако за цифровым графическим изображением таких свойств закрепилось слово «текстура».<br>
+https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BA%D1%81%D1%82%D1%83%D1%80%D0%B0_(%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5)
+</div></div>
+
+<span class="right_side"><a href="#6" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+
+<h3 id="1">CanvasTexture</h3>
+Создает текстуру из элемента <tt>canvas</tt>.<br>
+Это фактически тоже самое, что и базовый класс <a href="#6" title="Texture"><tt>Texture</tt></a>, за исключением того, что свойство <tt><a href="#6needsUpdate" title="Texture.needsUpdate. needs update - требуется обновление">needsUpdate</a></tt> сразу же устанавливается как <tt>true</tt>.<br><br>
+
+<h4>Конструктор</h4>
+<pre>CanvasTexture( <a class=popupspot href="JavaScript:hhctrl.TextPopup('HTMLElement','Arial,9',10,10,0xffffff,0xd69967)" title="canvas - холст, полотно">canvas</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="mapping - ">mapping</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="">wrapS</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="">wrapT</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="magFilter - фильтр по максимуму">magFilter</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="minFilter - фильтр по минимуму">minFilter</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="format - формат">format</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="type - тип">type</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="anisotropy - анизотропия (от др.-греч. анизос — неравный и тропос — направление), т.е. различие свойств среды (например, физических: упругости, электропроводности, теплопроводности, показателя преломления, скорости звука или света и др.) в различных направлениях внутри этой среды; в противоположность изотропии.">anisotropy</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup('HTMLElement','Arial,9',10,10,0xffffff,0xd69967)" title="canvas - холст, полотно">canvas</a></tt> -- HTML элемент <tt>canvas</tt>, из которого загружается текстура.</div>
+<div class=list>[page:Constant mapping</a> --  How the image is applied to the object. An object type of [page:Textures THREE.UVMapping</a>.
+Другие варианты смотрите в <a href="constants.htm#7.1" title="">константах картирования</a>.</div>
+
+<div class=list>[page:Constant wrapS</a> -- The default is [page:Textures THREE.ClampToEdgeWrapping</a>.
+		See [page:Textures wrap mode constants</a> for other choices.</div>
+
+<div class=list>[page:Constant wrapT</a> -- The default is [page:Textures THREE.ClampToEdgeWrapping</a>.
+		See [page:Textures wrap mode constants</a> for other choices.</div>
+
+<div class=list>[page:Constant magFilter</a> -- How the texture is sampled when a texel covers more than one pixel.
+		The default is [page:Textures THREE.LinearFilter</a>. See [page:Textures magnification filter constants</a> for other choices.</div>
+
+<div class=list>[page:Constant minFilter</a> -- How the texture is sampled when a texel covers less than one pixel.
+		 The default is [page:Textures THREE.LinearMipMapLinearFilter</a>. See [page:Textures minification filter constants</a> for other choices.</div>
+
+<div class=list>[page:Constant format</a> -- The format used in the texture.
+     See [page:Textures format constants</a> for other choices.</div>
+
+<div class=list>[page:Constant type</a> -- Default is [page:Textures THREE.UnsignedByteType</a>.
+     See [page:Textures type constants</a> for other choices.</div>
+
+<div class=list>[page:Number anisotropy</a> -- The number of samples taken along the axis through the pixel that has the highest density of texels.<br>
+		By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used.<br>
+		Use [page:WebGLrenderer.getMaxAnisotropy renderer.getMaxAnisotropy</a>() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.</div><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.
+<div class=blockindent><br>
+<pre id="1needsUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="needs update - нуждается в обновлении">.needsUpdate</a></pre>
+Значением по умолчанию является <tt>true</tt>. Это необходимо для загрузки данных холста (<tt>canvas</tt>).</div><br>
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/textures/CanvasTexture.js.txt">CanvasTexture.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/CanvasTexture.js" target="_blank">CanvasTexture.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#6" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+<h3 id="2">CompressedTexture</h3>
+Создает текстуру, основываясь на данных в сжатом виде.
+<h4>Конструктор</h4>
+<pre>CompressedTexture( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="mipmaps ">mipmaps</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="format - формат">format</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="type - тип">type</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="mapping - ">mapping</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="wrapS - ">wrapS</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="wrapT - ">wrapT</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="magFilter - ">magFilter</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="minFilter - ">minFilter</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="anisotropy - анизотропия (от др.-греч. анизос — неравный и тропос — направление), т.е. различие свойств среды (например, физических: упругости, электропроводности, теплопроводности, показателя преломления, скорости звука или света и др.) в различных направлениях внутри этой среды; в противоположность изотропии.">anisotropy</a> )</pre>
+<div class=list><tt>mipmaps</tt> - массив mipmap должен содержать объекты с данными, шириной и высотой. mipmaps должны быть правильного формата и типа. <br>https://ru.wikipedia.org/wiki/MIP-%D1%82%D0%B5%D0%BA%D1%81%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
+mipmap - множественное отображение (последовательность текстур одного и того же изображения с уменьшающимся разрешением по мере удаления отображаемого объекта от наблюдателя)</div>
+<div class=list><tt>width</tt> - ширина наибольшего mipmap</div>
+<div class=list><tt>height</tt> - высота наибольшего mipmap</div>
+<div class=list><tt>format</tt> - формат, используемый в mipmaps</div>
+<div class=list><tt>type</tt> - тип, используемый в mipmaps</div>
+<div class=list><tt>mapping</tt> --  How the image is applied to the object. An object type of THREE.UVMapping is the default, where the U,V coordinates are used to apply the map, and a single texture is expected. The other types are THREE.CubeReflectionMapping, for cube maps used as a reflection map; THREE.CubeRefractionMapping, refraction mapping; and THREE.SphericalReflectionMapping, a spherical reflection map projection.</div>
+<div class=list><tt>wrapS</tt> -- The default is THREE.ClampToEdgeWrapping, where the edge is clamped to the outer edge texels. The other two choices are THREE.RepeatWrapping and THREE.MirroredRepeatWrapping.</div>
+<div class=list><tt>wrapT</tt> -- The default is THREE.ClampToEdgeWrapping, where the edge is clamped to the outer edge texels. The other two choices are THREE.RepeatWrapping and THREE.MirroredRepeatWrapping.</div>
+<div class=list><tt>magFilter</tt> -- How the texture is sampled when a texel covers more than one pixel. The default is THREE.LinearFilter, which takes the four closest texels and bilinearly interpolates among them. The other option is THREE.NearestFilter, which uses the value of the closest texels.</div>
+<div class=list><tt>minFilter</tt> -- How the texture is sampled when a texel covers less than one pixel. The default is THREE.LinearMipMapLinearFilter, which uses mipmapping and a trilinear filter. Other choices are THREE.NearestFilter, THREE.NearestMipMapNearestFilter, THREE.NearestMipMapLinearFilter, THREE.LinearFilter, and THREE.LinearMipMapNearestFilter. These vary whether the nearest texel or nearest four texels are retrieved on the nearest mipmap or nearest two mipmaps. Interpolation occurs among the samples retrieved.</div>
+<div class=list><tt>anisotropy</tt> -- The number of samples taken along the axis through the pixel that has the highest density of texels. By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used. Use renderer.getMaxAnisotropy() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.<br>
+This creates a texture from compressed data. This is mostly used in ImageUtils.loadCompressedTexture.</div>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.
+<div class=blockindent><br>
+<pre id="2flipY"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.flipY</a></pre>
+Значение по умолчанию равно <tt>false</tt>. Flipping textures does not work for compressed textures.
+<pre id="2generateMipmaps"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.generateMipmaps</a></pre>
+Значение по умолчанию равно <tt>false</tt>. Mipmaps can't be generated for compressed textures.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/textures/CompressedTexture.js.txt">CompressedTexture.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/CompressedTexture.js" target="_blank">CompressedTexture.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="textures.htm#4" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+<h3 id="3">CubeTexture</h3>
+Создает кубическую текстуру, состоящую из шести изображений.<br><br>
+<h4>Пример</h4>
+<pre>var loader = new THREE.CubeTextureLoader();
+loader.setPath( 'textures/cube/pisa/' );<br>
+var textureCube = loader.load( [
+  'px.png', 'nx.png',
+  'py.png', 'ny.png',
+  'pz.png', 'nz.png'
+] );<br>
+var material = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube } );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>CubeTexture( images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy )</pre>
+По функциональности и применению <tt>CubeTexture</tt> практически равна <a href="#6" title="Texture">Texture</a>. Отличие состоит только в том, что изображения представляют собой массив из 6 изображений, а не одно изображение, и
+
+and the mapping options are [page:Textures THREE.CubeReflectionMapping</a> (default) or [page:Textures THREE.CubeRefractionMapping</a>.
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.<br><br>
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/textures/CubeTexture.js.txt">CubeTexture.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/CubeTexture.js" target="_blank">CubeTexture.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="textures.htm#4" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+<h3 id="4">DataTexture</h3>
+Создает текстуру непосредственно из необработанных данных (raw data), ширины и высоты.<br><br>
+
+<h4>Конструктор</h4>
+<pre>DataTexture( data, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy )</pre>
+The data argument must be an ArrayBuffer or a typed array view.
+			Further parameters correspond to the properties inherited from [page:Texture</a>, where both magFilter and minFilter default to THREE.NearestFilter. The properties flipY and generateMipmaps are intially set to false.<br><br>
+The interpretation of the data depends on type and format:
+			If the type is THREE.UnsignedByteType, a Uint8Array will be useful for addressing the texel data.
+			If the format is THREE.RGBAFormat, data needs four values for one texel; Red, Green, Blue and Alpha (typically the opacity). Similarly, THREE.RGBFormat specifies a format where only three values are used for each texel.<br>
+
+			For the packed types, THREE.UnsignedShort4444Type, THREE.UnsignedShort5551Type or THREE.UnsignedShort565Type, all color components of one texel can be addressed as bitfields within an integer element of a Uint16Array.<br>
+
+			In order to use the types THREE.FloatType and THREE.HalfFloatType, the WebGL implementation must support the respective extensions OES_texture_float and OES_texture_half_float. In order to use THREE.LinearFilter for component-wise, bilinear interpolation of the texels based on these types, the WebGL extensions OES_texture_float_linear or OES_texture_half_float_linear must also be present.
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="4image">[property:Image image</a></pre>
+Overridden with a record type holding data, width and height.</div><br>
+
+<h4>Методы</h4>
+<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/textures/DataTexture.js.txt">DataTexture.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/DataTexture.js" target="_blank">DataTexture.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#6" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+<h3 id="5">DepthTexture</h3>
+Creates a texture for use as a Depth Texture. Require support for the
+    <a href="https://www.khronos.org/registry/webgl/extensions/WEBGL_depth_texture/">WEBGL_depth_texture</a>
+    extension. According to <a href="https://webglstats.com/">WebGLStats</a>, as of February 2016 around 85%
+    of WebGL enabled devices support this.<br><br>
+
+<h4>Пример</h4>
+<pre>[example:webgl_depth_texture depth / texture</a></pre>
+
+<h4>Конструктор</h4>
+<pre>DepthTexture( [page:Number width</a>, [page:Number height</a>, [page:Constant type</a>, [page:Constant wrapS</a>, [page:Constant wrapT</a>, [page:Constant magFilter</a>, [page:Constant minFilter</a>, [page:Number anisotropy</a>, [page:Constant format</a> )</pre>
+
+<div class=list>[page:Number width</a> -- width of the texture.</div>
+<div class=list>[page:Number height</a> -- height of the texture.</div>
+<div class=list>[page:Constant type</a> -- Default is [page:Textures THREE.UnsignedShortType</a>.
+     See [page:Textures type constants</a> for other choices.</div>
+<div class=list>[page:Constant mapping</a> --
+    See [page:Textures type constants</a> for details.</div>
+<div class=list>[page:Constant wrapS</a> -- The default is [page:Textures THREE.ClampToEdgeWrapping</a>.
+		See [page:Textures wrap mode constants</a> for other choices.</div>
+<div class=list>[page:Constant wrapT</a> -- The default is [page:Textures THREE.ClampToEdgeWrapping</a>.
+		See [page:Textures wrap mode constants</a> for other choices.</div>
+<div class=list>[page:Constant magFilter</a> -- How the texture is sampled when a texel covers more than one pixel.
+		The default is [page:Textures THREE.NearestFilter</a>. See [page:Textures magnification filter constants</a> for other choices.</div>
+<div class=list>[page:Constant minFilter</a> -- How the texture is sampled when a texel covers less than one pixel.
+		 The default is [page:Textures THREE.NearestFilter</a>. See [page:Textures minification filter constants</a> for other choices.</div>
+<div class=list>[page:Number anisotropy</a> -- The number of samples taken along the axis through the pixel that has the highest density of texels.
+     By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used.
+     Use [page:WebGLrenderer.getMaxAnisotropy renderer.getMaxAnisotropy</a>() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.</div>
+<div class=list>[page:Constant format</a> -- must be either [page:Textures DepthFormat</a> (default) or [page:Textures DepthStencilFormat</a>.
+     See [page:Textures format constants</a> for details.</div>
+
+<h4>Свойства</h4>
+Общие методы смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>. Свойства, приведенные ниже, также являются частью класса <a href="#6" title="Texture">Texture</a>, но имеют здесь другие значения по умолчанию.
+    - the following are also part of the texture class, but have different defaults here.
+<div class=blockindent><br>
+<pre id="5">[page:Texture.format .format</a></pre>
+Either [page:Textures DepthFormat</a> (default) or [page:Textures DepthStencilFormat</a>.
+    See [page:Textures format constants</a> for details.<br><br>
+
+<pre id="5">[page:Texture.type .type</a></pre>
+Default is [page:Textures THREE.UnsignedShortType</a>.
+    See [page:Textures format constants</a> for details.<br><br>
+
+<pre id="5">[page:Texture.magFilter .magFilter</a></pre>
+How the texture is sampled when a texel covers more than one pixel.
+  		The default is [page:Textures THREE.NearestFilter</a>.
+      See [page:Textures magnification filter constants</a> for other choices.<br><br>
+
+<pre id="5">[page:Texture.minFilter .minFilter</a></pre>
+How the texture is sampled when a texel covers less than one pixel.
+  	The default is [page:Textures THREE.NearestFilter</a>.
+See [page:Textures magnification filter constants</a> for other choices.<br><br>
+
+<pre id="5">[page:Texture.flipY .flipY</a></pre>
+Depth textures do not need to be flipped so this is *false* by default.<br><br>
+
+<pre id="5">[page:Texture.generateMipmaps .generateMipmaps</a></pre>
+Depth textures do not use mipmaps.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/textures/DepthTexture.js.txt">DepthTexture.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/DepthTexture.js" target="_blank">DepthTexture.js на github.com</a></div><br><br>
+
+
+<h3 id="6">Texture</h3>
+Создает текстуру для применения к поверхности или в качестве карт отражения или преломления.<br><br>
+<h4>Пример</h4>
+<pre>// load a texture, set wrap mode to repeat
+// загрузка текстуры, установка режима оболочки для повторения
+var texture = new THREE.TextureLoader().load( "textures/water.jpg" );
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+texture.repeat.set( 4, 4 );</pre><br>
+<h4>Конструктор</h4>
+<pre>Texture( image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy )</pre>
+<br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="6id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_integer,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова identifier - идентификатор">.id</a></pre>
+Уникальное число для данного экземпляра текстуры (только для чтения).<br><br>
+
+<pre id="6image"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_image,'Arial,9',10,10,0xffffff,0xd69967)" title="image - изображение">.image</a></pre>
+An Image object, typically created using the ImageUtils or [page:ImageLoader ImageLoader</a> classes. The Image object can include an image (e.g., PNG, JPG, GIF, DDS), video (e.g., MP4, OGG/OGV), or set of six images for a cube map. To use video as a texture you need to have a playing HTML5 video element as a source for your texture image and continuously update this texture as long as video is playing.<br><br>
+
+<pre id="6mapping"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_object,'Arial,9',10,10,0xffffff,0xd69967)">.mapping</a></pre>
+How the image is applied to the object. An object type of THREE.UVMapping is the default, where the U,V coordinates are used to apply the map, and a single texture is expected. The other types are THREE.CubeReflectionMapping, for cube maps used as a reflection map; THREE.CubeRefractionMapping, refraction mapping; and THREE.SphericalReflectionMapping, a spherical reflection map projection.<br><br>
+
+<pre id="6wrapS"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.wrapS</a></pre>
+The default is THREE.ClampToEdgeWrapping, where the edge is clamped to the outer edge texels. The other two choices are THREE.RepeatWrapping and THREE.MirroredRepeatWrapping.<br><br>
+
+<pre id="6wrapT"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.wrapT</a></pre>
+The default is THREE.ClampToEdgeWrapping, where the edge is clamped to the outer edge texels. The other two choices are THREE.RepeatWrapping and THREE.MirroredRepeatWrapping.
+
+<div class="note"><b>Примечание:</b> tiling of images in textures only functions if image dimensions are powers of two (2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, ...) in terms of pixels. Individual dimensions need not be equal, but each must be a power of two. Это ограничение от WebGL, а не Three.js.</div><br>
+
+<pre id="6magFilter"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.magFilter</a></pre>
+How the texture is sampled when a texel covers more than one pixel. The default is THREE.LinearFilter, which takes the four closest texels and bilinearly interpolates among them. The other option is THREE.NearestFilter, which uses the value of the closest texel.<br><br>
+
+<pre id="6minFilter"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.minFilter</a></pre>
+How the texture is sampled when a texel covers less than one pixel. The default is THREE.LinearMipMapLinearFilter, which uses mipmapping and a trilinear filter. Other choices are THREE.NearestFilter, THREE.NearestMipMapNearestFilter, THREE.NearestMipMapLinearFilter, THREE.LinearFilter, and THREE.LinearMipMapNearestFilter. These vary whether the nearest texel or nearest four texels are retrieved on the nearest mipmap or nearest two mipmaps. Interpolation occurs among the samples retrieved.<br><br>
+
+<pre id="6format"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.format</a></pre>
+The default is THREE.RGBAFormat for the texture. Other formats are: THREE.AlphaFormat, THREE.RGBFormat, THREE.LuminanceFormat, and THREE.LuminanceAlphaFormat. There are also compressed texture formats, if the S3TC extension is supported: THREE.RGB_S3TC_DXT1_Format, THREE.RGBA_S3TC_DXT1_Format, THREE.RGBA_S3TC_DXT3_Format, and THREE.RGBA_S3TC_DXT5_Format.<br><br>
+
+<pre id="6type"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.type</a></pre>
+The default is THREE.UnsignedByteType. Other valid types (as WebGL allows) are THREE.ByteType, THREE.ShortType, THREE.UnsignedShortType, THREE.IntType, THREE.UnsignedIntType, THREE.FloatType, THREE.UnsignedShort4444Type, THREE.UnsignedShort5551Type, and THREE.UnsignedShort565Type.<br><br>
+
+<pre id="6anisotropy"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.anisotropy</a></pre>
+The number of samples taken along the axis through the pixel that has the highest density of texels. By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used. Use renderer.getMaxAnisotropy() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.<br><br>
+
+<pre id="6needsUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.needsUpdate</a></pre>
+If a texture is changed after creation, set this flag to true so that the texture is properly set up. Particularly important for setting the wrap mode.<br><br>
+
+<pre id="6repeat"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector2,'Arial,9',10,10,0xffffff,0xd69967)">.repeat</a></pre>
+How many times the texture is repeated across the surface, in each direction U and V.<br><br>
+
+<pre id="6offset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector2,'Arial,9',10,10,0xffffff,0xd69967)">.offset</a></pre>
+How much a single repetition of the texture is offset from the beginning, in each direction U and V. Typical range is 0.0 to 1.0.<br><br>
+
+<pre id="6name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">.name</a></pre>
+Given name of the texture, empty string by default.<br><br>
+
+<pre id="6generateMipmaps"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.generateMipmaps</a></pre>
+Whether to generate mipmaps (if possible) for a texture. True by default.<br><br>
+
+<pre id="6flipY"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.flipY</a></pre>
+True by default. Flips the image's Y axis to match the WebGL texture coordinate space.<br><br>
+
+<pre id="6mipmaps"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)">.mipmaps</a></pre>
+Array of user-specified mipmaps (optional).<br><br>
+
+<pre id="6unpackAlignment"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.unpackAlignment</a></pre>
+4 by default. Specifies the alignment requirements for the start of each pixel row in memory. The allowable values are 1 (byte-alignment), 2 (rows aligned to even-numbered bytes), 4 (word-alignment), and 8 (rows start on double-word boundaries). See <a href="http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml">glPixelStorei</a> for more information.<br><br>
+
+<pre id="6premultiplyAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.premultiplyAlpha</a></pre>
+False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.<br><br>
+
+<pre id="6encoding"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.encoding</a></pre>
+Set to THREE.LinearEncoding by default, but supports sRGB, RGBE, RGBM, RGBD, LogLuv and Gamma corrected encodings.  IMPORTANT: If this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.<br><br>
+
+<pre id="6onUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_object,'Arial,9',10,10,0xffffff,0xd69967)">.onUpdate</a></pre>
+A callback function, called when the texture is updated (e.g., when needsUpdate has been set to true and then the texture is used).
+</div><br>
+
+<h4>Методы</h4>
+В этом классе доступны методы <tt><a href="core.htm#5" title="EventDispatcher">EventDispatcher</a></tt>.
+<div class=blockindent><br>
+<pre id="6clone"><a href="#6" title="Texture. clone - клонировать">.clone</a> ( <a href="#6" title="Texture. texture - текстура">texture</a> )</pre>
+Make copy of the texture. Note this is not a "deep copy", the image is shared.<br><br>
+
+<pre id="6dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - ">.dispose</a> ()</pre>
+Call EventDispatcher.dispatchEvent with a 'dispose' event type.<br><br>
+
+<pre id="6toJSON"><a href="#6" title="Texture. toJSON - в формат JSON">.toJSON</a> ( meta )</pre>
+<div class=list><tt>meta</tt> -- объект, содержащий метаданные (дополнительный, необязательный параметр).</div>
+Convert the material to three.js JSON format.<br><br>
+
+<pre id="6transformUv"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="transformUv - ">.transformUv</a> ( uv )</pre>
+Transform the uv based on the value of this texture's .repeat, .offset, .wrapS, .wrapT and .flipY properties.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/textures/Texture.js.txt">Texture.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/Texture.js" target="_blank">Texture.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#6" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+<h3 id="7">VideoTexture</h1>
+Creates a texture for use with a video texture.<br>
+This is almost the same as the base [page:Texture Texture</a> class, except that it continuosly sets [page:Texture.needsUpdate needsUpdate</a> to *true*
+    (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a>)
+    so that the texture is updated as the video plays. Automatic creation of [page:Texture.mipmaps mipmaps</a>
+    is also disabled.<br><br>
+
+<h4>Пример</h4>
+<pre>//assuming you have created a HTML video element with id="video"
+var video = document.getElementById( 'video' );<br>
+var texture = new THREE.VideoTexture( video );
+texture.minFilter = THREE.LinearFilter;
+texture.magFilter = THREE.LinearFilter;
+texture.format = THREE.RGBFormat;</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_materials_video" target="_blank">WebGL / materials / video</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>VideoTexture( <a class=popupspot href="JavaScript:hhctrl.TextPopup('Video','Arial,9',10,10,0xffffff,0xd69967)" title="video - видео">video</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="mapping - ">mapping</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="">wrapS</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="">wrapT</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="magFilter - фильтр по максимуму">magFilter</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="minFilter - фильтр по минимуму">minFilter</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="format - формат">format</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="type - тип">type</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="anisotropy - анизотропия (от др.-греч. анизос — неравный и тропос — направление), т.е. различие свойств среды (например, физических: упругости, электропроводности, теплопроводности, показателя преломления, скорости звука или света и др.) в различных направлениях внутри этой среды; в противоположность изотропии.">anisotropy</a> )</pre>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup('Video','Arial,9',10,10,0xffffff,0xd69967)" title="video - видео">video</a></tt> -- видеоэлемент для использования в качестве текстуры.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="mapping - ">mapping</a></tt> --  How the image is applied to the object. An object type of [page:Textures THREE.UVMapping</a>. See [page:Textures mapping constants</a> for other choices.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="">wrapS</a></tt> -- The default is [page:Textures THREE.ClampToEdgeWrapping</a>. See [page:Textures wrap mode constants</a> for other choices.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="">wrapT</a></tt> -- The default is [page:Textures THREE.ClampToEdgeWrapping</a>. See [page:Textures wrap mode constants</a> for other choices.</div>
+
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="magFilter - фильтр по максимуму">magFilter</a></tt> -- способ выбора текстуры, если тексель занимает больше одного пикселя.
+Значением по умолчанию является <tt><a href="constants.htm#7.3" title="Константы текстур - фильтры увеличения">THREE.LinearFilter</a></tt>.
+Другие возможные варианты смотрите в <a href="constants.htm#7.3" title="Константы текстур - фильтры увеличения">константах фильтров увеличения</a>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="minFilter - фильтр по минимуму">minFilter</a></tt> -- способ выбора текстуры, если тексель занимает менее одного пикселя.
+Значением по умолчанию является <tt><a href="constants.htm#7.4" title="Константы текстур - фильтры уменьшения">THREE.LinearMipMapLinearFilter</a></tt>.
+Другие возможные варианты смотрите в <a href="constants.htm#7.4" title="Константы текстур - фильтры уменьшения">константах фильтров уменьшения</a>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="format - формат">format</a></tt> -- формат используемый в текстуре. Возможные варианты смотрите в <a href="constants.htm#7.6" title="Константы текстур - форматы">константах форматов текстур</a>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="type - тип">type</a></tt> -- значением по умолчанию является <a href="constants.htm#7.5" title="Константы текстур - типы">THREE.UnsignedByteType</a>. Другие возможные варианты смотрите в <a href="constants.htm#7.5" title="Константы текстур - типы">константах типов текстур</a>.</div>
+
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="anisotropy - анизотропия (от др.-греч. анизос — неравный и тропос — направление), т.е. различие свойств среды (например, физических: упругости, электропроводности, теплопроводности, показателя преломления, скорости звука или света и др.) в различных направлениях внутри этой среды; в противоположность изотропии.">anisotropy</a></tt>
+-- The number of samples taken along the axis through the pixel that has the highest density of texels.
+По умолчанию это значение равно <tt>1</tt>. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used.
+Используйте метод <tt><a href="renderers.htm#1" title="WebGLrenderer.getMaxAnisotropy">renderer.getMaxAnisotropy</a>( )</tt>, чтобы найти максимальное допустимое значение анизотропии для графического процессора (GPU); это значение обычно является степенью двойки.</div><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.
+<div class=blockindent><br>
+<pre id="7needsUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="needs update - требуется обновление">.needsUpdate</a></pre>
+Это свойство не нужно устанавливать вручную, поскольку оно автоматически обрабатывается методом
+<tt><a href="#7update" title="VideoTexture.update. update - обновление">update</a></tt>.</div><br>
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#6" title="Texture">Texture</a>.
+<div class=blockindent><br>
+<pre id="7update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a>()</pre>
+Этот метод вызывается автоматически и устанавливает свойство <tt><a href="#7needsUpdate" title="VideoTexture.needsUpdate. needs update - требуется обновление">needsUpdate</a></tt> как <tt>true</tt> каждый раз, когда доступен новый кадр (frame).</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/textures/VideoTexture.js.txt">VideoTexture.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/VideoTexture.js" target="_blank">VideoTexture.js на github.com</a></div><br><br>
+<br><br>
+</body></html>

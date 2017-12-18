@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Сцены</h2>
+<h3 id="1">Fog</h3>
+Данный класс содержит параметры, определяющие линейный туман (fog), т.е. плотность тумана линейно возрастает с увеличением расстояния.<br><br>
+<h4>Конструктор</h4>
+<pre>Fog( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение англ. слова hexadecimal - шестнадцатиричный">hex</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова near - ближний, близко">near</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова far - дальний, далеко">far</a> )</pre>
+Параметр <tt>hex</tt> передается в конструктор <tt><a href="math.htm#3" title="Color">Color</a></tt> для установки свойства <tt>color</tt> - цвет. Значением параметра <tt>hex</tt> может быть шестнадцатиричное целое число или строка CSS-стиля.<br><br>
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="1name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова name - имя, название">.name</a></pre>
+Значением по умолчанию является пустая строка (<tt>""</tt>).<br><br>
+<pre id="1color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
+Цвет тумана. Например, если установить его черным, дальние объекты будут отображаться черными.<br><br>
+<pre id="1near"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова near - ближний, близко">.near</a></pre>
+Минимальное расстояние, с которого начинается применение тумана. На объекты, размещенные от активной камеры ближе расстояния, указанного в <tt>near</tt>, туман не повлияет.<br>Значение по умолчанию равно <tt>1</tt>.<br><br>
+<pre id="1far"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова far - дальний, далеко">.far</a></pre>
+Максимальное расстояние, на котором прекращается расчет и применение тумана. На объекты, размещенные дальше от активной камеры, чем указано в <tt>far</tt>, туман не повлияет.<br>Значение по умолчанию равно <tt>1000</tt>.</div><br>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="1clone"><a href="#1" title="Fog. clone - клонировать">.clone</a>( )</pre>
+Возвращает новый экземпляр тумана с теми же параметрами как у данного.<br><br>
+<pre id="1toJSON"><a href="#1" title="Fog. to JSON - сокр. от англ. слов to JavaScript Object Notation, — то есть, в текстовый формат описания объекта, основанный на JavaScript">.toJSON</a>( )</pre>
+Возвращает данные тумана в формате JSON.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/scenes/Fog.js.txt">Fog.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/scenes/Fog.js" target="_blank">Fog.js на github.com</a></div><br><br>
+
+
+<h3 id="2">FogExp2</h3>
+Данный класс содержит параметры, определяющие экспоненциальный туман (fog), т.е. плотность тумана с увеличением расстояния, возрастает экспоненциально (в геометрической прогрессии).
+<h4>Конструктор</h4>
+<pre>FogExp2( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение англ. слова hexadecimal - шестнадцатиричный">hex</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова density - плотность">density</a> )</pre>
+Параметр <tt>hex</tt> передается в конструктор <tt><a href="math.htm#3" title="Color">Color</a></tt> для установки свойства <tt>color</tt> - цвет. Значением параметра <tt>hex</tt> может быть шестнадцатиричное целое число или строка CSS-стиля.<br><br>
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="2name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова name - имя, название">.name</a></pre>
+Значением по умолчанию является пустая строка (<tt>""</tt>).<br><br>
+<pre id="2color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
+Цвет тумана. Например, если установить его черным, дальние объекты будут отображаться черными.<br><br>
+<pre id="2density"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова density - плотность">density</a></pre>
+Определяет, как быстро будет нарастать плотность тумана.<br>Значение по умолчанию равно <tt>0.00025</tt>.</div><br>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="2clone"><a href="#2" title="FogExp2. clone - клонировать">.clone</a>( )</pre>
+Возвращает копию (клон) этого тумана.<br><br>
+<pre id="2toJSON"><a href="#2" title="FogExp2. to JSON - сокр. от англ. слов to JavaScript Object Notation, — то есть, в текстовый формат описания объекта, основанный на JavaScript">.toJSON</a>( )</pre>
+Возвращает данные тумана <tt>FogExp2</tt> в формате JSON.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/scenes/FogExp2.js.txt">FogExp2.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/scenes/FogExp2.js" target="_blank">FogExp2.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="3">Scene</h3>
+Сцены позволяют устанавливать все, как и где должно быть показано с помощью <em>three.js</em>. Это то место, где размещаются объекты, освещение и камеры.<br><br>
+<h4>Конструктор</h4>
+<pre>Scene()</pre>
+Создает новый объект места действия (новую сцену).<br><br>
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="3fog"><a href="#1" title="Fog. fog - туман">.fog</a></pre>
+Экземпляр <a href="#1">тумана</a>, определяющий тип тумана, что будет влиять на все, что отображается на сцене. Значением по умолчанию является <tt>null</tt>.<br><br>
+<pre id="3overrideMaterial"><a href="materials.htm#3" title="Material. override material - переопределение материала">.overrideMaterial</a></pre>
+Если значение не равно <tt>null</tt>, метод принудительно будет показывать все вещи на сцене с этим материалом. Значение по умолчанию равно <tt>null</tt>.<br><br>
+<pre id="3autoUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="auto update - автоматическое обновление">.autoUpdate</a></pre>
+Значением по умолчанию является <tt>true</tt>. Если установлено, то визуализатор (рендерер) проверяет на каждом кадре, не требуются ли обновления матриц сцены и всех объектов на ней.<br>
+Если это не так, то необходимо сохранять все матрицы сцены самостоятельно.<br><br>
+<pre id="3background"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="background - задний план, фон">.background</a></pre>
+Значение, не равное <tt>null</tt>, задает фон, который используется при визуализации сцены и который всегда отображается первым.
+Может устанавливаться как значение <a href="math.htm#3" title="Color">цвета</a>, которое определяет чистый (однотонный) цвет, как текстура (<a href="textures.htm#6" title="Texture">Texture</a>), покрывающая холст, или как текстура куба (<a href="textures.htm#3" title="CubeTexture">CubeTexture</a>).
+Значение по умолчанию равно <tt>null</tt>.</div><br>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3toJSON"><a class=popupspot href="JavaScript:hhctrl.TextPopup('JSON','Arial,9',10,10,0xffffff,0xd69967)" title="to JSON - сокр. от англ. слов to JavaScript Object Notation, — то есть, в текстовый формат описания объекта, основанный на JavaScript">.toJSON</a></pre>
+Возвращает данные сцены в формате JSON.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/scenes/Scene.js.txt">Scene.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/scenes/Scene.js" target="_blank">Scene.js на github.com</a></div><br>
+<br><br>
+</body></html>

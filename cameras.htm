@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Камеры</h2>
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="1">Camera</h3>
+Абстрактный базовый класс для камер. При создании новой камеры этот класс всегда будет унаследован.
+<h4>Конструктор</h4>
+<pre>Camera()</pre>
+Создает новый объект <tt>Camera</tt>. Обратите внимание, что этот класс не предназначен для непосредственного вызова; скорее всего вам нужна <a href="#4"><tt>PerspectiveCamera</tt></a> или <a href="#3"><tt>OrthographicCamera</tt></a>.
+<h4>Свойства</h4>
+Для просмотра общих свойств посмотрите базовый класс <a href="core.htm#14"><tt>Object3D</tt></a>.
+<div class=blockindent>
+<pre id="1isCamera"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is camera - является камерой">.isCamera</a></pre>
+Используется для проверки, является ли данный объект, или производные от него, камерами. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <b>three.js</b> оно используется рендерером (визуализатором) для оптимизации.<br>
+<pre id="1layers"><a href="core.htm#13" title="layers - слои, уровни">.layers</a></pre>
+The layers that the camera is a member of. Это свойство, наследуемое от <a href="core.htm#14"><tt>Object3D</tt></a>.<br>
+
+Objects must share at least one layer with the camera to be seen when the camera's viewpoint is rendered.<br>
+<pre id="1matrixWorldInverse"><a href="math.htm#9" title="matrix world inverse - инверсия матрицы мира">.matrixWorldInverse</a></pre>
+Это инверсия <tt>matrixWorld</tt>. MatrixWorld содержит Matrix, в которой имеется универсальное преобразование Camera.
+This is the inverse of matrixWorld. MatrixWorld contains the Matrix which has the world transform of the Camera.<br>
+<pre id="1projectionMatrix"><a href="math.htm#9" title="projection matrix - матрица проекции">.projectionMatrix</a></pre>
+Это матрица, содержащая проекцию изображения.</div>
+
+<h4>Методы</h4>
+Для просмотра общих методов посмотрите базовый класс <a href="core.htm#14"><tt>Object3D</tt></a>.<br>
+<div class=blockindent>
+<pre id="1clone"><a href="cameras.htm" title="clone - клон, двойник">.clone</a>( )</pre>
+Возвращает новую камеру с теми же свойствами, что и данная.
+<pre id="1copy"><a href="cameras.htm" title="copy - копия">.copy</a> ( source )</pre>
+Копирует свойства исходной камеры в данную камеру.
+<pre id="1getWorldDirection"><a href="math.htm#9" title="get world direction - получить направление мира">.getWorldDirection</a> ( <a href="math.htm#9">optionalTarget</a> )</pre>
+Возвращает трехмерный вектор (Vector3) представляющий направление в трехмерном пространстве, куда смотрит камера.
+<div class=note><b>Примечание:</b> Это не положительная, а отрицательная часть оси z камеры, в отличие от <tt>getWorldDirection</tt> базового класса (Object3D).</div>
+Если задан вектор <tt>optionalTarget</tt>, результат будет скопирован в этот вектор (который можно также использовать повторно), в противном случае будет создан новый вектор.
+If an optionalTarget vector is specified, the result will be copied into this vector (which can be reused in this way), otherwise a new vector will be created.
+<div class=blockindent><tt>vector</tt> — (дополнительный, необязательный параметр)</div>
+Метод возвращает вектор, представляющий направление, в котором смотрит камера в It returns a vector representing the direction in which the camera is looking, in world space.
+<pre id="1lookAt"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="look at - смотреть на">.lookAt</a> ( <a href="math.htm#19" title="Vector3D">target</a> )</pre>
+<div class=blockindent><tt>target</tt> — позиция в трехмерном пространстве, на которую указывает камера</div>
+
+This makes the camera look at the vector position in the global space as long as the parent of this camera is the scene or at position (0,0,0).</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/cameras/Camera.js.txt">Camera.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/src/cameras/Camera.js" target="_blank">Camera.js на Гитхабе</a></div><br>
+
+
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="2">CubeCamera</h3>
+Создает 6 камер, которые представляют визуализатор <tt><a href="renderers.htm#1.3">WebGLRenderTargetCube</a></tt>.
+
+<h4>Пример</h4>
+<pre>  //Create cube camera (создаем кубическую камеру)
+  var cubeCamera = new THREE.CubeCamera( 1, 100000, 128 );
+  scene.add( cubeCamera );<br>
+  //Create car (создаем машину)
+  var chromeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: cubeCamera.renderTarget } );
+  var car = new Mesh( carGeometry, chromeMaterial );
+  scene.add( car );<br>
+  //Update the render target cube (обновляем представление заданного куба)
+  car.setVisible( false );
+  cubeCamera.position.copy( car.position );
+  cubeCamera.updateCubeMap( renderer, scene );<br>
+  //Render the scene (визуализация сцены)
+  car.setVisible( true );
+  renderer.render( scene, camera );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/webgl_materials_cubemap_dynamic.html" target="_blank">materials / cubemap / dynamic</a>
+<a href="https://threejs.org/examples/webgl_materials_cubemap_dynamic2.html" target="_blank">materials / cubemap / dynamic2</a>
+<a href="https://threejs.org/examples/webgl_shading_physical.html" target="_blank">shading / physical</a></pre>
+
+<h4>Конструктор</h4>
+<pre>CubeCamera( <span title="число">near</span>, <a href="cameras.htm#2" title="число">far</a>, <a href="cameras.htm#2" title="число">cubeResolution</a> )</pre>
+<div class=blockindent><tt>near</tt> -- The near clipping distance.<br>
+<tt>far</tt> -- The far clipping distance<br>
+<tt>cubeResolution</tt> -- Sets the width of the cube.</div>
+Constructs a CubeCamera that contains 6 [page:PerspectiveCamera PerspectiveCameras] that then render to a [page:WebGLRenderTargetCube]
+
+<h4>Свойства</h4>
+Для просмотра общих свойств посмотрите базовый класс <a href="core.htm#14"><tt>Object3D</tt></a>.
+<div class=blockindent><pre id="2renderTarget"><a href="renderers.htm#1.3" title="WebGLRenderTargetCube">.renderTarget</a></pre>
+The cube texture that gets generated.</div>
+
+<h4>Методы</h4>
+Для просмотра общих методов посмотрите базовый класс <a href="core.htm#14"><tt>Object3D</tt></a>.
+<div class=blockindent><pre><a href="cameras.htm#2" title="null">updateCubeMap</a>( <a href="renderers.htm#2" title="WebGLRenderer">renderer</a>, <a href="scenes.htm#3" title="Сцена">scene</a> )</pre>
+<div class=blockindent><tt>renderer</tt> -- текущий WebGL визуализатор (рендерер)<br>
+<tt>scene</tt> -- текущая сцена</div>
+Вызов этого метода обновляет <tt>renderTarget</tt>.</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/cameras/CubeCamera.js.txt">CubeCamera.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/tree/dev/src/cameras/CubeCamera.js" target="_blank">CubeCamera.js на Гитхабе</a></div><br>
+
+
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> <a href="camera.htm" title="Переход к родительскому классу"><tt>Camera &rarr;</tt></a></span>
+<h3 id="3">Ортографическая камера</h3>
+Камера с <a href="https://ru.wikipedia.org/wiki/%D0%98%D0%B7%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank">ортографической проекцией</a>.<br>
+При этом способе проецирования, размер объекта в отображаемой картинке остается постоянным, независимо от расстояния между ним и камерой.<br>
+Между прочим, это может быть полезным при отображении двухмерных (2D) сцен и элементов интерфейса пользователя (UI).
+<!-- Проекция из трёхмерного пространства на плоскость
+Проекционный метод изображения предметов основан на их зрительном представлении. Если соединить все точки предмета прямыми линиями (проекционными лучами) с постоянной точкой О (центр проекции), в которой предполагается глаз наблюдателя, то на пересечении этих лучей с какой-либо плоскостью получается проекция всех точек предмета. Таким образом получаем на плоскости перспективное изображение предмета или центральную проекцию.<br><br>
+
+Если центр проекции бесконечно удалён от картинной плоскости, то говорят о параллельной проекции; при этом, если проекционные лучи падают перпендикулярно к плоскости — то об ортогональной проекции, а если наклонно — о косоугольной проекции.<br><br>
+
+Если плоскость проекции не параллельна ни одной из координатных плоскостей — это аксонометрическая проекция.<br><br>
+
+    При любом виде проекции отрезок прямой переходит в отрезок прямой (в вырожденном случае — когда отрезок лежит на проекционном луче — в точку); прямая может перейти в прямую или в луч.<br>
+    Это свойство заметно упрощает приложение проекции в изобразительных целях, особенно в техническом черчении, когда объект содержит много прямолинейных элементов. В последнем случае достаточно спроецировать концы отрезков и соединить их на чертеже прямыми.<br>
+    Эллипс или окружность переходят в эллипс (в вырожденном случае — в отрезок или окружность).
+https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D1%8F_(%D0%B3%D0%B5%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%8F) -->
+
+<h4>Пример</h3>
+<pre>var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+scene.add( camera );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/canvas_camera_orthographic" target="_blank">camera / orthographic</a>
+<a href="https://threejs.org/examples/canvas_camera_orthographic2" target="_blank">camera / orthographic2</a>
+<a href="https://threejs.org/examples/webgl_camera" target="_blank">camera</a>
+<a href="https://threejs.org/examples/webgl_interactive_cubes_ortho" target="_blank">interactive / cubes / ortho</a>
+<a href="https://threejs.org/examples/webgl_materials_cubemap_dynamic" target="_blank">materials / cubemap / dynamic</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_advanced" target="_blank">postprocessing / advanced</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_dof2" target="_blank">postprocessing / dof2</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_godrays" target="_blank">postprocessing / godrays</a>
+<a href="https://threejs.org/examples/webgl_rtt" target="_blank">rtt</a>
+<a href="https://threejs.org/examples/webgl_shaders_tonemapping" target="_blank">shaders / tonemapping</a>
+<a href="https://threejs.org/examples/webgl_shadowmap" target="_blank">shadowmap</a>
+<a href="https://threejs.org/examples/webgl_terrain_dynamic" target="_blank">terrain / dynamic</a></pre>
+
+<h4>Конструктор</h4>
+<pre>OrthographicCamera( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="left - левый">left</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="right - правый">right</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="top - верхний">top</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="bottom - нижний">bottom</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="near - ближний">near</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="far - дальний">far</a> )</pre>
+<div class=blockindent><tt>left</tt> — левая плоскость отсечения области видимости камеры.<br>
+<tt>right</tt> — правая плоскость отсечения области видимости камеры.<br>
+<tt>top</tt> — верхняя плоскость отсечения области видимости камеры.<br>
+<tt>bottom</tt> — нижняя плоскость отсечения области видимости камеры.<br>
+<tt>near</tt> — ближняя плоскость отсечения области видимости камеры.<br>
+<tt>far</tt> — дальняя плоскость отсечения области видимости камеры.</div>
+<div>Вместе они определяют <a href="https://en.wikipedia.org/wiki/Viewing_frustum" target="_blank">область просмотра</a> камеры (в виде усеченной пирамиды).<br>
+<a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
+<div style='display:none;'><img src="img/ViewFrustum.png" width="400"></div></div><br>
+
+<h4>Свойства</h4>
+Описание общих свойств смотрите в статье о базовом классе <tt><a href="#1" title="Camera">Camera</a></tt>.
+<div class=blockindent>
+<pre id="3bottom"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="bottom - низ">.bottom</a></pre>
+Нижняя плоскость отсечения области просмотра камеры.
+<pre id="3far"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="far - далеко">.far</a></pre>
+Дальняя плоскость отсечения области просмотра камеры. Значение по умолчанию равно <tt>2000</tt>.<br>
+Допустимый диапазон значений находится между текущим значением ближней плоскости отсечения (свойство <tt><a href="#3near" title="OrthographicCamera.near">near</a></tt>) и бесконечностью.
+<pre id="3isOrthographicCamera"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is orthographic camera - является ортографической камерой">.isOrthographicCamera</a></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классы, ортографическими камерами. Значением по умолчанию является <tt>true</tt>.<br>
+Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> визуализатором для оптимизации.
+<pre id="3left"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="left - левый">.left</a></pre>
+Левая плоскость отсечения области просмотра камеры.
+<pre id="3near"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="near - близко">.near</a></pre>
+Ближняя плоскость отсечения области просмотра камеры. Значением по умолчанию является <tt>0.1</tt>.<br>
+Допустимый диапазон значений находится между <tt>0</tt> и текущим значением дальней плоскости отсечения (свойство <tt><a href="#3far" title="OrthographicCamera.far">far</a></tt>). Обратите внимание, что, в отличие от <tt><a href="#4" title="PerspectiveCamera">PerspectiveCamera</a></tt>, для ближней плоскости отсечения <tt>OrthographicCamera</tt> <tt>0</tt> является допустимым значением.
+<pre id="3right"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="right - правый">.right</a></pre>
+Правая плоскость отсечения области просмотра камеры.
+<pre id="3top"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="top - верхний">.top</a></pre>
+Верхняя плоскость отсечения области просмотра камеры.
+<pre id="3view"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="view - вид">.view</a></pre>
+Значение свойства устанавливается методом <a href="#3setViewOffset" title="OrthographicCamera.setViewOffset">setViewOffset</a></tt>. Значением по умолчанию является <tt>null</tt>.
+<pre id="3zoom"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="zoom - увеличение изображения, масштабирование">.zoom</a></pre>
+Возвращает или устанавливает коэффициент масштабирования камеры. Значение по умолчанию равно <tt>1</tt>.</div>
+
+<h4>Методы</h4>
+Описание общих методов смотрите в статье о базовом классе <tt><a href="#1" title="Camera">Camera</a></tt>.
+<div class=blockindent><pre id="3setViewOffset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set view offset - установить смещение области просмотра">.setViewOffset</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="full width - полная ширина">fullWidth</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="full height - полная высота">fullHeight</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">x</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">y</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a> )</pre>
+<div class=blockindent><tt>fullWidth</tt> — полная ширина при настройке нескольких областей просмотра<br>
+<tt>fullHeight</tt> — полная высота при настройке нескольких областей просмотра<br>
+<tt>x</tt> — горизонтальное смещение субкамеры<br>
+<tt>y</tt> — горизонтальное смещение субкамеры<br>
+<tt>width</tt> — ширина субкамеры<br>
+<tt>height</tt> — высота субкамеры</div>
+Метод устанавливает смещение при большой области просмотра. Это полезно для многооконных или многомониторных/многомашинных настройках. Пример подобного использования смотрите в описании <tt><a href="#4setViewOffset" title="PerspectiveCamera.setViewOffset">PerspectiveCamera</a></tt>.
+<pre id="3clearViewOffset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="clear view offset - удаление смещения просмотра">.clearViewOffset</a>()</pre>
+Удаляет любые смещения, установленные методом <tt><a href="#3setViewOffset" title="OrthographicCamera.setViewOffset">setViewOffset</a></tt>.
+<pre id="3updateProjectionMatrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update projection matrix - обновление матрицы проецирования">.updateProjectionMatrix</a></pre>
+Метод обновляет матрицу проецирования. Он должен быть вызван после изменения параметров.
+<pre id="3toJSON"><a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">.toJSON</a>()</pre>
+Метод возвращает данные камеры в формате JSON.</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/cameras/OrthographicCamera.js.txt">OrthographicCamera.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/tree/dev/src/cameras/OrthographicCamera.js" target="_blank">OrthographicCamera.js на Гитхабе</a></div><br>
+
+
+<span class="right_side"><a href="core.htm#7" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> <a href="camera.htm" title="Переход к родительскому классу"><tt>Camera &rarr;</tt></a></span>
+<h3 id="4">PerspectiveCamera</h3>
+Камера с <a href="https://en.wikipedia.org/wiki/Perspective_(graphical)" target="_blank">перспективной проекцией</a>. На русском языке это называется <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BA%D1%81%D0%BE%D0%BD%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank">аксонометрией</a>.<br>
+Этот режим проецирования призван имитировать так, как видит человеческий глаз. Это самый распространенный режим проецирования, используемый для визуализации (рендеринга) трехмерной (3D) сцены
+<h4>Пример</h4>
+<pre>var camera = new THREE.PerspectiveCamera( 45, width / height, 1, 1000 );
+scene.add( camera );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/canvas_geometry_birds" target="_blank">geometry / birds</a>
+<a href="https://threejs.org/examples/canvas_geometry_cube" target="_blank">geometry / cube</a>
+<a href="https://threejs.org/examples/webgl_animation_skinning_blending" target="_blank">animation / skinning / blending</a>
+<a href="https://threejs.org/examples/webgl_animation_skinning_morph" target="_blank">animation / skinning / morph</a>
+<a href="https://threejs.org/examples/webgl_effects_stereo" target="_blank">effects / stereo</a>
+<a href="https://threejs.org/examples/webgl_interactive_cubes" target="_blank">interactive / cubes</a>
+<a href="https://threejs.org/examples/webgl_loader_collada_skinning" target="_blank">loader / collada / skinning</a></pre>
+
+<h4>Конструктор</h4>
+<pre>PerspectiveCamera( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение англ. слов field of view - поле просмотра">fov</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от aspect ratio - соотношение сторон">aspect</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="near - ближний">near</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="far - дальний">far</a> )</pre>
+<div class=blockindent><tt>fov</tt> — Camera frustum vertical field of view.<br>
+<tt>aspect</tt> — Camera frustum aspect ratio.<br>
+<tt>near</tt> — Camera frustum near plane.<br>
+<tt>far</tt> — Camera frustum far plane.</div>
+<div>Вместе они определяют <a href="https://en.wikipedia.org/wiki/Viewing_frustum" target="_blank">область просмотра</a> камеры (в виде усеченной пирамиды).<br>
+<a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
+<div style='display:none;'><img src="img/1.png" width="600"></div></div><br>
+
+<h4>Свойства</h4>
+Описание общих свойств смотрите в статье о базовом классе <tt><a href="#1" title="Camera">Camera</a></tt>.
+<div class=blockindent>
+<pre id="4aspect"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от aspect ratio - соотношение сторон">.aspect</a></pre>
+Соотношение сторон области видимости камеры, ширина окна деленная на высоту окна. Значение по умолчанию равно <tt>1</tt> (квадратное окно).
+Camera frustum aspect ratio, usually the canvas width / canvas height. Default is 1 (square canvas).
+
+<pre id="4far"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="far - дальний">.far</a></pre>
+Дальняя плоскость отсечения области просмотра камеры. Значение по умолчанию равно <tt>2000</tt>.<br>
+Допустимый диапазон значений находится между текущим значением ближней плоскости отсечения (свойство <tt><a href="#4near" title="PerspectiveCamera.near">near</a></tt>) и бесконечностью.
+
+<pre id="4filmGauge"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="film gauge - размер пленки">.filmGauge</a></pre>
+Film size used for the larger axis. Значение по умолчанию равно <tt>35</tt> (миллиметров). This parameter does not influence the projection matrix unless <tt><a href="#4filmOffset" title="PerspectiveCamera.filmOffset">filmOffset</a></tt> is set to a nonzero value.
+
+<pre id="4filmOffset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="film offset - смещение пленки">.filmOffset</a></pre>
+Смещение от центра по горизонтали в тех же единицах, что и <tt><a href="#4filmGauge" title="PerspectiveCamera.filmGauge">filmGauge</a></tt>. Значение по умолчанию равно <tt>0</tt>.
+
+<pre id="4focus"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="focus - фокус">.focus</a></pre>
+Расстояние до объекта, используемое для стереоскопии и эффектов глубины резкости (depth-of-field). Вот статьи из Википедии на <a href="https://en.wikipedia.org/wiki/Depth_of_field" target="_blank">английском</a> и <a href="https://ru.wikipedia.org/wiki/%D0%93%D0%BB%D1%83%D0%B1%D0%B8%D0%BD%D0%B0_%D1%80%D0%B5%D0%B7%D0%BA%D0%BE_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B0%D0%B5%D0%BC%D0%BE%D0%B3%D0%BE_%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%B0" target="_blank">русском</a> языках.
+Этот параметр не влияет на матрицу проекции, если не используется <tt><a href="#5" title="StereoCamera">StereoCamera</a></tt>. Значение по умолчанию равно <tt>10</tt>.
+
+<pre id="4fov"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение англ. слов field of view - поле просмотра">.fov</a></pre>
+Вертикальный угол области просмотра камеры, снизу доверху, в градусах. Значение по умолчанию равно <tt>50</tt>.
+<pre id="4isPerspectiveCamera"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is perspective camera - является перспективной камерой">.isPerspectiveCamera</a></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классы, камерами с перспективной проекцией. Значением по умолчанию является <tt>true</tt>.<br>
+Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> визуализатором для оптимизации.
+<pre id="4near"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="near - ближний">.near</a></pre>
+Ближняя плоскость отсечения области просмотра камеры. Значение по умолчанию равно <tt>0.1</tt>.<br>
+Допустимый диапазон значений находится между числом, большим 0, и текущим значением дальней плоскости отсечения (свойство <tt><a href="#4far" title="PerspectiveCamera.far">far</a></tt>).
+Обратите внимание, что, в отличие от <tt><a href="#3" title="OrthographicCamera">OrthographicCamera</a></tt>, для ближней плоскости отсечения <tt>PerspectiveCamera</tt> <tt>0</tt> не является допустимым значением.
+<pre id="4view"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="view - вид">.view</a></pre>
+Свойство может быть или описанием области видимости камеры в виде усеченной пирамиды, или <tt>null</tt>. Значение этого свойства устанавливается методом <tt><a href="#4setViewOffset" title="PerspectiveCamera.setViewOffset">setViewOffset</a></tt>, а удаляется методом <tt><a href="#4clearViewOffset" title="PerspectiveCamera.clearViewOffset">clearViewOffset</a></tt>.
+<pre id="4zoom"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="zoom - увеличение, масштабирование">.zoom</a></pre>
+Возвращает или устанавливает коэффициент масштабирования камеры.</div>
+
+<h4>Методы</h4>
+Описание общих методов смотрите в статье о базовом классе <tt><a href="#1" title="Camera">Camera</a></tt>.
+<div class=blockindent>
+<pre id="4clearViewOffset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="clear view offset - убрать смещение области просмотра">.clearViewOffset</a>()</pre>
+Удаляет любые смещения, установленные при помощи метода <tt><a href="#4setViewOffset" title="PerspectiveCamera.setViewOffset">setViewOffset</a></tt>.
+<pre id="4getEffectiveFOV"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов get effective field of view - получить действующий угол поля просмотра">.getEffectiveFOV</a>()</pre>
+Возвращает текущий вертикальный угол поля просмотра в градусах, с учетом <tt><a href="#4zoom" title="PerspectiveCamera.zoom">zoom</a></tt>.
+
+<pre id="4getFilmHeight"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="get film height - получить высоту ">.getFilmHeight</a>()</pre>
+Returns the height of the image on the film. If .aspect is less than or equal to one (portrait format), the result equals .filmGauge.
+
+<pre id="4getFilmWidth">[method:Float getFilmWidth</a>()</pre>
+Returns the width of the image on the film. If .aspect is greater than or equal to one (landscape format), the result equals .filmGauge.
+
+<pre id="4getFocalLength">[method:Float getFocalLength</a>()</pre>
+Returns the focal length of the current .fov in respect to .filmGauge.
+
+<pre id="4setFocalLength">[method:null setFocalLength</a>( [page:Float focalLength</a> )</pre>
+Sets the FOV by focal length in respect to the current .filmGauge.<br>
+By default, the focal length is specified for a 35mm (full frame) camera.
+
+<pre id="4setViewOffset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set view offset - установить смещение области просмотра">.setViewOffset</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="full width - полная ширина">fullWidth</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="full height - полная высота">fullHeight</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">x</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">y</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a> )</pre>
+<div class=blockindent><tt>fullWidth</tt> — полная ширина of multiview setup<br>
+<tt>fullHeight</tt> — полная высота при of multiview setup<br>
+<tt>x</tt> — горизонтальное смещение субкамеры<br>
+<tt>y</tt> — вертикальное смещение субкамеры<br>
+<tt>width</tt> — ширина субкамеры<br>
+<tt>height</tt> — высота субкамеры</div>
+Метод устанавливает смещение при большой области просмотра. Это полезно для многооконных или многомониторных/многомашинных настройках.
+Sets an offset in a larger frustum. This is useful for multi-window or multi-monitor/multi-machine setups.<br>
+Например, если имеются 3x2 мониторов и каждый монитор 1920x1080 и они располагаются в сетке вот таким образом:
+For example, if you have 3x2 monitors and each monitor is 1920x1080 and the monitors are in grid like this:
+<pre>+---+---+---+
+| A | B | C |
++---+---+---+
+| D | E | F |
++---+---+---+</pre>
+то для каждого монитора будем вызывать его следующим образом:
+<pre>var w = 1920;
+var h = 1080;
+var fullWidth = w * 3;
+var fullHeight = h * 2;<br>
+// A
+camera.setViewOffset( fullWidth, fullHeight, w * 0, h * 0, w, h );
+// B
+camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 0, w, h );
+// C
+camera.setViewOffset( fullWidth, fullHeight, w * 2, h * 0, w, h );
+// D
+camera.setViewOffset( fullWidth, fullHeight, w * 0, h * 1, w, h );
+// E
+camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 1, w, h );
+// F
+camera.setViewOffset( fullWidth, fullHeight, w * 2, h * 1, w, h );</pre>
+Обратите внимание, мониторы могут быть разного размера и не располагаться в сетке.
+
+<pre id="4updateProjectionMatrix"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update projection matrix - обновление матрицы проецирования">.updateProjectionMatrix</a>()</pre>
+Метод обновляет матрицу проецирования. Он должен вызываться после изменения параметров.
+<pre id="4toJSON"><a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">.toJSON</a>()</pre>
+Метод возвращает данные камеры в формате JSON.</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/cameras/PerspectiveCamera.js.txt">PerspectiveCamera.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/tree/dev/src/cameras/PerspectiveCamera.js" target="_blank">PerspectiveCamera.js на Гитхабе</a></div><br>
+
+
+<h3 id="5">StereoCamera</h3>
+Сдвоенная <a href="#4" title="PerspectiveCamera">PerspectiveCamera</a>, используемая для получения эффектов, подобных <a href="https://en.wikipedia.org/wiki/Anaglyph_3D" target="_blank">3D Anaglyph</a> или <a href="https://en.wikipedia.org/wiki/parallax_barrier" target="_blank">Parallax Barrier</a>.<br>
+Вот эти эффекты на русском языке: <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BD%D0%B0%D0%B3%D0%BB%D0%B8%D1%84" target="_blank">Анаглиф</a> и <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B0%D0%BA%D1%81%D0%BD%D1%8B%D0%B9_%D0%B1%D0%B0%D1%80%D1%8C%D0%B5%D1%80" target="_blank">Параллаксный барьер</a>.
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/webgl_effects_anaglyph" target="_blank">effects / anaglyph</a>
+<a href="https://threejs.org/examples/webgl_effects_parallaxbarrier" target="_blank">effects / parallaxbarrier</a>
+<a href="https://threejs.org/examples/webgl_effects_stereo" target="_blank">effects / stereo</a></pre>
+Этот класс камер используется внутри файлов
+<pre><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/effects/AnaglyphEffect.js" target="_blank">examples/js/effects/AnaglyphEffect.js</a> (исходный файл эффекта анаглиф)
+<a href="https://github.com/mrdoob/three.js/blob/master/examples/js/effects/ParallaxBarrierEffect.js" target="_blank">examples/js/effects/ParallaxBarrierEffect.js</a> (исходник параллаксного барьера)
+<a href="https://github.com/mrdoob/three.js/blob/master/examples/js/effects/StereoEffect.js" target="_blank">examples/js/effects/StereoEffect.js</a> (исходник стереоэффекта)</pre>
+используемых, в свою очередь, в вышеупомянутых  примерах.
+
+<h4>Конструктор</h4>
+<pre>StereoCamera( )</pre>
+
+<h4>Свойства</h4>
+<div class=blockindent>
+<pre id="5"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слов aspect ratio - соотношение сторон">.aspect</a></pre>
+Значение по умолчанию равно <tt>1</tt>.
+<pre id="5eyeSep"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от англ. слов eye sep - глаз ">.eyeSep</a></pre>
+Значение по умолчанию равно <tt>0.064</tt>.
+<pre id="5cameraL"><a href="#4" title="PerspectiveCamera. сокращ. англ. слов camera left - левая камера">.cameraL</a></pre>
+Левая камера. This is added to [page:Layers layer 1] - objects to be rendered by the left camera must also be added to this layer.
+<pre id="5cameraR"><a href="#4" title="PerspectiveCamera. сокращ. англ. слов camera right - правая камера">.cameraR</a></pre>
+Правая камера. This is added to [page:Layers layer 2] - objects to be rendered by the left camera must also be added to this layer.</div>
+
+<h4>Методы</h4>
+<div class=blockindent><pre id="5update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a>( camera )</pre>
+Обновление стереокамер, основанное на камере, переданной в качестве параметра.</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/cameras/StereoCamera.js.txt">StereoCamera.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/tree/dev/src/cameras/StereoCamera.js" target="_blank">StereoCamera.js на Гитхабе</a></div><br>
+<br><br>
+</body></html>

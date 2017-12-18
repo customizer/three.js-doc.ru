@@ -1,0 +1,2021 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<link rel="stylesheet" type="text/css" href="1.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<h2 class=head1>Примеры</h2>
+<h2 id="1">Геометрия</h2>
+
+
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="1.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ConvexBufferGeometry</h3>
+
+ConvexBufferGeometry can be used to generate a convex hull for a given array of 3D points.
+The average time complexity for this task is considered to be O(nlog(n)).
+
+		<script>
+
+		// iOS iframe auto-resize workaround
+
+		if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+
+			var scene = document.getElementById( 'scene' );
+
+			scene.style.width = getComputedStyle( scene ).width;
+			scene.style.height = getComputedStyle( scene ).height;
+			scene.setAttribute( 'scrolling', 'no' );
+
+		}
+
+		</script>
+
+<h4>Пример</h4>
+
+<pre>var geometry = new THREE.ConvexBufferGeometry( points );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre>
+
+<h4>Конструктор</h4>
+<pre>ConvexBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="points - точки">points</a> )</pre>
+<div class=list>
+<tt>points</tt> — Array of [page:Vector3 Vector3s</a> that the resulting convex hull will contain.</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/ConvexGeometry.js examples/js/geometries/ConvexGeometry.js</a> <br><br>
+
+
+<span class="right_side"><a href="core.htm#7" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="1.2">ConvexGeometry</h3>
+ConvexGeometry can be used to generate a convex hull for a given array of 3D points.
+			The average time complexity for this task is considered to be O(nlog(n)).
+
+		<script>
+
+		// iOS iframe auto-resize workaround
+
+		if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+
+			var scene = document.getElementById( 'scene' );
+
+			scene.style.width = getComputedStyle( scene ).width;
+			scene.style.height = getComputedStyle( scene ).height;
+			scene.setAttribute( 'scrolling', 'no' );
+
+		}
+
+		</script>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.ConvexGeometry( points );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>ConvexGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="points - точки">points</a> )</pre>
+<div class=list>
+<tt>points</tt> — Array of [page:Vector3 Vector3s</a> that the resulting convex hull will contain.</div><br>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/ConvexGeometry.js examples/js/geometries/ConvexGeometry.js</a>
+
+
+<h2 id="2">Загрузчики</h2>
+<h3 id="2.1">BabylonLoader</h3>
+Загрузчик для загрузки ресурсов в формате <em>.babylon</em>. A loader for loading a <em>.babylon</em> resource.</div><br>
+
+<h4>Пример</h4>
+
+<pre>// instantiate a loader
+var loader = new THREE.BabylonLoader();
+
+// load a Babylon resource
+loader.load(
+	// resource URL
+	'models/babylon/skull.babylon',
+	// Function when resource is loaded
+	function ( object ) {
+		scene.add( object );
+	},
+	// Function called when download progresses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+	// Function called when download errors
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);</pre>
+
+		[example:webgl_loader_babylon</a>
+
+<h4>Конструктор</h4>
+<pre>BabylonLoader( [page:LoadingManager manager</a> )</pre>
+<div class=list>
+		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
+Создает новый <tt>BabylonLoader</tt>.<br><br>
+
+
+<h4>Свойства</h4>
+
+
+<h4>Методы</h4>
+<pre id="2.1load"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="load - загрузить">.load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</pre>
+		<div>
+		[page:String url</a> — required<br />
+		[page:function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:Object3D</a>.<br />
+		[page:function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+		[page:function onError</a> — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and call onLoad with the parsed response content.
+		</div>
+
+		<h3>[method:Object3D parse</a>( [page:Object json</a> )</h3>
+		<div>
+		[page:Object json</a> — The <em>JSON</em> structure to parse.
+		</div>
+		<div>
+		Parse a <em>JSON</em> structure and return an [page:Object3D object</a> or a [page:Scene scene</a>.<br />
+		Found objects are converted to [page:Mesh</a> with a [page:BufferGeometry</a> and a default [page:MeshPhongMaterial</a>.<br />
+		Lights are parsed accordingly.
+		</div>
+<h2>Source</h2>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BabylonLoader.js examples/js/loaders/BabylonLoader.js</a>
+
+
+<h3 id="2.2">ColladaLoader</h3>
+Загрузчик файлов в формате <em>Collada</em>.
+
+<h4>Пример</h4>
+
+<pre>// instantiate a loader
+var loader = new THREE.ColladaLoader();
+
+loader.load(
+	// resource URL
+	'models/collada/monster/monster.dae',
+	// Function when resource is loaded
+	function ( collada ) {
+		scene.add( collada.scene );
+	},
+	// Function called when download progresses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	}
+);</pre>
+<h5>Другие примеры:</h5>
+<pre>[example:webgl_loader_collada</a>
+[example:webgl_loader_collada_keyframe</a>
+[example:webgl_loader_collada_skinning</a>
+[example:webgl_loader_collada_kinematics</a></pre>
+
+
+<h4>Конструктор</h4><br>
+<pre>ColladaLoader()</pre>
+Создает новый <tt>ColladaLoader</tt>.
+
+<h4>Свойства</h4><br>
+<div class=blockindent>
+<pre id="2.2options">[property:Array options</a></pre>
+		<div>
+		&nbsp;.[page:Boolean centerGeometry</a> — Force [page:Geometry</a> to always be centered at the local origin of the containing [page: Mesh</a>.<br />
+		&nbsp;.[page:Boolean convertUpAxis</a> — Axis conversion is done for geometries, animations, and controllers.<br />
+		&nbsp;.[page:Boolean subdivideFaces</a> — Force subdivision into multiple [page: Face3</a>.<br />
+		&nbsp;.[page:String upAxis</a> — X, Y or Z<br />
+		&nbsp;.[page:Boolean defaultEnvMap</a> — Cubemap to use for reflective or refractive materials.<br />
+		</div>
+
+<pre id="2.2geometries">[property:Object geometries</a></pre>
+Parsed <em>.dae</em> geometries.</div>
+
+
+<h4>Методы</h4>
+
+		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a> )</h3>
+		<div>
+		[page:String url</a> — required<br />
+		[page:function onLoad</a> — Will be called when load completes. The argument will be an [page:Object object</a> containing loaded resources.<br />
+		[page:function onProgress</a> — Will be called while load progresses. The argument will be an object containing .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+		</div>
+		<div>
+		Begin loading from url and call onLoad with the parsed response content.
+		</div>
+
+		<h3>[method:Object parse</a>( [page:Document doc</a>, [page:Function callBack</a>, [page:String url</a> )</h3>
+		<div>
+		[page:Document doc</a> — The <em>XML</em> document to parse.<br />
+		[page:Function callBack</a> — Will be called when parse completes.<br />
+		[page:String url</a> — The base url from which to find subsequent resources.<br />
+		</div>
+		<div>
+		Parse an <em>XML Document</em> and return an [page:Object object</a> that contain loaded parts: .[page:Scene scene</a>, .[page:Array morphs</a>, .[page:Array skins</a>, .[page:Array animations</a>, .[page:Object dae</a>
+		</div>
+
+		<h3>[method:null setPreferredShading</a>( [page:Integer shading</a> )</h3>
+		<div>
+		[page:Integer shading</a> — required
+		</div>
+		<div>
+		Set the .[page:Integer shading</a> property on the resource's materials.<br />
+		Options are [page:Materials THREE.SmoothShading</a>, [page:Materials THREE.FlatShading</a>.
+		</div>
+
+		<h3>[method:null applySkin</a>( [page:Geometry geometry</a>, [page:Object instanceCtrl</a>, [page:Integer frame</a> )</h3>
+		<div>
+		[page:Geometry geometry</a> — required<br />
+		[page:Object instanceCtrl</a> — required. A collada <em>skinController</em><br />
+		[page:Integer frame</a> — optionnal. Default is 40<br />
+		</div>
+		<div>
+		Apply a skin (vertices, animation, bones) from a <em>collada skin controller</em>, on the given [page:Geometry</a>.
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/ColladaLoader.js examples/js/loaders/ColladaLoader.js</a>
+
+
+		[page:Loader</a> &rarr;
+<h3 id="2.3">GLTF2Loader</h3>
+A loader for *glTF* 2.0 resources.
+<br><br>
+		<a href="https://www.khronos.org/gltf">glTF</a> (GL Transmission Format) is an
+		<a href="https://github.com/KhronosGroup/glTF/tree/master/specification/2.0">open format specification</a>
+		for efficient delivery and loading of 3D content. Assets may be provided either in JSON (.gltf)
+		or binary (.glb) format. External files store textures (.jpg, .png, ...) and additional binary
+		data (.bin). A glTF asset may deliver one or more scenes, including meshes, materials,
+		textures, shaders, skins, skeletons, morph targets, animations, lights, and/or cameras.
+		</div>
+
+		<h2>Extensions</h2>
+
+		<div>
+		GLTF2Loader supports the following glTF extensions:
+		</div>
+
+		<ul>
+			<li>
+				KHR_lights
+			</li>
+			<li>
+				<a target="_blank" href="https://github.com/KhronosGroup/glTF/tree/master/extensions/Khronos/KHR_materials_common">
+					KHR_materials_common
+				</a>
+			</li>
+			<li>
+				<a target="_blank" href="https://github.com/KhronosGroup/glTF/tree/master/extensions/Khronos/KHR_materials_pbrSpecularGlossiness">
+					KHR_materials_pbrSpecularGlossiness
+				</a>
+			</li>
+		</ul>
+
+  <h4>Пример</h4>
+
+  <pre>
+		// Instantiate a loader
+		var loader = new THREE.GLTF2Loader();
+
+		// Load a glTF resource
+		loader.load( 'models/gltf/duck/duck.gltf', function ( gltf ) {
+			scene.add( gltf.scene );
+
+			gltf.animations; // Array&lt;THREE.AnimationClip&gt;
+			gltf.scene;      // THREE.Scene
+			gltf.scenes;     // Array&lt;THREE.Scene&gt;
+			gltf.cameras;    // Array&lt;THREE.Camera&gt;
+		} );
+  </pre>
+
+		[example:webgl_loader_gltf2</a>
+
+  <h4>Конструктор</h4>
+
+		<h3>GLTF2Loader( [page:LoadingManager manager</a> )</h3>
+		<div>
+		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
+		</div>
+		<div>
+		Creates a new [name</a>.
+		</div>
+
+  <h4>Свойства</h4>
+
+
+  <h4>Методы</h4>
+
+		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
+		<div>
+		[page:String url</a> — required<br />
+		[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded JSON response returned from [page:Function parse</a>.<br />
+		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, that contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+		[page:Function onError</a> — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and call the callback function with the parsed response content.
+		</div>
+
+		<h3>[method:null setPath</a>( [page:String path</a> )</h3>
+		<div>
+		[page:String path</a> — Base path for loading additional resources e.g. textures, GLSL shaders, .bin data.
+		</div>
+		<div>
+		Set the base path for additional resources.
+		</div>
+
+		<h3>[method:null setCrossOrigin</a>( [page:String value</a> )</h3>
+		<div>
+		[page:String value</a> — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
+		</div>
+
+		<h3>[method:null parse</a>( [page:Object json</a>, [page:Function callBack</a>, [page:String path</a> )</h3>
+		<div>
+		[page:Object json</a> — <em>JSON</em> object to parse.<br />
+		[page:Function callBack</a> — Will be called when parse completes.<br />
+		[page:String path</a> — The base path from which to find subsequent glTF resources such as textures, GLSL shaders and .bin data files.<br />
+		</div>
+		<div>
+		Parse a glTF-based <em>JSON</em> structure and fire [page:Function callback</a> when complete. The argument to [page:Function callback</a> will be an [page:object</a> that contains loaded parts: .[page:Scene scene</a>, .[page:Array scenes</a>, .[page:Array cameras</a>, and .[page:Array animations</a>.
+		</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/GLTF2Loader.js examples/js/loaders/GLTF2Loader.js</a>
+
+
+<h3 id="2.4">MTLLoader</h3>
+A loader for loading an <em>.mtl</em> resource, used internaly by [page:OBJMTLLoader</a> and [page:UTF8Loader</a>.
+
+<h4>Конструктор</h4>
+<h3>MTLLoader( [page:LoadingManager loadingManager</a> )</h3>
+		<div>
+			[page:LoadingManager loadingManager</a> — LoadingManager to use. Defaults to [page:DefaultLoadingManager DefaultLoadingManager</a><br />
+		</div>
+		<div>
+			Creates a new [name</a>.
+		</div>
+
+		<!-- <h4>Свойства</h4> -->
+
+
+  <h4>Методы</h4>
+
+
+		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
+		<div>
+			[page:String url</a> — required<br />
+			[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:MTLLoaderMaterialCreator MTLLoader.MaterialCreator</a> instance.<br />
+			[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+			[page:Function onError</a> — Will be called when load errors.<br />
+		</div>
+		<div>
+			Begin loading from url and return the loaded material.
+		</div>
+
+
+		<h3>[method:null setPath</a>( [page:String path</a> )</h3>
+		<div>
+			[page:String path</a> — required<br />
+		</div>
+		<div>
+			 Set base path for resolving references. If set this path will be prepended to each loaded and found reference.
+		</div>
+
+
+		<h3>[method:null setTexturePath</a>( [page:String path</a> )</h3>
+		<div>
+			[page:String path</a> — required<br />
+		</div>
+		<div>
+			Set base path for resolving texture references. If set this path will be prepended found texture reference. If not set and setPath is, it will be used as texture base path.
+		</div>
+
+
+		<h3>[method:null setCrossOrigin</a>( [page:boolean useCrossOrigin</a> )</h3>
+		<div>
+			[page:boolean useCrossOrigin</a> — required<br />
+		</div>
+		<div>
+			Set to true if you need to load textures from a different origin.
+		</div>
+
+
+		<h3>[method:null setMaterialOptions</a>( [page:Object options</a> )</h3>
+		<div>
+			[page:Object options</a> — required
+			<ul>
+				<li>side: Which side to apply the material. THREE.FrontSide (default), THREE.BackSide, THREE.DoubleSide</li>
+				<li>wrap: What type of wrapping to apply for textures. THREE.RepeatWrapping (default), THREE.ClampToEdgeWrapping, THREE.MirroredRepeatWrapping</li>
+				<li>normalizeRGB: RGBs need to be normalized to 0-1 from 0-255. Default: false, assumed to be already normalized</li>
+				<li>ignoreZeroRGBs: Ignore values of RGBs (Ka,Kd,Ks) that are all 0's. Default: false</li>
+			</ul>
+		</div>
+		<div>
+			Set of options on how to construct the materials
+		</div>
+
+
+		<h3>[method:MTLLoaderMaterialCreator parse</a>( [page:String text</a> )</h3>
+		<div>
+			[page:String text</a> — The textual <em>mtl</em> structure to parse.
+		</div>
+		<div>
+			Parse a <em>mtl</em> text structure and return a [page:MTLLoaderMaterialCreator</a> instance.<br />
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/[name</a>.js examples/js/loaders/[name</a>.js</a>
+
+
+<h3 id="2.5">OBJLoader</h3>
+A loader for loading an <em>.obj</em> resource.
+
+<h4>Пример</h4>
+
+    <pre>
+				// instantiate a loader
+				var loader = new THREE.OBJLoader();
+
+				// load a resource
+				loader.load(
+					// resource URL
+					'models/monster.obj',
+					// Function when resource is loaded
+					function ( object ) {
+						scene.add( object );
+					}
+				);
+    </pre>
+
+				[example:webgl_loader_obj</a>
+
+
+  <h4>Конструктор</h4>
+
+		<h3>OBJLoader( [page:LoadingManager manager</a> )</h3>
+		<div>
+		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
+		</div>
+		<div>
+		Creates a new [name</a>.
+		</div>
+
+  <h4>Свойства</h4>
+
+
+  <h4>Методы</h4>
+
+		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
+		<div>
+		[page:String url</a> — required<br />
+		[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:Object3D</a>.<br />
+		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+		[page:Function onError</a> — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and call onLoad with the parsed response content.
+		</div>
+
+		<h3>[method:Object3D parse</a>( [page:String text</a> )</h3>
+		<div>
+		[page:String text</a> — The textual <em>obj</em> structure to parse.
+		</div>
+		<div>
+		Returns an [page:Object3D</a>. It contains the parsed meshes as [page:Mesh</a> and lines as [page:LineSegments</a>.<br />
+		All geometry is created as [page:BufferGeometry</a>. Default materials are created as [page:MeshPhongMaterial</a>.<br />
+		If an <em>obj</em> object or group uses multiple materials while declaring faces geometry groups and an array of materials are used.
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader.js examples/js/loaders/OBJLoader.js</a>
+
+
+<h3 id="2.6">OBJLoader2</h3>
+A loader for loading an <em>.obj</em> resource.
+
+  <h4>Пример</h4>
+
+  <pre>
+		// instantiate the loader
+		var loader = new THREE.OBJLoader2();
+
+		// function called on successful load
+		var intergrateIntoScene = function ( object ) {
+			scene.add( object );
+		};
+
+		// load a resource from provided URL
+		loader.load( 'obj/female02/female02.obj', intergrateIntoScene );
+  </pre>
+
+		[example:webgl_loader_obj2</a>
+
+
+  <h4>Конструктор</h4>
+
+		<h3>OBJLoader2( [page:LoadingManager manager</a> )</h3>
+		<div>
+		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
+		</div>
+		<div>
+			Use [name</a> to load OBJ data from files or to parse OBJ data from arraybuffer or text.
+		</div>
+
+  <h4>Свойства</h4>
+
+
+  <h4>Методы</h4>
+
+		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a>, [page:Boolean useArrayBuffer</a> )</h3>
+		<div>
+			[page:String url</a> — URL of the file to load<br />
+			[page:Function onLoad</a> — Called after loading was successfully completed. The argument will be the loaded [page:Object3D</a>.<br />
+			[page:Function onProgress</a> — Called to report progress of loading. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+			[page:Function onError</a>  Called after an error occurred during loading.<br />
+			[page:boolean useArrayBuffer</a> — Set this to false to force string based parsing<br />
+		</div>
+		<div>
+			Use this convenient method to load an OBJ file at the given URL. Per default the fileLoader uses an arraybuffer
+		</div>
+
+		<h3>[method:Object3D parse</a>( [page:ArrayBuffer arrayBuffer</a> )</h3>
+		<div>
+			[page:ArrayBuffer arrayBuffer</a> — OBJ data as Uint8Array
+		</div>
+		<div>
+			Default parse function: Parses OBJ file content stored in arrayBuffer and returns the [page:Object3D sceneGraphBaseNode</a>.
+		</div>
+
+		<h3>[method:Object3D parseText</a>( [page:String test</a> )</h3>
+		<div>
+			[page:String text</a> — OBJ data as string
+		</div>
+		<div>
+			Legacy parse function: Parses OBJ file content stored in string and returns the [page:Object3D sceneGraphBaseNode</a>.
+		</div>
+
+		<h3>[method:null setMaterials</a> ( Array of [page:Material materials</a> )</h3>
+		<div>
+			Array of [page:Material materials</a> — Array of [page:Material Materials</a> from MTLLoader
+		</div>
+		<div>
+			Set materials loaded by MTLLoader or any other supplier of an Array of [page:Material Materials</a>.
+		</div>
+
+		<h3>[method:null setPath</a> ( [page:String path</a> )</h3>
+		<div>
+			[page:String path</a> — The basePath
+		</div>
+		<div>
+			Base path to use.
+		</div>
+
+		<h3>[method:null setSceneGraphBaseNode</a> ( [page:Object3D sceneGraphBaseNode</a> )</h3>
+		<div>
+			[page:Object3D sceneGraphBaseNode</a> — Scenegraph object where meshes will be attached
+		</div>
+		<div>
+			Set the node where the loaded objects will be attached.
+		</div>
+
+		<h3>[method:null setDebug</a>( [page:Boolean parserDebug</a>, [page:Boolean meshCreatorDebug</a> )</h3>
+		<div>
+			[page:Boolean parserDebug</a> — Internal Parser will produce debug output<br>
+			[page:Boolean meshCreatorDebug</a> — Internal MeshCreator will produce debug output
+		</div>
+		<div>
+			Allows to set debug mode for the parser and the meshCreator.
+		</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader2.js examples/js/loaders/OBJLoader2.js</a>
+
+
+<h3 id="2.7">WWOBJLoader2</h3>
+A loader for loading an <em>.obj</em> resource within a web worker.</div>
+
+		<h2>Sub-Classes</h2>
+		[page:WWOBJLoader2.PrepDataArrayBuffer</a><br>
+		[page:WWOBJLoader2.PrepDataFile</a><br>
+		[page:WWOBJLoader2.PrepDataCallbacks</a><br>
+		[page:WWOBJLoader2.LoadedMeshUserOverride</a><br>
+		[page:WWOBJLoader2.WWOBJLoader2Director</a>
+
+  <h4>Пример</h4>
+
+  <pre>
+			// instantiate the loader
+			var loader = new THREE.OBJLoader2.WWOBJLoader2();
+
+			// load an OBJ file by providing a name, the path and the file name
+			var prepData = new THREE.OBJLoader2.WWOBJLoader2.PrepDataFile(
+				'female02',
+				'obj/female02/',
+				'female02.obj'
+			);
+
+			// set where to add the loaded data in the scene graph.
+			prepData.setSceneGraphBaseNode( scene );
+
+			// provide the preparation data to the loader and let it run.
+			loader.prepareRun( prepData );
+			loader.run();
+  </pre>
+
+		[example:webgl_loader_obj2_ww</a> — Simple example that allows to load own models via file selection.<br>
+		[example:webgl_loader_obj2_ww_parallels</a> — Advanced example using [page:WWOBJLoader2.WWOBJLoader2Director</a> for orchestration of multiple workers.
+
+
+  <h4>Конструктор</h4>
+
+		<h3>[name</a>()</h3>
+		<div>
+			OBJ data will be loaded by dynamically created web worker.<br>
+			First feed instructions with: [page:WWOBJLoader2.prepareRun prepareRun</a><br>
+			Then execute with: [page:WWOBJLoader2.run run</a>
+		</div>
+
+  <h4>Свойства</h4>
+
+
+  <h4>Методы</h4>
+
+		<h3>[method:null prepareRun</a>( [page:Object params</a> )</h3>
+		<div>
+			[page:Object params</a> — Either [page:WWOBJLoader2.PrepDataArrayBuffer</a> or [page:WWOBJLoader2.PrepDataFile</a>
+		</div>
+		<div>
+			Set all parameters for required for execution of [page:WWOBJLoader2.run run</a>.
+		</div>
+
+
+		<h3>[method:null run</a>()</h3>
+		<div>
+			Run the loader according the preparation instruction provided in [page:WWOBJLoader2.prepareRun prepareRun</a>.
+		</div>
+
+
+		<h3>[method:null setCrossOrigin</a>( [page:String crossOrigin</a> )</h3>
+		<div>
+			[page:String crossOrigin</a> — CORS value
+		</div>
+		<div>
+			Sets the CORS string to be used.
+		</div>
+
+
+		<h3>[method:null setDebug</a>( [page:Boolean enabled</a> )</h3>
+		<div>
+			[page:Boolean enabled</a> — True or false
+		</div>
+		<div>
+			Enable or disable debug logging.
+		</div>
+
+
+		<h3>[method:null setRequestTerminate</a>( [page:Boolean requestTerminate</a> )</h3>
+		<div>
+			[page:Boolean requestTerminate</a> — True or false
+		</div>
+		<div>
+			Call requestTerminate to terminate the web worker and free local resource after execution.
+		</div>
+
+
+		<h3>[method:null registerCallbackCompletedLoading</a>( [page:Function callbackCompletedLoading</a> )</h3>
+		<div>
+			[page:Function callbackCompletedLoading</a> — 	Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is called once loading of the complete model is completed.
+		</div>
+
+
+		<h3>[method:null registerCallbackProgress</a>( [page:Function callbackProgress</a> )</h3>
+		<div>
+			[page:Function callbackProgress</a> — 	Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is invoked by internal function "_announceProgress" to print feedback.
+		</div>
+
+
+		<h3>[method:null registerCallbackMaterialsLoaded</a>( [page:Function callbackMaterialsLoaded</a> )</h3>
+		<div>
+			[page:Function callbackMaterialsLoaded</a> — 	Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is called once materials have been loaded. It allows to alter and return materials.
+		</div>
+
+
+		<h3>[method:null registerCallbackMeshLoaded</a>( [page:Function callbackMeshLoaded</a> )</h3>
+		<div>
+			[page:Function callbackMeshLoaded</a> — 	Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is called every time a mesh was loaded. Use [page:WWOBJLoader2.LoadedMeshUserOverride</a> for alteration instructions (geometry, material or disregard mesh).
+		</div>
+
+		<h3>[method:null registerCallbackErrorWhileLoading</a>( [page:Function callbackErrorWhileLoading</a> )</h3>
+		<div>
+			[page:Function callbackErrorWhileLoading</a> — 	Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is called to report an error that prevented loading.
+		</div>
+
+
+		<h3>[method:null clearAllCallbacks</a>()</h3>
+		<div>
+			Clears all registered callbacks.
+		</div>
+
+
+		<h2>Sub-Classes</h2>
+		<br>
+		<a name="PrepDataArrayBuffer"></a><h1>PrepDataArrayBuffer</h1>
+  <h4>Конструктор</h4>
+
+		<h3>PrepDataArrayBuffer( [page:String modelName</a>, [page:Uint8Array objAsArrayBuffer</a>, [page:String pathTexture</a>, [page:String mtlAsString</a> )</h3>
+		<div>
+			[page:String modelName</a> — Overall name of the model<br>
+			[page:Uint8Array objAsArrayBuffer</a> — OBJ file content as ArrayBuffer<br>
+			[page:String pathTexture</a> — Path to texture files<br>
+			[page:String mtlAsString</a> — MTL file content as string
+		</div>
+		<div>
+			Instruction to configure [page:WWOBJLoader2.prepareRun</a> to load OBJ from given ArrayBuffer and MTL from given String.
+		</div>
+
+  <h4>Методы</h4>
+
+		<h3>[method:PrepDataCallbacks getCallbacks</a>()</h3>
+		<div>
+			Returns all callbacks as [page:WWOBJLoader2.PrepDataCallbacks</a>.
+		</div>
+
+
+		<h3>[method:null setRequestTerminate</a>( [page:Boolean requestTerminate</a> )</h3>
+		<div>
+			[page:Boolean requestTerminate</a> — Default is false
+		</div>
+		<div>
+			Request termination of web worker and free local resources after execution.
+		</div>
+
+
+		<h3>[method:null setSceneGraphBaseNode</a>( [page:THREE.Object3D sceneGraphBaseNode</a> )</h3>
+		<div>
+			[page:Object3D sceneGraphBaseNode</a> — Scene graph object
+		</div>
+		<div>
+			[page:Object3D</a> where meshes will be attached.
+		</div>
+
+
+		<h3>[method:null setStreamMeshes</a>( [page:Boolean streamMeshes</a> )</h3>
+		<div>
+			[page:Boolean streamMeshes</a> — Default is true
+		</div>
+		<div>
+			Singles meshes are directly integrated into scene when loaded or later.
+		</div>
+		<br>
+		<br>
+
+
+		<a name="PrepDataFile"></a><h1>PrepDataFile</h1>
+  <h4>Конструктор</h4>
+
+		<h3>PrepDataFile( [page:String modelName</a>, [page:String pathObj</a>, [page:String fileObj</a>, [page:String pathTexture</a>, [page:String fileMtl</a> )</h3>
+		<div>
+			[page:String modelName</a> — Overall name of the model<br>
+			[page:String pathObj</a> — Path to OBJ file<br>
+			[page:String fileObj</a> — OBJ file name<br>
+			[page:String pathTexture</a> — Path to texture files<br>
+			[page:String fileMtl</a> — MTL file name
+		</div>
+		<div>
+			Instruction to configure [page:WWOBJLoader2.prepareRun</a> to load OBJ and MTL from files.
+		</div>
+
+  <h4>Методы</h4>
+
+		<h3>[method:PrepDataCallbacks getCallbacks</a>()</h3>
+		<div>
+			Returns all callbacks as [page:WWOBJLoader2.PrepDataCallbacks</a>.
+		</div>
+
+
+		<h3>[method:null setRequestTerminate</a>( [page:Boolean requestTerminate</a> )</h3>
+		<div>
+			[page:Boolean requestTerminate</a> — Default is false
+		</div>
+		<div>
+			Request termination of web worker and free local resources after execution.
+		</div>
+
+
+		<h3>[method:null setSceneGraphBaseNode</a>( [page:THREE.Object3D sceneGraphBaseNode</a> )</h3>
+		<div>
+			[page:Object3D sceneGraphBaseNode</a> — Scene graph object
+		</div>
+		<div>
+			[page:Object3D</a> where meshes will be attached.
+		</div>
+
+
+		<h3>[method:null setStreamMeshes</a>( [page:Boolean streamMeshes</a> )</h3>
+		<div>
+			[page:Boolean streamMeshes</a> — Default is true
+		</div>
+		<div>
+			Singles meshes are directly integrated into scene when loaded or later.
+		</div>
+		<br>
+		<br>
+
+
+		<a name="PrepDataCallbacks"></a><h1>PrepDataCallbacks</h1>
+  <h4>Конструктор</h4>
+
+		<h3>PrepDataCallbacks()</h3>
+		<div>
+			Callbacks utilized by functions working with [page:WWOBJLoader2.PrepDataArrayBuffer</a> or [page:WWOBJLoader2.PrepDataFile</a>.
+		</div>
+
+  <h4>Методы</h4>
+
+		<h3>[method:null registerCallbackCompletedLoading</a>( [page:Function callbackCompletedLoading</a> )</h3>
+		<div>
+			[page:Function callbackCompletedLoading</a> — Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is called once loading of the complete model is completed.
+		</div>
+
+
+		<h3>[method:null registerCallbackProgress</a>( [page:Function callbackProgress</a> )</h3>
+		<div>
+			[page:Function callbackProgress</a> — Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is invoked by internal function "_announceProgress" to print feedback.
+		</div>
+
+
+		<h3>[method:null registerCallbackErrorWhileLoading</a>( [page:Function callbackErrorWhileLoading</a> )</h3>
+		<div>
+			[page:Function callbackErrorWhileLoading</a> — Callback function for described functionality
+		</div>
+		<div>
+			Report if an error prevented loading.
+		</div>
+
+
+		<h3>[method:null registerCallbackMaterialsLoaded</a>( [page:Function callbackMaterialsLoaded</a> )</h3>
+		<div>
+			[page:Function callbackMaterialsLoaded</a> — Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is called once materials have been loaded. It allows to alter and return materials.
+		</div>
+
+
+		<h3>[method:null registerCallbackMeshLoaded</a>( [page:Function callbackMeshLoaded</a> )</h3>
+		<div>
+			[page:Function callbackMeshLoaded</a> — Callback function for described functionality
+		</div>
+		<div>
+			Register callback function that is called every time a mesh was loaded. Use [page:WWOBJLoader2.LoadedMeshUserOverride</a> for alteration instructions (geometry, material or disregard mesh).
+		</div>
+		<br>
+		<br>
+
+
+		<a name="LoadedMeshUserOverride"></a><h1>LoadedMeshUserOverride</h1>
+  <h4>Конструктор</h4>
+
+		<h3>LoadedMeshUserOverride( [page:Boolean disregardMesh</a>, [page:THREE.BufferGeometry bufferGeometry</a>, [page:THREE.Material material</a> )</h3>
+		<div>
+			[page:Boolean disregardMesh</a> — Tell [page:WWOBJLoader2</a> to completely disregard this mesh<br>
+			[page:BufferGeometry bufferGeometry</a> — The [page:BufferGeometry</a> to be used<br>
+			[page:Material material</a> — The [page:Material</a> to be used
+		</div>
+		<div>
+			Object to return by THREE.OBJLoader2.WWOBJLoader2.callbacks.meshLoaded. Used to adjust bufferGeometry or material or prevent complete loading of mesh.
+		</div>
+		<br>
+		<br>
+
+
+		<a name="WWOBJLoader2Director"></a><h1>WWOBJLoader2Director</h1>
+  <h4>Конструктор</h4>
+
+		<h3>WWOBJLoader2Director()</h3>
+		<div>
+			Orchestrate loading of multiple OBJ files/data from an instruction queue with a configurable amount of workers (1-16).<br>
+			Workflow:<br>
+				prepareWorkers<br>
+				enqueueForRun<br>
+				processQueue<br>
+				deregister
+		</div>
+
+		<h3>[method:null prepareWorkers</a>( [page:WWOBJLoader2.PrepDataCallbacks globalCallbacks</a>, [page:Number maxQueueSize</a>, [page:Number maxWebWorkers</a> )</h3>
+		<div>
+			[page:WWOBJLoader2.PrepDataCallbacks globalCallbacks</a> — Register global callbacks used by all web workers<br>
+			[page:Number maxQueueSize</a> — Set the maximum size of the instruction queue (1-1024)<br>
+			[page:Number maxWebWorkers</a> — Set the maximum amount of workers (1-16)
+		</div>
+		<div>
+			Create or destroy workers according limits. Set the name and register callbacks for dynamically created web workers.
+		</div>
+
+
+		<h3>[method:null enqueueForRun</a>( [page:Object runParams</a> )</h3>
+		<div>
+			[page:Object runParams</a> — Either [page:WWOBJLoader2.PrepDataArrayBuffer</a> or [page:WWOBJLoader2.PrepDataFile</a>
+		</div>
+		<div>
+			Store run instructions in internal instructionQueue.
+		</div>
+
+
+		<h3>[method:null processQueue</a>()</h3>
+		<div>
+			Process the instructionQueue until it is depleted.
+		</div>
+
+
+		<h3>[method:null deregister</a>()</h3>
+		<div>
+			Terminate all workers
+		</div>
+
+
+		<h3>[method:null getMaxQueueSize</a>()</h3>
+		<div>
+			Returns the maximum length of the instruction queue.
+		</div>
+
+
+		<h3>[method:null getMaxWebWorkers</a>()</h3>
+		<div>
+			Returns the maximum number of workers.
+		</div>
+
+
+		<h3>[method:null setCrossOrigin</a>( [page:String crossOrigin</a> )</h3>
+		<div>
+			[page:String crossOrigin</a> — CORS value
+		</div>
+		<div>
+			Sets the CORS string to be used.
+		</div>
+
+
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader2.js examples/js/loaders/OBJLoader2.js</a>
+
+
+<h3 id="2.8">PCDLoader</h3>
+A loader for <em>PCD</em> files. Loads ascii and binary.
+			Compressed binary files are not supported.</div>
+
+<h4>Пример</h4>
+
+  <pre>
+
+		// instantiate a loader
+		var loader = new THREE.PCDLoader();
+
+		// load a resource
+		loader.load(
+			// resource URL
+			'pointcloud.pcd' ,
+			// Function when resource is loaded
+			function ( mesh ) {
+				scene.add( mesh );
+			}
+		);
+  </pre>
+
+		[example:webgl_loader_pcd</a>
+
+
+  <h4>Конструктор</h4>
+
+		<h3>PCDLoader( [page:LoadingManager manager</a> )</h3>
+		<div>
+		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
+		</div>
+		<div>
+		Creates a new [name</a>.
+		</div>
+
+  <h4>Свойства</h4>
+
+		<h3>[page:Boolean littleEndian</a></h3>
+		<div>
+		Default value is true.
+		</div>
+
+  <h4>Методы</h4>
+
+		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
+		<div>
+		[page:String url</a> — required<br />
+		[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:Object3D</a>.<br />
+		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+		[page:Function onError</a> — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and call onLoad with the parsed response content.
+		</div>
+
+		<h3>[method:Object3D parse</a>( [page:Arraybuffer data</a>,[page:String url</a> )</h3>
+		<div>
+		[page:Arraybuffer data</a> — The binary structure to parse.
+		</div>
+		<div>
+		[page:String url</a> — The file name or file url.
+		</div>
+		<div>
+		Parse an <em>pcd</em> binary structure and return an [page:Object3D</a>.<br />
+		The object is converted to [page:Points</a> with a [page:BufferGeometry</a> and a [page:PointsMaterial</a>.
+		</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PCDLoader.js examples/js/loaders/PCDLoader.js</a>
+
+
+<h3 id="2.9">PDBLoader</h3>
+A loader for loading a <em>.pdb</em> resource.<br /><br />
+		The <a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.
+		</div>
+
+  <h4>Пример</h4>
+
+  <pre>
+		// instantiate a loader
+		var loader = new THREE.PDBLoader();
+
+		// load a PDB resource
+		loader.load(
+			// resource URL
+			'models/molecules/caffeine.pdb',
+			// Function when resource is loaded
+			function ( geometryAtoms, geometryBonds, json ) {
+				console.log( 'This molecule has ' + json.atoms.length + ' atoms' );
+			},
+			// Function called when download progresses
+			function ( xhr ) {
+				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+			},
+			// Function called when download errors
+			function ( xhr ) {
+				console.log( 'An error happened' );
+			}
+		);
+  </pre>
+
+		[example:webgl_loader_pdb</a>
+
+
+  <h4>Конструктор</h4>
+
+		<h3>PDBLoader( [page:LoadingManager manager</a> )</h3>
+		<div>
+		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
+		</div>
+		<div>
+		Creates a new PDBLoader.
+		</div>
+
+  <h4>Свойства</h4>
+
+
+  <h4>Методы</h4>
+
+		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
+		<div>
+		[page:String url</a> — required. URL to the <em>.pdb</em> file<br />
+		[page:Function onLoad</a> — Will be called when load completes. The arguments will be an [page:BufferGeometry geometryAtoms</a>, [page:BufferGeometry geometryBonds</a> and the [page:Object JSON</a> structure.<br />
+		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+		[page:Function onError</a> — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and call onLoad with the parsed response content.
+		</div>
+
+		<h3>[method:Object parsePDB</a>( [page:String text</a> )</h3>
+		<div>
+		[page:String text</a> — The textual <em>pdb</em> structure to parse.
+		</div>
+		<div>
+		Parse a <em>pdb</em> text and return a <em>JSON</em> structure.<br />
+		</div>
+
+		<h3>[method:null createModel</a>( [page:Object json</a>, [page:Function callback</a> )</h3>
+		<div>
+		[page:Object json</a> — The <em>(JSON) pdb</em> structure to parse.<br />
+		[page:Function callback</a> — Will be called when parse completes, with three arguments: [page:BufferGeometry geometryAtoms</a>, [page:BufferGeometry geometryBonds</a> and the original [page:Object json</a>.<br />
+		</div>
+		<div>
+		Parse a <em>(JSON) pdb</em> structure and return two [page:BufferGeometry</a>: one for atoms, one for bonds.<br />
+		</div>
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PDBLoader.js examples/js/loaders/PDBLoader.js</a>
+
+
+<h3 id="2.10">SVGLoader</h3>
+Загрузчик для загрузки ресурса в формате <em>.svg</em>.
+<h4>Конструктор</h4>
+<pre>SVGLoader( <a href="loaders.htm#16.2" title="LoadingManager">manager</a> )</pre>
+<div class=list><a href="loaders.htm#16.2" title="LoadingManager">manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
+Создает новый SVGLoader.<br><br>
+
+<h4>Свойства</h4><br>
+
+<h4>Методы</h4><br>
+<div class=blockindent>
+<pre id="2.10load"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="load - загрузить">.load</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="url - сокращ. от англ. слов Uniform Resource Locator — единообразный локатор (определитель местонахождения) ресурса">url</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on load - на загрузку">onLoad</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on progress - на ход процесса">onProgress</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on error - на ошибку">onError</a> )</pre>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="url - сокращ. от англ. слов Uniform Resource Locator — единообразный локатор (определитель местонахождения) ресурса">url</a></tt> — обязательный параметр</div>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on load - на загрузку">onLoad</a></tt> — функция, которая должна быть вызвана по завершении загрузки. Её аргументом должен быть загруженный [page:SVGDocument</a>.</div>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on progress - на ход процесса">onProgress</a></tt> — функция, которая будет вызвана во время хода процесса загрузки. Аргументом этой функции должен быть экземпляр XMLHttpRequest, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.</div>
+<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on error - на ошибку">onError</a></tt> — функция, которая будет вызвана при ошибках загрузки.</div>
+Begin loading from url and call onLoad with the response content.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="src/examples/SVGLoader.js.txt">SVGLoader.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/SVGLoader.js" target="_blank">SVGLoader.js на github.com</a></div><br>
+
+
+<h3 id="2.11">TGALoader</h3>
+Class for loading a <em>.tga</em> [page:DataTexture texture</a>.
+
+<h4>Пример</h4>
+
+  <pre>
+		// instantiate a loader
+		var loader = new THREE.TGALoader();
+
+		// load a resource
+		var texture = loader.load(
+			// resource URL
+			'textures/crate_grey8.tga'
+			// Function when resource is loaded
+			function ( texture ) {
+				console.log( 'Texture is loaded' );
+			},
+			// Function called when download progresses
+			function ( xhr ) {
+				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+			},
+			// Function called when download errors
+			function ( xhr ) {
+				console.log( 'An error happened' );
+			}
+		);
+
+		var material = new THREE.MeshPhongMaterial( {
+			color: 0xffffff,
+			map: texture
+		} );
+  </pre>
+
+		[example:webgl_materials_texture_tga</a>
+
+  <h4>Конструктор</h4>
+
+		<h3>TGALoader( [page:LoadingManager manager</a> )</h3>
+		<div>
+		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
+		</div>
+		<div>
+		Creates a new TGALoader.
+		</div>
+
+
+  <h4>Методы</h4>
+
+		<h3>[method:DataTexture load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
+		<div>
+		[page:String url</a> — required<br />
+		[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:DataTexture</a>.<br />
+		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
+		[page:Function onError</a> — Will be called when load errors.<br />
+		</div>
+		<div>
+		Begin loading from url and pass the loaded [page:DataTexture texture</a> to onLoad. The [page:DataTexture texture</a> is also directly returned for immediate use (but may not be fully loaded).
+		</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/TGALoader.js examples/js/loaders/TGALoader.js</a>
+
+
+
+
+
+<h2 id="3">Плагины</h2>
+
+<span class="right_side"><a href="cameras.htm#1" title="Переход к родительскому классу: Camera"><tt>Camera &rarr;</tt></a></span>
+<h3 id="3.1">CombinedCamera</h3>
+A general purpose camera, for setting FOV, Lens Focal Length, and switching between perspective and orthographic views easily. Use this only if you do not wish to manage both an Orthographic and Perspective Camera.
+
+<h4>Примеры</h4>
+<div>[example:canvas_camera_orthographic2 camera / orthographic2 </a></div>
+<pre>//Create combined camera - создаем комбинированную камеру
+camera = new THREE.CombinedCamera( window.innerWidth / 2, window.innerHeight / 2, 70, 1, 1000, - 500, 1000 );</pre>
+
+<h4>Конструктор</h4>
+<pre>CombinedCamera(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">fov</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">near</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">far</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">orthoNear</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">orthoFar</a>)</pre>
+<div class="blockindent"><tt>width</tt> — Camera frustum width.<br>
+<tt>height</tt> — Camera frustum height.<br>
+<tt>fov</tt> — Camera frustum vertical field of view in perspective view.<br>
+<tt>near</tt> — Camera frustum near plane in perspective view.<br>
+<tt>far</tt> — Camera frustum far plane in perspective view.<br>
+<tt>orthoNear</tt> — Camera frustum near plane in orthographic view.<br>
+<tt>orthoFar</tt> — Camera frustum far plane in orthographic view.</div>
+Creates a CombinedCamera. This initializes 2 cameras, an OrthographicCamera and a PerspectiveCamera. The default is the perspective Camera.
+
+<h4>Свойства</h4>
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.fov</a></pre>
+Gets or sets the camera frustum vertical field of view in perspective view.
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.left</a></pre>
+Gets or sets the camera frustum left plane in orthographic view.
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.right</a></pre>
+Gets or sets the camera frustum right plane in orthographic view.
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.top</a></pre>
+Gets or sets the camera frustum top plane in orthographic view.
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.bottom</a></pre>
+Gets or sets the camera frustum bottom plane in orthographic view.
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.zoom</a></pre>
+Gets or sets the zoom factor of the camera.
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.near</a></pre>
+Gets camera frustum near plane.
+
+<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.far</a></pre>
+Gets camera frustum far plane.
+
+<pre>[property:Matrix4 projectionMatrix</a></pre>
+This is the matrix which contains the projection.
+
+<pre>[property:OrthographicCamera cameraO</a></pre>
+Gets or sets the internal OrthographicCamera used as camera.
+
+<pre>[property:PerspectiveCamera cameraP</a></pre>
+Gets or sets the internal PerspectiveCamera used as camera.
+
+<pre>[property:boolean inOrthographicMode</a></pre>
+Gets whether the combinedCamera is in Orthographic Mode.
+
+<pre>[property:boolean inPerspectiveMode</a></pre>
+Gets whether the combinedCamera is in Perspective Mode.
+
+<h4>Методы</h4>
+<pre>[method:null setFov</a>([page:Number fov</a>)</pre>
+<div class="blockindent">fov —  Camera frustum vertical field of view in perspective view.</div>
+sets the camera frustum vertical field of view in perspective view.
+
+<pre>[method:null setZoom</a>([page:Number zoom</a>)</pre>
+<div class="blockindent">zoom — The zoom factor.</div>
+Sets the zoomfactor.
+
+<pre>[method:null setLens</a>([page:number focalLength</a>, [page:Number filmGauge</a>)</pre>
+<div class="blockindent">focalLength — The focal length of a lens is defined as the distance from the optical center of a lens (or, the secondary principal point for a complex lens like a camera lens) to the focal point (sensor) when the lens is focused on an object at infinity. <br>
+		filmGauge — the size of the frame in mm. (default is *35*)</div>
+Sets the fov based on lens data.
+
+<pre>[method:null toFrontView</a>()</pre>
+Sets the camera to view the front of the target.
+
+<pre>[method:null toBackView</a>()</pre>
+Sets the camera to view the back of the target.
+
+<pre>[method:null toLeftView</a>()</pre>
+Sets the camera to view the left of the target.
+
+<pre>[method:null toRightView</a>()</pre>
+Sets the camera to view the right of the target.
+
+<pre>[method:null toTopView</a>()</pre>
+Sets the camera to view the top.
+
+<pre>[method:null toBottomView</a>()</pre>
+Sets the camera to view the bottom.
+
+<pre>[method:null setSize</a>([page:Number width</a>, [page:Number height</a>)</pre>
+<div class="blockindent">width — The width of the orthographic view.<br>
+height — The height of the orthographic view.</div>
+Sets the size of the orthographic view.
+
+<pre>[method:null toOrthographic</a>()</pre>
+Change the camera to orthographic view.
+
+<pre>[method:null toPerspective</a>()</pre>
+Change the camera to Perspective view.
+
+<pre>[method:null updateProjectionMatrix</a>()</pre>
+Updates the ProjectionMatrix.
+
+
+<h4>Source</h4>
+<div class=blockindent><a href="src/cameras/CombinedCamera.js.txt">CombinedCamera.js в этом справочнике</a><br>
+<a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/cameras/CombinedCamera.js" target="_blank">CombinedCamera.js на github.com</a></div><br>
+
+
+<h3 id="3.2">Lut</h3>
+Represents a lookup table for colormaps. It is used to determine the color values from a range of data values.
+
+<h4>Пример</h4>
+		<pre>var lut = new THREE.Lut( "rainbow", 512 );</pre>
+		<pre>var data = [0, 10.1, 4.2, 3.4, 63, 28</a>;</pre>
+		<pre>lut.setMax(63);</pre>
+		<pre>color = lut.getColor(10);</pre>
+
+<h4>Конструктор</h4>
+<pre>Lut( colormap, numberOfColors )</pre>
+<div class="blockindent">colormap — optional argument that sets a colormap from predefined colormaps. Available colormaps are : "rainbow", "cooltowarm", "blackbody".<br>
+numberOfColors — optional argument that sets the number of colors used to represent the data array.</div>
+
+<h4>Свойства</h4>
+
+<pre>[property:Float minV</a></pre>
+The minimum value to be represented with the lookup table. Default is 0.
+
+<pre>[property:Float maxV</a></pre>
+The maximum value to be represented with the lookup table. Default is 1.
+
+<pre>.[legend</a></pre>
+The legend of the lookup table.
+
+<h4>Методы</h4>
+<pre>[method:null copy</a>( [page:Lut lut</a> ) [page:Lut this</a></pre>
+<div class="blockindent">color — Lut to copy.</div>
+Copies given lut.
+<pre>.setLegendOn [parameters</a></pre>
+<div class="blockindent">parameters — { layout: value, position: { x: value, y: value, z: value }, dimensions: { width: value, height: value } }
+		layout — Horizontal or vertical layout. Default is vertical.<br>
+		position — The position x,y,z of the legend.<br>
+		dimensions — The dimensions (width and height) of the legend.</div>
+Sets this Lut with the legend on.
+
+
+<pre>.setLegendOff</pre>
+Sets this Lut with the legend off.
+
+
+<pre>.setLegendLabels [parameters, callback</a></pre>
+<div class="blockindent">parameters — { fontsize: value, fontface: value, title: value, um: value, ticks: value, decimal: value, notation: value }
+		fontsize — Font size to be used for labels.<br>
+		fontface — Font type to be used for labels.<br>
+		title — The title of the legend.<br>
+		um — The unit of measurements of the legend.<br>
+		ticks — The number of ticks to be displayed.<br>
+		decimal — The number of decimals to be used for legend values.<br>
+		notation — Legend notation: standard (default) or scientific.<br>
+		callback — An optional callback to be used to format the legend labels.</div>
+Sets the labels of the legend of this Lut.
+
+<pre>[method:Lut setminV</a>( [page:Float minV</a> )</pre>
+<div class="blockindent">minV — The minimum value to be represented with the lookup table.</div>
+Sets this Lut with the minimum value to be represented.
+
+<pre>[method:Lut setmaxV</a>( [page:Float maxV</a> )</pre>
+<div class="blockindent">maxV — The maximum value to be represented with the lookup table.</div>
+Sets this Lut with the maximum value to be represented.
+
+<pre>[method:Lut changeNumberOfColors</a>( [page:Float numberOfColors</a> )</pre>
+<div class="blockindent">numberOfColors — The number of colors to be used to represent the data array.</div>
+Sets this Lut with the number of colors to be used.
+
+
+<pre>[method:Lut changeColorMap</a>( [page:Float colorMap</a> )</pre>
+<div class="blockindent">colorMap — The name of the color map to be used to represent the data array.</div>
+Sets this Lut with the colormap to be used.
+
+<pre>[method:Lut addColorMap</a>( colorMapName, arrayOfColors )</pre>
+Insert a new color map into the set of available color maps.
+
+<pre>[method:Lut getColor</a>( value ) [page:Lut this</a></pre>
+<div class="blockindent">value — the data value to be displayed as a color.</div>
+Returns a Three.Color.
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/math/[path</a>.js examples/js/math/[path</a>.js</a><br><br>
+
+
+<span class="right_side"><a href="materials.htm#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3 id="3.3">SpriteCanvasMaterial</h3>
+Create a material that can draw custom sprites using a 2d canvas.
+
+<h4>Конструктор</h4>
+<pre>SpriteCanvasMaterial( [page:Object parameters</a> )</pre>
+parameters is an object that can be used to set up the default properties
+<div class="blockindent"><tt>color</tt> — the color of the sprite<br>
+<tt>program</tt> — the program used to draw the sprite</div>
+
+<h4>Свойства</h4>
+<pre>[property:Color color</a></pre>
+The color of the sprite. The material will set up the color for the context before calling the material's program.
+
+<h4>Методы</h4>
+<pre>[method:null program</a>([page:CanvasRenderingContext2D context</a>, [page:Color color</a>)</pre>
+<div class="blockindent"><tt>context</tt> — The canvas context<br>
+<tt>color</tt> — The color of the sprite</div>
+Define a program that will use the context to draw the sprite.
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js examples/js/renderers/CanvasRenderer.js</a>
+
+
+<h2 id="4">QuickHull</h2>
+<h3 id="4.1">Face</h3>
+Represents a section bounded by a specific amount of half-edges. The current implmentation assumes that a face always consist of three edges.
+		</div>
+
+
+  <h4>Конструктор</h4>
+
+
+		<h3>[name</a>()</h3>
+
+		</div>
+
+  <h4>Свойства</h4>
+
+		<h3>[property:Vector3 normal</a></h3>
+		<div>
+			The normal vector of the face. Default is a [page:Vector3</a> at (0, 0, 0).
+		</div>
+
+		<h3>[property:Vector3 midpoint</a></h3>
+		<div>
+			The midpoint or centroid of the face. Default is a [page:Vector3</a> at (0, 0, 0).
+		</div>
+
+		<h3>[property:Float area</a></h3>
+		<div>
+			The area of the face. Default is 0.
+		</div>
+
+		<h3>[property:Float constant</a></h3>
+		<div>
+			Signed distance from face to the origin. Default is 0.
+		</div>
+
+		<h3>[property:VertexNode outside</a></h3>
+		<div>
+			Reference to a vertex in a vertex list this face can see. Default is null.
+		</div>
+
+		<h3>[property:Integer mark</a></h3>
+		<div>
+			Marks if a face is visible or deleted. Default is 'Visible'.
+		</div>
+
+		<h3>[property:HalfEdge edge</a></h3>
+		<div>
+			Reference to the base edge of a face. To retrieve all edges, you can use the 'next' reference of the current edge. Default is null.
+		</div>
+
+  <h4>Методы</h4>
+
+		<h3>[method:Face create</a>( [page:VertexNode a</a>, [page:VertexNode b</a>, [page:VertexNode c</a> )</h3>
+		[page:VertexNode a</a> - First vertex of the face.<br /><br />
+		[page:VertexNode b</a> - Second vertex of the face.<br /><br />
+		[page:VertexNode c</a> - Third vertex of the face.<br /><br />
+
+		<div>Creates a face.</div>
+
+		<h3>[method:HalfEdge getEdge</a>( [page:Integer i</a> )</h3>
+		[page:Integer i</a> - The index of the edge.<br /><br />
+
+		<div>Returns an edge by the given index.</div>
+
+		<h3>[method:Face compute</a> ()</h3>
+
+		<div>Computes all properties of the face.</div>
+
+		<h3>[method:Float distanceToPoint</a>( [page:Vector3 point</a> )</h3>
+		[page:Vector3 point</a> - Any point in 3D space.<br /><br />
+
+		<div>Returns the signed distance from a given point to the plane representation of this face.</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+
+
+		<h3 id="4.2">HalfEdge</h3>
+The basis for a half-edge data structure, also known as doubly connected edge list (DCEL).
+
+<h4>Конструктор</h4>
+<h3>HalfEdge( [page:VertexNode vertex</a>, [page:Face face</a> )</h3>
+		[page:VertexNode vertex</a> - [page:VertexNode</a> A reference to its destination vertex.<br /><br />
+		[page:Face face</a> - [page:Face</a> A reference to its face.<br />
+
+		</div>
+
+  <h4>Свойства</h4>
+
+		<h3>[property:VertexNode vertex</a></h3>
+		<div>
+			Reference to the destination vertex. The origin vertex can be obtained by querying the destination of its twin, or of the previous half-edge. Default is undefined.
+		</div>
+
+		<h3>[property:HalfEdge prev</a></h3>
+		<div>
+			Reference to the previous half-edge of the same face. Default is null.
+		</div>
+
+		<h3>[property:HalfEdge next</a></h3>
+		<div>
+			Reference to the next half-edge of the same face. Default is null.
+		</div>
+
+		<h3>[property:HalfEdge twin</a></h3>
+		<div>
+			Reference to the twin half-edge to reach the opposite face. Default is null.
+		</div>
+
+		<h3>[property:Face face</a></h3>
+		<div>
+			 Each half-edge bounds a single face and thus has a reference to that face. Default is undefined.
+		</div>
+
+  <h4>Методы</h4>
+
+		<h3>[method:VertexNode head</a>()</h3>
+		<div>Returns the destintation vertex.</div>
+
+		<h3>[method:VertexNode tail</a>()</h3>
+		<div>Returns the origin vertex.</div>
+
+		<h3>[method:Float length</a>()</h3>
+		<div>Returns the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a>
+		(straight-line length) of the edge.</div>
+
+		<h3>[method:Float lengthSquared</a>()</h3>
+		<div>Returns the square of the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a>
+		(straight-line length) of the edge.</div>
+
+		<h3>[method:HalfEdge setTwin</a>( [page:HalfEdge edge</a> )</h3>
+		[page:HalfEdge edge</a> - Any half-edge.<br /><br />
+
+		<div>Sets the twin edge of this half-edge. It also ensures that the twin reference of the given half-edge is correctly set.</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+
+
+<h3 id="4.3">QuickHull</h3>
+General information about the Quickhull algorithm: Dirk Gregorius. March 2014, Game Developers Conference: [link:http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf Implementing QuickHull</a>.
+
+  <h4>Конструктор</h4>
+<h3>QuickHull()</h3>
+
+<h4>Свойства</h4>
+
+		<h3>[property:Float tolerance</a></h3>
+		<div>
+			The epsilon value that is used for internal comparative operations. The calculation of this value depends on the size of the geometry. Default is -1.
+		</div>
+
+		<h3>[property:Array faces</a></h3>
+		<div>
+			The generated faces of the convex hull. Default is an empty array.
+		</div>
+
+		<h3>[property:Array newFaces</a></h3>
+		<div>
+			This array holds the faces that are generated within a single iteration. Default is an empty array.
+		</div>
+
+		<h3>[property:VertexList assigned</a></h3>
+		<div>
+			This [page:VertexList vertex list</a> holds all vertices that are assigned to a face. Default is an empty vertex list.
+		</div>
+
+		<h3>[property:VertexList unassigned</a></h3>
+		<div>
+			This [page:VertexList vertex list</a> holds all vertices that are not assigned to a face. Default is an empty vertex list.
+		</div>
+
+		<h3>[property:Array vertices</a></h3>
+		<div>
+			The internal representation of the given geometry data (an array of [page:VertexNode vertices</a>).
+		</div>
+
+  <h4>Методы</h4>
+
+		<h3>[method:QuickHull setFromPoints</a>( [page:Array points</a> )</h3>
+		[page:Array points</a> - Array of [page:Vector3 Vector3s</a> that the resulting convex hull will contain.<br /><br />
+
+		<div>Computes to convex hull for the given array of points.</div>
+
+		<h3>[method:QuickHull setFromObject</a>( [page:Object3D object</a> )</h3>
+		[page:Object3D object</a> - [page:Object3D</a> to compute the convex hull of.<br /><br />
+
+		<div>Computes the convex hull of an [page:Object3D</a> (including its children),
+		accounting for the world transforms of both the object and its childrens.</div>
+
+		<h3>[method:QuickHull makeEmpty</a>()</h3>
+
+		<div>Makes this convex hull empty.</div>
+
+		<h3>[method:QuickHull addVertexToFace</a>( [page:VertexNode vertex</a>, [page:Face face</a>	)</h3>
+		[page:VertexNodeNode vertex</a> - The vetex to add.<br /><br />
+		[page:Face face</a> - The target face.<br /><br />
+
+		<div>Adds a vertex to the 'assigned' list of vertices and assigns it to the given face.</div>
+
+		<h3>[method:QuickHull removeVertexFromFace</a>( [page:VertexNode vertex</a>, [page:Face face</a>	)</h3>
+		[page:VertexNode vertex</a> - The vetex to remove.<br /><br />
+		[page:Face face</a> - The target face.<br /><br />
+
+		<div>Removes a vertex from the 'assigned' list of vertices and from the given face. It also makes sure that the link from 'face' to the first vertex it sees in 'assigned' is linked correctly after the removal.</div>
+
+		<h3>[method:VertexNode removeAllVerticesFromFace</a>( [page:Face face</a>	)</h3>
+		[page:Face face</a> - The given face.<br /><br />
+
+		<div>Removes all the visible vertices that a given face is able to see which are stored in the 'assigned' vertext list.</div>
+
+		<h3>[method:QuickHull deleteFaceVertices</a>( [page:Face face</a>, [page:Face absorbingFace</a>	)</h3>
+		[page:Face face</a> - The given face.<br /><br />
+		[page:Face absorbingFace</a> - An optional face that tries to absorb the vertices of the first face.<br /><br />
+
+		<div>Removes all the visible vertices that 'face' is able to see.
+			<ul>
+				<li>If 'absorbingFace' doesn't exist, then all the removed vertices will be added to the 'unassigned' vertex list.</li>
+				<li>If 'absorbingFace' exists, then this method will assign all the vertices of 'face' that can see 'absorbingFace'.</li>
+				<li>If a vertex cannot see 'absorbingFace', it's added to the 'unassigned' vertex list.</li>
+			</ul>
+		</div>
+
+		<h3>[method:QuickHull resolveUnassignedPoints</a>( [page:Array newFaces</a>	)</h3>
+		[page:Face newFaces</a> - An array of new faces.<br /><br />
+
+		<div>Reassigns as many vertices as possible from the unassigned list to the new faces.</div>
+
+		<h3>[method:Object computeExtremes</a>()</h3>
+
+		<div>Computes the extremes values (min/max vectors) which will be used to compute the inital hull.</div>
+
+		<h3>[method:QuickHull computeInitialHull</a>()</h3>
+
+		<div>Computes the initial simplex assigning to its faces all the points that are candidates to form part of the hull.</div>
+
+		<h3>[method:QuickHull reindexFaces</a>()</h3>
+
+		<div>Removes inactive (e.g. deleted) faces from the internal face list.</div>
+
+		<h3>[method:VertexNode nextVertexToAdd</a>()</h3>
+
+		<div>Finds the next vertex to create faces with the current hull.
+			<ul>
+				<li>Let the initial face be the first face existing in the 'assigned' vertex list.</li>
+				<li>If a face doesn't exist then return since there're no vertices left.</li>
+				<li>Otherwise for each vertex that face sees find the one furthest away from it.</li>
+			</ul>
+		</div>
+
+		<h3>[method:QuickHull computeHorizon</a>( [page:Vector3 eyePoint</a>, [page:HalfEdge crossEdge</a>, [page:Face face</a>, [page:Array horizon</a>	)</h3>
+		[page:Vector3 eyePoint</a> - The 3D-coordinates of a point.<br /><br />
+		[page:HalfEdge crossEdge</a> - The edge used to jump to the current face.<br /><br />
+		[page:Face face</a> - The current face being tested.<br /><br />
+		[page:Array horizon</a> - The edges that form part of the horizon in CCW order.<br /><br />
+
+		<div>Computes a chain of half edges in CCW order called the 'horizon'. For an edge to be part of the horizon it must join a face that can see 'eyePoint' and a face that cannot see 'eyePoint'.</div>
+
+		<h3>[method:HalfEdge addAdjoiningFace</a>( [page:VertexNode eyeVertex</a>, [page:HalfEdge horizonEdge</a> )</h3>
+		[page:VertexNode eyeVertex</a> - The vertex that is added to the hull.<br /><br />
+		[page:HalfEdge horizonEdge</a> - A single edge of the horizon.<br /><br />
+
+		<div>Creates a face with the vertices 'eyeVertex.point', 'horizonEdge.tail' and 'horizonEdge.head' in CCW order.
+			All the half edges are created in CCW order thus the face is always pointing outside the hull</div>
+
+		<h3>[method:QuickHull addNewFaces</a>( [page:VertexNode eyeVertex</a>, [page:HalfEdge horizonEdge</a> )</h3>
+		[page:VertexNode eyeVertex</a> - The vertex that is added to the hull.<br /><br />
+		[page:HalfEdge horizon</a> - An array of half-edges that form the horizon.<br /><br />
+
+		<div>Adds 'horizon.length' faces to the hull, each face will be linked with the horizon opposite face and the face on the left/right.</div>
+
+		<h3>[method:QuickHull addVertexToHull</a>( [page:VertexNode eyeVertex</a> )</h3>
+		[page:VertexNode eyeVertex</a> - The vertex that is added to the hull.<br /><br />
+
+		<div>Adds a vertex to the hull with the following algorithm
+			<ul>
+				<li>Compute the 'horizon' which is a chain of half edges. For an edge to belong to this group it must be the edge connecting a face that can see 'eyeVertex' and a face which cannot see 'eyeVertex'.</li>
+				<li>All the faces that can see 'eyeVertex' have its visible vertices removed from the assigned vertex list.</li>
+				<li>A new set of faces is created with each edge of the 'horizon' and 'eyeVertex'. Each face is connected with the opposite horizon face and the face on the left/right.</li>
+				<li>The vertices removed from all the visible faces are assigned to the new faces if possible.</li>
+			</ul>
+		</div>
+
+		<h3>[method:QuickHull cleanup</a>()</h3>
+
+		<div>Cleans up internal properties after computing the convex hull.</div>
+
+		<h3>[method:QuickHull compute</a>()</h3>
+
+		<div>Starts the execution of the quick hull algorithm.</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+
+
+<h3 id="4.4">VertexNode</h3>
+A vertex as a double linked list node.
+
+<h4>Конструктор</h4>
+
+<h3>VertexNode( [page:Vector3 point</a> )</h3>
+		[page:Vector3 point</a> - [page:Vector3</a> A point (x, y, z) in 3D space.<br /><br />
+
+		</div>
+
+  <h4>Свойства</h4>
+
+		<h3>[property:Vector3 point</a></h3>
+		<div>
+			A point (x, y, z) in 3D space. Default is undefined.
+		</div>
+
+		<h3>[property:VertexNode prev</a></h3>
+		<div>
+			Reference to the previous vertex in the double linked list. Default is null.
+		</div>
+
+		<h3>[property:VertexNode next</a></h3>
+		<div>
+			Reference to the next vertex in the double linked list. Default is null.
+		</div>
+
+		<h3>[property:Face face</a></h3>
+		<div>
+			Reference to the face that is able to see this vertex. Default is undefined.
+		</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+
+
+<h3 id="4.5">VertexList</h3>
+A doubly linked list of vertices.
+
+<h4>Конструктор</h4>
+<h3>VertexList()</h3>
+
+		</div>
+
+  <h4>Свойства</h4>
+
+		<h3>[property:VertexNode head</a></h3>
+		<div>
+			Reference to the first vertex of the linked list. Default is null.
+		</div>
+
+		<h3>[property:VertexNode tail</a></h3>
+		<div>
+			Reference to the last vertex of the linked list. Default is null.
+		</div>
+
+  <h4>Методы</h4>
+
+		<h3>[method:VertexNode first</a>()</h3>
+		<div>Returns the head reference.</div>
+
+		<h3>[method:VertexNode last</a>()</h3>
+		<div>Returns the tail reference.</div>
+
+		<h3>[method:VertexList clear</a>()</h3>
+		<div>Clears the linked list.</div>
+
+		<h3>[method:VertexList insertBefore</a>( [page:Vertex target</a>, [page:Vertex vertex</a> )</h3>
+		[page:Vertex target</a> - The target vertex. It's assumed that this vertex belongs to the linked list.<br /><br />
+		[page:Vertex vertex</a> - The vertex to insert.<br /><br />
+
+		<div>Inserts a vertex <strong>before</strong> a target vertex.</div>
+
+		<h3>[method:VertexList insertAfter</a>( [page:Vertex target</a>, [page:Vertex vertex</a> )</h3>
+		[page:Vertex target</a> - The target vertex. It's assumed that this vertex belongs to the linked list.<br /><br />
+		[page:Vertex vertex</a> - The vertex to insert.<br /><br />
+
+		<div>Inserts a vertex <strong>after</strong> a target vertex.</div>
+
+		<h3>[method:VertexList append</a>( [page:Vertex vertex</a> )</h3>
+		[page:Vertex vertex</a> - The vertex to append.<br /><br />
+
+		<div>Appends a vertex to the end of the linked list.</div>
+
+		<h3>[method:VertexList appendChain</a>( [page:Vertex vertex</a> )</h3>
+		[page:Vertex vertex</a> - The head vertex of a chain of vertices.<br /><br />
+
+		<div>Appends a chain of vertices where the given vertex is the head.</div>
+
+		<h3>[method:VertexList remove</a>( [page:Vertex vertex</a> )</h3>
+		[page:Vertex vertex</a> - The vertex to remove.<br /><br />
+
+		<div>Removes a vertex from the linked list.</div>
+
+		<h3>[method:VertexList removeSubList</a>( [page:Vertex a</a>, [page:Vertex b</a> )</h3>
+		[page:Vertex a</a> - The head of the sublist.<br /><br />
+		[page:Vertex b</a> - The tail of the sublist.<br /><br />
+
+		<div>Removes a sublist of vertices from the linked list.</div>
+
+		<h3>[method:Boolean isEmpty</a>()</h3>
+
+		<div>Returns true if the linked list is empty.</div>
+
+		<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+
+
+<h2 id="5">Визуализаторы</h2>
+<h3 id="5.1">CanvasRenderer</h3>
+
+		<div class="desc">
+			The Canvas renderer displays your beautifully crafted scenes <em>not</em> using WebGL,
+			but draws it using the (slower) <a href="http://drafts.htmlwg.org/2dcontext/html5_canvas_CR/Overview.html">Canvas 2D Context</a>
+			API.<br /><br />
+
+			<b>
+			NOTE: The Canvas renderer has been deprecated and is no longer part of the three.js core.
+			</b>
+			If you still need to use it you can find it here: [link:https://github.com/mrdoob/three.js/blob/master/examples/js/[path</a>.js examples/js/[path</a>.js</a>.<br /><br />
+
+			This renderer can be a nice fallback from [page:WebGLRenderer</a> for simple scenes:
+
+   <pre>
+			function webglAvailable() {
+				try {
+					var canvas = document.createElement( 'canvas' );
+					return !!( window.WebGLRenderingContext && (
+						canvas.getContext( 'webgl' ) ||
+						canvas.getContext( 'experimental-webgl' ) )
+					);
+				} catch ( e ) {
+					return false;
+				}
+			}
+
+			if ( webglAvailable() ) {
+				renderer = new THREE.WebGLRenderer();
+			} else {
+				renderer = new THREE.CanvasRenderer();
+			}
+   </pre>
+
+			Note: both WebGLRenderer and CanvasRenderer are embedded in the web page using an HTML5 &lt;canvas&gt; tag.
+			The "Canvas" in CanvasRenderer means it uses Canvas 2D instead of WebGL.<br /><br />
+
+			Don't confuse either CanvasRenderer with the SoftwareRenderer example, which simulates a screen buffer in a Javascript array.
+		</div>
+
+  <h4>Конструктор</h4>
+
+
+		<h3>[name</a>([page:object parameters</a>)</h3>
+        <div>parameters is an optional object with properties defining the renderer's behaviour. The constructor also accepts no parameters at all. In all cases, it will assume sane defaults when parameters are missing.</div>
+
+		<div>
+		canvas — A [page:Canvas</a> where the renderer draws its output.
+		</div>
+
+
+  <h4>Свойства</h4>
+
+    <h3>[property:Object info</a></h3>
+
+		<div>
+			An object with a series of statistical information about the graphics board memory and the rendering process. Useful for debugging or just for the sake of curiosity. The object contains the following fields:
+			<ul>
+				<li>render:
+					<ul>
+						<li>vertices</li>
+						<li>faces</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+    <h3>[property:DOMElement domElement</a></h3>
+
+		<div>
+			A [page:Canvas</a> where the renderer draws its output.<br />
+			This is automatically created by the renderer in the constructor (if not provided already); you just need to add it to your page.
+		</div>
+
+		<h3>[property:Boolean autoClear</a></h3>
+		<div>
+      Defines whether the renderer should automatically clear its output before rendering.
+    </div>
+
+		<h3>[property:Boolean sortObjects</a></h3>
+		<div>
+      Defines whether the renderer should sort objects. Default is true.<br />
+      Note: Sorting is used to attempt to properly render objects that have some degree of transparency.  By definition, sorting objects may not work in all cases.  Depending on the needs of application, it may be neccessary to turn off sorting and use other methods to deal with transparency rendering e.g. manually determining the object rendering order.
+    </div>
+
+		<h3>[property:boolean sortElements</a></h3>
+		<div>
+			Defines whether the renderer should sort the face of each object. Default is true.
+		</div>
+
+
+  <h4>Методы</h4>
+
+		<h3>[method:null render</a>([page:Scene scene</a>, [page:Camera camera</a>)</h3>
+		<div>
+			scene -- The scene to render. <br />
+			camera -- the camera to view the scene.
+		</div>
+		<div>
+        Render a scene using a camera.
+		</div>
+
+		<h3>[method:null clear</a>()</h3>
+		<div>
+			Tells the renderer to clear its color drawing buffer with the clearcolor.
+		</div>
+
+		<h3>[method:null setClearColor</a>([page:Color color</a>, [page:number alpha</a>)</h3>
+		<div>
+			color -- The color to clear the canvas with. <br />
+			alpha -- The alpha channel to clear the canvas with.
+		</div>
+		<div>
+			This set the clearColor and the clearAlpha.
+		</div>
+
+
+		<h3>[method:null setSize</a>([page:Number width</a>, [page:Number height</a>)</h3>
+		<div>
+			width -- The width of the drawing canvas. <br />
+			height -- The height of the drawing canvas.
+		</div>
+		<div>
+			This set the size of the drawing canvas and if updateStyle is set, then the css of the canvas is updated too.
+		</div>
+
+		<h3>[method:null setClearColorHex</a>([page:number hex</a>, [page:number alpha</a>)</h3>
+		<div>
+			hex -- The the hexadecimal value of the color to clear the canvas with. <br />
+	    alpha -- The alpha channel to clear the canvas with.
+		</div>
+		<div>
+			This set the clearColor and the clearAlpha.
+		</div>
+
+		<h3>[method:number getClearColorHex</a>()</h3>
+		<div>
+			Returns the [page:number hex</a> color.
+		</div>
+
+		<h3>[method:number getClearAlpha</a>()</h3>
+		<div>
+			Returns the alpha value.
+		</div>
+
+		<h2>Empty Methods to Maintain Compatibility with [page:WebglRenderer</a></h2>
+		<div>
+			[method:null clearColor</a>()<br/>
+			[method:null clearDepth</a>()<br/>
+			[method:null clearStencil</a>()<br/>
+			[method:null setFaceCulling</a>()<br/>
+			[method:null supportsVertexTextures</a>()<br/>
+			[method:number getMaxAnisotropy</a>() - returns 1 <br/>
+		</div>
+
+<h2>Source</h2>
+
+		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/[path</a>.js examples/js/[path</a>.js</a>
+
+
+<br><br>
+</body></html>

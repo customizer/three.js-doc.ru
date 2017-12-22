@@ -10,48 +10,38 @@
 <h2 class=head1>Камеры</h2>
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
 <h3 id="1">Camera</h3>
-Абстрактный базовый класс для камер. При создании новой камеры этот класс всегда будет унаследован.
+Абстрактный базовый класс для камер. При создании новой камеры этот класс всегда будет унаследован.<br><br>
 <h4>Конструктор</h4>
 <pre>Camera()</pre>
-Создает новый объект <tt>Camera</tt>. Обратите внимание, что этот класс не предназначен для непосредственного вызова; скорее всего вам нужна <a href="#4"><tt>PerspectiveCamera</tt></a> или <a href="#3"><tt>OrthographicCamera</tt></a>.
+Создает новый объект <tt>Camera</tt>. Обратите внимание, что этот класс не предназначен для непосредственного вызова; скорее всего вам нужна <a href="#4" onmouseover="show('PerspectiveCamera');" onmouseout="hide()">камера с перспективной проекцией</a> или <a href="#3" onmouseover="show('OrthographicCamera');" onmouseout="hide()">камера с ортографической проекцией</a>.<br><br>
 <h4>Свойства</h4>
 Для просмотра общих свойств посмотрите базовый класс <a href="core.htm#14"><tt>Object3D</tt></a>.
-<div class=blockindent>
-<pre id="1isCamera"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is camera - является камерой">.isCamera</a></pre>
+<div class=blockindent><br>
+<pre id="1isCamera"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is camera - является камерой');" onmouseout="hide()">.isCamera</a></span></pre>
 Используется для проверки, является ли данный объект, или производные от него, камерами. По умолчанию значение равно <tt>true</tt>.<br>
-Не нужно его изменять, так как внутри <b>three.js</b> оно используется рендерером (визуализатором) для оптимизации.<br>
-<pre id="1layers"><a href="core.htm#13" title="layers - слои, уровни">.layers</a></pre>
-The layers that the camera is a member of. Это свойство, наследуемое от <a href="core.htm#14"><tt>Object3D</tt></a>.<br>
-
-Objects must share at least one layer with the camera to be seen when the camera's viewpoint is rendered.<br>
-<pre id="1matrixWorldInverse"><a href="math.htm#9" title="matrix world inverse - инверсия матрицы мира">.matrixWorldInverse</a></pre>
+Не нужно его изменять, так как внутри <b>three.js</b> оно используется рендерером (визуализатором) для оптимизации.<br><br>
+<pre id="1layers"><a href="core.htm#13" onmouseover="show('layers - слои, уровни');" onmouseout="hide()">.layers</a></pre>
+Слои, частью которых является камера. Это свойство, наследуемое от <a href="core.htm#14"><tt>Object3D</tt></a>.<br>
+Чтобы быть видимыми, при отображении области просмотра камеры, объекты должны иметь с камерой как минимум один общий (совместно используемый) слой.<br><br>
+<pre id="1matrixWorldInverse"><a href="math.htm#11" onmouseover="show('Matrix4<br>matrix world inverse - инверсия матрицы мира');" onmouseout="hide()">.matrixWorldInverse</a></pre>
 Это инверсия <tt>matrixWorld</tt>. MatrixWorld содержит Matrix, в которой имеется универсальное преобразование Camera.
-This is the inverse of matrixWorld. MatrixWorld contains the Matrix which has the world transform of the Camera.<br>
-<pre id="1projectionMatrix"><a href="math.htm#9" title="projection matrix - матрица проекции">.projectionMatrix</a></pre>
-Это матрица, содержащая проекцию изображения.</div>
+This is the inverse of matrixWorld. MatrixWorld contains the Matrix which has the world transform of the Camera.<br><br>
+<pre id="1projectionMatrix"><a href="math.htm#11" onmouseover="show('Matrix4<br>projection matrix - матрица проекции');" onmouseout="hide()">.projectionMatrix</a></pre>
+Это матрица, содержащая проекцию изображения.</div><br>
 
 <h4>Методы</h4>
-Для просмотра общих методов посмотрите базовый класс <a href="core.htm#14"><tt>Object3D</tt></a>.<br>
-<div class=blockindent>
-<pre id="1clone"><a href="cameras.htm" title="clone - клон, двойник">.clone</a>( )</pre>
-Возвращает новую камеру с теми же свойствами, что и данная.
-<pre id="1copy"><a href="cameras.htm" title="copy - копия">.copy</a> ( source )</pre>
-Копирует свойства исходной камеры в данную камеру.
-<pre id="1getWorldDirection"><a href="math.htm#9" title="get world direction - получить направление мира">.getWorldDirection</a> ( <a href="math.htm#9">optionalTarget</a> )</pre>
-Возвращает трехмерный вектор (Vector3) представляющий направление в трехмерном пространстве, куда смотрит камера.
-<div class=note><b>Примечание:</b> Это не положительная, а отрицательная часть оси z камеры, в отличие от <tt>getWorldDirection</tt> базового класса (Object3D).</div>
-Если задан вектор <tt>optionalTarget</tt>, результат будет скопирован в этот вектор (который можно также использовать повторно), в противном случае будет создан новый вектор.
-If an optionalTarget vector is specified, the result will be copied into this vector (which can be reused in this way), otherwise a new vector will be created.
-<div class=blockindent><tt>vector</tt> — (дополнительный, необязательный параметр)</div>
-Метод возвращает вектор, представляющий направление, в котором смотрит камера в It returns a vector representing the direction in which the camera is looking, in world space.
-<pre id="1lookAt"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="look at - смотреть на">.lookAt</a> ( <a href="math.htm#19" title="Vector3D">target</a> )</pre>
-<div class=blockindent><tt>target</tt> — позиция в трехмерном пространстве, на которую указывает камера</div>
-
-This makes the camera look at the vector position in the global space as long as the parent of this camera is the scene or at position (0,0,0).</div>
+Для просмотра общих методов посмотрите базовый класс <a href="core.htm#14"><tt>Object3D</tt></a>.
+<div class=blockindent><br>
+<pre id="1clone"><a href="cameras.htm" onmouseover="show('Camera.<br>clone - клон, двойник');" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новую камеру с теми же свойствами, что и данная.<br><br>
+<pre id="1copy"><a href="cameras.htm" onmouseover="show('Camera.<br>copy - копия');" onmouseout="hide()">.copy</a>( <a href="cameras.htm" onmouseover="show('Camera.<br>source - источник');" onmouseout="hide()">source</a> )</pre>
+Копирует свойства исходной (<tt>source</tt>) камеры в данную камеру.<br><br>
+<pre id="1getWorldDirection"><a href="math.htm#19" onmouseover="show('Vector3.<br>get world direction - получить направление мира');" onmouseout="hide()">.getWorldDirection</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>optional target - дополнительная цель');" onmouseout="hide()">optionalTarget</a> )</pre>
+Возвращает трехмерный вектор (<a href="math.htm#19" onmouseover="show('Vector3.');" onmouseout="hide()">Vector3</a>) представляющий направление в трехмерном пространстве, куда смотрит камера.
+<div class=note><b>Примечание:</b> Это не положительная, а отрицательная часть оси <tt>z</tt> камеры, в отличие от <a href="core.htm#14getWorldDirection" onmouseover="show('Object3D.getWorldDirection<br>get world direction - получить направление мира');" onmouseout="hide()"><tt>getWorldDirection</tt></a> базового класса (Object3D).</div>
+Если задан вектор <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>optional target - дополнительная цель');" onmouseout="hide()">optionalTarget</a></tt>, результат будет скопирован в этот вектор (который можно также использовать повторно), в противном случае будет создан новый вектор.</div><br>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/cameras/Camera.js.txt">Camera.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/cameras/Camera.js" target="_blank">Camera.js на Гитхабе</a></div><br>
-
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/cameras/Camera.js" target="_blank">Camera.js на Гитхабе</a></div><br><br>
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
 <h3 id="2">CubeCamera</h3>

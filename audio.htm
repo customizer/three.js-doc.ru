@@ -1,9 +1,8 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head>
 <title>Three.js</title>
 <link rel="stylesheet" type="text/css" href="1.css">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
 <script type="text/javascript" src="1.js"></script>
 </head>
 <body>
@@ -147,7 +146,7 @@ analyser.getAverageFrequency();</pre>
 
 <h4>Конструктор</h4>
 <pre>AudioAnalyser( audio, <a href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize" target="_blank">fftSize</a> )</pre>
-Создает новый <a href="#2" title="AudioAnalyser">AudioAnalyser</a>.<br><br>
+Создает новый <a href="#2" onmouseover="show('AudioAnalyser');" onmouseout="hide()">AudioAnalyser</a>.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
@@ -181,12 +180,11 @@ AnalyserNode имеет всего лишь один вход и один вых
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="2getFrequencyData"><span onclick="showClick(type_uint8array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get frequency data - получить частотные данные');" onmouseout="hide()">.getFrequencyData</a></span>()</pre>
-Uses the Web Audio's [link:https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getByteFrequencyData getByteFrequencyData</a> method.
-		See that page.<br><br>
-
+Данный метод использует метод Web Audio с названием <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getByteFrequencyData" target="_blank">getByteFrequencyData</a></tt>.<br>
+Вот перевод части описания метода по ссылке выше: метод <tt>getByteFrequencyData</tt> интерфейса <tt>AnalyserNode</tt> копирует данные текущей частоты в массив беззнаковых целых чисел (Uint8Array), переданный с ним.<br>
+Если в массиве элементов меньше, чем в <tt>AnalyserNode.frequencyBinCount</tt>, избыточные элементы отбрасываются. Если же элементов больше, чем требуется, избыточные элементы игнорируются.<br><br>
 <pre id="2getAverageFrequency"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get average frequency - получить среднюю частоту');" onmouseout="hide()">.getAverageFrequency</a></span>()</pre>
-Get the average of the frequencies returned by the [page:AudioAnalyser.getFrequencyData getFrequencyData</a> method.
-</div><br>
+Метод получает среднее значение частот, возвращаемых методом <tt><a href="#2getFrequencyData"  onmouseover="show('AudioAnalyser.getFrequencyData');" onmouseout="hide()">getFrequencyData</a></tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/audio/AudioAnalyser.js" target="_blank">AudioAnalyser.js на github.com</a></div><br>
@@ -210,13 +208,9 @@ Get the average of the frequencies returned by the [page:AudioAnalyser.getFreque
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
 <h3 id="4">AudioListener</h3>
-The AudioListener represents a virtual listener of the all positional and non-positional audio effects in the scene.<br>
-A three.js application usually creates a single instance of AudioListener. It is a mandatory construtor parameter for audios entities like Audio and PositionalAudio.<br>
-В большинстве случаев, объект-слушатель является дочерним элементом камеры. Таким образом,
-In most cases, the listener object is a child of the camera. So the 3D transformation of the camera represents the 3D transformation of the listener.
-Создает глобальный, т.е. не имеющий конкретного расположения, аудио объект.<br>
-Для его работы используется <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a>.
-Вот <a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a> на русском языке.<br><br>
+AudioListener представляет виртуального <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener" target="_blank">слушателя</a> всех звуковых эффектов на сцене, как имеющих определенное положение, так и не имеющих такового.<br>
+Приложение three.js обычно создает один экземпляр AudioListener. Это обязательный параметр конструктора для аудио-объектов, таких как <a href="#1" onmouseover="show('Audio');" onmouseout="hide()">Audio</a> и <a href="#5" onmouseover="show('PositionalAudio');" onmouseout="hide()">PositionalAudio</a>.<br>
+В большинстве случаев, объект-слушатель является дочерним элементом камеры. Таким образом, изменение положения камеры в трехмерном пространстве представляет и изменение положения слушателя.<br><br>
 <h4>Пример</h4>
 <pre>// Create an AudioListener and add it to the camera
 // создаем AudioListener и добавляем его к камере
@@ -224,9 +218,9 @@ var listener = new THREE.AudioListener();
 camera.add( listener );<br>
 // create a global audio source (создаем глобальный аудиоисточник)
 var sound = new THREE.Audio( listener );<br>
-var audioLoader = new THREE.AudioLoader();<br>
 // Load a sound and set it as the Audio object's buffer
 // загружаем звук и устанавливаем его как буфер объекта Audio
+var audioLoader = new THREE.AudioLoader();
 audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
 	sound.setBuffer( buffer );
 	sound.setLoop(true);
@@ -243,24 +237,25 @@ audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="4context">[property:AudioContext context</a></pre>
-The [link:https://developer.mozilla.org/en-US/docs/Web/API/AudioContext AudioContext</a> of the [page:AudioListener listener</a> given in the constructor.<br><br>
+<pre id="4context"><a href="#3" onmouseover="show('AudioContext.<br>context - контекст, среда, фон');" onmouseout="hide()">.context</a></pre>
+Заданный в конструкторе, <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext" target="_blank">AudioContext</a> <a href="#4" onmouseover="show('AudioListener');" onmouseout="hide()">слушателя</a>.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/API/AudioContext" target="_blank">статья о AudioContext</a> на русском языке.<br><br>
 
-<pre id="4gain">[property:GainNode gain</a></pre>
-A [link:https://developer.mozilla.org/en-US/docs/Web/API/GainNode GainNode</a> created using [link:https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createGain AudioContext.createGain</a>().<br><br>
+<pre id="4gain"><span onclick="showClick('GainNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gain - усиление, увеличение');" onmouseout="hide()">.gain</a></span></pre>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/GainNode" target="_blank">GainNode</a> созданный при помощи метода <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createGain" target="_blank">AudioContext.createGain</a>.<br><br>
 
-<pre id="4filter">[property:AudioNode filter</a></pre>
+<pre id="4filter"><span onclick="showClick('AudioNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('filter - фильтр');" onmouseout="hide()">.filter</a></span></pre>
 Значением по умолчанию является <tt>null</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="4getInput">[method:GainNode getInput</a>()</pre>
-Return the [page:AudioListener.gain gainNode</a>.<br><br>
+<pre id="4getInput"><span onclick="showClick('GainNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get input - получить вход');" onmouseout="hide()">.getInput</a></span>()</pre>
+Возвращает значение <tt><a href="#4gain" onmouseover="show('AudioListener.gain');" onmouseout="hide()">gainNode</a></tt>.<br><br>
 
 <pre id="4removeFilter"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('remove filter - удалить фильтр');" onmouseout="hide()">.removeFilter</a></span>()</pre>
 Устанавливает свойство <tt><a href="#4filter" onmouseover="show('AudioListener.filter');" onmouseout="hide()">filter</a></tt> как <tt>null</tt>.<br><br>
 
-<pre id="4getFilter">[method:AudioNode getFilter</a>()</pre>
+<pre id="4getFilter"><span onclick="showClick('AudioNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get filter - получить фильтр');" onmouseout="hide()">.getFilter</a></span>()</pre>
 Возвращает значение свойства <tt><a href="#4filter" onmouseover="show('AudioListener.filter');" onmouseout="hide()">filter</a></tt>.<br><br>
 
 <pre id="4setFilter"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set filter - установить фильтр');" onmouseout="hide()">.setFilter</a></span>( [page:AudioNode value</a> )</pre>
@@ -278,7 +273,7 @@ Return the [page:AudioListener.gain gainNode</a>.<br><br>
 <h3 id="5">PositionalAudio</h3>
 Создает позиционированный аудиообъект (т.е. источник звука, имеющий конкретное расположение).<br>
 Для его работы используется <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a>.
-<a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a> на русском языке.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
 <pre>// Create an AudioListener and add it to the camera
@@ -306,16 +301,17 @@ scene.add( mesh );<br>
 // наконец добавляем звук к сетке
 mesh.add( sound );</pre>
 <h5>Другие примеры:</h5>
-<pre><a href="https://threejs.org/examples/misc_sound" target="_blank">misc / sound</a></pre>
+<pre><a href="https://threejs.org/examples/#webaudio_sandbox" target="_blank">webaudio / sandbox</a>
+<a href="https://threejs.org/examples/#webaudio_timing" target="_blank">webaudio / timing</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>PositionalAudio( <a href="#4" title="AudioListener">listener</a> )</pre>
-<div class=blockindent><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup('listener - слушатель, приемник','Arial,9',10,10,0xffffff,0xd69967)">listener</a></tt> — (обязателен) экземпляр <tt><a href="#4" title="AudioListener">AudioListener</a></tt>.</div>
+<pre>PositionalAudio( <a href="#4" onmouseover="show('AudioListener');" onmouseout="hide()">listener</a> )</pre>
+<div class=list><tt><a href="#" onclick="return false" onmouseover="show('listener - слушатель, приемник');" onmouseout="hide()">listener</a></tt> — экземпляр <tt><a href="#4" onmouseover="show('AudioListener');" onmouseout="hide()">AudioListener</a></tt> (обязательный аргумент).</div><br>
 
 <h4>Свойства</h4>
-Для ознакомления с унаследованными свойствами смотрите описание класса <tt><a href="#1" title="Audio">Audio</a></tt>.
-<div class=blockindent>
-<pre id="5panner"><a href="#" onclick="return false" title="PannerNode">.panner</a></pre>
+Для ознакомления с унаследованными свойствами смотрите описание класса <tt><a href="#1"  onmouseover="show('Audio');" onmouseout="hide()">Audio</a></tt>.
+<div class=blockindent><br>
+<pre id="5panner"><a href="#" onclick="return false" onmouseover="show('PannerNode');" onmouseout="hide()">.panner</a></pre>
 Это <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode" target="_blank">PannerNode</a></tt> для <tt>PositionalAudio</tt>.</div>
 <div class=note_trans><b>Примечание переводчика:</b> panner - устройство для панорамирования звука, т.е. для размещения источников звука в виртуальном пространстве, скорости распространения и направленности звукового сигнала.
 Вот неполный перевод вышеприведенной статьи о <tt>PannerNode</tt>.<br><a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
@@ -328,81 +324,85 @@ PannerNode всегда имеет только один вход и один в
 <dl><dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/PannerNode" target="_blank"><tt>PannerNode.PannerNode</tt></a></dt>
 <dd>Создает новый экземпляр <tt>PannerNode</tt>.</dd></dl>
 <h4>Свойства</h4>
-Наследует свойства от своего родителя, <em><a title="Интерфейс AudioNode является общим интерфейсом для представления модуля обработки звука типа источника звука (например, элементов HTML &lt;audio&gt; или &lt;video&gt;, OscillatorNode, и т.п.), приемника звука, модуля промежуточной обработки (например, фильтр вроде BiquadFilterNode или ConvolverNode), или управления громкостью (как GainNode)." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioNode" target="_blank"><tt>AudioNode</tt></a></em>.
+Наследует свойства от своего родителя, <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioNode" onmouseover="show('Интерфейс AudioNode является общим интерфейсом<br>для представления модуля обработки звука типа<br>источника звука (например, элементов HTML<br><tt>&#8249;audio&#8250;</tt> или <tt>&#8249;video&#8250;</tt>, <tt>OscillatorNode</tt>,<br>и т.п.), приемника звука, модуля промежуточной<br>обработки (например, фильтр вроде<br><tt>BiquadFilterNode</tt> или <tt>ConvolverNode</tt>), или<br>управления громкостью (как <tt>GainNode</tt>).');" onmouseout="hide()" target="_blank"><tt>AudioNode</tt></a>.
 
-<div class="note">Значения направления и положения устанавливаются и получаются различными вариантами синтаксиса, поскольку хранятся в виде значений <a title="Существует два вида параметров AudioParam: a-rate и k-rate." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank"><tt>AudioParam</tt></a>.
+<div class="note">Значения направления и положения устанавливаются и получаются различными вариантами синтаксиса, поскольку хранятся в виде значений <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank" onmouseover="show('Существует два вида параметров<br>AudioParam: a-rate и k-rate.');" onmouseout="hide()"><tt>AudioParam</tt></a>.
 Получение значения осуществляется через обращение, например так, <tt>PannerNode.positionX</tt>. Установка того же свойства делается так, <tt>PannerNode.positionX.value</tt>. This is why these values are not marked read only, which is how they appear in the WebIDL.</div>
 
-<dl><dt><a title="cone inner angle - внутренний угол конуса" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/coneInnerAngle" target="_blank"><tt>PannerNode.coneInnerAngle</tt></a></dt>
+<dl><dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/coneInnerAngle" target="_blank" onmouseover="show('cone inner angle - внутренний угол конуса');" onmouseout="hide()"><tt>PannerNode.coneInnerAngle</tt></a></dt>
 <dd>Это значение типа <tt>double</tt>, представляющее угол конуса (в градусах), внутри которого не будет уменьшения громкости.</dd>
-<dt><a title="cone outer angle - наружний угол конуса" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/coneOuterAngle" target="_blank"><tt>PannerNode.coneOuterAngle</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/coneOuterAngle" target="_blank" onmouseover="show('cone outer angle - наружний угол конуса');" onmouseout="hide()"><tt>PannerNode.coneOuterAngle</tt></a></dt>
 <dd>Это значение типа <tt>double</tt>, представляющее угол конуса (в градусах),  вне которого громкость звука будет уменьшена на постоянное значение, определяемое атрибутом <tt>coneOuterGain</tt>.</dd>
-<dt><a title="cone outer gain - усиление снаружи конуса" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/coneOuterGain" target="_blank"><tt>PannerNode.coneOuterGain</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/coneOuterGain" target="_blank" onmouseover="show('cone outer gain - усиление снаружи конуса');" onmouseout="hide()"><tt>PannerNode.coneOuterGain</tt></a></dt>
 <dd>Это значение типа <tt>double</tt>, представляющее величину снижения уровня громкости вне конуса, определенного атрибутом <tt>coneOuterAngle</tt>. Значение по умолчанию равно <tt>0</tt>, то есть, вне конуса звук не будет слышен.</dd>
-<dt><a title="distance model - модель (зависимости уровня громкости) от расстояния" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel" target="_blank"><tt>PannerNode.distanceModel</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel" target="_blank" onmouseover="show('distance model - модель (зависимости<br>уровня громкости) от расстояния');" onmouseout="hide()"><tt>PannerNode.distanceModel</tt></a></dt>
 <dd>Перечислимое значение, определяющее, какой алгоритм будет использован для уменьшения громкости источника звука при удалении его от слушателя.</dd>
-<dt><a title="max distance - максимальное расстояние" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance" target="_blank"><tt>PannerNode.maxDistance</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance" target="_blank" onmouseover="show('max distance - максимальное расстояние');" onmouseout="hide()"><tt>PannerNode.maxDistance</tt></a></dt>
 <dd>Значение типа <tt>double</tt>, представляющее максимальное расстояние между источником звука и слушателем, после которого громкость звука далее не уменьшается.</dd>
-<dt><a title="orientation X - ориентация (направленность) по оси X (по горизонтали)" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/orientationX" target="_blank"><tt>PannerNode.orientationX</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/orientationX" target="_blank" onmouseover="show('orientation X - ориентация (направленность)<br>по оси X (по горизонтали)');" onmouseout="hide()"><tt>PannerNode.orientationX</tt></a></dt>
 <dd>Представляет горизонтальное положение вектора источника звука в правосторонней системе координат Декарта.
-В то время как данный <a title="Существует два вида параметров AudioParam: a-rate и k-rate." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
-<a title="Хотя значение может быть установлено, любые изменения происходят в то время как имеется запланированная автоматизация событий — то есть, события запланированные при помощи методов AudioParam - игнорируются, без каких-либо исключений." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank"><tt>value</tt></a>.
+В то время как данный <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank" onmouseover="show('Существует два вида параметров<br>AudioParam: a-rate и k-rate.');" onmouseout="hide()"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank" onmouseover="show('Хотя значение может быть установлено, любые изменения<br>происходят в то время как имеется запланированная<br>автоматизация событий — то есть, события запланированные<br>при помощи методов AudioParam - игнорируются, без<br>каких-либо исключений.');" onmouseout="hide()"><tt>value</tt></a>.
 Значение по умолчанию равно <tt>1</tt>.</dd>
-<dt><a title="orientation Y - ориентация (направленность) по оси Y (по вертикали)" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/orientationY" target="_blank"><tt>PannerNode.orientationY</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/orientationY" target="_blank" onmouseover="show('orientation Y - ориентация (направленность)<br>по оси Y (по вертикали)');" onmouseout="hide()"><tt>PannerNode.orientationY</tt></a></dt>
 <dd>Представляет вертикальное положение вектора источника звука в правосторонней системе координат Декарта. Значение по умолчанию равно <tt>0</tt>.
-В то время как данный <a title="Существует два вида параметров AudioParam: a-rate и k-rate." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
-<a title="Хотя значение может быть установлено, любые изменения происходят в то время как имеется запланированная автоматизация событий — то есть, события запланированные при помощи методов AudioParam - игнорируются, без каких-либо исключений." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank"><tt>value</tt></a>.
+В то время как данный <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank" onmouseover="show('Существует два вида параметров<br>AudioParam: a-rate и k-rate.');" onmouseout="hide()"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank" onmouseover="show('Хотя значение может быть установлено, любые изменения<br>происходят в то время как имеется запланированная<br>автоматизация событий — то есть, события запланированные<br>при помощи методов AudioParam - игнорируются, без<br>каких-либо исключений.');" onmouseout="hide()"><tt>value</tt></a>.
 Значение по умолчанию равно <tt>0</tt>.</dd>
-<dt><a title="orientation Z - ориентация (направленность) по оси Z (вперед - назад)" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/orientationZ" target="_blank"><tt>PannerNode.orientationZ</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/orientationZ" target="_blank" onmouseover="show('orientation Z - ориентация (направленность)<br>по оси Z (вперед - назад)');" onmouseout="hide()"><tt>PannerNode.orientationZ</tt></a></dt>
 <dd>Представляет продольную (вперед - назад) позицию вектора распространения звука от источника в правосторонней системе координат Декарта. Значение по умолчанию равно <tt>0</tt>.
-В то время как данный <a title="Существует два вида параметров AudioParam: a-rate и k-rate." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
-<a title="Хотя значение может быть установлено, любые изменения происходят в то время как имеется запланированная автоматизация событий — то есть, события запланированные при помощи методов AudioParam - игнорируются, без каких-либо исключений." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank"><tt>value</tt></a>.
+В то время как данный <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank" onmouseover="show('Существует два вида параметров<br>AudioParam: a-rate и k-rate.');" onmouseout="hide()"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank" onmouseover="show('Хотя значение может быть установлено, любые изменения<br>происходят в то время как имеется запланированная<br>автоматизация событий — то есть, события запланированные<br>при помощи методов AudioParam - игнорируются, без<br>каких-либо исключений.');" onmouseout="hide()"><tt>value</tt></a>.
 Значение по умолчанию равно <tt>0</tt>.</dd>
-<dt><a title="A enum — see PanningModelType." href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/panningModel" target="_blank"><tt>PannerNode.panningModel</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/panningModel" target="_blank" onmouseover="show('A enum — see PanningModelType.');" onmouseout="hide()"><tt>PannerNode.panningModel</tt></a></dt>
 <dd>Перечислимое значение, определяющее какой алгоритм пространственной обработки используется для размещения источника звука в трехмерном пространстве.</dd>
-<dt><a title="An AudioParam whose value is the X coordinate of the audio source's position, in 3D Cartesian coordinates." href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/positionX"><tt>PannerNode.positionX</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/positionX" target="_blank" onmouseover="show('An AudioParam whose value is the X coordinate of the audio source's position, in 3D Cartesian coordinates.');" onmouseout="hide()"><tt>PannerNode.positionX</tt></a></dt>
 <dd>Представляет горизонтальное положение источника звука в правосторонней системе координат Декарта. Значение по умолчанию равно <tt>0</tt>.
-В то время как данный <a title="Существует два вида параметров AudioParam: a-rate и k-rate." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
-<a title="Хотя значение может быть установлено, любые изменения происходят в то время как имеется запланированная автоматизация событий — то есть, события запланированные при помощи методов AudioParam - игнорируются, без каких-либо исключений." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank"><tt>value</tt></a>.
+В то время как данный <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank" onmouseover="show('Существует два вида параметров<br>AudioParam: a-rate и k-rate.');" onmouseout="hide()"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank" onmouseover="show('Хотя значение может быть установлено, любые изменения<br>происходят в то время как имеется запланированная<br>автоматизация событий — то есть, события запланированные<br>при помощи методов AudioParam - игнорируются, без<br>каких-либо исключений.');" onmouseout="hide()"><tt>value</tt></a>.
 Значение по умолчанию равно <tt>0</tt>.</dd>
-<dt><a title="An AudioParam whose value is the Y coordinate of the audio source's position, in 3D Cartesian coordinates." href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/positionY"><tt>PannerNode.positionY</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/positionY" target="_blank" onmouseover="show('An AudioParam whose value is the Y coordinate of the audio source's position, in 3D Cartesian coordinates.');" onmouseout="hide()"><tt>PannerNode.positionY</tt></a></dt>
 <dd>Представляет вертикальное положение источника звука в правосторонней системе координат Декарта. Значение по умолчанию равно <tt>0</tt>.
-В то время как данный <a title="Существует два вида параметров AudioParam: a-rate и k-rate." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
-<a title="Хотя значение может быть установлено, любые изменения происходят в то время как имеется запланированная автоматизация событий — то есть, события запланированные при помощи методов AudioParam - игнорируются, без каких-либо исключений." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank"><tt>value</tt></a>.
+В то время как данный <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank" onmouseover="show('Существует два вида параметров<br>AudioParam: a-rate и k-rate.');" onmouseout="hide()"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank" onmouseover="show('Хотя значение может быть установлено, любые изменения<br>происходят в то время как имеется запланированная<br>автоматизация событий — то есть, события запланированные<br>при помощи методов AudioParam - игнорируются, без<br>каких-либо исключений.');" onmouseout="hide()"><tt>value</tt></a>.
 Значение по умолчанию равно <tt>0</tt>.</dd>
-<dt><a title="An AudioParam whose value is the Z coordinate of the audio source's position, in 3D Cartesian coordinates." href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/positionZ"><tt>PannerNode.positionZ</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/positionZ" target="_blank" onmouseover="show('An AudioParam whose value is the Z coordinate of the audio source's position, in 3D Cartesian coordinates.');" onmouseout="hide()"><tt>PannerNode.positionZ</tt></a></dt>
 <dd>Представляет позицию источника звука вдоль оси Z (вперед и назад) в правосторонней системе координат Декарта. Значение по умолчанию равно <tt>0</tt>.
-В то время как данный <a title="Существует два вида параметров AudioParam: a-rate и k-rate." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
-<a title="Хотя значение может быть установлено, любые изменения происходят в то время как имеется запланированная автоматизация событий — то есть, события запланированные при помощи методов AudioParam - игнорируются, без каких-либо исключений." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank"><tt>value</tt></a>.</dd>
-<dt><a title="сокращ. от reference distance - справочное (опорное) расстояние" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance"><tt>PannerNode.refDistance</tt></a></dt>
+В то время как данный <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam" target="_blank" onmouseover="show('Существует два вида параметров<br>AudioParam: a-rate и k-rate.');" onmouseout="hide()"><tt>AudioParam</tt></a> непосредственно изменить нельзя, его значение может быть изменено через его свойство
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/value" target="_blank" onmouseover="show('Хотя значение может быть установлено, любые изменения<br>происходят в то время как имеется запланированная<br>автоматизация событий — то есть, события запланированные<br>при помощи методов AudioParam - игнорируются, без<br>каких-либо исключений.');" onmouseout="hide()"><tt>value</tt></a>.</dd>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance" target="_blank" onmouseover="show('сокращ. от reference distance -<br>справочное (опорное) расстояние');" onmouseout="hide()"><tt>PannerNode.refDistance</tt></a></dt>
 <dd>Значение типа <tt>double</tt>, представляющее справочное (опорное) расстояние для уменьшения громкости при удалении источника звука от слушателя.</dd>
-<dt><a title="rolloff factor - коэффициент спада (уменьшения)" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor"><tt>PannerNode.rolloffFactor</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor" target="_blank" onmouseover="show('rolloff factor - коэффициент спада (уменьшения)');" onmouseout="hide()"><tt>PannerNode.rolloffFactor</tt></a></dt>
 <dd>Значение типа <tt>double</tt>, представляющее как быстро уменьшается громкость при удалении источника звука от слушателя. Данное значение используется во всех моделях изменения громкости от расстояния.</dd></dl>
 
 <h4>Методы</h4>
-Наследует методы от своего родителя, <em><a title="Интерфейс AudioNode является общим интерфейсом для представления модуля обработки звука типа источника звука (например, элементов HTML &lt;audio&gt; или &lt;video&gt;, OscillatorNode, и т.п.), приемника звука, модуля промежуточной обработки (например, фильтр вроде BiquadFilterNode или ConvolverNode), или управления громкостью (как GainNode)." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioNode" target="_blank"><tt>AudioNode</tt></a></em>.
-<dl><dt><a title="set position - установка положения" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/setPosition" target="_blank"><tt>PannerNode.setPosition()</tt></a></dt>
-<dd>Определяет положение источника звука относительно слушателя (представлен объектом <a title="Важно заметить, что в контексте имеется только один listener (слушатель) и это не AudioNode." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener" target="_blank"><tt>AudioListener</tt></a>, хранящимся в атрибуте <a title="объект AudioListener" href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/listener" target="_blank"><tt>AudioContext.listener</tt></a>.)</dd>
-<dt><a title="set orientation - установка ориентации (направления)" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/setOrientation" target="_blank"><tt>PannerNode.setOrientation()</tt></a></dt>
+Наследует методы от своего родителя, <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioNode" onmouseover="show('Интерфейс AudioNode является общим интерфейсом<br>для представления модуля обработки звука типа<br>источника звука (например, элементов HTML<br><tt>&#8249;audio&#8250;</tt> или <tt>&#8249;video&#8250;</tt>, <tt>OscillatorNode</tt>,<br>и т.п.), приемника звука, модуля промежуточной<br>обработки (например, фильтр вроде<br><tt>BiquadFilterNode</tt> или <tt>ConvolverNode</tt>), или<br>управления громкостью (как <tt>GainNode</tt>).');" onmouseout="hide()" target="_blank"><tt>AudioNode</tt></a>.
+<dl><dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/setPosition" target="_blank" onmouseover="show('set position - установка положения');" onmouseout="hide()"><tt>PannerNode.setPosition()</tt></a></dt>
+<dd>Определяет положение источника звука относительно слушателя (представлен объектом <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener" target="_blank" onmouseover="show('Важно заметить, что в контексте имеется<br>только один listener (слушатель) и это<br>не AudioNode.');" onmouseout="hide()"><tt>AudioListener</tt></a>,
+хранящимся в атрибуте <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/listener" target="_blank" onmouseover="show('объект AudioListener');" onmouseout="hide()"><tt>AudioContext.listener</tt></a>.)</dd>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/setOrientation" target="_blank" onmouseover="show('set orientation - установка ориентации (направления)');" onmouseout="hide()"><tt>PannerNode.setOrientation()</tt></a></dt>
 <dd>Определяет направление воспроизведения источника звука.</dd>
 
-<dt><a title="set velocity — установка скорости (распространения звука)" href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/setVelocity" target="_blank"><tt>PannerNode.setVelocity()</tt></a></dt>
+<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/setVelocity" target="_blank" onmouseover="show('set velocity — установка скорости (распространения звука)');" onmouseout="hide()"><tt>PannerNode.setVelocity()</tt></a></dt>
 <dd>Это устаревший элемент API и его работа в дальнейшем не гарантируется.<br>
 Определяет вектор распространения звука от источника - как быстро он движется и в каком направлении.
 В предыдущей версии спецификации, <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode" target="_blank"><tt>PannerNode</tt></a> имел скорость распространения, которую можно было выдать выше или ниже
-<a title="Интерфейс AudioBufferSourceNode представляет собой источник звука, состоящий из аудиоданных в оперативной памяти, хранящихся в AudioBuffer. Это AudioNode, который действует как источник звука." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode" target="_blank"><tt>AudioBufferSourceNode</tt></a>s connected downstream.
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode" target="_blank" onmouseover="show('Интерфейс AudioBufferSourceNode представляет собой источник звука,<br>состоящий из аудиоданных в оперативной памяти, хранящихся в AudioBuffer.<br>Это AudioNode, который действует как источник звука.');" onmouseout="hide()"><tt>AudioBufferSourceNode</tt></a>s connected downstream.
 Эта функция не была четко оговорена и имела ряд проблем, поэтому была удалена из спецификации.</dd></dl>
 
 <h4>Пример</h4>
-Ниже можно увидеть пример использования <tt><a title="Важно заметить, что в контексте имеется только один listener (слушатель) и это не AudioNode." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener" target="_blank">AudioListener</a></tt>,
+Ниже можно увидеть пример использования <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener" target="_blank" onmouseover="show('Важно заметить, что в контексте имеется<br>только один listener (слушатель) и это<br>не AudioNode.');" onmouseout="hide()">AudioListener</a></tt>,
 <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode" target="_blank">PannerNode</a></tt> и метода <tt>createPanner()</tt> для управления пространством объемного звука.
 Обычно определяется положение в трехмерном пространстве, изначально занимаемое слушателем (listener) и источником звука (panner), а затем, при использовании приложения, обновляется позиция одного из них или обоих.
 Например, вы можете перемещать персонажа внутри игрового мира, и желательно чтобы передача звука изменялась реалистично, по мере приближения или отдаления персонажа относительно источника звука, вроде стереопроигрывателя.
 В этом примере можно видеть, что все это управляется функциями <tt>moveRight()</tt>, <tt>moveLeft()</tt>, и т.п., которые устанавливают новые значения для положения паннера через функцию <tt>PositionPanner()</tt>.<br><br>
 Чтобы увидеть полную реализацию ознакомьтесь с нашим <a href="https://mdn.github.io/webaudio-examples/panner-node/" target="_blank">примером <tt>panner-node</tt></a> (<a href="https://mdn.github.io/webaudio-examples/" target="_blank">просмотрите весь список примеров</a>)
- — эта демонстрация перенесет вас в 2.5D "Room of metal" (2,5-мерную "металлическую комнату"), где можно проиграть трек на <a href="#" onclick="return false" class="hover-tip">бумбоксе<span>переносной двухкассетный магнитофон</span></a> и затем походить вокруг него и посмотреть как изменяется звук!<br><br>
+ — эта демонстрация перенесет вас в 2.5D "Room of metal" (2,5-мерную "металлическую комнату"),
+где можно проиграть трек на <span class="lnk" onmouseover="show('переносной двухкассетный магнитофон');" onmouseout="hide()">бумбоксе</span> и затем походить вокруг него и посмотреть как изменяется звук!<br><br>
 
-Note how we have used some feature detection to either give the browser the newer property values (like <a title="The forwardX read-only property of the AudioListener interface is an AudioParam representing the x value of the direction vector defining the forward direction the listener is pointing in." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener/forwardX" target="_blank"><tt>AudioListener.forwardX</tt></a>) for setting position, etc. if it supports those, or older methods (like <a title="Void." href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener/setOrientation" target="_blank"><tt>AudioListener.setOrientation()</tt></a>) if it still supports those but not the new properties.
+Note how we have used some feature detection to either give the browser the newer property values
+(like <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener/forwardX" target="_blank" onmouseover="show('The forwardX read-only property of the AudioListener interface<br>is an AudioParam representing the x value of the direction vector<br>defining the forward direction the listener is pointing in.');" onmouseout="hide()"><tt>AudioListener.forwardX</tt></a>)
+for setting position, etc. if it supports those, or older methods (like <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener/setOrientation" target="_blank" onmouseover="show('Void');" onmouseout="hide()"><tt>AudioListener.setOrientation()</tt></a>) if it still supports those but not the new properties.
 
 <pre>// set up listener and panner position information
 // установка сведений о слушателе и положении panner'а
@@ -472,35 +472,35 @@ function positionPanner() {
   }
   pannerData.innerHTML = 'Panner data: X ' + xPos + ' Y ' + yPos + ' Z ' + zPos;
 }</pre><br>
-Дополнительно о панорамировании звука можно почитать на сайте <a href="http://musiconnect.ru/publ/mixmaster/osnovy-panoramirovaniya-raspolozhenie-zvukov-v-virtualnom-prostranstve-ch-1/" target="_blank">musiconnect.ru</a>.<br><br><br></div></div>
+Дополнительно о панорамировании звука можно почитать на сайте <a href="http://musiconnect.ru/publ/mixmaster/osnovy-panoramirovaniya-raspolozhenie-zvukov-v-virtualnom-prostranstve-ch-1/" target="_blank">musiconnect.ru</a>.<br><br><br></div></div><br>
 
 <h4>Методы</h4>
-Для ознакомления с унаследованными методами смотрите описание класса <tt><a href="#1" title="Audio">Audio</a></tt>.
-<div class=blockindent>
-<pre id="5getOutput"><a class=popupspot href="JavaScript:hhctrl.TextPopup('PannerNode','Arial,9',10,10,0xffffff,0xd69967)" title="get output - получить выход">.getOutput</a>()</pre>
-Возвращает <a href="#5panner" title="PositionalAudio.panner">panner</a>.
+Для ознакомления с унаследованными методами смотрите описание класса <tt><a href="#1" onmouseover="show('Audio');" onmouseout="hide()">Audio</a></tt>.
+<div class=blockindent><br>
+<pre id="5getOutput"><span onclick="showClick('PannerNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get output - получить выход');" onmouseout="hide()">.getOutput</a></span>()</pre>
+Возвращает <a href="#5panner" onmouseover="show('PositionalAudio.panner');" onmouseout="hide()">panner</a>.<br><br>
 
-<pre id="5getRefDistance"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от get reference distance - получить справочное расстояние">.getRefDistance</a>()</pre>
+<pre id="5getRefDistance"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от get reference distance<br>- получить справочное расстояние');" onmouseout="hide()">.getRefDistance</a></span>()</pre>
 Возвращает значение параметра <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance" target="_blank">panner.refDistance</a></tt>.
 <div class=note_trans><b>Примечание переводчика:</b> Свойство <tt>refDistance</tt> интерфейса <tt>PannerNode</tt> это значение типа <tt>double</tt>, представляющее справочное (эталонное, опорное) расстояние для уменьшения громкости при удалении источника звука от слушателя.
 Данное значение используется при всех моделях, зависимости от расстояния, т.е. при всех значениях свойства <tt>distanceModel</tt>.<br>
-Значение по умолчанию свойства <tt>refDistance</tt> равно <tt>1</tt>.</div>
+Значение по умолчанию свойства <tt>refDistance</tt> равно <tt>1</tt>.</div><br>
 
-<pre id="5setRefDistance"><a class=popupspot href="JavaScript:hhctrl.TextPopup('PannerNode','Arial,9',10,10,0xffffff,0xd69967)" title="сокращение от set reference distance - установить справочное расстояние">setRefDistance</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a> )</pre>
-Устанавливает значение <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance" target="_blank">panner.refDistance</a></tt>.
+<pre id="5setRefDistance"><span onclick="showClick('PannerNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от set reference distance<br>- установить справочное расстояние');" onmouseout="hide()">.setRefDistance</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает значение <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance" target="_blank">panner.refDistance</a></tt>.<br><br>
 
-<pre id="5getRolloffFactor"><a class=popupspot href="JavaScript:hhctrl.TextPopup('PannerNode','Arial,9',10,10,0xffffff,0xd69967)" title="get rolloff factor - получить коэффициент спада (уменьшения)">.getRolloffFactor</a>()</pre>
+<pre id="5getRolloffFactor"><span onclick="showClick('PannerNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get rolloff factor - получить<br>коэффициент спада (уменьшения)');" onmouseout="hide()">.getRolloffFactor</a></span>()</pre>
 Возвращает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor" target="_blank">panner.rolloffFactor</a>.
 <div class=note_trans><b>Примечание переводчика:</b> Свойство <tt>rolloffFactor</tt> интерфейса <tt>PannerNode</tt> это значение типа <tt>double</tt>, характеризующее как быстро уменьшается громкость при удалении источника звука от слушателя.
 Данное значение используется при всех моделях, зависимости от расстояния, т.е. при всех значениях свойства <tt>distanceModel</tt>.<br>
-Значение по умолчанию свойства <tt>rolloffFactor</tt> равно <tt>1</tt>.</div>
+Значение по умолчанию свойства <tt>rolloffFactor</tt> равно <tt>1</tt>.</div><br>
 
-<pre id="5setRolloffFactor"><a class=popupspot href="JavaScript:hhctrl.TextPopup('PannerNode','Arial,9',10,10,0xffffff,0xd69967)" title="set rolloff factor - установить коэффициент спада (уменьшения)">.setRolloffFactor</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a> )</pre>
-Устанавливает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor" target="_blank">panner.rolloffFactor</a>.
+<pre id="5setRolloffFactor"><span onclick="showClick('PannerNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set rolloff factor - установить<br>коэффициент спада (уменьшения)');" onmouseout="hide()">.setRolloffFactor</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor" target="_blank">panner.rolloffFactor</a>.<br><br>
 
-<pre id="5getDistanceModel">[method:String .getDistanceModel</a>()</pre>
+<pre id="5getDistanceModel"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get distance model - получить<br>модель (зависимости от) расстояния');" onmouseout="hide()">.getDistanceModel</a></span>()</pre>
 Возвращает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel" target="_blank">panner.distanceModel</a>.
-<div class=note_trans><b>Примечание переводчика:</b> Свойство <tt>distanceModel</tt> интерфейса <tt>PannerNode</tt> is an enumerated value determining какой алгоритм будет использоваться для снижения громкости источника звука при его удалении от слушателя.<br>
+<div class=note_trans><b>Примечание переводчика:</b> Свойство <tt>distanceModel</tt> интерфейса <tt>PannerNode</tt> является вычисляемым значением, определяющим какой алгоритм будет использоваться для снижения громкости источника звука при его удалении от слушателя.<br>
 Возможными значениями являются:
 <div class=list><tt>linear</tt> (линейная): Модель линейной зависимости от расстояния рассчитывает коэффициент усиления, вызванный расстоянием, в соответствии с:
 <pre>1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)</pre></div>
@@ -508,18 +508,18 @@ function positionPanner() {
 <pre>refDistance / (refDistance + rolloffFactor * (distance - refDistance))</pre></div>
 <div class=list><tt>exponential</tt> (экспоненциальная): Модель экспоненциальной зависимости от расстояния рассчитывает коэффициент усиления, вызванный расстоянием, в соответствии с:
 <pre>pow(distance / refDistance, -rolloffFactor).</pre></div>
-Значением по умолчанию для <tt>distanceModel</tt> является <tt>inverse</tt>.</div>
+Значением по умолчанию для <tt>distanceModel</tt> является <tt>inverse</tt>.</div><br>
 
-<pre id="5setDistanceModel"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="set distance model - установить">.setDistanceModel</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a> )</pre>
-Устанавливает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel" target="_blank">panner.distanceModel</a>.
+<pre id="5setDistanceModel"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set distance model - установить<br>модель (зависимости от) расстояния');" onmouseout="hide()">.setDistanceModel</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel" target="_blank">panner.distanceModel</a>.<br><br>
 
-<pre id="5getMaxDistance"><a class=popupspot href="JavaScript:hhctrl.TextPopup('PannerNode','Arial,9',10,10,0xffffff,0xd69967)">.getMaxDistance</a>()</pre>
+<pre id="5getMaxDistance"><span onclick="showClick('PannerNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max distance - получить максимальное расстояние');" onmouseout="hide()">.getMaxDistance</a></span>()</pre>
 Возвращает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance" target="_blank">panner.maxDistance</a>.
 <div class=note_trans><b>Примечание переводчика:</b> Свойство <tt>maxDistance</tt> интерфейса <tt>PannerNode</tt> это значение типа <tt>double</tt>, представляющее максимальное расстояние между источником звука и слушателем, после которого уровень громкости дальше не снижается.
 Данное значение используется только в модели с линейной зависимостью от расстояния, т.е. когда <tt>distanceModel</tt> установлена как <tt>linear</tt>.<br>
-Значение по умолчанию свойства <tt>maxDistance</tt> равно <tt>10000</tt>.</div>
-<pre id="5setMaxDistance"><a class=popupspot href="JavaScript:hhctrl.TextPopup('PannerNode','Arial,9',10,10,0xffffff,0xd69967)">.setMaxDistance</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a> )</pre>
-Устанавливает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance" target="_blank">panner.maxDistance</a>.</div>
+Значение по умолчанию свойства <tt>maxDistance</tt> равно <tt>10000</tt>.</div><br>
+<pre id="5setMaxDistance"><span onclick="showClick('PannerNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set max distance - установить максимальное расстояние');" onmouseout="hide()">.setMaxDistance</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает значение <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance" target="_blank">panner.maxDistance</a>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/audio/PositionalAudio.js" target="_blank">PositionalAudio.js на github.com</a></div><br>

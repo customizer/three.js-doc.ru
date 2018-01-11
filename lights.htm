@@ -9,13 +9,12 @@
 <body>
 <h2 class=head1>Освещение</h2>
 В этой части рассматриваются различные виды освещения и образование тени, при некоторых способах освещения.<br><br>
-<!-- https://habrahabr.ru/post/333932/
-http://eax.me/opengl-lighting/
-https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D1%82%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D0%BE_%D0%A4%D0%BE%D0%BD%D0%B3%D1%83
--->
+Для понимания процесса освещения в компьютерной графике посмотрите следующие статьи:
+<div class=blockindent><a href="https://habrahabr.ru/post/333932/" target="_blank">learnopengl. Урок 2.2 — Основы освещения</a><br>
+<a href="http://eax.me/opengl-lighting/" target="_blank">Продолжаем изучение OpenGL: освещение по Фонгу</a><br>
+<a href="https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D1%82%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BF%D0%BE_%D0%A4%D0%BE%D0%BD%D0%B3%D1%83" target="_blank">Затенение по Фонгу</a></div><br>
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="#4" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
-<h3 id="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AmbientLight</h3>
-<div class=note_trans><b>Примечание переводчика:</b> В переводе с английского <tt>ambient light</tt> это окружающее или фоновое освещение.</div>
+<h3 id="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="lnk" onmouseover="show('ambient light это окружающее или фоновое освещение');" onmouseout="hide()">AmbientLight</span></h3>
 Фоновое освещение глобально и в равной степени освещает все объекты на сцене. Этот свет не может использоваться для создания теней, так как не имеет направления.<br><br>
 <h4>Пример</h4><br>
 <pre>var light = new THREE.AmbientLight( 0x404040 ); // soft white light (мягкий белый свет)
@@ -29,38 +28,36 @@ scene.add( light );</pre>
 <a href="https://threejs.org/examples/#webgl_animation_skinning_blending" target="_blank">animation / skinning / blending</a></pre><br>
 
 <h4>Конструктор</h4><br>
-<pre>AmbientLight( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">color</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">intensity</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">color</a></tt> — числовое значение RGB компонентов цвета.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">intensity</a></tt> — числовое значение силы/интенсивности света.</div>
+<pre>AmbientLight( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интесивность');" onmouseout="hide()">intensity</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> — числовое значение RGB компонентов цвета.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интесивность');" onmouseout="hide()">intensity</a></tt> — числовое значение силы/интенсивности света.</div>
 Конструктор создает окружающее (общее) освещение с заданными цветом и интенсивностью.<br><br>
 
 <h4>Свойства</h4><br>
-Смотрите базовый класс <a href="#4" title="Light"><tt>Light</tt></a> для общих свойств.
+Смотрите базовый класс <a href="#4" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
 <div class=blockindent><br>
-<pre id="1castShadow"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="cast shadow - бросать тень">.castShadow</a></pre>
+<pre id="1castShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cast shadow - бросать тень');" onmouseout="hide()">.castShadow</a></span></pre>
 В конструкторе значение этого свойства установлено как <tt>undefined</tt> - неопределено, поскольку фоновое освещение не может отбрасывать тени.<br><br>
-<pre id="1isAmbientLight"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is ambient light - является фоновым светом">.isAmbientLight</a></pre>
+<pre id="1isAmbientLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is ambient light - является фоновым светом');" onmouseout="hide()">.isAmbientLight</a></span></pre>
 Свойство используется для проверки, является ли данный и производные от него классы фоновым освещением. Значением по умолчанию является <tt>true</tt>.<br>
 Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.</div><br>
 <h4>Методы</h4><br>
-Смотрите базовый класс <a href="#4" title="Light"><tt>Light</tt></a> для общих методов.<br><br>
+Смотрите базовый класс <a href="#4" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.<br><br>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/lights/AmbientLight.js.txt">AmbientLight.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/AmbientLight.js" target="_blank">AmbientLight.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/AmbientLight.js" target="_blank">AmbientLight.js на github.com</a></div><br>
 
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="#4" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
-<h3 id="2">DirectionalLight</h3>
-<div class=note_trans><b>Примечание переводчика:</b> В переводе с английского <tt>directional light</tt> это направленный свет.</div>
+<h3 id="2"><span class="lnk" onmouseover="show('directional light это направленный свет');" onmouseout="hide()">DirectionalLight</span></h3>
 Свет, который испускается в определенном направлении. Этот свет будет вести себя так, как будто он бесконечно удален, и лучи, полученные из него, все параллельны.
 Общий пример использования - имитация дневного света; солнце достаточно далеко, так что расстояние до него можно считать бесконечным, а все лучи света, исходящие от него, параллельными.<br><br>
-Это освещение может отбрасывать тени - подробности смотрите в статье <tt><a href="#2.1" title="DirectionalLightShadow">DirectionalLightShadow</a></tt><br><br>
+Это освещение может отбрасывать тени - подробности смотрите в статье <tt><a href="#2.1" onmouseover="show('DirectionalLightShadow');" onmouseout="hide()">DirectionalLightShadow</a></tt><br><br>
 <h4>Примечание относительно положения, цели и вращения</h4>
 Общим местом недопонимания с направленным освещением является то, что настройки поворота не оказывают влияния. Это происходит из-за того, что <tt>DirectionalLight</tt> в <em>three.js</em> равнозначен тому, что в других приложениях зачастую называется <tt>Target Direct Light</tt> - целенаправленный (адресно направленный) свет.<br>
 Это означает, что его направление вычисляется как вектор от места расположения источника освещения к месту, где находится цель (в отличие от <tt>Free Direct Light</tt>, у которого имеется только компонент вращения).
 <div class=note_trans><b>Примечание переводчика:</b> То есть, если направление <tt>Free Direct Light</tt> определяется углом в трехмерном пространстве, то <tt>DirectionalLight</tt> направлен на конкретный объект - цель.</div>
 Это сделано для того, чтобы у данного освещения была возможность отбрасывать тени - теневой камере требуется позиция, от которой рассчитываются тени.<br>
-Смотрите ниже описание свойства <tt><a href="#2target" title="DirectionalLight.target">target</a></tt> для подробностей по обновлению цели.<br><br>
+Смотрите ниже описание свойства <tt><a href="#2target" onmouseover="show('DirectionalLight.target');" onmouseout="hide()">target</a></tt> для подробностей по обновлению цели.<br><br>
 
 <h4>Пример</h4><br>
 <pre>// White directional light at half intensity shining from the top.
@@ -81,55 +78,53 @@ scene.add( directionalLight );</pre>
 
 
 <h4>Конструктор</h4><br>
-<pre>DirectionalLight( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">hex</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">intensity</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">hex</a></tt> — шестнадцатиричное значение цвета освещения (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>0xffffff</tt> (белый).</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">intensity</a></tt> — числовое значение силы/интенсивности освещения (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+<pre>DirectionalLight( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal - шестнадцатиричный');" onmouseout="hide()">hex</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal - шестнадцатиричный');" onmouseout="hide()">hex</a></span></tt> — шестнадцатиричное значение цвета освещения (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>0xffffff</tt> (белый).</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span></tt> — числовое значение силы/интенсивности освещения (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
 Создает новый <tt>DirectionalLight</tt><br><br>
 
 <h4>Свойства</h4><br>
-Смотрите базовый класс <a href="#4" title="Light"><tt>Light</tt></a> для общих свойств.
+Смотрите базовый класс <a href="#4" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
 <div class=blockindent><br>
-<pre id="2castShadow"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="cast shadow - бросить тень">.castShadow</a></pre>
+<pre id="2castShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cast shadow - бросить тень');" onmouseout="hide()">.castShadow</a></span></pre>
 Если установлено значение <tt>true</tt>, освещение будет отбрасывать динамические (движущиеся при перемещении объекта-цели) тени.
-<div class=warning><b>Предупреждение:</b> Это довольно затратно и требует настройки для получения правильного отображения теней. Подробнее смотрите в описании <tt><a href="#2.1" title="DirectionalLightShadow">DirectionalLightShadow</a></tt>.</div>
+<div class=warning><b>Предупреждение:</b> Это довольно затратно и требует настройки для получения правильного отображения теней. Подробнее смотрите в описании <tt><a href="#2.1" onmouseover="show('DirectionalLightShadow');" onmouseout="hide()">DirectionalLightShadow</a></tt>.</div>
 Значением по умолчанию является	<tt>false</tt>.<br><br>
-<pre id="2isDirectionalLight"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is directional light - является направленным светом">.isDirectionalLight</a></pre>
+<pre id="2isDirectionalLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is directional light - является направленным светом');" onmouseout="hide()">.isDirectionalLight</a></span></pre>
 Свойство используется для проверки, является ли данный класс и все производные от него классы, направленным освещением. Значением по умолчанию является <tt>true</tt>.<br>
 Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
 
-<pre id="2position"><a href="math.htm#19" title="Vector3">.position</a></pre>
-Это свойство устанавливается равным <tt><a href="core.htm#14DefaultUp" title="Object3D.DefaultUp">Object3D.DefaultUp</a> (0, 1, 0)</tt>, так что свет светит сверху вниз.<br><br>
-<pre id="2shadow"><a href="#2.1" title="DirectionalLightShadow">.shadow</a></pre>
-Свойство используется в <tt><a href="#2.1" title="DirectionalLightShadow">DirectionalLightShadow</a></tt> для расчета теней от данного освещения.<br><br>
+<pre id="2position"><a href="math.htm#19" onmouseover="show('Vector3.<br>position - положение, позиция');" onmouseout="hide()">.position</a></pre>
+Это свойство устанавливается равным <tt><a href="core.htm#14DefaultUp" onmouseover="show('Object3D.DefaultUp');" onmouseout="hide()">Object3D.DefaultUp</a> (0, 1, 0)</tt>, так что свет светит сверху вниз.<br><br>
+<pre id="2shadow"><a href="#2.1" onmouseover="show('DirectionalLightShadow.<br>shadow - тень');" onmouseout="hide()">.shadow</a></pre>
+Свойство используется в <tt><a href="#2.1" onmouseover="show('DirectionalLightShadow');" onmouseout="hide()">DirectionalLightShadow</a></tt> для расчета теней от данного освещения.<br><br>
 
-<pre id="2target"><a href="core.htm#14" title="Object3D">.target</a></pre>
-Со своей <a href="#2position" title="DirectionalLight.position">позиции</a> DirectionalLight направлен на позицию объекта-цели (target.position), которую и определяет данное свойство. Позицией цели по умолчанию является <tt>(0, 0, 0)</tt>.
-<div class=note><b>Примечание:</b> Чтобы изменить позицию объекта-цели на что-либо другое, кроме значения по умолчанию, он должен быть добавлен на <a href="scenes.htm#3" title="Scene">сцену</a> при помощи
+<pre id="2target"><a href="core.htm#14" onmouseover="show('Object3D.<br>target - цель, мишень, назначение');" onmouseout="hide()">.target</a></pre>
+Со своей <a href="#2position" onmouseover="show('DirectionalLight.position');" onmouseout="hide()">позиции</a> DirectionalLight направлен на позицию объекта-цели (target.position), которую и определяет данное свойство. Позицией цели по умолчанию является <tt>(0, 0, 0)</tt>.
+<div class=note><b>Примечание:</b> Чтобы изменить позицию объекта-цели на что-либо другое, кроме значения по умолчанию, он должен быть добавлен на <a href="scenes.htm#3" onmouseover="show('Scene');" onmouseout="hide()">сцену</a> при помощи
 <pre>scene.add( light.target );</pre>
-Так что <tt><a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a></tt> цели станет автоматически обновляться с каждым кадром.<br>
-Также возможно установить в качестве цели другой объект на сцене (что-нибудь со свойством <tt><a href="core.htm#14position" title="Object3D.position">position</a></tt>), вот так:
+Так что <tt><a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt> цели станет автоматически обновляться с каждым кадром.<br>
+Также возможно установить в качестве цели другой объект на сцене (что-нибудь со свойством <tt><a href="core.htm#14position" onmouseover="show('Object3D.position');" onmouseout="hide()">position</a></tt>), вот так:
 <pre>var targetObject = new THREE.Object3D();
   scene.add(targetObject);<br>
   light.target = targetObject;</pre>
 Теперь <tt>directionalLight</tt> будет отслеживать целевой объект.</div></div><br>
 
-
 <h4>Методы</h4>
-Смотрите базовый класс <a href="#4" title="Light"><tt>Light</tt></a> для общих методов.
+Смотрите базовый класс <a href="#4" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.
 <div class=blockindent><br>
-<pre id="2copy"><a href="#2" title="DirectionalLight. copy - копировать">.copy</a>( <a href="#2" title="DirectionalLight. source - источник">source</a> )</pre>
+<pre id="2copy"><a href="#2" onmouseover="show('DirectionalLight.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#2" onmouseover="show('DirectionalLight.<br>source - источник');" onmouseout="hide()">source</a> )</pre>
 Копирует значение всех свойств из <tt>source</tt> в данный объект DirectionalLight.</div><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/lights/DirectionalLight.js.txt">DirectionalLight.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLight.js" target="_blank">DirectionalLight.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLight.js" target="_blank">DirectionalLight.js на github.com</a></div><br>
 
 
 <span class="right_side"><a href="#6" title="Переход к родительскому классу: LightShadow"><tt>LightShadow &rarr;</tt></a></span>
-<h3 id="2.1">DirectionalLightShadow</h3>
-<div class=note_trans><b>Примечание переводчика:</b> В переводе с английского <tt>directional light shadow</tt> это тень от направленного света.</div>
-Этот класс используется внутри для расчета теней от <tt><a href="#2" title="DirectionalLight">DirectionalLight</a></tt>.
-В отличие от других классов тени, данный класс для вычисления теней использует <tt><a href="cameras.htm#3" title="OrthographicCamera">OrthographicCamera</a></tt>, а не <tt><a href="cameras.htm#4" title="PerspectiveCamera">PerspectiveCamera</a></tt>. Это делается потому, что лучи света от <tt><a href="#2" title="DirectionalLight">DirectionalLight</a></tt> параллельны.<br><br>
+<h3 id="2.1"><span class="lnk" onmouseover="show('directional light shadow это тень от направленного света');" onmouseout="hide()">DirectionalLightShadow</span></h3>
+Этот класс используется внутри для расчета теней от <tt><a href="#2" onmouseover="show('DirectionalLight');" onmouseout="hide()">DirectionalLight</a></tt>.
+В отличие от других классов тени, данный класс для вычисления теней использует <tt><a href="cameras.htm#3" onmouseover="show('OrthographicCamera');" onmouseout="hide()">OrthographicCamera</a></tt>, а не <tt><a href="cameras.htm#4" onmouseover="show('PerspectiveCamera');" onmouseout="hide()">PerspectiveCamera</a></tt>.
+Это делается потому, что лучи света от <tt><a href="#2" onmouseover="show('DirectionalLight');" onmouseout="hide()">DirectionalLight</a></tt> параллельны.<br><br>
 <h4>Пример</h4>
 <pre>// Create a WebGLRenderer and turn on shadows in the renderer
 // создаем WebGLRenderer и включаем тени в визуализаторе
@@ -171,31 +166,28 @@ var helper = new THREE.CameraHelper( light.shadow.camera );
 scene.add( helper );</pre><br>
 <h4>Конструктор</h4><br>
 <pre>DirectionalLightShadow( )</pre>
-Создает новый <tt>DirectionalLightShadow</tt>. Конструктор не предназначен для непосредственного вызова - он вызывается внутри <em>three.js</em>, посредством <tt><a href="#2" title="DirectionalLight">DirectionalLight</a></tt>.<br><br>
+Создает новый <tt>DirectionalLightShadow</tt>. Конструктор не предназначен для непосредственного вызова - он вызывается внутри <em>three.js</em>, посредством <tt><a href="#2" onmouseover="show('DirectionalLight');" onmouseout="hide()">DirectionalLight</a></tt>.<br><br>
 <h4>Свойства</h4><br>
-Смотрите базовый класс <tt><a href="#4.1" title="LightShadow">LightShadow</a></tt> для общих свойств.
+Смотрите базовый класс <tt><a href="#4.1" onmouseover="show('LightShadow');" onmouseout="hide()">LightShadow</a></tt> для общих свойств.
 <div class=blockindent><br>
-<pre id="2.1camera"><a href="cameras.htm#1" title="Camera">.camera</a></pre>
+<pre id="2.1camera"><a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера');" onmouseout="hide()">.camera</a></pre>
 Свойство представляет освещенную область виртуального мира. Она используется для создания карты глубины сцены; объекты, находящиеся позади других объектов, с точки зрения освещения будут в тени.<br>
-По умолчанию это <tt><a href="cameras.htm#3" title="OrthographicCamera">OrthographicCamera</a></tt> с параметрами
-<tt><a href="cameras.htm#3left" title="OrthographicCamera.left">left</a></tt> и <tt><a href="cameras.htm#3bottom" title="OrthographicCamera.bottom">bottom</a></tt> установленными как <tt>-5</tt>,
-<tt><a href="cameras.htm#3right" title="OrthographicCamera.right">right</a></tt> и <tt><a href="cameras.htm#3top" title="OrthographicCamera.top">top</a></tt> установленными как <tt>5</tt>,
-параметр <tt><a href="cameras.htm#3near" title="OrthographicCamera.near">near</a></tt> (ближняя плоскость отсечения) установлен как <tt>0.5</tt>,
-а параметр <tt><a href="cameras.htm#3far" title="OrthographicCamera.far">far</a></tt> (дальняя плоскость отсечения) установлен как <tt>500</tt>.</div><br>
+По умолчанию это <tt><a href="cameras.htm#3" onmouseover="show('OrthographicCamera');" onmouseout="hide()">OrthographicCamera</a></tt> с параметрами
+<tt><a href="cameras.htm#3left" onmouseover="show('OrthographicCamera.left');" onmouseout="hide()">left</a></tt> и <tt><a href="cameras.htm#3bottom" onmouseover="show('OrthographicCamera.bottom');" onmouseout="hide()">bottom</a></tt> установленными как <tt>-5</tt>,
+<tt><a href="cameras.htm#3right" onmouseover="show('OrthographicCamera.right');" onmouseout="hide()">right</a></tt> и <tt><a href="cameras.htm#3top" onmouseover="show('OrthographicCamera.top');" onmouseout="hide()">top</a></tt> установленными как <tt>5</tt>,
+параметр <tt><a href="cameras.htm#3near" onmouseover="show('OrthographicCamera.near');" onmouseout="hide()">near</a></tt> (ближняя плоскость отсечения) установлен как <tt>0.5</tt>,
+а параметр <tt><a href="cameras.htm#3far" onmouseover="show('OrthographicCamera.far');" onmouseout="hide()">far</a></tt> (дальняя плоскость отсечения) установлен как <tt>500</tt>.</div><br>
 <h4>Методы</h4><br>
-Смотрите базовый класс <a href="#4.1" title="LightShadow"><tt>LightShadow</tt></a> для общих методов.<br><br>
+Смотрите базовый класс <a href="#4.1" onmouseover="show('LightShadow');" onmouseout="hide()"><tt>LightShadow</tt></a> для общих методов.<br><br>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/lights/DirectionalLightShadow.js.txt">DirectionalLightShadow.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLightShadow.js" target="_blank">DirectionalLightShadow.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLightShadow.js" target="_blank">DirectionalLightShadow.js на github.com</a></div><br>
 
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="#4" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
-<h3 id="3">HemisphereLight</h3>
-<div class=note_trans><b>Примечание переводчика:</b> В переводе с английского <tt>hemisphere light</tt> это свет полусферы.</div>
+<h3 id="3"><span class="lnk" onmouseover="show('hemisphere light это свет полусферы');" onmouseout="hide()">HemisphereLight</span></h3>
 Источник света, расположенный непосредственно над сценой, с затуханием цвета от цвета неба до цвета земли.
 A light source positioned directly above the scene, with color fading from the sky color to the ground color.<br>
-Это освещение не может использоваться для отбрасывания теней.
-This light cannot be used to cast shadows.<br><br>
+Это освещение не может использоваться для отбрасывания теней.<br><br>
 
 <h4>Пример</h4><br>
 <pre>var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
@@ -209,54 +201,53 @@ scene.add( light );</pre><br>
 <a href="https://threejs.org/examples/#webgl_shaders_ocean" target="_blank">shaders / ocean</a></pre><br>
 
 <h4>Конструктор</h4><br>
-<pre>HemisphereLight( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="sky color - цвет неба">skyColor</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="ground color - цвет земли">groundColor</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="intensity - интенсивность">intensity</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="sky color - цвет неба">skyColor</a></tt> — Numeric value of the RGB sky color.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="ground color - цвет земли">groundColor</a></tt> — Numeric value of the RGB ground color.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="intensity - интенсивность">intensity</a></tt> — Numeric value of the light's strength/intensity.</div><br>
+<pre>HemisphereLight( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sky color - цвет неба');" onmouseout="hide()">skyColor</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ground color - цвет земли');" onmouseout="hide()">groundColor</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sky color - цвет неба');" onmouseout="hide()">skyColor</a></span></tt> — шестнадцатиричное значение цвета неба, по умолчанию равно <tt>0xffffff</tt>. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ground color - цвет земли');" onmouseout="hide()">groundColor</a></span></tt> —  шестнадцатиричное значение цвета земли, по умолчанию равно <tt>0xffffff</tt>. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span></tt> —  числовое значение силы/интенсивности света, по умолчанию равно <tt>1</tt>. Дополнительный, необязательный аргумент.</div>
+Создает новый HemisphereLight.<br><br>
 
 <h4>Свойства</h4><br>
-Смотрите базовый класс <a href="#4" title="Light"><tt>Light</tt></a> для общих свойств.
+Смотрите базовый класс <a href="#4" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
 <div class=blockindent><br>
-<pre id="3castShadow"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="cast shadow - бросить тень">.castShadow</a></pre>
+<pre id="3castShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cast shadow - бросить тень');" onmouseout="hide()">.castShadow</a></span></pre>
 Это свойство в конструкторе устанавливается как <tt>undefined</tt>, так как освещение полусферой не может отбрасывать тени.<br><br>
-<pre id="3color"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">.color</a></pre>
-Цвет освещения неба, какой передан в конструктор. Значение по умолчанию для нового <a href="math.htm#3" title="Color">цвета</a> устанавливается как <tt>(0xffffff)</tt> - белый.<br><br>
-<pre id="3groundColor"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="ground color - цвет земли">.groundColor</a></pre>
-Цвет освещения земли, какой передан в конструктор. Значение по умолчанию для нового <a href="math.htm#3" title="Color">цвета</a> устанавливается как <tt>(0xffffff)</tt> - белый.<br><br>
-<pre id="3isHemisphereLight"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is hemisphere light - является светом полусферы">.isHemisphereLight</a></pre>
+<pre id="3color"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
+Цвет освещения неба, какой передан в конструктор. Значение по умолчанию для нового <a href="math.htm#3" onmouseover="show('Color');" onmouseout="hide()">цвета</a> устанавливается как <tt>(0xffffff)</tt> - белый.<br><br>
+<pre id="3groundColor"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ground color - цвет земли');" onmouseout="hide()">.groundColor</a></span></pre>
+Цвет освещения земли, какой передан в конструктор. Значение по умолчанию для нового <a href="math.htm#3" onmouseover="show('Color');" onmouseout="hide()">цвета</a> устанавливается как <tt>(0xffffff)</tt> - белый.<br><br>
+<pre id="3isHemisphereLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is hemisphere light - является светом полусферы');" onmouseout="hide()">.isHemisphereLight</a></span></pre>
 Свойство используется для проверки, является ли данный класс и все производные от него классы, освещением полусферы. Значением по умолчанию является <tt>true</tt>.<br>
 Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
-<pre id="3position"><a href="math.htm#19" title="Vector3">.position</a></pre>
-Это свойство устанавливается равным <tt><a href="core.htm#14DefaultUp" title="Object3D.DefaultUp">Object3D.DefaultUp</a> (0, 1, 0)</tt>, так что свет светит сверху вниз.</div><br>
+<pre id="3position"><a href="math.htm#19" onmouseover="show('Vector3.<br>position - позиция, положение');" onmouseout="hide()">.position</a></pre>
+Это свойство устанавливается равным <tt><a href="core.htm#14DefaultUp" onmouseover="show('Object3D.DefaultUp');" onmouseout="hide()">Object3D.DefaultUp</a> (0, 1, 0)</tt>, так что свет светит сверху вниз.</div><br>
 
 <h4>Методы</h4><br>
-Смотрите базовый класс <a href="#4" title="Light"><tt>Light</tt></a> для общих методов.
+Смотрите базовый класс <a href="#4" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.
 <div class=blockindent><br>
-<pre id="3copy"><a href="#3" title="HemisphereLight. copy - копировать">.copy</a>( <a href="#3" title="HemisphereLight. source - источник">source</a> )</pre>
-Копирует значение параметров <a href="#3color" title="HemisphereLight.color"><tt>color</tt></a>, <a href="#3intensity" title="HemisphereLight.intensity"><tt>intensity</tt></a> и <a href="#3groundColor" title="HemisphereLight.groundColor"><tt>groundColor</tt></a> из <a href="#4" title="Light"><tt>source</tt></a> освещения в этот.</div><br>
-
+<pre id="3copy"><a href="#3" onmouseover="show('HemisphereLight.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#3" onmouseover="show('HemisphereLight.<br>source - источник');" onmouseout="hide()">source</a> )</pre>
+Копирует значение параметров <a href="#3color" onmouseover="show('HemisphereLight.color');" onmouseout="hide()"><tt>color</tt></a>, <a href="#3intensity" onmouseover="show('HemisphereLight.intensity');" onmouseout="hide()"><tt>intensity</tt></a> и <a href="#3groundColor" onmouseover="show('HemisphereLight.groundColor');" onmouseout="hide()"><tt>groundColor</tt></a> из <a href="#4" onmouseover="show('Light');" onmouseout="hide()"><tt>source</tt></a> освещения в этот.</div><br>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/lights/HemisphereLight.js.txt">HemisphereLight.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/HemisphereLight.js" target="_blank">HemisphereLight.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/HemisphereLight.js" target="_blank">HemisphereLight.js на github.com</a></div><br>
 
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a></span>
 <h3 id="4">Light</h3>
-Абстрактный базовый класс освещения - все другие типы освещения наследуют свойства и методы, описанные здесь.<br><br>
+Абстрактный базовый класс освещения - все другие типы освещения наследуют описанные здесь свойства и методы.<br><br>
 
 <h4>Конструктор</h4><br>
-<pre>Light( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="intensity - интенсивность">intensity</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt> — шестнадцатиричное значение цвета освещения (дополнительный, необязательный параметр). Значением по умолчанию является <tt>0xffffff</tt> (белый).</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="intensity - интенсивность">intensity</a></tt> — числовое значение силы/интенсивности света (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+<pre>Light( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> — шестнадцатиричное значение цвета освещения (дополнительный, необязательный параметр). Значением по умолчанию является <tt>0xffffff</tt> (белый).</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span></tt> — числовое значение силы/интенсивности света (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
 Создает новый <tt>Light</tt>. Обратите внимание, что конструктор не предназначен для вызова напрямую (взамен используйте один из производных от него классов).<br><br>
 
 <h4>Свойства</h4><br>
-Смотрите базовый класс <a href="core.htm#14" title="Object3D"><tt>Object3D</tt></a> для общих свойств.
+Смотрите базовый класс <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()"><tt>Object3D</tt></a> для общих свойств.
 <div class=blockindent><br>
-<pre id="4">[property:Color color]</pre>
-Цвет света. Defaults to a new Color set to white, if not passed in the constructor.
+<pre id="4color">[property:Color color]</pre>
+Цвет освещения. По умолчанию, если это не передается в конструкторе, новый <tt>Color</tt> устанавливается белым (<tt>0xffffff</tt>).Defaults to a new Color set to white, if not passed in the constructor.
 
-<pre id="4">[property:Float intensity]</pre>
+<pre id="4intensity">[property:Float intensity]</pre>
 Light's intensity.<br>
 In "physically correct" mode, the product of color * intensity is interpreted as luminous intensity measured in candela.<br>
 Default — *1.0*.
@@ -271,12 +262,11 @@ Default — *1.0*.
 
 		Copies value of *source* to this Light object.
 
-<pre id="4toJSON">[method:JSON toJSON</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="meta - сокращ. от metadata - метаданные. Вообще-то meta (с латыни) это цель, конечный пункт, предел, а метаданные - информация о другой информации, или данные, относящиеся к дополнительной информации о содержимом или объекте. Метаданные раскрывают сведения о признаках и свойствах, характеризующих какие-либо сущности, которые позволяют автоматически искать и управлять ими в больших информационных потоках.">meta</a> )</pre>
+<pre id="4toJSON">[method:JSON toJSON</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('meta - сокращ. от metadata - метаданные. Вообще-то meta (с латыни)<br>это цель, конечный пункт, предел, а метаданные - информация о другой<br>информации, или данные, относящиеся к дополнительной информации о<br>содержимом или объекте. Метаданные раскрывают сведения о признаках<br>и свойствах, характеризующих какие-либо сущности, которые позволяют<br>автоматически искать и управлять ими в больших информационных<br>потоках.');" onmouseout="hide()">meta</a></span> )</pre>
 Возвращает данные <tt>Light</tt> в JSON-формате.</div><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/lights/Light.js.txt">Light.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/Light.js" target="_blank">Light.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/Light.js" target="_blank">Light.js на github.com</a></div><br>
 
 
 <h3 id="4.1">LightShadow</h3>
@@ -761,8 +751,7 @@ scene.add( spotLight );</pre>
 		</div>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/lights/SpotLight.js.txt">SpotLight.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/SpotLight.js" target="_blank">SpotLight.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/SpotLight.js" target="_blank">SpotLight.js на github.com</a></div><br>
 
 
 <span class="right_side"><a href="#4.1" title="Переход к родительскому классу: LightShadow"><tt>LightShadow &rarr;</tt></a></span>
@@ -781,8 +770,7 @@ See the base [page:LightShadow LightShadow] class for common methods.
 Updates the internal perspective camera.
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/lights/SpotLightShadow.js.txt">SpotLightShadow.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/SpotLightShadow.js" target="_blank">SpotLightShadow.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/SpotLightShadow.js" target="_blank">SpotLightShadow.js на github.com</a></div><br>
 
 <br><br>
 </body></html>

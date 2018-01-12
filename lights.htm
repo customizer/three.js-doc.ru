@@ -30,7 +30,7 @@ scene.add( light );</pre>
 <h4>Конструктор</h4><br>
 <pre>AmbientLight( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интесивность');" onmouseout="hide()">intensity</a></span> )</pre>
 <div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> — числовое значение RGB компонентов цвета.</div>
-<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интесивность');" onmouseout="hide()">intensity</a></tt> — числовое значение силы/интенсивности света.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интесивность');" onmouseout="hide()">intensity</a></span></tt> — числовое значение силы/интенсивности света.</div>
 Конструктор создает окружающее (общее) освещение с заданными цветом и интенсивностью.<br><br>
 
 <h4>Свойства</h4><br>
@@ -244,25 +244,24 @@ scene.add( light );</pre><br>
 <h4>Свойства</h4><br>
 Смотрите базовый класс <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()"><tt>Object3D</tt></a> для общих свойств.
 <div class=blockindent><br>
-<pre id="4color">[property:Color color]</pre>
-Цвет освещения. По умолчанию, если это не передается в конструкторе, новый <tt>Color</tt> устанавливается белым (<tt>0xffffff</tt>).Defaults to a new Color set to white, if not passed in the constructor.
+<pre id="4color"><span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('Color.<br>color - цвет');" onmouseout="hide()">.color</a></span></pre>
+Цвет освещения. По умолчанию, если это не передается в конструкторе, новый <tt>Color</tt> устанавливается белым (<tt>0xffffff</tt>).
 
-<pre id="4intensity">[property:Float intensity]</pre>
-Light's intensity.<br>
-In "physically correct" mode, the product of color * intensity is interpreted as luminous intensity measured in candela.<br>
-Default — *1.0*.
-<pre id="4isLight"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is light - является светом">.isLight</a></pre>
+<pre id="4intensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интесивность');" onmouseout="hide()">.intensity</a></span></pre>
+Интенсивность света.<br>
+В режиме, <a href="renderers.htm#1.1physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights');" onmouseout="hide()">правильном с точки зрения физики</a>, произведение <tt><a href="#4color" onmouseover="show('Light.color');" onmouseout="hide()">color</a></tt> * <tt>intensity</tt> интерпретируется как интенсивность (сила) света, измеряемая в канделах (candela).<br>
+Значение по умолчанию равно <tt>1.0</tt>.
+<pre id="4isLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is light - является светом');" onmouseout="hide()">.isLight</a></span></pre>
 Свойство используется для проверки, является ли данный класс и все производные от него классы, освещением. Значением по умолчанию является <tt>true</tt>.<br>
 Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.</div><br>
 
 <h4>Методы</h4><br>
 Смотрите базовый класс <a href="core.htm#14" title="Object3D"><tt>Object3D</tt></a> для общих методов.
 <div class=blockindent><br>
-<pre id="4copy">[method:Light copy</a>( [page:Light source</a> )</pre>
+<pre id="4copy"><a href="#4" onmouseover="show('Light.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#4" onmouseover="show('Light.<br>source - исходник');" onmouseout="hide()">source</a> )</pre>
+Метод копирует значение из <tt>source</tt> в данный объект <tt>Light</tt>.
 
-		Copies value of *source* to this Light object.
-
-<pre id="4toJSON">[method:JSON toJSON</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('meta - сокращ. от metadata - метаданные. Вообще-то meta (с латыни)<br>это цель, конечный пункт, предел, а метаданные - информация о другой<br>информации, или данные, относящиеся к дополнительной информации о<br>содержимом или объекте. Метаданные раскрывают сведения о признаках<br>и свойствах, характеризующих какие-либо сущности, которые позволяют<br>автоматически искать и управлять ими в больших информационных<br>потоках.');" onmouseout="hide()">meta</a></span> )</pre>
+<pre id="4toJSON"><span onclick="showClick('JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в формат JSON');" onmouseout="hide()">.toJSON</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('meta - сокращ. от metadata - метаданные. Вообще-то meta (с латыни)<br>это цель, конечный пункт, предел, а метаданные - информация о другой<br>информации, или данные, относящиеся к дополнительной информации о<br>содержимом или объекте. Метаданные раскрывают сведения о признаках<br>и свойствах, характеризующих какие-либо сущности, которые позволяют<br>автоматически искать и управлять ими в больших информационных<br>потоках.');" onmouseout="hide()">meta</a></span> )</pre>
 Возвращает данные <tt>Light</tt> в JSON-формате.</div><br>
 
 <h4>Исходники</h4>
@@ -270,102 +269,89 @@ Default — *1.0*.
 
 
 <h3 id="4.1">LightShadow</h3>
-Этот класс используется внутри <tt><a href="#5" title="PointLight">PointLight</a></tt> для расчета теней, а также служит базовым классом для других классов теней.
+Этот класс используется внутри <tt><a href="#5" onmouseover="show('PointLight');" onmouseout="hide()">PointLight</a></tt> для расчета теней, а также служит базовым классом для других классов теней.
 This is used internally by PointLights for calculating shadows, and also serves as a base class for the other shadow classes.
 
 <h4>Пример</h4>
-<pre>//Create a WebGLRenderer and turn on shadows in the renderer
+<pre>// Create a WebGLRenderer and turn on shadows in the renderer
+// Создаем WebGLRenderer и включаем в нем тени
 var renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
-
-//Create a PointLight and turn on shadows for the light
+                                                  // по умолчанию THREE.PCFShadowMap<br>
+// Create a PointLight and turn on shadows for the light
+// Создаем PointLight и включаем тени от него
 var light = new THREE.PointLight( 0xffffff, 1, 100 );
 light.position.set( 0, 10, 0 );
-light.castShadow = true;            // default false
-scene.add( light );
-
-//Set up shadow properties for the light
-light.shadow.mapSize.width = 512;  // default
-light.shadow.mapSize.height = 512; // default
-light.shadow.camera.near = 0.5;       // default
-light.shadow.camera.far = 500      // default
-
-//Create a sphere that cast shadows (but does not receive them)
+light.castShadow = true;           // default false (значение по умолчанию false )
+scene.add( light );<br>
+// Set up shadow properties for the light
+// Устанавливаем свойства тени
+light.shadow.mapSize.width = 512;  // default (по умолчанию)
+light.shadow.mapSize.height = 512; // default (по умолчанию)
+light.shadow.camera.near = 0.5;    // default (по умолчанию)
+light.shadow.camera.far = 500      // default (по умолчанию)<br>
+// Create a sphere that cast shadows (but does not receive them)
+// Создаем сферу, отбрасывающую тени (но не принимающую их)
 var sphereGeometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
 var sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
 var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-sphere.castShadow = true; //default is false
-sphere.receiveShadow = false; //default
-scene.add( sphere );
-
-//Create a plane that receives shadows (but does not cast them)
+sphere.castShadow = true;     // default is false  (по умолчанию равно false)
+sphere.receiveShadow = false; // default (по умолчанию)
+scene.add( sphere );<br>
+// Create a plane that receives shadows (but does not cast them)
+// Создаем плоскость, которая принимает тени (но не отбрасывает их)
 var planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
 var planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
 var plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.receiveShadow = true;
-scene.add( plane );
-
-//Create a helper for the shadow camera (optional)
+scene.add( plane );<br>
+// Create a helper for the shadow camera (optional)
+// Создаем вспомогательный элемент для теневой камеры (необязательно)
 var helper = new THREE.CameraHelper( light.shadow.camera );
 scene.add( helper );</pre><br>
 
 <h4>Конструктор</h4><br>
 <pre>LightShadow( [page:Camera camera] )</pre>
 <div class=list>[page:Camera camera] — The shadow's view of the world.</div>
-
+Create a new LightShadow. This is not intended to be called directly - it is called internally by PointLight or used as a base class by other light shadows.<br><br>
 <h4>Свойства</h4>
-
+<div class=blockindent><br>
 		<h3>[property:Camera camera]</h3>
-		<div>
-			The shadow's view of the world.
-		</div>
+The shadow's view of the world.<br><br>
 
 		<h3>[property:Float bias]</h3>
-		<div>
-			Shadow map bias, how much to add or subtract from the normalized depth when deciding whether a surface is in shadow.<br />
-			Default — *0*.
-		</div>
+Shadow map bias, how much to add or subtract from the normalized depth when deciding whether a surface is in shadow.<br />
+			Default — *0*.<br><br>
 
-		<h3>[property:Float radius]</h3>
-		<div>
-			TODO<br />
-			Default - *0*.
-		</div>
+<h3>[property:Float radius]</h3>
+TODO<br />
+			Default - *0*.<br><br>
 
-		<h3>[property:Vector2 mapSize]</h3>
-		<div>
-			The width and height of the shadow map stored in a [page:Vector2 Vector2].<br />
-			Default — *( 512, 512 )*.
-		</div>
+<h3>[property:Vector2 mapSize]</h3>
+The width and height of the shadow map stored in a [page:Vector2 Vector2].<br />
+			Default — *( 512, 512 )*.<br><br>
 
-		<h3>[property:WebGLRenderTarget map]</h3>
-		<div>
-			The depth map generated using the internal camera; a location beyond a pixel's depth is in shadow. Computed internally during rendering.
-		</div>
+<h3>[property:WebGLRenderTarget map]</h3>
+The depth map generated using the internal camera; a location beyond a pixel's depth is in shadow. Computed internally during rendering.<br><br>
 
-		<h3>[property:Matrix4 matrix]</h3>
-		<div>
-			Model to shadow camera space, to compute location and depth in shadow map. Stored in a [page:Matrix4 Matrix4]. Computed internally during rendering.
-		</div>
+<h3>[property:Matrix4 matrix]</h3>
+Model to shadow camera space, to compute location and depth in shadow map. Stored in a [page:Matrix4 Matrix4]. Computed internally during rendering.
+</div><br>
 
-
-		<h2>Methods</h2>
-		<h3>[method:LightShadow copy]( [page:LightShadow source] )</h3>
-		<div>
-		Copies value of *source* to this LightShadow object.
-		</div>
-
-		<h3>[method:LightShadow clone]()</h3>
-		<div>
-		It returns a clone of LightShadow.
-		</div>
-
+<h4>Методы</h4>
+<div class=blockindent><br>
+<h3>[method:LightShadow copy]( [page:LightShadow source] )</h3>
+Copies value of *source* to this LightShadow object.<br><br>
+<h3>[method:LightShadow clone]()</h3>
+It returns a clone of LightShadow.
+</div><br>
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/LightShadow.js" target="_blank">LightShadow.js на github.com</a></div><br>
+
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="#5" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
-<h3 id="5">PointLight</h1>
+<h3 id="5">PointLight</h3>
 A light that gets emitted from a single point in all directions. A common use case for this is to replicate the light emitted from a bare lightbulb.<br>
 
 This light can cast shadows - see LightShadow page for details.
@@ -440,7 +426,7 @@ See the base [page:Light Light] class for common properties.
 
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="#5" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
-<h3 id="6">RectAreaLight</h1>
+<h3 id="6">RectAreaLight</h3>
 
 		<div class="desc">
 			This light gets emitted uniformly across the face a rectangular plane. This can be
@@ -582,7 +568,7 @@ light.target = targetObject;
 
 
 
-<h3 id="6.1">RectAreaLightShadow</h1>
+<h3 id="6.1">RectAreaLightShadow</h3>
 <em>Note: this is currently being developed and does nothing at the moment (r83).
 Check back in a while!</em><br>
 
@@ -623,7 +609,7 @@ Create a new RectAreaLightShadow. This is not intended to be called directly - i
 
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="#5" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
-<h3 id="7">SpotLight</h1>
+<h3 id="7">SpotLight</h3>
 <div class=note_trans><b>Примечание переводчика:</b> В переводе с английского <tt>spot light</tt> это прожектор (дословно - пятно света).</div>
 Данный свет излучается из одной точки в одном направлении, вдоль конуса, расширяемого по мере удаления от источника света.
 This light gets emitted from a single point in one direction, along a cone that increases in size the further from the light it gets.

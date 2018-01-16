@@ -1141,6 +1141,7 @@ Returns true if *layers* and .mask have any bits set in common.</div>
 <h3 id="14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Object3D</h3>
 <b>Object3D</b> является базовым классом для большинства объектов <em>three.js</em> и предоставляет набор свойств и методов для управления объектами в трехмерном пространстве.<br>
 Обратите внимание, что имеется возможность для группировки объектов с помощью метода <tt><a href="#14add" title="Object3D.add">.add( object )</a></tt>, который добавляет объект в качестве дочернего, но, тем не менее, для этого лучше использовать класс <tt><a href="objects.htm#2" title="Group">Group</a></tt>.<br><br>
+
 <h4>Конструктор</h4>
 <pre>Object3D()</pre>
 Конструктор не принимает аргументов.<br><br>
@@ -1161,12 +1162,47 @@ When this is set, it checks every frame if the object is in the frustum of the c
 Используется для проверки, является ли этот класс или классы, производные от него, трехмерными объектами (Object3D). Значением по умолчанию является <tt>true</tt>.<br>
 Это свойство нельзя изменять, так как оно используется для оптимизации внутри <em>three.js</em>.
 <pre id="14layers"><a href="#13" title="Layers. layers - слои, уровни">.layers</a></pre>
-The layer membership of the object. Объект отображается только в том случае, если имеет хотя бы один слой, используемый совместно с <a href="cameras.htm#1" title="Camera">камерой</a>. The object is only visible if it has at least one layer in common with the Camera in use.
+The layer membership of the object. Объект отображается только в том случае, если имеет хотя бы один слой, используемый совместно с <a href="cameras.htm#1" title="Camera">камерой</a>. The object is only visible if it has at least one layer in common with the Camera in use.<br><br>
 
 <pre id="14matrix"><a href="math.htm#11" title="Matrix4">.matrix</a></pre>
-The local transform matrix.
+The local transform matrix.<br><br>
 
+<pre id="14matrixAutoUpdate">.matrixAutoUpdate</pre>
+When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is Object3D.DefaultMatrixAutoUpdate (true).<br><br>
 
+<pre id="14matrixWorld">.matrixWorld</pre>
+The global transform of the object. If the Object3D has no parent, then it's identical to the local transform .matrix.<br><br>
+
+<pre id="14matrixWorldNeedsUpdate">.matrixWorldNeedsUpdate</pre>
+When this is set, it calculates the matrixWorld in that frame and resets this property to false. Default is false.<br><br>
+
+<pre id="14modelViewMatrix">.modelViewMatrix</pre>
+This is passed to the shader and used to calculate the position of the object.<br><br>
+
+<pre id="14name">.name</pre>
+Optional name of the object (doesn't need to be unique). Default is an empty string.<br><br>
+
+<pre id="14normalMatrix">.normalMatrix</pre>
+This is passed to the shader and used to calculate lighting for the object. It is the transpose of the inverse of the upper left 3x3 sub-matrix of this object's modelViewMatrix.<br>
+
+The reason for this special matrix is that simply using the modelViewMatrix could result in a non-unit length of normals (on scaling) or in a non-perpendicular direction (on non-uniform scaling).<br>
+
+On the other hand the translation part of the modelViewMatrix is not relevant for the calculation of normals. Thus a Matrix3 is sufficient.<br><br>
+
+<pre id="14onAfterRender">.onAfterRender</pre>
+An optional callback that is executed immediately after the Object3D is rendered. This function is called with the following parameters: renderer, scene, camera, geometry, material, group.<br><br>
+
+<pre id="14onBeforeRender">.onBeforeRender</pre>
+An optional callback that is executed immediately before the Object3D is rendered. This function is called with the following parameters: renderer, scene, camera, geometry, material, group.<br><br>
+
+<pre id="14parent">.parent</pre>
+Object's parent in the scene graph.<br><br>
+
+<pre id="14position">.position</pre>
+A Vector3 representing the object's local position. Default is (0, 0, 0).<br><br>
+
+<pre id="14quaternion">.quaternion</pre>
+Object's local rotation as a Quaternion.<br><br>
 
 
 
@@ -1179,17 +1215,6 @@ This value allows the default rendering order of scene graph objects to be overr
 		This gets automatically assigned, so this shouldn't be edited.
 
 
-<pre>[property:String name]</pre>
-Optional name of the object (doesn't need to be unique).
-
-<pre>[property:Object3D parent]</pre>
-Object's parent in the scene graph.
-
-<pre>[property:Object3D children]</pre>
-Array with object's children.
-
-<pre>[property:Vector3 position]</pre>
-Object's local position.
 
 <pre id="14rotation">[property:Euler rotation]</pre>
 Object's local rotation (<a href="https://en.wikipedia.org/wiki/Euler_angles" target="_blank">Euler angles</a>), in radians.
@@ -1200,20 +1225,8 @@ Object's local scale.
 <pre>[property:Vector3 up]</pre>
 Up direction. Default is THREE.Vector3( 0, 1, 0 ).
 
-<a name=matrix></a>
-<h4>.matrix</h4>
-Local transform.
-
-<a name=quaternion></a>
-<pre>[property:Quaternion quaternion]</pre>
-Object's local rotation as [page:Quaternion Quaternion].
-
 <pre>[property:Boolean visible]</pre>
 Object gets rendered if *true*. default – true
-
-<pre>[property:Boolean castShadow]</pre>
-Gets rendered into shadow map.
-<div class=blockindent>default – false</div>
 
 <pre>[property:Boolean receiveShadow]</pre>
 Material gets baked in shadow receiving.
@@ -1223,19 +1236,8 @@ Material gets baked in shadow receiving.
 When this is set, it checks every frame if the object is in the frustum of the camera. Otherwise the object gets drawn every frame even if it isn't visible.
 <div class=blockindent>default – true</div>
 
-<pre>[property:Boolean matrixAutoUpdate]</pre>
-When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.
-<div>default – true</div>
-
-<pre>[property:Boolean matrixWorldNeedsUpdate]</pre>
-When this is set, it calculates the matrixWorld in that frame and resets this property to false.
-<div class=blockindent>default – false</div>
-
 <pre>[property:object userData]</pre>
 An object that can be used to store custom data about the Object3d. It should not hold references to functions as these will not be cloned.
-
-<pre>[property:Matrix4 matrixWorld]</pre>
-The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.</div><br>
 
 <h4>Статические свойства</h4><br>
 Static properties and methods are defined per class rather than per instance of that class. This means that changing Object3D.DefaultUp or Object3D.DefaultMatrixAutoUpdate will change the values of up and matrixAutoUpdate for every	instance of Object3D (or derived classes) created after the change has been made (already created Object3Ds will not be affected).

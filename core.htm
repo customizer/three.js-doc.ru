@@ -11,7 +11,7 @@
 <div class=list><a href="#1">BufferAttribute</a></div>
 <div class=list><a href="#2">BufferGeometry</a></div>
 <div class=list><a href="#3">Clock</a> - класс для отслеживания времени.</div>
-<div class=list><a href="#4">DirectGeometry</a></div>
+<div class=list><a href="#4">DirectGeometry</a> - данный класс используется внутри <em>three.js</em> для конвертирования из <a href="#7">Geometry</a> в <a href="#2">BufferGeometry</a>.</div>
 <div class=list><a href="#5">EventDispatcher</a> - диспетчер событий, класс для управления (отслеживания и запуска) событиями JavaScript.</div>
 <div class=list><a href="#6">Face3</a> - класс, определяющий параметры треугольной грани - ячейки арматуры, из которых составлена геометрическая фигура.</div>
 <div class=list><a href="#7">Geometry</a> - основной класс для всех геометрий кроме BufferGeometry. Также можно использовать напрямую для построения собственных и нестандартных геометрических элементов.</div>
@@ -20,7 +20,7 @@
 <div class=list><a href="#0">InstancedInterleavedBuffer</a></div>
 <div class=list><a href="#11">InterleavedBuffer</a></div>
 <div class=list><a href="#12">InterleavedBufferAttribute</a></div>
-<div class=list><a href="#13">Layers</a></div>
+<div class=list><a href="#13">Layers</a> - слои для управления видимостью трехмерных объектов. Можно использовать до 32 слоёв.</div>
 <div class=list><a href="#14">Object3D</a> - базовый класс для большинства объектов <em>three.js</em>, предоставляющий набор свойств и методов для управления объектами в трехмерном пространстве.</div>
 <div class=list><a href="#15">Raycaster</a></div>
 <div class=list><a href="#16">Uniform</a></div><br>
@@ -86,7 +86,7 @@
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="1clone"><a href="#1" onmouseover="show('от англ. слова clone - клон, двойник')" onmouseout="hide()">.clone( )</a></span></pre>
+<pre id="1clone"><a href="#1" onmouseover="show('от англ. слова clone - клон, двойник')" onmouseout="hide()">.clone( )</a></pre>
 Возвращает копию данного <tt>bufferAttribute</tt>.<br><br>
 <pre id="1copyArray"><a href="#1" onmouseover="show('от англ. слова copy array - копировать массив')" onmouseout="hide()">.copyArray</a>( array )</pre>
 Копирует, заданный здесь, массив (который может быть обычным массивом или типизированным - TypedArray) в массив <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>.
@@ -181,7 +181,7 @@
 Это делает <tt>BufferGeometry</tt> наиболее подходящим для статических объектов, где вам не нужно управлять геометрическими свойствами объекта после его создания.<br><br>
 
 <h4>Пример</h4>
-<img src="img/square.png" width="400px"><br>
+<img src="img/square.png" width="400"><br>
 <pre>var geometry = new THREE.BufferGeometry();
 // create a simple square shape. We duplicate the bottom left and top right
 // vertices because each vertex needs to appear once per triangle.
@@ -486,7 +486,7 @@ Use <a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()
 Цели морфинга - это набор последовательных изменений объекта. Исходный объект, зачастую называется затравочным (seed object).</div><br>
 <pre id="4skinWeights"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов skin weights - веса оболочки')" onmouseout="hide()">.skinWeights</a></span></pre>
 Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" onmouseover="show('DirectGeometry.fromGeometry')" onmouseout="hide()">.fromGeometry</a>().
-<div class=note_trans><b>Примечание переводчика:</b> <a href="" target="_blank">морфинг</a>.</div><br>
+<div class=note_trans><b>Примечание переводчика:</b> <a href="#" target="_blank">морфинг</a>.</div><br>
 <pre id="4skinIndices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов skin indices - индексы оболочки')" onmouseout="hide()">.skinIndices</a></span></pre>
 Инициализируется как пустой массив, заполняется методом <a href="#4fromGeometry" onmouseover="show('DirectGeometry.fromGeometry')" onmouseout="hide()">.fromGeometry</a>().<br><br>
 <pre id="4boundingBox"><a href="math.htm#2" onmouseover="show('Box3.<br>от англ. слов bounding box<br>- ограничительная рамка')" onmouseout="hide()">.boundingBox</a></pre>
@@ -512,7 +512,7 @@ Use <a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()
 <pre id="4computeBoundingSphere"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов compute bounding sphere<br>- вычисление ограничивающей сферы')" onmouseout="hide()">.computeBoundingSphere</a></span>( )</pre>
 Смотрите <tt><a href="#7Geometry.computeBoundingSphere" onmouseover="show('Geometry.computeBoundingSphere')" onmouseout="hide()">Geometry.computeBoundingSphere</a></tt>.<br><br>
 <pre id="4computeGroups"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов compute bounding groups - вычисление групп')" onmouseout="hide()">.computeGroups</a></span>( <a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">geometry</a> )</pre>
-Вычисляет части геометрии с разными materialIndex</a></tt>. Смотрите <a href="#2groups" onmouseover="show('BufferGeometry.groups')" onmouseout="hide()">BufferGeometry.groups</a></tt>.<br><br>
+Вычисляет части геометрии с разными <tt>materialIndex</a></tt>. Смотрите <tt><a href="#2groups" onmouseover="show('BufferGeometry.groups')" onmouseout="hide()">BufferGeometry.groups</a></tt>.<br><br>
 <pre id="4dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова dispose - избавиться, устранить, выбросить, удалить')" onmouseout="hide()">.dispose</a></span>( )</pre>
 Удаляет объект из памяти. Этот метод вызывается, если во время работы приложения нужно удалить <tt>directGeometry</tt>.<br><br>
 <pre id="4fromGeometry"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова from geometry - из геометрии')" onmouseout="hide()">.fromGeometry</a></span>( <a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">geometry</a> )</pre>
@@ -680,29 +680,29 @@ geometry.computeBoundingSphere();</pre>
 
 <pre id="7colors"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова colors - цвета')" onmouseout="hide()">.colors</a></span></pre>
 Массив значений <a href="math.htm#3" onmouseover="show('Color')" onmouseout="hide()">цвета</a> вершин, в соответствии с их числом и порядком.<br>
-Это свойство используется <a href="objects.htm#9" title="Points - точки">точками</a> и <a href="objects.htm#4" title="Line - линия">линией</a>,
-а также любыми классами, производными от их, такие как <a href="objects.htm#6" title="LineSegments - отрезки линии">LineSegments</a> и различные <a href="helpers.htm" title="helpers - помощники">вспомогательные элементы</a>.
+Это свойство используется <a href="objects.htm#9" onmouseover="show('Points - точки')" onmouseout="hide()">точками</a> и <a href="objects.htm#4" onmouseover="show('Line - линия')" onmouseout="hide()">линией</a>,
+а также любыми классами, производными от их, такие как <a href="objects.htm#6" onmouseover="show('LineSegments - отрезки линии')" onmouseout="hide()">LineSegments</a> и различные <a href="helpers.htm" onmouseover="show('helpers - помощники')" onmouseout="hide()">вспомогательные элементы</a>.
 <a href="objects.htm#8" title="Mesh - сетка">Сетки</a> взамен этого свойства используют <a href="#6" title="Face3.vertexColors - цвета вершин треугольной грани">Face3.vertexColors</a>.<br>
 Чтобы задать обновление этого массива, нужно установить свойство <a href="#7colorsNeedUpdate">Geometry.colorsNeedUpdate</a> как <tt>true</tt>.<br><br>
 
-<pre id="7faces"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова faces - грани">.faces</a></pre>
-Массив <a href="#6" title="Face3">граней</a>.<br>
+<pre id="7faces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова faces - грани')" onmouseout="hide()">.faces</a></span></pre>
+Массив <a href="#6" onmouseover="show('Face3')" onmouseout="hide()">граней</a>.<br>
 Массив граней описывает, как для формирования граней соединяется каждая вершина модели. Кроме того, в нем содержится информация о цвете и нормалях граней и вершин.<br>
 Чтобы задать обновление этого массива, нужно установить свойство <a href="#7elementsNeedUpdate">Geometry.elementsNeedUpdate</a> как <tt>true</tt>.<br><br>
 
-<pre id="7faceVertexUvs">.faceVertexUvs</a></pre>
+<pre id="7faceVertexUvs"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('face vertex UVs - координаты UV вершин граней')" onmouseout="hide()">.faceVertexUvs</a></span></pre>
 Array of face UV layers, used for mapping textures onto the geometry.
 Each UV layer is an array of UVs matching the order and number of vertices in faces.<br>
 Чтобы задать обновление этого массива, нужно установить свойство <a href="#7uvsNeedUpdate">Geometry.uvsNeedUpdate</a> как <tt>true</tt>.<br><br>
 
-<pre id="7id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокр. англ. слова identifier - идентификатор">.id</a></pre>
+<pre id="7id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокр. англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
 Уникальный номер для данного экземпляра геометрии.<br><br>
 
-<pre id="7isGeometry"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is geometry - является геометрией">.isGeometry</a></pre>
+<pre id="7isGeometry"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов is geometry - является геометрией')" onmouseout="hide()">.isGeometry</a></span></pre>
 Используется для проверки, является ли данный класс и его производные геометриями. Значением по умолчанию является <tt>true</tt>.<br>
 Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
-<pre id="7lineDistances"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов line distances - линейные расстояния">.lineDistances</a></pre>
+<pre id="7lineDistances"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов line distances - линейные расстояния')" onmouseout="hide()">.lineDistances</a></span></pre>
 Массив содержит расстояния между вершинами для геометрий Line.
 An array containing distances between vertices for Line geometries. This is required for LineSegments / LineDashedMaterial to render correctly. Line distances can be generated automatically with .computeLineDistances.<br><br>
 
@@ -888,7 +888,7 @@ Compute distances between vertices for Line geometries.
 
 <span class="right_side"><a href="#1" title="Переход к родительскому классу"><tt>BufferAttribute &rarr;</tt></a></span>
 <h3 id="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InstancedBufferAttribute</h3>
-<a class=popupspot href="JavaScript:hhctrl.TextPopup('Инстанцирование (англ. instantiation) — создание экземпляра класса. В отличие от слова «создание», применяется не к объекту, а к классу. То есть, говорят: (в виртуальной среде) создать экземпляр класса или, другими словами, инстанцировать класс.','Arial,9',10,10,0xffffff,0xd69967)">Инстанцированная</a> версия <tt><a href="#1" title="BufferAttribute">BufferAttribute</a></tt> (то есть, это экземпляр класса <tt>BufferAttribute</tt>).
+<span class="lnk" onmouseover="show('Инстанцирование (англ. instantiation) — создание экземпляра класса.<br>В отличие от слова «создание», применяется не к объекту, а к классу.<br>То есть, говорят: (в виртуальной среде) создать экземпляр класса<br>или, другими словами, инстанцировать класс.')" onmouseout="hide()">Инстанцированная</span> версия <tt><a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">BufferAttribute</a></tt> (то есть, это экземпляр класса <tt>BufferAttribute</tt>).
 An instanced version of BufferAttribute.
 <h4>Конструктор</h4>
 <pre>InstancedBufferAttribute( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_typearray,'Arial,9',10,10,0xffffff,0xd69967)" title="array - массив">array</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов item size - размер элемента">itemSize</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов mesh per attribute - сетка под атрибут">meshPerAttribute</a> )</pre><br>
@@ -896,10 +896,10 @@ An instanced version of BufferAttribute.
 <h4>Свойства</h4>
 Смотрите наследуемые свойства в описании <tt><a href="#1" title="BufferAttribute">BufferAttribute</a></tt>.
 <div class=blockindent><br>
-<pre id="8meshPerAttribute"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов mesh per attribute - ">.meshPerAttribute</a></pre>
-Значение по умолчанию равно <tt>1</tt>.
+<pre id="8meshPerAttribute"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов mesh per attribute - ')" onmouseout="hide()">.meshPerAttribute</a></span></pre>
+Значение по умолчанию равно <tt>1</tt>.<br><br>
 
-<pre id="8isInstancedBufferAttribute"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is instanced buffer attribute - является инстанцированным буферным атрибутом">.isInstancedBufferAttribute</a></pre>
+<pre id="8isInstancedBufferAttribute"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов is instanced buffer attribute<br>- является инстанцированным буферным атрибутом')" onmouseout="hide()">.isInstancedBufferAttribute</a></span></pre>
 Значение по умолчанию равно <tt>true</tt>.</div><br>
 
 <h4>Методы</h4>
@@ -910,24 +910,23 @@ An instanced version of BufferAttribute.
 
 <span class="right_side"><a href="#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InstancedBufferGeometry</h3>
-<a class=popupspot href="JavaScript:hhctrl.TextPopup('Инстанцирование (англ. instantiation) — создание экземпляра класса. В отличие от слова «создание», применяется не к объекту, а к классу. То есть, говорят: (в виртуальной среде) создать экземпляр класса или, другими словами, инстанцировать класс.','Arial,9',10,10,0xffffff,0xd69967)">Инстанцированная</a> версия <tt><a href="#2" title="BufferGeometry">BufferGeometry</a></tt> (то есть, это экземпляр класса <tt>BufferGeometry</tt>).
-An instanced version of BufferGeometry.
+<span class="lnk" onmouseover="show('Инстанцирование (англ. instantiation) — создание экземпляра класса.<br>В отличие от слова «создание», применяется не к объекту, а к классу.<br>То есть, говорят: (в виртуальной среде) создать экземпляр класса<br>или, другими словами, инстанцировать класс.')" onmouseout="hide()">Инстанцированная</span> версия <tt><a href="#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a></tt> (то есть, это экземпляр класса <tt>BufferGeometry</tt>).<br><br>
 <h4>Конструктор</h4>
 <pre>InstancedBufferGeometry( )</pre>
 
 <h4>Свойства</h4>
 Смотрите наследуемые свойства в описании <tt><a href="#2" title="BufferGeometry">BufferGeometry</a></tt>.
-<div class=blockindent>
-<pre id="9maxInstancedCount"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов max instanced count - максимальное число инстанцированных экземпляров">.maxInstancedCount</a></pre>
-Значение по умолчанию равно <tt>undefined*</tt>, т.е. не определено.
-<pre id="9isInstancedBufferGeometry"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов is instanced buffer geometry - является инстанцированной буферной геометрией">.isInstancedBufferGeometry</a></pre>
-Значение по умолчанию равно <tt>true</tt>.</div>
+<div class=blockindent><br>
+<pre id="9maxInstancedCount"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов max instanced count<br>- максимальное число инстанцированных экземпляров')" onmouseout="hide()">.maxInstancedCount</a></span></pre>
+Значение по умолчанию равно <tt>undefined</tt>, т.е. не определено.<br><br>
+<pre id="9isInstancedBufferGeometry"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов is instanced buffer geometry<br>- является инстанцированной буферной геометрией')" onmouseout="hide()">.isInstancedBufferGeometry</a></span></pre>
+Значение по умолчанию равно <tt>true</tt>.</div><br>
 
 <h4>Методы</h4>
-Смотрите наследуемые методы в описании <tt><a href="#2" title="BufferGeometry">BufferGeometry</a></tt>.
-<div class=blockindent>
-<pre id="9addGroup"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слов add group - добавить группу">.addGroup</a>( start</a>, count</a>, materialIndex</a> )</pre>
-</div>
+Смотрите наследуемые методы в описании <tt><a href="#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a></tt>.
+<div class=blockindent><br>
+<pre id="9addGroup"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов add group - добавить группу')" onmouseout="hide()">.addGroup</a></span>( start</a>, count</a>, materialIndex</a> )</pre>
+</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/InstancedBufferGeometry.js" target="_blank">InstancedBufferGeometry.js на github.com</a></div><br><br>
@@ -1242,7 +1241,7 @@ The default setting for matrixAutoUpdate for newly created Object3Ds.</div><br>
 Applies the rotation represented by the quaternion to the object.
 
 
-<pre id="14">[method:null translateX]( [page:Float distance] )</pre>
+<pre id="14translateX">[method:null translateX]( [page:Float distance] )</pre>
 <div class=blockindent>distance - Distance.</div>
 Translates object along x axis by distance.
 
@@ -1557,14 +1556,14 @@ In other words; GLSL primitives in arrays must not be represented by arrays. Thi
 Массив из массивов vec2, каждый из которых длиной в пять векторов, должен быть массивом массивов либо из пяти объектов Vector2, либо из десяти чисел.
 An array of vec2 arrays, each with a length of five vectors, must be an array of arrays, of either five Vector2 objects or ten numbers. <br>
 <span class="caption_top">Типы Uniform</span>
-<table class="tbl_1" border="1" cellpadding="5px" width="90%">
+<table class="tbl_1" border="1" cellpadding="5" width="90%">
 <tr class="head"><td>Типы GLSL</td><td>Типы JavaScript</td></tr>
 <tr valign="top"><td>int</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup('','Arial,9',10,10,0xffffff,0xd69967)" title="number - число">Number</a></td></tr>
 <tr valign="top"><td>float</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup('','Arial,9',10,10,0xffffff,0xd69967)" title="number - число">Number</a></td></tr>
 <tr valign="top"><td>bool</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup('','Arial,9',10,10,0xffffff,0xd69967)" title="boolean - логическое (булево) значение">Boolean</a></td></tr>
 <tr valign="top"><td>bool</td><td>[page:Number</a></td></tr>
 <tr valign="top"><td>vec2</td><td><a href="math.htm#18" title="Vector2">THREE.Vector2</a></td></tr>
-<tr valign="top"><td>vec2</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup('массив из 32-разрядных чисел с плавающей запятой','Arial,9',10,10,0xffffff,0xd69967)">Float32Array</a> (*)</td></tr>
+<tr valign="top"><td>vec2</td><td><span onclick="showClick('массив из 32-разрядных чисел с плавающей запятой')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">Float32Array</a></span>(*)</td></tr>
 <tr valign="top"><td>vec2</td><td>[page:Array Array</a> (*)</td></tr>
 <tr valign="top"><td>vec3</td><td>[page:Vector3 THREE.Vector3</a></td></tr>
 <tr valign="top"><td>vec3</td><td>[page:Color THREE.Color]</td></tr>
@@ -1606,7 +1605,7 @@ Sets wether this uniform is updated at each render call when used by a renderer.
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="16">.clone ()</pre>
+<pre id="16clone">.clone( )</pre>
 Возвращает клона данного uniform. Если свойство value uniform является объектом с методом clone(), то это используется, в противном случае, значение копируется по назначению. Значения массива являются общими для клонов Uniform.<br><br>
 В качестве примера использования данного метода посмотрите <a href="https://threejs.org/examples/#webgldeferred_animation" target="_blank">WebGL deferred animation</a>.
 Returns a clone of this uniform.

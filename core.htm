@@ -587,7 +587,7 @@ var face = new THREE.Face3( 0, 1, 2, normal, color, materialIndex );<br>
 // добавляем грань к массиву граней геометрии
 geometry.faces.push( face );<br>
 // the face normals and vertex normals can be calculated automatically if not supplied above
-// если выше не предоставлена, то нормали граней и вершин могут вычисляться автоматически
+// если выше не предоставлено, то нормали граней и вершин могут вычисляться автоматически
 geometry.computeFaceNormals();
 geometry.computeVertexNormals();<br>
 scene.add( new THREE.Mesh( geometry, material ) );</pre>
@@ -693,7 +693,7 @@ geometry.computeBoundingSphere();</pre>
 <pre id="7faceVertexUvs"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('face vertex UVs - координаты UV вершин граней')" onmouseout="hide()">.faceVertexUvs</a></span></pre>
 Array of face UV layers, used for mapping textures onto the geometry.
 Each UV layer is an array of UVs matching the order and number of vertices in faces.<br>
-Чтобы задать обновление этого массива, нужно установить свойство <a href="#7uvsNeedUpdate">Geometry.uvsNeedUpdate</a> как <tt>true</tt>.<br><br>
+Чтобы задать обновление этого массива, нужно установить свойство <tt><a href="#7uvsNeedUpdate" onmouseover="show('Geometry.uvsNeedUpdate')" onmouseout="hide()">uvsNeedUpdate</a></tt> как <tt>true</tt>.<br><br>
 
 <pre id="7id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокр. англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
 Уникальный номер для данного экземпляра геометрии.<br><br>
@@ -703,184 +703,178 @@ Each UV layer is an array of UVs matching the order and number of vertices in fa
 Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
 <pre id="7lineDistances"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов line distances - линейные расстояния')" onmouseout="hide()">.lineDistances</a></span></pre>
-Массив содержит расстояния между вершинами для геометрий Line.
-An array containing distances between vertices for Line geometries. This is required for LineSegments / LineDashedMaterial to render correctly. Line distances can be generated automatically with .computeLineDistances.<br><br>
-
-
-
-
-
-<pre id="7name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="от англ. слова name - имя, название">.name</a></pre>
-Имя данной геометрии. Значением по умолчанию является пустая строка ("").<br><br>
-
+Массив содержит расстояния между вершинами для геометрий Line. Они нужны для правильной визуализации <a href="objects.htm#5" onmouseover="show('LineSegments')" onmouseout="hide()">LineSegments</a> / <a href="materials.htm#2" onmouseover="show('LineDashedMaterial')" onmouseout="hide()">LineDashedMaterial</a>.
+Линейные расстояния могут быть сгенерированы автоматически методом <tt><a href="#7computeLineDistances" onmouseover="show('Geometry.computeLineDistances')" onmouseout="hide()">computeLineDistances</a></tt>.<br><br>
 
 <pre id="7morphTargets"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов morphing targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
-Array of morph targets. Each morph target is a Javascript object:
-		<code>{ name: "targetName", vertices: [ new THREE.Vector3(), ... ] }</code>
-		Morph vertices match number and order of primary vertices.
+Массив из целей морфинга. Каждая цель морфинга является объектом Javascript:
+<pre>{ name: "targetName", vertices: [ new THREE.Vector3(), ... ] }</pre>
+Morph vertices match number and order of primary vertices.<br><br>
 
-<pre>[property:Array morphNormals]</pre>
-Array of morph normals. Morph normals have similar structure as morph targets, each normal set is a Javascript object:
-		<code>morphNormal = { name: "NormalName", normals: [ new THREE.Vector3(), ... ] }</code>
+<pre id="7morphNormals"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов morphing normals - нормали морфинга')" onmouseout="hide()">.morphNormals</a></span></pre>
+Массив нормалей морфинга. Нормали морфинга имеют структуру подобную целям морфинга, каждый набор нормалей является объектом Javascript:
+<pre>morphNormal = { name: "NormalName", normals: [ new THREE.Vector3(), ... ] }</pre>
+Смотрите пример <a href="https://threejs.org/examples/#webgl_morphnormals" target="_blank">WebGL / morphNormals</a>.<br><br>
 
-<pre>[property:Array skinWeights]</pre>
-When working with a [page:SkinnedMesh], each vertex can have up to 4 [page:Bone bones] affecting it.
-		The skinWeights property is an array of weight values that correspond to the order of the vertices in
-		the geometry. So for instance, the first skinWeight would correspond to the first vertex in the geometry.
-		Since each vertex can be modified by 4 bones, a [page:Vector4] is used to represent the skin weights
-		for that vertex.<br><br>
-The values of the vector should typically be between 0 and 1. For instance when set to 0 the bone
-		transformation will have no affect. When set to 0.5 it will have 50% affect. When set to 100%, it will
-		have 100% affect. If there is only 1 bone associated with the vertex then you only need to worry about
-		the first component of the vector, the rest can be ignored and set to 0.
+<pre id="7name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова name - имя, название')" onmouseout="hide()">.name</a></span></pre>
+Имя данной геометрии. Значением по умолчанию является пустая строка ("").<br><br>
 
-<pre>[property:Array skinIndices]</pre>
-Just like the skinWeights property, the skinIndices' values correspond to the geometry's vertices.
-		Each vertex can have up to 4 bones associated with it. So if you look at the first vertex, and the
-		first skinIndex, this will tell you the bones associated with that vertex. For example the first vertex
-		could have a value of <strong>( 10.05, 30.10, 12.12 )</strong>. Then the first skin index could have the
-		value of <strong>( 10, 2, 0, 0 )</strong>. The first skin weight could have the value of
-		<strong>( 0.8, 0.2, 0, 0 )</strong>. In affect this would take the first vertex, and then the bone
-		<strong>mesh.bones[10]</strong> and apply it 80% of the way. Then it would take the bone <strong>skeleton.bones[2]</strong>
-		and apply it 20% of the way. The next two values have a weight of 0, so they would have no affect.<br><br>
-In code another example could look like this:
-<pre>// e.g.
+<pre id="7skinWeights"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skin weights - веса кожи (оболочки)')" onmouseout="hide()">.skinWeights</a></span></pre>
+При работе с <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, каждая вершина может иметь до 4 <a href="objects.htm#1" onmouseover="show('Bone')" onmouseout="hide()">костей</a>, влияющих на неё.
+Свойство <tt>skinWeights</tt> - это массив значений веса, который соответствует порядку вершин данной геометрии. Так например первый <tt>skinWeight</tt> будет соответствовать первой вершине геометрического элемента.
+Поскольку каждая вершина может быть изменена 4 костями, для представления веса оболочки каждой вершины используется <a href="math.htm#20" onmouseover="show('Vector4')" onmouseout="hide()">четырехмерный вектор</a>.<br>
+Значения вектора обычно должны быть в диапазоне между <tt>0</tt> и <tt>1</tt>. Например при установке значения равным <tt>0</tt>, преобразование кости не будет иметь никакого эффекта.
+Если установить значение равным <tt>0.5</tt>, преобразование будет иметь эффект в 50%. При установке <tt>1</tt>, будет влияние на 100%. Если существует только одна кость, связанная с конкретной вершиной, нужно побеспокоиться только о первом компоненте приданного вектора, остальные можно проигнорировать и установить равными <tt>0</tt>.<br><br>
+
+<pre id="7skinIndices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skin indices - ')" onmouseout="hide()">.skinIndices</a></span></pre>
+Точно также как у свойства skinWeights, значения свойста skinIndices соответствуют вершинам геометрического элемента. Каждая вершина может иметь до четырех вершин, связанных с ней.
+Поэтому, если посмотреть на первую вершину (vertex) и первый индекс оболочки (skinIndex), то они расскажут о костях, связанный с данной вершиной.
+Например предположим, первая вершина имеет значение <tt>( 10.05, 30.10, 12.12 )</tt>, значением первого индекса оболочки может быть <tt>( 10, 2, 0, 0 )</tt>, а первый вес оболочки имеет значение <tt>( 0.8, 0.2, 0, 0 )</tt>.
+
+In affect this would take the first vertex, and then the bone <tt>mesh.bones[10]</tt> and apply it 80% of the way.
+Then it would take the bone <tt>skeleton.bones[2]</tt> and apply it 20% of the way. Последующие два значения имеют вес равный 0, так что они не будут оказывать никакого влияния.<br><br>
+Код подобного примера может выглядеть так:
+<pre>// e.g. (например)
 geometry.skinIndices[15] = new THREE.Vector4(   0,   5,   9, 0 );
 geometry.skinWeights[15] = new THREE.Vector4( 0.2, 0.5, 0.3, 0 );<br>
 // corresponds with the following vertex
+// соответствует следующей вершине
 geometry.vertices[15];<br>
 // these bones will be used like so:
-skeleton.bones[0]; // weight of 0.2
-skeleton.bones[5]; // weight of 0.5
-skeleton.bones[9]; // weight of 0.3
-skeleton.bones[10]; // weight of 0</pre>
+// эти кости будут использоваться вот так:
+skeleton.bones[0]; // weight of 0.2 (вес 0.2)
+skeleton.bones[5]; // weight of 0.5 (вес 0.5)
+skeleton.bones[9]; // weight of 0.3 (вес 0.3)
+skeleton.bones[10]; // weight of 0 (вес 0)</pre>
 
-<pre>[property:Boolean verticesNeedUpdate]</pre>
-Set to *true* if the vertices array has been updated.
+<pre id="7uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uuid - сокращ. англ. слов universally unique identifier - универсальный уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank">UUID</a> данного экземпляра объекта.
+Вот статья Википедии о <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">UUID</a> на русском языке. Он присваивается автоматически и не должен редактироваться.<br><br>
 
-<pre>[property:Boolean elementsNeedUpdate]</pre>
-Set to *true* if the faces array has been updated.
+<pre id="7vertices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices - вершины')" onmouseout="hide()">.vertices</a></span></pre>
+Массив <a href="math.htm#19" onblur="hideClick()" onmouseover="show('Vector3')" onmouseout="hide()">вершин</a>.<br>
+Массив вершин содержит положение каждой вершины геометрического элемента.
+To signal an update in this array, значение свойства <tt><a href="#7verticesNeedUpdate" onmouseover="show('Geometry.verticesNeedUpdate')" onmouseout="hide()">verticesNeedUpdate</a></tt> должно быть установлено как <tt>true</tt>.<br><br>
 
-<pre>[property:Boolean uvsNeedUpdate]</pre>
-Set to *true* if the uvs array has been updated.
+<pre id="7verticesNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices need update - вершинам нужно обновление')" onmouseout="hide()">.verticesNeedUpdate</a></span></pre>
+Значение свойства устанавливается как <tt>true</tt>, если массив вершин был обновлен.
+Set to *true* if the vertices array has been updated.<br><br>
 
-<pre>[property:Boolean normalsNeedUpdate]</pre>
-Set to *true* if the normals array has been updated.
+<pre id="7elementsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.elementsNeedUpdate</a></span></pre>
+Set to *true* if the faces array has been updated.<br><br>
 
-<pre>[property:Boolean colorsNeedUpdate]</pre>
-Set to *true* if the colors array or a face3 color has been updated.
+<pre id="7uvsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.uvsNeedUpdate</a></span></pre>
+Значение свойства устанавливается как <tt>true</tt>, если массив UV координат был обновлен.
+Set to *true* if the uvs array has been updated.<br><br>
 
-<pre>[property:Boolean groupsNeedUpdate]</pre>
-Set to *true* if a face3 materialIndex has been updated.
+<pre id="7normalsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.normalsNeedUpdate</a></span></pre>
+Значение свойства устанавливается как <tt>true</tt>, если массив нормалей был обновлен.
+Set to *true* if the normals array has been updated.<br><br>
 
-<pre>[property:Boolean lineDistancesNeedUpdate]</pre>
-Set to *true* if the linedistances array has been updated.
-</div><br>
+<pre id="7colorsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.colorsNeedUpdate</a></span></pre>
+Set to *true* if the colors array or a face3 color has been updated.<br><br>
+
+<pre id="7groupsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.groupsNeedUpdate</a></span></pre>
+Set to *true* if a face3 materialIndex has been updated.<br><br>
+
+<pre id="7lineDistancesNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.lineDistancesNeedUpdate</a></span></pre>
+Значение свойства устанавливается как <tt>true</tt>, если массив linedistances был обновлен.
+Set to *true* if the linedistances array has been updated.</div><br>
 
 <h4>Методы</h4>
+В данном классе возможно применение методов <tt><a href="#5" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a></tt>.
 <div class=blockindent><br>
-<pre>[page:EventDispatcher EventDispatcher] methods are available on this class.</pre>
-<pre>[method:null applyMatrix]( [page:Matrix4 matrix] )</pre>
-Bakes matrix transform directly into vertex coordinates.
+<pre id="7applyMatrix"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('apply matrix - применить матрицу')" onmouseout="hide()">.applyMatrix</a></span>( <a href="math.htm#20" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
+Метод преобразует матрицу непосредственно в координаты вершин.<br><br>
 
-<pre>[method:null center] ()</pre>
-Center the geometry based on the bounding box.
+<pre id="7center"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('center - центр, центрировать')" onmouseout="hide()">.center</a></span>( )</pre>
+Метод центрирует геометрических элемент относительно ограничительной рамки.<br><br>
 
-		<pre>[method:Geometry rotateX] ( [page:Float radians] )</pre>
-		<div>
-		Rotate the geometry about the X axis. This is typically done as a one time operation, and not during a loop
-    Use [page:Object3D.rotation] for typical real-time mesh rotation.
-		</div>
-
-		<pre>[method:Geometry rotateY] ( [page:Float radians] )</pre>
-		<div>
-		Rotate the geometry about the Y axis. This is typically done as a one time operation, and not during a loop
-    Use [page:Object3D.rotation] for typical real-time mesh rotation.
-		</div>
-
-		<pre>[method:Geometry rotateZ] ( [page:Float radians] )</pre>
-		<div>
-		Rotate the geometry about the Z axis. This is typically done as a one time operation, and not during a loop
-    Use [page:Object3D.rotation] for typical real-time mesh rotation.
-		</div>
-
-		<pre>[method:Geometry translate] ( [page:Float x], [page:Float y], [page:Float z] )</pre>
-		<div>
-		Translate the geometry. This is typically done as a one time operation, and not during a loop
-    Use [page:Object3D.position] for typical real-time mesh translation.
-		</div>
-
-		<pre>[method:Geometry scale] ( [page:Float x], [page:Float y], [page:Float z] )</pre>
-		<div>
-		Scale the geometry data. This is typically done as a one time operation, and not during a loop
-    Use [page:Object3D.scale] for typical real-time mesh scaling.
-		</div>
-
-		<pre>[method:Geometry lookAt] ( [page:Vector3 vector] )</pre>
-		<div>
-		vector - A world vector to look at.<br>
-		</div>
-		<div>
-		Rotates the geometry to face point in space. This is typically done as a one time operation, and not during a loop
-    Use [page:Object3D.lookAt] for typical real-time mesh usage.
-		</div>
-
-<pre id="7computeFaceNormals">[method:null computeFaceNormals]()</pre>
-		<div>
-		Computes face normals.
-		</div>
-
-		<pre>[method:null computeVertexNormals]( [page:Boolean areaWeighted] )</pre>
-		<div>
-		areaWeighted - If true the contribution of each face normal to the vertex normal is weighted by the area of the face. Default is true.
-		</div>
-		<div>
-		Computes vertex normals by averaging face normals.<br>
-		Face normals must be existing / computed beforehand.
-		</div>
-
-		<pre>[method:null computeMorphNormals]()</pre>
-		<div>
-		Computes morph normals.
-		</div>
+<pre id="7clone"><a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">.clone</a>( )</pre>
+Создает новый клон Geometry.<br>
+Этот метод копирует только вершины, грани и UV-координаты. Он не копирует все остальные свойства геометрического элемента.<br><br>
 
 <pre id="7computeBoundingBox"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute bounding box - рассчитать ограничительную рамку')" onmouseout="hide()">.computeBoundingBox</a></span>( )</pre>
-Computes bounding box of the geometry, updating [page:Geometry Geometry.boundingBox] attribute.<br><br>
+Метод рассчитывает ограничительную рамку вокруг геометрического элемента, обновляя атрибут <tt><a href="#7boundingBox" onmouseover="show('Geometry.boundingBox')" onmouseout="hide()">boundingBox</a></tt>.<br><br>
 
 <pre id="7computeBoundingSphere"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute bounding sphere - рассчитать ограничительную сферу')" onmouseout="hide()">.computeBoundingSphere</a></span>( )</pre>
-Computes bounding sphere of the geometry, updating [page:Geometry Geometry.boundingSphere] attribute.<br><br>
+Метод рассчитывает ограничительную сферу вокруг геометрического элемента, обновляя атрибут <tt><a href="#7boundingSphere" onmouseover="show('Geometry.boundingSphere')" onmouseout="hide()">boundingSphere</a></tt>.<br>
+По умолчанию, ни ограничительные рамки, ни ограничительные сферы не рассчитываются. Они должны рассчитываться явно, в противном случае значения этих свойств равно <tt>null</tt>.<br><br>
 
-		<div>Neither bounding boxes or bounding spheres are computed by default. They need to be explicitly computed, otherwise they are *null*.</div>
+<pre id="7computeFaceNormals"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute face normals - рассчитать нормали граней')" onmouseout="hide()">.computeFaceNormals</a></span>( )</pre>
+Метод вычисляет <a href="#6normal" onmouseover="show('Face3.normal')" onmouseout="hide()">нормали граней</a>.<br><br>
 
-		<pre>[method:null merge]( [page:Geometry geometry], [page:Matrix4 matrix], [page:Integer materialIndexOffset] )</pre>
-		<div>Merge two geometries or geometry and geometry from object (using object's transform)</div>
+<pre id="7computeFlatVertexNormals">.computeFlatVertexNormals( )</pre>
+Computes flat vertex normals. Sets the vertex normal of each vertex of each face to be the same as the face's normal.<br><br>
 
-		<pre>[method:null mergeVertices]()</pre>
-		<div>
-		Checks for duplicate vertices using hashmap.<br>
-		Duplicated vertices are removed and faces' vertices are updated.
-		</div>
+<pre id="7computeLineDistances">.computeLineDistances( )</pre>
+Compute .lineDistances.<br><br>
 
-		<pre>[method:null normalize]()</pre>
-		<div>
-		Normalize the geometry. <br>
-		Make the geometry centered and has a bounding sphere whose radius equals to 1.0.
-		</div>
+<pre id="7computeMorphNormals">.computeMorphNormals( )</pre>
+Computes .morphNormals.<br><br>
 
-		<pre>[method:Geometry clone]()</pre>
-		<div>
-		Creates a new clone of the Geometry.
-		</div>
+<pre id="7computeVertexNormals">.computeVertexNormals( areaWeighted )</pre>
+areaWeighted - If true the contribution of each face normal to the vertex normal is weighted by the area of the face. Default is true.<br>
+Computes vertex normals by averaging face normals.<br><br>
 
-		<div>This method copies only vertices, faces and uvs. It does not copy any other properties of the geometry.</div>
+<pre id="7copy">.copy( geometry )</pre>
+Copies vertices, faces and uvs into this geometry. It does not copy any other properties of the geometry.
 
-<pre>[method:null dispose]()</pre>
-Removes The object from memory. <br>
-Don't forget to call this method when you remove a geometry because it can cause memory leaks.
+<pre id="7dispose">.dispose( )</pre>
+Removes The object from memory.<br>
+Don't forget to call this method when you remove a geometry because it can cause memory leaks.<br><br>
 
-<pre>[method:null computeLineDistances]()</pre>
-Compute distances between vertices for Line geometries.
-</div><br>
+<pre id="7fromBufferGeometry">.fromBufferGeometry ( geometry )</pre>
+Convert a BufferGeometry to a Geometry.<br><br>
+
+<pre id="7lookAt">.lookAt ( vector )</pre>
+<div class=list>vector - A world vector to look at.</div>
+
+Rotates the geometry to face point in space. This is typically done as a one time operation but not during the render loop.<br>
+Use Object3D.lookAt for typical real-time mesh usage.<br><br>
+
+<pre id="7merge">.merge ( geometry, matrix, materialIndexOffset )</pre>
+Merge two geometries or geometry and geometry from object (using object's transform)<br><br>
+
+<pre id="7mergeMesh">.mergeMesh ( mesh )</pre>
+Merge the mesh's geometry with this, also applying the mesh's transform.<br><br>
+
+<pre id="7mergeVertices">.mergeVertices( )</pre>
+Checks for duplicate vertices using hashmap.<br>
+Duplicated vertices are removed and faces' vertices are updated.<br><br>
+
+<pre id="7normalize">.normalize( )</pre>
+Normalize the geometry.<br>
+Make the geometry centered and have a bounding sphere of radius 1.0.<br><br>
+
+<pre id="7rotateX">.rotateX ( radians )</pre>
+Rotate the geometry about the X axis. This is typically done as a one time operation but not during the render loop.
+Use Object3D.rotation for typical real-time mesh rotation.<br><br>
+
+<pre id="7rotateY">.rotateY ( radians )</pre>
+Rotate the geometry about the Y axis. This is typically done as a one time operation but not during the render loop.
+Use Object3D.rotation for typical real-time mesh rotation.<br><br>
+
+<pre id="7rotateZ">.rotateZ ( radians )</pre>
+Rotate the geometry about the Z axis. This is typically done as a one time operation but not during the render loop.
+Use Object3D.rotation for typical real-time mesh rotation.<br><br>
+
+<pre id="7setFromPoints">.setFromPoints ( points )</pre>
+Sets the vertices for this Geometry from an array of points.<br><br>
+
+<pre id="7sortFacesByMaterialIndex">.sortFacesByMaterialIndex ( )</pre>
+Sorts the faces array according to material index. For complex geometries with several materials, this can result in reduced draw calls and improved performance.<br><br>
+
+<pre id="7scale">.scale ( x, y, z )</pre>
+Scale the geometry data. This is typically done as a one time operation but not during the render loop.
+Use Object3D.scale for typical real-time mesh scaling.<br><br>
+
+<pre id="7toJSON">.toJSON ( )</pre>
+Convert the geometry to JSON format.<br><br>
+
+<pre id="7translate">.translate ( x, y, z )</pre>
+Translate the geometry. This is typically done as a one time operation but not during the render loop.<br>
+Use Object3D.position for typical real-time mesh translation. </div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/Geometry.js" target="_blank">Geometry.js на github.com</a></div><br><br>

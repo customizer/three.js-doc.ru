@@ -1,18 +1,206 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head>
 <title>Three.js</title>
-<link rel="stylesheet" type="text/css" href="1.css">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<link rel="stylesheet" type="text/css" href="1.css">
 <script type="text/javascript" src="1.js"></script>
 </head>
 <body>
 <h2 class=head1>Примеры</h2>
-<h2 id="1">Геометрия</h2>
+
+<h2 id="1">Контролы</h2>
+<h3 id="1.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OrbitControls</h3>
+Орбитальный контрол (элемент управления) позволяет камере вращаться вокруг цели.
+ Orbit controls allow the camera to orbit around a target.<br>
+To use this, as with all files in the /examples directory, you will have to include the file seperately in your HTML.
+<h4>Пример</h4>
+<pre>var renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+var scene = new THREE.Scene();
+
+var  camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+
+var controls = new THREE.OrbitControls( camera );
+
+//controls.update() must be called after any manual changes to the camera's transform
+camera.position.set( 0, 20, 100 );
+controls.update();
+
+function animate() {
+
+  requestAnimationFrame( animate );
+
+  // required if controls.enableDamping or controls.autoRotate are set to true
+  controls.update();
+
+  renderer.render( scene, camera );
+
+}</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#misc_controls_orbit" target="_blank">misc / controls / orbit</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>OrbitControls( object, domElement )</pre>
+<div class=list>object: (required) The camera to be controlled.</div>
+
+<div class=list>domElement: (optional) The HTML element used for event listeners. By default this is the whole document, however if you only want to the controls to work over a specific element (e.g. the canvas) you can specify that here.</div><br>
+
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+.autoRotate
+Set to true to automatically rotate around the target.
+Note that if this is enabled, you must call .update () in your animation loop.
+#
+.autoRotateSpeed
+How fast to rotate around the target if
+#
+.autoRotate is true. Default is 2.0, which equates to 30 seconds per rotation at 60fps.
+Note that if
+#
+.autoRotate is enabled, you must call .update () in your animation loop.
+#
+.dampingFactor
+The damping inertia used if
+#
+.enableDamping is set to true.
+Note that for this to work, you must call .update () in your animation loop.
+#
+.domElement
+The HTMLDOMElement used to listen for mouse / touch events. This must be passed in the constructor; changing it here will not set up new event listeners. Default is the whole document.
+#
+.enabled
+Whether or not the controls are enabled.
+#
+.enableDamping
+Set to true to enable damping (inertia), which can be used to give a sense of weight to the controls. Default is false.
+Note that if this is enabled, you must call .update () in your animation loop.
+#
+.enableKeys
+Enable or disable the use of keyboard controls.
+#
+.enablePan
+Enable or disable camera panning. Default is true.
+#
+.enableRotate
+Enable or disable horizontal and vertical rotation of the camera. Default is true.
+Note that it is possible to disable a single axis by setting the min and max of the polar angle or azimuth angle to the same value, which will cause the vertical or horizontal rotation to be fixed at that value.
+#
+.enableZoom
+Enable or disable zooming (dollying) of the camera.
+#
+.keyPanSpeed
+How fast to pan the camera when the keyboard is used. Default is 7.0 pixels per keypress.
+#
+.keys
+This object contains references to the keycodes for controlling camera panning. Default is the 4 arrow keys.
+controls.keys = {
+  LEFT: 37, //left arrow
+  UP: 38, // up arrow
+  RIGHT: 39, // right arrow
+  BOTTOM: 40 // down arrow
+}
+See this page for a full list of keycodes.
+#
+.maxAzimuthAngle
+How far you can orbit horizontally, upper limit. Range is - Math.PI to Math.PI ( or Infinity for no limit ) and default is Infinity;
+#
+.maxDistance
+How far you can dolly out ( PerspectiveCamera only ). Default is Infinity.
+#
+.maxPolarAngle
+How far you can orbit vertically, upper limit. Range is 0 to Math.PI radians, and default is Math.PI.
+#
+.maxZoom
+How far you can zoom out ( OrthographicCamera only ). Default is Infinity.
+#
+.minAzimuthAngle
+How far you can orbit horizontally, lower limit. Range is - Math.PI to Math.PI ( or - Infinity for no limit ) and default is - Infinity;
+#
+.minDistance
+How far you can dolly in ( PerspectiveCamera only ). Default is 0.
+#
+.minPolarAngle
+How far you can orbit vertically, lower limit. Range is 0 to Math.PI radians, and default is 0.
+#
+.minZoom
+How far you can zoom in ( OrthographicCamera only ). Default is 0.
+#
+.mouseButtons
+This object contains references to the mouse buttons used for the controls.
+controls.mouseButtons = {
+  ORBIT: THREE.MOUSE.LEFT,
+  ZOOM: THREE.MOUSE.MIDDLE,
+  PAN: THREE.MOUSE.RIGHT
+}
+#
+.object
+The camera ( or other object ) that is being controlled.
+#
+.position0
+Used internally by the
+#
+.saveState and
+#
+.reset methods.
+#
+.rotateSpeed
+Speed of rotation. Default is 1.
+#
+.target0
+Used internally by the
+#
+.saveState and
+#
+.reset methods.
+#
+.target
+The focus point of the controls, the .object orbits around this. It can be updated manually at any point to change the focus of the controls.
+#
+.zoom0
+Used internally by the
+#
+.saveState and
+#
+.reset methods.
+#
+.zoomSpeed
+Speed of zooming / dollying. Default is 1.</div><br>
+
+
+<h4>Methods</h4>
+<div class=blockindent><br>
+.dispose ()
+Remove all the event listeners.
+#
+.getAzimuthalAngle ()
+Get the current horizontal rotation, in radians.
+#
+.getPolarAngle ()
+Get the current vertical rotation, in radians.
+#
+.reset ()
+Reset the controls to their state from either the last time the .saveState was called, or the initial state.
+#
+.saveState ()
+Save the current state of the controls. This can later be recovered with .reset.
+#
+.update ()
+Update the controls. Must be called after any manual changes to the camera's transform, or in the update loop if .autoRotate or .enableDamping are set.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/OrbitControls.js" target="_blank">OrbitControls.js на github.com</a></div><br><br>
+
+
+
+
+<h2 id="2">Геометрические элементы</h2>
 
 
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
-<h3 id="1.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ConvexBufferGeometry</h3>
+<h3 id="2.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ConvexBufferGeometry</h3>
 
 ConvexBufferGeometry can be used to generate a convex hull for a given array of 3D points.
 The average time complexity for this task is considered to be O(nlog(n)).
@@ -46,11 +234,11 @@ scene.add( mesh );</pre>
 <tt>points</tt> — Array of [page:Vector3 Vector3s</a> that the resulting convex hull will contain.</div>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/ConvexGeometry.js examples/js/geometries/ConvexGeometry.js</a> <br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/ConvexGeometry.js" target="_blank">ConvexGeometry.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#7" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
-<h3 id="1.2">ConvexGeometry</h3>
+<h3 id="2.2">ConvexGeometry</h3>
 ConvexGeometry can be used to generate a convex hull for a given array of 3D points.
 			The average time complexity for this task is considered to be O(nlog(n)).
 
@@ -82,11 +270,32 @@ scene.add( mesh );</pre><br>
 <tt>points</tt> — Array of [page:Vector3 Vector3s</a> that the resulting convex hull will contain.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/ConvexGeometry.js examples/js/geometries/ConvexGeometry.js</a>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/ConvexGeometry.js" target="_blank">ConvexGeometry.js на github.com</a></div><br><br>
 
 
-<h2 id="2">Загрузчики</h2>
-<h3 id="2.1">BabylonLoader</h3>
+<span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3 id="2.3">DecalGeometry</h3>
+DecalGeometry can be used to create a decal mesh that serves different kinds of purposes e.g. adding unique details to models, performing dynamic visual environmental changes or covering seams.<br><br>
+
+<h4>Пример</h4>
+<pre>var geometry =  new THREE.DecalGeometry( mesh, position, orientation, size );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_decals" target="_blank">decals</a></pre><br>
+<h4>Конструктор</h4>
+DecalGeometry( mesh, position, orientation, size )
+mesh — Any mesh object.
+position — Position of the decal projector.
+orientation — Orientation of the decal projector.
+size — Size of the decal projector.
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/DecalGeometry.js" target="_blank">DecalGeometry.js на github.com</a></div><br><br>
+
+
+<h2 id="3">Загрузчики</h2>
+<h3 id="3.1">BabylonLoader</h3>
 Загрузчик для загрузки ресурсов в формате <em>.babylon</em>. A loader for loading a <em>.babylon</em> resource.</div><br>
 
 <h4>Пример</h4>
@@ -149,7 +358,7 @@ loader.load(
 [link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BabylonLoader.js examples/js/loaders/BabylonLoader.js</a>
 
 
-<h3 id="2.2">ColladaLoader</h3>
+<h3 id="3.2">ColladaLoader</h3>
 Загрузчик файлов в формате <em>Collada</em>.
 
 <h4>Пример</h4>
@@ -1225,14 +1434,74 @@ Class for loading a <em>.tga</em> [page:DataTexture texture</a>.
 
 		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/TGALoader.js examples/js/loaders/TGALoader.js</a>
 
+<h2 id="4">Объекты</h2>
+<span class="right_side"><a href="objects.htm#7" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
+<h3 id="4.1">LensFlare</h3>
+
+Создает имитацию блика объектива камеры, зависящего от направления освещения.
+Creates a simulated lens flare that tracks a light.
+<div class="note">Примечание: Для работы LensFlare у <a href="renderers.htm#1.2" title="WebGLRenderer">WebGLRenderer</a> аргумент <tt>alpha</tt> должен быть установлен как <tt>true</tt>.</div>
+
+<h4>Пример</h4>
+<div>[example:webgl_lensflares lensflares]</div>
+
+<h4>Конструктор</h4>
+<pre>LensFlare( [page:Texture texture], [page:Float size], [page:Float distance], [page:Materials blending], [page:Color color] )</pre>
+<div class=blockindent><tt>texture</tt> — THREE.Texture (optional) <br>
+<tt>size</tt> — size in pixels (-1 = use texture.width) <br>
+<tt>distance</tt> — (0-1) from light source (0 = at light source) <br>
+<tt>blending</tt> — [page:Materials Blending Mode] - Defaults to THREE.NormalBlending <br>
+<tt>color</tt> — The color of the lens flare.</div>
+Automatically adds a lens flare to the lensFlares array if a texture is set.
+
+<h4>Свойства</h4>
 
 
 
+		<pre>[property:array lensFlares]</pre>
+		<div>
+		The array of flares as set by [page:LensFlare.add]
+		</div>
 
-<h2 id="3">Плагины</h2>
+		<pre>[property:Vector3 positionScreen]</pre>
+		<div>
+		The position of the lens flare on the screen.
+		</div>
+
+		<pre>[property:Function customUpdateCallback]</pre>
+		<div>
+		A custom update callback
+		</div>
+
+  <h4>Методы</h4>
+
+
+		<pre>[method:null add]( [page:Texture texture], [page:Float size], [page:Float distance], [page:Materials blending], [page:Color color] )</pre>
+		<div>
+		Adds a lens flare. See the constructor for details on the parameters.
+		</div>
+
+
+		<pre>[method:null updateLensFlares]()</pre>
+		<div>
+		Updates the lens flare based on the [page:LensFlare.positionScreen positionScreen] property.
+		</div>
+
+		<pre>[method:Lens Flare clone]()</pre>
+		<div>
+		Returns a clone of this LensFlare object and its descendants.
+		</div>
+
+
+<h4>Исходники</h4>
+[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<h2 id="5">Экспортеры</h2>
+<h3 id="5.1">GLTFExporter</h3>
+
+<h2 id="6">Плагины</h2>
 
 <span class="right_side"><a href="cameras.htm#1" title="Переход к родительскому классу: Camera"><tt>Camera &rarr;</tt></a></span>
-<h3 id="3.1">CombinedCamera</h3>
+<h3 id="6.1">CombinedCamera</h3>
 A general purpose camera, for setting FOV, Lens Focal Length, and switching between perspective and orthographic views easily. Use this only if you do not wish to manage both an Orthographic and Perspective Camera.
 
 <h4>Примеры</h4>
@@ -1343,7 +1612,7 @@ Updates the ProjectionMatrix.
 <a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/cameras/CombinedCamera.js" target="_blank">CombinedCamera.js на github.com</a></div><br>
 
 
-<h3 id="3.2">Lut</h3>
+<h3 id="6.2">Lut</h3>
 Represents a lookup table for colormaps. It is used to determine the color values from a range of data values.
 
 <h4>Пример</h4>
@@ -1425,7 +1694,7 @@ Returns a Three.Color.
 
 
 <span class="right_side"><a href="materials.htm#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
-<h3 id="3.3">SpriteCanvasMaterial</h3>
+<h3 id="6.3">SpriteCanvasMaterial</h3>
 Create a material that can draw custom sprites using a 2d canvas.
 
 <h4>Конструктор</h4>
@@ -1448,8 +1717,8 @@ Define a program that will use the context to draw the sprite.
 [link:https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js examples/js/renderers/CanvasRenderer.js</a>
 
 
-<h2 id="4">QuickHull</h2>
-<h3 id="4.1">Face</h3>
+<h2 id="7">QuickHull</h2>
+<h3 id="7.1">Face</h3>
 Represents a section bounded by a specific amount of half-edges. The current implmentation assumes that a face always consist of three edges.
 		</div>
 

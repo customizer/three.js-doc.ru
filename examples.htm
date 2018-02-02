@@ -10,184 +10,161 @@
 
 <h2 id="1">Контролы</h2>
 <h3 id="1.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OrbitControls</h3>
-Орбитальный контрол (элемент управления) позволяет камере вращаться вокруг цели.
- Orbit controls allow the camera to orbit around a target.<br>
-To use this, as with all files in the /examples directory, you will have to include the file seperately in your HTML.
+Орбитальный контрол (элемент управления) позволяет камере вращаться вокруг цели.<br>
+Для его использования, как и всех файлов в директории <tt>/examples</tt>, нужно будет отдельно включить этот файл в HTML-код.<br><br>
 <h4>Пример</h4>
 <pre>var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
-
-var scene = new THREE.Scene();
-
-var  camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
-
-var controls = new THREE.OrbitControls( camera );
-
-//controls.update() must be called after any manual changes to the camera's transform
+document.body.appendChild( renderer.domElement );<br>
+var scene = new THREE.Scene();<br>
+var  camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );<br>
+var controls = new THREE.OrbitControls( camera );<br>
+// controls.update() must be called after any manual changes to the camera's transform
+// после любых ручных изменений состояния камеры должен быть вызван controls.update()
 camera.position.set( 0, 20, 100 );
-controls.update();
-
-function animate() {
-
-  requestAnimationFrame( animate );
-
+controls.update();<br>
+function animate() {<br>
+  requestAnimationFrame( animate );<br>
   // required if controls.enableDamping or controls.autoRotate are set to true
-  controls.update();
-
-  renderer.render( scene, camera );
-
+  // если controls.enableDamping или controls.autoRotate установлен как true, необходимо
+  controls.update();<br>
+  renderer.render( scene, camera );<br>
 }</pre>
 <h5>Другие примеры:</h5>
 <pre><a href="https://threejs.org/examples/#misc_controls_orbit" target="_blank">misc / controls / orbit</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>OrbitControls( object, domElement )</pre>
-<div class=list>object: (required) The camera to be controlled.</div>
+<pre>OrbitControls( <a href="cameras.htm#1" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">object</a>, <span class="lnk" onmouseover="show('domElement - элемент DOM (от англ. Document Object Model — «объектная модель документа»)')" onmouseout="hide()">domElement</span> )</pre>
+<div class=list><tt><a href="cameras.htm#1" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">object</a></tt> - камера, которой нужно управлять (обязательный аргумент).</div>
 
-<div class=list>domElement: (optional) The HTML element used for event listeners. By default this is the whole document, however if you only want to the controls to work over a specific element (e.g. the canvas) you can specify that here.</div><br>
+<div class=list><tt><span class="lnk" onmouseover="show('domElement - элемент DOM (от англ. Document Object Model — «объектная модель документа»)')" onmouseout="hide()">domElement</span></tt> - элемент HTML, используемый для прослушивателей (приемников) событий (дополнительный, необязательный аргумент).
+По умолчанию это весь документ целиком, однако, если нужно чтобы элементы управления (контролы) работали от какого-либо определенного элемента (например, <tt>&lt;canvas&gt;</tt> - холст), укажите его в этом аргументе.<br>
+Статья о <a href="https://ru.wikipedia.org/wiki/Document_Object_Model" target="_blank">DOM</a> в Википедии.</div><br>
 
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-.autoRotate
-Set to true to automatically rotate around the target.
-Note that if this is enabled, you must call .update () in your animation loop.
-#
-.autoRotateSpeed
-How fast to rotate around the target if
-#
-.autoRotate is true. Default is 2.0, which equates to 30 seconds per rotation at 60fps.
-Note that if
-#
-.autoRotate is enabled, you must call .update () in your animation loop.
-#
-.dampingFactor
-The damping inertia used if
-#
-.enableDamping is set to true.
-Note that for this to work, you must call .update () in your animation loop.
-#
-.domElement
-The HTMLDOMElement used to listen for mouse / touch events. This must be passed in the constructor; changing it here will not set up new event listeners. Default is the whole document.
-#
-.enabled
-Whether or not the controls are enabled.
-#
-.enableDamping
-Set to true to enable damping (inertia), which can be used to give a sense of weight to the controls. Default is false.
-Note that if this is enabled, you must call .update () in your animation loop.
-#
-.enableKeys
-Enable or disable the use of keyboard controls.
-#
-.enablePan
-Enable or disable camera panning. Default is true.
-#
-.enableRotate
-Enable or disable horizontal and vertical rotation of the camera. Default is true.
-Note that it is possible to disable a single axis by setting the min and max of the polar angle or azimuth angle to the same value, which will cause the vertical or horizontal rotation to be fixed at that value.
-#
-.enableZoom
-Enable or disable zooming (dollying) of the camera.
-#
-.keyPanSpeed
-How fast to pan the camera when the keyboard is used. Default is 7.0 pixels per keypress.
-#
-.keys
+<pre id="1autoRotate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto rotate - автоматическое вращение')" onmouseout="hide()">.autoRotate</a></span></pre>
+Для автоматического вращения вокруг цели установите значение данного свойства как <tt>true</tt>.<br>
+Обратите внимание, если это свойство включено, в цикле анимации нужно вызывать метод <tt><a href="#1update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update</a></tt>.<br><br>
+
+<pre id="1autoRotateSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto rotate speed - скорость автоматического вращения')" onmouseout="hide()">.autoRotateSpeed</a></span></pre>
+Свойство определяет скорость вращения камеры вокруг цели, если свойство <tt><a href="#1autoRotate" onmouseover="show('OrbitControls.autoRotate')" onmouseout="hide()">autoRotate</a></tt> установлено как <tt>true</tt>.
+Значение по умолчанию равно <tt>2.0</tt>, что равно 30 секундам на один оборот при 60 кадрах в секунду.<br>
+Обратите внимание, если свойство <tt><a href="#1autoRotate" onmouseover="show('OrbitControls.autoRotate')" onmouseout="hide()">autoRotate</a></tt> включено, в цикле анимации нужно вызывать метод <tt><a href="#1update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update</a></tt>.<br><br>
+
+<pre id="1dampingFactor"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('damping factor - коэффициент демпфирования')" onmouseout="hide()">.dampingFactor</a></span></pre>
+The damping inertia used if .enableDamping is set to true.<br>
+Обратите внимание, для работы этого свойства в цикле анимации нужно вызывать метод <tt><a href="#1update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update</a></tt>.<br><br>
+
+<pre id="1domElement">.domElement</pre>
+The HTMLDOMElement used to listen for mouse / touch events. This must be passed in the constructor; changing it here will not set up new event listeners.<br>Default is the whole document.<br><br>
+
+<pre id="1enabled">.enabled</pre>
+Whether or not the controls are enabled.<br><br>
+
+<pre id="1enableDamping">.enableDamping</pre>
+Set to true to enable damping (inertia), which can be used to give a sense of weight to the controls. Default is false.<br>
+Note that if this is enabled, you must call .update () in your animation loop.<br><br>
+
+<pre id="1enableKeys">.enableKeys</pre>
+Enable or disable the use of keyboard controls.<br><br>
+
+<pre id="1enablePan">.enablePan</pre>
+Enable or disable camera panning. Default is true.<br><br>
+
+<pre id="1enableRotate">.enableRotate</pre>
+Enable or disable horizontal and vertical rotation of the camera. Default is true.<br>
+Note that it is possible to disable a single axis by setting the min and max of the polar angle or azimuth angle to the same value, which will cause the vertical or horizontal rotation to be fixed at that value.<br><br>
+
+<pre id="1enableZoom">.enableZoom</pre>
+Enable or disable zooming (dollying) of the camera.<br><br>
+
+<pre id="1keyPanSpeed">.keyPanSpeed</pre>
+How fast to pan the camera when the keyboard is used. Default is 7.0 pixels per keypress.<br><br>
+
+<pre id="1keys">.keys</pre>
 This object contains references to the keycodes for controlling camera panning. Default is the 4 arrow keys.
-controls.keys = {
+<pre>controls.keys = {
   LEFT: 37, //left arrow
   UP: 38, // up arrow
   RIGHT: 39, // right arrow
   BOTTOM: 40 // down arrow
-}
-See this page for a full list of keycodes.
-#
-.maxAzimuthAngle
+}</pre>
+See this page for a full list of keycodes.<br>
+
+<pre id="1maxAzimuthAngle">.maxAzimuthAngle</pre>
 How far you can orbit horizontally, upper limit. Range is - Math.PI to Math.PI ( or Infinity for no limit ) and default is Infinity;
-#
-.maxDistance
-How far you can dolly out ( PerspectiveCamera only ). Default is Infinity.
-#
-.maxPolarAngle
-How far you can orbit vertically, upper limit. Range is 0 to Math.PI radians, and default is Math.PI.
-#
-.maxZoom
-How far you can zoom out ( OrthographicCamera only ). Default is Infinity.
-#
-.minAzimuthAngle
-How far you can orbit horizontally, lower limit. Range is - Math.PI to Math.PI ( or - Infinity for no limit ) and default is - Infinity;
-#
-.minDistance
+
+<pre id="1maxDistance">.maxDistance</pre>
+How far you can dolly out ( PerspectiveCamera only ). Default is Infinity.<br><br>
+
+<pre id="1maxPolarAngle">.maxPolarAngle</pre>
+How far you can orbit vertically, upper limit. Range is 0 to Math.PI radians, and default is Math.PI.<br><br>
+
+<pre id="1maxZoom">.maxZoom</pre>
+How far you can zoom out ( OrthographicCamera only ). Default is Infinity.<br><br>
+
+<pre id="1minAzimuthAngle">.minAzimuthAngle</pre>
+How far you can orbit horizontally, lower limit. Range is - Math.PI to Math.PI ( or - Infinity for no limit ) and default is - Infinity;<br><br>
+
+<pre id="1minDistance">.minDistance</pre>
 How far you can dolly in ( PerspectiveCamera only ). Default is 0.
-#
-.minPolarAngle
-How far you can orbit vertically, lower limit. Range is 0 to Math.PI radians, and default is 0.
-#
-.minZoom
-How far you can zoom in ( OrthographicCamera only ). Default is 0.
-#
-.mouseButtons
+
+<pre id="1minPolarAngle">.minPolarAngle</pre>
+How far you can orbit vertically, lower limit. Range is 0 to Math.PI radians, and default is 0.<br><br>
+
+<pre id="1minZoom">.minZoom</pre>
+How far you can zoom in ( OrthographicCamera only ). Default is 0.<br><br>
+
+<pre id="1mouseButtons">.mouseButtons</pre>
 This object contains references to the mouse buttons used for the controls.
-controls.mouseButtons = {
+<pre>controls.mouseButtons = {
   ORBIT: THREE.MOUSE.LEFT,
   ZOOM: THREE.MOUSE.MIDDLE,
   PAN: THREE.MOUSE.RIGHT
-}
-#
-.object
-The camera ( or other object ) that is being controlled.
-#
-.position0
-Used internally by the
-#
-.saveState and
-#
-.reset methods.
-#
-.rotateSpeed
-Speed of rotation. Default is 1.
-#
-.target0
-Used internally by the
-#
-.saveState and
-#
-.reset methods.
-#
-.target
-The focus point of the controls, the .object orbits around this. It can be updated manually at any point to change the focus of the controls.
-#
-.zoom0
-Used internally by the
-#
-.saveState and
-#
-.reset methods.
-#
-.zoomSpeed
+}</pre>
+
+<pre id="1object">.object</pre>
+The camera ( or other object ) that is being controlled.<br><br>
+
+<pre id="1position0">.position0</pre>
+Used internally by the .saveState and .reset methods.<br><br>
+
+<pre id="1rotateSpeed">.rotateSpeed</pre>
+Speed of rotation. Default is 1.<br><br>
+
+<pre id="1target0">.target0</pre>
+Used internally by the .saveState and .reset methods.<br><br>
+
+<pre id="1target">.target</pre>
+The focus point of the controls, the .object orbits around this. It can be updated manually at any point to change the focus of the controls.<br><br>
+
+<pre id="1zoom0">.zoom0</pre>
+Used internally by the .saveState and .reset methods.<br><br>
+
+<pre id="1zoomSpeed">.zoomSpeed</pre>
 Speed of zooming / dollying. Default is 1.</div><br>
 
 
-<h4>Methods</h4>
+<h4>Методы</h4>
 <div class=blockindent><br>
-.dispose ()
-Remove all the event listeners.
-#
-.getAzimuthalAngle ()
-Get the current horizontal rotation, in radians.
-#
-.getPolarAngle ()
-Get the current vertical rotation, in radians.
-#
-.reset ()
-Reset the controls to their state from either the last time the .saveState was called, or the initial state.
-#
-.saveState ()
-Save the current state of the controls. This can later be recovered with .reset.
-#
-.update ()
+<pre id="1dispose">.dispose( )</pre>
+Remove all the event listeners.<br><br>
+
+<pre id="1getAzimuthalAngle">.getAzimuthalAngle( )</pre>
+Get the current horizontal rotation, in radians.<br><br>
+
+<pre id="1getPolarAngle">.getPolarAngle( )</pre>
+Get the current vertical rotation, in radians.<br><br>
+
+<pre id="1reset">.reset( )</pre>
+Reset the controls to their state from either the last time the .saveState was called, or the initial state.<br><br>
+
+<pre id="1saveState">.saveState( )</pre>
+Save the current state of the controls. This can later be recovered with .reset.<br><br>
+
+<pre id="1update">.update( )</pre>
 Update the controls. Must be called after any manual changes to the camera's transform, or in the update loop if .autoRotate or .enableDamping are set.</div><br>
 
 <h4>Исходники</h4>
@@ -205,64 +182,35 @@ Update the controls. Must be called after any manual changes to the camera's tra
 ConvexBufferGeometry can be used to generate a convex hull for a given array of 3D points.
 The average time complexity for this task is considered to be O(nlog(n)).
 
-		<script>
-
-		// iOS iframe auto-resize workaround
-
-		if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
-
-			var scene = document.getElementById( 'scene' );
-
-			scene.style.width = getComputedStyle( scene ).width;
-			scene.style.height = getComputedStyle( scene ).height;
-			scene.setAttribute( 'scrolling', 'no' );
-
-		}
-
-		</script>
-
 <h4>Пример</h4>
-
 <pre>var geometry = new THREE.ConvexBufferGeometry( points );
 var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 var mesh = new THREE.Mesh( geometry, material );
 scene.add( mesh );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_convex" target="_blank">geometry / convex</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>ConvexBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="points - точки">points</a> )</pre>
-<div class=list>
-<tt>points</tt> — Array of [page:Vector3 Vector3s</a> that the resulting convex hull will contain.</div>
+<pre>ConvexBufferGeometry( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span></tt>
+ — массив <a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерных векторов</a>, that the resulting convex hull will contain.</div>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/ConvexGeometry.js" target="_blank">ConvexGeometry.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#7" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
-<h3 id="2.2">ConvexGeometry</h3>
+<h3 id="2.2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ConvexGeometry</h3>
 ConvexGeometry can be used to generate a convex hull for a given array of 3D points.
 			The average time complexity for this task is considered to be O(nlog(n)).
-
-		<script>
-
-		// iOS iframe auto-resize workaround
-
-		if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
-
-			var scene = document.getElementById( 'scene' );
-
-			scene.style.width = getComputedStyle( scene ).width;
-			scene.style.height = getComputedStyle( scene ).height;
-			scene.setAttribute( 'scrolling', 'no' );
-
-		}
-
-		</script>
 
 <h4>Пример</h4>
 <pre>var geometry = new THREE.ConvexGeometry( points );
 var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 var mesh = new THREE.Mesh( geometry, material );
 scene.add( mesh );</pre><br>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_convex" target="_blank">geometry / convex</a></pre><br>
 
 <h4>Конструктор</h4>
 <pre>ConvexGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="points - точки">points</a> )</pre>
@@ -274,7 +222,7 @@ scene.add( mesh );</pre><br>
 
 
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
-<h3 id="2.3">DecalGeometry</h3>
+<h3 id="2.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DecalGeometry</h3>
 DecalGeometry can be used to create a decal mesh that serves different kinds of purposes e.g. adding unique details to models, performing dynamic visual environmental changes or covering seams.<br><br>
 
 <h4>Пример</h4>
@@ -284,59 +232,61 @@ var mesh = new THREE.Mesh( geometry, material );
 scene.add( mesh );</pre>
 <h5>Другие примеры:</h5>
 <pre><a href="https://threejs.org/examples/#webgl_decals" target="_blank">decals</a></pre><br>
+
 <h4>Конструктор</h4>
-DecalGeometry( mesh, position, orientation, size )
-mesh — Any mesh object.
-position — Position of the decal projector.
-orientation — Orientation of the decal projector.
-size — Size of the decal projector.
+<pre>DecalGeometry( mesh, position, orientation, size )</pre>
+<div class=list><tt>mesh</tt> — Any mesh object.</div>
+<div class=list><tt>position</tt> — Position of the decal projector.</div>
+<div class=list><tt>orientation</tt> — Orientation of the decal projector.</div>
+<div class=list><tt>size</tt> — Size of the decal projector.</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/DecalGeometry.js" target="_blank">DecalGeometry.js на github.com</a></div><br><br>
 
 
 <h2 id="3">Загрузчики</h2>
-<h3 id="3.1">BabylonLoader</h3>
-Загрузчик для загрузки ресурсов в формате <em>.babylon</em>. A loader for loading a <em>.babylon</em> resource.</div><br>
+<h3 id="3.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BabylonLoader</h3>
+Загрузчик для загрузки ресурсов в формате <em>.babylon</em><br>.
+Файловый формат <a href="https://doc.babylonjs.com/generals/file_format_map_(.babylon)" target="_blank">babylon</a> используется JavaScript'овским
+<a href="https://ru.wikipedia.org/wiki/%D0%A4%D1%80%D0%B5%D0%B9%D0%BC%D0%B2%D0%BE%D1%80%D0%BA" target="_blank">фреймворком</a> <a href="https://www.babylonjs.com/" target="_blank">Babylon.js</a>.<br><br>
 
 <h4>Пример</h4>
-
-<pre>// instantiate a loader
-var loader = new THREE.BabylonLoader();
-
-// load a Babylon resource
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.BabylonLoader();<br>
+// load a Babylon resource (загружаем Babylon ресурс)
 loader.load(
-	// resource URL
+	// resource URL (URL-адрес ресурса)
 	'models/babylon/skull.babylon',
-	// Function when resource is loaded
+	// Function when resource is loaded (функция при загрузке ресурса)
 	function ( object ) {
 		scene.add( object );
 	},
 	// Function called when download progresses
+    // функция, вызываемая в процессе загрузки
 	function ( xhr ) {
 		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
 	},
 	// Function called when download errors
+	// функция, вызываемая при ошибках загрузки
 	function ( xhr ) {
 		console.log( 'An error happened' );
 	}
 );</pre>
-
-		[example:webgl_loader_babylon</a>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_babylon" target="_blank">webgl_loader_babylon</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>BabylonLoader( [page:LoadingManager manager</a> )</pre>
-<div class=list>
-		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
+<pre>BabylonLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt><a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a></tt>
+— The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
 Создает новый <tt>BabylonLoader</tt>.<br><br>
 
-
 <h4>Свойства</h4>
-
+<br><br>
 
 <h4>Методы</h4>
-<pre id="2.1load"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="load - загрузить">.load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</pre>
-		<div>
-		[page:String url</a> — required<br />
+<pre id="3.1load"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="load - загрузить">.load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</pre>
+<div class=list><tt><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса.')" onmouseout="hide()">url</a></span></tt> — строка, содержащая путь/URL-адрес babylon-файла (обязательный аргумент).</div>
 		[page:function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:Object3D</a>.<br />
 		[page:function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
 		[page:function onError</a> — Will be called when load errors.<br />
@@ -349,215 +299,105 @@ loader.load(
 		<div>
 		[page:Object json</a> — The <em>JSON</em> structure to parse.
 		</div>
-		<div>
+
 		Parse a <em>JSON</em> structure and return an [page:Object3D object</a> or a [page:Scene scene</a>.<br />
 		Found objects are converted to [page:Mesh</a> with a [page:BufferGeometry</a> and a default [page:MeshPhongMaterial</a>.<br />
 		Lights are parsed accordingly.
-		</div>
-<h2>Source</h2>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BabylonLoader.js examples/js/loaders/BabylonLoader.js</a>
-
-
-<h3 id="3.2">ColladaLoader</h3>
-Загрузчик файлов в формате <em>Collada</em>.
-
-<h4>Пример</h4>
-
-<pre>// instantiate a loader
-var loader = new THREE.ColladaLoader();
-
-loader.load(
-	// resource URL
-	'models/collada/monster/monster.dae',
-	// Function when resource is loaded
-	function ( collada ) {
-		scene.add( collada.scene );
-	},
-	// Function called when download progresses
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	}
-);</pre>
-<h5>Другие примеры:</h5>
-<pre>[example:webgl_loader_collada</a>
-[example:webgl_loader_collada_keyframe</a>
-[example:webgl_loader_collada_skinning</a>
-[example:webgl_loader_collada_kinematics</a></pre>
-
-
-<h4>Конструктор</h4><br>
-<pre>ColladaLoader()</pre>
-Создает новый <tt>ColladaLoader</tt>.
-
-<h4>Свойства</h4><br>
-<div class=blockindent>
-<pre id="2.2options">[property:Array options</a></pre>
-		<div>
-		&nbsp;.[page:Boolean centerGeometry</a> — Force [page:Geometry</a> to always be centered at the local origin of the containing [page: Mesh</a>.<br />
-		&nbsp;.[page:Boolean convertUpAxis</a> — Axis conversion is done for geometries, animations, and controllers.<br />
-		&nbsp;.[page:Boolean subdivideFaces</a> — Force subdivision into multiple [page: Face3</a>.<br />
-		&nbsp;.[page:String upAxis</a> — X, Y or Z<br />
-		&nbsp;.[page:Boolean defaultEnvMap</a> — Cubemap to use for reflective or refractive materials.<br />
-		</div>
-
-<pre id="2.2geometries">[property:Object geometries</a></pre>
-Parsed <em>.dae</em> geometries.</div>
-
-
-<h4>Методы</h4>
-
-		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a> )</h3>
-		<div>
-		[page:String url</a> — required<br />
-		[page:function onLoad</a> — Will be called when load completes. The argument will be an [page:Object object</a> containing loaded resources.<br />
-		[page:function onProgress</a> — Will be called while load progresses. The argument will be an object containing .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
-		</div>
-		<div>
-		Begin loading from url and call onLoad with the parsed response content.
-		</div>
-
-		<h3>[method:Object parse</a>( [page:Document doc</a>, [page:Function callBack</a>, [page:String url</a> )</h3>
-		<div>
-		[page:Document doc</a> — The <em>XML</em> document to parse.<br />
-		[page:Function callBack</a> — Will be called when parse completes.<br />
-		[page:String url</a> — The base url from which to find subsequent resources.<br />
-		</div>
-		<div>
-		Parse an <em>XML Document</em> and return an [page:Object object</a> that contain loaded parts: .[page:Scene scene</a>, .[page:Array morphs</a>, .[page:Array skins</a>, .[page:Array animations</a>, .[page:Object dae</a>
-		</div>
-
-		<h3>[method:null setPreferredShading</a>( [page:Integer shading</a> )</h3>
-		<div>
-		[page:Integer shading</a> — required
-		</div>
-		<div>
-		Set the .[page:Integer shading</a> property on the resource's materials.<br />
-		Options are [page:Materials THREE.SmoothShading</a>, [page:Materials THREE.FlatShading</a>.
-		</div>
-
-		<h3>[method:null applySkin</a>( [page:Geometry geometry</a>, [page:Object instanceCtrl</a>, [page:Integer frame</a> )</h3>
-		<div>
-		[page:Geometry geometry</a> — required<br />
-		[page:Object instanceCtrl</a> — required. A collada <em>skinController</em><br />
-		[page:Integer frame</a> — optionnal. Default is 40<br />
-		</div>
-		<div>
-		Apply a skin (vertices, animation, bones) from a <em>collada skin controller</em>, on the given [page:Geometry</a>.
-		</div>
+		</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/ColladaLoader.js examples/js/loaders/ColladaLoader.js</a>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BabylonLoader.js" target="_blank">BabylonLoader.js на github.com</a></div><br><br>
+
+
+
 
 
 		[page:Loader</a> &rarr;
-<h3 id="2.3">GLTF2Loader</h3>
-A loader for *glTF* 2.0 resources.
-<br><br>
-		<a href="https://www.khronos.org/gltf">glTF</a> (GL Transmission Format) is an
-		<a href="https://github.com/KhronosGroup/glTF/tree/master/specification/2.0">open format specification</a>
-		for efficient delivery and loading of 3D content. Assets may be provided either in JSON (.gltf)
-		or binary (.glb) format. External files store textures (.jpg, .png, ...) and additional binary
-		data (.bin). A glTF asset may deliver one or more scenes, including meshes, materials,
-		textures, shaders, skins, skeletons, morph targets, animations, lights, and/or cameras.
-		</div>
+<h3 id="3.2">GLTFLoader</h3>
+ A loader for loading glTF 2.0 resource.<br>
+glTF (GL Transmission Format) is an open format specification for efficient delivery and loading of 3D content. Assets may be provided either in JSON (.gltf) or binary (.glb) format. External files store textures (.jpg, .png, ...) and additional binary data (.bin). A glTF asset may deliver one or more scenes, including meshes, materials, textures, skins, skeletons, morph targets, animations, lights, and/or cameras.<br><br>
+<h4>Расширения</h4>
+GLTFLoader supports the following glTF extensions:
+<div class=blockindent>KHR_materials_pbrSpecularGlossiness<br>
+KHR_lights (experimental)</div><br>
 
-		<h2>Extensions</h2>
+<h4>Example</h4>
+<pre>// Instantiate a loader
+	var loader = new THREE.GLTFLoader();
 
-		<div>
-		GLTF2Loader supports the following glTF extensions:
-		</div>
+	// Load a glTF resource
+	loader.load(
+		// resource URL
+		'models/gltf/duck/duck.gltf',
+		// called when the resource is loaded
+		function ( gltf ) {
 
-		<ul>
-			<li>
-				KHR_lights
-			</li>
-			<li>
-				<a target="_blank" href="https://github.com/KhronosGroup/glTF/tree/master/extensions/Khronos/KHR_materials_common">
-					KHR_materials_common
-				</a>
-			</li>
-			<li>
-				<a target="_blank" href="https://github.com/KhronosGroup/glTF/tree/master/extensions/Khronos/KHR_materials_pbrSpecularGlossiness">
-					KHR_materials_pbrSpecularGlossiness
-				</a>
-			</li>
-		</ul>
-
-  <h4>Пример</h4>
-
-  <pre>
-		// Instantiate a loader
-		var loader = new THREE.GLTF2Loader();
-
-		// Load a glTF resource
-		loader.load( 'models/gltf/duck/duck.gltf', function ( gltf ) {
 			scene.add( gltf.scene );
 
-			gltf.animations; // Array&lt;THREE.AnimationClip&gt;
-			gltf.scene;      // THREE.Scene
-			gltf.scenes;     // Array&lt;THREE.Scene&gt;
-			gltf.cameras;    // Array&lt;THREE.Camera&gt;
-		} );
-  </pre>
+			gltf.animations; // Array<THREE.AnimationClip>
+			gltf.scene; // THREE.Scene
+			gltf.scenes; // Array<THREE.Scene>
+			gltf.cameras; // Array<THREE.Camera>
 
-		[example:webgl_loader_gltf2</a>
+		},
+		// called when loading is in progresses
+		function ( xhr ) {
 
-  <h4>Конструктор</h4>
+			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
-		<h3>GLTF2Loader( [page:LoadingManager manager</a> )</h3>
-		<div>
-		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
-		</div>
-		<div>
-		Creates a new [name</a>.
-		</div>
+		},
+		// called when loading has errors
+		function ( error ) {
 
-  <h4>Свойства</h4>
+			console.log( 'An error happened' );
 
+		}
+	);</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_gltf" target="_blank">webgl / loader / gltf</a></pre><br>
 
-  <h4>Методы</h4>
+<h4>Совместимость с браузером</h4>
+GLTFLoader relies on ES6 Promises, which are not supported in IE11. To use the loader in IE11, you must include a polyfill providing a Promise replacement.<br><br>
 
-		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
-		<div>
-		[page:String url</a> — required<br />
-		[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded JSON response returned from [page:Function parse</a>.<br />
-		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, that contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
-		[page:Function onError</a> — Will be called when load errors.<br />
-		</div>
-		<div>
-		Begin loading from url and call the callback function with the parsed response content.
-		</div>
+<h4>Конструктор</h4>
+<pre>GLTFLoader( manager )</pre>
+<div class=list></tt>manager</tt> — The loadingManager for the loader to use. Default is THREE.DefaultLoadingManager.</div>
+Создает новый GLTFLoader.
 
-		<h3>[method:null setPath</a>( [page:String path</a> )</h3>
-		<div>
-		[page:String path</a> — Base path for loading additional resources e.g. textures, GLSL shaders, .bin data.
-		</div>
-		<div>
-		Set the base path for additional resources.
-		</div>
+<h4>Свойства</h4>
+<br><br>
 
-		<h3>[method:null setCrossOrigin</a>( [page:String value</a> )</h3>
-		<div>
-		[page:String value</a> — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
-		</div>
+<h4>Методы</h4>
+#
+.load ( url, onLoad, onProgress, onError )
+url — A string containing the path/URL of the .gltf or .glb file.
+onLoad — A function to be called after the loading is successfully completed. The function receives the loaded JSON response returned from parse.
+onProgress — (optional) A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, that contains .total and .loaded bytes.
+onError — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.
+Begin loading from url and call the callback function with the parsed response content.
+#
+.setPath ( path )
+path — Base path for loading additional resources e.g. textures and .bin data.
+Set the base path for additional resources.
+#
+.setCrossOrigin ( value )
+value — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
+#
+.parse ( data, path, onLoad, onError )
+data — glTF asset to parse, as an ArrayBuffer or JSON string.
+path — The base path from which to find subsequent glTF resources such as textures and .bin data files.
+onLoad — A function to be called when parse completes.
+onError — (optional) A function to be called if an error occurs during parsing. The function receives error as an argument.
+Parse a glTF-based ArrayBuffer or JSON String and fire onLoad callback when complete. The argument to onLoad will be an object that contains loaded parts: .scene, .scenes, .cameras, and .animations.
 
-		<h3>[method:null parse</a>( [page:Object json</a>, [page:Function callBack</a>, [page:String path</a> )</h3>
-		<div>
-		[page:Object json</a> — <em>JSON</em> object to parse.<br />
-		[page:Function callBack</a> — Will be called when parse completes.<br />
-		[page:String path</a> — The base path from which to find subsequent glTF resources such as textures, GLSL shaders and .bin data files.<br />
-		</div>
-		<div>
-		Parse a glTF-based <em>JSON</em> structure and fire [page:Function callback</a> when complete. The argument to [page:Function callback</a> will be an [page:object</a> that contains loaded parts: .[page:Scene scene</a>, .[page:Array scenes</a>, .[page:Array cameras</a>, and .[page:Array animations</a>.
-		</div>
-
-		<h2>Source</h2>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/GLTF2Loader.js examples/js/loaders/GLTF2Loader.js</a>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/GLTFLoader.js" target="_blank">GLTFLoader.js на github.com</a></div><br><br>
 
 
-<h3 id="2.4">MTLLoader</h3>
+<h3 id="3.3">MTLLoader</h3>
 A loader for loading an <em>.mtl</em> resource, used internaly by [page:OBJMTLLoader</a> and [page:UTF8Loader</a>.
+A loader for loading an .mtl resource, used internaly by OBJLoader and UTF8Loader.
+The Material Template Library format (MTL) or .MTL File Format is a companion file format to .OBJ that describes surface shading (material) properties of objects within one or more .OBJ files.
 
 <h4>Конструктор</h4>
 <h3>MTLLoader( [page:LoadingManager loadingManager</a> )</h3>
@@ -632,15 +472,14 @@ A loader for loading an <em>.mtl</em> resource, used internaly by [page:OBJMTLLo
 		<div>
 			[page:String text</a> — The textual <em>mtl</em> structure to parse.
 		</div>
-		<div>
-			Parse a <em>mtl</em> text structure and return a [page:MTLLoaderMaterialCreator</a> instance.<br />
-		</div>
+Parse a <em>mtl</em> text structure and return a [page:MTLLoaderMaterialCreator</a> instance.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/[name</a>.js examples/js/loaders/[name</a>.js</a>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/MTLLoader.js" target="_blank">MTLLoader.js на github.com</a></div><br><br>
 
 
-<h3 id="2.5">OBJLoader</h3>
+
+<h3 id="3.4">OBJLoader</h3>
 A loader for loading an <em>.obj</em> resource.
 
 <h4>Пример</h4>
@@ -693,22 +532,21 @@ A loader for loading an <em>.obj</em> resource.
 		<div>
 		[page:String text</a> — The textual <em>obj</em> structure to parse.
 		</div>
-		<div>
-		Returns an [page:Object3D</a>. It contains the parsed meshes as [page:Mesh</a> and lines as [page:LineSegments</a>.<br />
+Returns an [page:Object3D</a>. It contains the parsed meshes as [page:Mesh</a> and lines as [page:LineSegments</a>.<br />
 		All geometry is created as [page:BufferGeometry</a>. Default materials are created as [page:MeshPhongMaterial</a>.<br />
 		If an <em>obj</em> object or group uses multiple materials while declaring faces geometry groups and an array of materials are used.
-		</div>
+		</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader.js examples/js/loaders/OBJLoader.js</a>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader.js" target="_blank">OBJLoader.js на github.com</a></div><br><br>
 
 
-<h3 id="2.6">OBJLoader2</h3>
-A loader for loading an <em>.obj</em> resource.
+<h3 id="3.5">OBJLoader2</h3>
+A loader for loading a <em>.obj</em> resource.<br>
+The OBJ file format is a simple data-format that represents 3D geometry in a human redeable format as, the position of each vertex, the UV position of each texture coordinate vertex, vertex normals, and the faces that make each polygon defined as a list of vertices, and texture vertices.
 
-  <h4>Пример</h4>
-
-  <pre>
+<h4>Пример</h4>
+<pre>
 		// instantiate the loader
 		var loader = new THREE.OBJLoader2();
 
@@ -796,407 +634,342 @@ A loader for loading an <em>.obj</em> resource.
 			[page:Boolean parserDebug</a> — Internal Parser will produce debug output<br>
 			[page:Boolean meshCreatorDebug</a> — Internal MeshCreator will produce debug output
 		</div>
-		<div>
-			Allows to set debug mode for the parser and the meshCreator.
-		</div>
-
-		<h2>Source</h2>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader2.js examples/js/loaders/OBJLoader2.js</a>
-
-
-<h3 id="2.7">WWOBJLoader2</h3>
-A loader for loading an <em>.obj</em> resource within a web worker.</div>
-
-		<h2>Sub-Classes</h2>
-		[page:WWOBJLoader2.PrepDataArrayBuffer</a><br>
-		[page:WWOBJLoader2.PrepDataFile</a><br>
-		[page:WWOBJLoader2.PrepDataCallbacks</a><br>
-		[page:WWOBJLoader2.LoadedMeshUserOverride</a><br>
-		[page:WWOBJLoader2.WWOBJLoader2Director</a>
-
-  <h4>Пример</h4>
-
-  <pre>
-			// instantiate the loader
-			var loader = new THREE.OBJLoader2.WWOBJLoader2();
-
-			// load an OBJ file by providing a name, the path and the file name
-			var prepData = new THREE.OBJLoader2.WWOBJLoader2.PrepDataFile(
-				'female02',
-				'obj/female02/',
-				'female02.obj'
-			);
-
-			// set where to add the loaded data in the scene graph.
-			prepData.setSceneGraphBaseNode( scene );
-
-			// provide the preparation data to the loader and let it run.
-			loader.prepareRun( prepData );
-			loader.run();
-  </pre>
-
-		[example:webgl_loader_obj2_ww</a> — Simple example that allows to load own models via file selection.<br>
-		[example:webgl_loader_obj2_ww_parallels</a> — Advanced example using [page:WWOBJLoader2.WWOBJLoader2Director</a> for orchestration of multiple workers.
-
-
-  <h4>Конструктор</h4>
-
-		<h3>[name</a>()</h3>
-		<div>
-			OBJ data will be loaded by dynamically created web worker.<br>
-			First feed instructions with: [page:WWOBJLoader2.prepareRun prepareRun</a><br>
-			Then execute with: [page:WWOBJLoader2.run run</a>
-		</div>
-
-  <h4>Свойства</h4>
-
-
-  <h4>Методы</h4>
-
-		<h3>[method:null prepareRun</a>( [page:Object params</a> )</h3>
-		<div>
-			[page:Object params</a> — Either [page:WWOBJLoader2.PrepDataArrayBuffer</a> or [page:WWOBJLoader2.PrepDataFile</a>
-		</div>
-		<div>
-			Set all parameters for required for execution of [page:WWOBJLoader2.run run</a>.
-		</div>
-
-
-		<h3>[method:null run</a>()</h3>
-		<div>
-			Run the loader according the preparation instruction provided in [page:WWOBJLoader2.prepareRun prepareRun</a>.
-		</div>
-
-
-		<h3>[method:null setCrossOrigin</a>( [page:String crossOrigin</a> )</h3>
-		<div>
-			[page:String crossOrigin</a> — CORS value
-		</div>
-		<div>
-			Sets the CORS string to be used.
-		</div>
-
-
-		<h3>[method:null setDebug</a>( [page:Boolean enabled</a> )</h3>
-		<div>
-			[page:Boolean enabled</a> — True or false
-		</div>
-		<div>
-			Enable or disable debug logging.
-		</div>
-
-
-		<h3>[method:null setRequestTerminate</a>( [page:Boolean requestTerminate</a> )</h3>
-		<div>
-			[page:Boolean requestTerminate</a> — True or false
-		</div>
-		<div>
-			Call requestTerminate to terminate the web worker and free local resource after execution.
-		</div>
-
-
-		<h3>[method:null registerCallbackCompletedLoading</a>( [page:Function callbackCompletedLoading</a> )</h3>
-		<div>
-			[page:Function callbackCompletedLoading</a> — 	Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is called once loading of the complete model is completed.
-		</div>
-
-
-		<h3>[method:null registerCallbackProgress</a>( [page:Function callbackProgress</a> )</h3>
-		<div>
-			[page:Function callbackProgress</a> — 	Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is invoked by internal function "_announceProgress" to print feedback.
-		</div>
-
-
-		<h3>[method:null registerCallbackMaterialsLoaded</a>( [page:Function callbackMaterialsLoaded</a> )</h3>
-		<div>
-			[page:Function callbackMaterialsLoaded</a> — 	Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is called once materials have been loaded. It allows to alter and return materials.
-		</div>
-
-
-		<h3>[method:null registerCallbackMeshLoaded</a>( [page:Function callbackMeshLoaded</a> )</h3>
-		<div>
-			[page:Function callbackMeshLoaded</a> — 	Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is called every time a mesh was loaded. Use [page:WWOBJLoader2.LoadedMeshUserOverride</a> for alteration instructions (geometry, material or disregard mesh).
-		</div>
-
-		<h3>[method:null registerCallbackErrorWhileLoading</a>( [page:Function callbackErrorWhileLoading</a> )</h3>
-		<div>
-			[page:Function callbackErrorWhileLoading</a> — 	Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is called to report an error that prevented loading.
-		</div>
-
-
-		<h3>[method:null clearAllCallbacks</a>()</h3>
-		<div>
-			Clears all registered callbacks.
-		</div>
-
-
-		<h2>Sub-Classes</h2>
-		<br>
-		<a name="PrepDataArrayBuffer"></a><h1>PrepDataArrayBuffer</h1>
-  <h4>Конструктор</h4>
-
-		<h3>PrepDataArrayBuffer( [page:String modelName</a>, [page:Uint8Array objAsArrayBuffer</a>, [page:String pathTexture</a>, [page:String mtlAsString</a> )</h3>
-		<div>
-			[page:String modelName</a> — Overall name of the model<br>
-			[page:Uint8Array objAsArrayBuffer</a> — OBJ file content as ArrayBuffer<br>
-			[page:String pathTexture</a> — Path to texture files<br>
-			[page:String mtlAsString</a> — MTL file content as string
-		</div>
-		<div>
-			Instruction to configure [page:WWOBJLoader2.prepareRun</a> to load OBJ from given ArrayBuffer and MTL from given String.
-		</div>
-
-  <h4>Методы</h4>
-
-		<h3>[method:PrepDataCallbacks getCallbacks</a>()</h3>
-		<div>
-			Returns all callbacks as [page:WWOBJLoader2.PrepDataCallbacks</a>.
-		</div>
-
-
-		<h3>[method:null setRequestTerminate</a>( [page:Boolean requestTerminate</a> )</h3>
-		<div>
-			[page:Boolean requestTerminate</a> — Default is false
-		</div>
-		<div>
-			Request termination of web worker and free local resources after execution.
-		</div>
-
-
-		<h3>[method:null setSceneGraphBaseNode</a>( [page:THREE.Object3D sceneGraphBaseNode</a> )</h3>
-		<div>
-			[page:Object3D sceneGraphBaseNode</a> — Scene graph object
-		</div>
-		<div>
-			[page:Object3D</a> where meshes will be attached.
-		</div>
-
-
-		<h3>[method:null setStreamMeshes</a>( [page:Boolean streamMeshes</a> )</h3>
-		<div>
-			[page:Boolean streamMeshes</a> — Default is true
-		</div>
-		<div>
-			Singles meshes are directly integrated into scene when loaded or later.
-		</div>
-		<br>
-		<br>
-
-
-		<a name="PrepDataFile"></a><h1>PrepDataFile</h1>
-  <h4>Конструктор</h4>
-
-		<h3>PrepDataFile( [page:String modelName</a>, [page:String pathObj</a>, [page:String fileObj</a>, [page:String pathTexture</a>, [page:String fileMtl</a> )</h3>
-		<div>
-			[page:String modelName</a> — Overall name of the model<br>
-			[page:String pathObj</a> — Path to OBJ file<br>
-			[page:String fileObj</a> — OBJ file name<br>
-			[page:String pathTexture</a> — Path to texture files<br>
-			[page:String fileMtl</a> — MTL file name
-		</div>
-		<div>
-			Instruction to configure [page:WWOBJLoader2.prepareRun</a> to load OBJ and MTL from files.
-		</div>
-
-  <h4>Методы</h4>
-
-		<h3>[method:PrepDataCallbacks getCallbacks</a>()</h3>
-		<div>
-			Returns all callbacks as [page:WWOBJLoader2.PrepDataCallbacks</a>.
-		</div>
-
-
-		<h3>[method:null setRequestTerminate</a>( [page:Boolean requestTerminate</a> )</h3>
-		<div>
-			[page:Boolean requestTerminate</a> — Default is false
-		</div>
-		<div>
-			Request termination of web worker and free local resources after execution.
-		</div>
-
-
-		<h3>[method:null setSceneGraphBaseNode</a>( [page:THREE.Object3D sceneGraphBaseNode</a> )</h3>
-		<div>
-			[page:Object3D sceneGraphBaseNode</a> — Scene graph object
-		</div>
-		<div>
-			[page:Object3D</a> where meshes will be attached.
-		</div>
-
-
-		<h3>[method:null setStreamMeshes</a>( [page:Boolean streamMeshes</a> )</h3>
-		<div>
-			[page:Boolean streamMeshes</a> — Default is true
-		</div>
-		<div>
-			Singles meshes are directly integrated into scene when loaded or later.
-		</div>
-		<br>
-		<br>
-
-
-		<a name="PrepDataCallbacks"></a><h1>PrepDataCallbacks</h1>
-  <h4>Конструктор</h4>
-
-		<h3>PrepDataCallbacks()</h3>
-		<div>
-			Callbacks utilized by functions working with [page:WWOBJLoader2.PrepDataArrayBuffer</a> or [page:WWOBJLoader2.PrepDataFile</a>.
-		</div>
-
-  <h4>Методы</h4>
-
-		<h3>[method:null registerCallbackCompletedLoading</a>( [page:Function callbackCompletedLoading</a> )</h3>
-		<div>
-			[page:Function callbackCompletedLoading</a> — Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is called once loading of the complete model is completed.
-		</div>
-
-
-		<h3>[method:null registerCallbackProgress</a>( [page:Function callbackProgress</a> )</h3>
-		<div>
-			[page:Function callbackProgress</a> — Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is invoked by internal function "_announceProgress" to print feedback.
-		</div>
-
-
-		<h3>[method:null registerCallbackErrorWhileLoading</a>( [page:Function callbackErrorWhileLoading</a> )</h3>
-		<div>
-			[page:Function callbackErrorWhileLoading</a> — Callback function for described functionality
-		</div>
-		<div>
-			Report if an error prevented loading.
-		</div>
-
-
-		<h3>[method:null registerCallbackMaterialsLoaded</a>( [page:Function callbackMaterialsLoaded</a> )</h3>
-		<div>
-			[page:Function callbackMaterialsLoaded</a> — Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is called once materials have been loaded. It allows to alter and return materials.
-		</div>
-
-
-		<h3>[method:null registerCallbackMeshLoaded</a>( [page:Function callbackMeshLoaded</a> )</h3>
-		<div>
-			[page:Function callbackMeshLoaded</a> — Callback function for described functionality
-		</div>
-		<div>
-			Register callback function that is called every time a mesh was loaded. Use [page:WWOBJLoader2.LoadedMeshUserOverride</a> for alteration instructions (geometry, material or disregard mesh).
-		</div>
-		<br>
-		<br>
-
-
-		<a name="LoadedMeshUserOverride"></a><h1>LoadedMeshUserOverride</h1>
-  <h4>Конструктор</h4>
-
-		<h3>LoadedMeshUserOverride( [page:Boolean disregardMesh</a>, [page:THREE.BufferGeometry bufferGeometry</a>, [page:THREE.Material material</a> )</h3>
-		<div>
-			[page:Boolean disregardMesh</a> — Tell [page:WWOBJLoader2</a> to completely disregard this mesh<br>
-			[page:BufferGeometry bufferGeometry</a> — The [page:BufferGeometry</a> to be used<br>
-			[page:Material material</a> — The [page:Material</a> to be used
-		</div>
-		<div>
-			Object to return by THREE.OBJLoader2.WWOBJLoader2.callbacks.meshLoaded. Used to adjust bufferGeometry or material or prevent complete loading of mesh.
-		</div>
-		<br>
-		<br>
-
-
-		<a name="WWOBJLoader2Director"></a><h1>WWOBJLoader2Director</h1>
-  <h4>Конструктор</h4>
-
-		<h3>WWOBJLoader2Director()</h3>
-		<div>
-			Orchestrate loading of multiple OBJ files/data from an instruction queue with a configurable amount of workers (1-16).<br>
-			Workflow:<br>
-				prepareWorkers<br>
-				enqueueForRun<br>
-				processQueue<br>
-				deregister
-		</div>
-
-		<h3>[method:null prepareWorkers</a>( [page:WWOBJLoader2.PrepDataCallbacks globalCallbacks</a>, [page:Number maxQueueSize</a>, [page:Number maxWebWorkers</a> )</h3>
-		<div>
-			[page:WWOBJLoader2.PrepDataCallbacks globalCallbacks</a> — Register global callbacks used by all web workers<br>
-			[page:Number maxQueueSize</a> — Set the maximum size of the instruction queue (1-1024)<br>
-			[page:Number maxWebWorkers</a> — Set the maximum amount of workers (1-16)
-		</div>
-		<div>
-			Create or destroy workers according limits. Set the name and register callbacks for dynamically created web workers.
-		</div>
-
-
-		<h3>[method:null enqueueForRun</a>( [page:Object runParams</a> )</h3>
-		<div>
-			[page:Object runParams</a> — Either [page:WWOBJLoader2.PrepDataArrayBuffer</a> or [page:WWOBJLoader2.PrepDataFile</a>
-		</div>
-		<div>
-			Store run instructions in internal instructionQueue.
-		</div>
-
-
-		<h3>[method:null processQueue</a>()</h3>
-		<div>
-			Process the instructionQueue until it is depleted.
-		</div>
-
-
-		<h3>[method:null deregister</a>()</h3>
-		<div>
-			Terminate all workers
-		</div>
-
-
-		<h3>[method:null getMaxQueueSize</a>()</h3>
-		<div>
-			Returns the maximum length of the instruction queue.
-		</div>
-
-
-		<h3>[method:null getMaxWebWorkers</a>()</h3>
-		<div>
-			Returns the maximum number of workers.
-		</div>
-
-
-		<h3>[method:null setCrossOrigin</a>( [page:String crossOrigin</a> )</h3>
-		<div>
-			[page:String crossOrigin</a> — CORS value
-		</div>
-		<div>
-			Sets the CORS string to be used.
-		</div>
-
-
-
-		<h2>Source</h2>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader2.js examples/js/loaders/OBJLoader2.js</a>
-
-
-<h3 id="2.8">PCDLoader</h3>
+Allows to set debug mode for the parser and the meshCreator.
+		</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader2.js" target="_blank">OBJLoader2.js на github.com</a></div><br><br>
+
+
+<h3 id="3.6">LoaderSupport</h3>
+Supporting classes for file loaders and web worker based loaders.
+<h4>Sub-Classes</h4>
+<pre>LoaderSupport.Builder
+LoaderSupport.LoadedMeshUserOverride
+LoaderSupport.WorkerSupport
+LoaderSupport.WorkerRunnerRefImpl
+LoaderSupport.WorkerDirector
+LoaderSupport.PrepData
+LoaderSupport.LoaderBase
+LoaderSupport.Callbacks
+LoaderSupport.Validator
+LoaderSupport.ConsoleLogger</pre>
+<h4>Пример</h4>
+webgl_loader_obj2_meshspray - Example using LoaderSupport.LoaderWorkerDirector and LoaderSupport.LoaderWorkerSupport.
+
+<h3 id="3.6.1">Builder</h3>
+<h4>Конструктор</h4>
+Builder()
+Builds one or many Mesh from one raw set of Arraybuffers, materialGroup descriptions and further parameters. Supports vertex, vertexColor, normal, uv and index buffers.
+<h4>Методы</h4>
+#
+.setMaterials ( Array of materials )
+Array of materials - Array of Materials
+Set materials loaded by any supplier of an Array of Materials.
+#
+.processPayload ( Object payload )
+payload - Raw Mesh or Material descriptions.
+Delegates processing of the payload (mesh building or material update) to the corresponding functions (BW-compatibility).
+
+
+#
+.buildMeshes ( Object meshPayload )
+meshPayload - Raw mesh description (buffers, params, materials) used to build one to many meshes.
+Builds one or multiple meshes from the data described in the payload (buffers, params, material info).
+
+
+#
+.updateMaterials ( Object materialPayload )
+materialPayload - Material update instructions
+Updates the materials with contained material objects (sync) or from alteration instructions (async).
+
+
+#
+.getMaterialsJSON ()
+Returns the mapping object of material name and corresponding jsonified material.
+
+
+#
+.getMaterials ()
+Returns the mapping object of material name and corresponding material.
+
+
+<h3 id="3.6.2">LoadedMeshUserOverride</h3>
+<h4>Конструктор</h4>
+LoadedMeshUserOverride( disregardMesh, bufferGeometry )
+disregardMesh - Tell implementation to completely disregard this mesh
+alteredMesh - Tell implementation that mesh(es) have been altered or added
+Object to return by callback onMeshAlter. Used to disregard a certain mesh or to return one to many meshes.
+<h4>Методы</h4>
+#
+.addMesh ( mesh )
+mesh - Mesh
+Add a mesh created within callback.
+#
+.isDisregardMesh ()
+Answers if mesh shall be disregarded completely.
+#
+.providesAlteredMeshes ()
+Answers if new mesh(es) were created.
+
+
+<h3 id="3.6.3">WorkerSupport</h3>
+<h4>Конструктор</h4>
+WorkerSupport( logger )
+logger - logger to be used
+This class provides means to transform existing parser code into a web worker. It defines a simple communication protocol which allows to configure the worker and receive raw mesh data during execution.
+<h4>Методы</h4>
+#
+.validate ( functionCodeBuilder, Array of libLocations, libPath, runnerImpl )
+functionCodeBuilder - Function that is invoked with funcBuildObject and funcBuildSingelton that allows stringification of objects and singletons.
+Array of libLocations - URL of libraries that shall be added to worker code relative to libPath.
+libPath - Base path used for loading libraries.
+runnerImpl - The default worker parser wrapper implementation (communication and execution). An extended class could be passed here.
+Validate the status of worker code and the derived worker.
+#
+.setTerminateRequested ( terminateRequested )
+terminateRequested - True or false.
+Request termination of worker once parser is finished.
+#
+.setCallbacks ( builder, onLoad )
+builder - The builder function. Default is LoaderSupport.Builder.
+onLoad - The function that is called when parsing is complete.
+Specify functions that should be build when new raw mesh data becomes available and when the parser is finished.
+#
+.run ( payload )
+payload - Raw mesh description (buffers, params, materials) used to build one to many meshes.
+Runs the parser with the provided configuration.
+
+
+<h3 id="3.6.4">WorkerRunnerRefImpl</h3>
+<h4>Конструктор</h4>
+WorkerRunnerRefImpl()
+Default implementation of the WorkerRunner responsible for creation and configuration of the parser within the worker.
+<h4>Методы</h4>
+#
+.applyProperties ( parser, params )
+parser - The parser instance
+params - The parameter object
+Applies values from parameter object via set functions or via direct assignment.
+#
+.run ( payload )
+payload - Raw mesh description (buffers, params, materials) used to build one to many meshes.
+Configures the Parser implementation according the supplied configuration object.
+
+
+<h3 id="3.6.5">WorkerDirector</h3>
+<h4>Конструктор</h4>
+WorkerDirector( classDef, logger )
+classDef - Class definition to be used for construction
+logger - logger to be used
+Orchestrate loading of multiple OBJ files/data from an instruction queue with a configurable amount of workers (1-16).
+- Workflow:
+- prepareWorkers
+- enqueueForRun
+- processQueue
+- tearDown
+
+<h4>Методы</h4>
+#
+.prepareWorkers ( globalCallbacks, maxQueueSize, maxWebWorkers )
+globalCallbacks - Register global callbacks used by all web workers
+maxQueueSize - Set the maximum size of the instruction queue (1-1024)
+maxWebWorkers - Set the maximum amount of workers (1-16)
+Create or destroy workers according limits. Set the name and register callbacks for dynamically created web workers.
+#
+.enqueueForRun ( runParams )
+runParams
+Store run instructions in internal instructionQueue.
+#
+.processQueue ()
+Process the instructionQueue until it is depleted.
+#
+.tearDown ( callbackOnFinishedProcessing )
+callbackOnFinishedProcessing - Function called once all workers finished processing.
+Terminate all workers.
+#
+.getMaxQueueSize ()
+Returns the maximum length of the instruction queue.
+#
+.getMaxWebWorkers ()
+Returns the maximum number of workers.
+#
+.isRunning ()
+Returns if any workers are running.
+#
+.setCrossOrigin ( crossOrigin )
+crossOrigin - CORS value
+Sets the CORS string to be used.
+
+<h3 id="3.6.6">PrepData</h3>
+<h4>Конструктор</h4>
+PrepData( modelName )
+modelName - Overall name of the model
+Configuration instructions to be used by run method.
+<h4>Методы</h4>
+#
+.setStreamMeshesTo ( streamMeshesTo )
+streamMeshesTo - Object already attached to scenegraph where new meshes will be attached to
+Set the node where the loaded objects will be attached directly.
+#
+.setMaterialPerSmoothingGroup ( materialPerSmoothingGroup )
+materialPerSmoothingGroup
+Tells whether a material shall be created per smoothing group.
+#
+.setUseIndices ( useIndices )
+useIndices - Default is false
+Instructs loaders to create indexed BufferGeometry.
+#
+.setDisregardNormals ( disregardNormals )
+disregardNormals
+Tells whether normals should be completely disregarded and regenerated.
+#
+.getCallbacks ()
+Returns all callbacks as LoaderSupport.Callbacks.
+#
+.setCrossOrigin ( crossOrigin )
+crossOrigin - CORS value
+Sets the CORS string to be used.
+#
+.addResource ( resource )
+resource
+Add a resource description.
+#
+.setUseAsync ( useAsync )
+useAsync
+If true uses async loading with worker, if false loads data synchronously.
+
+
+<h3 id="3.6.7">LoaderBase</h3>
+<h4>Конструктор</h4>
+LoaderBase( manager, logger )
+manager - The loadingManager for the loader to use. Default is THREE.DefaultLoadingManager. logger - logger to be used
+Base class to be used by loaders.
+<h4>Методы</h4>
+#
+.getLogger ()
+Returns LoaderSupport.ConsoleLogger.
+#
+.setModelName ( modelName )
+modelName
+Set the name of the model.
+#
+.setPath ( path )
+path - URL
+The URL of the base path.
+#
+.setStreamMeshesTo ( streamMeshesTo )
+streamMeshesTo - Object already attached to scenegraph where new meshes will be attached to
+Set the node where the loaded objects will be attached directly.
+#
+.setMaterials ( Array of materials )
+Array of materials - Array of Materials
+Set materials loaded by MTLLoader or any other supplier of an Array of Materials.
+#
+.setUseIndices ( useIndices )
+useIndices
+Instructs loaders to create indexed BufferGeometry.
+#
+.setDisregardNormals ( disregardNormals )
+disregardNormals
+Tells whether normals should be completely disregarded and regenerated.
+#
+.onProgress ( type, text, numericalValue )
+type - The type of event
+text - Textual description of the event
+numericalValue - Numerical value describing the progress
+Announce feedback which is give to the registered LoaderSupport.Callbacks.
+
+
+<h3 id="3.6.8">Callbacks</h3>
+<h4>Конструктор</h4>
+Callbacks()
+Callbacks utilized by loaders and builder.
+<h4>Методы</h4>
+#
+.setCallbackOnProgress ( callbackOnProgress )
+callbackOnProgress - Callback function for described functionality
+Register callback function that is invoked by internal function "announceProgress" to print feedback.
+#
+.setCallbackOnMeshAlter ( callbackOnMeshAlter )
+callbackOnMeshAlter - Callback function for described functionality
+Register callback function that is called every time a mesh was loaded. Use LoadedMeshUserOverride for alteration instructions (geometry, material or disregard mesh).
+#
+.setCallbackOnLoad ( callbackOnLoad )
+callbackOnLoad - Callback function for described functionality
+Register callback function that is called once loading of the complete OBJ file is completed.
+#
+.setCallbackOnLoadMaterials ( callbackOnLoadMaterials )
+callbackOnLoadMaterials - Callback function for described functionality
+Register callback function that is called when materials have been loaded.
+
+
+<h3 id="3.6.9">Validator</h3>
+<h4>Constructor</h4>
+Validator()
+Validation functions.
+<h4>Методы</h4>
+#
+.isValid ( input )
+input - Can be anything
+If given input is null or undefined, false is returned otherwise true.
+#
+.verifyInput ( input, defaultValue )
+input - Can be anything defaultValue - Can be anything
+If given input is null or undefined, the defaultValue is returned otherwise the given input.
+
+
+<h3 id="3.6.10">ConsoleLogger</h3>
+<h4>Конструктор</h4>
+ConsoleLogger( enabled, debug )
+enabled - Tell if logger is enabled. debug - Toggle debug logging.
+Logging wrapper for console.
+<h4>Методы</h4>
+#
+.setDebug ( debug )
+debug - True or False
+Enable or disable debug logging.
+#
+.isDebug ()
+Returns if is enabled and debug.
+#
+.setEnabled ( enabled )
+enabled - True or False
+Enable or disable info, debug and time logging.
+#
+.isEnabled ()
+Returns if is enabled.
+#
+.logDebug ( message )
+message - Message to log
+Log a debug message if enabled and debug is set.
+#
+.logInfo ( message )
+message - Message to log
+Log an info message if enabled.
+#
+.logWarn ( message )
+message - Message to log
+Log a warn message (always).
+#
+.logError ( message )
+message - Message to log
+Log an error message (always).
+#
+.logTimeStart ( id )
+id - Time identification
+Start time measurement with provided id.
+#
+.logTimeEnd ( id )
+id - Time identification
+Stop time measurement started with provided id.
+
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/LoaderSupport.js" target="_blank">LoaderSupport.js на github.com</a></div><br><br>
+
+
+<h3 id="3.7">PCDLoader</h3>
 A loader for <em>PCD</em> files. Loads ascii and binary.
 			Compressed binary files are not supported.</div>
 
@@ -1258,18 +1031,16 @@ A loader for <em>PCD</em> files. Loads ascii and binary.
 		<div>
 		[page:String url</a> — The file name or file url.
 		</div>
-		<div>
-		Parse an <em>pcd</em> binary structure and return an [page:Object3D</a>.<br />
+Parse an <em>pcd</em> binary structure and return an [page:Object3D</a>.<br />
 		The object is converted to [page:Points</a> with a [page:BufferGeometry</a> and a [page:PointsMaterial</a>.
-		</div>
+		</div><br>
 
-		<h2>Source</h2>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PCDLoader.js" target="_blank">PCDLoader.js на github.com</a></div><br><br>
 
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PCDLoader.js examples/js/loaders/PCDLoader.js</a>
 
-
-<h3 id="2.9">PDBLoader</h3>
-A loader for loading a <em>.pdb</em> resource.<br /><br />
+<h3 id="3.8">PDBLoader</h3>
+A loader for loading a <em>.pdb</em> resource.<br>
 		The <a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.
 		</div>
 
@@ -1340,15 +1111,13 @@ A loader for loading a <em>.pdb</em> resource.<br /><br />
 		[page:Object json</a> — The <em>(JSON) pdb</em> structure to parse.<br />
 		[page:Function callback</a> — Will be called when parse completes, with three arguments: [page:BufferGeometry geometryAtoms</a>, [page:BufferGeometry geometryBonds</a> and the original [page:Object json</a>.<br />
 		</div>
-		<div>
-		Parse a <em>(JSON) pdb</em> structure and return two [page:BufferGeometry</a>: one for atoms, one for bonds.<br />
-		</div>
-
+Parse a <em>(JSON) pdb</em> structure and return two [page:BufferGeometry</a>: one for atoms, one for bonds.
+		</div><br>
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PDBLoader.js examples/js/loaders/PDBLoader.js</a>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PDBLoader.js" target="_blank">PDBLoader.js на github.com</a></div><br><br>
 
 
-<h3 id="2.10">SVGLoader</h3>
+<h3 id="3.9">SVGLoader</h3>
 Загрузчик для загрузки ресурса в формате <em>.svg</em>.
 <h4>Конструктор</h4>
 <pre>SVGLoader( <a href="loaders.htm#16.2" title="LoadingManager">manager</a> )</pre>
@@ -1367,11 +1136,10 @@ A loader for loading a <em>.pdb</em> resource.<br /><br />
 Begin loading from url and call onLoad with the response content.</div><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/examples/SVGLoader.js.txt">SVGLoader.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/SVGLoader.js" target="_blank">SVGLoader.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/SVGLoader.js" target="_blank">SVGLoader.js на github.com</a></div><br><br>
 
 
-<h3 id="2.11">TGALoader</h3>
+<h3 id="3.10">TGALoader</h3>
 Class for loading a <em>.tga</em> [page:DataTexture texture</a>.
 
 <h4>Пример</h4>
@@ -1426,13 +1194,77 @@ Class for loading a <em>.tga</em> [page:DataTexture texture</a>.
 		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
 		[page:Function onError</a> — Will be called when load errors.<br />
 		</div>
-		<div>
-		Begin loading from url and pass the loaded [page:DataTexture texture</a> to onLoad. The [page:DataTexture texture</a> is also directly returned for immediate use (but may not be fully loaded).
-		</div>
+Begin loading from url and pass the loaded [page:DataTexture texture</a> to onLoad. The [page:DataTexture texture</a> is also directly returned for immediate use (but may not be fully loaded).
+		</div><br>
 
-		<h2>Source</h2>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/TGALoader.js" target="_blank">TGALoader.js на github.com</a></div><br><br>
 
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/TGALoader.js examples/js/loaders/TGALoader.js</a>
+
+<h3 id="3.11">PRWMLoader</h3>
+A loader for loading a .prwm resource.
+Packed Raw WebGL Model is an open-source binary file format for nD geometries specifically designed for JavaScript and WebGL with a strong focus on fast parsing (from 1ms to 0.1ms in Chrome 59 on a MBP Late 2013). The parsing of PRWM file is especially fast when the endianness of the file is the same as the endianness of the client platform. More information on this here.<br><br>
+
+<h4>Пример</h4>
+// instantiate a loader
+var loader = new THREE.PRWMLoader();
+
+// load a resource
+loader.load(
+	// resource URL
+	'models/nefertiti.le.prwm',
+	// called when resource is loaded
+	function ( bufferGeometry ) {
+
+		var object = new THREE.Mesh( bufferGeometry, new THREE.MeshNormalMaterial() );
+		scene.add( object );
+
+	},
+	// called when loading is in progresses
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+webgl_loader_prwm
+
+<h4>Конструктор</h4>
+PRWMLoader( manager )
+manager — The loadingManager for the loader to use. Default is THREE.DefaultLoadingManager.
+Creates a new PRWMLoader.
+
+<h4>Свойства</h4>
+<br><br>
+
+<h4>Методы</h4>
+#
+.load ( url, onLoad, onProgress, onError )
+url — A string containing the path/URL of the .prwm file. Any * character in the URL will be automatically replaced by le or be depending on the platform endianness.
+onLoad — (optional) A function to be called after the loading is successfully completed. The function receives the loaded BufferGeometry as an argument.
+onProgress — (optional) A function to be called while the loading is in progress. The function receives a XMLHttpRequest instance, which contains total and loaded bytes.
+onError — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.
+Begin loading from url and call onLoad with the parsed response content.
+#
+.parse ( arrayBuffer )
+arrayBuffer — ArrayBuffer containing the prwm data.
+Parse a prwm file passed as an ArrayBuffer and directly return an instance of BufferGeometry.
+PRWMLoader.isBigEndianPlatform( )
+Return true if the endianness of the platform is Big Endian, false otherwise.
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PRWMLoader.js" target="_blank">PRWMLoader.js на github.com</a></div>
+<h4>Additional notes</h4>
+This loader is additionally available on npm as three-prwm-loader.
+<br><br>
+
+
 
 <h2 id="4">Объекты</h2>
 <span class="right_side"><a href="objects.htm#7" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
@@ -1495,8 +1327,57 @@ Automatically adds a lens flare to the lensFlares array if a texture is set.
 
 <h4>Исходники</h4>
 [link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+
 <h2 id="5">Экспортеры</h2>
 <h3 id="5.1">GLTFExporter</h3>
+ An exporter for glTF 2.0.<br>
+
+glTF (GL Transmission Format) is an open format specification for efficient delivery and loading of 3D content. Assets may be provided either in JSON (.gltf) or binary (.glb) format. External files store textures (.jpg, .png, ...) and additional binary data (.bin). A glTF asset may deliver one or more scenes, including meshes, materials, textures, skins, skeletons, morph targets, animations, lights, and/or cameras.<br><br>
+
+<h4>Пример</h4>
+// Instantiate a exporter
+var exporter = new THREE.GLTFExporter( defaultOptions );
+
+// Parse the input and generate the glTF output
+exporter.parse( scene, function ( gltf ) {
+	console.log( gltf );
+	downloadJSON( gltf );
+}, options );
+misc_exporter_gltf
+
+<h4>Конструктор</h4>
+GLTFExporter( )
+Creates a new GLTFExporter.
+
+<h4>Методы</h4>
+#
+.parse ( input, onCompleted, options )
+input — Scenes or objects to export. Valid options:
+
+    Export scenes
+    exporter.parse( scene1, ...)
+    exporter.parse( [ scene1, scene2 ], ...)
+    Export objects (It will create a new Scene to hold all the objects)
+    exporter.parse( object1, ...)
+    exporter.parse( [ object1, object2 ], ...)
+    Mix scenes and objects (It will export the scenes as usual but it will create a new scene to hold all the single objects).
+    exporter.parse( [ scene1, object1, object2, scene2 ], ...)
+
+onCompleted — Will be called when the export completes. The argument will be the generated glTF JSON or binary ArrayBuffer.
+options - Export options
+
+    trs - bool. Export position, rotation and scale instead of matrix per node. Default is false
+    onlyVisible - bool. Export only visible objects. Default is true.
+    truncateDrawRange - bool. Export just the attributes within the drawRange, if defined, instead of exporting the whole array. Default is true.
+    binary - bool. Export in binary (.glb) format, returning an ArrayBuffer. Default is false.
+    embedImages - bool. Export with images embedded into the glTF asset. Default is true.
+    animations - Array<AnimationClip>. List of animations to be included in the export.
+
+Generates a .gltf (JSON) or .glb (binary) output from the input (Scene or Objects)
+<h4>Исходники</h4>
+examples/js/exporters/GLTFExporter.js
+
+
 
 <h2 id="6">Плагины</h2>
 

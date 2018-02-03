@@ -512,7 +512,7 @@ Use <a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()
 <pre id="4computeBoundingSphere"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов compute bounding sphere<br>- вычисление ограничивающей сферы')" onmouseout="hide()">.computeBoundingSphere</a></span>( )</pre>
 Смотрите <tt><a href="#7Geometry.computeBoundingSphere" onmouseover="show('Geometry.computeBoundingSphere')" onmouseout="hide()">Geometry.computeBoundingSphere</a></tt>.<br><br>
 <pre id="4computeGroups"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов compute bounding groups - вычисление групп')" onmouseout="hide()">.computeGroups</a></span>( <a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">geometry</a> )</pre>
-Вычисляет части геометрии с разными <tt>materialIndex</a></tt>. Смотрите <tt><a href="#2groups" onmouseover="show('BufferGeometry.groups')" onmouseout="hide()">BufferGeometry.groups</a></tt>.<br><br>
+Вычисляет части геометрии с разными <tt>materialIndex</tt>. Смотрите <tt><a href="#2groups" onmouseover="show('BufferGeometry.groups')" onmouseout="hide()">BufferGeometry.groups</a></tt>.<br><br>
 <pre id="4dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова dispose - избавиться, устранить, выбросить, удалить')" onmouseout="hide()">.dispose</a></span>( )</pre>
 Удаляет объект из памяти. Этот метод вызывается, если во время работы приложения нужно удалить <tt>directGeometry</tt>.<br><br>
 <pre id="4fromGeometry"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова from geometry - из геометрии')" onmouseout="hide()">.fromGeometry</a></span>( <a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">geometry</a> )</pre>
@@ -927,6 +927,7 @@ An instanced version of BufferAttribute.
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/InstancedBufferGeometry.js" target="_blank">InstancedBufferGeometry.js на github.com</a></div><br><br>
 
+
 <span class="right_side"><a href="core.htm#11" title="Переход к родительскому классу"><tt>InterleavedBuffer &rarr;</tt></a></span>
 <h3 id="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InstancedInterleavedBuffer</h3>
 Инстанцированная версия <tt><a href="#11" onmouseover="show('InterleavedBuffer')" onmouseout="hide()">InterleavedBuffer</a></tt>.
@@ -949,129 +950,148 @@ An instanced version of BufferAttribute.
 
 
 <h3 id="11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InterleavedBuffer</h3>
+Слово "Interleaved" (т.е. "с чередованием") в названии означает, что несколько атрибутов
+(возможно разных типов, например, <tt>position</tt> - положение, <tt>normal</tt> - нормаль, <tt>uv</tt> - UV-координаты, <tt>color</tt> - цвет) упаковываются в один-единственный буфер массива.<br>
+Введение в массивы с чередованием можно найти здесь: <a href="https://blog.tojicode.com/2011/05/interleaved-array-basics.html" target="_blank">Interleaved array basics</a> (Основы массива с чередованием).<br><br>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/#webgl_buffergeometry_points_interleaved" target="_blank">webgl / buffergeometry / points / interleaved</a></pre><br>
+
 <h4>Конструктор</h4>
-InterleavedBuffer( array, stride )
-<pre>InterleavedBuffer( [page:TypedArray array</a>, [page:Integer stride</a> )</pre>
+<pre>InterleavedBuffer( <span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stride - шаг')" onmouseout="hide()">stride</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span></tt> -- типизированный массив с общим буфером. Содержит данные геометрического элемента.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stride - шаг')" onmouseout="hide()">stride</a></span></tt> -- количество элементов типизированного массива, приходящихся на одну вершину.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="10array">[property:Array array</a></pre>
+<pre id="11array"><span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">.array</a></span></pre>
+Типизированный массив с общим буфером. Содержит данные геометрического элемента.<br><br>
 
-<pre id="10stride">[property:Integer stride</a></pre>
+<pre id="11stride"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stride - шаг')" onmouseout="hide()">.stride</a></span></pre>
+Количество элементов типизированного массива, приходящихся на одну вершину.<br><br>
 
-<pre id="10count">[property:Integer count</a></pre>
-Gives the total number of elements in the array.
+<pre id="11count"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет, подсчитывать')" onmouseout="hide()">.count</a></span></pre>
+Указывает общее число элементов в массиве.<br><br>
 
-<pre id="10dynamic">[property:Boolean dynamic</a></pre>
-Значение по умолчанию равно <tt>false</tt>.
+<pre id="11dynamic"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dynamic - активный, динамический')" onmouseout="hide()">.dynamic</a></span></pre>
+Значение по умолчанию равно <tt>false</tt>.<br><br>
 
-<pre id="10updateRange">[property:Object updateRange</a></pre>
-Object containing offset and count.
+<pre id="11updateRange"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update range - диапазон обновления')" onmouseout="hide()">.updateRange</a></span></pre>
+Объект, содержащий <tt>offset</tt> (смещение) и <tt>count</tt> (счет).<br><br>
 
-<pre id="10updateRange.offset">[property:Number updateRange.offset</a></pre>
-Значение по умолчанию равно <tt>0</tt>.
+<pre id="11updateRange.offset"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update range offset - смещение диапазона обновления')" onmouseout="hide()">.updateRange.offset</a></span></pre>
+Значение по умолчанию равно <tt>0</tt>.<br><br>
 
-<pre id="10updateRange.count">[property:Number updateRange.count</a></pre>
-Значение по умолчанию равно <tt>-1</tt>.
+<pre id="11updateRange.count"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update range count - счет диапазона обновления')" onmouseout="hide()">.updateRange.count</a></span></pre>
+Значение по умолчанию равно <tt>-1</tt>.<br><br>
 
-<pre id="10version">[property:Integer version</a></pre>
-A version number, incremented every time the needsUpdate property is set to true.
+<pre id="11version"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('version - версия')" onmouseout="hide()">.version</a></span></pre>
+Номер версии, увеличивающийся каждый раз, когда свойство <tt>needsUpdate</tt> установливается как <tt>true</tt>.<br><br>
 
-<pre id="10isInterleavedBuffer">[property:Integer isInterleavedBuffer</a></pre>
-Значение по умолчанию равно <tt>true</tt>.
+<pre id="11isInterleavedBuffer"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is interleaved buffer - является буфером с чередованием')" onmouseout="hide()">.isInterleavedBuffer</a></span></pre>
+Значение по умолчанию равно <tt>true</tt>.<br><br>
 
-<pre id="10needsUpdate">[property:Integer needsUpdate</a></pre>
-Значение по умолчанию равно <tt>false</tt>. Setting this to true increments [page:InterleavedBuffer.version version].</div><br>
+<pre id="11needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('needs update - нуждается в обновлении')" onmouseout="hide()">.needsUpdate</a></span></pre>
+Значение по умолчанию равно <tt>false</tt>. Установка этого свойства как <tt>true</tt> увеличивает значение свойства <tt><a href="#11version" onmouseover="show('InterleavedBuffer.version')" onmouseout="hide()">version</a></tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<h3>[method:null setArray</a> ( [page:TypedArray array</a> ) </h3>
-<div class=blockindent><tt>array</tt> - must be  a Typed Array.</div>
+<pre id="11setArray"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set array - установить массив')" onmouseout="hide()">.setArray</a></span>( <span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span> )</pre>
+<div class=list><tt>array</tt> - должен быть типизированным массивом.</div><br>
 
-<h3>[method:InterleavedBuffer setDynamic] ( [page:Boolean value] ) </h3>
-Set [page:InterleavedBuffer.dynamic dynamic] to value.
+<pre id="11setDynamic"><a href="#11" onmouseover="show('InterleavedBuffer.<br>set dynamic - установить свойство dynamic')" onmouseout="hide()">.setDynamic</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает в свойство <tt><a href="#11dynamic" onmouseover="show('InterleavedBuffer.dynamic')" onmouseout="hide()">dynamic</a></tt> значение, приведенное в аргументе <tt>value</tt>.<br><br>
 
-<h3>[method:InterleavedBuffer copy]( source ) </h3>
-Copy the array, count, stride and value of dynamic to this.
+<pre id="11copy"><a href="#11" onmouseover="show('InterleavedBuffer.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#11" onmouseover="show('InterleavedBuffer.<br>source - исходник, источник')" onmouseout="hide()">source</a> )</pre>
+Копирует InterleavedBuffer, приведенный в аргументе <tt>source</tt>, в данный InterleavedBuffer.<br><br>
 
-<h3>[method:InterleavedBuffer copyAt]( index1, attribute, index2 ) </h3>
+<pre id="11copyAt"><a href="#11" onmouseover="show('InterleavedBuffer.<br>copy at - копировать в')" onmouseout="hide()">.copyAt</a>( index1, attribute, index2 )</pre>
+Метод копирует данные из <tt><span class="lnk" onmouseover="show('значение с индексом <tt>index2</tt> из массива по имени <tt>attribute</tt>')" onmouseout="hide()">attribute[index2]</span></tt> в <tt><span class="lnk" onmouseover="show('на место в массиве <tt>array</tt> с индексом <tt>index1</tt>')" onmouseout="hide()">array[index1]</span></tt>.<br><br>
 
-<h3>[method:InterleavedBuffer set]( value, offset ) </h3>
+<pre id="11set"><a href="#11" onmouseover="show('InterleavedBuffer.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span></tt> - исходный (типизированный) массив.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span></tt>
+- смещение в целевом массиве, с которого начинается запись значений из исходного массива. Значение по умолчанию равно <tt>0</tt>.</div>
+Сохраняет несколько значений в буфер, считывая входные значения из указанного массива.<br><br>
 		
-<h3>[method:InterleavedBuffer clone]( index, x, y ) </h3>
-</div><br>
+<pre id="11clone"><a href="#11" onmouseover="show('InterleavedBuffer.<br>clone - клон, клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Создает клон данного InterleavedBuffer.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBuffer.js" target="_blank">InterleavedBuffer.js на github.com</a></div><br><br>
 
-
 <h3 id="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InterleavedBufferAttribute</h3>
 <h4>Конструктор</h4>
-InterleavedBufferAttribute( interleavedBuffer, itemSize, offset, normalized )
-<h3>[name]( [page:InterleavedBuffer interleavedBuffer], [page:Integer itemSize], [page:Integer offset], [page:Boolean normalized] )</h3>
+<pre>InterleavedBufferAttribute( <a href="#11" onmouseover="show('InterleavedBuffer')" onmouseout="hide()">interleavedBuffer</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item size - размер элемента')" onmouseout="hide()">itemSize</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('normalized - нормализованный')" onmouseout="hide()">normalized</a></span> )</pre><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<h3>[property:InterleavedBuffer data]</h3>
-The [page:InterleavedBuffer InterleavedBuffer] instance passed in the constructor.
+<pre id="12data"><a href="#11" onmouseover="show('InterleavedBuffer.<br>data - данные')" onmouseout="hide()">.data</a></pre>
+Экземпляр <tt><a href="#11" onmouseover="show('InterleavedBuffer')" onmouseout="hide()">InterleavedBuffer</a></tt> переданный в конструкторе.<br><br>
 
-<h3>[property:Integer itemSize]</h3>
+<pre id="12array"><span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">.array</a></span></pre>
+Значение <tt><a href="#12data" onmouseover="show('InterleavedBufferAttribute.data')" onmouseout="hide()">data</a>.array</tt>.<br><br>
 
-<h3>[property:Integer offset]</h3>
+<pre id="12count"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет')" onmouseout="hide()">.count</a></span></pre>
+Значение <tt><a href="#12data" onmouseover="show('InterleavedBufferAttribute.data')" onmouseout="hide()">data</a>.count</tt>.
+Если буфер хранит трехкомпонентный элемент (такой как <tt>position</tt> - положение, <tt>normal</tt> - нормаль, или <tt>color</tt> - цвет), то здесь будет подсчитываться число сохранённых подобных элементов.<br><br>
 
-<h3>[property:Boolean normalized]</h3>
-Значение по умолчанию равно <tt>true</tt>.
+<pre id="12itemSize"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item size - размер элемента')" onmouseout="hide()">.itemSize</a></span></pre>
+Количество значений, составляющих каждый элемент.<br><br>
 
-<h3>[property:Boolean isInterleavedBufferAttribute]</h3>
+<pre id="12offset"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">.offset</a></span></pre>
+Смещение в базовом буфере массива, с которого начинается элемент.<br><br>
+
+<pre id="12normalized"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('normalized - нормализованный')" onmouseout="hide()">.normalized</a></span></pre>
+Значение по умолчанию равно <tt>true</tt>.<br><br>
+
+<pre id="12isInterleavedBufferAttribute"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is interleaved buffer attribute - является атрибутом буфера с чередованием')" onmouseout="hide()">.isInterleavedBufferAttribute</a></span></pre>
 Значение по умолчанию равно <tt>true</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<h3>[method:Integer count]()</h3>
-The value of [page:InterleavedBufferAttribute.data data].count.
+<pre id="12getX"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get X - получить (компонент) X')" onmouseout="hide()">.getX</a></span>( index )</pre>
+Метод возвращает компонент <tt>x</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:Array array]()</h3>
-The value of [page:InterleavedBufferAttribute.data data].array.
+<pre id="12getY"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get Y - получить (компонент) Y')" onmouseout="hide()">.getY</a></span>( index )</pre>
+Метод возвращает компонент <tt>y</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null getX]( index ) </h3>
+<pre id="12getZ"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get Z - получить (компонент) Z')" onmouseout="hide()">.getZ</a></span>( index )</pre>
+Метод возвращает компонент <tt>z</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null getY]( index ) </h3>
+<pre id="12getW"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get W - получить (компонент) W')" onmouseout="hide()">.getW</a></span>( index )</pre>
+Метод возвращает компонент <tt>w</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null getZ]( index ) </h3>
+<pre id="12setX"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set X - установить (компонент) X')" onmouseout="hide()">.setX</a></span>( index, x )</pre>
+Метод устанавливает компонент <tt>x</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null getW]( index ) </h3>
+<pre id="12setY"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set Y - установить (компонент) Y')" onmouseout="hide()">.setY</a></span>( index, y )</pre>
+Метод устанавливает компонент <tt>y</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null setX]( index, x ) </h3>
+<pre id="12setZ"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set Z - установить (компонент) Z')" onmouseout="hide()">.setZ</a></span>( index, z )</pre>
+Метод устанавливает компонент <tt>z</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null setY]( index, y ) </h3>
+<pre id="12setW"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set W - установить (компонент) W')" onmouseout="hide()">.setW</a></span>( index, w )</pre>
+Метод устанавливает компонент <tt>w</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null setZ]( index, z ) </h3>
+<pre id="12setXY"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set X Y - установить (компоненты) X и Y')" onmouseout="hide()">.setXY</a></span>( index, x, y )</pre>
+Метод устанавливает компоненты <tt>x</tt> и <tt>y</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null setXY]( index, x, y ) </h3>
+<pre id="12setXYZ"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set X Y Z - установить (компоненты) X Y и Z')" onmouseout="hide()">.setXYZ</a></span>( index, x, y, z )</pre>
+Метод устанавливает компоненты <tt>x</tt>, <tt>y</tt> и <tt>z</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.<br><br>
 
-<h3>[method:null setXYZ]( index, x, y, z ) </h3>
-
-<h3>[method:null setXYZW]( index, x, y, z, w ) </h3>
-</div><br>
+<pre id="12setXYZW"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set X Y Z W - установить (компоненты) X Y Z и W')" onmouseout="hide()">.setXYZW</a></span>( index, x, y, z, w )</pre>
+Метод устанавливает компоненты <tt>x</tt>, <tt>y</tt>, <tt>z</tt> и <tt>w</tt> элемента по индексу, приведенному в аргументе <tt>index</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBufferAttribute.js" target="_blank">InterleavedBufferAttribute.js на github.com</a></div><br><br>
 
 
 <h3 id="13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Layers</h3>
-<!-- A Layers object assigns an Object3D to 1 or more of 32 layers numbered 0 to 31 - internally the layers are stored as a bit mask, and by default all Object3Ds are a member of layer 0.<br>
-
-This can be used to control visibility - an object must share a layer with a camera to be visible when that camera's view is renderered.<br>
-
-All classes that inherit from Object3D have an Object3D.layers property which is an instance of this class.  -->
-Объект предоставляет битовую маску и методы допуска, используемые для управления видимостью <a href="#14" title="Object3D">Object3D</a>.
-An object providing a bit mask and accessor methods used to control an Object3D's visibility. A Layers object assigns an Object3D to 0 or more of 32 layers numbered 0 to 31.<br><br>
-
-This is used to control visibility - an object must share a layer with a camera to be visible when that camera's view is renderered.<br><br>
-
-All classes that inherit from Object3D have a .layers property which is an instance of this class.
-An object providing a bit mask and accessor method used to control an [page:Object3D]'s visibility.
-		A [page:Layers] object assigns an [page:Object3D] to 0 or more of 32 layers numbered 0 to 31.
+Объект Layers назначает для <a href="#14" title="Object3D">Object3D</a> 1 или больше (до 32) слоев, пронумерованных от 0 до 31 - внутренне слои хранятся в виде <a href="https://en.wikipedia.org/wiki/Mask_(computing)" target="_blank">битовой маски</a>
+(<a href="https://ru.wikipedia.org/wiki/%D0%91%D0%B8%D1%82%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%B0%D1%81%D0%BA%D0%B0" target="_blank">вот эта статья на русском</a>), и по умолчанию все объекты Object3D имеют принадлежность к слою 0.<br>
+Это можно использовать для управления видимостью - чтобы быть видимым, при визуализации представления этой камеры, объект должен иметь общий слой с <a href="cameras.htm#1" onmouseover="show('Camera')" onmouseout="hide()">камерой</a>.<br>
+Все классы, которые наследуют от <a href="#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> имеют свойство <tt><a href="#14layers" onmouseover="show('Object3D.layers')" onmouseout="hide()">layers</a></tt>, являющееся экземпляром данного класса.<br><br>
 
 <h4>Конструктор</h4>
 <pre>Layers()</pre>
@@ -1079,34 +1099,29 @@ An object providing a bit mask and accessor method used to control an [page:Obje
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="13mask"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="mask - маска">.mask</a></pre>
+<pre id="13mask"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mask - маска')" onmouseout="hide()">.mask</a></span></pre>
 Битовая маска, в которой хранится к каким из 32 слоев принадлежит этот объект в данный момент.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="13disable"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="disable - отключить, запретить">.disable</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="layer - слой">layer</a> )</pre>
-<div class=list><tt>layer</tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
+<pre id="13disable"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('disable - отключить, запретить')" onmouseout="hide()">.disable</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layer - слой')" onmouseout="hide()">layer</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layer - слой')" onmouseout="hide()">layer</a></span></tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
 Метод удаляет принадлежность объекта к данному слою (указанному в <tt>layer</tt>).<br><br>
-<pre id="13enable"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="enable - включить, разрешить">.enable</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="layer - слой">layer</a> )</pre>
-<div class=list><tt>layer</tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
+<pre id="13enable"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable - включить, разрешить')" onmouseout="hide()">.enable</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layer - слой')" onmouseout="hide()">layer</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layer - слой')" onmouseout="hide()">layer</a></span></tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
 Метод добавляет принадлежность объекта к данному слою (указанному в <tt>layer</tt>).<br><br>
 
-<pre id="13set"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set - установить">set</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="layer - слой">layer</a> )</pre>
-<div class=list><tt>layer</tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
+<pre id="13set"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set - установить')" onmouseout="hide()">set</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layer - слой')" onmouseout="hide()">layer</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layer - слой')" onmouseout="hide()">layer</a></span></tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
 Метод устанавливает принадлежность объекта к указанному слою (в аргументе <tt>layer</tt>) и удаляет принадлежность ко всем другим слоям.<br><br>
 
-<pre id="13test">.test</a> ( layers</a> )</pre>
-layers - a Layers object
-
-Returns true if this and the passed layers object are members of the same set of layers.
+<pre id="13test"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('test - проверка')" onmouseout="hide()">.test</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layers - слои')" onmouseout="hide()">layers</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layers - слои')" onmouseout="hide()">layers</a></span></tt> - объект Layers.</div>
+Метод возвращает значение <tt>true</tt>, если этот и переданный объект (в аргументе <tt>layers</tt>) принадлежать к одному и тому же набору слоев.<br><br>
 
 <pre id="13toggle"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('toggle - переключить')" onmouseout="hide()">.toggle</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layer - слой')" onmouseout="hide()">layer</a></span> )</pre>
-<div class=list><tt>layer</tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
-Метод переключает принадлежность к слою.<br><br>
-
-<h3>[method:Boolean test]( [page:Integer layers] )</h3>
-<div class=list>layers - a 32bit bit mask of layer numbers.</div>
-Returns true if *layers* and .mask have any bits set in common.</div><br>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('layer - слой')" onmouseout="hide()">layer</a></span></tt> - целое число от <tt>0</tt> до <tt>31</tt>.</div>
+Метод переключает принадлежность к слою.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/Layers.js" target="_blank">Layers.js на github.com</a></div><br><br>

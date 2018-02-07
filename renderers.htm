@@ -1,40 +1,41 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head>
 <title>Three.js</title>
-<link rel="stylesheet" type="text/css" href="1.css">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<link rel="stylesheet" type="text/css" href="1.css">
 <script type="text/javascript" src="1.js"></script>
 </head>
 <body>
 <h2 class=head1>Визуализаторы</h2>
 
 <h3 id="1.1">WebGLRenderer</h3>
-The WebGL renderer displays your beautifully crafted scenes using <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a>.
+Рендерер (визуализатор) WebGL при помощи программной библиотеки <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a> отображает сцены, созданные вами.
 Вот <a href="https://ru.wikipedia.org/wiki/WebGL" target="_blank">статья Википедии о WebGL</a> на русском языке.<br><br>
 
 <h4>Конструктор</h4>
-<pre>WebGLRenderer( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
+<pre>WebGLRenderer( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
 <div class=list><tt>parameters</tt> - объект со свойствами, определяющими поведение визуализатора (рендерера) (дополнительный, необязательный параметр).<br>
 Конструктор также допускает полное отсутствие параметров. Во всех подобных случаях, им будут приниматься соответствующие значения по умолчанию.</div>
 <div class=blockindent>Допустимы следующие параметры:
-<ul><li><tt>canvas</tt> — <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank" title="canvas - холст, полотно, картина">холст</a>, на который визуализатор выводит результаты своей работы.
-Он соответствует свойству <tt><a href="#1domElement" title="WebGLRenderer.domElement">domElement</a></tt>, указанному ниже. Если он не был передан здесь, то будет создан новый элемент <tt>canvas</tt>.</li>
-<li><tt>context</tt> — этот параметр можно использовать для присоединения визуализатора (рендерера) к существующему <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext" target="_blank">RenderingContext</a>. Значением по умолчанию является <tt>null</tt>.
-Вот статья о <a href="https://developer.mozilla.org/ru/docs/Web/API/WebGLRenderingContext" target="_blank">RenderingContext</a> на русском языке.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="precision - точность">precision</a></tt> — точность шейдера.
+<div class=list><tt>canvas</tt> — <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank" onmouseover="show('canvas - холст, полотно, картина')" onmouseout="hide()">холст</a>, на который визуализатор выводит результаты своей работы.
+Он соответствует свойству <tt><a href="#1domElement" onmouseover="show('WebGLRenderer.domElement')" onmouseout="hide()">domElement</a></tt>, указанному ниже. Если он не был передан здесь, то будет создан новый элемент <tt>canvas</tt>.</div>
+<div class=list><tt>context</tt> — этот параметр можно использовать для присоединения визуализатора (рендерера) к существующему <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext" target="_blank">RenderingContext</a>. Значением по умолчанию является <tt>null</tt>.
+Вот статья о <a href="https://developer.mozilla.org/ru/docs/Web/API/WebGLRenderingContext" target="_blank">RenderingContext</a> на русском языке.</div>
+<div class=list><tt><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('precision - точность')" onmouseout="hide()">precision</a></span></tt> — точность шейдера.
 Может быть <tt>highp</tt> (похоже сокращ. от англ. слов high precision - высокая точность), <tt>mediump</tt> (от слов medium precision - средняя точность) или <tt>lowp</tt> (от слов low precision - низкая точность).
 Значением по умолчанию является <tt>highp</tt>, если поддерживается устройством.
 Смотрите примечания "Things to Avoid" в статье <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/WebGL_best_practices" target="_blank">WebGL best practices</a>.
-На русском языке это будет раздел "Чего следует избегать" в статье <a href="https://developer.mozilla.org/ru/docs/Web/API/WebGL_API/WebGL_best_practices" target="_blank">Лучшие практики WebGL</a>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="alpha - ">alpha</a></tt> — параметр определяет, будет ли холст (canvas) содержать буфер альфа-канала (канал прозрачности) или нет. Значением по умолчанию является <tt>false</tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="premultiplied alpha - предварительное перемножение альфа-(канала)">premultipliedAlpha</a></tt> — будет ли визуализатор (рендерер) предполагать, что цвета whether the renderer will assume that colors have <a href="https://en.wikipedia.org/wiki/Glossary_of_computer_graphics#Premultiplied_alpha" target="_blank">premultiplied alpha</a>. Значением по умолчанию является <tt>true</tt>.
+На русском языке это будет раздел "Чего следует избегать" в статье <a href="https://developer.mozilla.org/ru/docs/Web/API/WebGL_API/WebGL_best_practices" target="_blank">Лучшие практики WebGL</a>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - альфа(-канал) - канал прозрачности')" onmouseout="hide()">alpha</a></span></tt> — параметр определяет, будет ли холст (canvas) содержать буфер альфа-канала (канал прозрачности) или нет. Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('premultiplied alpha - предварительное перемножение альфа-(канала)')" onmouseout="hide()">premultipliedAlpha</a></span></tt>
+— будет ли визуализатор (рендерер) предполагать, что цвета уже перемножены со значениями альфа-канала (<a href="https://en.wikipedia.org/wiki/Glossary_of_computer_graphics#Premultiplied_alpha" target="_blank">premultiplied alpha</a>). Значением по умолчанию является <tt>true</tt>.
 <div class=note_trans><b>Примечание переводчика:</b> предварительное перемножение альфа-канала (premultiplied alpha) - вариант вычисления растрового изображения или альфа-смешивания,
 в котором предполагается, что RGB значения цвета уже умножены на значения альфа-канала, для снижения вычислений во время альфа-смешивания;
-применяется операция смешивания: <tt>dst = dst * ( 1 - alpha ) + src</tt>; допускающая соединение альфа-смешивание с дополнительными эффектами смешивания.
-A variation of a bitmap image or alpha blending calculation in which the RGB color values are assumed to be already multiplied by an alpha channel, to reduce computations during Alpha blending; uses the blend operation: dst = dst * ( 1 - alpha ) + src; capable of mixing alpha blending with additive blending effects</div></li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="antialias - сглаживание">antialias</a></tt> —  параметр определяет, будет ли выполняться сглаживание (antialiasing). Значением по умолчанию является <tt>false</tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="stencil - шаблон, трафарет">stencil</a></tt> —  будет ли в буфере рисования находиться <a href="https://en.wikipedia.org/wiki/Stencil_buffer" target="_blank">буфер трафарета</a> не меньше 8 бит. Значением по умолчанию является <tt>true</tt>.
+применяется операция смешивания: <tt>dst = dst * ( 1 - alpha ) + src</tt>; допускающая соединение альфа-смешивание с дополнительными эффектами смешивания.</div></div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('antialias - сглаживание')" onmouseout="hide()">antialias</a></span></tt>
+—  параметр определяет, будет ли выполняться сглаживание (antialiasing). Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil - шаблон, трафарет')" onmouseout="hide()">stencil</a></span></tt>
+—  будет ли в буфере рисования находиться <a href="https://en.wikipedia.org/wiki/Stencil_buffer" target="_blank">буфер трафарета</a> не меньше 8 бит. Значением по умолчанию является <tt>true</tt>.
 <div class=note_trans><b>Примечание переводчика:</b> вот перевод начала вышеприведенной статьи о буфере трафарета. <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
 <div style='display:none;'>Буфер трафарета - это особый буфер, в дополнение к буферам цвета и глубины (z-буферизация), установленный на современном графическом оборудовании.
 Буфер попиксельный и работает с целочисленными значениями, обычно с глубиной один байт на пиксель. Буфер трафарета и буфер глубины зачастую используют одну и ту же область в оперативной памяти видеокарты.<br><br>
@@ -45,44 +46,50 @@ such as stencil shadow volumes, Two-Sided Stencil, compositing, decaling, dissol
 Наиболее типичным применением является добавление теней в 3D приложениях. Также используется для двумерных отражений.<br><br>
 Другие методы визуализации, такие как <a href="https://en.wikipedia.org/wiki/Portal_rendering" target="_blank">портальная передача</a>, используют буфер трафарета по-другому; например, можно использовать поиск области экрана, скрытой порталом, и повторно отобразить эти пиксели правильно.
 Other rendering techniques, such as portal rendering, use the stencil buffer in other ways; for example, it can be used to find the area of the screen obscured by a portal and re-render those pixels correctly.<br><br>
-Буфер трафарета и его модификаторы доступны в API компьютерной графики вроде OpenGL и Direct3D.</div></div></li>
+Буфер трафарета и его модификаторы доступны в API компьютерной графики вроде OpenGL и Direct3D.</div></div></div>
 
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="preserve drawing buffer - сохранение буфера рисования">preserveDrawingBuffer</a></tt> — whether to preserve the buffers until manually cleared or overwritten. Значением по умолчанию является <tt>false</tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="depth - глубина">depth</a></tt> — whether the drawing buffer has a depth buffer of at least 16 bits. Значением по умолчанию является <tt>true</tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="logarithmic depth buffer - логарифмический буфер глубины">logarithmicDepthBuffer</a></tt> — параметр определяет, будет ли использоваться логарифмический буфер глубины.
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('preserve drawing buffer - сохранение буфера рисования')" onmouseout="hide()">preserveDrawingBuffer</a></span></tt>
+— следует ли сохранять буферы до тех пор, пока они не будут удалены вручную или перезаписаны. Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth - глубина')" onmouseout="hide()">depth</a></span></tt>
+— будет ли у буфера рисования буфер глубины размером не менее 16 бит. Значением по умолчанию является <tt>true</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('logarithmic depth buffer - логарифмический буфер глубины')" onmouseout="hide()">logarithmicDepthBuffer</a></span></tt> — параметр определяет, будет ли использоваться логарифмический буфер глубины.
 Его использование может понадобиться, если имеются очень большие различия в масштабе при работе в одной сцене. Значением по умолчанию является <tt>false</tt>.
-Смотрите пример <a href="https://threejs.org/examples/#webgl_camera_logarithmicdepthbuffer" target="_blank">camera / logarithmicdepthbuffer</a>. </li></ul></div><br>
+Смотрите пример <a href="https://threejs.org/examples/#webgl_camera_logarithmicdepthbuffer" target="_blank">camera / logarithmicdepthbuffer</a>.</div></div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="1.1autoClear"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="auto clear - автоматическая очистка">.autoClear</a></pre>
+<pre id="1.1autoClear"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear - автоматическая очистка')" onmouseout="hide()">.autoClear</a></span></pre>
 Свойство определяет, будет ли визуализатор (рендерер) автоматически очищать свой выход перед визуализацией (рендерингом).<br><br>
-<pre id="1.1autoClearColor"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="auto clear color - автоматическая очистка цвета">.autoClearColor</a></pre>
-Свойство определяет, должен ли визуализатор (рендерер) очищать буфер цвета, если значение свойства <tt><a href="#1.1autoClear" title="WebGLRenderer.autoClear">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
-<pre id="1.1autoClearDepth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="auto clear depth - автоматическая очистка глубины">.autoClearDepth</a></pre>
-Свойство определяет, должен ли визуализатор (рендерер) очищать буфер глубины, если значение свойства <tt><a href="#1.1autoClear" title="WebGLRenderer.autoClear">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
-<pre id="1.1autoClearStencil"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="auto clear stencil - автоматическая очистка (буфера) трафарета">.autoClearStencil</a></pre>
-Свойство определяет, должен ли визуализатор (рендерер) очищать буфер трафарета, если значение свойства <tt><a href="#1.1autoClear" title="WebGLRenderer.autoClear">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
+<pre id="1.1autoClearColor"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear color - автоматическая очистка (буфера) цвета')" onmouseout="hide()">.autoClearColor</a></span></pre>
+Свойство определяет, должен ли визуализатор (рендерер) очищать буфер цвета, если значение свойства <tt><a href="#1.1autoClear" onmouseover="show('WebGLRenderer.autoClear')" onmouseout="hide()">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
+<pre id="1.1autoClearDepth"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear depth - автоматическая очистка глубины')" onmouseout="hide()">.autoClearDepth</a></span></pre>
+Свойство определяет, должен ли визуализатор (рендерер) очищать буфер глубины, если значение свойства <tt><a href="#1.1autoClear" onmouseover="show('WebGLRenderer.autoClear')" onmouseout="hide()">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
+<pre id="1.1autoClearStencil"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear stencil - автоматическая очистка (буфера) трафарета')" onmouseout="hide()">.autoClearStencil</a></span></pre>
+Свойство определяет, должен ли визуализатор (рендерер) очищать буфер трафарета, если значение свойства <tt><a href="#1.1autoClear" onmouseover="show('WebGLRenderer.autoClear')" onmouseout="hide()">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
 
-<pre id="1.1capabilities"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="capabilities - возможности">.capabilities</a></pre>
-Объект, содержащий сведения о возможностях текущего <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext" target="_blank">RenderingContext</a>. Вот <a href="https://developer.mozilla.org/ru/docs/Web/API/WebGLRenderingContext" target="_blank">статья Википедии о RenderingContext</a> на русском языке.
-<ul><li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="float fragment textures - ">.floatFragmentTextures</a></tt> : поддерживает ли контекст расширение <a href="https://developer.mozilla.org/en-US/docs/Web/API/OES_texture_float" target="_blank">OES_texture_float</a>.
+<pre id="1.1capabilities"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('capabilities - возможности')" onmouseout="hide()">.capabilities</a></span></pre>
+Объект, содержащий сведения о возможностях текущего <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext" target="_blank">RenderingContext</a>.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/API/WebGLRenderingContext" target="_blank">статья Википедии о RenderingContext</a> на русском языке.
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="float fragment textures - ">.floatFragmentTextures</a></tt> : поддерживает ли контекст расширение <a href="https://developer.mozilla.org/en-US/docs/Web/API/OES_texture_float" target="_blank">OES_texture_float</a>.
 По данным <a href="https://webglstats.com/" target="_blank">WebGLStats</a>, по состоянию на февраль 2016 года, его поддерживают свыше 95% устройств
-of WebGL enabled devices support this.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="float vertex textures - ">.floatVertexTextures</a></tt> : true if .floatFragmentTextures and .vertexTextures are both true.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup('метод','Arial,9',10,10,0xffffff,0xd69967)" title="get max anisotropy - получить максимальную анизотропию">.getMaxAnisotropy</a>()</tt> : смотрите ниже метод <tt><a href="#1.1getMaxAnisotropy" title="WebGLRenderer.getMaxAnisotropy">getMaxAnisotropy</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup('метод','Arial,9',10,10,0xffffff,0xd69967)" title="get max precision - получить максимальную точность">.getMaxPrecision</a>()</tt> : смотрите ниже метод <tt><a href="#1.1getMaxPrecision" title="WebGLRenderer.getMaxPrecision">getMaxPrecision</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="logarithmic depth buffer - логарифмический буфер глубины">.logarithmicDepthBuffer</a></tt> : true if the .logarithmicDepthBuffer was set to true in the constructor and the context supports the EXT_frag_depth extension. According to WebGLStats, as of February 2016 around 66% of WebGL enabled devices support this.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="max attributes - ">.maxAttributes</a></tt> : The value of gl.MAX_VERTEX_ATTRIBS.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxCubemapSize</a></tt> : The value of gl.MAX_CUBE_MAP_TEXTURE_SIZE. Maximum height * width of cube map textures that a shader can use.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxFragmentUniforms</a></tt> : The value of gl.MAX_FRAGMENT_UNIFORM_VECTORS. The number of uniforms that can be used by a fragment shader.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxTextureSize</a></tt> : The value of gl.MAX_TEXTURE_SIZE. Maximum height * width of a texture that a shader use.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxTextures</a></tt> : The value of gl.MAX_TEXTURE_IMAGE_UNITS. The maximum number of textures that can be used by a shader.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxVaryings</a></tt> : The value of gl.MAX_VARYING_VECTORS. The number of varying vectors that can used by shaders.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="max vertex textures - ">.maxVertexTextures</a></tt> : The value of gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS. The number of textures that can be used in a vertex shader.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxVertexUniforms</a></tt> : The value of gl.MAX_VERTEX_UNIFORM_VECTORS. The maximum number of uniforms that can be used in a vertex shader.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="precision - точность">.precision</a></tt> : The shader precision currently being used by the renderer.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="vertex textures - текстуры вершин">.vertexTextures</a></tt> : true if .maxVertexTextures is greater than 0 (i.e. vertext textures can be used).</li></ul><br>
+of WebGL enabled devices support this.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="float vertex textures - ">.floatVertexTextures</a></tt> : true if .floatFragmentTextures and .vertexTextures are both true.</div>
+<div class=list><tt><span onclick="showClick('метод')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max anisotropy - получить максимальную анизотропию')" onmouseout="hide()">.getMaxAnisotropy</a></span>()</tt>:
+смотрите ниже метод <tt><a href="#1.1getMaxAnisotropy" onmouseover="show('WebGLRenderer.getMaxAnisotropy')" onmouseout="hide()">getMaxAnisotropy</a></tt>.</div>
+<div class=list><tt><span onclick="showClick('метод')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max precision - получить максимальную точность')" onmouseout="hide()">.getMaxPrecision</a></span>()</tt>:
+смотрите ниже метод <tt><a href="#1.1getMaxPrecision" onmouseover="show('WebGLRenderer.getMaxPrecision')" onmouseout="hide()">getMaxPrecision</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('logarithmic depth buffer - логарифмический буфер глубины')" onmouseout="hide()">.logarithmicDepthBuffer</a></span></tt>:
+true if the .logarithmicDepthBuffer was set to true in the constructor and the context supports the EXT_frag_depth extension. According to WebGLStats, as of February 2016 around 66% of WebGL enabled devices support this.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="max attributes - ">.maxAttributes</a></tt> : The value of gl.MAX_VERTEX_ATTRIBS.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxCubemapSize</a></tt> : The value of gl.MAX_CUBE_MAP_TEXTURE_SIZE. Maximum height * width of cube map textures that a shader can use.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxFragmentUniforms</a></tt> : The value of gl.MAX_FRAGMENT_UNIFORM_VECTORS. The number of uniforms that can be used by a fragment shader.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxTextureSize</a></tt> : The value of gl.MAX_TEXTURE_SIZE. Maximum height * width of a texture that a shader use.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxTextures</a></tt> : The value of gl.MAX_TEXTURE_IMAGE_UNITS. The maximum number of textures that can be used by a shader.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxVaryings</a></tt> : The value of gl.MAX_VARYING_VECTORS. The number of varying vectors that can used by shaders.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="max vertex textures - ">.maxVertexTextures</a></tt> : The value of gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS. The number of textures that can be used in a vertex shader.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">.maxVertexUniforms</a></tt> : The value of gl.MAX_VERTEX_UNIFORM_VECTORS. The maximum number of uniforms that can be used in a vertex shader.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="precision - точность">.precision</a></tt> : The shader precision currently being used by the renderer.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="vertex textures - текстуры вершин">.vertexTextures</a></tt> : true if .maxVertexTextures is greater than 0 (i.e. vertext textures can be used).</div><br>
 
 <pre id="1.1clippingPlanes"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="">.clippingPlanes</a></pre>
 User-defined clipping planes specified as THREE.Plane objects in world space. These planes apply globally. Points in space whose dot product with the plane is negative are cut away. Значением по умолчанию является <tt>[]</tt>.<br><br>
@@ -97,21 +104,26 @@ A [page:Canvas</a> where the renderer draws its output.<br>
 Он автоматически создается визуализатором (рендерером) в конструкторе (если уже не предоставлен); нужно просто добавить его на страницу, вот так:
 <pre>document.body.appendChild( renderer.domElement );</pre><br>
 
-<pre id="1.1extensions"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="extensions - расширения">.extensions</a></pre>
-Оболочка для метода <tt><a href="#1.1extensions.get" title="WebGLRenderer.extensions.get">extensions.get</a></tt>, используется для проверки поддержки различных расширений WebGL.<br><br>
-<pre id="1.1gammaFactor"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="gamma factor - гамма-множитель">.gammaFactor</a></pre>
+<pre id="1.1extensions"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extensions - расширения')" onmouseout="hide()">.extensions</a></span></pre>
+Оболочка для метода <tt><a href="#1.1extensions.get" onmouseover="show('WebGLRenderer.extensions.get')" onmouseout="hide()">extensions.get</a></tt>, используется для проверки поддержки различных расширений WebGL.<br><br>
+<pre id="1.1gammaFactor"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - гамма-множитель')" onmouseout="hide()">.gammaFactor</a></span></pre>
 <a href="https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D0%BC%D0%BC%D0%B0-%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank">Гамма-коррекция</a>, т.е. коррекция яркости или цветовых компонентов цифрового изображения или видео. Значение по умолчанию равно <tt>2</tt>.<br><br>
-<pre id="1.1gammaInput"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="gamma input - гамма-вход">.gammaInput</a></pre>
+<pre id="1.1gammaInput"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma input - гамма-вход')" onmouseout="hide()">.gammaInput</a></span></pre>
 Если свойство установлено, то предполагается, что все текстуры и цвета предварительно перемножены на значение <tt>gammaFactor</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
-<pre id="1.1gammaOutput"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="gamma output - гамма-выход">.gammaOutput</a></pre>
+<pre id="1.1gammaOutput"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma output - гамма-выход')" onmouseout="hide()">.gammaOutput</a></span></pre>
 Если свойство установлено то предполагается, что все текстуры и цвета должны выводиться предварительно перемноженными на значение <tt>gammaFactor</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
-<pre id="1.1info"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слова information - информация, сведения">.info</a></pre>
-Объект с рядом статических сведений о памяти видеокарты и процессе визуализации. Полезно при отладке или просто из любопытства. Объект содержит следующие поля:</div>
-<ul style="list-style-type:disc; text-indent:20px;"><li><tt>memory</tt> (память):<ul><li><tt>geometries</tt> (геометрические элементы)</li><li><tt>textures</tt> (текстуры)</li></ul></li>
-<li><tt>render</tt> (визуализация):<ul><li><tt>calls</tt> (вызовы)</li><li><tt>vertices</tt> (вершины)</li><li><tt>faces</tt> (грани)</li><li><tt>points</tt> (точки)</li></ul></li>
-<li><tt>programs</tt> (программы)</li></ul><br>
+<pre id="1.1info"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова information - информация, сведения')" onmouseout="hide()">.info</a></span></pre>
+Объект с рядом статических сведений о памяти видеокарты и процессе визуализации. Полезно при отладке или просто из любопытства. Объект содержит следующие поля:
+<div class=blockindent><tt>memory</tt> (память):
+<div class=blockindent><tt>geometries</tt> (геометрические элементы)<br>
+<tt>textures</tt> (текстуры)</div></div>
+<div class=blockindent><tt>render</tt> (визуализация):
+<div class=blockindent><tt>calls</tt> (вызовы)<br>
+<tt>vertices</tt> (вершины)<br>
+<tt>faces</tt> (грани)<br>
+<tt>points</tt> (точки)</div></div>
+<div class=blockindent><tt>programs</tt> (программы)</div><br>
 
-<div class=blockindent>
 <pre id="1.1localClippingEnabled"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="local clipping enabled">.localClippingEnabled</a></pre>
 Свойство определяет, Defines whether the renderer respects object-level clipping planes. Значением по умолчанию является <tt>false</tt>.<br><br>
 
@@ -124,35 +136,35 @@ Default is 4. The maximum number of MorphNormals allowed in a shader. Keep in mi
 Default is 8. The maximum number of MorphTargets allowed in a shader. Keep in mind that the standard materials only allow 8 MorphTargets.<br><br>
 
 <pre id="1.1physicallyCorrectLights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="physically correct lights - физически правильное освещение">.physicallyCorrectLights</a></pre>
-Свойство определяет, использовать ли режим освещения, правильный с точки зрения физики. Значением по умолчанию является <tt>false</tt>. Смотрите пример <tt><a href="https://threejs.org/examples/webgl_lights_physical" target="_blank">lights / physical</a></tt>.
+Свойство определяет, использовать ли режим освещения, правильный с точки зрения физики. Значением по умолчанию является <tt>false</tt>. Смотрите пример <tt><a href="https://threejs.org/examples/webgl_lights_physical" target="_blank">lights / physical</a></tt>.<br><br>
 
 <pre id="1.1properties"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="">.properties</a></pre>
-Used internally by the renderer to keep track of various sub object properties.
+Used internally by the renderer to keep track of various sub object properties.<br><br>
 
 <pre id="1.1renderLists">.renderLists</a></pre>
-Used internally to handle ordering of scene object rendering.
+Used internally to handle ordering of scene object rendering.<br><br>
 
-<pre id="1.1">.shadowMap</a></pre>
-This contains the reference to the shadow map, if used.
-#
-<pre id="1.1">.shadowMap.enabled</a></pre>
-If set, use shadow maps in the scene. Default is false.
-#
-<pre id="1.1">.shadowMap.type</a></pre>
+<pre id="1.1shadowMap">.shadowMap</a></pre>
+This contains the reference to the shadow map, if used.<br><br>
+
+<pre id="1.1shadowMap.enabled">.shadowMap.enabled</a></pre>
+If set, use shadow maps in the scene. Default is false.<br><br>
+
+<pre id="1.1shadowMap.type">.shadowMap.type</a></pre>
 Defines shadow map type (unfiltered, percentage close filtering, percentage close filtering with bilinear filtering in shader)
-Options are THREE.BasicShadowMap, THREE.PCFShadowMap (default), THREE.PCFSoftShadowMap. See WebGLRenderer constants for details.
-#
-<pre id="1.1">.shadowMap.renderReverseSided</a></pre>
-Whether to render the opposite side as specified by the material into the shadow map. When disabled, an appropriate shadow.bias must be set on the light source for surfaces that can both cast and receive shadows at the same time to render correctly. Default is true.
-#
-<pre id="1.1">.shadowMap.renderSingleSided</a></pre>
-Whether to treat materials specified as double-sided as if they were specified as front-sided when rendering the shadow map. When disabled, an appropriate shadow.bias must be set on the light source for surfaces that can both cast and receive shadows at the same time to render correctly. Default is true.
-#
-<pre id="1.1">.sortObjects</a></pre>
+Options are THREE.BasicShadowMap, THREE.PCFShadowMap (default), THREE.PCFSoftShadowMap. See WebGLRenderer constants for details.<br><br>
+
+<pre id="1.1shadowMap.renderReverseSided">.shadowMap.renderReverseSided</a></pre>
+Whether to render the opposite side as specified by the material into the shadow map. When disabled, an appropriate shadow.bias must be set on the light source for surfaces that can both cast and receive shadows at the same time to render correctly. Default is true.<br><br>
+
+<pre id="1.1shadowMap.renderSingleSided">.shadowMap.renderSingleSided</a></pre>
+Whether to treat materials specified as double-sided as if they were specified as front-sided when rendering the shadow map. When disabled, an appropriate shadow.bias must be set on the light source for surfaces that can both cast and receive shadows at the same time to render correctly. Default is true.<br><br>
+
+<pre id="1.1sortObjects">.sortObjects</a></pre>
 Defines whether the renderer should sort objects. Default is true.
 
-Note: Sorting is used to attempt to properly render objects that have some degree of transparency. By definition, sorting objects may not work in all cases. Depending on the needs of application, it may be neccessary to turn off sorting and use other methods to deal with transparency rendering e.g. manually determining each object's rendering order.
-#
+<div class=note><b>Примечание:</b> Sorting is used to attempt to properly render objects that have some degree of transparency. By definition, sorting objects may not work in all cases. Depending on the needs of application, it may be neccessary to turn off sorting and use other methods to deal with transparency rendering e.g. manually determining each object's rendering order.</div><br>
+
 <pre id="1.1state"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="state - состояние">.state</a></pre>
 Объект содержит функции для установки разных свойств состояния <a href="#1.1context" title="WebGLRenderer.context">WebGLRenderer.context</a>.
 <pre id="1.1toneMapping"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="tone mapping - отображение тонов">.toneMapping</a></pre>
@@ -166,9 +178,10 @@ Tone mapping white point. Значение по умолчанию равно <t
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="1.1allocTextureUnit"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов allocate texture unit - выделить блок текстуры">.allocTextureUnit</a></pre>
+<pre id="1.1allocTextureUnit"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов allocate texture unit - выделить блок текстуры')" onmouseout="hide()">.allocTextureUnit</a></span></pre>
 Метод пытается выделить блок текстуры для использования шейдером. При попытке выделения блоков текстуры больше, чем поддерживается GPU, будет предупреждение.
-В основном этот метод используется внутренне. Смотрите описание свойства <a href="#1.1capabilities" title="WebGLRenderer.capabilities.maxTextures">capabilities.maxTextures</a>.<br><br>
+В основном этот метод используется внутренне.
+Смотрите описание свойства <a href="#1.1capabilities" onmouseover="show('WebGLRenderer.capabilities.maxTextures')" onmouseout="hide()">capabilities.maxTextures</a>.<br><br>
 
 <pre id="1.1clear"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="clear - очистить">.clear</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="depth - глубина">depth</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="stencil - трафарет">stencil</a> )</pre>
 Tells the renderer to clear its color, depth or stencil drawing buffer(s). This method initializes the color buffer to the current clear color value.
@@ -195,11 +208,11 @@ Dispose of the current rendering context.<br><br>
 
 <pre id="1.1extensions.get"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="extensions.get - расширения.получить">.extensions.get</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="extension name - название расширения">extensionName</a> )</pre>
 Метод используется для проверки поддержки разных расширений и, если таковая имеется, возвращает объект с подробной информацией о расширении. Он может проверять следующие расширения:
-<ul><li><tt>WEBGL_depth_texture</tt></li>
-<li><tt>EXT_texture_filter_anisotropic</tt></li>
-<li><tt>WEBGL_compressed_texture_s3tc</tt></li>
-<li><tt>WEBGL_compressed_texture_pvrtc</tt></li>
-<li><tt>WEBGL_compressed_texture_etc1</tt></li></ul><br>
+<div class=list><tt>WEBGL_depth_texture</tt></div>
+<div class=list><tt>EXT_texture_filter_anisotropic</tt></div>
+<div class=list><tt>WEBGL_compressed_texture_s3tc</tt></div>
+<div class=list><tt>WEBGL_compressed_texture_pvrtc</tt></div>
+<div class=list><tt>WEBGL_compressed_texture_etc1</tt></div><br>
 
 <pre id="1.1forceContextLoss">.forceContextLoss ( )</pre>
 Simulate loss of the WebGL context. This requires support for the WEBGL_lose_context extensions. According to WebGLStats, as of February 2016 90% of WebGL enabled devices support this.<br><br>
@@ -308,8 +321,7 @@ This method sets the correct texture to the correct slot for the WebGL shader. T
 <pre id="1.1setViewport"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set viewport - установить область (окно) просмотра">.setViewport</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="x - координата x">x</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="y - координата y">y</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a> )</pre>
 Метод устанавливает область просмотра (viewport) визуализации от <tt>(x, y)</tt> до <tt>(x + width, y + height)</tt>.</div><br>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/renderers/WebGLRenderer.js.txt">WebGLRenderer.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js" target="_blank">WebGLRenderer.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js" target="_blank">WebGLRenderer.js на github.com</a></div><br><br>
 
 
 <h3 id="1.2">WebGLRenderTarget</h3>
@@ -392,54 +404,63 @@ This texture instance holds the rendered pixels. Use it as input for further pro
 Устанавливает размеры данного целевого буфера визуализации.<br><br>
 <pre id="1.2clone"><a href="#1.2" title="WebGLRenderTarget. clone - клонировать">.clone</a>()</pre>
 Создает копию данного целевого буфера визуализации.<br><br>
-<pre id="1.2copy"><a href="#1.2" title="WebGLRenderTarget. copy - копировать">.copy</a>( <a href="#1.2" title="WebGLRenderTarget. source - источник">source</a> )</pre>
+<pre id="1.2copy"><a href="#1.2" onmouseover="show('WebGLRenderTarget.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#1.2" onmouseover="show('WebGLRenderTarget.<br>source - источник')" onmouseout="hide()">source</a> )</pre>
 Перенимает настройки заданного (в параметре <tt>source</tt>) целевого буфера визуализации.<br><br>
 
-<pre id="1.2dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - размещать, располагать">.dispose</a>()</pre>
+<pre id="1.2dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - выбросить, избавиться, удалить')" onmouseout="hide()">.dispose</a></span>()</pre>
 Метод отправляет Dispatches a dispose event.</div><br>
-Для данного класса доступны методы <a href="core.htm#5" title="EventDispatcher">EventDispatcher</a>.<br><br>
+Для данного класса доступны методы <a href="core.htm#5" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a>.<br><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/renderers/WebGLRenderTarget.js.txt">WebGLRenderTarget.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderTarget.js" target="_blank">WebGLRenderTarget.js на Гитхабе</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderTarget.js" target="_blank">WebGLRenderTarget.js на Гитхабе</a></div><br><br>
 
 
 <span class="right_side"><a href="#1.2" title="Переход к родительскому классу"><tt>WebGLRenderTarget &rarr;</tt></a></span>
 <h3 id="1.3">WebGLRenderTargetCube</h3>
-Данный буфер целевой визуализации используется <tt><a href="cameras.htm#2" title="CubeCamera">CubeCamera</a></tt>'ой в качестве своего <a href="#1.2" title="WebGLRenderTarget"><tt>WebGLRenderTarget</tt></a>.
+Данный буфер целевой визуализации используется <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>'ой в качестве своего <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.
 <h4>Примеры</h4>
-Примеры смотрите в описании <tt><a href="cameras.htm#2" title="CubeCamera">CubeCamera</a></tt>.<br>
+Примеры смотрите в описании <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.<br>
 
 <h4>Конструктор</h4>
-<pre>WebGLRenderTargetCube( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="options - опции">options</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a></tt> -- ширина renderTarget.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a></tt> -- высота renderTarget.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="options - опции">options</a></tt> - дополнительный, необязательный объект, который содержит параметры текстуры для автоматической генерации целевой текстуры и логические значения буферов глубины/трафаретов (<tt>depthBuffer</tt>/<tt>stencilBuffer</tt>).
-Пояснения к параметрам текстуры смотрите в статье <a href="textures.htm#6" title="Texture">Texture</a>.</div>
+<pre>WebGLRenderTargetCube( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span></tt> -- ширина renderTarget.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span></tt> -- высота renderTarget.</div>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции')" onmouseout="hide()">options</a></span></tt>
+- дополнительный, необязательный объект, который содержит параметры текстуры для автоматической генерации целевой текстуры и логические значения буферов глубины/трафаретов (<tt>depthBuffer</tt>/<tt>stencilBuffer</tt>).
+Пояснения к параметрам текстуры смотрите в статье <a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.</div>
 <div class="blockindent">Возможны следующие опции:
-<ul><li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="wrap S - укладка текстуры по горизонтали (координата S)">wrapS</a></tt> - константа, значением по умолчанию является <tt><a href="constants.htm#7.2" title="clamp to edge wrapping - стыковать с краем оболочки">THREE.ClampToEdgeWrapping</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="wrap T - укладка текстуры по вертикали (координата T)">wrapT</a></tt> - константа, значением по умолчанию является <tt><a href="constants.htm#7.2" title="clamp to edge wrapping - стыковать с краем оболочки">THREE.ClampToEdgeWrapping</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от magnification filter - фильтр увеличения">magFilter</a></tt> - константа, значением по умолчанию является <tt><a href="constants.htm#7.3" title="linear filter - линейный фильтр">THREE.LinearFilter</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от minification filter - фильтр уменьшения">minFilter</a></tt> - константа, значением по умолчанию является <tt><a href="constants.htm#7.4" title="linear filter - линейный фильтр">THREE.LinearFilter</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="format - формат">format</a></tt> - константа, значением по умолчанию является <tt><a href="constants.htm#7.6" title="RGBA format - формат передачи цвета (сокращ. по первым буквам) - красный, зеленый, синий, альфа-канал (прозрачность)">THREE.RGBAFormat</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="type - тип">type</a></tt> - константа, значением по умолчанию является <tt><a href="constants.htm#7.5" title="unsigned byte type - беззнаковый тип байтов">THREE.UnsignedByteType</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="anisotropy - анизотропия, т.е. неравномерность свойств среды по разным направлениям">anisotropy</a></tt> — значением по умолчанию является <tt>1</tt>. Смотрите описание свойства <tt><a href="textures.htm#6anisotropy" title="Texture.anisotropy">Texture.anisotropy</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="encoding - кодировка">encoding</a></tt> - константа, значением по умолчанию является <tt><a href="constants.htm#7.10" title="linear encoding - линейное кодирование">THREE.LinearEncoding</a></tt>.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="depth buffer - буфер глубины">depthBuffer</a></tt> — логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер глубины не нужен.</li>
-<li><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="stencil buffer - буфер трафарета">stencilBuffer</a></tt> — логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер трафарета не нужен.</li></ul></div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrap S - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">wrapS</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.2" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrap T - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">wrapT</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.2" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от magnification filter - фильтр увеличения')" onmouseout="hide()">magFilter</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.3" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minification filter - фильтр уменьшения')" onmouseout="hide()">minFilter</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.4" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.6" onmouseover="show('RGBA format - формат передачи цвета (сокращ. по первым буквам)<br>- красный, зеленый, синий, альфа-канал (прозрачность)')" onmouseout="hide()">THREE.RGBAFormat</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.5" onmouseover="show('unsigned byte type - беззнаковый тип байтов')" onmouseout="hide()">THREE.UnsignedByteType</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия, т.е. неравномерность<br>свойств среды по разным направлениям')" onmouseout="hide()">anisotropy</a></span></tt> — значением по умолчанию является <tt>1</tt>.
+Смотрите описание свойства <tt><a href="textures.htm#6anisotropy" onmouseover="show('Texture.anisotropy')" onmouseout="hide()">Texture.anisotropy</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('encoding - кодировка')" onmouseout="hide()">encoding</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.10" onmouseover="show('linear encoding - линейное кодирование')" onmouseout="hide()">THREE.LinearEncoding</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth buffer - буфер глубины')" onmouseout="hide()">depthBuffer</a></span></tt>
+— логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер глубины не нужен.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil buffer - буфер трафарета')" onmouseout="hide()">stencilBuffer</a></span></tt>
+— логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер трафарета не нужен.</div></div>
 Создает новый WebGLRenderTargetCube.<br><br>
 
 <h4>Свойства</h4>
-Для ознакомления с унаследованными свойствами смотрите <a href="#1.2" title="WebGLRenderTarget"><tt>WebGLRenderTarget</tt></a>.
+Для ознакомления с унаследованными свойствами смотрите <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.
 <div class=blockindent><br>
-<pre id="1.3activeCubeFace"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="active cube face - активная грань куба">.activeCubeFace</a></pre>
+<pre id="1.3activeCubeFace"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('active cube face - активная грань куба')" onmouseout="hide()">.activeCubeFace</a></span></pre>
 Свойство <tt>activeCubeFace</tt> соответствует стороне куба (PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5) and is used and set internally by the <tt><a href="cameras.htm#2" title="CubeCamera">CubeCamera</a></tt>.</div><br>
 
 <h4>Методы</h4>
-Для ознакомления с унаследованными методами смотрите <a href="#1.2" title="WebGLRenderTarget"><tt>WebGLRenderTarget</tt></a>.<br><br>
+Для ознакомления с унаследованными методами смотрите <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.<br><br>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/renderers/WebGLRenderTargetCube.js.txt">WebGLRenderTargetCube.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderTargetCube.js" target="_blank">WebGLRenderTargetCube.js на Гитхабе</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderTargetCube.js" target="_blank">WebGLRenderTargetCube.js на Гитхабе</a></div><br><br>
 
 
 <h2 id="2">Шейдеры</h2>
@@ -448,15 +469,14 @@ This texture instance holds the rendered pixels. Use it as input for further pro
 <h4>Свойства</h4>
 <h4>Методы</h4>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/renderers/ShaderChunk.js.txt">ShaderChunk.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/ShaderChunk.js" target="_blank">ShaderChunk.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/ShaderChunk.js" target="_blank">ShaderChunk.js на github.com</a></div><br><br>
+
 <h3 id="2.2">ShaderLib</h3>
 Библиотека Webgl Shader для <em>three.js</em>
 <h4>Свойства</h4>
 <h4>Методы</h4>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/renderers/ShaderLib.js.txt">ShaderLib.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/ShaderLib.js" target="_blank">ShaderLib.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/ShaderLib.js" target="_blank">ShaderLib.js на github.com</a></div><br><br>
 
 <h3 id="2.13">UniformsLib</h3>
 Библиотека однообразных переменных (uniform) для общеиспользуемых webgl шейдеров.
@@ -465,8 +485,7 @@ Uniforms library for shared webgl shaders
 <h4>Свойства</h4>
 <h4>Методы</h4>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/renderers/UniformsLib.js.txt">UniformsLib.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/UniformsLib.js" target="_blank">UniformsLib.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/UniformsLib.js" target="_blank">UniformsLib.js на github.com</a></div><br><br>
 
 <h3 id="2.4">UniformsUtils</h3>
 Uniform Utilities. Поддерживает слияние и клонирование однообразных переменных (uniform).
@@ -474,6 +493,5 @@ Uniform Utilities. Поддерживает слияние и клонирова
 <h4>Свойства</h4>
 <h4>Методы</h4>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/renderers/UniformsUtils.js.txt">UniformsUtils.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/UniformsUtils.js" target="_blank">UniformsUtils.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/UniformsUtils.js" target="_blank">UniformsUtils.js на github.com</a></div><br><br>
 </body></html>

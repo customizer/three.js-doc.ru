@@ -1600,23 +1600,17 @@ Define a program that will use the context to draw the sprite.
 
 <h2 id="7">QuickHull</h2>
 <h3 id="7.1">Face</h3>
-Represents a section bounded by a specific amount of half-edges. The current implmentation assumes that a face always consist of three edges.
-		</div>
+Represents a section bounded by a specific amount of half-edges. The current implmentation assumes that a face always consist of three edges.<br><br>
 
+<h4>Конструктор</h4>
+<pre>Face()</pre>
+<br><br>
 
-  <h4>Конструктор</h4>
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre>[property:Vector3 normal</a></pre>
+The normal vector of the face. Default is a [page:Vector3</a> at (0, 0, 0).<br><br>
 
-
-		<h3>[name</a>()</h3>
-
-		</div>
-
-  <h4>Свойства</h4>
-
-		<h3>[property:Vector3 normal</a></h3>
-		<div>
-			The normal vector of the face. Default is a [page:Vector3</a> at (0, 0, 0).
-		</div>
 
 		<h3>[property:Vector3 midpoint</a></h3>
 		<div>
@@ -1644,12 +1638,11 @@ Represents a section bounded by a specific amount of half-edges. The current imp
 		</div>
 
 		<h3>[property:HalfEdge edge</a></h3>
-		<div>
-			Reference to the base edge of a face. To retrieve all edges, you can use the 'next' reference of the current edge. Default is null.
+Reference to the base edge of a face. To retrieve all edges, you can use the 'next' reference of the current edge. Default is null.
 		</div>
 
-  <h4>Методы</h4>
-
+<h4>Методы</h4>
+<div class=blockindent><br>
 		<h3>[method:Face create</a>( [page:VertexNode a</a>, [page:VertexNode b</a>, [page:VertexNode c</a> )</h3>
 		[page:VertexNode a</a> - First vertex of the face.<br /><br />
 		[page:VertexNode b</a> - Second vertex of the face.<br /><br />
@@ -1666,17 +1659,16 @@ Represents a section bounded by a specific amount of half-edges. The current imp
 
 		<div>Computes all properties of the face.</div>
 
-		<h3>[method:Float distanceToPoint</a>( [page:Vector3 point</a> )</h3>
+<h3>[method:Float distanceToPoint</a>( [page:Vector3 point</a> )</h3>
 		[page:Vector3 point</a> - Any point in 3D space.<br /><br />
+Returns the signed distance from a given point to the plane representation of this face.</div><br>
 
-		<div>Returns the signed distance from a given point to the plane representation of this face.</div>
-
-		<h2>Source</h2>
+<h4>Исходники</h4>
 
 		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
 
 
-		<h3 id="4.2">HalfEdge</h3>
+		<h3 id="7.2">HalfEdge</h3>
 The basis for a half-edge data structure, also known as doubly connected edge list (DCEL).
 
 <h4>Конструктор</h4>
@@ -1739,7 +1731,7 @@ The basis for a half-edge data structure, also known as doubly connected edge li
 		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
 
 
-<h3 id="4.3">QuickHull</h3>
+<h3 id="7.3">QuickHull</h3>
 General information about the Quickhull algorithm: Dirk Gregorius. March 2014, Game Developers Conference: [link:http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf Implementing QuickHull</a>.
 
   <h4>Конструктор</h4>
@@ -1896,7 +1888,7 @@ General information about the Quickhull algorithm: Dirk Gregorius. March 2014, G
 		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
 
 
-<h3 id="4.4">VertexNode</h3>
+<h3 id="7.4">VertexNode</h3>
 A vertex as a double linked list node.
 
 <h4>Конструктор</h4>
@@ -1933,13 +1925,11 @@ A vertex as a double linked list node.
 		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
 
 
-<h3 id="4.5">VertexList</h3>
+<h3 id="7.5">VertexList</h3>
 A doubly linked list of vertices.
 
 <h4>Конструктор</h4>
 <h3>VertexList()</h3>
-
-		</div>
 
   <h4>Свойства</h4>
 
@@ -2006,166 +1996,132 @@ A doubly linked list of vertices.
 		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
 
 
-<h2 id="5">Визуализаторы</h2>
-<h3 id="5.1">CanvasRenderer</h3>
+<h2 id="8">Визуализаторы</h2>
+<h3 id="8.1">CanvasRenderer</h3>
+The Canvas renderer displays your beautifully crafted scenes <em>not</em> using WebGL, but draws it using the (slower) <a href="http://drafts.htmlwg.org/2dcontext/html5_canvas_CR/Overview.html">Canvas 2D Context</a> API.
 
-		<div class="desc">
-			The Canvas renderer displays your beautifully crafted scenes <em>not</em> using WebGL,
-			but draws it using the (slower) <a href="http://drafts.htmlwg.org/2dcontext/html5_canvas_CR/Overview.html">Canvas 2D Context</a>
-			API.<br /><br />
+<div class=note><b>Примечание:</b> Визуализатор Canvas уже устарел и больше не является частью основных элементов <em>three.js</em>.
+Если, все же потребуется его использование, можно найти его здесь: <a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js" target="_blank">examples/js/renderers/CanvasRenderer.js</a>.</div>
+Этот визуализатор может быть хорошей альтернативой <a href="renderers.htm#1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>'у для простых сцен:
+<pre>function webglAvailable() {
+  try {
+    var canvas = document.createElement( 'canvas' );
+    return !!( window.WebGLRenderingContext && (
+      canvas.getContext( 'webgl' ) ||
+      canvas.getContext( 'experimental-webgl' ) )
+    );
+  } catch ( e ) {
+    return false;
+ }
+}<br>
+if ( webglAvailable() ) {
+  renderer = new THREE.WebGLRenderer();
+} else {
+  renderer = new THREE.CanvasRenderer();
+}</pre>
+<div class=note><b>Примечание:</b> both WebGLRenderer and CanvasRenderer are embedded in the web page using an HTML5 &lt;canvas&gt; tag. The "Canvas" in CanvasRenderer means it uses Canvas 2D instead of WebGL.</div>
+Don't confuse either CanvasRenderer with the SoftwareRenderer example, which simulates a screen buffer in a Javascript array.<br><br>
 
-			<b>
-			NOTE: The Canvas renderer has been deprecated and is no longer part of the three.js core.
-			</b>
-			If you still need to use it you can find it here: [link:https://github.com/mrdoob/three.js/blob/master/examples/js/[path</a>.js examples/js/[path</a>.js</a>.<br /><br />
-
-			This renderer can be a nice fallback from [page:WebGLRenderer</a> for simple scenes:
-
-   <pre>
-			function webglAvailable() {
-				try {
-					var canvas = document.createElement( 'canvas' );
-					return !!( window.WebGLRenderingContext && (
-						canvas.getContext( 'webgl' ) ||
-						canvas.getContext( 'experimental-webgl' ) )
-					);
-				} catch ( e ) {
-					return false;
-				}
-			}
-
-			if ( webglAvailable() ) {
-				renderer = new THREE.WebGLRenderer();
-			} else {
-				renderer = new THREE.CanvasRenderer();
-			}
-   </pre>
-
-			Note: both WebGLRenderer and CanvasRenderer are embedded in the web page using an HTML5 &lt;canvas&gt; tag.
-			The "Canvas" in CanvasRenderer means it uses Canvas 2D instead of WebGL.<br /><br />
-
-			Don't confuse either CanvasRenderer with the SoftwareRenderer example, which simulates a screen buffer in a Javascript array.
-		</div>
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name</a>([page:object parameters</a>)</h3>
+<h4>Конструктор</h4>
+<pre>CanvasRenderer( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
         <div>parameters is an optional object with properties defining the renderer's behaviour. The constructor also accepts no parameters at all. In all cases, it will assume sane defaults when parameters are missing.</div>
 
 		<div>
 		canvas — A [page:Canvas</a> where the renderer draws its output.
-		</div>
+		</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="8.1info"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('info - информация, сведения')" onmouseout="hide()">.info</a></span></pre>
+An object with a series of statistical information about the graphics board memory and the rendering process. Useful for debugging or just for the sake of curiosity. The object contains the following fields:
+<div class=blockindent>render:
+<div class=blockindent>vertices<br>
+faces</div></div><br>
+
+<pre id="8.1domElement">[property:DOMElement domElement</a></pre>
+A [page:Canvas</a> where the renderer draws its output.<br>
+This is automatically created by the renderer in the constructor (if not provided already); you just need to add it to your page.<br><br>
+
+<pre id="8.1autoClear"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear - автоматическая очистка')" onmouseout="hide()">.autoClear</a></span></pre>
+Defines whether the renderer should automatically clear its output before rendering.<br><br>
+
+<pre id="8.1sortObjects"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sort objects - сортировка объектов')" onmouseout="hide()">.sortObjects</a></span></pre>
+Defines whether the renderer should sort objects. Значением по умолчанию является <tt>true</tt>.
+<div class=note><b>Примечание:</b> Sorting is used to attempt to properly render objects that have some degree of transparency.  By definition, sorting objects may not work in all cases.  Depending on the needs of application, it may be neccessary to turn off sorting and use other methods to deal with transparency rendering e.g. manually determining the object rendering order.</div><br>
+
+<pre id="8.1sortElements"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sort elements - сортировка элементов')" onmouseout="hide()">.sortElements</a></span></pre>
+Defines whether the renderer should sort the face of each object. Значением по умолчанию является <tt>true</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="8.1render"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - представить, изобразить')" onmouseout="hide()">.render</a></span>( <a href="scenes.htm#3" onmouseover="show('Scene.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+<div class=list><tt><a href="scenes.htm#3" onmouseover="show('Scene.<br>scene - сцена')" onmouseout="hide()">scene</a></tt> -- отображаемая сцена.</div>
+<div class=list><tt><a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a></tt> -- камера для просмотра сцены.</div>
+Метод визуализирует (отображает) сцену, используя камеру.<br><br>
+
+<pre id="8.1clear"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear - очистить')" onmouseout="hide()">.clear</a></span>()</pre>
+Tells the renderer to clear its color drawing buffer with the clearcolor.<br><br>
+
+<pre id="8.1setClearColor">[method:null setClearColor</a>([page:Color color</a>, [page:number alpha</a>)</pre>
+<div class=list>color -- The color to clear the canvas with.</div>
+<div class=list>alpha -- The alpha channel to clear the canvas with.</div>
+This set the clearColor and the clearAlpha.<br><br>
+
+<pre id="8.1setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span></tt> -- ширина холста для рисования.</div>
+<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span></tt> -- высота холста для рисования.</div>
+This set the size of the drawing canvas and if updateStyle is set, then the css of the canvas is updated too.<br><br>
+
+<pre id="8.1setClearColorHex">[method:null setClearColorHex</a>([page:number hex</a>, [page:number alpha</a>)</pre>
+<div class=list>hex -- The the hexadecimal value of the color to clear the canvas with.</div>
+<div class=list>alpha -- The alpha channel to clear the canvas with.</div>
+This set the clearColor and the clearAlpha.<br><br>
+
+<pre id="8.1getClearColorHex">[method:number getClearColorHex</a>()</pre>
+Returns the [page:number hex</a> color.<br><br>
+
+<pre id="8.1getClearAlpha"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get clear alpha - получить чистое (значение) альфа(-канала)')" onmouseout="hide()">.getClearAlpha</a></span>()</pre>
+Метод возвращает значение альфа-канала.<br><br>
+
+<h5>Пустые методы для обеспечения совместимости с <a href="renderers.htm#1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a></h5>
+<pre><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear color - очистка (буфера) цвета')" onmouseout="hide()">.clearColor</a></span>()
+<span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear depth - очистка (буфера) глубины')" onmouseout="hide()">.clearDepth</a></span>()
+<span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear stencil - очистка (буфера) трафарета')" onmouseout="hide()">.clearStencil</a></span>()
+<span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set face culling - установить отбраковку граней')" onmouseout="hide()">.setFaceCulling</a></span>()
+<span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('supports vertex textures - поддерживать текстуры вершин')" onmouseout="hide()">.supportsVertexTextures</a></span>()
+<span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max anisotropy - получить максимальную анизотропию')" onmouseout="hide()">.getMaxAnisotropy</a></span>() - возвращает <tt>1</tt>.</pre></div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js" target="_blank">CanvasRenderer.js на github.com</a></div><br><br>
 
 
-  <h4>Свойства</h4>
+<h2 id="9">Подсобные функции (утилиты)</h2>
+<h3 id="9.1">SceneUtils</h3>
+Класс, содержащий полезные служебные функции для работы со сценой.
+A class containing useful utility functions for scene manipulation.<br><br>
 
-    <h3>[property:Object info</a></h3>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="9.1createMultiMaterialObject">.createMultiMaterialObject ( geometry, materials )</pre>
+<div class=list><tt>geometry</tt> -- The geometry for the set of materials.</div>
+<div class=list><tt>materials</tt> -- The materials for the object.</div>
+Creates a new Group that contains a new mesh for each material defined in materials. Beware that this is not the same as an array of materials which defines multiple materials for 1 mesh.<br>
+This is mostly useful for objects that need both a material and a wireframe implementation.<br><br>
 
-		<div>
-			An object with a series of statistical information about the graphics board memory and the rendering process. Useful for debugging or just for the sake of curiosity. The object contains the following fields:
-			<ul>
-				<li>render:
-					<ul>
-						<li>vertices</li>
-						<li>faces</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+<pre id="9.1attach">.attach ( child, scene, parent )</pre>
+<div class=list><tt>child</tt> -- The object to add to the parent</div>
+<div class=list><tt>scene</tt> -- The scene to detach the object on.</div>
+<div class=list><tt>parent</tt> -- The parent to attach the object from.</div>
+Attaches the object to the parent without the moving the object in the worldspace. Beware that to do this the matrixWorld needs to be updated, this can be done by calling the updateMatrixWorld method on the parent object.<br><br>
 
-    <h3>[property:DOMElement domElement</a></h3>
+<pre id="9.1detach">.detach ( child, parent, scene )</pre>
+<div class=list><tt>child</tt> -- The object to remove from the parent</div>
+<div class=list><tt>scene</tt> -- The scene to attach the object on.</div>
+<div class=list><tt>parent</tt> -- The parent to detach the object from.</div>
+Detaches the object from the parent and adds it back to the scene without moving in worldspace. Beware that to do this the matrixWorld needs to be updated, this can be done by calling the updateMatrixWorld method on the parent object.</div><br>
 
-		<div>
-			A [page:Canvas</a> where the renderer draws its output.<br />
-			This is automatically created by the renderer in the constructor (if not provided already); you just need to add it to your page.
-		</div>
-
-		<h3>[property:Boolean autoClear</a></h3>
-		<div>
-      Defines whether the renderer should automatically clear its output before rendering.
-    </div>
-
-		<h3>[property:Boolean sortObjects</a></h3>
-		<div>
-      Defines whether the renderer should sort objects. Default is true.<br />
-      Note: Sorting is used to attempt to properly render objects that have some degree of transparency.  By definition, sorting objects may not work in all cases.  Depending on the needs of application, it may be neccessary to turn off sorting and use other methods to deal with transparency rendering e.g. manually determining the object rendering order.
-    </div>
-
-		<h3>[property:boolean sortElements</a></h3>
-		<div>
-			Defines whether the renderer should sort the face of each object. Default is true.
-		</div>
-
-
-  <h4>Методы</h4>
-
-		<h3>[method:null render</a>([page:Scene scene</a>, [page:Camera camera</a>)</h3>
-		<div>
-			scene -- The scene to render. <br />
-			camera -- the camera to view the scene.
-		</div>
-		<div>
-        Render a scene using a camera.
-		</div>
-
-		<h3>[method:null clear</a>()</h3>
-		<div>
-			Tells the renderer to clear its color drawing buffer with the clearcolor.
-		</div>
-
-		<h3>[method:null setClearColor</a>([page:Color color</a>, [page:number alpha</a>)</h3>
-		<div>
-			color -- The color to clear the canvas with. <br />
-			alpha -- The alpha channel to clear the canvas with.
-		</div>
-		<div>
-			This set the clearColor and the clearAlpha.
-		</div>
-
-
-		<h3>[method:null setSize</a>([page:Number width</a>, [page:Number height</a>)</h3>
-		<div>
-			width -- The width of the drawing canvas. <br />
-			height -- The height of the drawing canvas.
-		</div>
-		<div>
-			This set the size of the drawing canvas and if updateStyle is set, then the css of the canvas is updated too.
-		</div>
-
-		<h3>[method:null setClearColorHex</a>([page:number hex</a>, [page:number alpha</a>)</h3>
-		<div>
-			hex -- The the hexadecimal value of the color to clear the canvas with. <br />
-	    alpha -- The alpha channel to clear the canvas with.
-		</div>
-		<div>
-			This set the clearColor and the clearAlpha.
-		</div>
-
-		<h3>[method:number getClearColorHex</a>()</h3>
-		<div>
-			Returns the [page:number hex</a> color.
-		</div>
-
-		<h3>[method:number getClearAlpha</a>()</h3>
-		<div>
-			Returns the alpha value.
-		</div>
-
-		<h2>Empty Methods to Maintain Compatibility with [page:WebglRenderer</a></h2>
-		<div>
-			[method:null clearColor</a>()<br/>
-			[method:null clearDepth</a>()<br/>
-			[method:null clearStencil</a>()<br/>
-			[method:null setFaceCulling</a>()<br/>
-			[method:null supportsVertexTextures</a>()<br/>
-			[method:number getMaxAnisotropy</a>() - returns 1 <br/>
-		</div>
-
-<h2>Source</h2>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/[path</a>.js examples/js/[path</a>.js</a>
-
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/utils/SceneUtils.js" target="_blank">SceneUtils.js на github.com</a></div><br><br>
 
 <br><br>
 </body></html>

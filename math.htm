@@ -7,7 +7,33 @@
 </head>
 <body>
 <h2 class=head1>Математика</h2>
-В этом разделе рассматриваются некоторые объекты и функции, имеющие отношение к математике.<br><br>
+В этом разделе рассматриваются некоторые объекты и функции, имеющие отношение к математике.
+В чистом Javascript их нет, но для визуализации и анимации трехмерных объектов они просто необходимы.
+<div class=list><a href="#1">Box2</a> - прямоугольник</div>
+<div class=list><a href="#1">Box3</a> - параллелепипед</div>
+<div class=list><a href="#3">Color</a> - класс, представляющий цвет</div>
+<div class=list><a href="#4">Cylindrical</a> - координаты точки в цилиндрической системе координат</div>
+<div class=list><a href="#5">Euler</a> - класс, представляющий углы Эйлера</div>
+<div class=list><a href="#6">Frustum</a> - класс для расчета объемных областей просмотра, в виде усеченных пирамид, камеры и теневой камеры</div>
+<div class=list><a href="#7">Interpolant</a> - базовый класс интерполяций
+<ul><li><a href="#7.1">CubicInterpolant</a> - кубическая интерполяция</li>
+<li><a href="#7.2">DiscreteInterpolant</a> - дискретная интерполяция</li>
+<li><a href="#7.3">LinearInterpolant</a> - линейная интерполяция</li>
+<li><a href="#7.4">QuaternionLinearInterpolant</a> - линейная интерполяция кватернионов</li></ul></div>
+<div class=list><a href="#8">Line3</a> - линия</div>
+<div class=list><a href="#9">Math</a> - объект с некоторыми вспомогательными математическими функциями.</div>
+<div class=list><a href="#10">Matrix3</a> - матрица 3&#215;3</div>
+<div class=list><a href="#11">Matrix4</a> - матрица 4&#215;4</div>
+<div class=list><a href="#12">Plane</a> - плоскость</div>
+<div class=list><a href="#13">Quaternion</a> - кватернион</div>
+<div class=list><a href="#14">Ray</a> - луч</div>
+<div class=list><a href="#15">Sphere</a> - сфера</div>
+<div class=list><a href="#16">Spherical</a> - координаты точки в сферической системе координат.</div>
+<div class=list><a href="#17">Triangle</a> - треугольник</div>
+<div class=list><a href="#18">Vector2</a> - двумерный вектор</div>
+<div class=list><a href="#19">Vector3</a> - трехмерный вектор</div>
+<div class=list><a href="#20">Vector4</a> - четырехмерный вектор</div><br>
+
 <h3 id="1">Box2</h3>
 Представляет собой ограниченный прямоугольник в двумерном пространстве.<br><br>
 <h4>Конструктор</h4>
@@ -168,7 +194,7 @@ Adds offset to both the upper and lower bounds of this box, effectively moving t
 Метод преобразует данный Box3
 Transforms this Box3 with the supplied matrix.<br><br>
 
-<pre id="1clampPoint"><a href="#19" title="Vector3. clamp point - зажать (закрепить) точку">.clampPoint</a> ( <a href="#19" title="Vector3. point - точка">point</a>, <a href="#19" title="Vector3. optional target - дополнительная цель">optionalTarget</a> )</pre>
+<pre id="2clampPoint"><a href="#19" title="Vector3. clamp point - зажать (закрепить) точку">.clampPoint</a> ( <a href="#19" title="Vector3. point - точка">point</a>, <a href="#19" title="Vector3. optional target - дополнительная цель">optionalTarget</a> )</pre>
 <div class=list><tt><a href="#19" title="Vector3. point - точка">point</a></tt> - трехмерный вектор (<a href="#19" title="Vector3">Vector2</a>), который нужно зафиксировать.</div>
 <div class=list><tt><a href="#19" title="Vector3. optional target - дополнительная цель">optionalTarget</a></tt> — если этот параметр указан, то результат будет скопирован в данный трехмерный вектор (<tt>Vector3</tt>),
 в противном случае будет создан новый <tt>Vector3</tt>. Дополнительный, необязательный параметр.</div>
@@ -430,7 +456,7 @@ Copies the given color into this color while converting it from gamma to linear 
 <div class=list><tt><a href="#3" title="Color. color - цвет">color</a></tt> — Color to copy.</div>
 <div class=list>gammaFactor - (optional). Значение по умолчанию равно <tt>2.0</tt>.</div>
 
-Copies the given color into this color while converting it from linear to gamma space by taking r, g and b to the power of 1 / gammaFactor.</pre></pre>
+Copies the given color into this color while converting it from linear to gamma space by taking r, g and b to the power of 1 / gammaFactor.<br><br>
 
 <pre id="3equals"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="equals - равняется">.equals</a>( <a href="#3" title="Color. color - цвет">color</a> )</pre>
 Метод сравнивает значения RGB, переданные в аргументе <tt><a href="#3" title="Color. color - цвет">color</a></tt> с такими же значениями данного объекта.
@@ -474,9 +500,9 @@ Copies the given color into this color while converting it from linear to gamma 
 Внутри же метода, вначале конвертируются значения <tt><a href="#3r" title="Color.r">r</a></tt>, <tt><a href="#3g" title="Color.g">g</a></tt> и <tt><a href="#3b" title="Color.b">b</a></tt> в HSL,
 добавляются значения <tt>h</tt>, <tt>s</tt>, и <tt>l</tt>, а затем цвет конвертируется обратно в RGB.<br><br>
 
-<pre id="3set"><a href="#3" title="Color. set - установить">.set</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup('тип значения может быть Color - т.е. другой экземпляр класса Color, hex - шестнадцатиричное значение или string - строковое значение','Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup('тип значения может быть Color - т.е. другой экземпляр класса Color, hex - шестнадцатиричное значение или string - строковое значение','Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a></tt> - значение для установки в данный цвет.</div>
-Более подробную информацию о том, какое значение может быть указано в аргументе <tt>value</tt>, см. в разделе <a href="#3Constructor" title="Конструктор">Конструктор</a>. В зависимости от введенного типа, выполнение передается методам <tt><a href="#3copy" title="Color.copy">copy</a></tt>, <tt><a href="#3setStyle" title="Color.setStyle">setStyle</a></tt>, или <tt><a href="#3setHex" title="Color.setHex">setHex</a></tt>.<br><br>
+<pre id="3set"><a href="#3" onmouseover="show('Color.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick('тип значения может быть Color -<br>т.е. другой экземпляр класса Color,<br>hex - шестнадцатиричное значение<br>или string - строковое значение')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt><span onclick="showClick('тип значения может быть Color -<br>т.е. другой экземпляр класса Color,<br>hex - шестнадцатиричное значение<br>или string - строковое значение')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span></tt> - значение для установки в данный цвет.</div>
+Более подробную информацию о том, какое значение может быть указано в аргументе <tt>value</tt>, см. в разделе <a href="#3Constructor" onmouseover="show('Конструктор')" onmouseout="hide()">Конструктор</a>. В зависимости от введенного типа, выполнение передается методам <tt><a href="#3copy" onmouseover="show('Color.copy')" onmouseout="hide()">copy</a></tt>, <tt><a href="#3setStyle" onmouseover="show('Color.setStyle')" onmouseout="hide()">setStyle</a></tt>, или <tt><a href="#3setHex" onmouseover="show('Color.setHex')" onmouseout="hide()">setHex</a></tt>.<br><br>
 
 <pre id="3setHex"><a href="#3" title="Color. set hex - сокращ. англ. слов set hexadecimal - установить шестнадцатиричное (значение)">.setHex</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="hex - сокращ. англ. слова hexadecimal - шестнадцатиричное">hex</a> )</pre>
 <div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="hex - сокращ. англ. слова hexadecimal - шестнадцатиричное">hex</a></tt> — значение цвета в шестнадцатиричном формате
@@ -1019,7 +1045,7 @@ Evaluate the interpolant at position <tt>t</tt>.</div><br>
 Метод возвращает точку на линии, ближайшую к точке, указанной в аргументе <tt><a href="#19" title="Vector3. point - точка">point</a></tt>. Если аргумент <tt>clampToLine</tt> указан как <tt>true</tt>, то возвращаемое значение будет прижато к отрезку линии.
 Returns the closest point on the line. If clampToLine is true, then the returned value will be clamped to the line segment.<br><br>
 
-<pre id="8"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="closest point to point parameter - ближайшая точка к параметру точки">.closestPointToPointParameter( <a href="#19" title="Vector3. point - точка">point</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="clamp to line - ">clampToLine</a> )</pre>
+<pre id="8"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="closest point to point parameter - ближайшая точка к параметру точки">.closestPointToPointParameter</a>( <a href="#19" title="Vector3. point - точка">point</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="clamp to line - ">clampToLine</a> )</pre>
 <div class=list><tt><a href="#19" title="Vector3. point - точка">point</a></tt> - the point for which to return a point parameter.</div>
 <div class=list>clampToLine - Whether to clamp the result to the range [0, 1].</div>
 
@@ -1076,7 +1102,7 @@ Returns a point parameter based on the closest point as projected on the line se
 Вычисляет модуль (т.е. наибольший общий делитель - НОД) по алгоритму Евклида из <tt>m % n</tt>, то есть:
 <pre>( ( n % m ) + m ) % m</pre>
 <div class=note_trans><b>Примечание переводчика:</b> Символ <tt>%</tt> в JavaScript это оператор взятия остатка от деления.</div><br>
-<pre id="9generateUUID"><a class=popupspot href="JavaScript:hhctrl.TextPopup('generate UUID - создать UUID (Universally Unique Identifier - универсальный уникальный идентификатор) — это стандарт идентификации, используемый в создании программного обеспечения','Arial,9',10,10,0xffffff,0xd69967)">.generateUUID</a> ( )</pre>
+<pre id="9generateUUID"><span class="lnk" onmouseover="show('generate UUID - создать UUID (Universally Unique Identifier -<br>универсальный уникальный идентификатор) — это стандарт<br>идентификации, используемый в создании программного<br>обеспечения')" onmouseout="hide()">.generateUUID</span> ( )</pre>
 Метод создает <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">UUID (универсальный уникальный идентификатор)</a>.<br><br>
 <pre id="9isPowerOfTwo"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is power of two - является степенью двойки">.isPowerOfTwo</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="n - ">n</a> )</pre>
 Возвращает значение <tt>true</tt>, если <tt>n</tt> является степенью числа <tt>2</tt>.<br><br>
@@ -1538,7 +1564,7 @@ Transposes this matrix.</div><br>
 
 <h3 id="12">Plane</h3>
 Двумерная поверхность, расширяемая до бесконечности в трехмерном пространстве, представленная в <a href="http://mathworld.wolfram.com/HessianNormalForm.html" target="_blank">Hessian normal form</a>
-<a class=popupspot href="JavaScript:hhctrl.TextPopup('Нормальный вектор, часто называемый просто «нормалью», к поверхности представляет собой вектор, перпендикулярный поверхности в данной точке.','Arial,9',10,10,0xffffff,0xd69967)" title="">нормальным вектором</a> единичной длины и константой.
+<span class="lnk" onmouseover="show('Нормальный вектор, часто называемый просто «нормалью»,<br>к поверхности представляет собой вектор, перпендикулярный<br>поверхности в данной точке.')" onmouseout="hide()">нормальным вектором</span> единичной длины и константой.
 
 <!-- https://en.wikipedia.org/wiki/Hesse_normal_form
 https://ru.wikipedia.org/wiki/%D0%9F%D0%BB%D0%BE%D1%81%D0%BA%D0%BE%D1%81%D1%82%D1%8C -->
@@ -2012,21 +2038,22 @@ Checks to see if two spheres intersect.<br><br>
 <pre id="15"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="empty - пустой">.empty</a>( )</pre>
 Checks to see if the sphere is empty (the radius set to 0).<br><br>
 
-<pre id="15set"><a href="#15" title="Sphere. set - установить">.set</a>( <a href="#19" title="Vector3. center - центр">center</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a> )</pre>
-<div class=list><tt><a href="#19" title="Vector3. center - центр">center</a></tt> -- центр сферы.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a></tt> -- радиус сферы.</div>
-Метод устанавливает свойства <tt><a href="#15center" title="Sphere.center">center</a></tt> и <tt><a href="#15radius" title="Sphere.radius">radius</a></tt> для этой сферы.<br><br>
-<pre id="15setFromPoints"><a href="#15" title="Sphere. set from points - установить">.setFromPoints</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="points - точки">points</a>, <a href="#19" title="Vector3. optional center - дополнительный (необязательный) центр">optionalCenter</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="points - точки">points</a></tt> -- массив позиций трехмерных векторов (<a href="#19" title="Vector3">Vector3</a>).</div>
-<div class=list><tt><a href="#19" title="Vector3. optional center - дополнительный (необязательный) центр">optionalCenter</a></tt> -- дополнительная позиция (<a href="#19" title="Vector3">Vector3</a>) центра сферы.</div>
-Метод вычисляет минимальную ограничивающую сферу для массива точек (переданного в параметре <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="points - точки">points</a></tt>).
-Если параметр <tt><a href="#19" title="Vector3. optional center - дополнительный (необязательный) центр">optionalCenter</a></tt> задан, то он будет использоваться в качестве центра сферы.
-В противном случае, вычисляется центр ограничивающей рамки, выровненной по осям и охватывающей весь массив точек (<tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="points - точки">points</a></tt>).<br><br>
-<pre id="15translate"><a href="#15" title="Sphere. translate - перевести, перенести">.translate</a>( <a href="#19" title="Vector3. offset - смещение">offset</a> )</pre>
+<pre id="15set"><a href="#15" onmouseover="show('Sphere.<br>set - установить')" onmouseout="hide()">.set</a>( <a href="#19" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span> )</pre>
+<div class=list><tt><a href="#19" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a></tt> -- центр сферы.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span></tt> -- радиус сферы.</div>
+Метод устанавливает свойства <tt><a href="#15center" onmouseover="show('Sphere.center')" onmouseout="hide()">center</a></tt> и <tt><a href="#15radius" onmouseover="show('Sphere.radius')" onmouseout="hide()">radius</a></tt> для этой сферы.<br><br>
+<pre id="15setFromPoints"><a href="#15" onmouseover="show('Sphere.<br>set from points - установить')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span>, <a href="#19" onmouseover="show('Vector3.<br>optional center - дополнительный (необязательный) центр')" onmouseout="hide()">optionalCenter</a> )</pre>
+<div class=list><tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span></tt>
+-- массив позиций трехмерных векторов (<a href="#19" title="Vector3">Vector3</a>).</div>
+<div class=list><tt><a href="#19" onmouseover="show('Vector3.<br>optional center - дополнительный (необязательный) центр')" onmouseout="hide()">optionalCenter</a></tt>
+-- дополнительная позиция (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) центра сферы.</div>
+Метод вычисляет минимальную ограничивающую сферу для массива точек (переданного в параметре <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span></tt>).
+Если параметр <tt><a href="#19" onmouseover="show('Vector3.<br>optional center - дополнительный (необязательный) центр')" onmouseout="hide()">optionalCenter</a></tt> задан, то он будет использоваться в качестве центра сферы.
+В противном случае, вычисляется центр ограничивающей рамки, выровненной по осям и охватывающей весь массив точек (<tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span></tt>).<br><br>
+<pre id="15translate"><a href="#15" onmouseover="show('Sphere.<br>translate - перевести, перенести')" onmouseout="hide()">.translate</a>( <a href="#19" onmouseover="show('Vector3.<br>offset - смещение')" onmouseout="hide()">offset</a> )</pre>
 Метод переносит центр сферы на представленный вектор смещения (параметр <tt>offset</tt>).</div><br>
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/math/Sphere.js.txt">Sphere.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Sphere.js" target="_blank">Sphere.js на Гитхабе</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Sphere.js" target="_blank">Sphere.js на Гитхабе</a></div><br><br>
 
 
 <h3 id="16">Spherical</h3>
@@ -2464,7 +2491,7 @@ Applies euler transform to this vector by converting the Euler object to a Quate
 Метод умножает данный вектор на матрицу, указанную в параметре <tt><a href="#10" onmouseover="show('Matrix3.<br>m это сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt>.<br><br>
 
 <pre id="19applyMatrix4"><a href="#19" onmouseover="show('Vector3.<br>apply matrix 4 - применить матрицу 4&#215;4')" onmouseout="hide()">.applyMatrix4</a>( <a href="#11" onmouseover="show('Matrix4.<br>m это сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
-Перемножает данный вектор (с подразумеваемой <tt>1</tt> в четвертом измерении) с матрицей <tt><a href="#10" onmouseover="show('Matrix3.<br>m это сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt> и делит на перспективу.
+Перемножает данный вектор (с подразумеваемой <tt>1</tt> в четвертом измерении) с матрицей <tt><a href="#11" onmouseover="show('Matrix4.<br>m это сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt> и делит на перспективу.
 Multiplies this vector (with an implicit 1 in the 4th dimension) and m, and divides by perspective.<br><br>
 
 <pre id="19applyQuaternion">.applyQuaternion ( quaternion )</pre>
@@ -2593,7 +2620,7 @@ Projects the vector with the camera.<br><br>
 <div class=list><tt>planeNormal</tt> - A vector representing a plane normal.</div>
 Метод <a href="https://en.wikipedia.org/wiki/Vector_projection" target="_blank">проецирует</a> данный вектор на плоскость путем вычитания из данного вектора проекции данного вектора на нормаль к этой плоскости.<br><br>
 <pre id="19projectOnVector"><a href="#19" title="Vector3. project on vector - проецировать на вектор">.projectOnVector</a>( <a href="#19" title="Vector3. Vector3 - трехмерный вектор">Vector3</a> )</pre>
-Метод <a href="https://en.wikipedia.org/wiki/Vector_projection" target="_blank">проецирует</a> данный вектор на другой вектор (параметр </tt><a href="#19" title="Vector3. Vector3 - трехмерный вектор">Vector3</a></tt>).<br><br>
+Метод <a href="https://en.wikipedia.org/wiki/Vector_projection" target="_blank">проецирует</a> данный вектор на другой вектор (параметр <tt><a href="#19" title="Vector3. Vector3 - трехмерный вектор">Vector3</a></tt>).<br><br>
 <pre id="19reflect"><a href="#19" title="Vector3. reflect - отражать">.reflect</a>( <a href="#19" title="Vector3. normal - нормаль, перпендикуляр">normal</a> )</pre>
 <div class=list><tt><a href="#19" title="Vector3. normal - нормаль, перпендикуляр">normal</a></tt> - нормаль (перпендикуляр) к плоскости отражения.</div>
 Метод отражает вектор от плоскости, перпендикулярной (ортогональной) к нормали (параметр <tt><a href="#19" title="Vector3. normal - нормаль, перпендикуляр">normal</a></tt>). Предполагается что нормаль имеет единичную длину.<br><br>
@@ -2605,27 +2632,29 @@ Projects the vector with the camera.<br><br>
 <pre id="19set"><a href="#19" title="Vector3. set - установить">.set</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">x</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">y</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата z">z</a> )</pre>
 Устанавливает компоненты <tt><a href="#19x" title="Vector3.x">x</a></tt>, <tt><a href="#19y" title="Vector3.y">y</a></tt> и <tt><a href="#19z" title="Vector3.z">z</a></tt> данного вектора.<br><br>
 
-<pre id="19setComponent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set component - установить компонент">.setComponent</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">index</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">index</a></tt> -- целочисленное значение, может быть <tt>0</tt>, <tt>1</tt> или <tt>2</tt>.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a></tt> -- число с плавающей запятой.</div>
-Если индекс равен <tt>0</tt>, устанавливается значение <tt><a href="#19x" title="Vector3.x">x</a></tt>.<br>
-Если индекс равен <tt>1</tt>, устанавливается значение <tt><a href="#19y" title="Vector3.y">y</a></tt>.<br>
-Если индекс равен <tt>2</tt>, устанавливается значение <tt><a href="#19z" title="Vector3.z">z</a></tt>.<br><br>
+<pre id="19setComponent"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set component - установить компонент')" onmouseout="hide()">.setComponent</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt>
+-- целочисленное значение, может быть <tt>0</tt>, <tt>1</tt> или <tt>2</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span></tt> -- число с плавающей запятой.</div>
+Если индекс равен <tt>0</tt>, устанавливается значение <tt><a href="#19x" onmouseover="show('Vector3.x')" onmouseout="hide()">x</a></tt>.<br>
+Если индекс равен <tt>1</tt>, устанавливается значение <tt><a href="#19y" onmouseover="show('Vector3.y')" onmouseout="hide()">y</a></tt>.<br>
+Если индекс равен <tt>2</tt>, устанавливается значение <tt><a href="#19z" onmouseover="show('Vector3.z')" onmouseout="hide()">z</a></tt>.<br><br>
 
-<pre id="19setFromCylindrical"><a href="#19" title="Vector3. set from cylindrical - ">.setFromCylindrical</a>( c</a> )</pre>
-Sets this vector from the cylindrical coordinates c.<br><br>
+<pre id="19setFromCylindrical"><a href="#19" onmouseover="show('Vector3.<br>set from cylindrical - установить<br>из цилиндрических (координат)')" onmouseout="hide()">.setFromCylindrical</a>( <a href="#4" onmouseover="show('Cylindrical.<br>c - сокращ. англ. слова cylindrical - цилиндрический')" onmouseout="hide()">c</a> )</pre>
+Метод устанавливает данный вектор из координат в цилиндрической системе, переданных в <tt><a href="#4" onmouseover="show('Cylindrical.<br>c - сокращ. англ. слова cylindrical - цилиндрический')" onmouseout="hide()">c</a></tt>.<br><br>
 
-<pre id="19setFromMatrixColumn"><a href="#19" title="Vector3. set from matrix column - ">.setFromMatrixColumn</a>( matrix</a>, index</a> )</pre>
-Sets this vector's x, y and z equal to the column of the matrix specified by the index.<br><br>
+<pre id="19setFromMatrixColumn"><a href="#19" onmouseover="show('Vector3.<br>set from matrix column - установить из колонки матрицы')" onmouseout="hide()">.setFromMatrixColumn</a>( <a href="#11" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span> )</pre>
+Устанавливает компоненты <tt><a href="#19x" title="Vector3.x">x</a></tt>, <tt><a href="#19y" title="Vector3.y">y</a></tt> и <tt><a href="#19z" title="Vector3.z">z</a></tt> данного вектора равными колонке матрицы (аргумент <tt><a href="#11" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a></tt>),
+определяемой по индексу (<tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt>).<br><br>
 
-<pre id="19setFromMatrixPosition"><a href="#19" title="Vector3. set from matrix position - ">.setFromMatrixPosition</a>( m</a> )</pre>
+<pre id="19setFromMatrixPosition"><a href="#19" onmouseover="show('Vector3.<br>set from matrix position - ')" onmouseout="hide()">.setFromMatrixPosition</a>( <a href="#11" onmouseover="show('Matrix4.<br>m это сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
 Sets this vector to the position elements of the transformation matrix m.<br><br>
 
-<pre id="19setFromMatrixScale"><a href="#19" title="Vector3. set from matrix scale - ">.setFromMatrixScale</a>( m</a> )</pre>
+<pre id="19setFromMatrixScale"><a href="#19" onmouseover="show('Vector3.<br>set from matrix scale - ')" onmouseout="hide()">.setFromMatrixScale</a>( <a href="#11" onmouseover="show('Matrix4.<br>m это сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
 Sets this vector to the scale elements of the transformation matrix m.<br><br>
 
-<pre id="19setFromSpherical"><a href="#19" title="Vector3. ">.setFromSpherical</a>( s</a> )</pre>
-Sets this vector from the spherical coordinates s.<br><br>
+<pre id="19setFromSpherical"><a href="#19" onmouseover="show('Vector3.<br>set from spherical - установить из<br>(координат) сферической (системе)')" onmouseout="hide()">.setFromSpherical</a>( <a href="#16" onmouseover="show('Spherical.<br>s - сокращ. англ. слова spherical - сферический')" onmouseout="hide()">s</a> )</pre>
+Метод устанавливает данный вектор из координат в сферической системе, переданных в <tt><a href="#16" onmouseover="show('Spherical.<br>s - сокращ. англ. слова spherical - сферический')" onmouseout="hide()">s</a></tt>.<br><br>
 
 <pre id="19setLength"><a href="#19" title="Vector3. set length - установить длину">.setLength</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слова length - длина">l</a> )</pre>
 Метод устанавливает данный вектор как вектор с тем же самым направлением, но длиной (<tt><a href="#19length" title="Vector3.length">length</a></tt>) равной <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слова length - длина">l</a></tt>.<br><br>
@@ -2643,26 +2672,27 @@ Sets this vector from the spherical coordinates s.<br><br>
 <pre id="19subScalar"><a href="#19" title="Vector3. сокращ. англ. слов subtract scalar - вычесть скалярное значение">.subScalar</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слова scalar - скаляр">s</a> )</pre>
 Метод вычитает из компонентов <tt><a href="#19x" title="Vector3.x">x</a></tt>, <tt><a href="#19y" title="Vector3.y">y</a></tt> и <tt><a href="#19z" title="Vector3.z">z</a></tt> данного вектора скалярное значение,
 указанное в параметре <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слова scalar - скаляр">s</a></tt>.<br><br>
+
 <pre id="19subVectors"><a href="#19" title="Vector3. сокращ. англ. слов subtract vectors - вычитание векторов">.subVectors</a>( <a href="#19" title="Vector3.">a</a>, <a href="#19" title="Vector3.">b</a> )</pre>
 Метод устанавливает данный вектор как разницу векторов <tt><a href="#19" title="Vector3.">a</a> - <a href="#19" title="Vector3.">b</a></tt>.<br><br>
 
 
-<pre id="19toArray"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="to array - в массив">.toArray</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="array - массив">array</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="offset - смещение">offset</a> )</pre>
+<pre id="19toArray"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to array - в массив')" onmouseout="hide()">.toArray</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
 <div class=list><tt>array</tt> - дополнительный, необязательный массив для хранения вектора. Если он не предоставлен, создается новый массив.</div>
 <div class=list><tt>offset</tt> - дополнительное, необязательное смещение в массиве.</div>
-Возвращает массив в виде <tt>[x, y, z]</tt>, или копирует <tt>x</tt>, <tt>y</tt> и <tt>z</tt> в предоставленный (<tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="array - массив">array</a></tt>) массив.<br><br>
-<pre id="19transformDirection"><a href="#19" title="Vector3. transform direction - преобразовать направление">.transformDirection</a> ( <a href="#11" title="Matrix4. m - сокращ. англ. слова matrix - матрица">m</a> )</pre>
-Метод изменяет данный вектор на матрицу (набор 3&#215;3 вверху слева в матрице, переданной в параметре <tt><a href="#11" title="Matrix4. m - сокращ. англ. слова matrix - матрица">m</a></tt>) и затем <a href="#19normalize" title="Vector3.normalize">нормализует</a> результат.<br><br>
+Возвращает массив в виде <tt>[x, y, z]</tt>, или копирует <tt>x</tt>, <tt>y</tt> и <tt>z</tt> в предоставленный (<tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span></tt>) массив.<br><br>
 
-<pre id="19unproject"><a href="#19" title="Vector3. unproject - ">.unproject</a> ( <a href="cameras.htm#1" title="Camera. camera - камера">camera</a> )</pre>
-<div class=list><tt><a href="cameras.htm#1" title="Camera. camera - камера">camera</a></tt> — камера, используемая в проекции.</div>
-Отменяет <a href="https://en.wikipedia.org/wiki/Vector_projection" target="_blank">проецирование</a> вектора на матрицу проекции камеры.
-Unprojects the vector with the camera's projection matrix.
-</div><br>
+<pre id="19transformDirection"><a href="#19" onmouseover="show('Vector3.<br>transform direction - преобразовать направление')" onmouseout="hide()">.transformDirection</a>( <a href="#11" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Метод изменяет данный вектор на матрицу (набор 3&#215;3 вверху слева в матрице, переданной в параметре <tt><a href="#11" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt>)
+и затем <a href="#19normalize" onmouseover="show('Vector3.normalize')" onmouseout="hide()">нормализует</a> результат.<br><br>
+
+<pre id="19unproject"><a href="#19" onmouseover="show('Vector3.<br>unproject - снять проецирование')" onmouseout="hide()">.unproject</a>( <a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+<div class=list><tt><a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a></tt> — камера, используемая в проекции.</div>
+Отменяет <a href="https://en.wikipedia.org/wiki/Vector_projection" target="_blank">проецирование</a> вектора на проекционную матрицу камеры.
+Unprojects the vector with the camera's projection matrix.</div><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/math/Vector3.js.txt">Vector3.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Vector3.js" target="_blank">Vector3.js на Гитхабе</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Vector3.js" target="_blank">Vector3.js на Гитхабе</a></div><br><br>
 
 
 <h3 id="20">Vector4</h3>
@@ -2683,166 +2713,229 @@ var b = new THREE.Vector4( );<br>
 var d = a.dot( b );</pre><br>
 
 <h4>Конструктор</h4>
-<pre>Vector4 ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">x</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">y</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата z">z</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата w">w</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">x</a></tt> - значение <tt>x</tt> вектора, по умолчанию равно <tt>0</tt>.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">y</a></tt> - значение <tt>y</tt> вектора, по умолчанию равно <tt>0</tt>.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата z">z</a></tt> - значение <tt>z</tt> вектора, по умолчанию равно <tt>0</tt>.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата w">w</a></tt> - значение <tt>w</tt> вектора, по умолчанию равно <tt>1</tt>.</div>
+<pre>Vector4 ( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата w')" onmouseout="hide()">w</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span></tt>
+- значение <tt>x</tt> вектора, по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span></tt>
+- значение <tt>y</tt> вектора, по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span></tt>
+- значение <tt>z</tt> вектора, по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата w')" onmouseout="hide()">w</a></span></tt>
+- значение <tt>w</tt> вектора, по умолчанию равно <tt>1</tt>.</div>
 Создает новый Vector4.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="20isVector4"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is vector 4 - является четырехмерным вектором">.isVector4</a></pre>
+<pre id="20isVector4"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is vector 4 - является четырехмерным вектором')" onmouseout="hide()">.isVector4</a></span></pre>
 Свойство используется для проверки, является ли данный класс и производные от него классы четырехмерными векторами (Vector4). Значением по умолчанию является <tt>true</tt>.<br>
 Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
-<pre id="20x"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">.x</a></pre>
+<pre id="20x"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">.x</a></span></pre>
 <br><br>
-<pre id="20y"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">.y</a></pre>
+<pre id="20y"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">.y</a></span></pre>
 <br><br>
-<pre id="20z"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата z">.z</a></pre>
+<pre id="20z"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">.z</a></span></pre>
 <br><br>
-<pre id="20w"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата w">.w</a></pre>
+<pre id="20w"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата w')" onmouseout="hide()">.w</a></span></pre>
 </div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="20add"><a href="#20" title="Vector4. add - добавить">.add</a>( <a href="#20" title="Vector4. сокращ. от англ. слова vector - вектор">v</a> )</pre>
-Метод добавляет к данному вектору вектор <tt><a href="#20" title="Vector4. сокращ. от англ. слова vector - вектор">v</a></tt>.<br><br>
-<pre id="20addScalar"><a href="#20" title="Vector4. add scalar - добавить скаляр(ное значение)">.addScalar</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова scalar - скаляр, т.е. величина, полностью определяемая в любой координатной системе одним числом, которое не меняется при изменении пространственной системы координат.">s</a> )</pre>
-Метод добавляет скалярное значение <tt>s</tt> к значениям данного вектора <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt>.<br><br>
-<pre id="20addScaledVector"><a href="#20" title="Vector4. add scaled vector - добавить">.addScaledVector</a>( <a href="#20" title="Vector4. сокращ. от англ. слова vector - вектор">v</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова scalar - скаляр, т.е. величина, полностью определяемая в любой координатной системе одним числом, которое не меняется при изменении пространственной системы координат.">s</a> )</pre>
-Добавляет к данному вектору множество из <tt>v</tt> и <tt>s</tt>.<br><br>
-<pre id="20addVectors"><a href="#20" title="Vector4. add vectors - сложить векторы">.addVectors</a>( <a href="#20" title="Vector4. a - первое слагаемое">a</a>, <a href="#20" title="Vector4. b - второе слагаемое">b</a> )</pre>
-Устанавливает данный вектор как <tt><a href="#20" title="Vector4. a - первое слагаемое">a</a> + <a href="#20" title="Vector4. b - второе слагаемое">b</a></tt>.<br><br>
-<pre id="20applyMatrix4"><a href="#20" title="Vector4. apply matrix 4 - применить матрицу 4 на 4">.applyMatrix4</a>( <a href="#11" title="Matrix4. сокращ. англ. слова matrix - матрица">m</a> )</pre>
-Метод умножает данный вектор с матрицей 4&#215;4, заданной в аргументе <tt><a href="#11" title="Matrix4. сокращ. англ. слова matrix - матрица">m</a></tt>.<br><br>
-<pre id="20ceil"><a href="#20" title="Vector4. ceil - перекрытие, потолок">.ceil</a>( )</pre>
-Компоненты вектора <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt> округляются вверх до ближайшего целочисленного значения.<br><br>
-<pre id="20clamp"><a href="#20" title="Vector4. clamp - зажать, в данном случае означает зафиксировать значение в диапазоне, определенном минимальным и максимальным значениями">.clamp</a>( <a href="#20" title="Vector4. min - сокращ. от англ. слова minimum - минимум">min</a>, <a href="#20" title="Vector4. max - сокращ. от англ. слова maximum - максимум">max</a> )</pre>
-<div class=list><tt>min</tt> - минимальные значения <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt> в желаемом диапазоне.</div>
-<div class=list><tt>max</tt> - максимальные значения <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt> в желаемом диапазоне.</div>
+<pre id="20add"><a href="#20" onmouseover="show('Vector4.<br>add - добавить')" onmouseout="hide()">.add</a>( <a href="#20" onmouseover="show('Vector4.<br>сокращ. от англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод добавляет к данному вектору вектор <tt><a href="#20" onmouseover="show('Vector4. сокращ. от англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.<br><br>
+<pre id="20addScalar"><a href="#20" onmouseover="show('Vector4.<br>add scalar - добавить скаляр(ное значение)')" onmouseout="hide()">.addScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова scalar - скаляр,<br>т.е. величина, полностью определяемая в<br>любой координатной системе одним числом,<br>которое не меняется при изменении<br>пространственной системы координат.')" onmouseout="hide()">s</a></span> )</pre>
+Метод добавляет скалярное значение <tt>s</tt> к значениям данного вектора <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>,
+<tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt>.<br><br>
+
+<pre id="20addScaledVector"><a href="#20" onmouseover="show('Vector4.<br>add scaled vector - добавить скалярный вектор')" onmouseout="hide()">.addScaledVector</a>( <a href="#20" onmouseover="show('Vector4.<br>сокращ. от англ. слова vector - вектор')" onmouseout="hide()">v</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова scalar - скаляр,<br>т.е. величина, полностью определяемая в<br>любой координатной системе одним числом,<br>которое не меняется при изменении<br>пространственной системы координат.')" onmouseout="hide()">s</a></span> )</pre>
+Добавляет к данному вектору множество из вектора (<tt>v</tt>) и скаляра (<tt>s</tt>).<br><br>
+
+<pre id="20addVectors"><a href="#20" onmouseover="show('Vector4.<br>add vectors - сложить векторы')" onmouseout="hide()">.addVectors</a>( <a href="#20" onmouseover="show('Vector4.<br>a - первое слагаемое')" onmouseout="hide()">a</a>, <a href="#20" onmouseover="show('Vector4.<br>b - второе слагаемое')" onmouseout="hide()">b</a> )</pre>
+Устанавливает данный вектор как <tt><a href="#20" onmouseover="show('Vector4.<br>a - первое слагаемое')" onmouseout="hide()">a</a> + <a href="#20" onmouseover="show('Vector4.<br>b - второе слагаемое')" onmouseout="hide()">b</a></tt>.<br><br>
+
+<pre id="20applyMatrix4"><a href="#20" onmouseover="show('Vector4.<br>apply matrix 4 - применить матрицу 4&#215;4')" onmouseout="hide()">.applyMatrix4</a>( <a href="#11" onmouseover="show('Matrix4.<br>сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Метод умножает данный вектор с матрицей 4&#215;4, заданной в аргументе <tt><a href="#11" onmouseover="show('Matrix4.<br>сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt>.<br><br>
+
+<pre id="20ceil"><a href="#20" onmouseover="show('Vector4.<br>ceil - перекрытие, потолок, здесь<br>подразумевается округление вверх')" onmouseout="hide()">.ceil</a>( )</pre>
+Компоненты вектора <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>, <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt>
+округляются вверх до ближайшего целочисленного значения.<br><br>
+
+<pre id="20clamp"><a href="#20" onmouseover="show('Vector4.<br>clamp - зажать, в данном случае означает<br>зафиксировать значение в диапазоне,<br>определенном минимальным и<br>максимальным значениями')" onmouseout="hide()">.clamp</a>( <a href="#20" onmouseover="show('Vector4.<br>min - сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">min</a>, <a href="#20" onmouseover="show('Vector4.<br>max - сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">max</a> )</pre>
+<div class=list><tt>min</tt> - минимальные значения <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>, <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> в желаемом диапазоне.</div>
+<div class=list><tt>max</tt> - максимальные значения <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>, <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> в желаемом диапазоне.</div>
 Если значение <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> данного вектора больше значения <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> вектора, указанного в параметре <tt>max</tt>, оно заменяется этим соответствующим значением.<br>
 Если значение <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> данного вектора меньше значения <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> вектора, указанного в параметре <tt>min</tt>, оно заменяется этим соответствующим значением.<br><br>
-<pre id="20clampLength"><a href="#20" title="Vector4. clamp length - зажать длину">.clampLength</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова minimum - минимум">min</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова maximum - максимум">max</a> )</pre>
+
+<pre id="20clampLength"><a href="#20" onmouseover="show('Vector4.<br>clamp length - зажать длину')" onmouseout="hide()">.clampLength</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">max</a></span> )</pre>
 <div class=list><tt>min</tt> - минимальное значение длины, на котором она будет зафиксирована (зажата).</div>
 <div class=list><tt>max</tt> - максимальное значение длины, на котором она будет зафиксирована (зажата).</div>
 Если длина данного вектора больше значения, указанного в параметре <tt>max</tt>, она заменяется на значение <tt>max</tt>.<br>
 Если длина данного вектора меньше значения, указанного в параметре <tt>min</tt>, она заменяется на значение <tt>min</tt>.<br><br>
-<pre id="20clampScalar"><a href="#20" title="Vector4. clamp scalar - зажать скалярное (значение)">.clampScalar</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова minimum - минимум">min</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова maximum - максимум">max</a> )</pre>
+
+<pre id="20clampScalar"><a href="#20" onmouseover="show('Vector4.<br>clamp scalar - зажать скалярное (значение)')" onmouseout="hide()">.clampScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">max</a></span> )</pre>
 <div class=list><tt>min</tt> - минимальное значение компонентов, на котором они будут зафиксированы (зажаты).</div>
 <div class=list><tt>max</tt> - максимальное значение компонентов, на котором они будут зафиксированы (зажаты).</div>
 Если значение <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> данного вектора больше значения, указанного в параметре <tt>max</tt>, оно заменяется на значение <tt>max</tt>.<br>
 Если значение <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> данного вектора меньше значения, указанного в параметре <tt>min</tt>, оно заменяется на значение <tt>min</tt>.<br><br>
-<pre id="20clone"><a href="#20" title="Vector4. clone - клонировать">.clone</a>( )</pre>
-Возвращает новый Vector4 с такими же значениями <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt>, что и у данного вектора.<br><br>
-<pre id="20copy"><a href="#20" title="Vector4. copy - копировать">.copy</a>( <a href="#20" title="Vector4. сокращ. англ. слова vector">v</a> )</pre>
-Копирует значения свойств <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt> из вектора, переданного в параметре <tt>v</tt>, в данный четырехмерный вектор.<br><br>
 
-<pre id="20divideScalar"><a href="#20" title="Vector4. divide scalar - делить (на) скаляр">.divideScalar</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слова scalar - скаляр">s</a> )</pre>
+<pre id="20clone"><a href="#20" onmouseover="show('Vector4.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новый Vector4 с такими же значениями <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>, <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt>, что и у данного вектора.<br><br>
+
+<pre id="20copy"><a href="#20" onmouseover="show('Vector4.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector')" onmouseout="hide()">v</a> )</pre>
+Копирует значения свойств <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>, <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> из вектора, переданного в параметре <tt>v</tt>, в данный четырехмерный вектор.<br><br>
+
+<pre id="20divideScalar"><a href="#20" onmouseover="show('Vector4.<br>divide scalar - делить (на) скаляр')" onmouseout="hide()">.divideScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
 Делит данный вектор на скалярное значение <tt>s</tt>. Если значение скаляра равно нулю (<tt>s = 0</tt>), вектор устанавливается как <tt>(0, 0)</tt>.<br><br>
-<pre id="20dot"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="dot - точка (название метода скорее всего отражает тот факт, что скалярное произведение принято обозначать точкой, а векторное - знаком умножения, т.е. диагональным крестиком)">.dot</a>( <a href="#20" title="Vector4. сокращ. англ. слова vector - вектор">v</a> )</pre>
-Метод вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank">скалярное произведение</a> (<a href="https://en.wikipedia.org/wiki/Dot_product" target="_blank">dot product</a>) данного вектора и вектора, переданного в параметре <tt><a href="#20" title="Vector4. сокращ. англ. слова vector - вектор">v</a></tt>.<br><br>
-<pre id="20equals"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="equals - равняется">.equals</a>( <a href="#20" title="Vector4. сокращ. англ. слова vector - вектор">v</a> )</pre>
-Метод проверяет точное равенство данного вектора и вектора, переданного в параметре <tt><a href="#20" title="Vector4. сокращ. англ. слова vector - вектор">v</a></tt>.<br><br>
-<pre id="20floor"><a href="#20" title="Vector4. floor - пол, нижний уровень, здесь имеется ввиду что производится округление вниз">.floor</a>( )</pre>
+
+<pre id="20dot"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dot - точка (название метода скорее всего отражает тот факт,<br>что скалярное произведение принято обозначать точкой,<br>а векторное - знаком умножения, т.е. диагональным крестиком)')" onmouseout="hide()">.dot</a></span>( <a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank">скалярное произведение</a> (<a href="https://en.wikipedia.org/wiki/Dot_product" target="_blank">dot product</a>)
+данного вектора и вектора, переданного в параметре <tt><a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.<br><br>
+
+<pre id="20equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод проверяет точное равенство данного вектора и вектора, переданного в параметре <tt><a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.<br><br>
+
+<pre id="20floor"><a href="#20" onmouseover="show('Vector4.<br>floor - пол, нижний уровень, здесь<br>имеется ввиду что производится<br>округление вниз')" onmouseout="hide()">.floor</a>( )</pre>
 Этим методом компоненты вектора округляются вниз, до ближайшего целочисленного значения.<br><br>
-<pre id="20fromArray"><a href="#20" title="Vector4. from array - из массива">.fromArray</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="array - массив">array</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="offset - смещение">offset</a> )</pre>
+
+<pre id="20fromArray"><a href="#20" onmouseover="show('Vector4.<br>from array - из массива')" onmouseout="hide()">.fromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
 <div class=list><tt>array</tt> - исходный массив в виде <tt>[x, y, z, w]</tt>.</div>
 <div class=list><tt>offset</tt> - смещение массива (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>0</tt>.</div>
-Метод устанавливает для данного вектора значение <tt><a href="#20x" title="Vector4.x">x</a></tt> равное <tt>array[ offset + 0 ]</tt>, значение <tt><a href="#20y" title="Vector4.y">y</a></tt> равное <tt>array[ offset + 1 ]</tt>,
-значение <tt><a href="#20z" title="Vector4.z">z</a></tt> равное <tt>array[ offset + 2 ]</tt> и значение <tt><a href="#20w" title="Vector4.w">w</a></tt> равное <tt>array[ offset + 3 ]</tt>.<br><br>
-<pre id="20fromBufferAttribute"><a href="#20" title="Vector4. from buffer attribute - из буферного атрибута">.fromBufferAttribute</a>( <a href="core.htm#1" title="BufferAttribute. attribute - атрибут, признак, свойство">attribute</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">index</a> )</pre>
-<div class=list><tt><a href="core.htm#1" title="BufferAttribute. attribute - атрибут, признак, свойство">attribute</a></tt> - исходный атрибут.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">index</a></tt> - индекс в атрибуте.</div>
-Устанавливает значения <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt> данного вектора из атрибута, указанного в параметре <tt><a href="core.htm#1" title="BufferAttribute. attribute - атрибут, признак, свойство">attribute</a></tt>.<br><br>
-<pre id="20getComponent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="get component - получить компонент">.getComponent</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">index</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">index</a></tt> -- целочисленное значение, может быть <tt>0</tt>, <tt>1</tt>, <tt>2</tt>, или <tt>3</tt>.</div>
-Если индекс равен <tt>0</tt>, возвращается значение <tt><a href="#20x" title="Vector4.x">x</a></tt>.<br>
-Если индекс равен <tt>1</tt>, возвращается значение <tt><a href="#20y" title="Vector4.y">y</a></tt>.<br>
-Если индекс равен <tt>2</tt>, возвращается значение <tt><a href="#20z" title="Vector4.z">z</a></tt>.<br>
-Если индекс равен <tt>3</tt>, возвращается значение <tt><a href="#20w" title="Vector4.w">w</a></tt>.<br><br>
-<pre id="20length"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="length - длина">.length</a>( )</pre>
+Метод устанавливает для данного вектора значение <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt> равное <tt>array[ offset + 0 ]</tt>, значение <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt> равное <tt>array[ offset + 1 ]</tt>,
+значение <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> равное <tt>array[ offset + 2 ]</tt> и значение <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> равное <tt>array[ offset + 3 ]</tt>.<br><br>
+
+<pre id="20fromBufferAttribute"><a href="#20" onmouseover="show('Vector4.<br>from buffer attribute - из буферного атрибута')" onmouseout="hide()">.fromBufferAttribute</a>( <a href="core.htm#1" onmouseover="show('BufferAttribute.<br>attribute - атрибут, признак, свойство')" onmouseout="hide()">attribute</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span> )</pre>
+<div class=list><tt><a href="core.htm#1" onmouseover="show('BufferAttribute.<br>attribute - атрибут, признак, свойство')" onmouseout="hide()">attribute</a></tt> - исходный атрибут.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt> - индекс в атрибуте.</div>
+Устанавливает значения <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>, <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt>
+данного вектора из атрибута, указанного в параметре <tt><a href="core.htm#1" onmouseover="show('BufferAttribute.<br>attribute - атрибут, признак, свойство')" onmouseout="hide()">attribute</a></tt>.<br><br>
+
+<pre id="20getComponent"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get component - получить компонент')" onmouseout="hide()">.getComponent</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt>
+-- целочисленное значение, может быть <tt>0</tt>, <tt>1</tt>, <tt>2</tt>, или <tt>3</tt>.</div>
+Если индекс равен <tt>0</tt>, возвращается значение <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>.<br>
+Если индекс равен <tt>1</tt>, возвращается значение <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>.<br>
+Если индекс равен <tt>2</tt>, возвращается значение <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt>.<br>
+Если индекс равен <tt>3</tt>, возвращается значение <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt>.<br><br>
+
+<pre id="20length"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина')" onmouseout="hide()">.length</a></span>( )</pre>
 Вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">евклидову длину</a> <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">(Euclidean length)</a>,
 т.е. расстояние по прямой линии, от точки начала координат <tt>(0, 0, 0, 0)</tt> до точки с заданными координатами <tt>(x, y, z, w)</tt>.<br><br>
-<pre id="20lengthManhattan"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="length Manhattan - манхэттенское расстояние">.lengthManhattan</a>( )</pre>
+
+<pre id="20lengthManhattan"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length Manhattan - манхэттенское расстояние')" onmouseout="hide()">.lengthManhattan</a></span>( )</pre>
 Метод вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B8%D1%85_%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B0%D0%BB%D0%BE%D0%B2" target="_blank">манхэттенское расстояние</a>
 (<a href="http://en.wikipedia.org/wiki/Taxicab_geometry" target="_blank">Manhattan length</a>) данного вектора.<br><br>
-<pre id="20lengthSq"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слов length square - длина в квадрате или квадрат длины">.lengthSq</a>( )</pre>
+
+<pre id="20lengthSq"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов length square<br>- длина в квадрате или квадрат длины')" onmouseout="hide()">.lengthSq</a></span>( )</pre>
 Метод вычисляет квадрат <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">евклидовой длины</a> <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">(Euclidean length)</a>,
 т.е. квадрат расстояния по прямой линии, от точки начала координат <tt>(0, 0, 0, 0)</tt> до точки с заданными координатами <tt>(x, y, z, w)</tt>.
 При сравнении длин векторов, взамен сравнения длин, следует сравнивать квадраты длины, так как для расчета это несколько более эффективно.
-<div class=note_trans><b>Примечание переводчика:</b> Вычисление длины вектора методом <tt><a href="#20length" title="Vector4.length">length</a></tt> это вычисление квадратного корня из результата, полученного методом <tt>lengthSq</tt>.</div><br>
-<pre id="20lerp"><a href="#20" title="Vector4. lerp - сокращ. англ. слов linearly interpolate - линейная интерполяция">.lerp</a>( <a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="alpha - название буквы греческого алфавита, в данном случае обозначает коэффициент интерполяции">alpha</a> )</pre>
-<div class=list><tt><a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a></tt> - <a href="#20" title="Vector4">четырехмерный вектор (Vector4)</a>, до которого будет проводится операция интерполирования.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="alpha - название буквы греческого алфавита, в данном случае обозначает коэффициент интерполяции">alpha</a></tt> - коэффициент интерполяции в закрытом интервале <tt>[0, 1]</tt>.</div>
-Метод выполняет операцию линейного интерполирования между данным вектором и вектором, переданным в параметре <tt><a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a></tt>
-с коэффициентом интерполяции <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="alpha - название буквы греческого алфавита, в данном случае обозначает коэффициент интерполяции">alpha</a></tt>, причем <tt>alpha</tt> можно рассматривать как расстояние вдоль линии соединения этих двух векторов - при <tt>alpha = 0</tt>, он будет равен данному вектору, а при <tt>alpha = 1</tt> - вектору <tt>v</tt>.<br><br>
-<pre id="20lerpVectors"><a href="#20" title="Vector4. lerp vectors - сокращ. англ. слов linearly interpolate vectors - линейная интерполяция векторов">.lerpVectors</a>( <a href="#20" title="Vector4. сокращ. англ. слова vector - вектор, в данном случае - первый вектор">v1</a>, <a href="#20" title="Vector4. сокращ. англ. слова vector - вектор, в данном случае - второй вектор">v2</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="alpha - название буквы греческого алфавита, в данном случае обозначает коэффициент интерполяции">alpha</a> )</pre>
-<div class=list><tt><a href="#20" title="Vector4. сокращ. англ. слова vector - вектор, в данном случае - первый вектор">v1</a></tt> - начальный <a href="#20" title="Vector4">четырехмерный вектор (Vector4)</a>.</div>
-<div class=list><tt><a href="#20" title="Vector4. сокращ. англ. слова vector - вектор, в данном случае - второй вектор">v2</a></tt> - <a href="#20" title="Vector4">четырехмерный вектор (Vector4)</a>, до которого будет проводится операция интерполирования.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="alpha - название буквы греческого алфавита, в данном случае обозначает коэффициент интерполяции">alpha</a></tt> - коэффициент интерполяции в закрытом интервале <tt>[0, 1]</tt>.</div>
+<div class=note_trans><b>Примечание переводчика:</b> Вычисление длины вектора методом <tt><a href="#20length" onmouseover="show('Vector4.length')" onmouseout="hide()">length</a></tt> это вычисление квадратного корня из результата, полученного методом <tt>lengthSq</tt>.</div><br>
+
+<pre id="20lerp"><a href="#20" onmouseover="show('Vector4.<br>lerp - сокращ. англ. слов linearly interpolate<br>- линейная интерполяция')" onmouseout="hide()">.lerp</a>( <a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span> )</pre>
+<div class=list><tt><a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>
+- <a href="#20" onmouseover="show('Vector4')" onmouseout="hide()">четырехмерный вектор (Vector4)</a>, до которого будет проводится операция интерполирования.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span></tt> - коэффициент интерполяции в закрытом интервале <tt>[0, 1]</tt>.</div>
+Метод выполняет операцию линейного интерполирования между данным вектором и вектором, переданным в параметре <tt><a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>
+с коэффициентом интерполяции <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span></tt>,
+причем <tt>alpha</tt> можно рассматривать как расстояние вдоль линии соединения этих двух векторов - при <tt>alpha = 0</tt>, он будет равен данному вектору, а при <tt>alpha = 1</tt> - вектору <tt>v</tt>.<br><br>
+
+<pre id="20lerpVectors"><a href="#20" onmouseover="show('Vector4.<br>lerp vectors - сокращ. англ. слов<br>linearly interpolate vectors -<br>линейная интерполяция векторов')" onmouseout="hide()">.lerpVectors</a>( <a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector - вектор,<br>в данном случае - первый вектор')" onmouseout="hide()">v1</a>, <a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector - вектор,<br>в данном случае - второй вектор')" onmouseout="hide()">v2</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span> )</pre>
+<div class=list><tt><a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector - вектор,<br>в данном случае - первый вектор')" onmouseout="hide()">v1</a></tt>
+- начальный <a href="#20" onmouseover="show('Vector4')" onmouseout="hide()">четырехмерный вектор (Vector4)</a>.</div>
+<div class=list><tt><a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова vector - вектор,<br>в данном случае - второй вектор')" onmouseout="hide()">v2</a></tt>
+- <a href="#20" onmouseover="show('Vector4')" onmouseout="hide()">четырехмерный вектор (Vector4)</a>, до которого будет проводится операция интерполирования.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span></tt>
+- коэффициент интерполяции в закрытом интервале <tt>[0, 1]</tt>.</div>
 Метод устанавливает данный вектор как линейно интерполированный вектор между векторами <tt>v1</tt> и <tt>v2</tt>, и где <tt>alpha</tt> - это расстояние вдоль линии соединения этих двух векторов - при <tt>alpha = 0</tt>, он будет равен вектору <tt>v1</tt>, при <tt>alpha = 1</tt> - вектору <tt>v2</tt>.<br><br>
-<pre id="20max"><a href="#20" title="Vector4. max - сокращ. англ. слова maximum - максимум">.max</a>( <a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a> )</pre>
+
+<pre id="20max"><a href="#20" onmouseover="show('Vector4.<br>max - сокращ. англ. слова maximum - максимум')" onmouseout="hide()">.max</a>( <a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
 Если значение <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> данного вектора меньше значения <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> вектора,
-переданного в параметре <tt><a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a></tt>,
-то это значение заменяется соответствующим значением вектора <tt><a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a></tt>.<br><br>
-<pre id="20min"><a href="#20" title="Vector4. min - сокращ. англ. слова minimum - минимум">.min</a>( <a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a> )</pre>
+переданного в параметре <tt><a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>,
+то это значение заменяется соответствующим значением вектора <tt><a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.<br><br>
+
+<pre id="20min"><a href="#20" onmouseover="show('Vector4.<br>min - сокращ. англ. слова minimum - минимум')" onmouseout="hide()">.min</a>( <a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
 Если значение <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> данного вектора больше значения <tt>x</tt>, <tt>y</tt>, <tt>z</tt> или <tt>w</tt> вектора,
 переданного в параметре <tt><a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a></tt>,
-то это значение заменяется соответствующим значением вектора <tt><a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a></tt>.<br><br>
-<pre id="20multiplyScalar"><a href="#20" title="Vector4. multiply scalar - умножить (на) скаляр">.multiplyScalar</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="s - сокращ. англ. слова scalar - скаляр">s</a> )</pre>
-Метод умножает данный вектор на скаляр, переданный в параметре <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="s - сокращ. англ. слова scalar - скаляр">s</a></tt>.<br><br>
-<pre id="20negate"><a href="#20" title="Vector4. negate - отрицать">.negate</a>( )</pre>
-Метод инвертирует данный вектор, т.е. устанавливает <tt>x = -x</tt>, <tt>y = -y</tt>, <tt>z = -z</tt> и <tt>w = -w</tt>.<br><br>
-<pre id="20normalize"><a href="#20" title="Vector4. normalize - нормализовать, упорядочивать">.normalize</a>( )</pre>
-Метод преобразовывает данный вектор в <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80" target="_blank">единичный вектор</a> (<a href="https://en.wikipedia.org/wiki/Unit_vector" target="_blank">unit vector</a>)
-- то есть, направление его остается тем же самым, а длина вектора (<tt><a href="#20length" title="Vector4.length">length</a></tt>) устанавливается равной <tt>1</tt>.<br><br>
-<pre id="20round"><a href="#20" title="Vector4. round - округлить">.round</a>( )</pre>
-Метод округляет компоненты вектора до ближайшего целочисленного значения.<br><br>
-<pre id="20roundToZero"><a href="#20" title="Vector4. round to zero - округлить к нулю">.roundToZero</a>( )</pre>
-Метод округляет компоненты вектора к нулю (если значение отрицательно - происходит округление вверх, если положительное - вниз) до целочисленного значения.<br><br>
-<pre id="20set"><a href="#20" title="Vector4. set - установить">.set</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">x</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">y</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата z">z</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата w">w</a> )</pre>
-Устанавливает компоненты <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt> данного вектора.<br><br>
-<pre id="20setAxisAngleFromQuaternion"><a href="#20" title="Vector4. set axis angle from quaternion - установить осевой угол по кватерниону">.setAxisAngleFromQuaternion</a>( <a href="#13" title="Quaternion. q - сокращ. от англ. слова quaternion - кватернион">q</a> )</pre>
-<div class=list><tt><a href="#13" title="Quaternion. q - сокращ. от англ. слова quaternion - кватернион">q</a></tt> - нормализованнй <a href="#13" title="Quaternion">кватернион</a>.</div>
-Метод устанавливает значения компонентов <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> данного вектора по осям кватерниона, а значение компонента <tt><a href="#20w" title="Vector4.w">w</a></tt> по углу.<br><br>
-<pre id="20setAxisAngleFromRotationMatrix">.<a href="#20" title="Vector4. set axis angle from rotation matrix - установить осевой угол по матрице вращения">setAxisAngleFromRotationMatrix</a>( <a href="#11" title="Matrix4. m - сокращ. англ. слова matrix - матрица">m</a> )</pre>
-<div class=list><tt><a href="#11" title="Matrix4. m - сокращ. англ. слова matrix - матрица">m</a></tt> - <a href="#11" title="Matrix4">матрица 4&#215;4</a>, в которой матрица 3&#215;3, вверху слева, является простой матрицей вращения.</div>
-Метод устанавливает значения <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> по осям вращения, а значение <tt><a href="#20w" title="Vector4.w">w</a></tt> по углу.<br><br>
-<pre id="20setComponent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set component - установить компонент">.setComponent</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">index</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="index - индекс">index</a></tt> -- целочисленное значение, может быть <tt>0</tt>, <tt>1</tt>, <tt>2</tt>, или <tt>3</tt>.</div>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="value - значение">value</a></tt> -- число с плавающей запятой.</div>
-Если индекс равен <tt>0</tt>, устанавливается значение <tt><a href="#20x" title="Vector4.x">x</a></tt>.<br>
-Если индекс равен <tt>1</tt>, устанавливается значение <tt><a href="#20y" title="Vector4.y">y</a></tt>.<br>
-Если индекс равен <tt>2</tt>, устанавливается значение <tt><a href="#20z" title="Vector4.z">z</a></tt>.<br>
-Если индекс равен <tt>3</tt>, устанавливается значение <tt><a href="#20w" title="Vector4.w">w</a></tt>.<br><br>
-<pre id="20setLength"><a href="#20" title="Vector4. set length - установить длину">.setLength</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слова length - длина">l</a> )</pre>
-Метод устанавливает данный вектор как вектор с тем же самым направлением, но длиной (<tt><a href="#20length" title="Vector4.length">length</a></tt>) равной <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слова length - длина">l</a></tt>.<br><br>
-<pre id="20setScalar"><a href="#20" title="Vector4. set scalar - установить скаляр">.setScalar</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="scalar - скаляр">scalar</a> )</pre>
-Устанавливает все значения <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt> данного вектора равными скалярному значению, указанному в параметре <tt>scalar</tt>.<br><br>
-<pre id="20setX"><a href="#20" title="Vector4. set X - установить (значение координаты) X">.setX</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">x</a> )</pre>
-Метод заменяет значение <tt><a href="#20x" title="Vector4.x">x</a></tt> данного вектора на значение, переданное в параметре <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата x">x</a></tt>.<br><br>
-<pre id="20setY"><a href="#20" title="Vector4. set Y - установить (значение координаты) Y">.setY</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">y</a> )</pre>
-Метод заменяет значение <tt><a href="#20y" title="Vector4.y">y</a></tt> данного вектора на значение, переданное в параметре <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата y">y</a></tt>.<br><br>
-<pre id="20setZ"><a href="#20" title="Vector4. set Z - установить (значение координаты) Z">.setZ</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата z">z</a> )</pre>
-Метод заменяет значение <tt><a href="#20z" title="Vector4.z">z</a></tt> данного вектора на значение, переданное в параметре <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="координата z">z</a></tt>.<br><br>
-<pre id="20setW"><a href="#20" title="Vector4. set W - установить (значение координаты) W">.setW</a>( <a href="#" onclick="return false" class="click-tip" title="координата w">w<span><script type="text/javascript">document.write (type_float);</script></span></a> )</pre>
-Метод заменяет значение <tt><a href="#20w" title="Vector4.w">w</a></tt> данного вектора на значение, переданное в параметре <a href="#" onclick="return false" class="click-tip" title="координата w"><tt>w</tt><span><script type="text/javascript">document.write (type_float);</script></span></a>.<br><br>
-<pre id="20sub"><a href="#20" title="Vector4. сокращ. англ. слова subtract - вычитать">.sub</a> ( <a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a> )</pre>
-Метод вычитает из данного вектора вектор, указанный в параметре <tt><a href="#20" title="Vector4. v - сокращ. англ. слова vector - вектор">v</a></tt>.<br><br>
-<pre id="20subScalar"><a href="#20" title="Vector4. сокращ. англ. слов subtract scalar - вычесть скалярное значение">.subScalar</a> ( <a href="#" onclick="return false" class="click-tip" title="s - сокращ. англ. слова scalar - скаляр">s<span><script type="text/javascript">document.write (type_float);</script></span></a> )</pre>
-Метод вычитает из компонентов <tt><a href="#20x" title="Vector4.x">x</a></tt>, <tt><a href="#20y" title="Vector4.y">y</a></tt>, <tt><a href="#20z" title="Vector4.z">z</a></tt> и <tt><a href="#20w" title="Vector4.w">w</a></tt> данного вектора скалярное значение,
-указанное в параметре <a href="#" onclick="return false" class="click-tip" title="s - сокращ. англ. слова scalar - скаляр"><tt>s</tt><span><script type="text/javascript">document.write (type_float);</script></span></a>.<br><br>
-<pre id="20subVectors"><a href="#20" title="Vector4. subVectors - сокращ. англ. слов subtract vectors - вычитание векторов">.subVectors</a>( <a href="#20" title="Vector4.">a</a>, <a href="#20" title="Vector4.">b</a> )</pre>
-Метод устанавливает данный вектор как разницу векторов <tt><a href="#20" title="Vector4.">a</a> - <a href="#20" title="Vector4.">b</a></tt>.<br><br>
+то это значение заменяется соответствующим значением вектора <tt><a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.<br><br>
 
-<pre id="20toArray"><a href="#" onclick="return false" class="click-tip" title="to array - в массив">.toArray<span><script type="text/javascript">document.write (type_array);</script></span></a>( <a href="#" onclick="return false" class="click-tip" title="array - массив">array<span><script type="text/javascript">document.write (type_array);</script></span></a>, <a href="#" onclick="return false" class="click-tip" title="offset - смещение">offset<span><script type="text/javascript">document.write (type_int);</script></span></a> )</pre>
+<pre id="20multiplyScalar"><a href="#20" onmouseover="show('Vector4.<br>multiply scalar - умножить (на) скаляр')" onmouseout="hide()">.multiplyScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
+Метод умножает данный вектор на скаляр, переданный в параметре <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span></tt>.<br><br>
+
+<pre id="20negate"><a href="#20" onmouseover="show('Vector4.<br>negate - отрицать')" onmouseout="hide()">.negate</a>( )</pre>
+Метод инвертирует данный вектор, т.е. устанавливает <tt>x = -x</tt>, <tt>y = -y</tt>, <tt>z = -z</tt> и <tt>w = -w</tt>.<br><br>
+
+<pre id="20normalize"><a href="#20" onmouseover="show('Vector4.<br>normalize - нормализовать, упорядочивать')" onmouseout="hide()">.normalize</a>( )</pre>
+Метод преобразовывает данный вектор в <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80" target="_blank">единичный вектор</a> (<a href="https://en.wikipedia.org/wiki/Unit_vector" target="_blank">unit vector</a>)
+- то есть, направление его остается тем же самым, а длина вектора (<tt><a href="#20length" onmouseover="show('Vector4.length')" onmouseout="hide()">length</a></tt>) устанавливается равной <tt>1</tt>.<br><br>
+
+<pre id="20round"><a href="#20" onmouseover="show('Vector4.<br>round - округлить')" onmouseout="hide()">.round</a>( )</pre>
+Метод округляет компоненты вектора до ближайшего целочисленного значения.<br><br>
+
+<pre id="20roundToZero"><a href="#20" onmouseover="show('Vector4.<br>round to zero - округлить к нулю')" onmouseout="hide()">.roundToZero</a>( )</pre>
+Метод округляет компоненты вектора к нулю (если значение отрицательно - происходит округление вверх, если положительное - вниз) до целочисленного значения.<br><br>
+
+<pre id="20set"><a href="#20" onmouseover="show('Vector4.<br>set - установить')" onmouseout="hide()">.set</a> ( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата w')" onmouseout="hide()">w</a></span> )</pre>
+Устанавливает компоненты <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>,
+<tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> данного вектора.<br><br>
+
+<pre id="20setAxisAngleFromQuaternion"><a href="#20" onmouseover="show('Vector4.<br>set axis angle from quaternion -<br>установить осевой угол по кватерниону')" onmouseout="hide()">.setAxisAngleFromQuaternion</a>( <a href="#13" onmouseover="show('Quaternion.<br>q - сокращ. от англ. слова quaternion - кватернион')" onmouseout="hide()">q</a> )</pre>
+<div class=list><tt><a href="#13" onmouseover="show('Quaternion.<br>q - сокращ. от англ. слова quaternion - кватернион')" onmouseout="hide()">q</a></tt> - нормализованнй <a href="#13" onmouseover="show('Quaternion')" onmouseout="hide()">кватернион</a>.</div>
+Метод устанавливает значения компонентов <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>,
+<tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> данного вектора по осям кватерниона, а значение компонента <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> по углу.<br><br>
+
+<pre id="20setAxisAngleFromRotationMatrix"><a href="#20" onmouseover="show('Vector4.<br>set axis angle from rotation matrix -<br>установить осевой угол по матрице вращения')" onmouseout="hide()">.setAxisAngleFromRotationMatrix</a>( <a href="#11" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+<div class=list><tt><a href="#11" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt>
+- <a href="#11" onmouseover="show('Matrix4')" onmouseout="hide()">матрица 4&#215;4</a>, в которой матрица 3&#215;3, вверху слева, является простой матрицей вращения.</div>
+Метод устанавливает значения <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>,
+<tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> по осям вращения, а значение <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> по углу.<br><br>
+
+<pre id="20setComponent"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set component - установить компонент')" onmouseout="hide()">.setComponent</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt>
+-- целочисленное значение, может быть <tt>0</tt>, <tt>1</tt>, <tt>2</tt>, или <tt>3</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span></tt> -- число с плавающей запятой.</div>
+Если индекс равен <tt>0</tt>, устанавливается значение <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>.<br>
+Если индекс равен <tt>1</tt>, устанавливается значение <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>.<br>
+Если индекс равен <tt>2</tt>, устанавливается значение <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt>.<br>
+Если индекс равен <tt>3</tt>, устанавливается значение <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt>.<br><br>
+
+<pre id="20setLength"><a href="#20" onmouseover="show('Vector4.<br>set length - установить длину')" onmouseout="hide()">.setLength</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова length - длина')" onmouseout="hide()">l</a></span> )</pre>
+Метод устанавливает данный вектор как вектор с тем же самым направлением, но длиной (<tt><a href="#20length" onmouseover="show('Vector4.length')" onmouseout="hide()">length</a></tt>) равной <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова length - длина')" onmouseout="hide()">l</a></span></tt>.<br><br>
+
+<pre id="20setScalar"><a href="#20" onmouseover="show('Vector4.<br>set scalar - установить скаляр')" onmouseout="hide()">.setScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scalar - скаляр')" onmouseout="hide()">scalar</a></span> )</pre>
+Устанавливает все значения <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>, <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> данного вектора равными скалярному значению, указанному в параметре <tt>scalar</tt>.<br><br>
+
+<pre id="20setX"><a href="#20" onmouseover="show('Vector4.<br>set X - установить (значение координаты) X')" onmouseout="hide()">.setX</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span> )</pre>
+Метод заменяет значение <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt> данного вектора на значение,
+переданное в параметре <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span></tt>.<br><br>
+
+<pre id="20setY"><a href="#20" onmouseover="show('Vector4.<br>set Y - установить (значение координаты) Y')" onmouseout="hide()">.setY</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод заменяет значение <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt> данного вектора на значение, переданное в параметре <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span></tt>.<br><br>
+
+<pre id="20setZ"><a href="#20" onmouseover="show('Vector4.<br>set Z - установить (значение координаты) Z')" onmouseout="hide()">.setZ</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span> )</pre>
+Метод заменяет значение <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> данного вектора на значение,
+переданное в параметре <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span></tt>.<br><br>
+
+<pre id="20setW"><a href="#20" onmouseover="show('Vector4.<br>set W - установить (значение координаты) W')" onmouseout="hide()">.setW</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата w')" onmouseout="hide()">w</a></span> )</pre>
+Метод заменяет значение <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> данного вектора на значение,
+переданное в параметре <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата w')" onmouseout="hide()">w</a></span></tt>.<br><br>
+
+<pre id="20sub"><a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слова subtract - вычитать')" onmouseout="hide()">.sub</a>( <a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод вычитает из данного вектора вектор, указанный в параметре <tt><a href="#20" onmouseover="show('Vector4.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.<br><br>
+
+<pre id="20subScalar"><a href="#20" onmouseover="show('Vector4.<br>сокращ. англ. слов subtract scalar<br>- вычесть скалярное значение')" onmouseout="hide()">.subScalar</a> ( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
+Метод вычитает из компонентов <tt><a href="#20x" onmouseover="show('Vector4.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#20y" onmouseover="show('Vector4.y')" onmouseout="hide()">y</a></tt>, <tt><a href="#20z" onmouseover="show('Vector4.z')" onmouseout="hide()">z</a></tt> и <tt><a href="#20w" onmouseover="show('Vector4.w')" onmouseout="hide()">w</a></tt> данного вектора скалярное значение,
+указанное в параметре <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span></tt>.<br><br>
+
+<pre id="20subVectors"><a href="#20" onmouseover="show('Vector4.<br>subVectors - сокращ. англ. слов<br>subtract vectors - вычитание векторов')" onmouseout="hide()">.subVectors</a>( <a href="#20" onmouseover="show('Vector4.')" onmouseout="hide()">a</a>, <a href="#20" onmouseover="show('Vector4.')" onmouseout="hide()">b</a> )</pre>
+Метод устанавливает данный вектор как разность векторов <tt><a href="#20" onmouseover="show('Vector4.')" onmouseout="hide()">a</a> - <a href="#20" onmouseover="show('Vector4.')" onmouseout="hide()">b</a></tt>.<br><br>
+
+<pre id="20toArray"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to array - в массив')" onmouseout="hide()">.toArray</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
 <div class=list><tt>array</tt> - дополнительный, необязательный массив для хранения вектора. Если он не предоставлен, создается новый массив.</div>
 <div class=list><tt>offset</tt> - дополнительное, необязательное смещение в массиве.</div>
-Возвращает массив в виде <tt>[x, y, z, w]</tt>, или копирует <tt>x</tt>, <tt>y</tt>, <tt>z</tt> и <tt>w</tt> в предоставленный (<a href="#" onclick="return false" class="click-tip" title="array - массив"><tt>array</tt><span><script type="text/javascript">document.write (type_array);</script></span></a>) массив.</div><br>
+Возвращает массив в виде <tt>[x, y, z, w]</tt>, или копирует <tt>x</tt>, <tt>y</tt>, <tt>z</tt> и <tt>w</tt> в предоставленный
+(<tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span></tt>) массив.</div><br>
 
 <h4>Исходники</h4>
-<a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Vector4.js" target="_blank">Vector4.js на Гитхабе</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Vector4.js" target="_blank">Vector4.js на Гитхабе</a></div><br>
 
 <br><br>
 </body></html>

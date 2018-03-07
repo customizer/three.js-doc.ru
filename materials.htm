@@ -1,16 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head>
 <title>Three.js</title>
-<link rel="stylesheet" type="text/css" href="1.css">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<link rel="stylesheet" type="text/css" href="1.css">
 <script type="text/javascript" src="1.js"></script>
 <script type="text/javascript">
 var note_0 = 'Аргумент <tt>parameters</tt> (параметры) является объектом с одним или несколькими свойствами, определяющими внешний вид материала.'
-var note_1 = '<br>Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).<br>'
+var note_1 = '<br>Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" onmouseover="show(\'WebGLRenderer\')" onmouseout="hide()">WebGL</a> визуализатором (рендерером).<br>'
 +'Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br>'
-var note_2 = '<br>При работе с некоторыми визуализаторами, данная настройка может не иметь никакого влияния. Например, она игнорируется рендерером <a href="renderers.htm#1.1" title="CanvasRenderer">Canvas</a>, но работает с рендерером <a href="renderers.htm#1.2" title="WebGLRenderer">WebGL</a>.<br>'
-var note_3 = '<br>Из-за ограничений в <a href="https://code.google.com/p/angleproject" target="_blank">слое ANGLE</a> с визуализатором (рендерером) <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> в операционных системах на основе Windows толщина линии (т.е. значение параметра <tt>linewidth</tt>) всегда будет равна <tt>1</tt>, независимо от установленного значения.'
+var note_2 = '<br>При работе с некоторыми визуализаторами, данная настройка может не иметь никакого влияния. Например, она игнорируется рендерером <a href="renderers.htm#1.1" onmouseover="show(\'CanvasRenderer\')" onmouseout="hide()">Canvas</a>, но работает с рендерером <a href="renderers.htm#1.2" onmouseover="show(\'WebGLRenderer\')" onmouseout="hide()">WebGL</a>.<br>'
+var note_3 = '<br>Из-за ограничений в <a href="https://code.google.com/p/angleproject" target="_blank">слое ANGLE</a> с визуализатором (рендерером) <a href="renderers.htm#1.1" onmouseover="show(\'WebGLRenderer\')" onmouseout="hide()">WebGL</a> в операционных системах на основе Windows толщина линии (т.е. значение параметра <tt>linewidth</tt>) всегда будет равна <tt>1</tt>, независимо от установленного значения.'
 +'<div class=note_trans><b>Примечание переводчика:</b> ANGLE (Almost Native Graphics Layer Engine - практически встроенный движок графического слоя, а перевод самой аббревиатуры ANGLE - угол) это графический движок слоя абстракций, разработанный компанией Google, с открытым исходным кодом под лицензией BSD.'
 +'Этот API в основном предназначен для обеспечения высокопроизводительной совместимости OpenGL с компьютерами Windows и веб-браузерами вроде Chromium, путем перевода вызовов OpenGL в Direct3D, который гораздо лучше поддерживается драйверами. Для ANGLE существует два внутренних визуализатора: самый старый использует Direct3D 9.0c, в то время как новый использует Direct3D 11.<br><br>'
 +'<span style="float:right; margin-top:-16px; background-color:#ffffe8;"><i>из статьи англ. Википедии о <a href="https://en.wikipedia.org/wiki/ANGLE_(software)" target="_blank">ANGLE</a>, перевод мой.</i></span></div>'
@@ -18,6 +17,25 @@ var note_3 = '<br>Из-за ограничений в <a href="https://code.goog
 </head>
 <body>
 <h2 class=head1>Материалы</h2>
+<div class=below>В этом разделе дается описание различных материалов. Их можно представить как некие строительные материалы, вроде балок, стен, черепицы, рубероида и т.д.
+Имеется базовый материал, определяющий общие свойства всех материалов и методов работы с ними. Оставшиеся материалы можно разделить на следующие виды: линии, сетки, точки, шейдеры, тень и спрайт.
+<div class=list><a href="#1">LineBasicMaterial</a> - простые линии</div>
+<div class=list><a href="#2">LineDashedMaterial</a> - пунктирные линии</div>
+<div class=list><a href="#3">Material</a> - базовый материал</div>
+<div class=list><a href="#4">MeshBasicMaterial</a> - базовая сетка</div>
+<div class=list><a href="#5">MeshDepthMaterial</a> - сетка с прорисовкой глубины</div>
+<div class=list><a href="#6">MeshLambertMaterial</a> - матовая сетка с расчетом коэффициента отражения по Ламберту</div>
+<div class=list><a href="#7">MeshNormalMaterial</a> - </div>
+<div class=list><a href="#8">MeshPhongMaterial</a> - </div>
+<div class=list><a href="#9">MeshPhysicalMaterial</a> - </div>
+<div class=list><a href="#10">MeshStandardMaterial</a> - стандартная сетка</div>
+<div class=list><a href="#11">MeshToonMaterial</a> - сетка с тонировкой</div>
+<div class=list><a href="#12">PointsMaterial</a> - матерал точек</div>
+<div class=list><a href="#13">RawShaderMaterial</a> - </div>
+<div class=list><a href="#14">ShaderMaterial</a> - </div>
+<div class=list><a href="#15">ShadowMaterial</a> - теневой материал, он может принимать тень, а в остальном полностью прозрачен</div>
+<div class=list><a href="#16">SpriteMaterial</a> - спрайт</div></div><br>
+
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="1">LineBasicMaterial</h3>
 Материал для рисования геометрических фигур в каркасном стиле обычными линиями.<br><br>
@@ -48,46 +66,51 @@ var note_3 = '<br>Из-за ограничений в <a href="https://code.goog
 <a href="https://threejs.org/examples/webgl_physics_rope" target="_blank">WebGL / physics / rope</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>LineBasicMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
-Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
-Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
-Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+<pre>LineBasicMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span></tt>
+- объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>).</div>
+Исключением является свойство <tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></span></tt>,
+значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" onmouseover="show('Color.set')" onmouseout="hide()">Color.set( color )</a></tt> вызывается внутренне.<br><br>
 
 <h4>Свойства</h4>
-Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
-<pre id="1color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
-<a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
-<pre id="1isLineBasicMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is line basic material - является материалом обычных линий">.isLineBasicMaterial</a></pre>
-Используется для проверки, является ли данный объект, или производные от него, материалом обычных линий. По умолчанию значение равно <tt>true</tt>.<br>
+<pre id="1color"><a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+<a href="math.htm#3" onmouseover="show('Color')" onmouseout="hide()">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
+<pre id="1isLineBasicMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is line basic material -<br>является материалом обычных линий')" onmouseout="hide()">.isLineBasicMaterial</a></span></pre>
+Используется для проверки, принадлежит ли данный объект, или производные от него, к классу LineBasicMaterial (материалу обычных линий). По умолчанию значение равно <tt>true</tt>.<br>
 Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
-<pre id="1lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+
+<pre id="1lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
 Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
-<pre id="1linewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - толщина линии">.linewidth</a></pre>
+
+<pre id="1linewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - толщина линии')" onmouseout="hide()">.linewidth</a></span></pre>
 Свойство управляет толщиной линии. Значение по умолчанию <tt>1</tt>.
 <script>document.write(note_3);</script><br>
 
-<pre id="1linecap"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="line cap - конец линии">.linecap</a></pre>
+<pre id="1linecap"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line cap - конец линии')" onmouseout="hide()">.linecap</a></span></pre>
 Определяет внешний вид концов линии. Возможные значения: <tt>butt</tt> (торец), <tt>round</tt> (круглый) и <tt>square</tt> (квадратный). Значение по умолчанию <tt>round</tt> - круглый.<br>
-Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank"><tt>linecap</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank"><tt>linecap</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> визуализатором (рендерером).
 Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank">статья о <tt>linecap</tt></a> на русском языке.<br>
 <table>
 <tr><td><div class=note_trans><b>Примечание переводчика:</b> Вот нарисованы три линии с разными значениями <tt>linecap</tt>. Для наглядности добавлены две направляющие. Каждая линия будет начинаться и заканчиваться этими направляющими.<br>
-Левая линия будет использовать для <tt>linecap</tt> значение <tt>butt</tt>. Она не будет выходить за направляющие. Средняя линия будет нарисована со значением <tt>round</tt>. За направляющие будут выходить полукруги с диаметром равным толщине линии. Правая линия будет использовать значение <tt>square</tt>. Она будет выходить за направляющие на поля с шириной равной толщине линии и высотой равной половине толщины.</div></td><td><img src="img/linecap.png" width="150px"></td></tr></table>
+Левая линия будет использовать для <tt>linecap</tt> значение <tt>butt</tt>. Она не будет выходить за направляющие. Средняя линия будет нарисована со значением <tt>round</tt>. За направляющие будут выходить полукруги с диаметром равным толщине линии. Правая линия будет использовать значение <tt>square</tt>. Она будет выходить за направляющие на поля с шириной равной толщине линии и высотой равной половине толщины.</div></td><td><img src="img/linecap.png" width="150"></td></tr></table>
 
-<pre id="1linejoin"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="line join - соединение линии">.linejoin</a></pre>
-Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt> (<a class=popupspot href="JavaScript:hhctrl.TextPopup('митра - головной убор, часть богослужебного облачения в ряде христианских церквей.\r\nВ данном случае это остроконечная католическая митра (в православии митра округлая), что и определяет вид соединения линий.','Arial,9',10,10,0xffffff,0xd69967)" title="">митра</a>). Значение по умолчанию <tt>round</tt> - круглый.<br>
-Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
+<pre id="1linejoin"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line join - соединение линии')" onmouseout="hide()">.linejoin</a></span></pre>
+Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt> (<span class="lnk" onmouseover="show('<strong>митра</strong> - головной убор, часть богослужебного облачения<br>в ряде христианских церквей. В данном случае это<br>остроконечная католическая митра (в православии митра<br>округлая), что и определяет вид соединения линий.')" onmouseout="hide()">митра</span>). Значение по умолчанию <tt>round</tt> - круглый.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> визуализатором (рендерером).
 Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br>
 <table><tr><td><div class=note_trans><b>Примечание переводчика:</b> <tt>miter</tt> соединяет линии в одной точке, расширяя для этого их границы и заполняя пространство ромбами.<br>
 <tt>round</tt> скругляет углы засчет добавления сектора с центром в точке пересечения линий и радиусом равным толщине линии.<br>
-<tt>bevel</tt> "срезает" угол, рисуя треугольник с вершинами в точке пересечения линий и крайних точках каждой линии.</div></td><td><img src="img/linejoin.png" width="200px"></td></tr></table></div><br>
+<tt>bevel</tt> "срезает" угол, рисуя треугольник с вершинами в точке пересечения линий и крайних точках каждой линии.</div></td><td><img src="img/linejoin.png" width="200"></td></tr></table></div><br>
+
 <h4>Методы</h4>
-Общие методы смотрите в описании базового класса <a href="#3" title="Material"><tt>Material</tt></a>.<br><br>
+Общие методы смотрите в описании базового класса <a href="#3" onmouseover="show('Material')" onmouseout="hide()"><tt>Material</tt></a>.<br><br>
+
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/materials/LineBasicMaterial.js.txt">LineBasicMaterial.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/LineBasicMaterial.js" target="_blank">LineBasicMaterial.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/LineBasicMaterial.js" target="_blank">LineBasicMaterial.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
@@ -107,78 +130,94 @@ var note_3 = '<br>Из-за ограничений в <a href="https://code.goog
 <a href="https://threejs.org/examples/canvas_lines_dashed" target="_blank">Canvas / lines /dashed</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>LineDashedMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
-Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
-Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
-Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+<pre>LineDashedMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span></tt>
+- объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>).</div>
+Исключением является свойство <tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></span></tt>,
+значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" onmouseover="show('Color.set')" onmouseout="hide()">Color.set( color )</a></tt> вызывается внутренне.<br><br>
 
 <h4>Свойства</h4>
-Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
-<pre id="2color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
-<a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
-<pre id="2dashSize"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="dash size - размер штриха">.dashSize</a></pre>
+<pre id="2color"><a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+<a href="math.htm#3" onmouseover="show('Color')" onmouseout="hide()">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
+
+<pre id="2dashSize"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dash size - размер штриха')" onmouseout="hide()">.dashSize</a></span></pre>
 Размер штриха, по умолчанию равен <tt>3</tt>. Это сумма размеров самого штриха и зазора между штрихами.<br><br>
-<pre id="2gapSize"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="gap size - размер зазора (между штрихами)">.gapSize</a></pre>
+
+<pre id="2gapSize"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gap size - размер зазора (между штрихами)')" onmouseout="hide()">.gapSize</a></span></pre>
 Размер зазора (расстояния) между штрихами, по умолчанию равен <tt>1</tt>.<br><br>
-<pre id="2isLineDashedMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is line dashed material - является материалом штриховых линий">.isLineDashedMaterial</a></pre>
-Используется для проверки, является ли данный объект, или производные от него, материалом штриховых линий. По умолчанию значение равно <tt>true</tt>.<br>
+
+<pre id="2isLineDashedMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is line dashed material -<br>является материалом штриховых<br>линий')" onmouseout="hide()">.isLineDashedMaterial</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу LineDashedMaterial (материалу штриховых линий). По умолчанию значение равно <tt>true</tt>.<br>
 Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
-<pre id="2lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+
+<pre id="2lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
 Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
 
-<pre id="2linewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="line width - толщина линии">.linewidth</a></pre>
+<pre id="2linewidth"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - толщина линии')" onmouseout="hide()">.linewidth</a></span></pre>
 Управляет толщиной линии. Значение по умолчанию <tt>1</tt>.
 <script>document.write(note_3);</script><br>
 
-<pre id="2scale"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="scale - масштаб">.scale</a></pre>
-The scale штриховой части линии.</div><br>
+<pre id="2scale"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scale - масштаб')" onmouseout="hide()">.scale</a></span></pre>
+The scale штриховой части линии. Значение по умолчанию <tt>1</tt>.</div><br>
 
 <h4>Методы</h4>
-Общие методы смотрите в описании базового класса <a href="#3" title="Material"><tt>Material</tt></a>.<br><br>
+Общие методы смотрите в описании базового класса <a href="#3" onmouseover="show('Material')" onmouseout="hide()"><tt>Material</tt></a>.<br><br>
+
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/materials/LineDashedMaterial.js.txt">LineDashedMaterial.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/LineDashedMaterial.js" target="_blank">LineDashedMaterial.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/LineDashedMaterial.js" target="_blank">LineDashedMaterial.js на github.com</a></div><br><br>
 
 
 <h3 id="3">Material</h3>
 Абстрактный, базовый класс для материалов.<br>
-Материалы описывают внешний вид <a href="#3" title="Object">объектов</a>. Они определены (в основном) независимыми от визуализатора (рендерера), так что не придется переписывать материалы, если вы решили использовать другой визуализатор.<br>
+Материалы описывают внешний вид <a href="#3" onmouseover="show('Object')" onmouseout="hide()">объектов</a>. Они определены (в основном) независимыми от визуализатора (рендерера), так что не придется переписывать материалы, если вы решили использовать другой визуализатор.<br>
 Перечисленные ниже свойства и методы наследуются всеми другими типами материала (хотя и могут иметь разные значения по умолчанию).<br><br>
+
 <h4>Конструктор</h4>
 <pre>Material()</pre>
 Конструктор создает общий (универсальный) материал.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="3alphaTest"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="alpha test - проверка альфа(канала)">.alphaTest</a></pre>
+<pre id="3alphaTest"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha test - проверка альфа(канала)')" onmouseout="hide()">.alphaTest</a></span></pre>
 Устанавливает значение альфа-канала (определяет прозрачность), которое будет использоваться при прохождении проверки состояния альфа-канала.
-Если непрозрачность (свойство <tt><a href="#3opacity" title="Material.opacity">opacity</a></tt>) будет меньше заданного здесь значения, материал не будет отображаться.<br>
+Если непрозрачность (свойство <tt><a href="#3opacity" onmouseover="show('Material.opacity')" onmouseout="hide()">opacity</a></tt>) будет меньше заданного здесь значения, материал не будет отображаться.<br>
 Значение по умолчанию <tt>0</tt>.<br><br>
-<pre id="3blendDst"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending destination - целевое смешивание">.blendDst</a></pre>
-Целевое смешивание. Значением по умолчанию является <tt><a href="constants.htm#3" title="CustomBlendingEquation">OneMinusSrcAlphaFactor</a></tt>. Все возможные значения смотрите в описании констант <a href="constants.htm#3.3" title="CustomBlendingEquation">целевых факторов смешивания</a>.<br>
-Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" title="Material.blending">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" title="CustomBlending">CustomBlending</a></tt>.<br><br>
-<pre id="3blendDstAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending destination alpha - альфа(канал) целевого смешивания">.blendDstAlpha</a></pre>
-Прозрачность для <tt><a href="#3blendDst" title="Material.blendDst">blendDst</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
-<pre id="3blendEquation"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending equation - уравнение смешивания">.blendEquation</a></pre>
-Уравнение смешивания, используемое при применении смешивания. Значением по умолчанию является <tt><a href="constants.htm#3" title="CustomBlendingEquation">AddEquation</a></tt>. Все возможные значения смотрите в описании констант <a href="constants.htm#3.1" title="Константы настраиваемых уравнений смешивания">уравнений смешивания</a>.<br>
-Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" title="Material.blending">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" title="CustomBlending">CustomBlending</a></tt>.<br><br>
-<pre id="3blendEquationAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending equation alpha - уравнение смешивания альфа(канала)">.blendEquationAlpha</a></pre>
-Прозрачность для <tt><a href="#3blendEquation" title="Material.blendEquation">blendEquation</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
-<pre id="3blending"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_const,'Arial,9',10,10,0xffffff,0xd69967)" title="blending - смешивание">.blending</a></pre>
-Свойство определяет какое смешивание будет использоваться при отображении объектов с этим материалом.
-При использовании настраиваемых свойств <tt><a href="#3blendSrc" title="Material.blendSrc">blendSrc</a></tt>, <tt><a href="#3blendDst" title="Material.blendDst">blendDst</a></tt> или <tt><a href="#3blendEquation" title="Material.blendEquation">blendEquation</a></tt>,
-оно должно быть установлено как <tt><a href="constants.htm#5.3" title="CustomBlending">CustomBlending</a></tt>.<br>
-Все возможные значения смотрите в описании констант <a href="constants.htm#5.3" title="Константы материалов - режим смешивания">режима смешивания</a>. Значением по умолчанию является <tt><a href="constants.htm#5.3" title="Константы материалов - режим смешивания">NormalBlending</a></tt>.<br><br>
-<pre id="3blendSrc"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending source - исходное смешивание">.blendSrc</a></pre>
-Исходное смешивание. Значением по умолчанию является <tt><a href="constants.htm#3.2" title="Константы настраиваемых уравнений смешивания - исходные факторы">SrcAlphaFactor</a></tt>.
-Все возможные значения смотрите в описании констант <a href="constants.htm#3.2" title="Константы настраиваемых уравнений смешивания - исходные факторы">режима смешивания</a>.<br>
-Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" title="Material.blending">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" title="CustomBlending">CustomBlending</a></tt>.<br><br>
-<pre id="3blendSrcAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов blending source alpha - исходное смешивание альфа(канала)">.blendSrcAlpha</a></pre>
-Прозрачность для <tt><a href="#3blendSrc" title="Material.blendSrc">blendSrc</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-<pre id="3clipIntersection"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="clip intersection - ">.clipIntersection</a></pre>
+<pre id="3blendDst"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending<br>destination - целевое смешивание')" onmouseout="hide()">.blendDst</a></span></pre>
+Целевое смешивание. Значением по умолчанию является <tt><a href="constants.htm#3" onmouseover="show('CustomBlendingEquation')" onmouseout="hide()">OneMinusSrcAlphaFactor</a></tt>. Все возможные значения смотрите в описании констант <a href="constants.htm#3.3" onmouseover="show('CustomBlendingEquation')" onmouseout="hide()">целевых факторов смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" onmouseover="show('Material.blending')" onmouseout="hide()">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" onmouseover="show('CustomBlending')" onmouseout="hide()">CustomBlending</a></tt>.<br><br>
+
+<pre id="3blendDstAlpha"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending destination<br>alpha - альфа(канал) целевого смешивания')" onmouseout="hide()">.blendDstAlpha</a></span></pre>
+Прозрачность для <tt><a href="#3blendDst" onmouseover="show('Material.blendDst')" onmouseout="hide()">blendDst</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="3blendEquation"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending equation<br>- уравнение смешивания')" onmouseout="hide()">.blendEquation</a></span></pre>
+Уравнение смешивания, используемое при применении смешивания. Значением по умолчанию является <tt><a href="constants.htm#3" onmouseover="show('CustomBlendingEquation')" onmouseout="hide()">AddEquation</a></tt>. Все возможные значения смотрите в описании констант <a href="constants.htm#3.1" onmouseover="show('Константы настраиваемых уравнений смешивания')" onmouseout="hide()">уравнений смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" onmouseover="show('Material.blending')" onmouseout="hide()">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" onmouseover="show('CustomBlending')" onmouseout="hide()">CustomBlending</a></tt>.<br><br>
+
+<pre id="3blendEquationAlpha"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending equation alpha<br>- уравнение смешивания альфа(канала)')" onmouseout="hide()">.blendEquationAlpha</a></span></pre>
+Прозрачность для <tt><a href="#3blendEquation" onmouseover="show('Material.blendEquation')" onmouseout="hide()">blendEquation</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="3blending"><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('blending - смешивание')" onmouseout="hide()">.blending</a></span></pre>
+Свойство определяет какое смешивание будет использоваться при отображении объектов с этим материалом.
+При использовании настраиваемых свойств <tt><a href="#3blendSrc" onmouseover="show('Material.blendSrc')" onmouseout="hide()">blendSrc</a></tt>,
+<tt><a href="#3blendDst" onmouseover="show('Material.blendDst')" onmouseout="hide()">blendDst</a></tt> или <tt><a href="#3blendEquation" onmouseover="show('Material.blendEquation')" onmouseout="hide()">blendEquation</a></tt>,
+оно должно быть установлено как <tt><a href="constants.htm#5.3" onmouseover="show('CustomBlending')" onmouseout="hide()">CustomBlending</a></tt>.<br>
+Все возможные значения смотрите в описании констант <a href="constants.htm#5.3" onmouseover="show('Константы материалов - режим смешивания')" onmouseout="hide()">режима смешивания</a>.
+Значением по умолчанию является <tt><a href="constants.htm#5.3" onmouseover="show('Константы материалов - режим смешивания')" onmouseout="hide()">NormalBlending</a></tt>.<br><br>
+
+<pre id="3blendSrc"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending source - исходное смешивание')" onmouseout="hide()">.blendSrc</a></span></pre>
+Исходное смешивание. Значением по умолчанию является <tt><a href="constants.htm#3.2" onmouseover="show('Константы настраиваемых уравнений<br>смешивания - исходные факторы')" onmouseout="hide()">SrcAlphaFactor</a></tt>.
+Все возможные значения смотрите в описании констант <a href="constants.htm#3.2" onmouseover="show('Константы настраиваемых уравнений<br>смешивания - исходные факторы')" onmouseout="hide()">режима смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#3blending" onmouseover="show('Material.blending')" onmouseout="hide()">blending</a></tt> должно быть установлено как <tt><a href="constants.htm#5.3" onmouseover="show('CustomBlending')" onmouseout="hide()">CustomBlending</a></tt>.<br><br>
+
+<pre id="3blendSrcAlpha"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending source alpha<br>- исходное смешивание альфа(канала)')" onmouseout="hide()">.blendSrcAlpha</a></span></pre>
+Прозрачность для <tt><a href="#3blendSrc" onmouseover="show('Material.blendSrc')" onmouseout="hide()">blendSrc</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="3clipIntersection"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clip intersection - обрезать пересечение')" onmouseout="hide()">.clipIntersection</a></span></pre>
 Изменяет поведение плоскостей отсечения так, что обрезается только их пересечение, а не их соединение.
 Changes the behavior of clipping planes so that only their intersection is clipped, rather than their union. Значение по умолчанию <tt>false</tt>.<br><br>
 
@@ -186,24 +225,24 @@ Changes the behavior of clipping planes so that only their intersection is clipp
 User-defined clipping planes specified as THREE.Plane objects in world space. These planes apply to the objects this material is attached to. Points in space whose signed distance to the plane is negative are clipped (not rendered).
 Смотрите пример <a href="https://threejs.org/examples/webgl_clipping_intersection.html" target="_blank">WebGL / clipping /intersection</a>. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-<pre id="3clipShadows"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="clip shadows - обрезать тени">.clipShadows</a></pre>
+<pre id="3clipShadows"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clip shadows - обрезать тени')" onmouseout="hide()">.clipShadows</a></span></pre>
 Свойство определяет, обрезать ли тени в соответствии с плоскостями отсечения, указанными на этом материале. Defines whether to clip shadows according to the clipping planes specified on this material. Значение по умолчанию <tt>false</tt>.<br><br>
 
-<pre id="3colorWrite"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="color write - ">.colorWrite</a></pre>
-Будет ли отображаться цвет материала. Это свойство можно использовать в соединении со свойством сетки (mesh) <tt><a href="core.htm#14renderOrder" title="Object3D.renderOrder">renderOrder</a></tt> для создания невидимых объектов, закрывающих другие объекты.
+<pre id="3colorWrite"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color write - показать цвет')" onmouseout="hide()">.colorWrite</a></span></pre>
+Будет ли отображаться цвет материала. Это свойство можно использовать в соединении со свойством сетки (mesh) <tt><a href="core.htm#14renderOrder" onmouseover="show('Object3D.renderOrder')" onmouseout="hide()">renderOrder</a></tt> для создания невидимых объектов, закрывающих другие объекты.
 Whether to render the material's color. This can be used in conjunction with a mesh's .renderOrder property to create invisible objects that occlude other objects. Значение по умолчанию <tt>true</tt>.<br><br>
 
-<pre id="3customDepthMaterial"><a href="#3" title="Material. custom depth material - настраиваемая глубина материала">.customDepthMaterial</a></pre>
+<pre id="3customDepthMaterial"><a href="#3" onmouseover="show('Material.<br>custom depth material -<br>настраиваемая глубина материала')" onmouseout="hide()">.customDepthMaterial</a></pre>
 Custom depth material to be used by this material when rendering to the depth map.
-Для правильного отображения теней при направленном (<a href="lights.htm#2" title="DirectionalLight">DirectionalLight</a>) или прожекторном (<a href="lights.htm#7" title="SpotLight">SpotLight</a>) освещении, требуется указывать <tt>customDepthMaterial</a></tt>, если было:
+Для правильного отображения теней при направленном (<a href="lights.htm#2" onmouseover="show('DirectionalLight')" onmouseout="hide()">DirectionalLight</a>) или прожекторном (<a href="lights.htm#7" onmouseover="show('SpotLight')" onmouseout="hide()">SpotLight</a>) освещении, требуется указывать <tt>customDepthMaterial</a></tt>, если было:
 <ol style="list-style-type:lower-alpha;"><li>изменение позиций вершин в шейдере вершин,</li>
 <li>использование карты смещения,</li>
-<li>использование карты прозрачности (alpha map) с проверкой прозрачности (<tt><a href="#3alphaTest" title="Material.alphaTest">alphaTest</a></tt>), или</li>
-<li>использовалась прозрачная текстура с проверкой прозрачности (<tt><a href="#3alphaTest" title="Material.alphaTest">alphaTest</a></tt>).</li></ol>
+<li>использование карты прозрачности (alpha map) с проверкой прозрачности (<tt><a href="#3alphaTest" onmouseover="show('Material.alphaTest')" onmouseout="hide()">alphaTest</a></tt>), или</li>
+<li>использовалась прозрачная текстура с проверкой прозрачности (<tt><a href="#3alphaTest" onmouseover="show('Material.alphaTest')" onmouseout="hide()">alphaTest</a></tt>).</li></ol>
 Значением по умолчанию является <tt>undefined</tt>.<br><br>
 
-<pre id="3customDistanceMaterial"><a href="#3" title="Material. custom distance material - ">.customDistanceMaterial</a></pre>
-Тоже самое, что и <tt>customDepthMaterial</tt>, но используется с точечным освещением (<a href="lights.htm#5" title="PointLight">PointLight</a>). Значением по умолчанию является <tt>undefined</tt>.<br><br>
+<pre id="3customDistanceMaterial"><a href="#3" onmouseover="show('Material.<br>custom distance material -<br>настраиваемая отдаление материала')" onmouseout="hide()">.customDistanceMaterial</a></pre>
+Тоже самое, что и <tt>customDepthMaterial</tt>, но используется с точечным освещением (<a href="lights.htm#5" onmouseover="show('PointLight')" onmouseout="hide()">PointLight</a>). Значением по умолчанию является <tt>undefined</tt>.<br><br>
 
 <pre id="3defines">.defines</a></pre>
 Custom defines to be injected into the shader. These are passed in form of an object literal, with key/value pairs. { MY_CUSTOM_DEFINE: '' , PI2: Math.PI * 2 }. The pairs are defined in both vertex and fragment shaders. Значением по умолчанию является <tt>undefined</tt>.<br><br>
@@ -214,42 +253,46 @@ Which depth function to use. Default is LessEqualDepth. See the depth mode const
 <pre id="3depthTest">.depthTest</a></pre>
 Whether to have depth test enabled when rendering this material. Значение по умолчанию <tt>true</tt>.<br><br>
 
-<pre id="3depthWrite"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="depth write - записывать глубину">.depthWrite</a></pre>
+<pre id="3depthWrite"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth write - записывать глубину')" onmouseout="hide()">.depthWrite</a></span></pre>
 Whether rendering this material has any effect on the depth buffer. Значение по умолчанию <tt>true</tt>.<br>
 
 When drawing 2D overlays it can be useful to disable the depth writing in order to layer several things together without creating z-index artifacts.<br><br>
 
-<pre id="3dithering"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="dithering - размывание">.dithering</a></pre>
+<pre id="3dithering"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dithering - размывание')" onmouseout="hide()">.dithering</a></span></pre>
 Whether to apply dithering to the color to remove the appearance of banding. Значение по умолчанию <tt>false</tt>.<br><br>
 
-<pre id="3flatShading"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="flat shading - плоское затенение">.flatShading</a></pre>
+<pre id="3flatShading"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('flat shading - плоское затенение')" onmouseout="hide()">.flatShading</a></span></pre>
 Define whether the material is rendered with flat shading. Значение по умолчанию <tt>false</tt>.<br><br>
 
-<pre id="3fog"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="fog - туман">.fog</a></pre>
+<pre id="3fog"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fog - туман')" onmouseout="hide()">.fog</a></span></pre>
 Свойство определяет, будет ли материал подвержен влиянию тумана. Значение по умолчанию <tt>true</tt>.<br><br>
-<pre id="3id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова identifier - идентификатор">.id</a></pre>
+
+<pre id="3id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
 Уникальное число-идентификатор для данного экземпляра материала.<br><br>
-<pre id="3isMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is material - является материалом">.isMaterial</a></pre>
+
+<pre id="3isMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is material - является материалом')" onmouseout="hide()">.isMaterial</a></span></pre>
 Используется для проверки, является ли данный объект, или производные от него, материалами. По умолчанию значение равно <tt>true</tt>.<br>
 Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
-<pre id="3lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+
+<pre id="3lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
 Свойство определяет, будет ли освещение влиять на материал. Значение по умолчанию <tt>true</tt>.<br><br>
-<pre id="name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="name - имя, название">.name</a></pre>
+
+<pre id="name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">.name</a></span></pre>
 Дополнительное, необязательное название объекта (необязательно быть уникальным). По умолчанию это пустая строка ("").<br><br>
 
-<pre id="3needsUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="needs update - требуется обновление">.needsUpdate</a></pre>
+<pre id="3needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('needs update - требуется обновление')" onmouseout="hide()">.needsUpdate</a></span></pre>
 Specifies that the material needs to be updated at the WebGL level. Set it to true if you made changes that need to be reflected in WebGL.<br>
 При создании экземпляра нового материала, данное свойство автоматически устанавливается как <tt>true</tt>.<br><br>
 
-<pre id="3opacity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="opacity - непрозрачность">.opacity</a></pre>
+<pre id="3opacity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('opacity - непрозрачность')" onmouseout="hide()">.opacity</a></span></pre>
 Число с плавающей запятой (float) в диапазоне <tt>0.0 - 1.0</tt>, показывающее насколько прозрачен материал. Значение <tt>0.0</tt> указывает на полную прозрачность, а <tt>1.0</tt> - на полную непрозрачность.
 Значение по умолчанию равно <tt>1.0</tt>.<br>
-Если свойство <tt><a href="#3transparent" title="Material.transparent">transparent</a></tt> материала не установлено как <tt>true</tt>, материал будет оставаться полностью непрозрачным и данное значение будет влиять только на его цвет.<br><br>
+Если свойство <tt><a href="#3transparent" onmouseover="show('Material.transparent')" onmouseout="hide()">transparent</a></tt> материала не установлено как <tt>true</tt>, материал будет оставаться полностью непрозрачным и данное значение будет влиять только на его цвет.<br><br>
 
-<pre id="3overdraw"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="overdraw - превышение">.overdraw</a></pre>
+<pre id="3overdraw"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('overdraw - превышение')" onmouseout="hide()">.overdraw</a></span></pre>
 Amount of triangle expansion at draw time. This is a workaround for cases when gaps appear between triangles when using CanvasRenderer. 0.5 tends to give good results across browsers. Значение по умолчанию <tt>0</tt>.<br><br>
 
-<pre id="3polygonOffset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="polygon offset - смещение полигона">.polygonOffset</a></pre>
+<pre id="3polygonOffset"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('polygon offset - смещение полигона')" onmouseout="hide()">.polygonOffset</a></span></pre>
 Свойство устанавливает, будет ли использоваться смещение полигонов. Значение по умолчанию <tt>false</tt>. Это свойство соответствует свойству WebGL <tt>GL_POLYGON_OFFSET_FILL</tt>.<br><br>
 <!--
 glPolygonOffset — set the scale and units used to calculate depth values
@@ -265,15 +308,16 @@ glPolygonOffset is useful for rendering hidden-line images, for applying decals 
 https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glPolygonOffset.xhtml
 http://www.opengl-master.ru/function.php?id=42 -->
 
-<pre id="3polygonOffsetFactor"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="polygon offset factor - коэффициент масштабирования смещения полигонов">.polygonOffsetFactor</a></pre>
-Устанавливает <a class=popupspot href="JavaScript:hhctrl.TextPopup('коэффициент масштабирования, который используется для создания переменного смещения глубины для каждого полигона','Arial,9',10,10,0xffffff,0xd69967)">коэффициент масштабирования</a> смещения полигонов. Значение по умолчанию <tt>0</tt>.<br><br>
+<pre id="3polygonOffsetFactor"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('polygon offset factor - коэффициент<br>масштабирования смещения полигонов')" onmouseout="hide()">.polygonOffsetFactor</a></span></pre>
+Устанавливает <span class="lnk" onmouseover="show('коэффициент масштабирования, который используется<br>для создания переменного смещения глубины<br>каждого полигона')" onmouseout="hide()">коэффициент масштабирования</span> смещения полигонов. Значение по умолчанию <tt>0</tt>.<br><br>
 
-<pre id="3polygonOffsetUnits"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="polygon offset units - блоки смещения полигонов">.polygonOffsetUnits</a></pre>
+<pre id="3polygonOffsetUnits"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('polygon offset units - блоки смещения полигонов')" onmouseout="hide()">.polygonOffsetUnits</a></span></pre>
 <!-- Is multiplied by an implementation - specific value to create a constant depth offset    -->
 Устанавливает блоки смещения полигонов. Значение по умолчанию <tt>0</tt>.<br><br>
 
-<pre id="3precision"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="precision - точность">.precision</a></pre>
-Свойство переопределяет точность по умолчанию визуализатора для данного материала. Может быть <tt title="сокращ. от англ. слов high precision - высокая точность">highp</tt>, <tt title="сокращ. от англ. слов medium precision - средняя точность">mediump</tt> или <tt title="сокращ. от англ. слов low precision - низкая точность">lowp</a></tt>. Значение по умолчанию равно <tt>null</tt>.<br><br>
+<pre id="3precision"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('precision - точность')" onmouseout="hide()">.precision</a></span></pre>
+Свойство переопределяет точность по умолчанию визуализатора для данного материала. Может быть <span class="lnk" onmouseover="show('сокращ. от англ. слов high precision - высокая точность')" onmouseout="hide()"><tt>highp</tt></span>,
+<span class="lnk" onmouseover="show('сокращ. от англ. слов medium precision - средняя точность')" onmouseout="hide()"><tt>mediump</tt></span> или <span class="lnk" onmouseover="show('сокращ. от англ. слов low precision - низкая точность')" onmouseout="hide()"><tt>lowp</tt></span>. Значение по умолчанию равно <tt>null</tt>.<br><br>
 
 <pre id="3premultipliedAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="premultiplied alpha - ">.premultipliedAlpha</a></pre>
 Whether to premultiply the alpha (transparency) value. Посмотрите отличия в примере <a href="https://threejs.org/examples/#webgl_materials_transparency" target="_blank">WebGL / Materials / Transparency</a>. Значение по умолчанию <tt>false</tt>.<br><br>
@@ -332,7 +376,7 @@ A material for drawing geometries in a simple shaded (flat or wireframe) way.<br
 На этот материал не влияет освещение.
 This material is not affected by lights.
 A material for drawing geometries in a simple shaded (flat or wireframe) way.<br>
-По умолчанию будет отображаться в виде плоских многоугольников. Чтобы нарисовать сетку в виде каркаса, просто установите свойство <tt><a href="#4wireframe" title="MeshBasicMaterial.wireframe">wireframe</tt></a> как <tt>true</tt>.<br><br>
+По умолчанию будет отображаться в виде плоских многоугольников. Чтобы нарисовать сетку в виде каркаса, просто установите свойство <tt><a href="#4wireframe" onmouseover="show('MeshBasicMaterial.wireframe')" onmouseout="hide()">wireframe</a></tt> как <tt>true</tt>.<br><br>
 
 <!--
 <iframe id="scene" src="scenes/material-browser.html#MeshBasicMaterial"></iframe>  -->
@@ -415,7 +459,9 @@ Define whether the material uses skinning. Значением по умолча�
 Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank"><tt>linecap</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
 Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank">статья о <tt>linecap</tt></a> на русском языке.<br><br>
 <pre id="4wireframeLinejoin"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line join - соединение линий каркаса">.wireframeLinejoin</a></pre>
-Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt> (<a class=popupspot href="JavaScript:hhctrl.TextPopup('митра - головной убор, часть богослужебного облачения в ряде христианских церквей.\r\nВ данном случае это остроконечная католическая митра (в православии митра округлая), что и определяет вид соединения линий.','Arial,9',10,10,0xffffff,0xd69967)" title="">митра</a>). Значение по умолчанию <tt>round</tt> - круглый.<br>
+Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt>
+(<span class="lnk" onmouseover="show('<strong>митра</strong> - головной убор, часть богослужебного облачения<br>в ряде христианских церквей. В данном случае это<br>остроконечная католическая митра (в православии митра<br>округлая), что и определяет вид соединения линий.')" onmouseout="hide()">митра</span>).
+Значение по умолчанию <tt>round</tt> - круглый.<br>
 Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
 Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br><br>
 <pre id="4wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линии каркаса">.wireframeLinewidth</a></pre>
@@ -1064,7 +1110,7 @@ Define whether the material uses skinning. Значением по умолча�
 
 <pre id="11isMeshToonMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh toon material - является тонированным материалом сетки">.isMeshToonMaterial</a></pre>
 Используется для проверки, является ли данный объект, или производные от него, тонированным материалом сетки. По умолчанию значение равно <tt>true</tt>.<br>
-Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.</div><br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
 
 <pre id="11defines"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="defines - ">.defines</a></pre>
 Объект в виде:
@@ -1120,7 +1166,7 @@ scene.add( starField );</pre>
 <h4>Свойства</h4>
 Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
 <div class=blockindent><br>
-<pre id="12"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
+<pre id="12color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
 <a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
 <pre id="12isPointsMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is points material - является материалом точек">.isPointsMaterial</a></pre>
 Используется для проверки, является ли данный объект, или производные от него, материалом точек. По умолчанию значение равно <tt>true</tt>.<br>
@@ -1183,7 +1229,7 @@ scene.add( starField );</pre>
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="14">ShaderMaterial</h3>
 Материал отображаемый с помощью собственных (заказных) шейдеров. Шейдер - это небольшая программа, написанная на языке <a href="https://www.opengl.org/documentation/glsl/" target="_blank">GLSL</a>
-для запуска на <a class=popupspot href="JavaScript:hhctrl.TextPopup('сокращ. англ. слов graphics processing unit - блок графической обработки, т.е. видеокарта','Arial,9',10,10,0xffffff,0xd69967)">GPU</a>.
+для запуска на <span class="lnk" onmouseover="show('сокращ. англ. слов graphics processing unit -<br>блок графической обработки, т.е. видеокарта')" onmouseout="hide()">GPU</span>.
 Можно использовать заказной шейдер, если требуется:
 <ul><li>реализовать эффект не включенный ни в один из встроенных <a href="#3" title="Material">материалов</a></li>
 <li>для повышения производительности объединить несколько объектов в одной <tt><a href="core.htm#7" title="Geometry">Geometry</a></tt> или <tt><a href="core.htm#2" title="BufferGeometry">BufferGeometry</a></tt></li></ul>
@@ -1257,7 +1303,7 @@ Note that <b>within</b> the shader itself, uniforms and attributes act like cons
 
 <h4>Настраиваемые атрибуты и униформы Custom attributes and uniforms</h4>
 Оба типа переменных (и настраиваемые атрибуты, и униформы), должны быть объявлены в GLSL коде шейдера (внутри <tt>vertexShader</tt> и/или <tt>fragmentShader</tt>).
-Both custom attributes and uniforms must be declared in your GLSL shader code (within *vertexShader* and/or *fragmentShader*). Custom uniforms must be defined in <emph>both</emph> the *uniforms* property of your *ShaderMaterial*, whereas any custom attributes must be defined via [page:BufferAttribute] instances. Note that *varying*s only need to be declared within the shader code (not within the material).<br><br>
+Both custom attributes and uniforms must be declared in your GLSL shader code (within *vertexShader* and/or *fragmentShader*). Custom uniforms must be defined in <b>both</b> the *uniforms* property of your *ShaderMaterial*, whereas any custom attributes must be defined via [page:BufferAttribute] instances. Note that *varying*s only need to be declared within the shader code (not within the material).<br><br>
 To declare a custom attribute, please reference the [page:BufferGeometry] page for an overview, and the [page:BufferAttribute] page for a detailed look at the *BufferAttribute* API.<br><br>
 При создании собственных атрибутов имейте ввиду, что каждый типизированный массив, для хранения данных вашего атрибута, должен быть кратным размеру вашего типа данных.
 Например, если типом атрибута будет <tt><a href="math.htm#19" title="Vector3">THREE.Vector3</a></tt> и в вашей <tt><a href="core.htm#2" title="BufferGeometry">BufferGeometry</a></tt> имеется <tt>3000</tt> вершин,
@@ -1266,7 +1312,7 @@ When creating your attributes, each typed array that you create to hold your att
 Для справки ниже приведена таблица размеров для каждого типа данных:<br>
 
 <span class="caption_top"><a id="attribute-sizes">Размеры атрибутов</a></span>
-<table class="tbl_1" border="1" cellpadding="5px">
+<table class="tbl_1" border="1" cellpadding="5">
 <tr class="head"><td>Тип GLSL<br>GLSL type</td><td>Тип JavaScript<br>JavaScript type</td><td>Размер<br>Size</td></tr>
 <tr align=center><td>float</td><td><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)" title="number - число">Number</a></td><td>1</td></tr>
 <tr align=center><td>vec2</td><td><a href="math.htm#18" title="Vector2">THREE.Vector2</a></td><td>2</td></tr>

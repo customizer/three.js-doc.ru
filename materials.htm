@@ -319,81 +319,101 @@ http://www.opengl-master.ru/function.php?id=42 -->
 Свойство переопределяет точность по умолчанию визуализатора для данного материала. Может быть <span class="lnk" onmouseover="show('сокращ. от англ. слов high precision - высокая точность')" onmouseout="hide()"><tt>highp</tt></span>,
 <span class="lnk" onmouseover="show('сокращ. от англ. слов medium precision - средняя точность')" onmouseout="hide()"><tt>mediump</tt></span> или <span class="lnk" onmouseover="show('сокращ. от англ. слов low precision - низкая точность')" onmouseout="hide()"><tt>lowp</tt></span>. Значение по умолчанию равно <tt>null</tt>.<br><br>
 
-<pre id="3premultipliedAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="premultiplied alpha - ">.premultipliedAlpha</a></pre>
-Whether to premultiply the alpha (transparency) value. Посмотрите отличия в примере <a href="https://threejs.org/examples/#webgl_materials_transparency" target="_blank">WebGL / Materials / Transparency</a>. Значение по умолчанию <tt>false</tt>.<br><br>
+<pre id="3premultipliedAlpha"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('premultiplied alpha - предварительное<br>умножение альфа(-канала)')" onmouseout="hide()">.premultipliedAlpha</a></span></pre>
+Свойство определяет, будет ли предварительное перемножение значения альфа-канала, определяющего прозрачность.
+Посмотрите отличия в примере <a href="https://threejs.org/examples/#webgl_materials_transparency" target="_blank">WebGL / Materials / Transparency</a>. Значение по умолчанию <tt>false</tt>.<br><br>
 
-<pre id="3side"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="side - сторона">.side</a></pre>
-Свойство определяет сторону грани, которая будет отображаться, - передняя, задняя или обе. Значение по умолчанию <tt><a href="constants.htm#5.1" title="Константы материала. front side - передняя сторона">THREE.FrontSide</a></tt>.
-Остальные варианты это <tt><a href="constants.htm#5.1" title="Константы материала. back side - задняя сторона">THREE.BackSide</a></tt> и <tt><a href="constants.htm#5.1" title="Константы материала. double side - две стороны">THREE.DoubleSide</a></tt>.<br><br>
-<pre id="3transparent"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="transparent - прозрачность">.transparent</a></pre>
+<pre id="3shadowSide"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shadow side - теневая сторона')" onmouseout="hide()">.shadowSide</a></span></pre>
+Определяет которая из сторон граней отбрасывает тени. Может быть <tt><a href="constants.htm#5.1" onmouseover="show('Константы материала.<br>front side - передняя сторона')" onmouseout="hide()">THREE.FrontSide</a></tt>,
+<tt><a href="constants.htm#5.1" onmouseover="show('Константы материала.<br>back side - задняя сторона')" onmouseout="hide()">THREE.BackSide</a></tt>
+или <tt><a href="constants.htm#5.1" onmouseover="show('Константы материала.<br>double side - две стороны')" onmouseout="hide()">THREE.DoubleSide</a></tt>. Значение по умолчанию <tt>null</tt>.<br>
+Если установлено значение <tt>null</tt>, сторона отбрасывающая тень определяется следующим образом:
+<table width="400">
+<tr><td><a href="#3side" onmouseover="show('Material.side')" onmouseout="hide()">Material.side</a></td><td>Сторона, отбрасывающая тени</td>
+<tr><td>THREE.FrontSide</td><td>задняя сторона</td>
+<tr><td>THREE.BackSide</td><td>передняя сторона</td>
+<tr><td>THREE.DoubleSide</td><td>обе стороны</td></table><br>
+ 
+<pre id="3side"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('side - сторона')" onmouseout="hide()">.side</a></span></pre>
+Свойство определяет сторону грани, которая будет отображаться, - передняя, задняя или обе.
+Значение по умолчанию <tt><a href="constants.htm#5.1" onmouseover="show('Константы материала.<br>front side - передняя сторона')" onmouseout="hide()">THREE.FrontSide</a></tt>.
+Остальные варианты это <tt><a href="constants.htm#5.1" onmouseover="show('Константы материала.<br>back side - задняя сторона')" onmouseout="hide()">THREE.BackSide</a></tt>
+и <tt><a href="constants.htm#5.1" onmouseover="show('Константы материала.<br>double side - две стороны')" onmouseout="hide()">THREE.DoubleSide</a></tt>.<br><br>
+
+<pre id="3transparent"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('transparent - прозрачность')" onmouseout="hide()">.transparent</a></span></pre>
 Определяет будет ли данный материал прозрачным или нет. Данное свойство влияет на процесс визуализации, так как прозрачные объекты нуждаются в специальной обработке и отображаются после непрозрачных объектов.<br>
-Если данное свойство установлено как <tt>true</tt>, степень прозрачности материала определяется настройкой значения свойства <tt><a href="#3opacity" title="Material.opacity">opacity</a></tt>.<br>
+Если данное свойство установлено как <tt>true</tt>, степень прозрачности материала определяется настройкой значения свойства <tt><a href="#3opacity" onmouseover="show('Material.opacity')" onmouseout="hide()">opacity</a></tt>.<br>
 Значение по умолчанию <tt>false</tt>.<br><br>
-<pre id="3type"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="type - тип">.type</a></pre>
+
+<pre id="3type"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">.type</a></span></pre>
 Значением этого свойства является строка <tt>Material</tt>. Она не должна изменяться и может использоваться для поиска на сцене всех объектов данного типа.<br><br>
-<pre id="3uuid"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слов universally unique identifier - универсальный уникальный идентификатор">.uuid</a></pre>
-<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" title="сокращ. от англ. слов universally unique identifier - универсальный уникальный идентификатор">UUID</a> данного экземпляра материала. Он присваивается автоматически и не должен быть изменен.<br>
+
+<pre id="3uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов universally unique<br>identifier - универсальный уникальный<br>идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" onmouseover="show('сокращ. англ. слов universally unique<br>identifier - универсальный уникальный<br>идентификатор')" onmouseout="hide()">UUID</a> данного экземпляра материала. Он присваивается автоматически и не должен быть изменен.<br>
 Вот <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">статья Википедии про UUID</a> на русском языке.<br><br>
-<pre id="3vertexColors">.vertexColors</a></pre>
+
+<pre id="3vertexColors"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertex colors - цвета вершин')" onmouseout="hide()">.vertexColors</a></span></pre>
 Свойство определяет, как окрашиваются вершины, путем задания способа заполнения атрибута цвета.
-Возможными значениями являются <tt><a href="constants.htm#5.2" title="Константы материалов. no colors - не окрашено">THREE.NoColors</a></tt>,
-<tt><a href="constants.htm#5.2" title="Константы материалов. face colors - цвета граней">THREE.FaceColors</a></tt> и <tt><a href="constants.htm#5.2" title="Константы материалов. vertex colors - цвета вершин">THREE.VertexColors</a></tt>.
-Значение по умолчанию <tt title="Константы материалов. no colors - не окрашено">THREE.NoColors</tt>.<br><br>
-<pre id="3visible"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="visible - видимый">.visible</a></pre>
+Возможными значениями являются <tt><a href="constants.htm#5.2" onmouseover="show('Константы материалов.<br>no colors - не окрашено')" onmouseout="hide()">THREE.NoColors</a></tt>,
+<tt><a href="constants.htm#5.2" onmouseover="show('Константы материалов.<br>face colors - цвета граней')" onmouseout="hide()">THREE.FaceColors</a></tt> и <tt><a href="constants.htm#5.2" onmouseover="show('Константы материалов.<br>vertex colors - цвета вершин')" onmouseout="hide()">THREE.VertexColors</a></tt>.
+Значение по умолчанию <tt><a href="constants.htm#5.2" onmouseover="show('Константы материалов.<br>no colors - не окрашено')" onmouseout="hide()">THREE.NoColors</a></tt>.<br><br>
+
+<pre id="3visible"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('visible - видимый')" onmouseout="hide()">.visible</a></span></pre>
 Свойство определяет, будет ли данный материал видимым. Значение по умолчанию <tt>true</tt>.<br><br>
-<pre id="3userData"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="user data - пользовательские данные">.userData</a></pre>
+
+<pre id="3userData"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('user data - пользовательские данные')" onmouseout="hide()">.userData</a></span></pre>
 Этот объект может использоваться для хранения пользовательских данных о материале. В нем нельзя хранить ссылки на функции, так как они не будут клонироваться.</div><br>
 
 <h4>Методы</h4>
-В этом классе доступны методы <tt><a href="core.htm#5" title="EventDispatcher">EventDispatcher</a></tt>.
+В этом классе доступны методы <tt><a href="core.htm#5" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a></tt>.
 <div class=blockindent><br>
-<pre id="3clone"><a href="#3" title="Material. clone - клонировать, клон">.clone</a> ( )</pre>
+<pre id="3clone"><a href="#3" onmouseover="show('Material.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
 Возвращает новый материал с теми же параметрами как у данного материала.<br><br>
-<pre id="3copy"><a href="#3" title="Material. copy- копировать">.copy</a> ( <a href="#3" title="Material. material - материал">material</a> )</pre>
+
+<pre id="3copy"><a href="#3" onmouseover="show('Material.<br>copy- копировать')" onmouseout="hide()">.copy</a>( <a href="#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
 Метод копирует параметры из переданного материала (параметр <tt>material</tt>) в данный материал.<br><br>
 
-<pre id="3dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - ">.dispose</a> ( )</pre>
-This disposes the material. Textures of a material don't get disposed. These needs to be disposed by <a href="textures.htm#6" title="Texture">Texture</a>.<br><br>
+<pre id="3dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - ')" onmouseout="hide()">.dispose</a></span>( )</pre>
+This disposes the material. Textures of a material don't get disposed. These needs to be disposed by <a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.<br><br>
 
-<pre id="3setValues"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="set values - установить значения">.setValues</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="values - значения">values</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="values - значения">values</a></tt> -- контейнер с параметрами.</div>
+<pre id="3setValues"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set values - установить значения')" onmouseout="hide()">.setValues</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('values - значения')" onmouseout="hide()">values</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('values - значения')" onmouseout="hide()">values</a></span></tt> -- контейнер с параметрами.</div>
 Метод устанавливает свойства на основе значений, переданных в аргументе.<br><br>
-<pre id="3toJSON"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="to JSON - в (формат) JSON">.toJSON</a> ( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова metadata - метаданные, т.е. дополнительные сведения, прилагаемые к данным">meta</a> )</pre>
+
+<pre id="3toJSON"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в (формат) JSON')" onmouseout="hide()">.toJSON</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова metadata -<br>метаданные, т.е. дополнительные<br>сведения, прилагаемые к данным')" onmouseout="hide()">meta</a></span> )</pre>
 <div class=list><tt>meta</tt> -- объект, содержащий <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5" target="_blank">метаданные</a> для материала, вроде текстур или изображений.</div>
 Конвертирует материал в формат <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">JSON</a> для <em>three.js</em>.<br><br>
-<pre id="3update"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">.update</a> ( )</pre>
-Метод вызывает для материала <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispatch event - отправить событие">.dispatchEvent</a> ( { type: '<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="update - обновление">update</a>' })</tt>.</div><br>
+
+<pre id="3update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">.update</a></span>( )</pre>
+Метод вызывает для материала <tt><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispatch event - отправить событие')" onmouseout="hide()">.dispatchEvent</a></span>( { type: '<span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">update</a></span>' })</tt>.</div><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/materials/Material.js.txt">Material.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/Material.js" target="_blank">Material.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/Material.js" target="_blank">Material.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="4">MeshBasicMaterial</h3>
-Материал для рисования геометрических элементов в
-A material for drawing geometries in a simple shaded (flat or wireframe) way.<br>
-На этот материал не влияет освещение.
-This material is not affected by lights.
-A material for drawing geometries in a simple shaded (flat or wireframe) way.<br>
-По умолчанию будет отображаться в виде плоских многоугольников. Чтобы нарисовать сетку в виде каркаса, просто установите свойство <tt><a href="#4wireframe" onmouseover="show('MeshBasicMaterial.wireframe')" onmouseout="hide()">wireframe</a></tt> как <tt>true</tt>.<br><br>
-
-<!--
-<iframe id="scene" src="scenes/material-browser.html#MeshBasicMaterial"></iframe>  -->
+Материал для рисования геометрических элементов в простом, затушеванном виде (плоском (flat) или каркасном (wireframe).<br>
+На этот материал не влияет освещение.<br>
+По умолчанию будет отображаться в виде плоских многоугольников. Чтобы нарисовать сетку в виде каркаса, установите свойство <tt><a href="#4wireframe" onmouseover="show('MeshBasicMaterial.wireframe')" onmouseout="hide()">wireframe</a></tt> как <tt>true</tt>.
+<div class="caption"><img src="img/MeshBasicMaterial.png" width=700><br>
+MeshBasicMaterial плоский (flat) и каркасный (wireframe).</div><br>
 
 <h4>Конструктор</h4>
-<pre>MeshBasicMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
-Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
-Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет). Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+<pre>MeshBasicMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span></tt>
+- объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>).</div>
+Исключением является свойство <tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет')" onmouseout="hide()">color</a></span></tt>,
+значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет). Метод <tt><a href="math.htm#3set" onmouseover="show('Color.set')" onmouseout="hide()">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+
 <h4>Свойства</h4>
-Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
-<pre id="4alphaMap"><a href="textures.htm#6" title="Texture. alpha map - карта альфа-канала, т.е. карта прозрачности">.alphaMap</a></pre>
+<pre id="4alphaMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>alpha map - карта альфа-канала,<br>т.е. карта прозрачности')" onmouseout="hide()">.alphaMap</a></pre>
 Альфа-карта представляет собой текстуру в оттенках серого, которая управляет непрозрачностью по всей поверхности (черный цвет: полностью прозрачный; белый: полностью непрозрачный). Значением по умолчанию является <tt>null</tt>.<br>
 Используется только цвет текстуры, альфа-канал (если он существует) игнорируется.
-Для текстур <a href="https://ru.wikipedia.org/wiki/RGB" target="_blank">RGB</a> и <a href="https://en.wikipedia.org/wiki/RGBA_color_space" target="_blank">RGBA</a> визуализатор <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a>
-будет использовать канал зеленого цвета
+Для текстур <a href="https://ru.wikipedia.org/wiki/RGB" target="_blank">RGB</a> и <a href="https://en.wikipedia.org/wiki/RGBA_color_space" target="_blank">RGBA</a> визуализатор <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> будет использовать канал зеленого цвета
 For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats.
 из-за дополнительного бита точности, предоставляемого зеленым каналом, в сжатом DXT и несжатом RGB 565 форматах.
 Текстуры только с каналом яркости и яркости/прозрачности (альфа-канал) также будут работать как и ожидалось.
@@ -402,92 +422,101 @@ Luminance-only and luminance/alpha textures will also still work as expected.
 https://en.wikipedia.org/wiki/S3_Texture_Compression -->
 <br><br>
 
-<pre id="4aoMap"><a href="textures.htm#6" title="Texture. aoMap это сокращ. англ. слов ambient occlusion map - карта перекрытия (затенения) при общем (фоновом) освещении">.aoMap</a></pre>
+<pre id="4aoMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>aoMap это сокращ. англ. слов ambient occlusion map -<br>карта перекрытия (затенения) при общем (фоновом)<br>освещении')" onmouseout="hide()">.aoMap</a></pre>
 Канал красного цвета используется в данной текстуре в качестве ambient occlusion map. Значением по умолчанию является <tt>null</tt>.
 The aoMap requires a second set of UVs, and consequently will ignore the repeat and offset Texture properties.<br>
-Статья в русской Википедии о <a href="https://ru.wikipedia.org/wiki/Ambient_occlusion" target="_blank">эффекте перекрытия</a> (модели затенения) при фоновом освещении. А <a href="https://en.wikipedia.org/wiki/Ambient_occlusion" target="_blank">это</a> в английской.<br><br>
+Статья в русской Википедии о <a href="https://ru.wikipedia.org/wiki/Ambient_occlusion" target="_blank">эффекте перекрытия</a> (модели затенения) при фоновом освещении. А <a href="https://en.wikipedia.org/wiki/Ambient_occlusion" target="_blank">вот</a> в английской.<br><br>
 
-<pre id="4aoMapIntensity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. англ. слов ambient occlusion map intensity ">.aoMapIntensity</a></pre>
+<pre id="4aoMapIntensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов ambient occlusion map intensity -<br>интенсивность затенения при общем (фоновом) освещении')" onmouseout="hide()">.aoMapIntensity</a></span></pre>
 Интенсивность затенения при общем (фоновом) освещении. Значение по умолчанию равно <tt>1</tt>. Нулевое значение означает отсутствие эффекта перекрытия (затенения).<br><br>
 
-<pre id="4color"><a href="math.htm#3" title="Color. color - цвет">.color</a></pre>
-<a href="math.htm#3" title="Color">Цвет</a> материала, по умолчанию установлен как белый (<tt>0xffffff</tt> - <tt>white</tt>).<br><br>
+<pre id="4color"><a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+<a href="math.htm#3" onmouseover="show('Color')" onmouseout="hide()">Цвет</a> материала, по умолчанию установлен как белый (<tt>0xffffff</tt> - <tt>white</tt>).<br><br>
 
-<pre id="4combine"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="combine - комбинирование, совмещение">.combine</a></pre>
+<pre id="4combine"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('combine - комбинирование, совмещение')" onmouseout="hide()">.combine</a></span></pre>
 How to combine the result of the surface's color with the environment map, if any.<br>
-Возможными значениями являются <tt><a href="constants.htm#5.5" title="Константы материалов. multiply - умножать">THREE.Multiply</a></tt> (значение по умолчанию), <tt><a href="constants.htm#5.5" title="Константы материалов. mix operation - операция смешивания">THREE.MixOperation</a></tt> и <tt><a href="constants.htm#5.5" title="Константы материалов. add operation - операция сложения">THREE.AddOperation</a></tt>. Если выбрано смешивание (<tt>THREE.MixOperation</tt>), то свойство <tt><a href="#4reflectivity" title="MeshBasicMaterial.reflectivity">reflectivity</a></tt> будет использовано для смешивания двух цветов.
-If mix is chosen, the <a href="#4reflectivity" title="MeshBasicMaterial.reflectivity. reflectivity - коэффициент отражения, способность к отражению">reflectivity</a> is used to blend between the two colors.<br><br>
+Возможными значениями являются <tt><a href="constants.htm#5.5" onmouseover="show('Константы материалов.<br>multiply - умножать')" onmouseout="hide()">THREE.Multiply</a></tt> (значение по умолчанию),
+<tt><a href="constants.htm#5.5" onmouseover="show('Константы материалов.<br>mix operation - операция смешивания')" onmouseout="hide()">THREE.MixOperation</a></tt>
+и <tt><a href="constants.htm#5.5" onmouseover="show('Константы материалов.<br>add operation - операция сложения')" onmouseout="hide()">THREE.AddOperation</a></tt>.
+Если выбрано смешивание (<tt>THREE.MixOperation</tt>), то для смешивания двух цветов будет использовано свойство <tt><a href="#4reflectivity" onmouseover="show('MeshBasicMaterial.reflectivity<br>reflectivity - коэффициент отражения,<br>способность к отражению')" onmouseout="hide()">reflectivity</a></tt>.<br><br>
 
-<pre id="4isMeshBasicMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh basic material - является основным материалом сетки">.isMeshBasicMaterial</a></pre>
+<pre id="4isMeshBasicMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is mesh basic material -<br>является основным материалом<br>сетки')" onmouseout="hide()">.isMeshBasicMaterial</a></span></pre>
 Используется для проверки, является ли данный объект, или производные от него, основными материалами сетки. По умолчанию значение равно <tt>true</tt>.<br>
 Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
 
-<pre id="4envMap">.envMap</a></pre>
+<pre id="4envMap"><a href="#4envMap" onmouseover="show('')" onmouseout="hide()">.envMap</a></pre>
 Карта окружения (environment map). Значением по умолчанию является <tt>null</tt>.<br><br>
 
-<pre id="4lightMap"><a href="textures.htm#6" title="Texture. light map - карта освещения">.lightMap</a></pre>
+<pre id="4lightMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>light map - карта освещения')" onmouseout="hide()">.lightMap</a></pre>
 Карта освещения. Значением по умолчанию является <tt>null</tt>. Свойство <tt>lightMap</tt> требует второго набора <a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">UV координат</a> и, следовательно,
-будет игнорировать свойства <tt><a href="textures.htm#6repeat" title="Texture.repeat (repeat - повторение)">repeat</a></tt> и <tt><a href="textures.htm#6offset" title="Texture.offset (offset - смещение)">offset</a></tt> текстуры.<br><br>
+будет игнорировать свойства <tt><a href="textures.htm#6repeat" onmouseover="show('Texture.repeat<br>(repeat - повторение)')" onmouseout="hide()">repeat</a></tt>
+и <tt><a href="textures.htm#6offset" onmouseover="show('Texture.offset<br>(offset - смещение)')" onmouseout="hide()">offset</a></tt> текстуры.<br><br>
 
-<pre id="4lightMapIntensity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="light map intensity - интенсивность карты освещения">.lightMapIntensity</a></pre>
+<pre id="4lightMapIntensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('light map intensity - интенсивность карты освещения')" onmouseout="hide()">.lightMapIntensity</a></span></pre>
 Intensity of the baked light. Значение по умолчанию равно <tt>1</tt>.<br><br>
 
 <pre id="4lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
 Свойство определяет, будет ли материал зависеть от освещения. Значением по умолчанию является <tt>false</tt>.<br><br>
 
-<pre id="4map"><a href="textures.htm#6" title="Texture. map - карта">.map</a></pre>
+<pre id="4map"><a href="textures.htm#6" onmouseover="show('Texture.<br>map - карта')" onmouseout="hide()">.map</a></pre>
 Карта цвета. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-<pre id="4morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph targets - ">.morphTargets</a></pre>
-Define whether the material uses morphTargets. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="4morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
+Свойство определяет, будет ли данный материал использовать цели морфинга (<tt>morphTargets</tt>). Значением по умолчанию является <tt>false</tt>.<br><br>
 
-<pre id="4reflectivity"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="reflectivity - способность к отражению, коэффициент отражения">.reflectivity</a></pre>
+<pre id="4reflectivity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reflectivity - способность к отражению, коэффициент отражения')" onmouseout="hide()">.reflectivity</a></span></pre>
 How much the environment map affects the surface; also see .combine. The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).<br><br>
 
-<pre id="4refractionRatio"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="refraction ratio - коэффициент преломления">.refractionRatio</a></pre>
-The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material. It is used with environment mapping modes THREE.CubeRefractionMapping and THREE.EquirectangularRefractionMapping. The refraction ratio should not exceed 1. Значение по умолчанию равно <tt>0.98</tt>.<br><br>
+<pre id="4refractionRatio"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('refraction ratio - коэффициент преломления')" onmouseout="hide()">.refractionRatio</a></span></pre>
+The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material. It is used with environment mapping modes THREE.CubeRefractionMapping and THREE.EquirectangularRefractionMapping.
+Коэффициент преломления не должен превышать <tt>1</tt>. Значение по умолчанию равно <tt>0.98</tt>.<br><br>
 
-<pre id="4skinning"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="skinning - ">.skinning</a></pre>
+<pre id="4skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - ')" onmouseout="hide()">.skinning</a></span></pre>
 Define whether the material uses skinning. Значением по умолчанию является <tt>false</tt>.<br><br>
 
-<pre id="4specularMap"><a href="textures.htm#6" title="Texture. specular map - карта отражения">.specularMap</a></pre>
+<pre id="4specularMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>specular map - карта отражения')" onmouseout="hide()">.specularMap</a></pre>
 Карта отражений используемая материалом. Значением по умолчанию является <tt>null</tt>.<br><br>
-<pre id="4wireframe"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe - каркас">.wireframe</a></pre>
+
+<pre id="4wireframe"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe - каркас')" onmouseout="hide()">.wireframe</a></span></pre>
 Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и визуализация происходит при помощи плоских многоугольников).<br><br>
-<pre id="4wireframeLinecap"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line cap - конец линии каркаса">.wireframeLinecap</a></pre>
+
+<pre id="4wireframeLinecap"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line cap - конец линии каркаса')" onmouseout="hide()">.wireframeLinecap</a></span></pre>
 Определяет внешний вид концов линии. Возможные значения: <tt>butt</tt> (торец), <tt>round</tt> (круглый) и <tt>square</tt> (квадратный). Значение по умолчанию <tt>round</tt> - круглый.<br>
-Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank"><tt>linecap</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank"><tt>linecap</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> визуализатором (рендерером).
 Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank">статья о <tt>linecap</tt></a> на русском языке.<br><br>
-<pre id="4wireframeLinejoin"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line join - соединение линий каркаса">.wireframeLinejoin</a></pre>
+
+<pre id="4wireframeLinejoin"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line join - соединение линий каркаса')" onmouseout="hide()">.wireframeLinejoin</a></span></pre>
 Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt>
 (<span class="lnk" onmouseover="show('<strong>митра</strong> - головной убор, часть богослужебного облачения<br>в ряде христианских церквей. В данном случае это<br>остроконечная католическая митра (в православии митра<br>округлая), что и определяет вид соединения линий.')" onmouseout="hide()">митра</span>).
 Значение по умолчанию <tt>round</tt> - круглый.<br>
 Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
 Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br><br>
-<pre id="4wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линии каркаса">.wireframeLinewidth</a></pre>
+
+<pre id="4wireframeLinewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line width - толщина линии каркаса')" onmouseout="hide()">.wireframeLinewidth</a></span></pre>
 Управляет толщиной линии каркаса. Значение по умолчанию равно <tt>1</tt>.
 <script>document.write(note_3);</script></div><br>
+
 <h4>Методы</h4>
 Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/materials/MeshBasicMaterial.js.txt">MeshBasicMaterial.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshBasicMaterial.js" target="_blank">MeshBasicMaterial.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshBasicMaterial.js" target="_blank">MeshBasicMaterial.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="5">MeshDepthMaterial</h3>
-Материал для рисования геометрических элементов фигуры в глубину. Глубина зависит от ближней и дальней плоскостей отсечения камеры.
-A material for drawing geometry by depth. Depth is based off of the camera near and far plane. White is nearest, black is farthest.
-<!--
-<iframe id="scene" src="scenes/material-browser.html#MeshDepthMaterial"></iframe> -->
+Материал для рисования геометрических элементов фигуры в глубину. Глубина зависит от ближней и дальней плоскостей отсечения камеры. Белый - самый ближний, черный - самый дальний.
+<div class="caption"><img src="img/MeshDepthMaterial.png" width=700><br>
+MeshDepthMaterial плоский (flat) и каркасный (wireframe).</div><br>
 
 <h4>Конструктор</h4>
-<pre>MeshDepthMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
-Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div><br>
+<pre>MeshDepthMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span></tt>
+- объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>).</div><br>
 
 <h4>Свойства</h4>
-Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
 <pre id="5alphaMap">.alphaMap</a></pre>
 The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.<br>
@@ -506,38 +535,42 @@ How much the displacement map affects the mesh (where black is no displacement, 
 <pre id="5displacementBias">.displacementBias</a></pre>
 The offset of the displacement map's values on the mesh's vertices. Without a displacement map set, this value is not applied. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
-<pre id="5fog"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="fog - туман">.fog</a></pre>
+<pre id="5fog"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fog - туман')" onmouseout="hide()">.fog</a></span></pre>
 Свойство определяет, будет ли материал подвержен влиянию тумана. Значением по умолчанию является <tt>false</tt>.<br><br>
-<pre id="5isMeshDepthMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh depth material - является материалом сетки с прорисовкой глубины">.isMeshDepthMaterial</a></pre>
+
+<pre id="5isMeshDepthMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is mesh depth material -<br>является материалом сетки<br>с прорисовкой глубины')" onmouseout="hide()">.isMeshDepthMaterial</a></span></pre>
 Используется для проверки, является ли данный объект, или производные от него, материалами сетки с прорисовкой глубины. По умолчанию значение равно <tt>true</tt>.<br>
 Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
-<pre id="5lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
-Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.
-<pre id="5map"><a href="textures.htm#6" title="Texture. map - карта">.map</a></pre>
+
+<pre id="5lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="5map"><a href="textures.htm#6" onmouseover="show('Texture.<br>map - карта')" onmouseout="hide()">.map</a></pre>
 Карта цвета. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-<pre id="5morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph targets - ">.morphTargets</a></pre>
+<pre id="5morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
 Свойство определяет, будет ли материал использовать <tt>morphTargets</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
 
-<pre id="5skinning"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="skinning - ">.skinning</a></pre>
+<pre id="5skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - ')" onmouseout="hide()">.skinning</a></span></pre>
 Свойство определяет, будет ли материал использовать skinning. Значением по умолчанию является <tt>false</tt>.<br><br>
 
-<pre id="5wireframe"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe - каркас">.wireframe</a></pre>
+<pre id="5wireframe"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe - каркас')" onmouseout="hide()">.wireframe</a></span></pre>
 Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и объект отображен плавно затушеванным).<br><br>
-<pre id="5wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линии каркаса">.wireframeLinewidth</a></pre>
+
+<pre id="5wireframeLinewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line width - толщина линии каркаса')" onmouseout="hide()">.wireframeLinewidth</a></span></pre>
 Управляет толщиной линии каркаса. Значение по умолчанию равно <tt>1</tt>.
 <script>document.write(note_3);</script></div><br>
 
 <h4>Методы</h4>
-Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+Для информации об общих методах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
+
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/materials/MeshDepthMaterial.js.txt">MeshDepthMaterial.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshDepthMaterial.js" target="_blank">MeshDepthMaterial.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshDepthMaterial.js" target="_blank">MeshDepthMaterial.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="6">MeshLambertMaterial</h3>
-Материал для матовых поверхностей, без
+Материал для матовых поверхностей, без зеркальных бликов.
 A material for non-shiny surfaces, without specular highlights.<br>
 
 The material uses a non-physically based Lambertian model for calculating reflectance. This can simulate some surfaces (such as untreated wood or stone) well, but cannot simulate shiny surfaces with specular highlights (such as varnished wood).<br>
@@ -545,19 +578,19 @@ The material uses a non-physically based Lambertian model for calculating reflec
 Shading is calculated using a Gouraud shading model. This calculates shading per vertex (i.e. in the vertex shader) and interpolates the results over the polygon's faces.<br>
 
 Due to the simplicity of the reflectance and illumination models, performance will be greater when using this material over the MeshPhongMaterial, MeshStandardMaterial or MeshPhysicalMaterial, at the cost of some graphical accuracy.<br><br>
-
-<!--
-<iframe id="scene" src="scenes/material-browser.html#MeshLambertMaterial"></iframe>  -->
+<div class="caption"><img src="img/MeshLambertMaterial.png" width=700><br>
+MeshLambertMaterial плоский (flat) и каркасный (wireframe).</div><br>
 
 <h4>Конструктор</h4>
-<pre>MeshLambertMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
-Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div>
-Исключением является свойство <tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_hex,'Arial,9',10,10,0xffffff,0xd69967)" title="Color. color - цвет">color</a></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
-Метод <tt><a href="math.htm#3set" title="Color.set">Color.set( color )</a></tt> вызывается внутренне.<br><br>
+<pre>MeshLambertMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span></tt>
+- объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>).</div>
+Исключением является свойство <tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></span></tt>, значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" onmouseover="show('Color.set')" onmouseout="hide()">Color.set( color )</a></tt> вызывается внутренне.<br><br>
 
 <h4>Свойства</h4>
-Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
 <pre>[property:Color color]</pre>
 Diffuse color of the material. Default is white.
@@ -642,10 +675,10 @@ Defines whether the material uses morphNormals. Set as true to pass morphNormal 
 		</div>
 
 <h4>Методы</h4>
-Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+Для информации об общих методах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
+
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/materials/MeshLambertMaterial.js.txt">MeshLambertMaterial.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshLambertMaterial.js" target="_blank">MeshLambertMaterial.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshLambertMaterial.js" target="_blank">MeshLambertMaterial.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>

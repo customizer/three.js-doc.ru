@@ -17,7 +17,7 @@ var note_3 = '<br>Из-за ограничений в <a href="https://code.goog
 </head>
 <body>
 <h2 class=head1>Материалы</h2>
-<div class=below>В этом разделе дается описание различных материалов. Их можно представить как некие строительные материалы, вроде балок, стен, черепицы, рубероида и т.д.
+<div class=below>В этом разделе дается описание различных материалов. Их можно представить как некие строительные материалы, вроде балок, стен, кровельного материала и т.д.
 Имеется базовый материал, определяющий общие свойства всех материалов и методов работы с ними. Оставшиеся материалы можно разделить на следующие виды: линии, сетки, точки, шейдеры, тень и спрайт.
 <div class=list><a href="#1">LineBasicMaterial</a> - простые линии</div>
 <div class=list><a href="#2">LineDashedMaterial</a> - пунктирные линии</div>
@@ -455,7 +455,7 @@ How to combine the result of the surface's color with the environment map, if an
 <pre id="4lightMapIntensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('light map intensity - интенсивность карты освещения')" onmouseout="hide()">.lightMapIntensity</a></span></pre>
 Intensity of the baked light. Значение по умолчанию равно <tt>1</tt>.<br><br>
 
-<pre id="4lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+<pre id="4lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
 Свойство определяет, будет ли материал зависеть от освещения. Значением по умолчанию является <tt>false</tt>.<br><br>
 
 <pre id="4map"><a href="textures.htm#6" onmouseover="show('Texture.<br>map - карта')" onmouseout="hide()">.map</a></pre>
@@ -489,7 +489,7 @@ Define whether the material uses skinning. Значением по умолча�
 Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt>
 (<span class="lnk" onmouseover="show('<strong>митра</strong> - головной убор, часть богослужебного облачения<br>в ряде христианских церквей. В данном случае это<br>остроконечная католическая митра (в православии митра<br>округлая), что и определяет вид соединения линий.')" onmouseout="hide()">митра</span>).
 Значение по умолчанию <tt>round</tt> - круглый.<br>
-Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" title="WebGLRenderer">WebGL</a> визуализатором (рендерером).
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> визуализатором (рендерером).
 Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br><br>
 
 <pre id="4wireframeLinewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line width - толщина линии каркаса')" onmouseout="hide()">.wireframeLinewidth</a></span></pre>
@@ -497,7 +497,7 @@ Define whether the material uses skinning. Значением по умолча�
 <script>document.write(note_3);</script></div><br>
 
 <h4>Методы</h4>
-Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+Для информации об общих методах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshBasicMaterial.js" target="_blank">MeshBasicMaterial.js на github.com</a></div><br><br>
@@ -577,7 +577,7 @@ The material uses a non-physically based Lambertian model for calculating reflec
 
 Shading is calculated using a Gouraud shading model. This calculates shading per vertex (i.e. in the vertex shader) and interpolates the results over the polygon's faces.<br>
 
-Due to the simplicity of the reflectance and illumination models, performance will be greater when using this material over the MeshPhongMaterial, MeshStandardMaterial or MeshPhysicalMaterial, at the cost of some graphical accuracy.<br><br>
+Due to the simplicity of the reflectance and illumination models, performance will be greater when using this material over the MeshPhongMaterial, MeshStandardMaterial or MeshPhysicalMaterial, at the cost of some graphical accuracy.
 <div class="caption"><img src="img/MeshLambertMaterial.png" width=700><br>
 MeshLambertMaterial плоский (flat) и каркасный (wireframe).</div><br>
 
@@ -685,107 +685,97 @@ Defines whether the material uses morphNormals. Set as true to pass morphNormal 
 <h3 id="7">MeshNormalMaterial</h3>
 Материал, который сопоставляет векторы нормалей в RGB цвета.
 A material that maps the normal vectors to RGB colors.
-<!--
-<iframe id="scene" src="scenes/material-browser.html#MeshNormalMaterial"></iframe> -->
+<div class="caption"><img src="img/MeshNormalMaterial.png" width=1020><br>
+MeshNormalMaterial, MeshNormalMaterial с включенным <tt>flatShading</tt> и MeshNormalMaterial с включенным <tt>wireframe</tt>.</div><br>
 
 <h4>Конструктор</h4>
-<pre>MeshNormalMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>
-<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
-Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" title="Material">Material</a>).</div><br>
+<pre>MeshNormalMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>).</div><br>
 
 <h4>Свойства</h4>
-Для информации об общих свойствах смотрите базовый класс <a href="#3" title="Material">Material</a>.
+Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
-<pre id="7fog"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="fog - туман">.fog</a></pre>
+<pre id="7fog"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fog - туман')" onmouseout="hide()">.fog</a></span></pre>
 Свойство устанавливает, будет или нет материал подвержен влиянию тумана. По умолчанию значение равно <tt>false</tt>.<br><br>
 
-<pre id="7isMeshNormalMaterial"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="is mesh normal material - является материалом ">.isMeshNormalMaterial</a></pre>
+<pre id="7isMeshNormalMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is mesh normal material - является материалом нормалей')" onmouseout="hide()">.isMeshNormalMaterial</a></span></pre>
 Используется для проверки, является ли данный объект, или производные от него,  материалом нормалей сетки. По умолчанию значение равно <tt>true</tt>.<br>
 Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
 
-<pre id="7lights"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="lights - огни, освещение">.lights</a></pre>
+<pre id="7lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
 Свойство устанавливает, будет или нет освещение влиять на материал. По умолчанию значение равно <tt>false</tt>.<br><br>
 
-<pre id="7morphTargets"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="morph targets - ">.morphTargets</a></pre>
+<pre id="7morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
 Define whether the material uses morphTargets. По умолчанию значение равно <tt>false</tt>.<br><br>
 
-<pre id="7wireframe"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_bool,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe - каркас">.wireframe</a></pre>
+<pre id="7wireframe"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe - каркас')" onmouseout="hide()">.wireframe</a></span></pre>
 Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и объект ровно закрашен).<br><br>
 
-<pre id="7wireframeLinewidth"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="wireframe line width - толщина линий каркаса">.wireframeLinewidth</a></pre>
+<pre id="7wireframeLinewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line width - толщина линий каркаса')" onmouseout="hide()">.wireframeLinewidth</a></span></pre>
 Свойство управляет толщиной линий каркаса. Значение по умолчанию равно <tt>1</tt>.<br>
 Из-за ограничений в <a href="https://code.google.com/p/angleproject" target="_blank">слое ANGLE</a> в операционных системах на основе Windows ширина линии всегда будет равна <tt>1</tt>, независимо от установленного значения.
 <div class=note_trans><b>Примечание переводчика:</b> ANGLE (Almost Native Graphics Layer Engine - практически встроенный движок графического слоя, а перевод самой аббревиатуры ANGLE - угол) это графический движок слоя абстракций, разработанный компанией Google, с открытым исходным кодом под лицензией BSD.
 Этот API в основном предназначен для обеспечения высокопроизводительной совместимости OpenGL с компьютерами Windows и веб-браузерами вроде Chromium, путем перевода вызовов OpenGL в Direct3D, который гораздо лучше поддерживается драйверами. Для ANGLE существует два внутренних визуализатора: самый старый использует Direct3D 9.0c, в то время как новый использует Direct3D 11.<br><br>
 <span style='float:right; margin-top:-16px; background-color:#ffffe8;'><i>из статьи англ. Википедии о <a href="https://en.wikipedia.org/wiki/ANGLE_(software)" target="_blank">ANGLE</a>, перевод мой.</i></span></div></div><br>
 <h4>Методы</h4>
-Для информации об общих методах смотрите базовый класс <a href="#3" title="Material">Material</a>.<br><br>
+Для информации об общих методах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
+
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/materials/MeshNormalMaterial.js.txt">MeshNormalMaterial.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshNormalMaterial.js" target="_blank">MeshNormalMaterial.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshNormalMaterial.js" target="_blank">MeshNormalMaterial.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="8">MeshPhongMaterial</h3>
-A material for shiny surfaces, evaluated per pixel.
-<!--
-<iframe id="scene" src="scenes/material-browser.html#MeshPhongMaterial"></iframe>  -->
+Материал для блестящих поверхностей с зеркальными бликами.<br>
+
+The material uses a non-physically based Blinn-Phong model for calculating reflectance. Unlike the Lambertian model used in the MeshLambertMaterial this can simulate shiny surfaces with specular highlights (such as varnished wood).<br>
+
+Shading is calculated using a Phong shading model. This calculates shading per pixel (i.e. in the fragment shader, AKA pixel shader) which gives more accurate results than the Gouraud model used by MeshLambertMaterial, at the cost of some performance. The MeshStandardMaterial and MeshPhysicalMaterial also use this shading model.<br>
+
+Performance will generally be greater when using this material over the MeshStandardMaterial or MeshPhysicalMaterial, at the cost of some graphical accuracy.
+<div class="caption"><img src="img/MeshPhongMaterial.png" width=1020><br>
+MeshPhongMaterial, MeshPhongMaterial с включенным <tt>flatShading</tt> и MeshPhongMaterial с включенным <tt>wireframe</tt>.</div><br>
 
 <h4>Конструктор</h4>
-<pre>MeshPhongMaterial( [page:Object parameters] )</pre>
-		<div>
-		parameters -- an object with one or more of the material's properties defining the material's appearance.
-		</div>
-		<div>
-		color — geometry color in hexadecimal. Default is 0xffffff.<br>
-		specular — Set specular color. Default is 0x111111 .<br>
-		shininess — Set shininess Default is 30.<br>
-		map — Set texture map. Default is null.<br>
-		lightMap — Set light map. Default is null.<br>
-		lightMapIntensity — Set light map intensity. Default is 1.<br>
-		aoMap — Set ao map. Default is null.<br>
-		aoMapIntensity — Set ao map intensity. Default is 1.<br>
-		emissive - Set emissive color. Default is 0x000000.<br>
-		emissiveMap — Set emissive map. Default is null.<br>
-		emissiveIntensity — Set emissive map intensity. Default is 1.<br>
-		bumpMap — Set bump map. Default is null.<br>
-		bumpScale — Set bump map scale. Default is 1.<br>
-		normalMap — Set normal map. Default is null.<br>
-		normalScale — Set normal map scale. Default is (1, 1).<br>
-		displacementMap — Set displacement map. Default is null.<br>
-		displacementScale — Set displacement scale. Default is 1.<br>
-		displacementBias — Set displacement offset. Default is 0.<br>
-		specularMap — Set specular map. Default is null.<br>
-		alphaMap — Set alpha map. Default is null.<br>
-		envMap — Set env map. Default is null.<br>
-		combine — Set combine operation. Default is THREE.MultiplyOperation.<br>
-		reflectivity — Set reflectivity. Default is 1.<br>
-		refractionRatio — Set refraction ratio. Default is 0.98.<br>
-		fog — Define whether the material color is affected by global fog settings. Default is true.<br>
-		shading — Define shading type. Default is THREE.SmoothShading.<br>
-		wireframe — render geometry as wireframe. Default is false.<br>
-		wireframeLinewidth — Line thickness. Default is 1.<br>
-		wireframeLinecap — Define appearance of line ends. Default is 'round'.<br>
-		wireframeLinejoin — Define appearance of line joints. Default is 'round'.<br>
-		vertexColors — Define how the vertices gets colored. Default is THREE.NoColors.<br>
-		skinning — Define whether the material uses skinning. Default is false.<br>
-		morphTargets — Define whether the material uses morphTargets. Default is false.<br>
-		morphNormals — Define whether the material uses morphNormals. Default is false.
-		</div>
-		<div>
-		Example:<br>
-		materials.push( new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } ) );
+<pre>MeshPhongMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span></tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>).</div>
+Исключением является свойство <tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></span></tt>,
+значение которого можно передать как шестнадцатиричную строку и по умолчанию равно <tt>0xffffff</tt> (белый цвет).
+Метод <tt><a href="math.htm#3set" onmouseover="show('Color.set')" onmouseout="hide()">Color.set( color )</a></tt> вызывается внутренне.<br><br>
 
-		</div>
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
+<div class=blockindent><br>
+<pre id="8alphaMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>alpha map - карта альфа-канала,<br>т.е. карта прозрачности')" onmouseout="hide()">.alphaMap</a></pre>
+Альфа-карта представляет собой текстуру в оттенках серого, которая управляет непрозрачностью по всей поверхности (черный цвет: полностью прозрачный; белый: полностью непрозрачный). Значением по умолчанию является <tt>null</tt>.<br>
+Используется только цвет текстуры, альфа-канал (если он существует) игнорируется.
+Для текстур <a href="https://ru.wikipedia.org/wiki/RGB" target="_blank">RGB</a> и <a href="https://en.wikipedia.org/wiki/RGBA_color_space" target="_blank">RGBA</a> визуализатор <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> будет использовать канал зеленого цвета
+For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats.
+из-за дополнительного бита точности, предоставляемого зеленым каналом, в сжатом DXT и несжатом RGB 565 форматах.
+Текстуры только с каналом яркости и яркости/прозрачности (альфа-канал) также будут работать как и ожидалось.
+Luminance-only and luminance/alpha textures will also still work as expected.
+<!-- https://ru.wikipedia.org/wiki/S3TC
+https://en.wikipedia.org/wiki/S3_Texture_Compression -->
+<br><br>
 
+<pre id="8aoMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>aoMap это сокращ. англ. слов ambient occlusion map -<br>карта перекрытия (затенения) при общем (фоновом)<br>освещении')" onmouseout="hide()">.aoMap</a></pre>
+Канал красного цвета используется в данной текстуре в качестве ambient occlusion map. Значением по умолчанию является <tt>null</tt>.
+The aoMap requires a second set of UVs, and consequently will ignore the repeat and offset Texture properties.<br>
+Статья в русской Википедии о <a href="https://ru.wikipedia.org/wiki/Ambient_occlusion" target="_blank">эффекте перекрытия</a> (модели затенения) при фоновом освещении. А <a href="https://en.wikipedia.org/wiki/Ambient_occlusion" target="_blank">вот</a> в английской.<br><br>
 
-  <h4>Свойства</h4>
-		<div>See the base [page:Material] class for common properties.</div>
+<pre id="8aoMapIntensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов ambient occlusion map intensity -<br>интенсивность затенения при общем (фоновом) освещении')" onmouseout="hide()">.aoMapIntensity</a></span></pre>
+Интенсивность затенения при общем (фоновом) освещении. Значение по умолчанию равно <tt>1</tt>. Нулевое значение означает отсутствие эффекта перекрытия (затенения).<br><br>
 
-		<pre>[property:Color color]</pre>
-		<div>
-		Diffuse color of the material. Default is white.<br>
-		</div>
+<pre id="8bumpMap">.bumpMap : Texture</pre>
+The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights. Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.<br><br>
+
+<pre id="8bumpScale">.bumpScale : Float</pre>
+How much the bump map affects the material. Typical ranges are 0-1. Default is 1.<br><br>
+
+<pre id="8color"><a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+<a href="math.htm#3" onmouseover="show('Color')" onmouseout="hide()">Цвет</a> материала, по умолчанию установлен как белый (<tt>0xffffff</tt> - <tt>white</tt>).<br><br>
 
 		<pre>[property:Color specular]</pre>
 		<div>
@@ -804,12 +794,6 @@ A material for shiny surfaces, evaluated per pixel.
 		<pre>[property:Float lightMapIntensity]</pre>
 		<div>TODO</div>
 
-		<pre>[property:Texture aoMap]</pre>
-		<div>Set ambient occlusion map. Default is null. The aoMap requires a second set of UVs.</div>
-
-		<pre>[property:Float aoMapIntensity]</pre>
-		<div>TODO</div>
-
 		<pre>[property:Color emissive]</pre>
 		<div>
 		Emissive (light) color of the material, essentially a solid color unaffected by other lighting. Default is black.<br>
@@ -820,18 +804,6 @@ A material for shiny surfaces, evaluated per pixel.
 
 		<pre>[property:Float emissiveIntensity]</pre>
 		<div>Intensity of the emissive light. Modulates the emissive color. Default is 1.</div>
-
-		<pre>[property:Texture bumpMap]</pre>
-		<div>
-			The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
-			Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will
-			be ignored.
-		</div>
-
-		<pre>[property:Float bumpScale]</pre>
-		<div>
-			How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
-		</div>
 
 		<pre>[property:Texture normalMap]</pre>
 		<div>
@@ -862,10 +834,6 @@ A material for shiny surfaces, evaluated per pixel.
 
 		<pre>[property:Texture specularMap]</pre>
 		<div>The specular map value affects both how much the specular surface highlight contributes and how much of the environment map affects the surface. Default is null.</div>
-
-		<pre>[property:Texture alphaMap]</pre>
-		<div>The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.</div>
-		<div>Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the [page:WebGLRenderer WebGL] renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.</div>
 
 		<pre>[property:TextureCube envMap]</pre>
 		<div>Set env map. Default is null.</div>
@@ -919,11 +887,10 @@ A material for shiny surfaces, evaluated per pixel.
 Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the [page:Geometry] to the shader. Default is *false*.
 
 <h4>Методы</h4>
-<br><br>
+Для информации об общих методах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/materials/MeshPhongMaterial.js.txt">MeshPhongMaterial.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshPhongMaterial.js" target="_blank">MeshPhongMaterial.js на github.com</a></div><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshPhongMaterial.js" target="_blank">MeshPhongMaterial.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a>&nbsp;&nbsp;<a href="#10" title="Переход к родительскому классу: MeshStandardMaterial"><tt>MeshStandardMaterial &rarr;</tt></a></span>
@@ -990,7 +957,9 @@ For a non-technical introduction to the concept of PBR and how to set up a PBR m
 <ul><li><a href="https://www.marmoset.co/posts/basic-theory-of-physically-based-rendering/" target="_blank">Basic Theory of Physically Based Rendering</a></li>
 <li><a href="https://www.marmoset.co/posts/physically-based-rendering-and-you-can-too/" target="_blank">Physically Based Rendering and You Can Too</a></li></ul>
 Технические подробности подхода, используемого в <em>three.js</em> (и большинстве других систем PBR),
-можно найти в <a href="https://disney-animation.s3.amazonaws.com/library/s2012_pbs_disney_brdf_notes_v2.pdf" target="_blank">этой статье</a> (pdf) от диснеевской студии анимации, написанную Брентом Барли (Brent Burley).<br><br>
+можно найти в <a href="https://disney-animation.s3.amazonaws.com/library/s2012_pbs_disney_brdf_notes_v2.pdf" target="_blank">этой статье</a> (pdf) от диснеевской студии анимации, написанную Брентом Барли (Brent Burley).
+<div class="caption"><img src="img/MeshStandardMaterial.png" width=1020><br>
+MeshStandardMaterial, MeshStandardMaterial с включенным <tt>flatShading</tt> и MeshStandardMaterial с включенным <tt>wireframe</tt>.</div><br>
 
 <h4>Конструктор</h4>
 <pre>MeshStandardMaterial( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>

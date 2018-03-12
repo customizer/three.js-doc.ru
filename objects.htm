@@ -1,42 +1,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head>
 <title>Three.js</title>
-<link rel="stylesheet" type="text/css" href="1.css">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<object id=hhctrl classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" width=0 height=0 vspace=0 hspace=0 border=0 type="application/x-oleobject"></object>
+<link rel="stylesheet" type="text/css" href="1.css">
 <script type="text/javascript" src="1.js"></script>
 </head>
 <body>
 <h2 class=head1>Объекты</h2>
+<div class=below>В этом разделе дается описание различных объектов
+<div class=list><a href="#1">Bone</a> - кость, т.е. объект, который может быть соединен с другими объектами в одно целое - скелет</div>
+<div class=list><a href="#2">Group</a> - группа объектов</div>
+<div class=list><a href="#3">Line</a> - линия</div>
+<div class=list><a href="#4">LineLoop</a> - замкнутая линия, т.е. линия, у которой конец и начало соединены</div>
+<div class=list><a href="#5">LineSegments</a> - отрезки линий</div>
+<div class=list><a href="#6">LOD</a> - Level of Detail - уровень детализации объектов в зависимости от расстояния между объектом и камерой</div>
+<div class=list><a href="#7">Mesh</a> - <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%B8%D0%B3%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D1%81%D0%B5%D1%82%D0%BA%D0%B0" target="_blank">полигональная сетка</a></div>
+<div class=list><a href="#8">Points</a> - точки</div>
+<div class=list><a href="#9">Skeleton</a> - скелет, т.е. объект, состоящий из нескольких, состыкованных между собой объектов</div>
+<div class=list><a href="#10">SkinnedMesh</a> - полигональная сетка, покрывающая скелет (Skeleton) из костей (Bone)</div>
+<div class=list><a href="#11">Sprite</a> - спрайт, т.е. плоскость, всегда обращенная к камере, частично прозрачная и не отбрасывающая тень</div></div><br>
+
 <span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
 <h3 id="1">Bone</h3>
-Кость (bone) является частью скелета (<a href="#9" title="Skeleton">Skeleton</a>). Скелет, в свою очередь, используется "сеткой, покрытой кожей" (<a href="#10" title="SkinnedMesh">SkinnedMesh</a>). Кости практически одинаковы с пустым <a href="core.htm#8" title="Object3D">Object3D</a>.
+Кость (bone) является частью скелета (<a href="#9" onmouseover="show('Skeleton')" onmouseout="hide()">Skeleton</a>).
+Скелет, в свою очередь, используется "сеткой, покрытой кожей" (<a href="#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>).
+Кости практически одинаковы с пустым <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
 
 <h4>Пример</h4>
 <pre>var root = new THREE.Bone();
 var child = new THREE.Bone();<br>
 root.add( child );
-child.position.y = 5;</pre>
+child.position.y = 5;</pre><br>
 
 <h4>Конструктор</h4>
-<pre>Bone( <a href="#10" title="SkinnedMesh">skin</a> )</pre>
-<div class=blockindent><tt>skin</tt> — (дополнительный, необязательный аргумент) <a href="#10" title="SkinnedMesh">SkinnedMesh</a> которой принадлежит кость.</div>
+<pre>Bone( )</pre>
+Создает новую кость (Bone).<br><br>
 
 <h4>Свойства</h4>
-<pre><a href="#10" title="SkinnedMesh">.skin</a></pre>
-An optional reference to the [page:SkinnedMesh].
+Общие свойства смотрите в описании базового класса <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="1isBone"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is bone - является костью')" onmouseout="hide()">.isBone</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу Bone. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="1type"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">.type</a></span></pre>
+Значение свойства установлено как &#34;Bone&#34;. Оно может использоваться для поиска всех объектов класса Bone на сцене.</div><br>
 
 <h4>Методы</h4>
-<pre><a href="#1" title="Bone">.clone</a>()</pre>
-Возвращает клона данного объекта <tt>Bone</tt> и его потомков.
+Общие методы смотрите в описании базового класса <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.<br><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/objects/Bone.js.txt">Bone.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Bone.js" target="_blank">Bone.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Bone.js" target="_blank">Bone.js на github.com</a></div><br><br>
+
 
 <span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
 <h3 id="2">Group</h3>
-Данный объект (группа) практически идентичен <a href="core.htm#8" title="Object3D">Object3D</a>. Его назначение сделать работу с группой объектов синтаксически яснее.
+Данный объект (группа) практически идентичен <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>. Его назначение сделать работу с группой объектов синтаксически яснее.
 
 <h4>Пример</h4>
 <pre>var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
@@ -56,85 +75,29 @@ scene.add( group );</pre>
 
 <h4>Конструктор</h4>
 <pre>Group( )</pre>
+Создает новую группу объектов.<br><br>
 
 <h4>Свойства</h4>
-Свойства одинаковы со свойствами <a href="core.htm#8" title="Object3D">Object3D</a>, за исключением:
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">.type</a></pre>
-Строка 'Group'. Она не должна изменяться.
+Общие свойства смотрите в описании базового класса <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="2type"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">.type</a></span></pre>
+Строка 'Group'. Она не должна изменяться.</div><br>
 
 <h4>Методы</h4>
-Методы одинаковы с методами <a href="core.htm#8" title="Object3D">Object3D</a>.
+Общие методы смотрите в описании базового класса <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.<br><br>
 
 <h4>Исходники</h4>
-<div class=blockindent><a href="src/objects/Group.js.txt">Group.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Group.js" target="_blank">Group.js на github.com</a></div><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Group.js" target="_blank">Group.js на github.com</a></div><br><br>
+
 
 <span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="3">LensFlare</h3>
-Создает имитацию блика объектива камеры, зависящего от направления освещения.
-Creates a simulated lens flare that tracks a light.
-<div class="note">Примечание: Для работы LensFlare у <a href="renderers.htm#1.2" title="WebGLRenderer">WebGLRenderer</a> аргумент <tt>alpha</tt> должен быть установлен как <tt>true</tt>.</div>
+<h3 id="3">Line</h3>
+Непрерывная линия.<br>
+Это почти то же самое, что и <a href="#5" onmouseover="show('LineSegments')" onmouseout="hide()">LineSegments</a>; единственное различие заключается в том,
+что оно отображается с помощью <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements" target="_blank" onmouseover="show('рисует прямую линию к следующей вершине')" onmouseout="hide()">gl.LINE_STRIP</a>,
+а не <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements" target="_blank" onmouseover="show('рисует линию между парой вершин')" onmouseout="hide()">gl.LINES</a>.<br><br>
 
 <h4>Пример</h4>
-<div>[example:webgl_lensflares lensflares]</div>
-
-<h4>Конструктор</h4>
-<pre>LensFlare( [page:Texture texture], [page:Float size], [page:Float distance], [page:Materials blending], [page:Color color] )</pre>
-<div class=blockindent><tt>texture</tt> — THREE.Texture (optional) <br>
-<tt>size</tt> — size in pixels (-1 = use texture.width) <br>
-<tt>distance</tt> — (0-1) from light source (0 = at light source) <br>
-<tt>blending</tt> — [page:Materials Blending Mode] - Defaults to THREE.NormalBlending <br>
-<tt>color</tt> — The color of the lens flare.</div>
-Automatically adds a lens flare to the lensFlares array if a texture is set.
-
-<h4>Свойства</h4>
-
-
-
-		<pre>[property:array lensFlares]</pre>
-		<div>
-		The array of flares as set by [page:LensFlare.add]
-		</div>
-
-		<pre>[property:Vector3 positionScreen]</pre>
-		<div>
-		The position of the lens flare on the screen.
-		</div>
-
-		<pre>[property:Function customUpdateCallback]</pre>
-		<div>
-		A custom update callback
-		</div>
-
-  <h4>Методы</h4>
-
-
-		<pre>[method:null add]( [page:Texture texture], [page:Float size], [page:Float distance], [page:Materials blending], [page:Color color] )</pre>
-		<div>
-		Adds a lens flare. See the constructor for details on the parameters.
-		</div>
-
-
-		<pre>[method:null updateLensFlares]()</pre>
-		<div>
-		Updates the lens flare based on the [page:LensFlare.positionScreen positionScreen] property.
-		</div>
-
-		<pre>[method:Lens Flare clone]()</pre>
-		<div>
-		Returns a clone of this LensFlare object and its descendants.
-		</div>
-
-
-<h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="4">Line</h3>
-Непрерывная линия.
-
-<h4>Пример</h4>
-
 <pre>var material = new THREE.LineBasicMaterial({
 	color: 0x0000ff
 });<br>
@@ -148,186 +111,174 @@ var line = new THREE.Line( geometry, material );
 scene.add( line );</pre>
 
 <h4>Конструктор</h4>
-<pre>Line( [page:Geometry geometry], [page:Material material] )</pre>
+<pre>Line( <a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
+<div class=list><tt><a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a></tt>
+— вершины, представляющие отрезок (отрезки) линии. По умолчанию используется новая <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.</div>
+<div class=list><tt><a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a></tt>
+— материал для линии. По умолчанию используется <a href="materials.htm#1" onmouseover="show('LineBasicMaterial')" onmouseout="hide()">LineBasicMaterial</a> со случайно выбранным цветом.</div>
+Если материал не предоставлен, то для объекта будет создан и затем назначен линейный материал, выбранный в случайном порядке.<br><br>
 
-		<div>
-		geometry — Vertices representing the line segment(s).<br>
-		material — Material for the line. Default is [page:LineBasicMaterial LineBasicMaterial].<br>
-		</div>
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="3isLine"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is line - является линией')" onmouseout="hide()">.isLine</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу Line. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
 
-		<div>If no material is supplied, a randomized line material will be created and assigned to the object.</div>
+<pre id="3geometry"><a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">.geometry</a></pre>
+Вершины, представляющие отрезок (отрезки) линии.<br><br>
 
+<pre id="3material"><a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">.material</a></pre>
+Материал для линии.</div><br>
 
-  <h4>Свойства</h4>
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="3computeLineDistances"><a href="#3" onmouseover="show('Line.<br>compute line distances - вычислить размеры линии')" onmouseout="hide()">.computeLineDistances</a>( )</pre>
+Метод вычисляет массив значений размеров, необходимых для <a href="materials.htm#2" onmouseover="show('LineDashedMaterial')" onmouseout="hide()">LineDashedMaterial</a>.
+Для каждой вершины геометрического элемента метод рассчитывает совокупную длину от текущей точки до самого начала линии.<br><br>
 
-		<pre>[property:Geometry geometry]</pre>
-		<div>
-		Vertices representing the line segment(s).
-		</div>
+<pre id="3raycast"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ray cast - бросок луча')" onmouseout="hide()">.raycast</a></span>( [page:Raycaster raycaster], [page:Array intersects] )</pre>
+Метод получает точки пересечения между брошенным <a href="math.htm#14" onmouseover="show('Ray')" onmouseout="hide()">лучом</a> и данной линией.
+Данный метод будет вызываться методом <tt><a href="core.htm#15intersectObject" onmouseover="show('Raycaster.intersectObjec')" onmouseout="hide()">Raycaster.intersectObject</a></tt>.<br><br>
 
-		<pre>[property:Material material]</pre>
-		<div>
-		Material for the line.
-		</div>
-
-
-  <h4>Методы</h4>
-
-		<pre>[method:Array raycast]( [page:Raycaster raycaster], [page:Array intersects] )</pre>
-		<div>
-		Get intersections between a casted ray and this Line. [page:Raycaster.intersectObject] will call this method.
-		</div>
-
-		<pre>[method:Line clone]()</pre>
-		<div>
-		Returns a clone of this Line object and its descendants.
-		</div>
+<pre id="3clone"><a href="#3" onmouseover="show('Line.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Метод возвращает клон данного объекта Line и его потомков.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Line.js" target="_blank">Line.js на github.com</a></div><br><br>
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> &nbsp; <a href="#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
-<h3 id="5">LineLoop</h3>
-A continuous line that connects back to the start.
-
-<span class="right_side"><a href="#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
-<h3 id="6">LineSegments</h3>
-A series of lines drawn between pairs of vertices.</div>
+<h3 id="4">LineLoop</h3>
+<span class="lnk" onmouseover="show('line loop - линейная петля или замкнутая линия')" onmouseout="hide()">LineLoop</span> это непрерывная линия, начало которой соединено с её концом, т.е. замкнутая линия.<br>
+Это почти то же самое, что и Line; единственное различие заключается в том, что оно отображается с помощью
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements" target="_blank" onmouseover="show('рисует прямую линию к следующей вершине<br>и соединяет последнюю вершину с первой')" onmouseout="hide()">gl.LINE_LOOP</a>
+(вместо <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements" target="_blank" onmouseover="show('рисует прямую линию к следующей вершине')" onmouseout="hide()">gl.LINE_STRIP</a>),
+которая рисует прямую линию к следующей вершине и присоединяет последнюю вершину обратно к первой.<br><br>
 
 <h4>Конструктор</h4>
-<pre>LineSegments( [page:Geometry geometry], [page:Material material] )</pre>
+<pre>LineLoop( <a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
+<div class=list><tt><a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a></tt>
+— список вершин, представляющих точки замкнутой линии.</div>
+<div class=list><tt><a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a></tt>
+— материал для линии. По умолчанию используется <a href="materials.htm#1" onmouseover="show('LineBasicMaterial')" onmouseout="hide()">LineBasicMaterial</a>.</div>
+Если материал не предоставлен, то для объекта будет создан и затем назначен линейный материал, выбранный в случайном порядке.<br><br>
 
-		<div>
-		geometry — Pair(s) of vertices representing each line segment(s).<br>
-		material — Material for the line. Default is [page:LineBasicMaterial LineBasicMaterial].
-		</div>
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="#3" onmouseover="show('Line')" onmouseout="hide()">Line</a>.
+<div class=blockindent><br>
+<pre id="4isLineLoop"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is line loop - является замкнутой линией')" onmouseout="hide()">.isLineLoop</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу LineLoop. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.</div><br>
 
-		<div>If no material is supplied, a randomized line material will be created and assigned to the object.</div>
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#3" onmouseover="show('Line')" onmouseout="hide()">Line</a>.<br><br>
 
-
-  <h4>Свойства</h4>
-
-		<pre>[property:Geometry geometry]</pre>
-		<div>
-		Pair(s) of vertices representing the line segment(s).
-		</div>
-
-		<pre>[property:Material material]</pre>
-		<div>
-		Material for the line.
-		</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/LineLoop.js" target="_blank">LineLoop.js на github.com</a></div><br><br>
 
 
-  <h4>Методы</h4>
+<span class="right_side"><a href="#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
+<h3 id="5">LineSegments</h3>
+Цепочка линий, нарисованных между парами вершин.<br>
+Это почти то же самое, что и Line; единственное различие заключается в том, что оно отображается с помощью
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements" target="_blank" onmouseover="show('рисует линию между парой вершин')" onmouseout="hide()">gl.LINES</a>,
+а не <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements" target="_blank" onmouseover="show('рисует прямую линию к следующей вершине')" onmouseout="hide()">gl.LINE_STRIP</a>.<br><br>
 
-		<pre>[method:Array raycast]( [page:Raycaster raycaster], [page:Array intersects] )</pre>
-		<div>
-		Get intersections between a casted ray and this Line. [page:Raycaster.intersectObject] will call this method.
-		</div>
+<h4>Конструктор</h4>
+<pre>LineSegments( <a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
+<div class=list><tt><a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a></tt>
+— пара (или пары) вершин, представляющих каждый отрезок линии.</div>
+<div class=list><tt><a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a></tt>
+— материал для линии. По умолчанию используется <a href="materials.htm#1" onmouseover="show('LineBasicMaterial')" onmouseout="hide()">LineBasicMaterial</a>.</div>
+Если материал не предоставлен, то для объекта будет создан и затем назначен линейный материал, выбранный в случайном порядке.<br><br>
 
-		<pre>[method:LineSegments clone]()</pre>
-		<div>
-		Returns a clone of this LineSegments object and its descendants.
-		</div>
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="#3" onmouseover="show('Line')" onmouseout="hide()">Line</a>.
+<div class=blockindent><br>
+<pre id="5isLineLoop"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is line loop - является замкнутой линией')" onmouseout="hide()">.isLineLoop</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу LineLoop. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.</div><br>
 
-<h4>Source</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="#3" onmouseover="show('Line')" onmouseout="hide()">Line</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/LineSegments.js" target="_blank">LineSegments.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="7">LOD</h3>
-Level of Detail - Show meshes with more or less geometry based on distance.
+<h3 id="6">LOD</h3>
+LOD - это сокращение английских слов level of detail - уровень детализации - показывает полигональные сетки (mesh) с большим или меньшим количеством геометрических элементов в зависимости от расстояния между объектом и камерой.<br><br>
 
 <h4>Пример</h4>
-
-		<div>
-		[example:webgl_lod LOD]
-		</div>
-
-		<pre>
-		var lod = new THREE.LOD();
-
-		//Create 5 levels of spheres
-		for( var i = 0; i &lt; 5; i++ ) {
-
-			var geometry = new THREE.IcosahedronGeometry( 10, 5 - i )
-
-			new THREE.Mesh( geometry, material );
-
-			lod.addLevel( mesh, i * 50 );
-
-		}
-		</pre>
+<pre>var lod = new THREE.LOD();<br>
+// Create spheres with 3 levels of detail and create new LOD levels for them
+// Создаем сферы с 3 уровнями детализации и создаем новые уровни LOD для них
+for( var i = 0; i &lt; 3; i++ ) {
+	var geometry = new THREE.IcosahedronBufferGeometry( 10, 3 - i )
+	var mesh = new THREE.Mesh( geometry, material );
+	lod.addLevel( mesh, i * 75 );
+}<br>
+scene.add( lod );</pre>
+Обратите внимание, что LOD переключения между различными уровнями детализации,
+в цикле визуализации нужно будет вызывать <tt><a href="#6update" onclick="return false" onmouseover="show('LOD.update')" onmouseout="hide()">update</a>( camera )</tt>.
+Смотрите подробности в исходном коде этого примера: <a href="https://threejs.org/examples/#webgl_lod" target="_blank">WebGL / LOD</a>.<br><br>
 
 <h4>Конструктор</h4>
 <pre>LOD()</pre>
+Создает новый LOD.<br><br>
 
 <h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="6levels"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('levels - уровни')" onmouseout="hide()">.levels</a></span></pre>
+Массив объектов уровня.<br>
+Каждый уровень является объектом с двумя свойствами:
+<div class=list><tt><a href="core.htm#8" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a></tt> - <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> для отображения на данном уровне.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span></tt> - расстояние на котором будет показываться данный уровень детализации.</div></div><br>
 
-<pre>[property:array levels]</pre>
-		<div>
-		An array of [page:object level] objects
-		</div>
-		<div>
-		level is an object with two properties.
-		</div>
-		<div>
-		distance -- The distance at which to display this level of detail<br>
-		object -- The Object3D which will be displayed
-		</div>
-
-  <h4>Методы</h4>
-
-
-
-		<pre>[method:null addLevel]( [page:Object3D mesh], [page:Float distance] )</pre>
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="core.htm#8" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="6addLevel">[method:null addLevel]( [page:Object3D mesh], [page:Float distance] )</pre>
 		<div>
 		mesh -- The Object3D to display <br>
 		distance -- The distance at which to display this level of detail
 		</div>
-		<div>
-		Adds a mesh that will display at a certain distance and greater. Typically the further away the distance,
-		the lower the detail on the mesh.
-		</div>
+Adds a mesh that will display at a certain distance and greater. Typically the further away the distance, the lower the detail on the mesh.<br><br>
 
-		<pre>[method:Object3D getObjectForDistance]( [page:Float distance] )</pre>
-		<div>
-		Get a reference to the first [page:Object3D] (mesh) that is greater than supplied distance.
-		</div>
+<pre id="6clone">[method:LOD clone]()</pre>
+Returns a clone of this LOD object and its associated distance specific objects.<br><br>
 
-		<pre>[method:null update]( [page:Camera camera] )</pre>
-		<div>
-		camera -- The current camera
-		</div>
-		<div>
-		Update the visiblility of the level of detail based on the distance from the camera.
-		</div>
+<pre id="6getObjectForDistance">[method:Object3D getObjectForDistance]( [page:Float distance] )</pre>
+Get a reference to the first [page:Object3D] (mesh) that is greater than supplied distance.<br><br>
 
-		<pre>[method:LOD clone]()</pre>
-		<div>
-		Returns a clone of this LOD object and its associated distance specific objects.
-		</div>
+<pre id="6raycast">.raycast ( raycaster : Raycaster, intersects : Array ) : Array</pre>
+Get intersections between a casted Ray and this LOD. Raycaster.intersectObject will call this method.<br><br>
 
+<pre id="6toJSON">.toJSON ( meta ) : null</pre>
+Create a JSON structure with details of this LOD object.<br><br>
+
+<pre id="6update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">.update</a></span>( <a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+Set the visibility of each level's object based on distance from the camera. This needs to be called in the render loop for levels of detail to be updated dynamically.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/LOD.js" target="_blank">LOD.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="8">Mesh</h3>
-Base class for Mesh objects, such as [page:MorphAnimMesh] and [page:SkinnedMesh].
+<h3 id="7">Mesh</h3>
+Base class for Mesh objects, such as [page:MorphAnimMesh] and [page:SkinnedMesh].<br><br>
 
 <h4>Пример</h4>
-<code>var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-		var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-		var mesh = new THREE.Mesh( geometry, material );
-		scene.add( mesh );
-		</code>
+<pre>var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+  var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+  var mesh = new THREE.Mesh( geometry, material );
+  scene.add( mesh );</pre><br>
 
-
-  <h4>Конструктор</h4>
-
-		<pre>[name]( [page:Geometry geometry], [page:Material material] )</pre>
+<h4>Конструктор</h4>
+<pre>[name]( [page:Geometry geometry], [page:Material material] )</pre>
 
 		<div>
 		geometry — An instance of [page:Geometry].<br>
@@ -386,11 +337,11 @@ Base class for Mesh objects, such as [page:MorphAnimMesh] and [page:SkinnedMesh]
 		</div>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Mesh.js" target="_blank">Mesh.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="9">Points</h3>
+<h3 id="8">Points</h3>
 
 		<div class="desc">A class for displaying points. For example, if using the [page:WebGLRenderer], the points are displayed using GL_POINTS.</div>
 
@@ -428,12 +379,11 @@ Base class for Mesh objects, such as [page:MorphAnimMesh] and [page:SkinnedMesh]
 		Returns a clone of this Points object and its descendants.
 		</div>
 
-
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Points.js" target="_blank">Points.js на github.com</a></div><br><br>
 
 
-<h3 id="10">Skeleton</h3>
+<h3 id="9">Skeleton</h3>
 Use an array of [page:Bone bones] to create a skeleton that can be used by a [page:SkinnedMesh]. WebGL only.
 
 <h4>Пример</h4>
@@ -502,11 +452,11 @@ Updates the [page:Float32Array boneMatrices] and [page:DataTexture boneTexture] 
 Returns a clone of this Skeleton object.
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Skeleton.js" target="_blank">Skeleton.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="11">SkinnedMesh</h3>
+<h3 id="10">SkinnedMesh</h3>
 A mesh that has a [page:Skeleton] with [page:Bone bones] that can then be used to animate the vertices of the geometry.
 
 <!-- 		<iframe id="scene" src="scenes/bones-browser.html"></iframe> -->
@@ -562,9 +512,10 @@ The base matrix that is used for the bound bone transforms.
 The inverse of the bindMatrix.
 
 <h4>Методы</h4>
+<div class=blockindent><br>
 <pre>[method:null bind]( [page:Skeleton skeleton], [page:Matrix4 bindMatrix] )</pre>
-<div class=blockindent><tt>skeleton</tt> — [page:Skeleton]<br>
-bindMatrix — [page:Matrix4] that represents the base transform of the skeleton</div>
+<div class=list><tt>skeleton</tt> — [page:Skeleton]</div>
+<div class=list>bindMatrix — [page:Matrix4] that represents the base transform of the skeleton</div>
 Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
 
 <pre>[method:null normalizeSkinWeights]()</pre>
@@ -574,18 +525,18 @@ Normalizes the [page:Geometry.skinWeights] vectors. Does not affect [page:Buffer
 This method sets the skinned mesh in the rest pose.
 
 <pre>[method:Bone addBone]( [page:Bone bone] )</pre>
-<div class=blockindent><tt>bone</tt> — This is the bone that needs to be added. (optional)</div>
+<div class=list><tt>bone</tt> — This is the bone that needs to be added. (optional)</div>
 This method adds the bone to the skinned mesh when it is provided. It creates a new bone and adds that when no bone is given.
 
 <pre>[method:SkinnedMesh clone]()</pre>
-Returns a clone of this SkinnedMesh object and its descendants.</div>
+Returns a clone of this SkinnedMesh object and its descendants.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/SkinnedMesh.js" target="_blank">SkinnedMesh.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#8" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="12">Sprite</h3>
+<h3 id="11">Sprite</h3>
 Спрайт это плоскость на трехмерной сцене, которая всегда стоит перед камерой.<br>
 Спрайты не отбрасывают тени, так что установка <tt>castShadow = true</tt> не даст никакого эффекта.
 
@@ -598,18 +549,20 @@ Returns a clone of this SkinnedMesh object and its descendants.</div>
 <h4>Конструктор</h4>
 <pre>Sprite( <a href="materials.htm#3" title="Material">material</a> )</pre>
 <div class=blockindent><tt>material</tt> — экземпляр <tt><a href="materials.htm#3" title="Material">Material</a></tt> (дополнительный, необязательный аргумент).</div>
-Создает новый объект <tt>Sprite</tt> с указанным материалом <tt>material</tt>.
+Создает новый объект <tt>Sprite</tt> с указанным материалом <tt>material</tt>.<br><br>
 
 <h4>Свойства</h4>
+<div class=blockindent><br>
 <pre>[property:SpriteMaterial material]</pre>
-An instance of [page:Material], defining the object's appearance. Значение по умолчанию равно [page:SpriteMaterial], который является белой плоскостью.
+An instance of [page:Material], defining the object's appearance. Значение по умолчанию равно [page:SpriteMaterial], который является белой плоскостью.</div><br>
 
 <h4>Методы</h4>
+<div class=blockindent><br>
 <pre>[method:Sprite clone]()</pre>
-Возвращает клон данного объекта Sprite и его потомков.
+Возвращает клон данного объекта Sprite и его потомков.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Sprite.js" target="_blank">Sprite.js на github.com</a></div><br><br>
 
 <br><br>
 </body></html>

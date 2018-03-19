@@ -162,9 +162,8 @@ var material = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCu
 
 <h4>Конструктор</h4>
 <pre>CubeTexture( images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy )</pre>
-По функциональности и применению <tt>CubeTexture</tt> практически равна <a href="#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>. Отличие состоит только в том, что изображения представляют собой массив из 6 изображений, а не одно изображение, и
-
-and the mapping options are [page:Textures THREE.CubeReflectionMapping</a> (default) or [page:Textures THREE.CubeRefractionMapping</a>.
+По функциональности и применению <tt>CubeTexture</tt> фактически равна <a href="#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>. Отличие состоит только в том, что аргумент <tt>images</tt> представляет собой массив из 6 изображений, а не одно изображение, и вариантами картирования является
+<a href="constants.htm#7.1" onmouseover="show('cube reflection mapping - ')" onmouseout="hide()">THREE.CubeReflectionMapping</a> (по умолчанию) или <a href="constants.htm#7.1" onmouseover="show('cube refraction mapping - ')" onmouseout="hide()">THREE.CubeRefractionMapping</a>.<br><br>
 
 <h4>Свойства</h4>
 Общие свойства смотрите в описании базового класса <a href="#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.<br><br>
@@ -211,7 +210,7 @@ Creates a texture for use as a Depth Texture. Require support for the
     of WebGL enabled devices support this.<br><br>
 
 <h4>Пример</h4>
-<pre>[example:webgl_depth_texture depth / texture</a></pre>
+<pre><a href="https://threejs.org/examples/webgl_depth_texture" target="_blank">WebGL / depth / texture</a></pre>
 
 <h4>Конструктор</h4>
 <pre>DepthTexture( [page:Number width</a>, [page:Number height</a>, [page:Constant type</a>, [page:Constant wrapS</a>, [page:Constant wrapT</a>, [page:Constant magFilter</a>, [page:Constant minFilter</a>, [page:Number anisotropy</a>, [page:Constant format</a> )</pre>
@@ -272,101 +271,152 @@ Depth textures do not use mipmaps.</div><br>
 
 
 <h3 id="6">Texture</h3>
-Создает текстуру для применения к поверхности или в качестве карт отражения или преломления.<br><br>
+Создает текстуру применяемую к поверхности объекта или в качестве карты отражения или преломления.<br><br>
+
 <h4>Пример</h4>
 <pre>// load a texture, set wrap mode to repeat
-// загрузка текстуры, установка режима оболочки для повторения
+// загрузка текстуры, установка режима стыковки для повторения
 var texture = new THREE.TextureLoader().load( "textures/water.jpg" );
 texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
 texture.repeat.set( 4, 4 );</pre><br>
+
 <h4>Конструктор</h4>
 <pre>Texture( image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy )</pre>
 <br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="6id"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_integer,'Arial,9',10,10,0xffffff,0xd69967)" title="сокращ. от англ. слова identifier - идентификатор">.id</a></pre>
+<pre id="6anisotropy"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия (от др.-греч. анизос — неравный<br>и тропос — направление), т.е. различие свойств среды<br>(например, физических: упругости, электропроводности,<br>теплопроводности, показателя преломления, скорости звука<br>или света и др.) в различных направлениях внутри этой среды;<br>в противоположность изотропии.')" onmouseout="hide()">.anisotropy</a></span></pre>
+Число выборок, взятых через пиксель по оси с наибольшей плотностью текселей.
+По умолчанию, значение данного аргумента равно <tt>1</tt>. Более высокое значение дает менее размытый результат, чем базовая mip-карта, за счет большего количества используемых выборок текстуры.<br>
+Поиск максимально возможного значения анизотропии для <span class="lnk" onmouseover="show('GPU - сокращ. англ. слов graphics processing unit - блок<br>графической обработки, графический процессор или<br>попросту видеокарта')" onmouseout="hide()">GPU</span>
+делается с помощью <tt><a href="renderers.htm#1.1capabilities" onmouseover="show('WebGLrenderer.getMaxAnisotropy')" onmouseout="hide()">renderer.getMaxAnisotropy</a></tt>; это значение обычно является степенью <tt>2</tt>.<br><br>
+
+<pre id="6center"><a href="math.htm#18" onmouseover="show('Vector2.<br>center - центр')" onmouseout="hide()">.center</a></pre>
+Свойство показывает, где находится центр вращения. Для поворота вокруг центральной точки установите данное значение как <tt>(0.5, 0.5)</tt>. Значение по умолчанию равно <tt>(0.0, 0.0)</tt>.<br><br>
+
+<pre id="6encoding"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('encoding - кодирование')" onmouseout="hide()">.encoding</a></span></pre>
+Значением по умолчанию является <a href="constants.htm#7.10" onmouseover="show('linear encoding - линейное кодирование')" onmouseout="hide()">THREE.LinearEncoding</a>.
+Другие возможные варианты смотрите в описании <a href="constants.htm#7.10" onmouseover="show('Texture =&#62; Encoding')" onmouseout="hide()">констант кодирования текстуры</a>.<br>
+Обратите внимание, что если данное значение изменяется на текстуре после использования материала, необходимо запустить Material.needsUpdate этого значения, чтобы выполнить обновление в шейдере.<br><br>
+
+<pre id="6flipY"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('flip Y - перевернуть (отразить) по оси Y (по вертикали)')" onmouseout="hide()">.flipY</a></span></pre>
+Значение по умолчанию равно <tt>true</tt>. Переворачивает координатную ось Y объекта для соответствия пространству текстурных координат WebGL.<br><br>
+
+<pre id="6format"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">.format</a></span></pre>
+Значением по умолчанию является <a href="constants.htm#7.6" onmouseover="show('RGBAFormat - формат, в котором считываются<br>данные каналов цвета<br>&nbsp;&nbsp;&nbsp;R (red) - красный,<br>&nbsp;&nbsp;&nbsp;G (green) - зеленый,<br>&nbsp;&nbsp;&nbsp;B (blue) - синий<br>и канала прозрачности A (alfa) - альфа-канал')" onmouseout="hide()">THREE.RGBAFormat</a>,
+хотя для изображений в формате JPG <a href="loaders.htm#15" onmouseover="show('TextureLoader')" onmouseout="hide()">TextureLoader</a> автоматически установит это свойство как
+<a href="constants.htm#7.6" onmouseover="show('RGBAFormat - формат, в котором считываются<br>данные каналов цвета<br>&nbsp;&nbsp;&nbsp;R (red) - красный,<br>&nbsp;&nbsp;&nbsp;G (green) - зеленый и<br>&nbsp;&nbsp;&nbsp;B (blue) - синий')" onmouseout="hide()">THREE.RGBFormat</a>.<br>
+Другие возможные варианты смотрите в описании <a href="constants.htm#7.6" onmouseover="show('Texture Constants')" onmouseout="hide()">констант формата текстуры</a>.<br><br>
+
+<pre id="6generateMipmaps"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('generate mipmaps - генерировать mip-карты')" onmouseout="hide()">.generateMipmaps</a></span></pre>
+Свойство определяет, будут ли создаваться для текстуры mip-карты (если это возможно). Значением по умолчанию является <tt>true</tt>.<br><br>
+
+<pre id="6id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('id - сокращ. от англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
 Уникальное число для данного экземпляра текстуры (только для чтения).<br><br>
 
-<pre id="6image"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_image,'Arial,9',10,10,0xffffff,0xd69967)" title="image - изображение">.image</a></pre>
-An Image object, typically created using the ImageUtils or [page:ImageLoader ImageLoader</a> classes. The Image object can include an image (e.g., PNG, JPG, GIF, DDS), video (e.g., MP4, OGG/OGV), or set of six images for a cube map. To use video as a texture you need to have a playing HTML5 video element as a source for your texture image and continuously update this texture as long as video is playing.<br><br>
+<pre id="6image"><span onclick="showClick('значением может быть изображение или видео,<br>загруженное с помощью метода TextureLoader.load')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('image - изображение')" onmouseout="hide()">.image</a></span></pre>
+Объект изображение, обычно создаваемый с помощью метода <tt><a href="loaders.htm#15load" onmouseover="show('TextureLoader.load')" onmouseout="hide()">TextureLoader.load</a></tt>.
+Это может быть любой тип изображения (например, PNG, JPG, GIF, DDS) или видео (например, MP4, OGG/OGV), поддерживаемый <em>three.js</em>.<br>
+Чтобы использовать видео в качестве текстуры нужно иметь элемент HTML5, воспроизводящий видео, как ресурс для изображения текстуры и постоянно обновлять эту текстуру, до тех пор пока видео проигрывается - класс <a href="#7" onmouseover="show('VideoTexture')" onmouseout="hide()">VideoTexture</a> делает это автоматически.<br><br>
 
-<pre id="6mapping"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_object,'Arial,9',10,10,0xffffff,0xd69967)">.mapping</a></pre>
-How the image is applied to the object. An object type of THREE.UVMapping is the default, where the U,V coordinates are used to apply the map, and a single texture is expected. The other types are THREE.CubeReflectionMapping, for cube maps used as a reflection map; THREE.CubeRefractionMapping, refraction mapping; and THREE.SphericalReflectionMapping, a spherical reflection map projection.<br><br>
-
-<pre id="6wrapS"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.wrapS</a></pre>
-The default is THREE.ClampToEdgeWrapping, where the edge is clamped to the outer edge texels. The other two choices are THREE.RepeatWrapping and THREE.MirroredRepeatWrapping.<br><br>
-
-<pre id="6wrapT"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.wrapT</a></pre>
-The default is THREE.ClampToEdgeWrapping, where the edge is clamped to the outer edge texels. The other two choices are THREE.RepeatWrapping and THREE.MirroredRepeatWrapping.
-
-<div class="note"><b>Примечание:</b> tiling of images in textures only functions if image dimensions are powers of two (2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, ...) in terms of pixels. Individual dimensions need not be equal, but each must be a power of two. Это ограничение от WebGL, а не Three.js.</div><br>
+<pre id="6mapping"><span onclick="showClick(type_object)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mapping - картирование, т.е. укладка<br>изображения на поверхность объекта')" onmouseout="hide()">.mapping</a></span></pre>
+Свойство определяет способ применения изображения к объекту.
+По умолчанию типом объекта является <a href="constants.htm#7.1" onmouseover="show('текстура накладывается на поверхность объекта<br>в соответствии с координатами UV полигональной<br>сетки (mesh)')" onmouseout="hide()">THREE.UVMapping</a>, то есть при укладке используются U и V координаты.
+Другие возможные варианты смотрите в <a href="constants.htm#7.1" onmouseover="show('mapping modes')" onmouseout="hide()">константах режима картирования</a>.br><br>
 
 <pre id="6magFilter"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.magFilter</a></pre>
 How the texture is sampled when a texel covers more than one pixel. The default is THREE.LinearFilter, which takes the four closest texels and bilinearly interpolates among them. The other option is THREE.NearestFilter, which uses the value of the closest texel.<br><br>
 
+<pre id="6matrix">.matrix : Matrix3</pre>
+The uv-transform matrix for the texture. Updated by the renderer from the texture properties .offset : Vector2, .repeat : Vector2, and .rotation : numberwhen the texture's .matrixAutoUpdate : booleanproperty is true. When .matrixAutoUpdate : booleanproperty is false, this matrix may be set manually. Default is the indentity matrix.<br><br>
+
+<pre id="6matrixAutoUpdate">.matrixAutoUpdate : boolean</pre>
+Whether to update the texture's uv-transform .matrix : Matrix3based on the .offset : Vector2, .repeat : Vector2, and .rotation : numbersettings. True by default. Set this to false if you are specifying the uv-transform matrix directly.<br><br>
+
 <pre id="6minFilter"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.minFilter</a></pre>
 How the texture is sampled when a texel covers less than one pixel. The default is THREE.LinearMipMapLinearFilter, which uses mipmapping and a trilinear filter. Other choices are THREE.NearestFilter, THREE.NearestMipMapNearestFilter, THREE.NearestMipMapLinearFilter, THREE.LinearFilter, and THREE.LinearMipMapNearestFilter. These vary whether the nearest texel or nearest four texels are retrieved on the nearest mipmap or nearest two mipmaps. Interpolation occurs among the samples retrieved.<br><br>
 
-<pre id="6format"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.format</a></pre>
-The default is THREE.RGBAFormat for the texture. Other formats are: THREE.AlphaFormat, THREE.RGBFormat, THREE.LuminanceFormat, and THREE.LuminanceAlphaFormat. There are also compressed texture formats, if the S3TC extension is supported: THREE.RGB_S3TC_DXT1_Format, THREE.RGBA_S3TC_DXT1_Format, THREE.RGBA_S3TC_DXT3_Format, and THREE.RGBA_S3TC_DXT5_Format.<br><br>
+<pre id="6mipmaps"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mipmaps - mip-карты')" onmouseout="hide()">.mipmaps</a></span></pre>
+Массив mip-карт, задаваемый пользователем (дополнительное, необязательное свойство).<br><br>
 
-<pre id="6type"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.type</a></pre>
-The default is THREE.UnsignedByteType. Other valid types (as WebGL allows) are THREE.ByteType, THREE.ShortType, THREE.UnsignedShortType, THREE.IntType, THREE.UnsignedIntType, THREE.FloatType, THREE.UnsignedShort4444Type, THREE.UnsignedShort5551Type, and THREE.UnsignedShort565Type.<br><br>
+<pre id="6name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">.name</a></span></pre>
+Дополнительное имя объекта (ему необязательно быть уникальным). Значением по умолчанию является пустая строка.<br><br>
 
-<pre id="6anisotropy"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.anisotropy</a></pre>
-The number of samples taken along the axis through the pixel that has the highest density of texels. By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used. Use renderer.getMaxAnisotropy() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.<br><br>
+<pre id="6needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('needs update - нуждается в обновлении')" onmouseout="hide()">.needsUpdate</a></span></pre>
+Установите значение этого свойства как <tt>true</tt> для запуска обновления при следующем использовании текстуры. Особенно это важно для установки режима укладки текстуры.<br><br>
 
-<pre id="6needsUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.needsUpdate</a></pre>
-If a texture is changed after creation, set this flag to true so that the texture is properly set up. Particularly important for setting the wrap mode.<br><br>
+<pre id="6offset"><a href="math.htm#18" onmouseover="show('Vector2.<br>offset - смещение')" onmouseout="hide()">.offset</a></pre>
+Свойство показывает насколько одно повторение текстуры смещено от начала, в каждом направлении U и V. Обычный диапазон значений от <tt>0.0</tt> до <tt>1.0</tt>.
+<div class=note><b>Примечание:</b> свойство <tt>offset</tt> является расчетным модификатором и влияет только на применение текстуры к первому набору координат UV модели.
+Если текстура используется как карта, требующая дополнительных наборов координат UV (например <tt>aoMap</tt> или <tt>lightMap</tt> большинства материалов ассортимента),
+то для достижения желаемого повторения эти координаты должны быть назначены вручную.</div><br>
 
-<pre id="6repeat"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector2,'Arial,9',10,10,0xffffff,0xd69967)">.repeat</a></pre>
-How many times the texture is repeated across the surface, in each direction U and V.<br><br>
+<pre id="6onUpdate"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on update - на обновление')" onmouseout="hide()">.onUpdate</a></span></pre>
+Функция обратного вызова, вызываемая при обновлении текстуры (например когда свойство <tt><a href="#6needsUpdate" onmouseover="show('Texture.needsUpdate')" onmouseout="hide()">needsUpdate</a></tt> установлено как <tt>true</tt> и затем данная текстура используется).<br><br>
 
-<pre id="6offset"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_vector2,'Arial,9',10,10,0xffffff,0xd69967)">.offset</a></pre>
-How much a single repetition of the texture is offset from the beginning, in each direction U and V. Typical range is 0.0 to 1.0.<br><br>
+<pre id="6premultiplyAlpha"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('premultiply alpha - предварительное умножение альфа(-канала)')" onmouseout="hide()">.premultiplyAlpha</a></span></pre>
+Значением по умолчанию равно <tt>false</tt>, что является нормой для изображений в формате PNG. Если значения RGB хранились предварительно перемноженными на значение альфа-канала (канал прозрачности), то установите значение <tt>true</tt>.<br><br>
 
-<pre id="6name"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)">.name</a></pre>
-Given name of the texture, empty string by default.<br><br>
+<pre id="6repeat"><a href="math.htm#18" onmouseover="show('Vector2.<br>repeat - повторение')" onmouseout="hide()">.repeat</a></pre>
+Свойство показывает сколько раз текстура повторяется по поверхности, в каждом направлении U и V.
+Если значение этого свойства установлено больше <tt>1</tt> в любом направлении, то соответствующий параметр укладки текстуры (<tt>wrapS</tt> или <tt>wrapT</tt>) также должен быть установлен как
+<a href="constants.htm#7.2" onmouseover="show('repeat wrapping - повторить укладку.<br>укладка текстуры повторяется до бесконечности')" onmouseout="hide()">THREE.RepeatWrapping</a> или
+<a href="constants.htm#7.2" onmouseover="show('mirrored repeat wrapping - зеркальное повторение укладки.<br>текстура будет повторяться бесконечно, зеркально отражаясь<br>при каждом повторе')" onmouseout="hide()">THREE.MirroredRepeatWrapping</a> для достижения желаемого эффекта мозаичной укладки.
+<div class=note><b>Примечание:</b> свойство <tt>repeat</tt> является расчетным модификатором и влияет только на применение текстуры к первому набору координат UV модели.
+Если текстура используется как карта, требующая дополнительных наборов координат UV (например <tt>aoMap</tt> или <tt>lightMap</tt> большинства материалов ассортимента),
+то для достижения желаемого повторения эти координаты должны быть назначены вручную.</div><br>
 
-<pre id="6generateMipmaps"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.generateMipmaps</a></pre>
-Whether to generate mipmaps (if possible) for a texture. True by default.<br><br>
+<pre id="6rotation"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotation - поворот, вращение')" onmouseout="hide()">.rotation</a></span></pre>
+Угол, на который текстура поворачивается вокруг центральной точки, в радианах. Положительным значениям соответствует поворот против часовой стрелки. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
-<pre id="6flipY"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.flipY</a></pre>
-True by default. Flips the image's Y axis to match the WebGL texture coordinate space.<br><br>
+<pre id="6type"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">.type</a></span></pre>
+Значение данного свойства должно соответствовать значению свойства <tt><a href="#6format" onmouseover="show('Texture.format')" onmouseout="hide()">format</a></tt>.
+Значением по умолчанию является <a href="constants.htm#7.5" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">THREE.UnsignedByteType</a>, который будет использоваться для большинства форматов текстур.<br>
+Другие возможные варианты смотрите в описании <a href="constants.htm#7.5" onmouseover="show('Texture Constants')" onmouseout="hide()">констант типа текстуры</a>.<br><br>
 
-<pre id="6mipmaps"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)">.mipmaps</a></pre>
-Array of user-specified mipmaps (optional).<br><br>
+<pre id="6unpackAlignment"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unpack alignment - выравнивание распаковки')" onmouseout="hide()">.unpackAlignment</a></span></pre>
+Свойство определяет требования к выравниванию в памяти начала каждого ряда пикселов. Значение по умолчанию равно <tt>4</tt>.
+Допустимыми значениями являются <tt>1</tt> (выравнивание по байтам), <tt>2</tt> (ряды выравниваются по четным байтам), <tt>4</tt> (выравнивание по словам) и <tt>8</tt> (ряды начинаются на границах двойных слов).
+Подробнее смотрите в описании свойства <tt><a href="http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml" target="_blank" onmouseover="show('устанавливает режим хранения пикселей')" onmouseout="hide()">glPixelStorei</a></tt> на <tt>www.khronos.org</tt>.<br><br>
 
-<pre id="6unpackAlignment"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.unpackAlignment</a></pre>
-4 by default. Specifies the alignment requirements for the start of each pixel row in memory. The allowable values are 1 (byte-alignment), 2 (rows aligned to even-numbered bytes), 4 (word-alignment), and 8 (rows start on double-word boundaries). See <a href="http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml">glPixelStorei</a> for more information.<br><br>
+<pre id="6uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов universally<br>unique identifier - универсальный<br>уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" onmouseover="show('сокращ. от англ. слов universally<br>unique identifier - универсальный<br>уникальный идентификатор');" onmouseout="hide()">UUID</a> данного экземпляра объекта. Он присваивается автоматически и не должен быть изменен.<br>
+Вот <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">статья Википедии про UUID</a> на русском языке.<br><br>
 
-<pre id="6premultiplyAlpha"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_boolean,'Arial,9',10,10,0xffffff,0xd69967)">.premultiplyAlpha</a></pre>
-False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.<br><br>
+<pre id="6version"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('version - версия')" onmouseout="hide()">.version</a></span></pre>
+Это свойство ведет подсчет (начиная с <tt>0</tt>) сколько раз свойство <tt><a href="#6needsUpdate" onmouseover="show('Texture.needsUpdate')" onmouseout="hide()">needsUpdate</a></tt> было установлено как <tt>true</tt>.<br><br>
 
-<pre id="6encoding"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.encoding</a></pre>
-Set to THREE.LinearEncoding by default, but supports sRGB, RGBE, RGBM, RGBD, LogLuv and Gamma corrected encodings.  IMPORTANT: If this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.<br><br>
+<pre id="6wrapS"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapS - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">.wrapS</a></span></pre>
+Свойство определяет укладку текстуры по горизонтали и соответствует координате U в картировании по координатам UV.
+Значением по умолчанию является <a href="constants.htm#7.2" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки<br>последний пиксел текстуры растягивается до края<br>полигональной сетки (mesh)')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a>, при этом край прижимается к внешним текселям края.
+Другие возможные варианты - <a href="constants.htm#7.2" onmouseover="show('repeat wrapping - повторить укладку.<br>укладка текстуры повторяется до бесконечности')" onmouseout="hide()">THREE.RepeatWrapping</a>
+и <a href="constants.htm#7.2" onmouseover="show('mirrored repeat wrapping - зеркальное повторение укладки.<br>текстура будет повторяться бесконечно, зеркально отражаясь<br>при каждом повторе')" onmouseout="hide()">THREE.MirroredRepeatWrapping</a>.
+Подробности смотрите в описании <a href="constants.htm#7.2" onmouseover="show('wrapping modes')" onmouseout="hide()">констант режима укладки текстур</a>.<br><br>
 
-<pre id="6onUpdate"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_object,'Arial,9',10,10,0xffffff,0xd69967)">.onUpdate</a></pre>
-A callback function, called when the texture is updated (e.g., when needsUpdate has been set to true and then the texture is used).
-</div><br>
+<pre id="6wrapT"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapT - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">.wrapT</a></span></pre>
+Свойство определяет укладку текстуры по вертикали и соответствует координате V в картировании по координатам UV. Значение по умолчанию и другие возможные варианты такие же как у свойства <tt><a href="#6wrapS" onmouseover="show('Texture.wrapS')" onmouseout="hide()">wrapS</a></tt>.
+<div class="note"><b>Примечание:</b> мозаичное размещение изображений в текстурах работает только в том случае, если размеры изображения являются степенью двойки (2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, ...) в переводе на пиксели.
+Отдельные размеры не обязательно должны быть равными, но каждый из них должен быть степенью двойки. Это ограничение от WebGL, а не <em>three.js</em>.</div></div><br>
 
 <h4>Методы</h4>
-В этом классе доступны методы <tt><a href="core.htm#5" title="EventDispatcher">EventDispatcher</a></tt>.
+В этом классе доступны методы <tt><a href="core.htm#5" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a></tt>.
 <div class=blockindent><br>
-<pre id="6clone"><a href="#6" title="Texture. clone - клонировать">.clone</a> ( <a href="#6" title="Texture. texture - текстура">texture</a> )</pre>
-Make copy of the texture. Note this is not a "deep copy", the image is shared.<br><br>
+<pre id="6clone"><a href="#6" onmouseover="show('Texture.<br>clone - клонировать')" onmouseout="hide()">.clone</a> ( <a href="#6" onmouseover="show('Texture.<br>texture - текстура')" onmouseout="hide()">texture</a> )</pre>
+Метод делает копию текстуры. Обратите внимание, что это не
+Note this is not a "deep copy", the image is shared.<br><br>
 
 <pre id="6dispose"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="dispose - ">.dispose</a> ()</pre>
 Call EventDispatcher.dispatchEvent with a 'dispose' event type.<br><br>
 
-<pre id="6toJSON"><a href="#6" title="Texture. toJSON - в формат JSON">.toJSON</a> ( meta )</pre>
+<pre id="6toJSON"><a href="#6" onmouseover="show('Texture.<br>toJSON - в формат JSON')" onmouseout="hide()">.toJSON</a> ( meta )</pre>
 <div class=list><tt>meta</tt> -- объект, содержащий метаданные (дополнительный, необязательный параметр).</div>
 Convert the material to three.js JSON format.<br><br>
 
-<pre id="6transformUv"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="transformUv - ">.transformUv</a> ( uv )</pre>
-Transform the uv based on the value of this texture's .repeat, .offset, .wrapS, .wrapT and .flipY properties.</div><br>
+<pre id="6transformUv"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('transformUv - преобразование (координат) UV')" onmouseout="hide()">.transformUv</a></span>( <a href="math.htm#18" onmouseover="show('Vector2.<br>uv - координаты UV')" onmouseout="hide()">uv</a> )</pre>
+Метод изменяет координаты UV исходя из значений свойств <tt><a href="#6repeat" onmouseover="show('Texture.repeat')" onmouseout="hide()">repeat</a></tt>, <tt><a href="#6offset" onmouseover="show('Texture.offset')" onmouseout="hide()">offset</a></tt>,
+<tt><a href="#6wrapS" onmouseover="show('Texture.wrapS')" onmouseout="hide()">wrapS</a></tt>, <tt><a href="#6wrapT" onmouseover="show('Texture.wrapT')" onmouseout="hide()">wrapT</a></tt> и <tt><a href="#6flipY" onmouseover="show('Texture.flipY')" onmouseout="hide()">flipY</a></tt> данной текстуры.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/textures/Texture.js" target="_blank">Texture.js на github.com</a></div><br><br>

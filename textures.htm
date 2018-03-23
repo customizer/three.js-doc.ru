@@ -200,14 +200,17 @@ var texture = new THREE.DataTexture( data, width, height, THREE.RGBFormat );</pr
 
 <h4>Конструктор</h4>
 <pre>DataTexture( data, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy )</pre>
-The data argument must be an ArrayBuffer or a typed array view.
-Further parameters correspond to the properties inherited from <a href="#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>, where both magFilter and minFilter default to THREE.NearestFilter. The properties flipY and generateMipmaps are intially set to false.<br><br>
-The interpretation of the data depends on type and format:
-If the type is THREE.UnsignedByteType, a Uint8Array will be useful for addressing the texel data.
-If the format is THREE.RGBAFormat, data needs four values for one texel; Red, Green, Blue and Alpha (typically the opacity). Similarly, THREE.RGBFormat specifies a format where only three values are used for each texel.<br>
+Аргумент <tt>data</tt> должен быть ArrayBuffer или разновидностью типизированного массива. Остальные параметры соответствуют свойствам,
+наследуемым из <a href="#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>, среди которых и <tt>magFilter</tt> и <tt>minFilter</tt>, оба имеют по умолчанию значение THREE.NearestFilter.
+Свойства <tt>flipY</tt> и <tt>generateMipmaps</tt> изначально установлены как <tt>false</tt>.<br><br>
 
-For the packed types, THREE.UnsignedShort4444Type, THREE.UnsignedShort5551Type or THREE.UnsignedShort565Type, all color components of one texel can be addressed as bitfields within an integer element of a Uint16Array.<br>
+Интерпретация данных (аргумент <tt>data</tt>) зависит от типа и формата:
+Если типом является THREE.UnsignedByteType, то Uint8Array целесообразен для адресации данных текселей.
+Если форматом является THREE.RGBAFormat, то для данных требуется четыре значения на каждый тексель; значения цвета - красный (red), зеленый (green), синий (blue) и значение альфа-канала (обычно канал прозрачности).
+Аналогично, формат THREE.RGBFormat определяет только три значения каждого текселя.<br>
 
+Для типов упакованных данных, THREE.UnsignedShort4444Type, THREE.UnsignedShort5551Type или THREE.UnsignedShort565Type, все компоненты цвета одного текселя можно рассматривать как битовые поля внутри целочисленного элемента в формате Uint16Array.<br>
+Для использования типов THREE.FloatType и THREE.HalfFloatType
 In order to use the types THREE.FloatType and THREE.HalfFloatType, the WebGL implementation must support the respective extensions OES_texture_float and OES_texture_half_float. In order to use THREE.LinearFilter for component-wise, bilinear interpolation of the texels based on these types, the WebGL extensions OES_texture_float_linear or OES_texture_half_float_linear must also be present.<br><br>
 
 <h4>Свойства</h4>

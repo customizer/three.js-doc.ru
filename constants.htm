@@ -9,9 +9,9 @@
 <h2 class=head1>Константы</h2>
 <h3 id="1">Анимационные константы</h3>
 <h4 id="1.1">Цикличные режимы (loop modes)</h4>
-<pre><a href="#" onclick="return false" onmouseover="show('loop once - одноразовый цикл, т.е.<br>однократное воспроизведение клипа');" onmouseout="hide()">THREE.LoopOnce</a>
-<a href="#" onclick="return false" onmouseover="show('loop repeat - повторяющийся цикл, т.е.<br>клип проигрывается выбранное количество<br>раз (указанное в параметре repetitions),<br>всякий раз переходя с конца клипа<br>непосредственно на его начало');" onmouseout="hide()">THREE.LoopRepeat</a>
-<a href="#" onclick="return false" onmouseover="show('loop pingpong - цикл пинг-понг, т.е. клип<br>воспроизводится выбранное количество раз<br>(указанное в параметре repetitions),<br>проигрывая его поочередно вперед и назад');" onmouseout="hide()">THREE.LoopPingPong</a></pre><br>
+<pre><span class="lnk" onmouseover="show('loop once - одноразовый цикл, т.е.<br>однократное воспроизведение клипа');" onmouseout="hide()">THREE.LoopOnce</span>
+<span class="lnk" onmouseover="show('loop repeat - повторяющийся цикл, т.е.<br>клип проигрывается выбранное количество<br>раз (указанное в параметре repetitions),<br>всякий раз переходя с конца клипа<br>непосредственно на его начало');" onmouseout="hide()">THREE.LoopRepeat</span>
+<span class="lnk" onmouseover="show('loop pingpong - цикл пинг-понг, т.е. клип<br>воспроизводится выбранное количество раз<br>(указанное в параметре repetitions),<br>проигрывая его поочередно вперед и назад');" onmouseout="hide()">THREE.LoopPingPong</span></pre><br>
 <h4 id="1.2">Режимы интерполяции (interpolation modes)</h4>
 <pre><a href="#" onclick="return false" onmouseover="show('interpolate discrete - дискретная (т.е. прерывистая, из отдельных частей) интерполяция');" onmouseout="hide()">THREE.InterpolateDiscrete</a>
 <a href="#" onclick="return false" onmouseover="show('interpolate linear - линейная интерполяция');" onmouseout="hide()">THREE.InterpolateLinear</a>
@@ -305,20 +305,26 @@ to produce a texture value from each mipmap. The final texture value is a weight
 See the [example:webgl_materials_texture_filters materials / texture / filters] example.
 
 <h4 id="7.5">Типы</h4>
-<pre>THREE.UnsignedByteType
-THREE.ByteType
-THREE.ShortType
-THREE.UnsignedShortType
-THREE.IntType
-THREE.UnsignedIntType
-THREE.FloatType
-THREE.HalfFloatType
-THREE.UnsignedShort4444Type
-THREE.UnsignedShort5551Type
-THREE.UnsignedShort565Type
-THREE.UnsignedInt248Type</pre>
+<pre><span class="lnk" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">THREE.UnsignedByteType</span>
+<span class="lnk" onmouseover="show('byte type - тип байта')" onmouseout="hide()">THREE.ByteType</span>
+<span class="lnk" onmouseover="show('short type - тип числа в коротком формате')" onmouseout="hide()">THREE.ShortType</span>
+<span class="lnk" onmouseover="show('unsigned short type - тип числа в коротком формате без знака')" onmouseout="hide()">THREE.UnsignedShortType</span>
+<span class="lnk" onmouseover="show('int(eger) type - целочисленный тип')" onmouseout="hide()">THREE.IntType</span>
+<span class="lnk" onmouseover="show('unsigned int(eger) type - целочисленный тип без знака')" onmouseout="hide()">THREE.UnsignedIntType</span>
+<span class="lnk" onmouseover="show('float type - тип числа с плавающей запятой')" onmouseout="hide()">THREE.FloatType</span>
+<span class="lnk" onmouseover="show('half float type - ')" onmouseout="hide()">THREE.HalfFloatType</span>
+<span class="lnk" onmouseover="show('')" onmouseout="hide()">THREE.UnsignedShort4444Type</span>
+<span class="lnk" onmouseover="show('')" onmouseout="hide()">THREE.UnsignedShort5551Type</span>
+<span class="lnk" onmouseover="show('')" onmouseout="hide()">THREE.UnsignedShort565Type</span>
+<span class="lnk" onmouseover="show('')" onmouseout="hide()">THREE.UnsignedInt248Type</span></pre>
 Для использования со свойством текстуры <tt><a href="textures.htm#6type" onmouseover="show('Texture.type');" onmouseout="hide()">type</a></tt>, которое должно соответствовать правильному формату.<br>
 Значением по умолчанию является <span onclick="showClick(type_constant)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unsigned byte type - тип байта без знака');" onmouseout="hide()">UnsignedByteType</a></span>.<br><br>
+Для типов упакованных данных, THREE.UnsignedShort4444Type, THREE.UnsignedShort5551Type или THREE.UnsignedShort565Type, все компоненты цвета одного текселя можно рассматривать как битовые поля внутри целочисленного элемента в формате Uint16Array.<br>
+Это метод хранения цвета текселя (пикселя текстуры). Описываемые битовые поля связаны с числами, определяющими количество бит каждого канала цвета.<br>
+Цифры 4444 в названии типа означают число бит для каждого из каналов цвета и канала прозрачности в формате RGBA - по четыре бита на каждый канал.<br>
+В типе 5551 по пять бит отведено на каждый из каналов цвета и один бит на канал прозрачности (т.е. альфа-канал может быть либо 100%, либо 0% или 1 или 0).<br>
+У типа 565 нет альфа-канала, но имеется дополнительный бит в канале зеленого цвета.
+565 has no alpha but it gives an extra bit to the Green channel.<br><br>
 
 <h4 id="7.6">Форматы</h4>
 <pre>THREE.AlphaFormat

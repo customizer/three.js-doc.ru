@@ -62,6 +62,8 @@
 <br><br>
 Система координат ...
 </div><br>
+
+
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="1">BoxBufferGeometry</h3>
 Это перенос <a href="#2" onmouseover="show('BoxGeometry');" onmouseout="hide()">BoxGeometry</a> в <a href="core.htm#2" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a>.
@@ -92,7 +94,8 @@ scene.add( cube );</pre><br><br>
    // параметры объекта {width: 1, height: 1, depth: 1, widthSegments: undefined, heightSegments: undefined}
 cube.geometry.parameters; // as above, т.е. как указано выше
 cube.geometry.parameters.width; // === 1, т.е. ширина равна 1
-cube.geometry.parameters.widthSegments // === undefined, т.е. неопределено и используется значение по умолчанию</pre></div<br>
+cube.geometry.parameters.widthSegments // === undefined, т.е. неопределено и используется значение по умолчанию</pre>
+</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/geometries/BoxBufferGeometry.js" target="_blank">BoxBufferGeometry.js на github.com</a></div><br>
@@ -128,7 +131,8 @@ scene.add( cube );</pre><br><br>
    // параметры объекта {width: 1, height: 1, depth: 1, widthSegments: undefined, heightSegments: undefined}
 cube.geometry.parameters; // as above, т.е. как указано выше
 cube.geometry.parameters.width; // === 1, т.е. ширина равна 1
-cube.geometry.parameters.widthSegments // === undefined, т.е. неопределено и используется значение по умолчанию</pre></div<br>
+cube.geometry.parameters.widthSegments // === undefined, т.е. неопределено и используется значение по умолчанию</pre>
+</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/geometries/BoxGeometry.js" target="_blank">BoxGeometry.js на github.com</a></div><br><br>
@@ -139,17 +143,20 @@ cube.geometry.parameters.widthSegments // === undefined, т.е. неопреде
 Это перенос <a href="#4">CircleGeometry</a> в <a href="core.htm#2">BufferGeometry</a>.
 <div class="caption"><img src="img/CircleGeometry1.png" width=500><br>
 Круг с радиусом 20 и 32 сегментами, остальные параметры по умолчанию.<br><span style="font-size:80%; font-style:italic;">Обратите внимание на более светлую границу между сегментами, справа.<br>Так обозначен <tt>thetaStart</tt> — начальный угол.</span></div><br>
+
 <h4>Пример</h4>
 <pre>var geometry = new THREE.CircleBufferGeometry( 5, 32 );
 var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 var circle = new THREE.Mesh( geometry, material );
-scene.add( circle );</pre>
+scene.add( circle );</pre><br>
+
 <h4>Конструктор</h4>
 <pre>CircleBufferGeometry(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">segments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaLength</a>)</pre>
 <div class=list><tt>radius</tt> — радиус круга, значение по умолчанию равно <tt>50</tt>.</div>
 <div class=list><tt>segments</tt> — число сегментов (треугольников), минимальное значение равно <tt>3</tt>, значение по умолчанию равно <tt>8</tt>.</div>
 <div class=list><tt>thetaStart</tt> — начальный угол для первого сегмента, значение по умолчанию равно <tt>0</tt> (положение на 3 часа).</div>
 <div class=list><tt>thetaLength</tt> — центральный угол (часто называемый theta) кругового сектора. Значение по умолчанию равно <tt>2*Pi</tt>, что составляет полный круг.</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/CircleGeometry.js" target="_blank">CircleBufferGeometry.js на github.com</a></div><br><br>
 
@@ -157,9 +164,10 @@ scene.add( circle );</pre>
 <span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
 <h3 id="4">CircleGeometry</h3>
 CircleGeometry (геометрия круга) это простая форма эвклидовой геометрии. Она построена из нескольких треугольных сегментов, расположенных вокруг центральной точки и is a simple shape of Euclidean geometry.  It is contructed from a number of triangular segments that are oriented around a central point and extend as far out as a given radius.
-It is built counter-clockwise from a start angle and a given central angle.  It can also be used to create regular polygons, where the number of segments determines the number of sides.<br>
-<img src="img/CircleGeometry1.png" width=500><br>
-<div class="caption">Круг с радиусом 20 и 32 сегментами, остальные параметры по умолчанию.<br><span style="font-size:80%; font-style:italic;">Обратите внимание на более светлую границу между сегментами, справа.<br>Так обозначен <tt>thetaStart</tt> — начальный угол.</span></div><br>
+It is built counter-clockwise from a start angle and a given central angle.  It can also be used to create regular polygons, where the number of segments determines the number of sides.
+<div class="caption"><img src="img/CircleGeometry1.png" width=500><br>
+Круг с радиусом 20 и 32 сегментами, остальные параметры по умолчанию.<br><span style="font-size:80%; font-style:italic;">Обратите внимание на более светлую границу между сегментами, справа.<br>Так обозначен <tt>thetaStart</tt> — начальный угол.</span></div><br>
+
 <h4>Пример</h4>
 <pre>var geometry = new THREE.CircleGeometry( 5, 32 );
 var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
@@ -180,8 +188,7 @@ scene.add( circle );</pre><br>
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="5">ConeBufferGeometry</h3>
 This is the [page:BufferGeometry] port of [page:ConeGeometry].<br>
-<img src="img/ConeGeometry1.png" width=300><br>
-<div class="caption">Конус</div><br>
+<div class="caption"><img src="img/ConeGeometry1.png" width=300><br>Конус</div><br>
 
 <h4>Пример</h4>
 <pre>var geometry = new THREE.ConeBufferGeometry( 5, 20, 32 );
@@ -956,8 +963,7 @@ The geometry is created by sweeping and calculating vertexes around the Y axis (
 <span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
 <h3 id="31">SphereGeometry (геометрия сферы)</h3>
 Класс для генерации сферической геометрии.<br>
-<img src="img/SphereGeometry.png" width=450><br>
-<div class="caption">Сфера</div><br>
+<div class="caption"><img src="img/SphereGeometry.png" width=450><br>Сфера</div><br>
 
 <h4>Пример</h4>
 <pre>var geometry = new THREE.SphereGeometry( 5, 32, 32 );
@@ -967,13 +973,13 @@ scene.add( sphere );</pre>
 
 <h4>Конструктор</h4>
 <pre>SphereGeometry(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">heightSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">phiStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">phiLength</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">thetaLength</a>)</pre>
-<div class=blockindent><tt>radius</tt> — радиус сферы, значение по умолчанию равно 50.<br>
-<tt>widthSegments</tt> — количество горизонтальных сегментов. Минимальное значение равно 3, значение по умолчанию 8.<br>
-<tt>heightSegments</tt> — количество вертикальных сегментов. Минимальное значение равно 2, значение по умолчанию 6.<br>
-<tt>phiStart</tt> — устанавливает начальный угол по горизонтали specify horizontal starting angle, значение по умолчанию равно 0.<br>
-<tt>phiLength</tt> — определяет размер угла ометания по горизонтали specify horizontal sweep angle size, значение по умолчанию равно Math.PI * 2.<br>
-<tt>thetaStart</tt> — specify vertical starting angle, значение по умолчанию равно 0.<br>
-<tt>thetaLength</tt> — specify vertical sweep angle size, значение по умолчанию равно Math.PI.</div>
+<div class=list><tt>radius</tt> — радиус сферы, значение по умолчанию равно 50.</div>
+<div class=list><tt>widthSegments</tt> — количество горизонтальных сегментов. Минимальное значение равно 3, значение по умолчанию 8.</div>
+<div class=list><tt>heightSegments</tt> — количество вертикальных сегментов. Минимальное значение равно 2, значение по умолчанию 6.</div>
+<div class=list><tt>phiStart</tt> — устанавливает начальный угол по горизонтали specify horizontal starting angle, значение по умолчанию равно 0.</div>
+<div class=list><tt>phiLength</tt> — определяет размер угла ометания по горизонтали specify horizontal sweep angle size, значение по умолчанию равно Math.PI * 2.</div>
+<div class=list><tt>thetaStart</tt> — specify vertical starting angle, значение по умолчанию равно 0.</div>
+<div class=list><tt>thetaLength</tt> — specify vertical sweep angle size, значение по умолчанию равно Math.PI.</div>
 Геометрия создается путем обхода и вычисления вершин вокруг оси Y (горизонтальный обход) и оси Z (вертикальный обход).
 Таким образом, неполные сферы (вроде <em>'ломтиков или кусков сферы'</em> - sphere slices) могут быть созданы через использование разных значений <tt>phiStart</tt>, <tt>phiLength</tt>, <tt>thetaStart</tt> и <tt>thetaLength</tt>, для определения точек, с которых начинается (или заканчивается) вычисление этих вершин.
 The geometry is created by sweeping and calculating vertexes around the Y axis (horizontal sweep) and the Z axis (vertical sweep). Thus, incomplete spheres (akin to <em>'sphere slices'</em>) can be created through the use of different values of phiStart, phiLength, thetaStart and thetaLength, in order to define the points in which we start (or end) calculating those vertices.

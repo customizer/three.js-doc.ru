@@ -302,7 +302,7 @@ The final texture value is a weighted average of those two values.<br><br>
 (a weighted average of the four texels that are closest to the center of the pixel) to produce a texture value.<br><br>
 [page:constant LinearMipMapLinearFilter] is the default and chooses the two mipmaps that most closely match the size of the pixel being textured and uses the [page:constant LinearFilter] criterion
 to produce a texture value from each mipmap. The final texture value is a weighted average of those two values.<br><br>
-See the [example:webgl_materials_texture_filters materials / texture / filters] example.
+See the [example:webgl_materials_texture_filters materials / texture / filters] example.<br><br>
 
 <h4 id="7.5">Типы</h4>
 <pre><span class="lnk" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">THREE.UnsignedByteType</span>
@@ -312,19 +312,28 @@ See the [example:webgl_materials_texture_filters materials / texture / filters] 
 <span class="lnk" onmouseover="show('int(eger) type - целочисленный тип')" onmouseout="hide()">THREE.IntType</span>
 <span class="lnk" onmouseover="show('unsigned int(eger) type - целочисленный тип без знака')" onmouseout="hide()">THREE.UnsignedIntType</span>
 <span class="lnk" onmouseover="show('float type - тип числа с плавающей запятой')" onmouseout="hide()">THREE.FloatType</span>
-<span class="lnk" onmouseover="show('half float type - ')" onmouseout="hide()">THREE.HalfFloatType</span>
+<span class="lnk" onmouseover="show('half float type - тип числа с плавающей запятой половинной точности')" onmouseout="hide()">THREE.HalfFloatType</span>
 <span class="lnk" onmouseover="show('')" onmouseout="hide()">THREE.UnsignedShort4444Type</span>
 <span class="lnk" onmouseover="show('')" onmouseout="hide()">THREE.UnsignedShort5551Type</span>
 <span class="lnk" onmouseover="show('')" onmouseout="hide()">THREE.UnsignedShort565Type</span>
 <span class="lnk" onmouseover="show('')" onmouseout="hide()">THREE.UnsignedInt248Type</span></pre>
 Для использования со свойством текстуры <tt><a href="textures.htm#6type" onmouseover="show('Texture.type');" onmouseout="hide()">type</a></tt>, которое должно соответствовать правильному формату.<br>
-Значением по умолчанию является <span onclick="showClick(type_constant)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unsigned byte type - тип байта без знака');" onmouseout="hide()">UnsignedByteType</a></span>.<br><br>
-Для типов упакованных данных, THREE.UnsignedShort4444Type, THREE.UnsignedShort5551Type или THREE.UnsignedShort565Type, все компоненты цвета одного текселя можно рассматривать как битовые поля внутри целочисленного элемента в формате Uint16Array.<br>
+Значением по умолчанию является <tt><span onclick="showClick(type_constant)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unsigned byte type - тип байта без знака');" onmouseout="hide()">UnsignedByteType</a></span></tt>.<br><br>
+Для типов упакованных данных <tt>THREE.UnsignedShort4444Type</tt>, <tt>THREE.UnsignedShort5551Type</tt> или <tt>THREE.UnsignedShort565Type</tt>, все компоненты цвета одного текселя можно рассматривать как битовые поля внутри целочисленного элемента в формате <tt>Uint16Array</tt>.<br>
 Это метод хранения цвета текселя (пикселя текстуры). Описываемые битовые поля связаны с числами, определяющими количество бит каждого канала цвета.<br>
 Цифры 4444 в названии типа означают число бит для каждого из каналов цвета и канала прозрачности в формате RGBA - по четыре бита на каждый канал.<br>
+<pre> 16-разрядное беззнаковое число
+|R|R|R|R|G|G|G|G|B|B|B|B|A|A|A|A|
+ красный|зеленый| синий | альфа</pre>
 В типе 5551 по пять бит отведено на каждый из каналов цвета и один бит на канал прозрачности (т.е. альфа-канал может быть либо 100%, либо 0% или 1 или 0).<br>
+<pre> 16-разрядное беззнаковое число
+|R|R|R|R|R|G|G|G|G|G|B|B|B|B|B|A|
+| красный | зеленый |  синий  |альфа</pre>
 У типа 565 нет альфа-канала, но имеется дополнительный бит в канале зеленого цвета.
-565 has no alpha but it gives an extra bit to the Green channel.<br><br>
+<pre> 16-разрядное беззнаковое число
+|R|R|R|R|R|G|G|G|G|G|G|B|B|B|B|B|
+  красный |  зеленый  |  синий</pre><br>
+Тип <tt>THREE.UnsignedInt248Type</tt> это упаковка значений глубины и трафарета в 32-битное целое число без знака. Цифры 248 означают, что на значение глубины (depth) отводится 24 бита, а на значение трафарета (stencil) - 8 бит.<br><br>
 
 <h4 id="7.6">Форматы</h4>
 <pre>THREE.AlphaFormat

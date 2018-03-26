@@ -388,30 +388,41 @@ scene.add( mesh );</pre><br>
 
 <h4>Конструктор</h4><br>
 <pre>ExtrudeGeometry( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shapes - форма')" onmouseout="hide()">shapes</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - параметры, опции, варианты')" onmouseout="hide()">options</a></span> )</pre>
-<div class=list><tt>shapes</tt> — форма или массив форм. Shape or an array of shapes.</div>
+<div class=list><tt>shapes</tt> — форма или массив форм.</div>
 <div class=list><tt>options</tt> — объект, который может содержать следующие параметры:</div>
 <div class=blockindent>
 <div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve segments - сегменты (части) кривой')" onmouseout="hide()">curveSegments</a></span></tt> — количество точек на кривых. Значение по умолчанию равно&nbsp;<tt>12</tt>.</div>
 <div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('steps - шаги')" onmouseout="hide()">steps</a></span></tt> — количество точек для разделения сегментов по глубине Number of points used for subdividing segments along the depth of the extruded spline. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
-<div class=list><tt>amount</tt> —  int. Depth to extrude the shape</div>
-<div class=list><tt>bevelEnabled</tt> —  bool. turn on bevel</div>
-<div class=list><tt>bevelThickness</tt> —  float. how deep into the original shape bevel goes</div>
-<div class=list><tt>bevelSize</tt> —  float. how far from shape outline is bevel</div>
-<div class=list><tt>bevelSegments</tt> —  int. number of bevel layers</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('amount - количество, сумма')" onmouseout="hide()">amount</a></span></tt> — глубина выдавливания фигуры. Значение по умолчанию равно&nbsp;<tt>100</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel enabled - включить скос, фаску')" onmouseout="hide()">bevelEnabled</a></span></tt> — turn on bevel. Значением по умолчанию является&nbsp;<tt>true</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel thickness - толщина скоса')" onmouseout="hide()">bevelThickness</a></span></tt> — насколько глубоко входит скос в исходную форму. how deep into the original shape bevel goes. Значение по умолчанию равно&nbsp;<tt>6</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel size - размер скоса')" onmouseout="hide()">bevelSize</a></span></tt>
+— насколько далеко выходит рельеф из контура фигуры или расстояние от контура формы, на которое простирается рельеф. Значением по умолчанию является <tt>bevelThickness - 2</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel segments - сегменты скоса')" onmouseout="hide()">bevelSegments</a></span></tt>
+— количество слоев скоса. Значение по умолчанию равно&nbsp;<tt>3</tt>.</div>
 <div class=list><tt>extrudePath</tt> —  THREE.CurvePath. 3d spline path to extrude shape along. (creates Frames if frames aren't defined)</div>
-<div class=list><tt>frames</tt> —  THREE.TubeGeometry.FrenetFrames.  containing arrays of tangents, normals, binormals</div>
-<div class=list><tt>material</tt> —  int. material index for front and back faces</div>
-<div class=list><tt>extrudeMaterial</tt> —  int. material index for extrusion and beveled faces</div>
-<div class=list><tt>UVGenerator</tt> —  Object. object that provides UV generator functions</div></div>
-This object extrudes an 2D shape to an 3D geometry.<br><br>
+<div class=list><tt>frames</tt> — объект, содержащий массивы касательных, нормалей, бинормалей для каждого шага (<tt>step</tt>) вдоль выдавливаемого контура (extrudePath).
+<div class=note_trans><b>Примечание переводчика:</b> Прямая, перпендикулярная касательной и проходящая через точку касания, называется нормалью к кривой.
+Плоскость, перпендикулярная касательной в данной точке кривой, называется нормальной плоскостью; все нормали для данной точки лежат в нормальной плоскости.
+Нормаль, лежащую в соприкасающейся плоскости, называют главной нормалью, а нормаль, перпендикулярная соприкасающейся плоскости, называется бинормалью.</div></div>
+
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material - материал')" onmouseout="hide()">material</a></span></tt> — индекс материала для передней и задней граней. material index for front and back faces</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extrude material - ')" onmouseout="hide()">extrudeMaterial</a></span></tt> — индекс материала для  material index for extrusion and beveled faces</div>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('UV generator - генератор координат U V')" onmouseout="hide()">UVGenerator</a></span></tt> — объект, который обеспечивает функции генератора координат UV.</div></div>
+Данный объект выдавливается двухмерной формой на трехмерном геометрическом элементе. This object extrudes a 2D shape to a 3D geometry.<br>
+
+When creating a Mesh with this geometry, if you'd like to have a separate material used for its face and its extruded sides, you can use an array of materials.
+Первый материал будет применен к грани; второй будет применен к сторонам.
+The first material will be applied to the face; the second material will be applied to the sides.<br><br>
 
 <h4>Свойства</h4>
+<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="12addShapeList">[method:null addShapeList]([page:Array shapes], [page:Object options] )</pre>
-<div class=list>shapes — An Array of shapes to add.</div>
-<div class=list>options — Object that can contain the following parameters.</div>
+<pre id="12addShapeList"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add shape list - добавить список форм')" onmouseout="hide()">.addShapeList</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shapes - форма')" onmouseout="hide()">shapes</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - параметры, опции, варианты')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list><tt>shapes</tt> — массив добавляемых форм.</div>
+<div class=list><tt>options</tt> — объект, который может содержать следующие параметры:</div>
 <div class=blockindent>
 <ul><li>curveSegments —  int. number of points on the curves</li>
 <li>steps —  int. number of points used for subdividing segements of extrude spline</li>
@@ -425,10 +436,10 @@ This object extrudes an 2D shape to an 3D geometry.<br><br>
 <li>material —  int. material index for front and back faces</li>
 <li>extrudeMaterial —  int. material index for extrusion and beveled faces</li>
 <li>UVGenerator —  Object. object that provides UV generator functions</li></ul></div>
-Adds the shapes to the list to extrude.<br><br>
+Метод добавляет формы в список на выдавливание.<br><br>
 
-<h3>[method:null addShape]([page:Shape shape], [page:Object options])</h3>
-<div class=list>shape — A shape to add.</div>
+<pre id="12addShape"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add shape - добавить форму')" onmouseout="hide()">addShape</a></span>( <a href="extras.htm#" onclick="return false" onblur="hideClick()" onmouseover="show('Shape.<br>shape - форма')" onmouseout="hide()">shape</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - параметры, опции, варианты')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list>shape — добавляемая форма.</div>
 <div class=list>options — Object that can contain the following parameters.</div>
 <div class=blockindent>
 <ul><li>curveSegments —  int. number of points on the curves</li>
@@ -443,7 +454,7 @@ Adds the shapes to the list to extrude.<br><br>
 <li>material —  int. material index for front and back faces</li>
 <li>extrudeMaterial —  int. material index for extrusion and beveled faces</li>
 <li>UVGenerator —  Object. object that provides UV generator functions</li></ul></div>
-Add the shape to the list to extrude.</div><br>
+Метод добавляет форму в список на выдавливание.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/ExtrudeGeometry.js" target="_blank">ExtrudeGeometry.js на github.com</a></div><br>
@@ -639,7 +650,7 @@ scene.add( cube );</pre>
 
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="22">PlaneBufferGeometry</h3>
-This is the [page:BufferGeometry] port of [page:PlaneGeometry].<br>
+Это перенос <a href="#23" onmouseover="show('PlaneGeometry');" onmouseout="hide()">PlaneGeometry</a> в <a href="core.htm#2" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a>.
 <div class="caption"><img src="img/PlaneGeometry.png" width=350><br>PlaneGeometry</div><br>
 
 <h4>Пример</h4>
@@ -649,7 +660,7 @@ var plane = new THREE.Mesh( geometry, material );
 scene.add( plane );</pre><br>
 
 <h4>Конструктор</h4><br>
-<pre>PlaneBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="width segments - сегменты по ширине">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height segments - сегменты по высоте">heightSegments</a> )</pre>
+<pre>PlaneBufferGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width segments - сегменты по ширине')" onmouseout="hide()">widthSegments</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height segments - сегменты по высоте')" onmouseout="hide()">heightSegments</a></span> )</pre>
 <div class=list><tt>width</tt> — ширина по оси <tt>X</tt>.</div>
 <div class=list><tt>height</tt> — высота по оси <tt>Y</tt>.</div>
 <div class=list><tt>widthSegments</tt> — количество сегментов (частей) по ширине (дополнительный, необязательный параметр). По умолчанию равен <tt>1</tt>.</div>
@@ -662,7 +673,7 @@ scene.add( plane );</pre><br>
 
 <span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
 <h3 id="23">PlaneGeometry</h3>
-Класс для построения плоских геометрических фигур.<br>
+Класс для построения плоских геометрических фигур.
 <div class="caption"><img src="img/PlaneGeometry.png" width=350><br>PlaneGeometry</div><br>
 
 <h4>Пример</h4>
@@ -672,12 +683,11 @@ var plane = new THREE.Mesh( geometry, material );
 scene.add( plane );</pre><br>
 
 <h4>Конструктор</h4><br>
-<pre>PlaneBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="width - ширина">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="height - высота">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="width segments - сегменты по ширине">widthSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="height segments - сегменты по высоте">heightSegments</a> )</pre>
+<pre>PlaneBufferGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width segments - сегменты по ширине')" onmouseout="hide()">widthSegments</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height segments - сегменты по высоте')" onmouseout="hide()">heightSegments</a></span> )</pre>
 <div class=list><tt>width</tt> — ширина по оси <tt>X</tt>.</div>
 <div class=list><tt>height</tt> — высота по оси <tt>Y</tt>.</div>
 <div class=list><tt>widthSegments</tt> — количество сегментов (частей) по ширине (дополнительный, необязательный параметр). По умолчанию равен <tt>1</tt>.</div>
 <div class=list><tt>heightSegments</tt> — количество сегментов по высоте (дополнительный, необязательный параметр). По умолчанию равен <tt>1</tt>.</div><br>
-
 <script language="javascript">document.write (prop_1);</script>
 
 <h4>Исходники</h4>
@@ -686,44 +696,35 @@ scene.add( plane );</pre><br>
 
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="24">PolyhedronBufferGeometry</h3>
-A polyhedron is a solid in three dimensions with flat faces. This class will take an array of vertices,
-			project them onto a sphere, and then divide them up to the desired level of detail. This class is used
-			by [page:DodecahedronBufferGeometry], [page:IcosahedronBufferGeometry], [page:OctahedronBufferGeometry],
-			and [page:TetrahedronBufferGeometry] to generate their respective geometries.
+PolyhedronBufferGeometry представляет собой трехмерный объект (многогранник) с плоскими гранями. Этот класс принимает массив вершин, проецирует их на сферу и затем делит их на желаемый уровень детализации.<br>
+Этот класс используется <a href="#9">DodecahedronBufferGeometry</a>, <a href="#14">IcosahedronBufferGeometry</a>, <a href="#18">OctahedronBufferGeometry</a> и <a href="#32">TetrahedronBufferGeometry</a> для создания соответствующих геометрических элементов.to generate their respective geometries.<br><br>
 
-
-  <h4>Пример</h4>
-<pre>
-var verticesOfCube = [
-    -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
-    -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
-];
-
+<h4>Пример</h4>
+<pre>var verticesOfCube = [
+  -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
+  -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
+];<br>
 var indicesOfFaces = [
-    2,1,0,    0,3,2,
-    0,4,7,    7,3,0,
-    0,1,5,    5,4,0,
-    1,2,6,    6,5,1,
-    2,3,7,    7,6,2,
-    4,5,6,    6,7,4
-];
-
-var geometry = new THREE.PolyhedronBufferGeometry( verticesOfCube, indicesOfFaces, 6, 2 );
-</pre>
+  2,1,0,    0,3,2,
+  0,4,7,    7,3,0,
+  0,1,5,    5,4,0,
+  1,2,6,    6,5,1,
+  2,3,7,    7,6,2,
+  4,5,6,    6,7,4
+];<br>
+var geometry = new THREE.PolyhedronBufferGeometry( verticesOfCube, indicesOfFaces, 6, 2 );</pre>
 
 <h4>Конструктор</h4>
-<pre>PolyhedronBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="vertices - вершины">vertices</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_array,'Arial,9',10,10,0xffffff,0xd69967)" title="faces - грани">faces</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="radius - радиус">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="detail - часть">detail</a> )</pre>
-<div class=list>vertices — [page:Array] of points of the form [1,1,1, -1,-1,-1, ... ]</div>
-<div class=list>faces — [page:Array] of indices that make up the faces of the form [0,1,2, 2,3,0, ... ]</div>
-<div class=list>radius — [page:Float] - The radius of the final shape</div>
-<div class=list>detail — [page:Integer] - How many levels to subdivide the geometry. The more detail, the smoother the shape.</div>
+<pre>PolyhedronBufferGeometry( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices - вершины')" onmouseout="hide()">vertices</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('indices - индексы')" onmouseout="hide()">indices</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('detail - части')" onmouseout="hide()">detail</a></span> )</pre>
+<div class=list><tt>vertices</tt> — массив точек в виде <tt>[1,1,1, -1,-1,-1, ... ]</tt></div>
+<div class=list><tt>indices</tt> — массив индексов, составляющих грани в виде <tt>[0,1,2, 2,3,0, ... ]</tt></div>
+<div class=list><tt>radius</tt> — радиус получаемого объекта</div>
+<div class=list><tt>detail</tt> — количество уровней, на которые подразделяется геометрический элемент. Чем больше <tt>detail</tt>, тем глаже форма получаемого объекта, т.е. тем ближе к сфере.</div><br>
 
 <h4>Свойства</h4>
-
-<h3>[property:Object parameters]</h3>
-<div>
-An object with all of the parameters that were used to generate the geometry.
-</div><br>
+<div class=blockindent><br>
+<pre id="24parameters"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">.parameters</a></span></pre>
+Объект со всеми параметрами, которые были использованы для создания геометрического элемента.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/PolyhedronBufferGeometry.js" target="_blank">PolyhedronBufferGeometry.js на github.com</a></div><br>
@@ -731,37 +732,34 @@ An object with all of the parameters that were used to generate the geometry.
 
 <span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
 <h3 id="25">PolyhedronGeometry</h3>
-A polyhedron is a solid in three dimensions with flat faces. This class will take an array of vertices, project them onto a sphere, and then divide them up to the desired level of detail.
+PolyhedronGeometry представляет собой трехмерный объект (многогранник) с плоскими гранями. Этот класс принимает массив вершин, проецирует их на сферу и затем делит их на желаемый уровень детализации.<br><br>
 
 <h4>Пример</h4>
-<pre>
-var verticesOfCube = [
-    -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
-    -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
-];
-
+<pre>var verticesOfCube = [
+  -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
+  -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
+];<br>
 var indicesOfFaces = [
-    2,1,0,    0,3,2,
-    0,4,7,    7,3,0,
-    0,1,5,    5,4,0,
-    1,2,6,    6,5,1,
-    2,3,7,    7,6,2,
-    4,5,6,    6,7,4
-];
-
-var geometry = new THREE.PolyhedronGeometry( verticesOfCube, indicesOfFaces, 6, 2 );</pre>
+  2,1,0,    0,3,2,
+  0,4,7,    7,3,0,
+  0,1,5,    5,4,0,
+  1,2,6,    6,5,1,
+  2,3,7,    7,6,2,
+  4,5,6,    6,7,4
+];<br>
+var geometry = new THREE.PolyhedronGeometry( verticesOfCube, indicesOfFaces, 6, 2 );</pre><br>
 
 <h4>Конструктор</h4>
-<pre>PolyhedronGeometry([page:Array vertices], [page:Array faces], [page:Float radius], [page:Integer detail])</pre>
-		<div>
-		vertices — [page:Array] of points of the form [1,1,1, -1,-1,-1, ... ] <br>
-		faces — [page:Array] of indices that make up the faces of the form [0,1,2, 2,3,0, ... ] <br>
-		radius — [page:Float] - The radius of the final shape <br>
-		detail — [page:Integer] - How many levels to subdivide the geometry. The more detail, the smoother the shape.</div>
+<pre>PolyhedronGeometry( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices - вершины')" onmouseout="hide()">vertices</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('indices - индексы')" onmouseout="hide()">indices</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('detail - части')" onmouseout="hide()">detail</a></span> )</pre>
+<div class=list><tt>vertices</tt> — массив точек в виде <tt>[1,1,1, -1,-1,-1, ... ]</tt></div>
+<div class=list><tt>indices</tt> — массив индексов, составляющих грани в виде <tt>[0,1,2, 2,3,0, ... ]</tt></div>
+<div class=list><tt>radius</tt> — радиус получаемого объекта</div>
+<div class=list><tt>detail</tt> — количество уровней, на которые подразделяется геометрический элемент. Чем больше <tt>detail</tt>, тем глаже форма получаемого объекта, т.е. тем ближе к сфере.</div><br>
 
 <h4>Свойства</h4>
-<pre>[property:Object parameters]</pre>
-An object with all of the parameters that were used to generate the geometry.<br><br>
+<div class=blockindent><br>
+<pre id="25parameters"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">.parameters</a></span></pre>
+Объект со всеми параметрами, которые были использованы для создания геометрического элемента.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/PolyhedronGeometry.js" target="_blank">PolyhedronGeometry.js на github.com</a></div><br><br>

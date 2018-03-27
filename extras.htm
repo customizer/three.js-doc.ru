@@ -8,1085 +8,661 @@
 </head>
 <body>
 <h2 class=head1>Дополнения</h2>
-<h3 id="1">CurveUtils</h3>
-A class containing utility functions for curves.<br>
-Note that these are all linear functions so it is neccessary to calculate separately for x, y (and z, w if present) components of a curve.<br><br>
+
+
+<h3 id="1">Earcut</h3>
+Реализация алгоритма триангуляции (т.е. разбиения на треугольники) полигона (многоугольника). Earcut в переводе на русский язык будет "ухорез", здесь имеется ввиду способ нарезания треугольников по имеющимся координатам вершин.
+Данный код - перенос из <tt><a href="https://github.com/mapbox/earcut" target="_blank">mapbox/earcut</a></tt>.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="1interpolate">[method:Number interpolate]( p0, p1, p2, p3, t )</pre>
-<div class=list>t -- interpolation weight.</div>
-<div class=list>p0, p1, p2, p4 -- the points defining the spline curve.</div>
-Used internally by [page:SplineCurve SplineCurve].<br><br>
-
-<pre id="1tangentQuadraticBezier">[method:Number tangentQuadraticBezier]( t, p0, p1, p2 )</pre>
-<div class=list>t -- the point at which to calculate the tangent.</div>
-<div class=list>p0, p1, p2 -- the three points defining the quadratic Bezier curve.</div>
-
-Calculate the tangent at the point t on a quadratic Bezier curve given by the three points.<br>
-Used internally by [page:QuadraticBezierCurve QuadraticBezierCurve].<br><br>
-
-<pre id="1tangentCubicBezier">[method:Number tangentCubicBezier]( t, p0, p1, p2, p3 )</pre>
-<div class=list>t -- the point at which to calculate the tangent.</div>
-<div class=list>p0, p1, p2, p3 -- the points defining the cubic Bezier curve.</div>
-
-Calculate the tangent at the point t on a cubic Bezier curve given by the four points.<br>
-Used internally by [page:CubicBezierCurve CubicBezierCurve].<br><br>
-
-<pre id="1tangentSpline">[method:Number tangentSpline]( t, p0, p1, p2, p3 )</pre>
-<div class=list>t -- the point at which to calculate the tangent.</div>
-<div class=list>p0, p1, p2, p3 -- the points defining the spline curve.</div>
-Calculate the tangent at the point t on a spline curve given by the four points.</div><br>
+<pre id="1triangulate"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('triangulate - триангуляция, разбиение на треугольники')" onmouseout="hide()">.triangulate</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('data - данные')" onmouseout="hide()">data</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hole indices - индексы дыр')" onmouseout="hide()">holeIndices</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dim - сокращ. от англ. слова dimension - измерение')" onmouseout="hide()">dim</a></span> )</pre>
+<div class=list><tt>data</tt> -- "плоский" массив координат вершин.</div>
+<div class=list><tt>holeIndices</tt> -- массив индексов дыр, если они имеются.</div>
+<div class=list><tt>dim</tt> -- число координат на вершину во входном массиве.</div></div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/Earcut.js" target="_blank">Earcut.js на github.com</a></div><br><br>
 
 
-<h3 id="2">SceneUtils</h3>
-A class containing useful utility functions for scene manipulation.
+<h3 id="2">ShapeUtils</h3>
+Класс содержащий вспомогательные функции для форм.<br>
+Обратите внимание, что все они являются линейными функциями, поэтому необходимо отдельно рассчитывать для <tt>x</tt>, <tt>y</tt> (и <tt>z</tt>, <tt>w</tt>, если они есть) компоненты вектора.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="2createMultiMaterialObject">[method:Group createMultiMaterialObject]( [page:Geometry geometry], [page:Array materials] )</pre>
-<div class=list>geometry -- The geometry for the set of materials.</div>
-<div class=list>materials -- The materials for the object.</div>
+<pre id="2area"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('area - область, площадь, участок')" onmouseout="hide()">.area</a></span>( contour )</pre>
+<div class=list><tt>contour</tt> -- 2D polygon.</div>
+Calculate area of a ( 2D ) contour polygon.<br><br>
 
-Creates a new Group that contains a new mesh for each material defined in materials. Beware that this is not the same as an array of materials which defines multiple materials for 1 mesh.<br>
-This is mostly useful for objects that need both a material and a wireframe implementation.<br><br>
+<pre id="2isClockwise">.isClockwise ( pts ) : Boolean</pre>
+<div class=list><tt>pts</tt> -- points defining a 2D polygon</div>
+Note that this is a linear function so it is neccessary to calculate separately for x, y components of a polygon.<br>
+Used internally by Path, ExtrudeGeometry and ShapeGeometry.<br><br>
 
-<pre id="2attach">[method:null attach]( [page:Object3D child], [page:Object3D scene], [page:Object3D parent] )</pre>
-<div class=list>child -- The object to add to the parent</div>
-<div class=list>scene -- The scene to detach the object on.</div>
-<div class=list>parent -- The parent to attach the object from.</div>
-Attaches the object to the parent without the moving the object in the worldspace. Beware that to do this the matrixWorld needs to be updated, this can be done by calling the updateMatrixWorld method on the parent object.<br><br>
-
-<pre id="2detach">[method:null detach]( [page:Object3D child], [page:Object3D parent], [page:Object3D scene] )</pre>
-<div class=list>child -- The object to remove from the parent.</div>
-<div class=list>scene -- The scene to attach the object on.</div>
-<div class=list>parent -- The parent to detach the object from.</div>
-Detaches the object from the parent and adds it back to the scene without moving in worldspace. Beware that to do this the matrixWorld needs to be updated, this can be done by calling the updateMatrixWorld method on the parent object.</div><br>
+<pre id="2triangulateShape">.triangulateShape ( contour, holes ) : null</pre>
+<div class=list><tt>contour</tt> -- 2D polygon.</div>
+<div class=list><tt>holes</tt> -- array of holes</div>
+Used internally by ExtrudeGeometry and ShapeGeometry to calculate faces in shapes with holes.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/ShapeUtils.js" target="_blank">ShapeUtils.js на github.com</a></div><br><br>
 
 
-<h3 id="3">ShapeUtils</h3>
-Класс содержащий вспомогательные функции для форм.
-		A class containing utility functions for shapes.<br>
-Заметьте, что это все линейные функции, так что их нужно рассчитывать по отдельности для компонентов вектора x, y (и z, w, если имеются).
-Note that these are all linear functions so it is neccessary to calculate separately for x, y (and z, w if present) components of a vector.<br><br>
-
-<h4>Методы</h4>
-
-		<h3>[method:Number area]( contour )</h3>
-		<div>
-		contour -- 2D polygon.<br /><br />
-
-		Calculate area of a ( 2D ) contour polygon.<br /><br />
-
-		</div>
-
-		<h3>[method:Number b2]( t, p0, p1, p2 )</h3>
-		<div>
-		t -- number<br />
-		p0, p1, p2 -- x, y, z or w components of a quadratic bezier curve.<br /><br />
-
-		Note that this is a linear function so it is neccessary to calculate separately for
-		x, y (and z for 3D curves) components of a curve.<br /><br />
-
-		Used internally by [page:QuadraticBezierCurve QuadraticBezierCurve],
-		[page:QuadraticBezierCurve3 QuadraticBezierCurve3] and [page:Font Font].
-		</div>
-
-		<h3>[method:Number b3]( t, p0, p1, p2, p3 )</h3>
-		<div>
-		t -- number. <br />
-		p0, p1, p2, p3 -- x, y or z components of a cubic bezier curve..<br /><br />
-
-		Note that this is a linear function so it is neccessary to calculate separately for
-		x, y (and z for 3D curves) components of a curve.<br /><br />
-
-		Used internally by [page:CubicBezierCurve CubicBezierCurve],
-		[page:CubicBezierCurve3 CubicBezierCurve3] and [page:Font Font].
-		</div>
-
-		<h3>[method:Boolean isClockwise]( pts )</h3>
-		<div>
-		pts -- points defining a 2D polygon<br /><br />
-
-		Note that this is a linear function so it is neccessary to calculate separately for
-		x, y  components of a polygon.<br /><br />
-
-		Used internally by [page:Path Path],
-		[page:ExtrudeGeometry ExtrudeGeometry] and [page:ShapeBufferGeometry ShapeBufferGeometry].
-		</div>
-
-		<h3>[method:null triangulate]( contour, indices )</h3>
-		<div>
-		contour --  2D polygon.<br />
-		indices -- <br /><br />
-
-		Used internally by [page:ExtrudeGeometry ExtrudeGeometry]
-		and [page:ShapeBufferGeometry ShapeBufferGeometry] to calculate faces.
-		</div>
-
-		<h3>[method:null triangulateShape]( contour, holes )</h3>
-		<div>
-		contour -- 2D polygon.<br />
-		holes -- array of holes<br /><br />
-
-		Used internally by [page:ExtrudeGeometry ExtrudeGeometry]
-		and [page:ShapeBufferGeometry ShapeBufferGeometry] to calculate faces in shapes with holes.
-		</div>
-
-<h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
-
-<a name="2"></a>
-<h3>Анимация collada-файлов</h3>
-
-<a name="2.1"></a>
-<h1>[name]</h1>
-This class animates an object based on an hierarchy. This hierarchy can be Object3ds or bones.
-
-<h4>Конструктор</h4>
-<pre>[name]([page:Object3d root], [page:String name])</pre>
-<div class="blockindent"><tt>root</tt> -- The mesh to animate. <br>
-<tt>name</tt> -- The name of the animation</div>
-Creates an animation for root. The animation data is gathered from AnimationHandler based on its name.
-
-<h4>Свойства</h4>
-<pre>[property:Object3d root]</pre>
-		<div>
-		The root object of the animation.
-		</div>
-
-		<h3>[property:Object data]</h3>
-		<div>
-		The data containing the animation
-		</div>
-
-		<h3>[property:Array hierarchy]</h3>
-		<div>
-		The objects that are influenced by the animation.
-		</div>
-
-		<h3>[property:number currentTime]</h3>
-		<div>
-		The time elapsed since the last start/restart of the animation.
-		</div>
-
-		<h3>[property:number timeScale]</h3>
-		<div>
-		How much to scale the speed of the animation. Defaults to 1.
-		</div>
-
-		<h3>[property:boolean isPlaying]</h3>
-		<div>
-		Indicates whether the animation is playing. This shouldn't be adapted by user code.
-		</div>
-
-		<h3>[property:boolean isPaused]</h3>
-		<div>
-		Indicates whether the animation is paused. This shouldn't be adapted by user code.
-		</div>
-
-		<h3>[property:boolean loop]</h3>
-		<div>
-		Set to make the animation restart when the animation ends.
-		</div>
-
-		<h3>[property:number interpolationType]</h3>
-		<div>
-		The type to indicate how to interpolate between 2 data points.
-		</div>
-
-  <h4>Методы</h4>
-
-		<h3>[method:null play]([page:Number startTime])</h3>
-		<div>
-		Starts the animation at the startTime (in seconds) of the animation.
-		</div>
-
-		<h3>[method:null stop]()</h3>
-		<div>
-		Stops the animation.
-		</div>
-
-		<h3>[method:Boolean update]([page:Number deltaTimeMS])</h3>
-		<div>
-		deltaTimeMS -- The time of the between the previous frame and this frame in miliseconds.
-		</div>
-		<div>
-		Updates the animation in time. This shouldn't be called by user code. The animationHandler calls this method.
-		</div>
-
-		<h3>[method:array interpolateCatmullRom]([page:Array points], [page:Number scale])</h3>
-		<div>
-		points -- The 4 control point to calculate CatMullRom <br />
-		scale -- The scale between the previous key and the nex key
-		</div>
-		<div>
-		Interpolates the point based on the key. Is used in update.
-		</div>
-
-		<h3>[method:Object getNextKeyWith]([page:String type], [page:Object h], [page:Number key])</h3>
-		<div>
-		type -- The animationtype for the key. Can be "pos", "rot" and "scl".<br />
-		h -- The object of the hierarchy that catins the key <br />
-		key -- The index of the next possible key.
-		</div>
-		<div>
-		Gets the next key. Is used in Update.
-		</div>
-
-		<h3>[method:Object getPrevKeyWith]([page:String type], [page:Object h], [page:Number key])</h3>
-		<div>
-		type -- The animationtype for the key. Can be "pos", "rot" and "scl".<br />
-		h -- The object of the hierarchy that contains the key. <br />
-		key -- The index of the prev possible key.
-		</div>
-		<div>
-		Gets the previous key. Is used in Update.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/collada/[name].js examples/js/loaders/collada/[name].js]
-
-<a name="2.2"></a>
-		<h1>[name]</h1>
-
-		<div class="desc">
-		The AnimationHandler handles the initialisation of the Animation data and
-		the animations itself. It keeps track of every animation and if it's active or not.
-		It also update all animations which are active if its method *update* is called.
-		</div>
-
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]()</h3>
-		<div>
-		The animationHandler can't be called as constructor.
-		</div>
-
-  <h4>Свойства</h4>
-
-
-		<h3>[property:number CATMULLROM]</h3>
-		<div>
-		Enum Value to indicate that the animation needs to be interpolated as CATMULLROM.
-		</div>
-
-		<h3>[property:number CATMULLROM_FORWARD]</h3>
-		<div>
-		Enum Value to indicate that the animation needs to be interpolated as CATMULLROM_FORWARD.
-		</div>
-
-		<h3>[property:number LINEAR]</h3>
-		<div>
-		Enum Value to indicate that the animation needs to be interpolated as LINEAR.
-		</div>
-
-  <h4>Методы</h4>
-
-
-
-		<h3>[method:null removeFromUpdate]([page:Animation animation])</h3>
-		<div>
-		animation -- The Animation to remove from the update.
-		</div>
-		<div>
-		Removes the animation from the update cycle. This gets called when the animation stops. This shouldn't be called by usercode.
-		</div>
-
-		<h3>[method:Object get]([page:String name])</h3>
-		<div>
-		name -- The name of the animationData
-		</div>
-		<div>
-		Gets the animationData from its library.
-		</div>
-
-		<h3>[method:null update]([page:Number deltaTimeMS]) </h3>
-		<div>
-		deltaTimeMS -- Time elapsed since last update in milliseconds.
-		</div>
-		<div>
-		Updates all active animations with deltaTime.
-		</div>
-
-		<h3>[method:null parse]([page:Object root])</h3>
-		<div>
-		root -- object
-		</div>
-		<div>
-		Parses the object to get the hierachy.
-		</div>
-
-		<h3>[method:null add]([page:object data])</h3>
-		<div>
-		data -- The animationData
-		</div>
-		<div>
-		Adds the animationData from its library.
-		</div>
-
-		<h3>[method:null addToUpdate]([page:Animation animation]) </h3>
-		<div>
-		animation -- The Animation to add from the update.
-		</div>
-		<div>
-		Adds the animation from the update cycle. This gets called when the animation starts. This shouldn't be called by user code.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/collada/[name].js examples/js/loaders/collada/[name].js]
-
-<a name="2.3"></a>
-		<h1>[name]</h1>
-
-		<div class="desc">Runs a keyframe animation as imported from the [page:ColladaLoader].</div>
-
-		<h2>Examples</h2>
-
-		<div>[example:webgl_loader_collada_keyframe loader / collada / keyframe ]</div>
-
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]([page:Object data])</h3>
-		<div>
-		data -- An individual animation object from a the [page:ColladaLoader], e.g. loadedColladaObj.animations[0] <br />
-		</div>
-		<div>
-		Creates a new keyframe animation and initializes it to the first keyframes.
-		</div>
-
-<h4>Свойства</h4>
-<h3>[property:Object3D root]</h3>
-		<div>
-		The root object of the animation
-		</div>
-
-		<h3>[property:Object data]</h3>
-		<div>
-		The data containing the animation
-		</div>
-
-		<h3>[property:Array hierarchy]</h3>
-		<div>
-		The objects that are influenced by the animation.
-		</div>
-
-		<h3>[property:number currentTime]</h3>
-		<div>
-		The time elapsed since the last start/restart of the animation.
-		</div>
-
-		<h3>[property:number timeScale]</h3>
-		<div>
-		How much to scale the speed of the animation. Defaults to 1.
-		</div>
-
-		<h3>[property:boolean isPlaying]</h3>
-		<div>
-		Indicates whether the animation is playing. This shouldn't be adapted by user code.
-		</div>
-
-		<h3>[property:boolean isPaused]</h3>
-		<div>
-		Indicates whether the animation is paused. This shouldn't be adapted by user code.
-		</div>
-
-		<h3>[property:boolean loop]</h3>
-		<div>
-		Set to make the animation restart when the animation ends.
-		</div>
-
-  <h4>Методы</h4>
-
-		<h3>[method:null play]([page:Number startTime])</h3>
-		<div>
-		Starts the animation at the startTime (in seconds) of the animation.
-		</div>
-
-		<h3>[method:null stop]()</h3>
-		<div>
-		Stops the animation.
-		</div>
-
-		<h3>[method:null update]([page:Float deltaTime])</h3>
-		<div>
-		deltaTime -- The change in time in seconds
-		</div>
-		<div>
-		Updates the keyframe animation
-		</div>
-
-		<h3>[method:Object getNextKeyWith]([page:String sid], [page:Integer h], [page:Integer key])</h3>
-		<div>
-		sid -- The string id <br />
-		h -- The index in the heirarchy to use<br />
-		key -- The index of which key to start from
-		</div>
-		<div>
-		Used internally to traverse the animation
-		</div>
-
-		<h3>[method:Object getPrevKeyWith]([page:String sid], [page:Integer h], [page:Integer key])</h3>
-		<div>
-		sid -- The string id <br />
-		h -- The index in the heirarchy to use<br />
-		key -- The index of which key to start from
-		</div>
-		<div>
-		Used internally to traverse the animation
-		</div>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/collada/[name].js examples/js/loaders/collada/[name].js]
-
+<h2 id="3">Дополнения к основным элементам <em>three.js</em></h2>
 
 <h3 id="3.1">Curve</h3>
-An abstract base class for creating a curve object that contains methods for interpolation.<br>
-For an array of Curves see [page:CurvePath].
-
-
-<h4>Examples</h4>
-<h3>[example:webgl_geometry_extrude_splines geometry / extrude / splines ]</h3>
+An abstract base class for creating a Curve object that contains methods for interpolation. For an array of Curves see CurvePath.<br><br>
 
 <h4>Конструктор</h4>
-<h3>Curve()</h3>
-		<div>
-		This constructor creates a new [name].
-		</div>
+<pre>Curve( )</pre>
+Данный конструктор создает новую Curve.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="3.1arcLengthDivisions"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('arc length divisions - ')" onmouseout="hide()">.arcLengthDivisions</a></span></pre>
+This value determines the amount of divisions when calculating the cumulative segment lengths of a curve via .getLengths. To ensure precision when using methods like .getSpacedPoints, it is recommended to increase .arcLengthDivisions if the curve is very large. Default is 200.
+</div><br>
 
 <h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.1clone"><a href="#3.1" onmouseover="show('Curve.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Создает клон данного экземпляра кривой линии.<br><br>
 
-		<h3>[method:Vector getPoint]( t )</h3>
-		<div>Returns a vector for point t of the curve where t is between 0 and 1. Must be implemented in the extending class.</div>
+<pre id="3.1computeFrenetFrames">.computeFrenetFrames ( segments : Integer, closed : Boolean ) : Object</pre>
+Generates the Frenet Frames. Used in geometries like TubeGeometry or ExtrudeGeometry.<br><br>
 
-		<h3>[method:Vector getPointAt]( u )</h3>
-		<div>Returns a vector for point at relative position in curve according to arc length</div>
+<pre id="3.1copy"><a href="#3.1" onmouseover="show('Curve.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#3.1" onmouseover="show('Curve.<br>source - источник, исходник')" onmouseout="hide()">source</a> )</pre>
+Метод копирует в данный экземпляр другой объект Curve, переданный в аргументе <tt>source</tt>.<br><br>
 
-		<h3>[method:Array getPoints]( divisions )</h3>
-		<div>Get sequence of points using getPoint( t ) </div>
+<pre id="3.1fromJSON">.fromJSON ( json : Object ) : Curve</pre>
+Copies the data from the given JSON object to this instance.<br><br>
 
-		<h3>[method:Array getSpacedPoints]( divisions )</h3>
-		<div>Get sequence of equi-spaced points using getPointAt( u )</div>
+<pre id="3.1getLength">.getLength( ) : Float</pre>
+Get total curve arc length.<br><br>
 
-		<h3>[method:Float getLength]()</h3>
-		<div>Get total curve arc length</div>
+<pre id="3.1getLengths">.getLengths( divisions : Integer ) : Array</pre>
+Get list of cumulative segment lengths.<br><br>
 
-		<h3>[method:Array getLengths]( divisions )</h3>
-		<div>Get list of cumulative segment lengths</div>
+<pre id="3.1getPoint">.getPoint( t : Float, optionalTarget : Vector ) : Vector</pre>
+<div class=list>t - A position on the curve. Must be in the range [ 0, 1 ].</div>
+<div class=list>optionalTarget — (optional) If specified, the result will be copied into this Vector, otherwise a new Vector will be created.</div>
 
-		<h3>[method:null updateArcLengths]()</h3>
-		<div>Update the cumlative segment distance cache</div>
+Returns a vector for a given position on the curve.<br><br>
 
-		<h3>[method:Float getUtoTmapping]( u, distance )</h3>
-		<div>Given u ( 0 .. 1 ), get a t to find p. This gives you points which are equidistant</div>
+<pre id="3.1getPointAt">.getPointAt( u : Float, optionalTarget : Vector ) : Vector</pre>
+<div class=list>u - A position on the curve according to the arc length. Must be in the range [ 0, 1 ].</div>
+<div class=list>optionalTarget — (optional) If specified, the result will be copied into this Vector, otherwise a new Vector will be created.</div>
+Returns a vector for a given position on the curve according to the arc length.<br><br>
 
-		<h3>[method:Vector getTangent]( t )</h3>
-		<div>Returns a unit vector tangent at t. If the subclassed curve do not implement its tangent derivation, 2 points a small delta apart will be used to find its gradient which seems to give a reasonable approximation</div>
+<pre id="3.1getPoints">.getPoints( divisions : Integer ) : Array</pre>
+<div class=list>divisions -- number of pieces to divide the curve into. Default is 5.</div>
+Returns a set of divisions + 1 points using getPoint( t ).<br><br>
 
-		<h3>[method:Vector getTangentAt]( u )</h3>
-		<div>Returns tangent at equidistant point u on the curve</div>
+<pre id="3.1getSpacedPoints">.getSpacedPoints( divisions : Integer ) : Array</pre>
+<div class=list>divisions -- number of pieces to divide the curve into. Default is 5.</div>
+Returns a set of divisions + 1 equi-spaced points using getPointAt( u ).<br><br>
 
-		<h3>[method:Object computeFrenetFrames]( segments, closed )</h3>
-		<div>
-		Generates the Frenet Frames. Used in geometries like [page:TubeGeometry] or [page:ExtrudeGeometry].
-		</div>
+<pre id="3.1getTangent">.getTangent( t : Float ) : Vector</pre>
+Returns a unit vector tangent at t. If the derived curve does not implement its tangent derivation, two points a small delta apart will be used to find its gradient which seems to give a reasonable approximation.<br><br>
 
-  <h4>Исходники</h4>
+<pre id="3.1getTangentAt">.getTangentAt( u : Float ) : Vector</pre>
+Returns tangent at a point which is equidistant to the ends of the curve from the point given in .getTangent.<br><br>
 
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<pre id="3.1getUtoTmapping">.getUtoTmapping( u : Float, distance : Float ) : Float</pre>
+Given u in the range ( 0 .. 1 ), returns t also in the range ( 0 .. 1 ). u and t can then be used to give you points which are equidistant from the ends of the curve, using .getPoint.<br><br>
 
-<a name="3.2"></a>
-		[page:Curve] &rarr;
-<h3>[name]</h3>
+<pre id="3.1toJSON">.toJSON( ) : Object</pre>
+Returns a JSON object representation of this instance.<br><br>
+
+<pre id="3.1updateArcLengths">.updateArcLengths( ) : null</pre>
+Update the cumlative segment distance cache.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/Curve.js" target="_blank">Curve.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="3.2">CurvePath</h3>
 An abstract base class further extending [page:Curve]. A CurvePath is simply an array of connected curves, but retains the api of a curve.
 
 <h4>Конструктор</h4>
-<h3>[name]()</h3>
-		<div>
-		The constructor take no parameters.
-		</div>
+<pre>CurvePath( )</pre>
+The constructor take no parameters.<br><br>
+
 
 <h4>Свойства</h4>
-<h3>[property:array curves]</h3>
-		<div>
-		The array of [page:Curve]s
-		</div>
+See the base Curve class for common properties.
+<div class=blockindent><br>
+<pre id="3.2autoClose">.autoClose : boolean</pre>
+Whether or not to automatically close the path.<br><br>
 
-		<h3>[property:array bends]</h3>
-		<div>
-		An array of [page:Curve]s used to transform and bend the curve using [page:CurvePath.getWrapPoints].
-		</div>
+<pre id="3.2curves">.curves : array</pre>
+The array of Curves.</div><br>
 
-		<h3>[property:boolean autoClose]</h3>
-		<div>
-		Whether or not to automatically close the path.
-		</div>
+<h4>Методы</h4>
+See the base Curve class for common methods.
+<div class=blockindent><br>
+<pre id="3.2add">.add ( curve : Curve ) : null</pre>
+Add a curve to the .curves array.<br><br>
 
-  <h4>Методы</h4>
+<pre id="3.2closePath">.closePath () : null</pre>
+Adds a lineCurve to close the path.<br><br>
 
+<pre id="3.2getCurveLengths">.getCurveLengths () : Float</pre>
+Adds together the lengths of the curves in the .curves array.</div><br>
 
-		<h3>[method:Array getWrapPoints]( [page:Array vertices], [page:Curve curve] )</h3>
-		<div>
-		vertices -- An array of [page:Vector2]s to modify<br />
-		curve -- An array of 2d [page:Curve]s
-		</div>
-		<div>
-		Modifies the array of vertices by warping it by the curve. The curve parameter also accepts objects with similar
-		interfaces such as [page:CurvePath], [page:Path], [page:SplineCurve], etc. Returns the original vertices after
-		modification.
-		</div>
-
-		<h3>[method:null addWrapPath]( [page:Curve curve] )</h3>
-		<div>
-		curve -- A [page:Curve] or object with a similar interface.
-		</div>
-		<div>
-		Pushes a curve onto the bends array.
-		</div>
-
-		<h3>[method:Geometry createGeometry]( [page:Vector3 points] )</h3>
-		<div>
-		points -- An array of [page:Vector3]s
-		</div>
-		<div>
-		Creates a geometry from points
-		</div>
-
-		<h3>[method:Geometry createPointsGeometry]( [page:Integer divisions] )</h3>
-		<div>
-		divisions -- How many segments to create with [page:Vector3]s. Defaults to 12.
-		</div>
-		<div>
-		Creates a [page:Geometry] object comprised of [page:Vector3]s
-		</div>
-
-		<h3>[method:Geometry createSpacedPointsGeometry]( [page:Integer divisions] )</h3>
-		<div>
-		divisions -- How many segments to create with [page:Vector3]s. Defaults to 12.
-		</div>
-		<div>
-		Creates a [page:Geometry] object comprised of [page:Vector3]s that are equidistant.
-		</div>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/CurvePath.js" target="_blank">CurvePath.js на github.com</a></div><br><br>
 
 
-		<h3>[method:null add]( [page:Curve curve] )</h3>
-		<div>
-		curve -- The [page:Curve curve] to add
-		</div>
-		<div>
-		Pushes a curve onto the curves array.
-		</div>
+<h3 id="3.3">Font</h3>
+Create a set of Shapes representing a font loaded in JSON format.<br>
+This is used internally by the FontLoader.<br><br>
 
-		<h3>[method:null closePath]()</h3>
-		<div>
-		Adds a curve to close the path.
-		</div>
-
-		<h3>[method:Object getBoundingBox]()</h3>
-		<div>
-		Returns an object with the keys minX, minY, maxX, maxY, (if 3d: maxZ, minZ)
-		</div>
-
-		<h3>[method:Float getCurveLengths]()</h3>
-		<div>
-		Adds together the length of the curves
-		</div>
-
-		<h3>[method:Array getTransformedPoints]( [page:Integer segments], [page:Array bends] )</h3>
-		<div>
-		segments -- The number of segments to create using the getPoints()<br />
-		bends -- (optional) An array of [page:Curve]s used to transform the points. Defaults to this.bends if blank.
-		</div>
-		<div>
-		Uses this CurvePath to generate a series of points transformed by the curves in the bends array. Returns an
-		array of [page:Vector2]s.
-		</div>
-
-		<h3>[method:Array getTransformedSpacedPoints]( [page:Integer segments], [page:Array bends] )</h3>
-		<div>
-		segments -- The number of segments to create using the getPoints()<br />
-		bends -- (optional) Defaults to this.bends if blank. An array of [page:Curve]s used to transform the points.
-		</div>
-		<div>
-		Uses this CurvePath to generate a series equidistant points that are then transformed by the curves in the bends.
-	    Returns an array of [page:Vector2]s.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="3.3"></a>
-		[page:CurvePath] &rarr;
-
-		<h1>[name]</h1>
-A 2d path representation, comprising of points, lines, and cubes, similar to the html5 2d canvas api.
-		It extends [page:CurvePath].
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/webgl_geometry_text_shapes" target="_blank">geometry / text / shapes</a>
+<a href="https://threejs.org/examples/webgl_shaders_vector" target="_blank">shaders / vector</a></pre><br>
 
 <h4>Конструктор</h4>
-<h3>[name]( [page:Array points] )</h3>
-		<div>
-		points -- array of Vector2
-		</div>
-Creates a Path from the points. The first vector defines the offset. After that the lines get defined.
+<pre>Font( data )</pre>
+<div class=list><tt>data</tt> -- JSON data representing the font.</div>
+This constructor creates a new Font, which is an array of Shapes.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<h3>[property:array actions]</h3>
-The possible actions that define the path.</div><br>
+<pre id="3.3data">.data : array</pre>
+The JSON data passed in the constructor.<br><br>
+
+<pre id="3.3isFont">.isFont : Boolean</pre>
+Used to check whether this or derived classes are fonts. Default is true.<br>
+You should not change this, as it used internally by the renderer for optimisation.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<h3>[method:null fromPoints]( [page:Array vector2s] )</h3>
-Adds to the Path from the points. The first vector defines the offset. After that the lines get defined.<br><br>
+<pre id="3.3generateShapes">.generateShapes( text : String, size : Float, divisions : Integer ) : null</pre>
+<div class=list>text -- string of text.</div>
+<div class=list>size -- (optional) scale for the Shapes. Default is 100.</div>
+<div class=list>divisions -- (optional) fineness of the Shapes. Default is 4.</div>
+Creates an array of Shapes representing the text in the font.</div><br>
 
-<h3>[method:null moveTo]( [page:Float x], [page:Float y] )</h3>
-This moves the offset to x and y<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Font.js" target="_blank">Font.js на github.com</a></div><br><br>
 
-		<h3>[method:null lineTo]( [page:Float x], [page:Float y] )</h3>
-		<div>This creates a line from the offset to X and Y and updates the offset to X and Y.</div>
 
-		<h3>[method:null quadraticCurveTo]( [page:Float cpX], [page:Float cpY], [page:Float x], [page:Float y] )</h3>
-		<div>This creates a quadratic curve from the offset to x and y with cpX and cpY as control point and updates the offset to x and y.</div>
+<h3 id="3.4">Interpolations</h3>
 
-		<h3>[method:null bezierCurveTo]( [page:Float cp1X], [page:Float cp1Y], [page:Float cp2X], [page:Float cp2Y], [page:Float x], [page:Float y] )</h3>
-		<div>This creates a bezier curve from the last offset to x and y with cp1X, cp1Y and cp1X, cp1Y as control points and updates the offset to x and y.</div>
+TODO<br><br>
 
-		<h3>[method:null splineThru] ( [page:Array points] ) </h3>
-		<div>points - An array of [page:Vector2]s</div>
-		<div>Connects a new [page:SplineCurve] onto the path.</div>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.4CatmullRom">.CatmullRom ( t : Float, p0 : Float, p1 : Float, p2 : Float, p3 : Float ) : Float</pre>
+<div class=list>t -- interpolation weight.</div>
+<div class=list>p0, p1, p2, p3 -- the points defining the spline curve.</div>
 
-		<h3>[method:null arc]( [page:Float x], [page:Float y], [page:Float radius], [page:Float startAngle], [page:Float endAngle], [page:Float clockwise] )</h3>
-		<div>
-		x, y -- The center of the arc offset from the last call
-		radius -- The radius of the arc
-		startAngle -- The start angle in radians
-		endAngle -- The end angle in radians
-		clockwise -- Sweep the arc clockwise. Defaults to false
-		</div>
-		<div>Draw an arc offset from the last call</div>
+Used internally by SplineCurve.<br><br>
 
-		<h3>[method:null absarc]( [page:Float x], [page:Float y], [page:Float radius], [page:Float startAngle], [page:Float endAngle], [page:Float clockwise] )</h3>
-		<div>
-		x, y -- The absolute center of the arc
-		radius -- The radius of the arc
-		startAngle -- The start angle in radians
-		endAngle -- The end angle in radians
-		clockwise -- Sweep the arc clockwise. Defaults to false
-		</div>
-		<div>Draw an arc absolutely positioned</div>
+<pre id="3.4QuadraticBezier">.QuadraticBezier( t : Float, p0 : Float, p1 : Float, p2 : Float ) : Float</pre>
+<div class=list>t -- interpolation weight.</div>
+<div class=list>p0, p1, p2 -- the starting, control and end points defining the curve.</div>
 
-		<h3>[method:null ellipse]( [page:Float x], [page:Float y], [page:Float xRadius], [page:Float yRadius], [page:Float startAngle], [page:Float endAngle], [page:Float clockwise], [page:Float rotation] )</h3>
-		<div>
-		x, y -- The center of the ellipse offset from the last call
-		xRadius -- The radius of the ellipse in the x axis
-		yRadius -- The radius of the ellipse in the y axis
-		startAngle -- The start angle in radians
-		endAngle -- The end angle in radians
-		clockwise -- Sweep the ellipse clockwise. Defaults to false
-		rotation -- The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to 0
-		</div>
-		<div>Draw an ellipse offset from the last call</div>
+Used internally by QuadraticBezierCurve3, QuadraticBezierCurve and Font.<br><br>
 
-		<h3>[method:null absellipse]( [page:Float x], [page:Float y], [page:Float xRadius], [page:Float yRadius], [page:Float startAngle], [page:Float endAngle], [page:Float clockwise], [page:Float rotation] )</h3>
-		<div>
-		x, y -- The absolute center of the ellipse
-		xRadius -- The radius of the ellipse in the x axis
-		yRadius -- The radius of the ellipse in the y axis
-		startAngle -- The start angle in radians
-		endAngle -- The end angle in radians
-		clockwise -- Sweep the ellipse clockwise. Defaults to false
-		rotation -- The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to 0
-		</div>
-		<div>Draw an ellipse absolutely positioned</div>
+<pre id="3.4CubicBezier">.CubicBezier ( t : Float, p0 : Float, p1 : Float, p2 : Float, p3 : Float ) : Float</pre>
+<div class=list>t -- interpolation weight.</div>
+<div class=list>p0, p1, p2, p3 -- the starting, control(twice) and end points defining the curve.</div>
 
-		<h3>[method:Array toShapes]( [page:Boolean isCCW], [page:Boolean noHoles] )</h3>
-		<div>
-		isCCW -- Changes how solids and holes are generated<br/>
-		noHoles -- Whether or not to generate holes
-		</div>
-Converts the Path into an array of Shapes. By default solid shapes are defined clockwise (CW) and holes are defined counterclockwise (CCW). If isCCW is set to true,
-		then those are flipped. If the paramater noHoles is set to true then all paths are set as solid shapes and isCCW is ignored.
+Used internally by CubicBezierCurve3, CubicBezierCurve and Font.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Interpolations.js" target="_blank">Interpolations.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3.2" title="Переход к родительскому классу"><tt>CurvePath &rarr;</tt></a></span>
+<h3 id="3.5">Path</h3>
+A 2D path representation. The class provides methods for creating paths and contours of 2D shapes similar to the 2D Canvas API.<br><br>
+
+<h4>Пример</h4>
+<pre>var path = new THREE.Path();<br>
+  path.lineTo( 0, 0.8 );
+  path.quadraticCurveTo( 0, 1, 0.2, 1 );
+  path.lineTo( 1, 1 );<br>
+  var points = path.getPoints();<br>
+  var geometry = new THREE.BufferGeometry().setFromPoints( points );
+  var material = new THREE.LineBasicMaterial( { color: 0xffffff } );<br>
+  var line = new THREE.Line( geometry, material );
+  scene.add( line );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>Path( points : Array )</pre>
+<div class=list>points -- (optional) array of Vector2s.</div>
+Creates a Path from the points. The first point defines the offset, then successive points are added to the curves array as LineCurves.<br>
+If no points are specified, an empty path is created and the .currentPoint is set to the origin.<br><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.2">CurvePath</a>.
+<div class=blockindent><br>
+<pre id="3.5currentPoint"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('current point - текущая точка')" onmouseout="hide()">.currentPoint</a></span></pre>
+The current offset of the path. Any new Curve added will start here.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.2">CurvePath</a>.
+<div class=blockindent><br>
+<pre id="3.5absarc"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('absarc - сокращ. англ. слов abs(olute<br>center of the) arc - абсолютный центр дуги')" onmouseout="hide()">.absarc</a></span>( x : Float, y : Float, radius : Float, startAngle : Float, endAngle : Float, clockwise : Float )</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- координаты абсолютного центра дуги.</div>
+<div class=list><tt>radius</tt> -- радиус дуги.</div>
+<div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
+<div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
+<div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
+Adds an absolutely positioned EllipseCurve to the path.<br><br>
+
+<pre id="3.5absellipse">.absellipse ( x : Float, y : Float, xRadius : Float, yRadius : Float, startAngle : Float, endAngle : Float, clockwise : Float, rotation : Float ) : null</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- The absolute center of the ellipse.</div>
+<div class=list><tt>xRadius</tt> -- The radius of the ellipse in the x axis.</div>
+<div class=list><tt>yRadius</tt> -- The radius of the ellipse in the y axis.</div>
+<div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
+<div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
+<div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt>rotation</tt> -- The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to 0.</div>
+Adds an absolutely positioned EllipseCurve to the path.<br><br>
+
+<pre id="3.5arc">.arc ( x : Float, y : Float, radius : Float, startAngle : Float, endAngle : Float, clockwise : Float ) : null</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- The center of the arc offset from the last call.</div>
+<div class=list><tt>radius</tt> -- радиус дуги.</div>
+<div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
+<div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
+<div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
+Adds an EllipseCurve to the path, positioned relative to .currentPoint.<br><br>
+
+<pre id="3.5bezierCurveTo">.bezierCurveTo ( cp1X : Float, cp1Y : Float, cp2X : Float, cp2Y : Float, x : Float, y : Float ) : null</pre>
+This creates a bezier curve from .currentPoint with (cp1X, cp1Y) and (cp2X, cp2Y) as control points and updates .currentPoint to x and y.<br><br>
+
+<pre id="3.5ellipse">.ellipse ( x : Float, y : Float, xRadius : Float, yRadius : Float, startAngle : Float, endAngle : Float, clockwise : Float, rotation : Float ) : null</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- The center of the ellipse offset from the last call.</div>
+<div class=list><tt>xRadius</tt> -- The radius of the ellipse in the x axis.</div>
+<div class=list><tt>yRadius</tt> -- The radius of the ellipse in the y axis.</div>
+<div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
+<div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
+<div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt>rotation</tt> -- The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to 0.</div>
+Adds an EllipseCurve to the path, positioned relative to .currentPoint.<br><br>
+
+<pre id="3.5lineTo">.lineTo ( x : Float, y : Float ) : null</pre>
+Connects a LineCurve from .currentPoint to x, y onto the path.<br><br>
+
+<pre id="3.5moveTo">.moveTo ( x : Float, y : Float ) : null</pre>
+Move the .currentPoint to x, y.<br><br>
+
+<pre id="3.5quadraticCurveTo">.quadraticCurveTo ( cpX : Float, cpY : Float, x : Float, y : Float ) : null</pre>
+Creates a quadratic curve from .currentPoint with cpX and cpY as control point and updates .currentPoint to x and y.<br><br>
+
+<pre id="3.5setFromPoints">.setFromPoints ( vector2s : Array ) : null</pre>
+<div class=list><tt>points</tt> - массив <a href="math.htm#18" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>.</div>
+Points are added to the curves array as LineCurves.<br><br>
+
+<pre id="3.5splineThru">.splineThru ( points : Array ) : null</pre>
+<div class=list><tt>points</tt> - массив <a href="math.htm#18" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>.</div>
+Connects a new SplineCurve onto the path.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Path.js" target="_blank">Path.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3.5" title="Переход к родительскому классу"><tt>Path &rarr;</tt></a></span>
+<h3 id="3.6">Shape</h3>
+Defines an arbitrary 2d shape plane using paths with optional holes. It can be used with [page:ExtrudeGeometry], [page:ShapeGeometry], to get points, or to get triangulated faces.<br><br>
+
+<h4>Пример</h4>
+<pre>var heartShape = new THREE.Shape();<br>
+heartShape.moveTo( 25, 25 );
+heartShape.bezierCurveTo( 25, 25, 20, 0, 0, 0 );
+heartShape.bezierCurveTo( 30, 0, 30, 35,30,35 );
+heartShape.bezierCurveTo( 30, 55, 10, 77, 25, 95 );
+heartShape.bezierCurveTo( 60, 77, 80, 55, 80, 35 );
+heartShape.bezierCurveTo( 80, 35, 80, 0, 50, 0 );
+heartShape.bezierCurveTo( 35, 0, 25, 25, 25, 25 );<br>
+var extrudeSettings = { amount: 8, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 1, bevelThickness: 1 };<br>
+var geometry = new THREE.ExtrudeGeometry( heartShape, extrudeSettings );<br>
+var mesh = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );</pre>
+
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_geometry_shapes" target="_blank">geometry / shapes</a>
+<a href="https://threejs.org/examples/webgl_geometry_extrude_shapes" target="_blank">geometry / extrude / shapes</a>
+<a href="https://threejs.org/examples/webgl_geometry_extrude_shapes2" target="_blank">geometry / extrude / shapes2</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>Shape( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> -- массив <a href="math.htm#18" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a> (дополнительный, необязательный аргумент).</div>
+
+Creates a Shape from the points. The first point defines the offset, then successive points are added to the curves array as LineCurves.<br>
+If no points are specified, an empty shape is created and the .currentPoint is set to the origin.<br><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.5">Path</a>.
+<div class=blockindent><br>
+<pre id="3.6holes">.holes : array</pre>
+An array of paths that define the holes in the shape.<br><br>
+
+<pre id="3.6uuid">.uuid : String</pre>
+UUID of this instance. This gets automatically assigned, so this shouldn't be edited.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.5">Path</a>.
+<div class=blockindent><br>
+<pre id="3.6extractPoints">.extractPoints ( divisions : Integer ) : Array</pre>
+<div class=list><tt>divisions</tt> -- The fineness of the result.</div>
+
+Call getPoints on the shape and the .holes array, and return an object of the form:
+<pre>{
+  shape
+  holes
+}</pre>
+где <tt>shape</tt> и <tt>holes</tt> являются массивами <a href="math.htm#18" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>.<br><br>
+
+<pre id="3.6getPointsHoles">.getPointsHoles ( divisions : Integer ) : Array</pre>
+<div class=list>divisions -- The fineness of the result.</div>
+
+Get an array of Vector2s that represent the holes in the shape.
 </div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Shape.js" target="_blank">Shape.js на github.com</a></div><br><br>
 
-<a name="3.4"></a>
-[page:Path] &rarr;
-<h3>[name]</h3>
-Defines an arbitrary 2d shape plane using paths with optional holes. It can be used with [page:ExtrudeGeometry], [page:ShapeGeometry], to get points, or to get triangulated faces.
 
-  <pre>
-		var heartShape = new THREE.Shape();
+<span class="right_side"><a href="#3.2" title="Переход к родительскому классу"><tt>CurvePath &rarr;</tt></a></span>
+<h3 id="3.7">ShapePath</h3>
+This is class is used to convert a series of shapes to an array of Paths, for example an SVG shape to a path (see the example below). It is used internally by Font to convert a font in JSON format to a series of paths.
 
-		heartShape.moveTo( 25, 25 );
-		heartShape.bezierCurveTo( 25, 25, 20, 0, 0, 0 );
-		heartShape.bezierCurveTo( 30, 0, 30, 35,30,35 );
-		heartShape.bezierCurveTo( 30, 55, 10, 77, 25, 95 );
-		heartShape.bezierCurveTo( 60, 77, 80, 55, 80, 35 );
-		heartShape.bezierCurveTo( 80, 35, 80, 0, 50, 0 );
-		heartShape.bezierCurveTo( 35, 0, 25, 25, 25, 25 );
-
-		var extrudeSettings = { amount: 8, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 1, bevelThickness: 1 };
-
-		var geometry = new THREE.ExtrudeGeometry( heartShape, extrudeSettings );
-
-		var mesh = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
-  </pre>
-
-		<h2>Examples</h2>
-
-		<div>
-		[example:webgl_geometry_shapes geometry / shapes ]<br/>
-		[example:webgl_geometry_extrude_shapes geometry / extrude / shapes ]<br/>
-		[example:webgl_geometry_extrude_shapes2 geometry / extrude / shapes2 ]<br/>
-		[example:webgl_particles_shapes particles / shapes ]
-		</div>
-
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_geometry_extrude_shapes2" target="_blank">geometry / extrude / shapes2</a></pre><br>
 
 <h4>Конструктор</h4>
-<h3>[name]()</h3>
+<pre>ShapePath( )</pre>
+Creates a new ShapePath. Unlike a Path, no points are passed in as the ShapePath is designed to be generated after creation.<br><br>
 
 <h4>Свойства</h4>
-<h3>[property:array holes]</h3>
-		<div>
-		An array of [page:Path paths] that define the holes in the shape.
-		</div>
+<div class=blockindent><br>
+<pre id="3.7subPaths">.subPaths : array</pre>
+Array of Paths.<br><br>
 
-  <h4>Методы</h4>
+<pre id="3.7currentPath">.currentPath : array</pre>
+The current Path that is being generated.</div><br>
 
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.7bezierCurveTo">.bezierCurveTo ( cp1X : Float, cp1Y : Float, cp2X : Float, cp2Y : Float, x : Float, y : Float ) : null</pre>
+This creates a bezier curve from the currentPath's offset to x and y with cp1X, cp1Y and cp1X, cp1Y as control points and updates the currentPath's offset to x and y.<br><br>
 
-		<h3>[method:ShapeGeometry makeGeometry]( [page:Object options] )</h3>
-		<div>
-		options -- This is passed as the second argument to [page:ShapeGeometry ShapeGeometry]
-		</div>
-		<div>
-		Convenience method to return ShapeGeometry
-		</div>
+<pre id="3.7lineTo">.lineTo ( x : Float, y : Float ) : null</pre>
+This creates a line from the currentPath's offset to X and Y and updates the offset to X and Y.<br><br>
 
-		<h3>[method:Array extractAllPoints]( [page:Integer divisions] )</h3>
-		<div>
-		divisions -- The number of divisions to create on the shape
-		</div>
-		<div>
-		Get points of shape and holes (keypoints based on segments parameter)
-		</div>
+<pre id="3.7moveTo">.moveTo ( x : Float, y : Float ) : null</pre>
+Starts a new Path and calls Path.moveTo( x, y ) on that Path. Also points currentPath to that Path.<br><br>
 
-		<h3>[method:ExtrudeGeometry extrude]( [page:Object options] )</h3>
-		<div>
-		options -- This is passed as the second argument to [page:ExtrudeGeometry ExtrudeGeometry]
-		</div>
-		<div>
-		Convenience method to return ExtrudeGeometry
-		</div>
+<pre id="3.7quadraticCurveTo">.quadraticCurveTo ( cpX : Float, cpY : Float, x : Float, y : Float ) : null</pre>
+This creates a quadratic curve from the currentPath's offset to x and y with cpX and cpY as control point and updates the currentPath's offset to x and y.<br><br>
 
-		<h3>[method:Object extractPoints]( [page:Integer divisions] )</h3>
-		<div>
-		divisions -- The number of divisions to create on the shape
-		</div>
-		<div>
-		Returns an object with a *shape* and *holes* property that each reference an array of [page:Vector2 Vector2s].
-		</div>
+<pre id="3.7splineThru">.splineThru ( points : Array ) : null</pre>
+<div class=list>points - An array of Vector2s</div>
+Connects a new SplineCurve onto the currentPath.<br><br>
 
-		<h3>[method:Object extractAllSpacedPoints]( [page:Integer divisions] )</h3>
-		<div>
-		divisions -- The number of divisions to create on the shape
-		</div>
-		<div>
-		Returns an object with a *shape* and *holes* property that each reference an array of [page:Vector2 Vector2s]. The
-		points will all be equally spaced along the shape.
-		</div>
-
-		<h3>[method:Array getPointsHoles]( [page:Integer divisions] )</h3>
-		<div>
-		divisions -- The number of divisions to create on the shape
-		</div>
-		<div>
-		Get an array of [page Vector2 Vector2s] that represent the holes in the shape.
-		</div>
-
-		<h3>[method:Array getSpacedPointsHoles]( [page:Integer divisions] )</h3>
-		<div>
-		divisions -- The number of divisions to create on the shape
-		</div>
-		<div>
-		Get an array of equally spaced [page Vector2 Vector2s] that represent the holes in the shape.
-		</div>
+<pre id="3.7toShapes">.toShapes ( isCCW : Boolean, noHoles : Boolean ) : Array</pre>
+<div class=list>isCCW -- Changes how solids and holes are generated</div>
+<div class=list>noHoles -- Whether or not to generate holes</div>
+Converts the subPaths array into an array of Shapes. By default solid shapes are defined clockwise (CW) and holes are defined counterclockwise (CCW). If isCCW is set to true, then those are flipped. If the paramater noHoles is set to true then all paths are set as solid shapes and isCCW is ignored.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Path.js" target="_blank">Path.js на github.com</a></div><br><br>
 
-<a name="4.1"></a>
-		[page:EllipseCurve] &rarr;
-<h3>ArcCurve</h3>
-Alias for [page:EllipseCurve]
+
+<h2 id="4">Дополнения к кривым</h2>
+
+
+<span class="right_side"><a href="#4.5" title="Переход к родительскому классу"><tt>EllipseCurve &rarr;</tt></a></span>
+<h3 id="4.1">ArcCurve</h3>
+Псевдоним (алиас) для <a href="#4.5">EllipseCurve</a><br><br>
+
+<h4>Свойства</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#4.5">EllipseCurve</a>.
+<div class=blockindent><br>
+<pre id="4.1isArcCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is ArcCurve - является объектом ArcCurve')" onmouseout="hide()">.isArcCurve</a></span></pre>
+Used to check whether this or derived classes are ArcCurves. Значением по умолчанию является <tt>true</tt>.<br>
+You should not change this, as it used internally for optimisation.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/ArcCurve.js" target="_blank">ArcCurve.js на github.com</a></div><br><br>
 
-<a name="4.2"></a>
-[page:Curve] &rarr;
-<h3>CatmullRomCurve3</h3>
-Create a smooth 3d spline curve from a series of points using the Catmull-Rom algorithm
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.2">CatmullRomCurve3</h3>
+Create a smooth 3d spline curve from a series of points using the <a href="https://en.wikipedia.org/wiki/Centripetal_Catmull-Rom_spline" target="_blank">Catmull-Rom algorithm</a>.<br><br>
 
 <h4>Пример</h4>
-
-<pre>//Create a closed wavey loop
+<pre>// Create a closed wavey loop
+// создаем замкнутый волновой цикл
 var curve = new THREE.CatmullRomCurve3( [
 	new THREE.Vector3( -10, 0, 10 ),
 	new THREE.Vector3( -5, 5, 5 ),
 	new THREE.Vector3( 0, 0, 0 ),
 	new THREE.Vector3( 5, -5, 5 ),
 	new THREE.Vector3( 10, 0, 10 )
-] );
-
-var geometry = new THREE.Geometry();
-geometry.vertices = curve.getPoints( 50 );
-
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );</pre>
-
-<h3>[example:webgl_geometry_extrude_splines geometry / extrude / splines]</h3>
-
-<h4>Конструктор</h4>
-<h3>CatmullRomCurve3( [page:Array points] )</h3>
-<div>points – An array of [page:Vector3] points</div>
-
-<h4>Свойства</h4>
-<h3>[property:Array points]</h3>
-
-		<h3>[property:Boolean closed] – curve loops back onto itself when true. False by default.</h3>
-
-		<h3>[property:String type] - possible values are `centripetal` (default), `chordal` and `catmullrom`</h3>
-
-		<h3>[property:float tension] - when type is `catmullrom`, defines catmullrom's tension. Defaults to 0.5</h3>
-
-<h4>Методы</h4>
-See [page:Curve] for inherited methods
-
-<h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="4.3"></a>
-[page:Curve] &rarr;
-<h3>ClosedSplineCurve3</h3>
-Create a smooth 3d spline curve from a series of points that loops back onto itself. THREE.ClosedSplineCurve3 has been deprecated. Please use THREE.CatmullRomCurve3
-
-<h4>Пример</h4>
-<pre>//Create a closed wavey loop
-var curve = new THREE.ClosedSplineCurve3( [
-	new THREE.Vector3( -10, 0, 10 ),
-	new THREE.Vector3( -5, 5, 5 ),
-	new THREE.Vector3( 0, 0, 0 ),
-	new THREE.Vector3( 5, -5, 5 ),
-	new THREE.Vector3( 10, 0, 10 )
-] );
-
-var geometry = new THREE.Geometry();
-geometry.vertices = curve.getPoints( 50 );
-
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );</pre>
-
-		<h3>[example:webgl_geometry_extrude_splines geometry / extrude / splines] (choose SampleClosedSpline)</h3>
-
+] );<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var curveObject = new THREE.Line( geometry, material );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_geometry_extrude_splines" target="_blank">geometry / extrude / splines</a></pre><br>
 
 <h4>Конструктор</h4>
-<h3>[name]( [page:Array points] )</h3>
-<div>points – An array of [page:Vector3] points</div>
+<pre>CatmullRomCurve3( points : Array, closed : Boolean, curveType : String, tension : Float )</pre>
+<div class=list><tt>points</tt> – An array of Vector3 points</div>
+<div class=list><tt>closed</tt> – Whether the curve is closed. Значение по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt>curveType</tt> – Type of the curve. Default is centripetal.</div>
+<div class=list><tt>tension</tt> – Tension of the curve. Значение по умолчанию равно <tt>0.5</tt>.</div><br>
 
 <h4>Свойства</h4>
-<h3>[property:Array points]</h3>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.2isCatmullRomCurve3">.isCatmullRomCurve3 : Boolean</pre>
+Used to check whether this or derived classes are CatmullRomCurve3s. Default is true.<br>
+You should not change this, as it used internally for optimisation.<br><br>
+
+<pre id="4.2points">.points : Array</pre>
+The array of Vector3 points that define the curve. It needs at least two entries.<br><br>
+
+<pre id="4.2closed">.closed : Boolean</pre>
+The curve will loop back onto itself when this is true.<br><br>
+
+<pre id="4.2curveType">.curveType : String</pre>
+Possible values are centripetal, chordal and catmullrom.<br><br>
+
+<pre id="4.2tension">.tension : float</pre>
+When .type is catmullrom, defines catmullrom's tension.</div><br>
 
 <h4>Методы</h4>
-See [page:Curve] for inherited methods</h3>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/CatmullRomCurve3.js" target="_blank">CatmullRomCurve3.js на github.com</a></div><br><br>
 
-<a name="4.4"></a>
-		[page:Curve] &rarr;
 
-<h3>CubicBezierCurve3</h3>
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.3">CubicBezierCurve</h3>
 Create a smooth 2d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg" target="_blank">cubic bezier curve</a>.
+Статья Википедии <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank">о кривых Безье</a> на английском языке.
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
-
-<pre>
-var curve = new THREE.CubicBezierCurve(
-	new THREE.Vector3( -10, 0, 0 ),
-	new THREE.Vector3( -5, 15, 0 ),
-	new THREE.Vector3( 20, 15, 0 ),
-	new THREE.Vector3( 10, 0, 0 )
-);
-
-var path = new THREE.Path( curve.getPoints( 50 ) );
-
-var geometry = path.createPointsGeometry( 50 );
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
-
-// Create the final Object3d to add to the scene
-var curveObject = new THREE.Line( geometry, material );
-</pre>
+<pre>var curve = new THREE.CubicBezierCurve(
+  new THREE.Vector2( -10, 0 ),
+  new THREE.Vector2( -5, 15 ),
+  new THREE.Vector2( 20, 15 ),
+  new THREE.Vector2( 10, 0 )
+);<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var curveObject = new THREE.Line( geometry, material );</pre>
 
 <h4>Конструктор</h4>
-<h3>CubicBezierCurve3( [page:Vector2 v0], [page:Vector2 v1], [page:Vector2 v2], [page:Vector2 v3] )</h3>
-		<div>
-			[page:Vector2 v0] – The starting point<br/>
-			[page:Vector2 v1] – The first control point<br/>
-			[page:Vector2 v2] – The second control point<br/>
-			[page:Vector2 v3] – The ending point<br/>
-		</div>
+<pre>CubicBezierCurve ( <a href="math.htm#18" onmouseover="show('Vector2.<br>v0 - сокращ. англ. слов vector с индексом 0')" onmouseout="hide()">v0</a>, <a href="math.htm#18" onmouseover="show('Vector2.<br>v1 - сокращ. англ. слов vector с индексом 1')" onmouseout="hide()">.v1</a>, <a href="math.htm#18" onmouseover="show('Vector2.<br>v2 - сокращ. англ. слов vector с индексом 2')" onmouseout="hide()">.v2</a>, <a href="math.htm#18" onmouseover="show('Vector2.<br>v3 - сокращ. англ. слов vector с индексом 3')" onmouseout="hide()">.v3</a> )</pre>
+<div class=list><tt>v0</tt> – начальная точка.</div>
+<div class=list><tt>v1</tt> – первая контрольная точка.</div>
+<div class=list><tt>v2</tt> – вторая контрольная точка.</div>
+<div class=list><tt>v3</tt> – конечная точка.</div><br>
 
-  <h4>Свойства</h4>
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.3isCubicBezierCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CubicBezierCurve - ')" onmouseout="hide()">.isCubicBezierCurve</a></span></pre>
+Used to check whether this or derived classes are CubicBezierCurves. Default is true.<br>
+You should not change this, as it used internally for optimisation.<br><br>
 
-		<h3>[property:Vector2 v0]</h3>
+<pre id="4.3v0"><a href="math.htm#18" onmouseover="show('Vector2.<br>v0 - сокращ. англ. слов vector с индексом 0')" onmouseout="hide()">.v0</a></pre>
+Начальная точка.<br><br>
 
-		<h3>[property:Vector2 v1]</h3>
+<pre id="4.3v1"><a href="math.htm#18" onmouseover="show('Vector2.<br>v1 - сокращ. англ. слов vector с индексом 1')" onmouseout="hide()">.v1</a></pre>
+Первая контрольная точка.<br><br>
 
-		<h3>[property:Vector2 v2]</h3>
+<pre id="4.3v2"><a href="math.htm#18" onmouseover="show('Vector2.<br>v2 - сокращ. англ. слов vector с индексом 2')" onmouseout="hide()">.v2</a></pre>
+Вторая контрольная точка.<br><br>
 
-		<h3>[property:Vector2 v3]</h3>
+<pre id="4.3v3"><a href="math.htm#18" onmouseover="show('Vector2.<br>v3 - сокращ. англ. слов vector с индексом 3')" onmouseout="hide()">.v3</a></pre>
+Конечная точка.</div><br>
 
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
 
-  <h4>Методы</h4>
-
-		<h3>See [page:Curve] for inherited methods</h3>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="4.5"></a>
-		[page:Curve] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">
-			Create a smooth 3d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg" target="_blank">cubic bezier curve</a>.
-		</div>
-
-  <h4>Пример</h4>
-
-<pre>
-var curve = new THREE.CubicBezierCurve3(
-	new THREE.Vector3( -10, 0, 0 ),
-	new THREE.Vector3( -5, 15, 0 ),
-	new THREE.Vector3( 20, 15, 0 ),
-	new THREE.Vector3( 10, 0, 0 )
-);
-
-var geometry = new THREE.Geometry();
-geometry.vertices = curve.getPoints( 50 );
-
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
-
-// Create the final Object3d to add to the scene
-var curveObject = new THREE.Line( geometry, material );
-
-</pre>
-
-  <h4>Конструктор</h4>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/CubicBezierCurve.js" target="_blank">CubicBezierCurve.js на github.com</a></div><br><br>
 
 
-		<h3>[name]( [page:Vector3 v0], [page:Vector3 v1], [page:Vector3 v2], [page:Vector3 v3] )</h3>
-		<div>
-			[page:Vector3 v0] – The starting point<br/>
-			[page:Vector3 v1] – The first control point<br/>
-			[page:Vector3 v2] – The second control point<br/>
-			[page:Vector3 v3] – The ending point<br/>
-		</div>
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.4">CubicBezierCurve3</h3>
+Create a smooth 3d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg" target="_blank">cubic bezier curve</a>.
+Статья Википедии <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank">о кривых Безье</a> на английском языке.
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.<br><br>
 
-  <h4>Свойства</h4>
+<h4>Пример</h4>
+<pre>var curve = new THREE.CubicBezierCurve3(
+  new THREE.Vector3( -10, 0, 0 ),
+  new THREE.Vector3( -5, 15, 0 ),
+  new THREE.Vector3( 20, 15, 0 ),
+  new THREE.Vector3( 10, 0, 0 )
+);<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var curveObject = new THREE.Line( geometry, material );</pre>
 
-		<h3>[property:Vector3 v0]</h3>
+<h4>Конструктор</h4>
+<pre>CubicBezierCurve3 ( <a href="math.htm#19" onmouseover="show('Vector3.<br>v0 - сокращ. англ. слов vector с индексом 0')" onmouseout="hide()">v0</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>v1 - сокращ. англ. слов vector с индексом 1')" onmouseout="hide()">.v1</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>v2 - сокращ. англ. слов vector с индексом 2')" onmouseout="hide()">.v2</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>v3 - сокращ. англ. слов vector с индексом 3')" onmouseout="hide()">.v3</a> )</pre>
+<div class=list><tt>v0</tt> – начальная точка.</div>
+<div class=list><tt>v1</tt> – первая контрольная точка.</div>
+<div class=list><tt>v2</tt> – вторая контрольная точка.</div>
+<div class=list><tt>v3</tt> – конечная точка.</div><br>
 
-		<h3>[property:Vector3 v1]</h3>
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.4isCubicBezierCurve3"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CubicBezierCurve - ')" onmouseout="hide()">.isCubicBezierCurve</a></span></pre>
+Used to check whether this or derived classes are CubicBezierCurves. Default is true.<br>
+You should not change this, as it used internally for optimisation.<br><br>
 
-		<h3>[property:Vector3 v2]</h3>
+<pre id="4.4v0"><a href="math.htm#19" onmouseover="show('Vector3.<br>v0 - сокращ. англ. слов vector с индексом 0')" onmouseout="hide()">.v0</a></pre>
+Начальная точка.<br><br>
 
-		<h3>[property:Vector3 v3]</h3>
+<pre id="4.4v1"><a href="math.htm#19" onmouseover="show('Vector3.<br>v1 - сокращ. англ. слов vector с индексом 1')" onmouseout="hide()">.v1</a></pre>
+Первая контрольная точка.<br><br>
+
+<pre id="4.4v2"><a href="math.htm#19" onmouseover="show('Vector3.<br>v2 - сокращ. англ. слов vector с индексом 2')" onmouseout="hide()">.v2</a></pre>
+Вторая контрольная точка.<br><br>
+
+<pre id="4.4v3"><a href="math.htm#19" onmouseover="show('Vector3.<br>v3 - сокращ. англ. слов vector с индексом 3')" onmouseout="hide()">.v3</a></pre>
+Конечная точка.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/CubicBezierCurve3.js" target="_blank">CubicBezierCurve3.js на github.com</a></div><br><br>
 
 
-  <h4>Методы</h4>
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.5">EllipseCurve</h3>
+Creates a 2d curve in the shape of an ellipse. Setting the xRadius equal to the yRadius will result in a circle.<br><br>
 
-		<h3>See [page:Curve] for inherited methods</h3>
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="4.6"></a>
-		[page:Curve] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">Creates a 2d curve in the shape of an ellipse.</div>
-
-  <h4>Пример</h4>
-
-<pre>
-var curve = new THREE.EllipseCurve(
+<h4>Пример</h4>
+<pre>var curve = new THREE.EllipseCurve(
 	0,  0,            // ax, aY
 	10, 10,           // xRadius, yRadius
 	0,  2 * Math.PI,  // aStartAngle, aEndAngle
 	false,            // aClockwise
 	0                 // aRotation
-);
+);<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var ellipse = new THREE.Line( geometry, material );</pre><br>
 
-var path = new THREE.Path( curve.getPoints( 50 ) );
-var geometry = path.createPointsGeometry( 50 );
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+<h4>Конструктор</h4>
+<pre>EllipseCurve( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aX</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aY</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">xRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">yRadius</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aStartAngle</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aEndAngle</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aClockwise</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aRotation</a></span> )</pre>
+<div class=list>aX – The X center of the ellipse. Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list>aY – The Y center of the ellipse. Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list>xRadius – The radius of the ellipse in the x direction. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list>yRadius – The radius of the ellipse in the y direction. Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list>aStartAngle – The start angle of the curve in radians starting from the middle right side. Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list>aEndAngle – The end angle of the curve in radians starting from the middle right side. Значением по умолчанию является <tt>2&#215;Math.PI</tt>.</div>
+<div class=list>aClockwise – рисовать ли эллипс в направлении по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list>aRotation – The rotation angle of the ellipse in radians, counterclockwise from the positive X axis (optional). Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=note><b>Примечание:</b> When going clockwise it's best to set the start angle to (Math.PI * 2) and then work towards lower numbers.</div><br>
 
-// Create the final Object3d to add to the scene
-var ellipse = new THREE.Line( geometry, material );
-</pre>
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.5aX">.aX : Float</pre>
+The X center of the ellipse.<br><br>
 
-  <h4>Конструктор</h4>
+<pre id="4.5aY">.aY : Float</pre>
+The Y center of the ellipse.<br><br>
 
+<pre id="4.5xRadius">.xRadius : Radians</pre>
+The radius of the ellipse in the x direction.<br><br>
 
-		<h3>[name]( [page:Float aX], [page:Float aY], [page:Float xRadius], [page:Float yRadius], [page:Radians aStartAngle], [page:Radians aEndAngle], [page:Boolean aClockwise], [page:Radians aRotation] )</h3>
-		<div>
-			aX – The X center of the ellipse<br/>
-			aY – The Y center of the ellipse<br/>
-			xRadius – The radius of the ellipse in the x direction<br/>
-			yRadius – The radius of the ellipse in the y direction<br/>
-			aStartAngle – The start angle of the curve in radians starting from the middle right side<br/>
-			aEndAngle – The end angle of the curve in radians starting from the middle right side<br/>
-			aClockwise – Whether the ellipse is clockwise<br/>
-			aRotation – The rotation angle of the ellipse in radians, counterclockwise from the positive X axis (optional)<br/><br/>
+<pre id="4.5yRadius">.yRadius : Radians</pre>
+The radius of the ellipse in the y direction.<br><br>
 
-			<strong>Note:</strong> When going clockwise it's best to set the start angle to (Math.PI * 2) and then work towards lower numbers.
-		</div>
+<pre id="4.5aStartAngle">.aStartAngle : Float</pre>
+The start angle of the curve in radians starting from the middle right side.<br><br>
 
+<pre id="4.5aEndAngle">.aEndAngle : Float</pre>
+The end angle of the curve in radians starting from the middle right side.<br><br>
 
-  <h4>Свойства</h4>
+<pre id="4.5aClockwise">.aClockwise : Boolean</pre>
+Whether the ellipse is drawn clockwise.
 
-		<h3>[property:Float aX]</h3>
-		<h3>[property:Float aY]</h3>
-		<h3>[property:Radians xRadius]</h3>
-		<h3>[property:Radians yRadius]</h3>
-		<h3>[property:Float aStartAngle]</h3>
-		<h3>[property:Float aEndAngle]</h3>
-		<h3>[property:Boolean aClockwise]</h3>
-		<h3>[property:Float aRotation]</h3>
+<pre id="4.5aRotation">.aRotation : Float</pre>
+The rotation angle of the ellipse in radians, counterclockwise from the positive X axis (optional). Default is 0.
 
-  <h4>Методы</h4>
+<pre id="4.5isEllipseCurve">.isEllipseCurve : Boolean</pre>
+Used to check whether this or derived classes are ellipses. Default is true.<br>
 
-		<h3>See [page:Curve] for inherited methods</h3>
+You should not change this, as it used internally for optimisation.</div><br>
 
-  <h4>Исходники</h4>
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
 
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/EllipseCurve.js" target="_blank">EllipseCurve.js на github.com</a></div><br><br>
+
 
 <a name="4.7"></a>
 		[page:Curve] &rarr;
@@ -1352,776 +928,25 @@ See [page:Curve] for inherited methods
 <h4>Исходники</h4>
 [link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
 
-<a name="5.1"></a>
-		[page:Object3D] &rarr;
 
-		<h1>[name]</h1>
+<h2 id="5">Дополнения к объектам</h2>
 
-		<div class="desc">An 3D arrow Object.</div>
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="5.1">ImmediateRenderObject</h3>
+Базовый класс для немедленной визуализации объектов.<br><br>
 
-
-  <h4>Пример</h4>
-
-		<pre>var dir = new THREE.Vector3( 1, 0, 0 );
-		var origin = new THREE.Vector3( 0, 0, 0 );
-		var length = 1;
-		var hex = 0xffff00;
-
-		var arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
-		scene.add( arrowHelper );
-  </pre>
-
-
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]([page:Vector3 dir], [page:Vector3 origin], [page:Number length], [page:Number hex], [page:Number headLength], [page:Number headWidth] )</h3>
-		<div>
-		dir -- Vector3 -- direction from origin. Must be a unit vector. <br />
-		origin -- Vector3 <br />
-		length -- scalar <br />
-		hex -- hexadecimal value to define color ex:0xffff00<br />
-		headLength -- The length of the head of the arrow<br />
-		headWidth -- The length of the width of the arrow
-		</div>
-		<div>
-		This creates an arrow starting in origin in the direction dir for a certain length. It is also possible to change color.
-		</div>
-
-
-  <h4>Свойства</h4>
-
-
-
-		<h3>[property:Line line]</h3>
-		<div>
-		Contains the line part of the arrowHelper.
-		</div>
-
-		<h3>[property:Mesh cone]</h3>
-		<div>
-		Contains the cone part of the arrowHelper.
-		</div>
-
-  <h4>Методы</h4>
-
-
-
-		<h3>[method:null setColor]([page:Number hex])</h3>
-		<div>
-		hex -- The hexadicmal value of the color
-		</div>
-		<div>
-		Sets the color of the arrowHelper.
-		</div>
-
-		<h3>[method:null setLength]([page:Number length], [page:Number headLength], [page:Number headWidth])</h3>
-		<div>
-		length -- The desired length<br />
-		headLength -- The length of the head of the arrow<br />
-		headWidth -- The length of the width of the arrow
-		</div>
-		<div>
-		Sets the length of the arrowhelper.
-		</div>
-
-		<h3>[method:null setDirection]([page:Vector3 dir])</h3>
-		<div>
-		dir -- The desired direction. Must be a unit vector.
-		</div>
-		<div>
-		Sets the direction of the arrowhelper.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.2"></a>
-		[page:Line] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">An axis object to visualize the the 3 axes in a simple way. <br />
-			The X axis is red. The Y axis is green. The Z axis is blue.</div>
-
-
-  <h4>Пример</h4>
-
-                <pre>var axisHelper = new THREE.AxisHelper( 5 );
-		scene.add( axisHelper );
-                </pre>
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]([page:Number size])</h3>
-		<div>
-		size -- Define the size of the line representing the axes.
-		</div>
-		<div>
-		Creates an axisHelper with lines of length size.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.3"></a>
-		[page:Mesh] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">A helper object to show the world-axis-aligned bounding box for an object.</div>
-
-
-  <h4>Пример</h4>
-
-		<pre>var hex  = 0xff0000;
-
-		var sphereMaterial = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
-		var sphere = new THREE.Mesh( new THREE.SphereGeometry( 30, 12, 12), sphereMaterial );
-		scene.add( sphere );
-
-		var bbox = new THREE.BoundingBoxHelper( sphere, hex );
-		bbox.update();
-		scene.add( bbox );
-  </pre>
-		<div>Note that this helper will create a wireframe [page:Mesh] object with a [page:BoxGeometry]; the resulting bounding box object will therefore have face diagonals. You may want to use [page:BoxHelper], which generates a [page:Line] object without face diagonals.</div>
-
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]([page:Object3D object], [page:Number hex])</h3>
-		<div>
-		object -- Object3D -- the object3D to show the world-axis-aligned boundingbox.<br />
-		hex -- hexadecimal value to define color ex:0x888888
-		</div>
-		<div>
-		This creates an line object to the boundingbox.
-		</div>
-
-
-  <h4>Свойства</h4>
-
-
-
-		<h3>[property:Object3D object]</h3>
-		<div>
-		Contains the object3D to show the world-axis-aligned boundingbox.
-		</div>
-
-		<h3>[property:Box3 box]</h3>
-		<div>
-		Contains the bounding box of the object.
-		</div>
+<h4>Конструктор</h4>
+<pre>ImmediateRenderObject( )</pre>
+Конструктор создает новый ImmediateRenderObject.<br><br>
 
 <h4>Методы</h4>
-<h3>[method:null update]()</h3>
-		<div>
-		Updates the BoundingBoxHelper based on the object property.
-		</div>
+<div class=blockindent><br>
+<pre id="5.1render"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - визуализировать')" onmouseout="hide()">.render</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render callback - (функция) обратного вызова (для) визуализации')" onmouseout="hide()">renderCallback</a></span> )</pre>
+<div class=list><tt>renderCallback</tt> -- A function to render the generated object.</div>
+This function needs to be overridden to start the creation of the object and should call renderCallback when finished.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/objects/ImmediateRenderObject.js" target="_blank">ImmediateRenderObject.js на github.com</a></div><br><br>
 
-<a name="5.4"></a>
-		[page:Line] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">Helper object to show a wireframe box (with no face diagonals) around an object</div>
-
-
-  <h4>Пример</h4>
-
-		<pre>var sphere = new THREE.SphereGeometry();
-		var object = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( 0xff0000 ) );
-		var box = new THREE.BoxHelper( object );
-		scene.add( box );
-  </pre>
-
-
-  <h4>Конструктор</h4>
-
-		<h3>[name]( [page:Object3D object], [page:Color color] )</h3>
-		<div>
-		object -- Object3D -- the object3D to show the world-axis-aligned boundingbox.<br />
-		color -- The color of the helper. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0xffff00
-		</div>
-		<div>Creates a new wireframe box matching the size of the passed box.</div>
-
-  <h4>Свойства</h4>
-
-		<div>(none)</div>
-
-  <h4>Методы</h4>
-
-		<h3>[method:null update]( [page:Object3D object] )</h3>
-		<div>
-		Updates the helper's geometry to match the dimensions of the [page:Geometry.boundingBox bounding box] of the passed object's geometry.
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.5"></a>
-		[page:Line] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">
-		The camera Helper is an Object3D which helps visualizing what a camera contains in its frustum.<br />
-		It visualizes the frustum with an line Geometry.
-		</div>
-
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]([page:Camera camera])</h3>
-		<div>
-		camera -- The camera to visualize.
-		</div>
-		<div>
-		This create a new [Name] for the specified camera.
-		</div>
-
-
-  <h4>Свойства</h4>
-
-
-		<h3>[property:object pointMap]</h3>
-		<div>
-		This contains the points to viualize the cameraHelper
-		</div>
-
-		<h3>[property:Camera camera]</h3>
-		<div>
-		The camera to visualize.
-		</div>
-
-  <h4>Методы</h4>
-
-
-		<h3>[method:null update]()</h3>
-		<div>
-		Updates the helper based on the projectionMatrix of the camera.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.6"></a>
-		[page:Object3D] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">Visualize a [page:DirectionalLight]'s effect on the scene</div>
-
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]([page:DirectionalLight light], [page:Number size])</h3>
-		<div>
-		light -- [page:DirectionalLight] -- Light to visualize <br />
-		size -- dimensions of the plane
-		</div>
-		<div>
-		Creates a line and plane to visualize the light's position and direction
-		</div>
-
-
-  <h4>Свойства</h4>
-
-
-		<h3>[property:Line lightPlane]</h3>
-		<div>
-		Contains the line mesh showing the location of the directional light.
-		</div>
-
-		<h3>[property:DirectionalLight light]</h3>
-		<div>
-		Contains the directionalLight.
-		</div>
-
-		<h3>[property:Line targetLine]</h3>
-		<div>
-		Contains the line mesh that shows the direction of the light.
-		</div>
-
-  <h4>Методы</h4>
-
-
-		<h3>.[method:null update]()</h3>
-		<div>
-		Updates the helper to match the position and direction of the [page:.light].
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.7"></a>
-		[page:Line] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">Renders [page:ArrowHelper arrows] to visualize an object's [page:Face3 face] normals. Requires that the object's geometry be an instance of [page:Geometry] (does not work with [page:BufferGeometry]), and that face normals have been specified on all [page:Face3 faces] or calculated with [page:Geometry.computeFaceNormals computeFaceNormals].</div>
-
-  <h4>Пример</h4>
-
-  <pre>
-		geometry = new THREE.BoxGeometry( 10, 10, 10, 2, 2, 2 );
-		material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-		object = new THREE.Mesh( geometry, material );
-
-		edges = new THREE.FaceNormalsHelper( object, 2, 0x00ff00, 1 );
-
-		scene.add( object );
-		scene.add( edges );
-  </pre>
-		[example:webgl_helpers Example using various helpers]
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]( [page:Object3D object], [page:Number size], [page:Color color], [page:Number linewidth] )</h3>
-		<div>
-		object -- object for which to render face normals<br />
-		size -- size (length) of the arrows<br />
-		color -- color of the arrows<br />
-		linewidth -- width of the arrow lines
-		</div>
-
-
-  <h4>Свойства</h4>
-
-		<h3>[property:Object3D object]</h3>
-		<div>
-		The attached object
-		</div>
-
-
-  <h4>Методы</h4>
-
-
-		<h3>[method:null update]()</h3>
-		<div>Updates the face normal preview based on movement of the object.</div>
-
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.8"></a>
-		[page:Line] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">The GridHelper is an object to define grids. Grids are two-dimensional arrays of lines.</div>
-
-
-  <h4>Пример</h4>
-
-		<pre>var size = 10;
-		var step = 1;
-
-		var gridHelper = new THREE.GridHelper( size, step );
-		scene.add( gridHelper );
-  </pre>
-		[example:webgl_helpers Example using various helpers]
-
-
-  <h4>Конструктор</h4>
-
-		<h3>[name]( [page:number size], [page:Number step], [page:Color colorCenterLine], [page:Color colorGrid] )</h3>
-		<div>
-		size -- The size of the grid <br />
-		step -- The size of the step between 2 lines <br />
-		colorCenterLine -- The color of the centerline. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0x444444 <br />
-		colorGrid -- The color of the lines of the grid. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0x888888
-		</div>
-		<div>
-		Creates a new [name] of size 'size' and with steps of size 'step'. Colors are optional.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
-
-<a name="5.9"></a>
-		[page:Object3D] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">Creates a visual aid for a [page:HemisphereLight HemisphereLight].</div>
-
-
-  <h4>Конструктор</h4>
-
-		<h3>[name]([page:HemisphereLight light], [page:Number sphereSize])</h3>
-		<div>
-		light -- The HemisphereLight. <br />
-		sphereSize -- The size of the sphere that shows the location.
-		</div>
-		<div>
-		Creates an helper for the hemispherelight.
-		</div>
-
-
-  <h4>Свойства</h4>
-
-		<h3>[property:Mesh lightSphere]</h3>
-		<div>
-		The sphere mesh that shows the location of the hemispherelight.
-		</div>
-
-		<h3>[property:HemisphereLight light]</h3>
-		<div>
-		Contains the HemisphereLight.
-		</div>
-
-
-  <h4>Методы</h4>
-
-		<h3>[method:null update]()</h3>
-		<div>
-		Updates the helper to match the position and direction of the [page:.light].
-		</div>
-
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.10"></a>
-		[page:Mesh] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">This displays a helper object for a [page:PointLight] </div>
-
-
-  <h4>Пример</h4>
-
-		<pre>var pointLight = new THREE.PointLight( 0xff0000, 1, 100 );
-		pointLight.position.set( 10, 10, 10 );
-		scene.add( pointLight );
-
-		var sphereSize = 1;
-		var pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
-		scene.add( pointLightHelper );
-  </pre>
-		[example:webgl_helpers Example using various helpers]
-
-
-  <h4>Конструктор</h4>
-
-		<h3>[name]([page:PointLight light], [page:Float sphereSize])</h3>
-		<div>
-		light -- The [page:PointLight] to display. <br />
-		sphereSize -- The size of the sphere helper
-		</div>
-
-
-  <h4>Свойства</h4>
-
-		<h3>[property:PointLight light]</h3>
-		<div>
-		The [page:PointLight] that is being represented.
-		</div>
-
-
-  <h4>Методы</h4>
-
-		<h3>[method:null update]()</h3>
-		<div>
-		Updates the light helper.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.11"></a>
-		[page:Object3D] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">This displays a cylinder helper object for a [page:SpotLight] </div>
-
-  <h4>Пример</h4>
-		<iframe src='../examples/webgl_lights_spotlight.html'></iframe>
-		<a target="THREE_Examples" href="../examples/#webgl_lights_spotlight">View in Examples</a><br />
-		<h2>Other Examples</h2>
-
-		<div>[example:webgl_lights_spotlights lights / spotlights ]</div>
-
-		<h2>Code Example</h2>
-<pre>var spotLight = new THREE.SpotLight( 0xffffff );
-spotLight.position.set( 10, 10, 10 );
-scene.add( spotLight );
-
-var spotLightHelper = new THREE.SpotLightHelper( spotLight );
-scene.add( spotLightHelper );</pre>
-
-<h4>Конструктор</h4>
-
-
-		<h3>[name]([page:SpotLight light])</h3>
-		<div>
-		light -- The [page:SpotLight] to display
-		</div>
-
-
-  <h4>Свойства</h4>
-
-
-		<h3>[property:SpotLight light]</h3>
-		<div>
-		The [page:SpotLight]
-		</div>
-
-
-  <h4>Методы</h4>
-
-
-		<h3>[method:null update]()</h3>
-		<div>
-		Updates the light helper.
-		</div>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="5.12"></a>
-		[page:Line] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">Renders [page:ArrowHelper arrows] to visualize an object's vertex normal vectors. Requires that normals have been specified in a [page:BufferAttribute custom attribute] or have been calculated using [page:Geometry.computeVertexNormals computeVertexNormals]. </div>
-
-<h4>Пример</h4>
-<pre>geometry = new THREE.BoxGeometry( 10, 10, 10, 2, 2, 2 );
-material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-object = new THREE.Mesh( geometry, material );
-
-edges = new THREE.VertexNormalsHelper( object, 2, 0x00ff00, 1 );
-
-scene.add( object );
-scene.add( edges );</pre>
-		[example:webgl_helpers Example using various helpers]
-
-<h4>Конструктор</h4>
-<h3>[name]( [page:Object3D object], [page:Number size], [page:Color color], [page:Number linewidth] )</h3>
-		<div>object -- object for which to render vertex normals
-		size -- size (length) of the arrows
-		color -- color of the arrows
-		linewidth -- width of the arrow lines
-		</div>
-
-
-<h4>Свойства</h4>
-<h3>[property:Object3D object]</h3>
-		<div>
-		The attached object
-		</div>
-
-
-<h4>Методы</h4>
-<h3>[method:null update]()</h3>
-<div>Updates the vertex normal preview based on movement of the object.</div>
-
-<h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="6.1"></a>
-		[page:Object3D] &rarr;
-<h1>[name]</h1>
-base class for immediate rendering objects.</div>
-
-<h4>Конструктор</h4>
-<h3>[name]()</h3>
-		<div>
-		This creates a new [name].
-		</div>
-
-
-  <h4>Методы</h4>
-<h3>[method:null render]([page:Function renderCallback])</h3>
-		<div>
-		renderCallback -- A function to render the generated object.
-		</div>
-		<div>
-		This function needs to be overridden to start the creation of the object and should call renderCallback when finished.
-		</div>
-
-<h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="6.2"></a>
-		[page:Mesh] &rarr;
-
-<h3>[name]</h3>
-A mesh that can blend together multiple animated morph targets.
-
-<h4>Пример</h4>
-<pre>[example:webgl_morphtargets_md2_control morphtargets / md2 / controll]</pre>
-
-<h4>Конструктор</h4>
-<pre>[name]([page:Geometry geometry], [page:Material material])</pre>
-		<div>
-		geometry — An instance of [page:Geometry].<br />
-		material — An instance of [page:Material] (optional).
-		</div>
-
-<h4>Свойства</h4>
-<pre>[property:object animationsMap]</pre>
-		<div>
-		An object of named animations as added by [page:MorphBlendMesh.createAnimation].
-		</div>
-
-		<h3>[property:array animationsList]</h3>
-		<div>
-		The list of animations as added by [page:MorphBlendMesh.createAnimation].
-		</div>
-
-<h4>Методы</h4>
-<h3>[method:null setAnimationWeight]([page:String name], [page:Float weight])</h3>
-		<div>
-		name -- The name of the animation<br />
-		weight -- Weight of the animation, typically 0-1
-		</div>
-		<div>
-		Set the weight of how much this animation will apply to the overall morph. 0 is off, 1 is full weight.
-		</div>
-
-		<h3>[method:null setAnimationFPS]([page:String name], [page:Float fps])</h3>
-		<div>
-		name -- The name of the animation <br />
-		fps -- The number of frames (morphTargets) per second
-		</div>
-		<div>
-		A frame is typically 1 morph target.
-		</div>
-
-		<h3>[method:null createAnimation]([page:String name], [page:Integer start], [page:Integer end], [page:Float fps])</h3>
-		<div>
-		name -- The name of the animation <br />
-		start -- The starting frame (morph)<br />
-		end -- The ending frame (morph)<br />
-		fps -- How many frames (morphs) to play per second
-		</div>
-		<div>
-		Creates an animation object that gets added to both the [page:MorphBlendMesh.animationsMap animationsMap] and
-		[page:MorphBlendMesh.animationsList animationsList].<br/><br/>
-
-		Animation object:<br/><br/>
-		startFrame -- Starting frame<br/>
-		endFrame -- Ending frame<br/>
-		length -- The number of frames<br/>
-		fps -- The frames per second<br/>
-		duration -- The length of the animation in seconds<br/>
-		lastFrame -- The previous frame that was played<br/>
-		currentFrame -- The current frame<br/>
-		active -- Whether or not the animation is being played<br/>
-		time -- The time in seconds of the animation<br/>
-		direction -- Which way to play the animation<br/>
-		weight -- The weight of the animation<br/>
-		directionBackwards -- Is playing backwards<br/>
-		mirroredLoop -- Loop back and forth
-		</div>
-
-		<h3>[method:null playAnimation]([page:String name])</h3>
-		<div>
-		name -- The name of the animation
-		</div>
-		<div>
-		Sets the animation to active and animation time to 0
-		</div>
-
-		<h3>[method:null update]([page:Float delta])</h3>
-		<div>
-		delta -- Time in seconds
-		</div>
-		<div>
-		Updates and plays the animation
-		</div>
-
-		<h3>[method:null autoCreateAnimations]([page:Float fps])</h3>
-		<div>
-		fps -- Frames per second
-		</div>
-		<div>
-		Goes through the geometry's morphTargets and generates animations based on the morphTargets' names. Names
-		are of the form "walk_01", "walk_02", "walk_03", etc or "run001", "run002", "run003".
-		</div>
-
-		<h3>[method:null setAnimationDuration]([page:String name], [page:Float duration])</h3>
-		<div>
-		name -- The name of the animation <br />
-		duration -- How long in seconds to play the animation
-		</div>
-		<div>
-		Updates the animation object with proper values to update the duration.
-		</div>
-
-		<h3>[method:null setAnimationDirectionForward]([page:String name])</h3>
-		<div>
-		name -- The name of the animation
-		</div>
-		<div>
-		Sets the animation to play forwards
-		</div>
-
-		<h3>[method:null setAnimationDirectionBackward]([page:String name])</h3>
-		<div>
-		name -- The name of the animation
-		</div>
-		<div>
-		Sets the animation to play backwards
-		</div>
-
-		<h3>[method:Float getAnimationDuration]([page:String name])</h3>
-		<div>
-		name -- The name of the animation
-		</div>
-		<div>
-		Returns the duration in seconds of the animation. Returns -1 if it can't be found.
-		</div>
-
-		<h3>[method:Float getAnimationTime]([page:String name])</h3>
-		<div>
-		name -- The name of the animation
-		</div>
-		<div>
-		Returns the current time position of the animation.
-		</div>
-
-		<h3>[method:null setAnimationTime]([page:String name], [page:Float time])</h3>
-		<div>
-		name -- The name of the animation <br />
-		time -- The time in seconds
-		</div>
-		<div>
-		Sets the current time position of the animation
-		</div>
-
-		<h3>[method:null stopAnimation]([page:String name])</h3>
-		<div>
-		name -- The name of the animation
-		</div>
-		<div>
-		Stops the playback of the animation
-		</div>
-
-<h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]
 <br><br>
 </body></html>

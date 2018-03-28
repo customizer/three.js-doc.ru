@@ -8,7 +8,30 @@
 </head>
 <body>
 <h2 class=head1>Дополнения</h2>
-
+<div class=below>Здесь дается описание дополнительных классов к уже имеющимся.
+<div class=list><a href="#1">Earcut</a> - реализация алгоритма разбиения многоугольника на треугольники, т.е. триангуляция</div>
+<div class=list><a href="#2">ShapeUtils</a> -  вспомогательные функции для форм</div>
+<div class=blockindent>Дополнения к основным элементам three.js
+<div class=list><a href="#3.1">Curve</a> - базовый класс для кривых линий</div>
+<div class=list><a href="#3.2">CurvePath</a> - базовый класс массивов кривых линий</div>
+<div class=list><a href="#3.3">Font</a> - создание набора форм для шрифтов</div>
+<div class=list><a href="#3.4">Interpolations</a> - </div>
+<div class=list><a href="#3.5">Path</a> - </div>
+<div class=list><a href="#3.6">Shape</a> - </div>
+<div class=list><a href="#3.7">ShapePath</a> - </div></div>
+<div class=blockindent>Дополнения к кривым
+<div class=list><a href="#4.1">ArcCurve</a> - </div>
+<div class=list><a href="#4.2">CatmullRomCurve3</a> - </div>
+<div class=list><a href="#4.3">CubicBezierCurve</a> - </div>
+<div class=list><a href="#4.4">CubicBezierCurve3</a> - </div>
+<div class=list><a href="#4.5">EllipseCurve</a> - </div>
+<div class=list><a href="#4.6">LineCurve</a> - </div>
+<div class=list><a href="#4.7">LineCurve3</a> - </div>
+<div class=list><a href="#4.8">QuadraticBezierCurve</a> - </div>
+<div class=list><a href="#4.9">QuadraticBezierCurve3</a> - </div>
+<div class=list><a href="#4.10">SplineCurve</a> - </div></div>
+<div class=blockindent>Дополнения к объектам
+<div class=list><a href="#5.1">ImmediateRenderObject</a> - класс для немедленной визуализации объектов</div></div></div>
 
 <h3 id="1">Earcut</h3>
 Реализация алгоритма триангуляции (т.е. разбиения на треугольники) полигона (многоугольника). Earcut в переводе на русский язык будет "ухорез", здесь имеется ввиду способ нарезания треугольников по имеющимся координатам вершин.
@@ -32,18 +55,20 @@
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="2area"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('area - область, площадь, участок')" onmouseout="hide()">.area</a></span>( contour )</pre>
-<div class=list><tt>contour</tt> -- 2D polygon.</div>
-Calculate area of a ( 2D ) contour polygon.<br><br>
+<div class=list><tt>contour</tt> -- двумерный многоугольник (полигон).</div>
+Метод вычисляет площадь двумерного многоугольника, переданного в аргументе <tt>contour</tt>.<br><br>
 
-<pre id="2isClockwise">.isClockwise ( pts ) : Boolean</pre>
-<div class=list><tt>pts</tt> -- points defining a 2D polygon</div>
-Note that this is a linear function so it is neccessary to calculate separately for x, y components of a polygon.<br>
-Used internally by Path, ExtrudeGeometry and ShapeGeometry.<br><br>
+<pre id="2isClockwise"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is clockwise - по часовой стрелке')" onmouseout="hide()">.isClockwise</a></span>( pts )</pre>
+<div class=list><tt>pts</tt> -- точки, определяющие двумерный многоугольник.</div>
+Обратите внимание, что это линейная функция, поэтому необходимо делать отдельные вычисления для <tt>x</tt> и <tt>y</tt> компонентов многоугольника.<br>
+Используется внутри <em>three.js</em> классами <a href="#3.5" onmouseover="show('Path')" onmouseout="hide()">Path</a>,
+<a href="geometries.htm#12" onmouseover="show('ExtrudeGeometry')" onmouseout="hide()">ExtrudeGeometry</a> и <a href="geometries.htm#29" onmouseover="show('ShapeGeometry')" onmouseout="hide()">ShapeGeometry</a>.<br><br>
 
-<pre id="2triangulateShape">.triangulateShape ( contour, holes ) : null</pre>
-<div class=list><tt>contour</tt> -- 2D polygon.</div>
-<div class=list><tt>holes</tt> -- array of holes</div>
-Used internally by ExtrudeGeometry and ShapeGeometry to calculate faces in shapes with holes.</div><br>
+<pre id="2triangulateShape"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('triangulate shape - триангуляция формы,<br>т.е. разбиение формы на треугольники')" onmouseout="hide()">.triangulateShape</a></span>( contour, holes )</pre>
+<div class=list><tt>contour</tt> -- двумерный многоугольник.</div>
+<div class=list><tt>holes</tt> -- массив дырок.</div>
+Используется внутри <em>three.js</em> для вычисления граней в формах с дырками классами
+<a href="geometries.htm#12" onmouseover="show('ExtrudeGeometry')" onmouseout="hide()">ExtrudeGeometry</a> и <a href="geometries.htm#29" onmouseover="show('ShapeGeometry')" onmouseout="hide()">ShapeGeometry</a>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/ShapeUtils.js" target="_blank">ShapeUtils.js на github.com</a></div><br><br>
@@ -52,7 +77,7 @@ Used internally by ExtrudeGeometry and ShapeGeometry to calculate faces in shape
 <h2 id="3">Дополнения к основным элементам <em>three.js</em></h2>
 
 <h3 id="3.1">Curve</h3>
-An abstract base class for creating a Curve object that contains methods for interpolation. For an array of Curves see CurvePath.<br><br>
+Абстрактный базовый класс для создания объекта Curve, который содержит методы интерполяции. Массив объектов Curve рассматривается в <a href="#3.2" onmouseover="show('CurvePath')" onmouseout="hide()">CurvePath</a>.<br><br>
 
 <h4>Конструктор</h4>
 <pre>Curve( )</pre>
@@ -60,17 +85,19 @@ An abstract base class for creating a Curve object that contains methods for int
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="3.1arcLengthDivisions"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('arc length divisions - ')" onmouseout="hide()">.arcLengthDivisions</a></span></pre>
-This value determines the amount of divisions when calculating the cumulative segment lengths of a curve via .getLengths. To ensure precision when using methods like .getSpacedPoints, it is recommended to increase .arcLengthDivisions if the curve is very large. Default is 200.
-</div><br>
+<pre id="3.1arcLengthDivisions"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('arc length divisions - части (по) длине дуги')" onmouseout="hide()">.arcLengthDivisions</a></span></pre>
+Значение данного свойства определяет количество частей при вычислении совокупной длины отрезков кривой линии, полученных через <tt><a href="#3.1getLengths" onmouseover="show('Curve.getLengths')" onmouseout="hide()">getLengths</a></tt>.
+Если кривая линия очень велика, то для обеспечения точности при использовании методов типа <tt><a href="#3.1getSpacedPoints" onmouseover="show('Curve.getSpacedPoints')" onmouseout="hide()">getSpacedPoints</a></tt>,
+рекомендуется увеличивать значение <tt>arcLengthDivisions</tt>. Значение по умолчанию равно <tt>200</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="3.1clone"><a href="#3.1" onmouseover="show('Curve.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
 Создает клон данного экземпляра кривой линии.<br><br>
 
-<pre id="3.1computeFrenetFrames">.computeFrenetFrames ( segments : Integer, closed : Boolean ) : Object</pre>
-Generates the Frenet Frames. Used in geometries like TubeGeometry or ExtrudeGeometry.<br><br>
+<pre id="3.1computeFrenetFrames"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute frenet frames - вычислить реперы Френе')" onmouseout="hide()">.computeFrenetFrames</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('segments - части, сегменты')" onmouseout="hide()">segments</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closed - закрыть, замкнуть')" onmouseout="hide()">closed</a></span> )</pre>
+Generates the Frenet Frames.
+Используется в геометрических элементах вроде <a href="geometries.htm#41" onmouseover="show('TubeGeometry')" onmouseout="hide()">TubeGeometry</a> или <a href="geometries.htm#12" onmouseover="show('ExtrudeGeometry')" onmouseout="hide()">ExtrudeGeometry</a>.<br><br>
 
 <pre id="3.1copy"><a href="#3.1" onmouseover="show('Curve.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#3.1" onmouseover="show('Curve.<br>source - источник, исходник')" onmouseout="hide()">source</a> )</pre>
 Метод копирует в данный экземпляр другой объект Curve, переданный в аргументе <tt>source</tt>.<br><br>
@@ -78,17 +105,16 @@ Generates the Frenet Frames. Used in geometries like TubeGeometry or ExtrudeGeom
 <pre id="3.1fromJSON">.fromJSON ( json : Object ) : Curve</pre>
 Copies the data from the given JSON object to this instance.<br><br>
 
-<pre id="3.1getLength">.getLength( ) : Float</pre>
-Get total curve arc length.<br><br>
+<pre id="3.1getLength"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get length - получить длину')" onmouseout="hide()">.getLength</a></span>( )</pre>
+Метод получает полную длину дуги кривой.<br><br>
 
-<pre id="3.1getLengths">.getLengths( divisions : Integer ) : Array</pre>
-Get list of cumulative segment lengths.<br><br>
+<pre id="3.1getLengths"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get lengths - получить длины')" onmouseout="hide()">.getLengths</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - части, отделы, секции')" onmouseout="hide()">divisions</a></span> )</pre>
+Метод получает список совокупные длины частей кривой.<br><br>
 
-<pre id="3.1getPoint">.getPoint( t : Float, optionalTarget : Vector ) : Vector</pre>
-<div class=list>t - A position on the curve. Must be in the range [ 0, 1 ].</div>
-<div class=list>optionalTarget — (optional) If specified, the result will be copied into this Vector, otherwise a new Vector will be created.</div>
-
-Returns a vector for a given position on the curve.<br><br>
+<pre id="3.1getPoint"><span onclick="showClick('Vector')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get point - получить точку')" onmouseout="hide()">.getPoint</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t сокращ англ. слова target - цель')" onmouseout="hide()">t</a></span>, <span onclick="showClick('Vector')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a></span> )</pre>
+<div class=list><tt>t</tt> - позиция на кривой. Значение должно быть в диапазоне <tt>[ 0, 1 ]</tt>.</div>
+<div class=list><tt>optionalTarget</tt> — если аргумент указан, то результат метод будет скопирован в переданный вектор, в противном случае будет создан новый вектор. Дополнительный, необязательный параметр.</div>
+Метод возвращает вектор заданного положения на кривой.<br><br>
 
 <pre id="3.1getPointAt">.getPointAt( u : Float, optionalTarget : Vector ) : Vector</pre>
 <div class=list>u - A position on the curve according to the arc length. Must be in the range [ 0, 1 ].</div>
@@ -132,7 +158,7 @@ The constructor take no parameters.<br><br>
 
 
 <h4>Свойства</h4>
-See the base Curve class for common properties.
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
 <div class=blockindent><br>
 <pre id="3.2autoClose">.autoClose : boolean</pre>
 Whether or not to automatically close the path.<br><br>
@@ -141,7 +167,7 @@ Whether or not to automatically close the path.<br><br>
 The array of Curves.</div><br>
 
 <h4>Методы</h4>
-See the base Curve class for common methods.
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
 <div class=blockindent><br>
 <pre id="3.2add">.add ( curve : Curve ) : null</pre>
 Add a curve to the .curves array.<br><br>
@@ -248,7 +274,7 @@ The current offset of the path. Any new Curve added will start here.</div><br>
 <h4>Методы</h4>
 Сведения об общих методах смотрите в описании базового класса <a href="#3.2">CurvePath</a>.
 <div class=blockindent><br>
-<pre id="3.5absarc"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('absarc - сокращ. англ. слов abs(olute<br>center of the) arc - абсолютный центр дуги')" onmouseout="hide()">.absarc</a></span>( x : Float, y : Float, radius : Float, startAngle : Float, endAngle : Float, clockwise : Float )</pre>
+<pre id="3.5absarc"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('absarc - сокращ. англ. слов abs(olute<br>center of the) arc - абсолютный центр дуги')" onmouseout="hide()">.absarc</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start angle - начальный угол')" onmouseout="hide()">startAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end angle - конечный угол')" onmouseout="hide()">endAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clockwise - по часовой стрелке')" onmouseout="hide()">clockwise</a></span> )</pre>
 <div class=list><tt>x</tt>, <tt>y</tt> -- координаты абсолютного центра дуги.</div>
 <div class=list><tt>radius</tt> -- радиус дуги.</div>
 <div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
@@ -256,17 +282,17 @@ The current offset of the path. Any new Curve added will start here.</div><br>
 <div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
 Adds an absolutely positioned EllipseCurve to the path.<br><br>
 
-<pre id="3.5absellipse">.absellipse ( x : Float, y : Float, xRadius : Float, yRadius : Float, startAngle : Float, endAngle : Float, clockwise : Float, rotation : Float ) : null</pre>
-<div class=list><tt>x</tt>, <tt>y</tt> -- The absolute center of the ellipse.</div>
-<div class=list><tt>xRadius</tt> -- The radius of the ellipse in the x axis.</div>
-<div class=list><tt>yRadius</tt> -- The radius of the ellipse in the y axis.</div>
+<pre id="3.5absellipse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('abs ellipse - сокращ. англ. слов absolute ellipse -')" onmouseout="hide()">.absellipse</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x radius - радиус по оси x')" onmouseout="hide()">xRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y radius - радиус по оси y')" onmouseout="hide()">yRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start angle - начальный угол')" onmouseout="hide()">startAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end angle - конечный угол')" onmouseout="hide()">endAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clockwise - по часовой стрелке')" onmouseout="hide()">clockwise</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotation - поворот, вращение')" onmouseout="hide()">rotation</a></span> )</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- координаты абсолютного центра эллипса.</div>
+<div class=list><tt>xRadius</tt> -- радиус эллипса по оси <tt>x</tt>.</div>
+<div class=list><tt>yRadius</tt> -- радиус эллипса по оси <tt>y</tt>.</div>
 <div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
 <div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
 <div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
-<div class=list><tt>rotation</tt> -- The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to 0.</div>
+<div class=list><tt>rotation</tt> -- The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Дополнительный, необязательный аргумент, значение по умолчанию равно <tt>0</tt>.</div>
 Adds an absolutely positioned EllipseCurve to the path.<br><br>
 
-<pre id="3.5arc">.arc ( x : Float, y : Float, radius : Float, startAngle : Float, endAngle : Float, clockwise : Float ) : null</pre>
+<pre id="3.5arc"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('arc - дуга')" onmouseout="hide()">.arc</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start angle - начальный угол')" onmouseout="hide()">startAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end angle - конечный угол')" onmouseout="hide()">endAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clockwise - по часовой стрелке')" onmouseout="hide()">clockwise</a></span> )</pre>
 <div class=list><tt>x</tt>, <tt>y</tt> -- The center of the arc offset from the last call.</div>
 <div class=list><tt>radius</tt> -- радиус дуги.</div>
 <div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
@@ -274,10 +300,10 @@ Adds an absolutely positioned EllipseCurve to the path.<br><br>
 <div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
 Adds an EllipseCurve to the path, positioned relative to .currentPoint.<br><br>
 
-<pre id="3.5bezierCurveTo">.bezierCurveTo ( cp1X : Float, cp1Y : Float, cp2X : Float, cp2Y : Float, x : Float, y : Float ) : null</pre>
+<pre id="3.5bezierCurveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bezier curve to - кривая Безье для')" onmouseout="hide()">.bezierCurveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp1X - ')" onmouseout="hide()">cp1X</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp1Y - ')" onmouseout="hide()">cp1Y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp2X - ')" onmouseout="hide()">cp2X</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp2Y - ')" onmouseout="hide()">cp2Y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
 This creates a bezier curve from .currentPoint with (cp1X, cp1Y) and (cp2X, cp2Y) as control points and updates .currentPoint to x and y.<br><br>
 
-<pre id="3.5ellipse">.ellipse ( x : Float, y : Float, xRadius : Float, yRadius : Float, startAngle : Float, endAngle : Float, clockwise : Float, rotation : Float ) : null</pre>
+<pre id="3.5ellipse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.ellipse</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x radius радиус по оси x')" onmouseout="hide()">xRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y radius - радиус по оси y')" onmouseout="hide()">yRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start angle - начальный угол')" onmouseout="hide()">startAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end angle - конечный угол')" onmouseout="hide()">endAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clockwise - по часовой стрелке')" onmouseout="hide()">clockwise</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotation - поворот, вращение')" onmouseout="hide()">rotation</a></span> )</pre>
 <div class=list><tt>x</tt>, <tt>y</tt> -- The center of the ellipse offset from the last call.</div>
 <div class=list><tt>xRadius</tt> -- The radius of the ellipse in the x axis.</div>
 <div class=list><tt>yRadius</tt> -- The radius of the ellipse in the y axis.</div>
@@ -287,10 +313,10 @@ This creates a bezier curve from .currentPoint with (cp1X, cp1Y) and (cp2X, cp2Y
 <div class=list><tt>rotation</tt> -- The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to 0.</div>
 Adds an EllipseCurve to the path, positioned relative to .currentPoint.<br><br>
 
-<pre id="3.5lineTo">.lineTo ( x : Float, y : Float ) : null</pre>
+<pre id="3.5lineTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line to - линия к')" onmouseout="hide()">.lineTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
 Connects a LineCurve from .currentPoint to x, y onto the path.<br><br>
 
-<pre id="3.5moveTo">.moveTo ( x : Float, y : Float ) : null</pre>
+<pre id="3.5moveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('move to - передвинуть к')" onmouseout="hide()">.moveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
 Move the .currentPoint to x, y.<br><br>
 
 <pre id="3.5quadraticCurveTo">.quadraticCurveTo ( cpX : Float, cpY : Float, x : Float, y : Float ) : null</pre>
@@ -426,8 +452,8 @@ Converts the subPaths array into an array of Shapes. By default solid shapes are
 Сведения об общих методах смотрите в описании базового класса <a href="#4.5">EllipseCurve</a>.
 <div class=blockindent><br>
 <pre id="4.1isArcCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is ArcCurve - является объектом ArcCurve')" onmouseout="hide()">.isArcCurve</a></span></pre>
-Used to check whether this or derived classes are ArcCurves. Значением по умолчанию является <tt>true</tt>.<br>
-You should not change this, as it used internally for optimisation.</div><br>
+Свойство используется для проверки, является ли данный класс и производные от него ArcCurve. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/ArcCurve.js" target="_blank">ArcCurve.js на github.com</a></div><br><br>
@@ -466,8 +492,8 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
 <div class=blockindent><br>
 <pre id="4.2isCatmullRomCurve3">.isCatmullRomCurve3 : Boolean</pre>
-Used to check whether this or derived classes are CatmullRomCurve3s. Default is true.<br>
-You should not change this, as it used internally for optimisation.<br><br>
+Свойство используется для проверки, является ли данный класс и производные от него CatmullRomCurve3. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
 <pre id="4.2points">.points : Array</pre>
 The array of Vector3 points that define the curve. It needs at least two entries.<br><br>
@@ -518,9 +544,9 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 <h4>Свойства</h4>
 Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
 <div class=blockindent><br>
-<pre id="4.3isCubicBezierCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CubicBezierCurve - ')" onmouseout="hide()">.isCubicBezierCurve</a></span></pre>
-Used to check whether this or derived classes are CubicBezierCurves. Default is true.<br>
-You should not change this, as it used internally for optimisation.<br><br>
+<pre id="4.3isCubicBezierCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CubicBezierCurve - является классом CubicBezierCurve')" onmouseout="hide()">.isCubicBezierCurve</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него CubicBezierCurve. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
 <pre id="4.3v0"><a href="math.htm#18" onmouseover="show('Vector2.<br>v0 - сокращ. англ. слов vector с индексом 0')" onmouseout="hide()">.v0</a></pre>
 Начальная точка.<br><br>
@@ -571,9 +597,9 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 <h4>Свойства</h4>
 Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
 <div class=blockindent><br>
-<pre id="4.4isCubicBezierCurve3"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CubicBezierCurve - ')" onmouseout="hide()">.isCubicBezierCurve</a></span></pre>
-Used to check whether this or derived classes are CubicBezierCurves. Default is true.<br>
-You should not change this, as it used internally for optimisation.<br><br>
+<pre id="4.4isCubicBezierCurve3"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CubicBezierCurve - является классом CubicBezierCurve3')" onmouseout="hide()">.isCubicBezierCurve3</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него CubicBezierCurve3. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
 <pre id="4.4v0"><a href="math.htm#19" onmouseover="show('Vector3.<br>v0 - сокращ. англ. слов vector с индексом 0')" onmouseout="hide()">.v0</a></pre>
 Начальная точка.<br><br>
@@ -653,9 +679,8 @@ Whether the ellipse is drawn clockwise.
 The rotation angle of the ellipse in radians, counterclockwise from the positive X axis (optional). Default is 0.
 
 <pre id="4.5isEllipseCurve">.isEllipseCurve : Boolean</pre>
-Used to check whether this or derived classes are ellipses. Default is true.<br>
-
-You should not change this, as it used internally for optimisation.</div><br>
+Свойство используется для проверки, является ли данный класс и производные от него EllipseCurve. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.</div><br>
 
 <h4>Методы</h4>
 Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
@@ -664,269 +689,196 @@ You should not change this, as it used internally for optimisation.</div><br>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/EllipseCurve.js" target="_blank">EllipseCurve.js на github.com</a></div><br><br>
 
 
-<a name="4.7"></a>
-		[page:Curve] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">A curve representing a 2d line segment</div>
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]( [page:Vector2 v1], [page:Vector2 v2] )</h3>
-		<div>
-			v1 – The start point<br/>
-			v2 - The end point
-		</div>
-
-
-  <h4>Свойства</h4>
-
-		<h3>[property:Vector2 v1]</h3>
-		<h3>[property:Vector2 v2]</h3>
-
-
-  <h4>Методы</h4>
-
-		<h3>See [page:Curve] for inherited methods</h3>
-
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="4.8"></a>
-		[page:Curve] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">A curve representing a 3d line segment</div>
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]( [page:Vector3 v1], [page:Vector3 v2] )</h3>
-		<div>
-			v1 – The start point<br/>
-			v2 - The end point
-		</div>
-
-
-  <h4>Свойства</h4>
-
-		<h3>[property:Vector3 v1]</h3>
-		<h3>[property:Vector3 v2]</h3>
-
-
-  <h4>Методы</h4>
-
-		<h3>See [page:Curve] for inherited methods</h3>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="4.9"></a>
-		[page:Curve] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">
-			Create a smooth 2d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">quadratic bezier curve</a>.
-		</div>
-
-  <h4>Пример</h4>
-
-<pre>
-var curve = new THREE.QuadraticBezierCurve(
-	new THREE.Vector3( -10, 0, 0 ),
-	new THREE.Vector3( 20, 15, 0 ),
-	new THREE.Vector3( 10, 0, 0 )
-);
-
-var path = new THREE.Path( curve.getPoints( 50 ) );
-
-var geometry = path.createPointsGeometry( 50 );
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
-
-//Create the final Object3d to add to the scene
-var curveObject = new THREE.Line( geometry, material );
-</pre>
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]( [page:Vector2 v0], [page:Vector2 v1], [page:Vector2 v2] )</h3>
-		<div>
-			[page:Vector2 v0] – The starting point<br/>
-			[page:Vector2 v1] – The middle control point<br/>
-			[page:Vector2 v2] – The ending point<br/>
-		</div>
-
-
-  <h4>Свойства</h4>
-
-
-		<h3>[property:Vector2 v0]</h3>
-
-		<h3>[property:Vector2 v1]</h3>
-
-		<h3>[property:Vector2 v2]</h3>
-
-
-  <h4>Методы</h4>
-
-
-		<h3>See [page:Curve] for inherited methods</h3>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="4.10"></a>
-		[page:Curve] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">
-			Create a smooth 3d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">quadratic bezier curve</a>.
-		</div>
-
-  <h4>Пример</h4>
-
-<pre>
-var curve = new THREE.QuadraticBezierCurve3(
-	new THREE.Vector3( -10, 0, 0 ),
-	new THREE.Vector3( 20, 15, 0 ),
-	new THREE.Vector3( 10, 0, 0 )
-);
-
-var geometry = new THREE.Geometry();
-geometry.vertices = curve.getPoints( 50 );
-
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
-
-// Create the final Object3d to add to the scene
-var curveObject = new THREE.Line( geometry, material );
-</pre>
-
-  <h4>Конструктор</h4>
-
-
-		<h3>[name]( [page:Vector3 v0], [page:Vector3 v1], [page:Vector3 v2] )</h3>
-		<div>
-			[page:Vector3 v0] – The starting point<br/>
-			[page:Vector3 v1] – The middle control point<br/>
-			[page:Vector3 v2] – The ending point<br/>
-		</div>
-
-
-
-<h4>Свойства</h4>
-
-		<h3>[property:Vector3 v0]</h3>
-
-		<h3>[property:Vector3 v1]</h3>
-
-		<h3>[property:Vector3 v2]</h3>
-
-
-  <h4>Методы</h4>
-
-
-		<h3>See [page:Curve] for inherited methods</h3>
-
-  <h4>Исходники</h4>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
-
-<a name="4.11"></a>
-		[page:Curve] &rarr;
-
-		<h1>[name]</h1>
-
-		<div class="desc">Create a smooth 2d spline curve from a series of points</div>
-
-  <h4>Пример</h4>
-
-<pre>
-// Create a sine-like wave
-var curve = new THREE.SplineCurve( [
-	new THREE.Vector2( -10, 0 ),
-	new THREE.Vector2( -5, 5 ),
-	new THREE.Vector2( 0, 0 ),
-	new THREE.Vector2( 5, -5 ),
-	new THREE.Vector2( 10, 0 )
-] );
-
-var path = new THREE.Path( curve.getPoints( 50 ) );
-
-var geometry = path.createPointsGeometry( 50 );
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
-
-// Create the final Object3d to add to the scene
-var splineObject = new THREE.Line( geometry, material );
-</pre>
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.6">LineCurve</h3>
+Кривая, представляющая отрезок линии в двумерном пространстве.<br><br>
 
 <h4>Конструктор</h4>
-<h3>[name]( [page:Array points] )</h3>
-		<div>points – An array of [page:Vector2] points</div>
+<pre>LineCurve( <a href="math.htm#18" onmouseover="show('Vector2.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">v1</a>, <a href="math.htm#18" onmouseover="show('Vector2.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">v2</a> )</pre>
+<div class=list><tt>v1</tt> – начальная точка.</div>
+<div class=list><tt>v2</tt> - конечная точка.</div><br>
 
 <h4>Свойства</h4>
-<h3>[property:Array points]</h3>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.6isLineCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is LineCurve - является классом LineCurve')" onmouseout="hide()">.isLineCurve</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него LineCurve. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="4.6v1"><a href="math.htm#18" onmouseover="show('Vector2.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">.v1</a></pre>
+Начальная точка.<br><br>
+
+<pre id="4.6v2"><a href="math.htm#18" onmouseover="show('Vector2.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">.v2</a></pre>
+Конечная точка.</div><br>
 
 <h4>Методы</h4>
-See [page:Curve] for inherited methods
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
 
 <h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/LineCurve.js" target="_blank">LineCurve.js на github.com</a></div><br><br>
 
-		[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
 
-<a name="4.12"></a>
-		[page:Curve] &rarr;
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.7">LineCurve3</h3>
+Кривая, представляющая отрезок линии в трехмерном пространстве.<br><br>
 
-		<h1>[name]</h1>
+<h4>Конструктор</h4>
+<pre>LineCurve3( <a href="math.htm#19" onmouseover="show('Vector3.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">v1</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">v2</a> )</pre>
+<div class=list><tt>v1</tt> – начальная точка.</div>
+<div class=list><tt>v2</tt> - конечная точка.</div><br>
 
-		<div class="desc">Create a smooth 3d spline curve from a series of points</div>
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.7isLineCurve3"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is LineCurve3 - является классом LineCurve3')" onmouseout="hide()">.isLineCurve3</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него LineCurve3. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="4.7v1"><a href="math.htm#19" onmouseover="show('Vector3.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">.v1</a></pre>
+Начальная точка.<br><br>
+
+<pre id="4.7v2"><a href="math.htm#19" onmouseover="show('Vector3.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">.v2</a></pre>
+Конечная точка.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/LineCurve3.js" target="_blank">LineCurve3.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.8">QuadraticBezierCurve</h3>
+Create a smooth 2d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">quadratic bezier curve</a>.<br><br>
 
 <h4>Пример</h4>
-
-<pre>
-//Create a closed bent a sine-like wave
-var curve = new THREE.SplineCurve3( [
-	new THREE.Vector3( -10, 0, 10 ),
-	new THREE.Vector3( -5, 5, 5 ),
-	new THREE.Vector3( 0, 0, 0 ),
-	new THREE.Vector3( 5, -5, 5 ),
-	new THREE.Vector3( 10, 0, 10 )
-] );
-
-var geometry = new THREE.Geometry();
-geometry.vertices = curve.getPoints( 50 );
-
-var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
-
-//Create the final Object3d to add to the scene
-var splineObject = new THREE.Line( geometry, material );
-</pre>
-
-		<h3>[example:webgl_geometry_extrude_splines geometry / extrude / splines ] (choose PipeSpline)</h3>
+<pre>var curve = new THREE.QuadraticBezierCurve(
+  new THREE.Vector2( -10, 0 ),
+  new THREE.Vector2( 20, 15 ),
+  new THREE.Vector2( 10, 0 )
+);<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var curveObject = new THREE.Line( geometry, material );</pre>
 
 <h4>Конструктор</h4>
-<h3>[name]( [page:Array points] )</h3>
-		<div>points – An array of [page:Vector3] points</div>
+<pre>QuadraticBezierCurve( <a href="math.htm#18" onmouseover="show('Vector2.<br>v0 - сокращ. англ. слова vector с индексом 0')" onmouseout="hide()">v0</a>, <a href="math.htm#18" onmouseover="show('Vector2.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">v1</a>, <a href="math.htm#18" onmouseover="show('Vector2.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">v2</a> )</pre>
+<div class=list><tt>v0</tt> – начальная точка.</div>
+<div class=list><tt>v1</tt> – контрольная точка.</div>
+<div class=list><tt>v2</tt> – конечная точка.</div><br>
 
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.8isQuadraticBezierCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is QuadraticBezierCurve - является классом QuadraticBezierCurve')" onmouseout="hide()">.isQuadraticBezierCurve</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него QuadraticBezierCurve. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
-  <h4>Свойства</h4>
+<pre id="4.8v0"><a href="math.htm#18" onmouseover="show('Vector2.<br>v0 - сокращ. англ. слова vector с индексом 0')" onmouseout="hide()">.v0</a></pre>
+Начальная точка.<br><br>
 
-		<h3>[property:Array points]</h3>
+<pre id="4.8v1"><a href="math.htm#18" onmouseover="show('Vector2.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">.v1</a></pre>
+Контрольная точка.<br><br>
+
+<pre id="4.8v2"><a href="math.htm#18" onmouseover="show('Vector2.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">.v2</a></pre>
+Конечная точка.</div><br>
 
 <h4>Методы</h4>
-See [page:Curve] for inherited methods
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/QuadraticBezierCurve.js" target="_blank">QuadraticBezierCurve.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.9">QuadraticBezierCurve3</h3>
+Create a smooth 3d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">quadratic bezier curve</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var curve = new THREE.QuadraticBezierCurve3(
+  new THREE.Vector3( -10, 0, 0 ),
+  new THREE.Vector3( 20, 15, 0 ),
+  new THREE.Vector3( 10, 0, 0 )
+);<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var curveObject = new THREE.Line( geometry, material );</pre>
+
+<h4>Конструктор</h4>
+<pre>QuadraticBezierCurve3( <a href="math.htm#19" onmouseover="show('Vector3.<br>v0 - сокращ. англ. слова vector с индексом 0')" onmouseout="hide()">v0</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">v1</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">v2</a> )</pre>
+<div class=list><tt>v0</tt> – начальная точка.</div>
+<div class=list><tt>v1</tt> – средняя контрольная точка.</div>
+<div class=list><tt>v2</tt> – конечная точка.</div><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.9isQuadraticBezierCurve3"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is QuadraticBezierCurve3 - является классом QuadraticBezierCurve3')" onmouseout="hide()">.isQuadraticBezierCurve3</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него QuadraticBezierCurve3. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="4.9v0"><a href="math.htm#19" onmouseover="show('Vector3.<br>v0 - сокращ. англ. слова vector с индексом 0')" onmouseout="hide()">.v0</a></pre>
+Начальная точка.<br><br>
+
+<pre id="4.9v1"><a href="math.htm#19" onmouseover="show('Vector3.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">.v1</a></pre>
+Контрольная точка.<br><br>
+
+<pre id="4.9v2"><a href="math.htm#19" onmouseover="show('Vector3.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">.v2</a></pre>
+Конечная точка.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/QuadraticBezierCurve3.js" target="_blank">QuadraticBezierCurve3.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3 id="4.10">SplineCurve</h3>
+Create a smooth 2d spline curve from a series of points. Internally this uses <tt><a href="#3.4CatmullRom" onmouseover="show('Interpolations.CatmullRom')" onmouseout="hide()">Interpolations.CatmullRom</a></tt> to create the curve.<br><br>
+
+<h4>Пример</h4>
+<pre>// Create a sine-like wave
+// создаем синусоиду
+var curve = new THREE.SplineCurve( [
+  new THREE.Vector2( -10, 0 ),
+  new THREE.Vector2( -5, 5 ),
+  new THREE.Vector2( 0, 0 ),
+  new THREE.Vector2( 5, -5 ),
+  new THREE.Vector2( 10, 0 )
+] );<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var splineObject = new THREE.Line( geometry, material );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>SplineCurve( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> – массив точек (<a href="math.htm#18" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), определяющих кривую.</div><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
+<div class=blockindent><br>
+<pre id="4.10isSplineCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is SplineCurve - является классом SplineCurve')" onmouseout="hide()">.isSplineCurve</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него SplineCurve. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="4.10points"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">.points</a></span></pre>
+Массив точек (<a href="math.htm#18" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), определяющих кривую.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/SplineCurve.js" target="_blank">SplineCurve.js на github.com</a></div><br><br>
 
 
 <h2 id="5">Дополнения к объектам</h2>

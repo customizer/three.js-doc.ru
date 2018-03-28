@@ -553,12 +553,12 @@ var lathe = new THREE.Mesh( geometry, material );
 scene.add( lathe );</pre>
 
 <h4>Конструктор</h4>
-<pre>LatheGeometry( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">segments</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">phiStart</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">phiLength</a></span> )</pre>
-<div class=blockindent><tt>points</tt> — Array of Vector2s. The x-coordinate of each point must be greater than zero.<br>
-segments — the number of circumference segments to generate. Default is 12.<br>
-phiStart — the starting angle in radians. Default is 0.<br>
-phiLength — the radian (0 to 2PI) range of the lathed section 2PI is a closed lathe, less than 2PI is a portion. Default is 2PI.</div>
-		This creates a LatheBufferGeometry based on the parameters.<br><br>
+<pre>LatheGeometry( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('segments - части, сегменты')" onmouseout="hide()">segments</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">phiStart</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">phiLength</a></span> )</pre>
+<div class=list><tt>points</tt> — массив <a href="math.htm#18" onmouseover="show('Vector2.<br>points - точки')" onmouseout="hide()">двумерных векторов</a>. Координата <tt>x</tt> каждой точки должна быть больше нуля.</div>
+<div class=list><tt>segments</tt> — the number of circumference segments to generate. Значение по умолчанию равно <tt>12</tt>.</div>
+<div class=list><tt>phiStart</tt> — начальный угол, в радианах. Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt>phiLength</tt> — the radian (0 to 2PI) range of the lathed section 2PI is a closed lathe, less than 2PI is a portion. Значение по умолчанию равно <tt>2PI</tt>.</div>
+This creates a LatheBufferGeometry based on the parameters.<br><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/LatheGeometry.js" target="_blank">LatheGeometry.js на github.com</a></div><br><br>
@@ -767,7 +767,7 @@ var geometry = new THREE.PolyhedronGeometry( verticesOfCube, indicesOfFaces, 6, 
 
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="26">RingBufferGeometry</h3>
-This is the [page:BufferGeometry] port of [page:RingGeometry].<br>
+Это перенос <a href="#27" onmouseover="show('RingGeometry');" onmouseout="hide()">RingGeometry</a> в <a href="core.htm#2" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a>.
 <div class="caption"><img src="img/RingGeometry.png" width=350><br>Кольцо</div><br>
 
 <h4>Пример</h4>
@@ -777,11 +777,11 @@ var mesh = new THREE.Mesh( geometry, material );
 scene.add( mesh );</pre>
 
 <h4>Конструктор</h4>
-<pre>RingBufferGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="inner radius - внутренний радиус">innerRadius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="outer radius - наружный радиус">outerRadius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="theta segments - сегменты по углу тэта, т.е. по окружности">thetaSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="phi segments - сегменты по углу фи, т.е. по радиусу">phiSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="theta start - начальный угол тэта">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="theta length - длина дуги по углу тэта">thetaLength</a> )</pre>
-<div class=list><tt>innerRadius</tt> — внутренний радиус кольца. Значение по умолчанию равно&nbsp;<tt>20</tt>.</div>
-<div class=list><tt>outerRadius</tt> — наружный радиус кольца. Значение по умолчанию равно&nbsp;<tt>50</tt>.</div>
-<div class=list><tt>thetaSegments</tt> — число сегментов по окружности кольца. Чем больше число сегментов, тем более круглым будет кольцо. Минимальное значение равно <tt>3</tt>. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
-<div class=list><tt>phiSegments</tt> — число сегментов по радиусу кольца (в толщину). Минимальное значение равно&nbsp;<tt>1</tt>. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<pre>RingBufferGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('inner radius - внутренний радиус')" onmouseout="hide()">innerRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('outer radius - наружный радиус')" onmouseout="hide()">outerRadius</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta segments - сегменты по углу тэта, т.е. по окружности')" onmouseout="hide()">thetaSegments</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('phi segments - сегменты по углу фи, т.е. по радиусу')" onmouseout="hide()">phiSegments</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta start - начальный угол тэта')" onmouseout="hide()">thetaStart</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta length - длина дуги по углу тэта')" onmouseout="hide()">thetaLength</a></span> )</pre>
+<div class=list><tt>innerRadius</tt> — внутренний радиус кольца. Значение по умолчанию равно&nbsp;<tt>0.5</tt>.</div>
+<div class=list><tt>outerRadius</tt> — наружный радиус кольца. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>thetaSegments</tt> — число сегментов по окружности кольца. Чем больше число сегментов, тем более круглым будет кольцо. Минимальное значение равно&nbsp;<tt>3</tt>. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt>phiSegments</tt> — число сегментов по радиусу кольца (в толщину). Минимальное значение равно&nbsp;<tt>1</tt>. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
 <div class=list><tt>thetaStart</tt> — начальный угол. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
 <div class=list><tt>thetaLength</tt> — центральный угол. Значение по умолчанию равно&nbsp;<tt>Math.PI&nbsp;*&nbsp;2</tt>.</div><br>
 
@@ -791,7 +791,7 @@ scene.add( mesh );</pre>
 
 <span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
 <h3 id="27">RingGeometry</h3>
-Класс для построения двумерной кольцевой фигуры.<br>
+Класс для построения двумерной кольцевой фигуры.
 <div class="caption"><img src="img/RingGeometry.png" width=350><br>Кольцо</div><br>
 
 <h4>Пример</h4>
@@ -801,13 +801,13 @@ var mesh = new THREE.Mesh( geometry, material );
 scene.add( mesh );</pre>
 
 <h4>Конструктор</h4>
-<pre>RingGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="">innerRadius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="">outerRadius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">thetaSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)" title="">phiSegments</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="">thetaStart</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)" title="">thetaLength</a> )</pre>
-<div class=list><tt>innerRadius</tt> — Default is 0, but it doesn't work right when innerRadius is set to 0.</div>
-<div class=list><tt>outerRadius</tt> — Значение по умолчанию равно <tt>50</tt>.</div>
-<div class=list><tt>thetaSegments</tt> — Number of segments.  A higher number means the ring will be more round.  Minimum is 3. Значение по умолчанию равно <tt>8</tt>.</div>
-<div class=list><tt>phiSegments</tt> — Minimum is 1. Значение по умолчанию равно <tt>8</tt>.</div>
-<div class=list><tt>thetaStart</tt> — Начальный угол. Значение по умолчанию равно <tt>0</tt>.</div>
-<div class=list><tt>thetaLength</tt> — Центральный угол. Значение по умолчанию равно <tt>Math.PI * 2</tt>.</div>
+<pre>RingGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('inner radius - внутренний радиус')" onmouseout="hide()">innerRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('outer radius - наружный радиус')" onmouseout="hide()">outerRadius</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta segments - сегменты по углу тэта, т.е. по окружности')" onmouseout="hide()">thetaSegments</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('phi segments - сегменты по углу фи, т.е. по радиусу')" onmouseout="hide()">phiSegments</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta start - начальный угол тэта')" onmouseout="hide()">thetaStart</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta length - длина дуги по углу тэта')" onmouseout="hide()">thetaLength</a></span> )</pre>
+<div class=list><tt>innerRadius</tt> — внутренний радиус кольца. Значение по умолчанию равно&nbsp;<tt>0.5</tt>.</div>
+<div class=list><tt>outerRadius</tt> — наружный радиус кольца. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>thetaSegments</tt> — число сегментов по окружности кольца. Чем больше число сегментов, тем более круглым будет кольцо. Минимальное значение равно&nbsp;<tt>3</tt>. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt>phiSegments</tt> — число сегментов по радиусу кольца (в толщину). Минимальное значение равно&nbsp;<tt>1</tt>. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>thetaLength</tt> — центральный угол. Значение по умолчанию равно&nbsp;<tt>Math.PI&nbsp;*&nbsp;2</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/RingGeometry.js" target="_blank">RingGeometry.js на github.com</a></div><br><br>

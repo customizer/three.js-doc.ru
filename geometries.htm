@@ -1073,7 +1073,7 @@ scene.add( sphere );</pre>
 <div class=list><tt>thetaLength</tt> — specify vertical sweep angle size, значение по умолчанию равно Math.PI.</div>
 Геометрия создается путем обхода и вычисления вершин вокруг оси Y (горизонтальный обход) и оси Z (вертикальный обход).
 Таким образом, неполные сферы (вроде <em>'ломтиков или кусков сферы'</em> - sphere slices) могут быть созданы через использование разных значений <tt>phiStart</tt>, <tt>phiLength</tt>, <tt>thetaStart</tt> и <tt>thetaLength</tt>, для определения точек, с которых начинается (или заканчивается) вычисление этих вершин.
-The geometry is created by sweeping and calculating vertexes around the Y axis (horizontal sweep) and the Z axis (vertical sweep). Thus, incomplete spheres (akin to <em>'sphere slices'</em>) can be created through the use of different values of phiStart, phiLength, thetaStart and thetaLength, in order to define the points in which we start (or end) calculating those vertices.
+The geometry is created by sweeping and calculating vertexes around the Y axis (horizontal sweep) and the Z axis (vertical sweep). Thus, incomplete spheres (akin to <em>'sphere slices'</em>) can be created through the use of different values of phiStart, phiLength, thetaStart and thetaLength, in order to define the points in which we start (or end) calculating those vertices.<br><br>
 
 <script language="javascript">document.write (prop_1);</script>
 
@@ -1087,69 +1087,65 @@ The geometry is created by sweeping and calculating vertexes around the Y axis (
 <div class="caption"><img src="img/TetrahedronGeometry.png" width=300><br>Tetrahedron</div><br>
 
 <h4>Конструктор</h4>
-<pre>TetrahedronBufferGeometry(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_float,'Arial,9',10,10,0xffffff,0xd69967)">radius</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_int,'Arial,9',10,10,0xffffff,0xd69967)">detail</a>)</pre>
-<div class=blockindent><tt>radius</tt> — радиус тетраэдра. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br>
-<tt>detail</tt> — По умолчанию равен 0. Установка значения для этого параметра больше нуля добавит вершин и это будет уже не тетраэдр.<br>
-Например, вот <tt>detail</tt> равен 5.<br>
-<img src="img/TetrahedronGeometry5.png" width="200"></div>
-<h4>Свойства</h4>
-<pre>.<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)">parameters</a></pre>
-An object with all of the parameters that were used to generate the geometry.
-
-<h4>Исходники</h4>
-<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TetrahedronBufferGeometry.js" target="_blank">TetrahedronBufferGeometry.js на github.com</a></div><br><br>
-
-
-<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
-<h3 id="33">TetrahedronGeometry</h3>
-A class for generating a tetrahedron geometries.
-<div class="caption"><img src="img/TetrahedronGeometry1.png" width=300><br>Tetrahedron</div><br>
-
-<h4>Конструктор</h4>
-<pre>TetrahedronGeometry([page:Float radius], [page:Integer detail])</pre>
-		<div>
-		radius — Radius of the tetrahedron. Default is 1.<br>
-		detail — Default is 0. Setting this to a value greater than 0 adds vertices making it no longer a tetrahedron.
-		</div>
+<pre>TetrahedronBufferGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('detail - части')" onmouseout="hide()">detail</a></span> )</pre>
+<div class=list><tt>radius</tt> — радиус тетраэдра. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>detail</tt> — Значение по умолчанию равно&nbsp;<tt>0</tt>. Установка здесь значения большего&nbsp;<tt>0</tt>, добавит вершин и это будет уже не тетраэдр.</div>
+Например, вот <tt>detail</tt> равен&nbsp;<tt>3</tt>.
+<div class="caption"><img src="img/TetrahedronGeometry1.png" width="300"></div><br>
 
 <h4>Свойства</h4>
-<pre>[property:Object parameters]</pre>
-An object with all of the parameters that were used to generate the geometry.
+<div class=blockindent><br>
+<pre id="32parameters"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">.parameters</a></span></pre>
+Объект со всеми параметрами, которые были использованы для создания геометрического элемента.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TetrahedronGeometry.js" target="_blank">TetrahedronGeometry.js на github.com</a></div><br><br>
 
 
-		[page:ExtrudeBufferGeometry] &rarr;
+<span class="right_side"><a href="core.htm#6" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="33">TetrahedronGeometry</h3>
+Класс для создания геометрии тетраэдра (четырехгранника).
+<div class="caption"><img src="img/TetrahedronGeometry.png" width=300><br>Tetrahedron</div><br>
 
+<h4>Конструктор</h4>
+<pre>TetrahedronGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('detail - части')" onmouseout="hide()">detail</a></span> )</pre>
+<div class=list><tt>radius</tt> — радиус тетраэдра. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>detail</tt> — Значение по умолчанию равно&nbsp;<tt>0</tt>. Установка здесь значения большего&nbsp;<tt>0</tt>, добавит вершин и это будет уже не тетраэдр.</div>
+Например, вот <tt>detail</tt> равен&nbsp;<tt>3</tt>.
+<div class="caption"><img src="img/TetrahedronGeometry1.png" width="300"></div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="33parameters"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">.parameters</a></span></pre>
+Объект со всеми параметрами, которые были использованы для создания геометрического элемента.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TetrahedronGeometry.js" target="_blank">TetrahedronGeometry.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#12" title="Переход к родительскому классу"><tt>ExtrudeBufferGeometry &rarr;</tt></a></span>
 <h3 id="34">TextBufferGeometry</h3>
 A class for generating text as a single geometry. It is constructed by providing a string of text, and a hash of
 			parameters consisting of a loaded [page:Font] and settings for the geometry's parent [page:ExtrudeBufferGeometry].
 			See the [page:Font], [page:FontLoader] and [page:Creating_Text] pages for additional details.<br>
 <div class="caption"><img src="img/TextGeometry.png" width=650><br>Text</div><br>
 
-<h4>Examples</h4>
-
-		<div>
-		[example:webgl_geometry_text geometry / text ]<br>
-		[example:webgl_geometry_text2 geometry / text2 ]
-		</div>
-
+<h4>Пример</h4>
 <pre>var loader = new THREE.FontLoader();<br>
 loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {<br>
-
-	var geometry = new THREE.TextBufferGeometry( 'Hello three.js!', {
-		font: font,
-		size: 80,
-		height: 5,
-		curveSegments: 12,
-		bevelEnabled: true,
-		bevelThickness: 10,
-		bevelSize: 8,
-		bevelSegments: 5
-	} );
+  var geometry = new THREE.TextBufferGeometry( 'Hello three.js!', {
+    font: font,
+    size: 80,
+    height: 5,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 10,
+    bevelSize: 8,
+    bevelSegments: 5
+  } );
 } );</pre>
-
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank">geometry / text</a></pre><br>
 
 <h4>Конструктор</h4><br>
 <h3>TextBufferGeometry([page:String text], [page:Object parameters])</h3>

@@ -1123,11 +1123,12 @@ The geometry is created by sweeping and calculating vertexes around the Y axis (
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TetrahedronGeometry.js" target="_blank">TetrahedronGeometry.js на github.com</a></div><br><br>
 
 
-<span class="right_side"><a href="#12" title="Переход к родительскому классу"><tt>ExtrudeBufferGeometry &rarr;</tt></a></span>
+<span class="right_side"><a href="#13" title="Переход к родительскому классу"><tt>ExtrudeBufferGeometry &rarr;</tt></a></span>
 <h3 id="34">TextBufferGeometry</h3>
-A class for generating text as a single geometry. It is constructed by providing a string of text, and a hash of
-			parameters consisting of a loaded [page:Font] and settings for the geometry's parent [page:ExtrudeBufferGeometry].
-			See the [page:Font], [page:FontLoader] and [page:Creating_Text] pages for additional details.<br>
+Класс для создания текста как отдельного геометрического элемента. Он строится по предоставлению строки текста и набора параметров,
+состоящих из загруженного <a href="extras.htm#3.3" onmouseover="show('Font')" onmouseout="hide()">шрифта</a> и настроек родительского класса <a href="#13">ExtrudeBufferGeometry</a>.
+Дополнительные сведения смотрите в описании <a href="extras.htm#3.3" onmouseover="show('Font')" onmouseout="hide()">Font</a>, <a href="loaders.htm#9" onmouseover="show('FontLoader')" onmouseout="hide()">FontLoader</a>
+и <a href="intro.htm#7" onmouseover="show('Creating_Text')" onmouseout="hide()">Создание текста</a>.
 <div class="caption"><img src="img/TextGeometry.png" width=650><br>Text</div><br>
 
 <h4>Пример</h4>
@@ -1148,30 +1149,31 @@ loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {<br>
 <pre><a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank">geometry / text</a></pre><br>
 
 <h4>Конструктор</h4><br>
-<h3>TextBufferGeometry([page:String text], [page:Object parameters])</h3>
-		<div>
-		text — The text that needs to be shown. <br />
-		parameters — Object that can contains the following parameters.
-		<ul>
-			<li>font — an instance of THREE.Font.</li>
-			<li>size — Float. Size of the text. Default is 100.</li>
-			<li>height — Float. Thickness to extrude text.  Default is 50.</li>
-			<li>curveSegments — Integer. Number of points on the curves. Default is 12.</li>
-			<li>bevelEnabled — Boolean. Turn on bevel. Default is False.</li>
-			<li>bevelThickness — Float. How deep into text bevel goes. Default is 10.</li>
-			<li>bevelSize — Float. How far from text outline is bevel. Default is 8.</li>
-			<li>bevelSegments — Integer. Number of bevel segments. Default is 3.</li>
-		</ul>
-		</div>
+<pre>TextBufferGeometry( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">.parameters</a></span> )</pre>
+<div class=list><tt>text</tt> — текст, который требуется показать.</div>
+<div class=list><tt>parameters</tt> — объект, который может содержать следующие параметры:</div>
+<div class=blockindent>
+<div class=list><tt><span onclick="showClick('THREE.Font')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('font - шрифт')" onmouseout="hide()">font</a></span></tt> — экземпляр THREE.Font.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер')" onmouseout="hide()">size</a></span></tt>
+— размер текста. Значение по умолчанию равно&nbsp;<tt>100</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span></tt>
+— толщина выдавленного текста.  Значение по умолчанию равно&nbsp;<tt>50</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve segments - ')" onmouseout="hide()">curveSegments</a></span></tt>
+— количество точек на кривых. Значение по умолчанию равно&nbsp;<tt>12</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel enabled - ')" onmouseout="hide()">bevelEnabled</a></span></tt>
+— включает фаску (скос). Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel thickness - толщина фаски')" onmouseout="hide()">bevelThickness</a></span></tt>
+— насколько глубоко в тексте снимается фаска. Значение по умолчанию равно&nbsp;<tt>10</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel size - размер фаски (скоса)')" onmouseout="hide()">bevelSize</a></span></tt>
+— насколько далеко выступает фаска из текста. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel segments - сегменты фаски')" onmouseout="hide()">bevelSegments</a></span></tt>
+— количество сегментов (слоев) фаски (скоса). Значение по умолчанию равно&nbsp;<tt>3</tt>.</div></div><br>
 
-		<h2>Available Fonts</h2>
-
-		<div>
-		TextGeometry uses <a href='http://gero3.github.io/facetype.js/' target="_top">typeface.json</a> generated fonts.
-		Some existing fonts can be found located in <b>/examples/fonts</b> and must be included in the page.
-		</div>
-
-<table><tr><th>Font</th><th>Weight</th><th>Style</th><th>File Path</th></tr>
+<h4>Доступные шрифты</h4>
+<tt>TextGeometry</tt> использует шрифты, сгенерированные <a href='http://gero3.github.io/facetype.js/' target="_blank">typeface.json</a>.<br>
+Несколько имеющихся шрифтов можно найти в <b>/examples/fonts</b> и они должны быть включены в коде страницы.
+<table class="tbl_1" border="1" cellpadding="5">
+<tr class="head"><td>Font<br>шрифт</td><td>Weight<br>плотность</td><td>Style<br>стиль</td><td>File Path<br>путь к файлу</td></tr>
 <tr><td>helvetiker</td><td>normal</td><td>normal</td><td>/examples/fonts/helvetiker_regular.typeface.json</td></tr>
 <tr><td>helvetiker</td><td>bold</td><td>normal</td><td>/examples/fonts/helvetiker_bold.typeface.json</td></tr>
 <tr><td>optimer</td><td>normal</td><td>normal</td><td>/examples/fonts/optimer_regular.typeface.json</td></tr>
@@ -1187,16 +1189,30 @@ loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {<br>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TextBufferGeometry.js" target="_blank">TextBufferGeometry.js на github.com</a></div><br><br>
 
 
-[page:ExtrudeGeometry] &rarr;
+<span class="right_side"><a href="#12" title="Переход к родительскому классу"><tt>ExtrudeGeometry &rarr;</tt></a></span>
 <h3 id="35">TextGeometry</h3>
-This object creates a 3D object of text as a single object.<br>
+Класс для создания текста как отдельного геометрического элемента. Он строится по предоставлению строки текста и набора параметров,
+состоящих из загруженного <a href="extras.htm#3.3" onmouseover="show('Font')" onmouseout="hide()">шрифта</a> и настроек родительского класса <a href="#12">ExtrudeGeometry</a>.
+Дополнительные сведения смотрите в описании <a href="extras.htm#3.3" onmouseover="show('Font')" onmouseout="hide()">Font</a>, <a href="loaders.htm#9" onmouseover="show('FontLoader')" onmouseout="hide()">FontLoader</a>
+и <a href="intro.htm#7" onmouseover="show('Creating_Text')" onmouseout="hide()">Создание текста</a>.
 <div class="caption"><img src="img/TextGeometry.png" width=650><br>Text</div><br>
 
 <h4>Пример</h4>
-<div>
-[example:webgl_geometry_text geometry / text ]<br>
-[example:webgl_geometry_text2 geometry / text2 ]
-</div>
+<pre>var loader = new THREE.FontLoader();<br>
+loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {<br>
+  var geometry = new THREE.TextGeometry( 'Hello three.js!', {
+    font: font,
+    size: 80,
+    height: 5,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 10,
+    bevelSize: 8,
+    bevelSegments: 5
+  } );
+} );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank">geometry / text</a></pre><br>
 
 <h4>Конструктор</h4>
 <pre>TextGeometry( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="text - текст">text</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_obj,'Arial,9',10,10,0xffffff,0xd69967)" title="parameters - параметры">parameters</a> )</pre>

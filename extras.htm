@@ -102,8 +102,8 @@ Generates the Frenet Frames.
 <pre id="3.1copy"><a href="#3.1" onmouseover="show('Curve.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#3.1" onmouseover="show('Curve.<br>source - источник, исходник')" onmouseout="hide()">source</a> )</pre>
 Метод копирует в данный экземпляр другой объект Curve, переданный в аргументе <tt>source</tt>.<br><br>
 
-<pre id="3.1fromJSON">.fromJSON ( json : Object ) : Curve</pre>
-Copies the data from the given JSON object to this instance.<br><br>
+<pre id="3.1fromJSON"><a href="#3.1" onmouseover="show('Curve.<br>from JSON - из (объекта в формате) JSON')" onmouseout="hide()">.fromJSON</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('json - сокр. от англ. слов JavaScript Object Notation —<br>текстовый формат описания объекта, основанный на JavaScript')" onmouseout="hide()">json</a></span>)</pre>
+Копирует данные из переданного объекта JSON в данный экземпляр кривой.<br><br>
 
 <pre id="3.1getLength"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get length - получить длину')" onmouseout="hide()">.getLength</a></span>( )</pre>
 Метод получает полную длину дуги кривой.<br><br>
@@ -116,33 +116,34 @@ Copies the data from the given JSON object to this instance.<br><br>
 <div class=list><tt>optionalTarget</tt> — если аргумент указан, то результат метод будет скопирован в переданный вектор, в противном случае будет создан новый вектор. Дополнительный, необязательный параметр.</div>
 Метод возвращает вектор заданного положения на кривой.<br><br>
 
-<pre id="3.1getPointAt">.getPointAt( u : Float, optionalTarget : Vector ) : Vector</pre>
-<div class=list>u - A position on the curve according to the arc length. Must be in the range [ 0, 1 ].</div>
-<div class=list>optionalTarget — (optional) If specified, the result will be copied into this Vector, otherwise a new Vector will be created.</div>
-Returns a vector for a given position on the curve according to the arc length.<br><br>
+<pre id="3.1getPointAt"><span onclick="showClick('Vector')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get point at - получить точку на')" onmouseout="hide()">.getPointAt</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('u - ')" onmouseout="hide()">u</a></span>, <span onclick="showClick('Vector')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a></span> )</pre>
+<div class=list><tt>u</tt> - позиция на кривой, соответствующей длине дуги. Значение должно быть в диапазоне <tt>[ 0, 1 ]</tt>.</div>
+<div class=list><tt>optionalTarget</tt> — если аргумент указан, то результат метод будет скопирован в переданный вектор, в противном случае будет создан новый вектор. Дополнительный, необязательный параметр.</div>
+Метод возвращает вектор заданной позиции на кривой, соответствующей длине дуги.<br><br>
 
-<pre id="3.1getPoints">.getPoints( divisions : Integer ) : Array</pre>
-<div class=list>divisions -- number of pieces to divide the curve into. Default is 5.</div>
-Returns a set of divisions + 1 points using getPoint( t ).<br><br>
+<pre id="3.1getPoints"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get points - получить точки')" onmouseout="hide()">.getPoints</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - ')" onmouseout="hide()">divisions</a></span> )</pre>
+<div class=list><tt>divisions</tt> -- количество частей, на которые разделена кривая. Значение по умолчанию равно&nbsp;<tt>5</tt>.</div>
+Метод, при помощи <tt>getPoint( t )</tt> возвращает набор точек из <tt>divisions + 1</tt>. Returns a set of divisions + 1 points using getPoint( t ).<br><br>
 
 <pre id="3.1getSpacedPoints">.getSpacedPoints( divisions : Integer ) : Array</pre>
 <div class=list>divisions -- number of pieces to divide the curve into. Default is 5.</div>
 Returns a set of divisions + 1 equi-spaced points using getPointAt( u ).<br><br>
 
-<pre id="3.1getTangent">.getTangent( t : Float ) : Vector</pre>
-Returns a unit vector tangent at t. If the derived curve does not implement its tangent derivation, two points a small delta apart will be used to find its gradient which seems to give a reasonable approximation.<br><br>
+<pre id="3.1getTangent"><span onclick="showClick('Vector')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get tangent - получить касательную')" onmouseout="hide()">.getTangent</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - ')" onmouseout="hide()">t</a></span> )</pre>
+Метод возвращает единичный вектор Returns a unit vector tangent at t. If the derived curve does not implement its tangent derivation, two points a small delta apart will be used to find its gradient which seems to give a reasonable approximation.<br><br>
 
-<pre id="3.1getTangentAt">.getTangentAt( u : Float ) : Vector</pre>
+<pre id="3.1getTangentAt"><span onclick="showClick('Vector')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get tangent at - получить касательную в')" onmouseout="hide()">.getTangentAt</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('u - ')" onmouseout="hide()">u</a></span> )</pre>
+Возвращает касательную к точке, равноудаленной от концов кривой, из точки, заданной в <tt><a href="#3.1getTangent" onmouseover="show('Curve.getTangent')" onmouseout="hide()">getTangent</a></tt>.
 Returns tangent at a point which is equidistant to the ends of the curve from the point given in .getTangent.<br><br>
 
 <pre id="3.1getUtoTmapping">.getUtoTmapping( u : Float, distance : Float ) : Float</pre>
 Given u in the range ( 0 .. 1 ), returns t also in the range ( 0 .. 1 ). u and t can then be used to give you points which are equidistant from the ends of the curve, using .getPoint.<br><br>
 
-<pre id="3.1toJSON">.toJSON( ) : Object</pre>
-Returns a JSON object representation of this instance.<br><br>
+<pre id="3.1toJSON"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в формат JSON')" onmouseout="hide()">.toJSON</a></span>( )</pre>
+Метод возвращает объект в формате <a href="https://ru.wikipedia.org/wiki/JSON" onmouseover="show('JSON - сокр. от англ. слов JavaScript Object Notation —<br>текстовый формат описания объекта, основанный на JavaScript')" onmouseout="hide()" target="_blank">JSON</a>, представляющий данный экземпляр Curve.<br><br>
 
-<pre id="3.1updateArcLengths">.updateArcLengths( ) : null</pre>
-Update the cumlative segment distance cache.</div><br>
+<pre id="3.1updateArcLengths"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update arc lengths - обновить длины дуг')" onmouseout="hide()">.updateArcLengths</a></span>( )</pre>
+Метод обновляет кэш накопленных размеров частей кривой. Update the cumulative segment distance cache.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/Curve.js" target="_blank">Curve.js на github.com</a></div><br><br>
@@ -150,21 +151,21 @@ Update the cumlative segment distance cache.</div><br>
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="3.2">CurvePath</h3>
-An abstract base class further extending [page:Curve]. A CurvePath is simply an array of connected curves, but retains the api of a curve.
+Абстрактный базовый класс дальшейшего расширения возможностей <a href="#3.1" onmouseover="show('Curve')" onmouseout="hide()">Curve</a>. CurvePath - это просто массив связанных кривых, поддерживающий api отдельной кривой.
+An abstract base class further extending Curve. A CurvePath is simply an array of connected curves, but retains the api of a curve.
 
 <h4>Конструктор</h4>
 <pre>CurvePath( )</pre>
-The constructor take no parameters.<br><br>
-
+Конструктор не принимает никаких параметров.<br><br>
 
 <h4>Свойства</h4>
 Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
 <div class=blockindent><br>
-<pre id="3.2autoClose">.autoClose : boolean</pre>
-Whether or not to automatically close the path.<br><br>
+<pre id="3.2autoClose"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto close - автоматическое закрытие')" onmouseout="hide()">.autoClose</a></span></pre>
+Свойство определяет, будет или нет автоматическое замыкание пути (траектории).<br><br>
 
-<pre id="3.2curves">.curves : array</pre>
-The array of Curves.</div><br>
+<pre id="3.2curves"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curves - кривые')" onmouseout="hide()">.curves</a></span></pre>
+Массив <a href="#3.1" onmouseover="show('Curve')" onmouseout="hide()">кривых</a>.</div><br>
 
 <h4>Методы</h4>
 Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
@@ -369,8 +370,9 @@ If no points are specified, an empty shape is created and the .currentPoint is s
 <pre id="3.6holes">.holes : array</pre>
 An array of paths that define the holes in the shape.<br><br>
 
-<pre id="3.6uuid">.uuid : String</pre>
-UUID of this instance. This gets automatically assigned, so this shouldn't be edited.</div><br>
+<pre id="3.6uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uuid - сокращ. англ. слов universally unique identifier<br>- универсальный уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank">UUID</a> данного экземпляра.
+Вот статья Википедии о <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">UUID</a> на русском языке. Он присваивается автоматически и не должен редактироваться.</div><br>
 
 <h4>Методы</h4>
 Сведения об общих методах смотрите в описании базового класса <a href="#3.5">Path</a>.
@@ -397,6 +399,7 @@ Get an array of Vector2s that represent the holes in the shape.
 
 <span class="right_side"><a href="#3.2" title="Переход к родительскому классу"><tt>CurvePath &rarr;</tt></a></span>
 <h3 id="3.7">ShapePath</h3>
+Этот класс используется для конвертирования ряда фигур в массив из <a href="#3.5" onmouseover="show('Path')" onmouseout="hide()">Path</a>, например SVG-формы в путь (смотрите пример ниже). Также он используется внутри <a href="#3.3" onmouseover="show('Font')" onmouseout="hide()">Font</a> для преобразования шрифта (в формате JSON) в ряд путей.
 This is class is used to convert a series of shapes to an array of Paths, for example an SVG shape to a path (see the example below). It is used internally by Font to convert a font in JSON format to a series of paths.
 
 <h5>Другие примеры</h5>
@@ -404,35 +407,36 @@ This is class is used to convert a series of shapes to an array of Paths, for ex
 
 <h4>Конструктор</h4>
 <pre>ShapePath( )</pre>
-Creates a new ShapePath. Unlike a Path, no points are passed in as the ShapePath is designed to be generated after creation.<br><br>
+Создает новый ShapePath. В отличие от Path, no points are passed in as the ShapePath is designed to be generated after creation.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="3.7subPaths">.subPaths : array</pre>
-Array of Paths.<br><br>
+<pre id="3.7subPaths"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sub paths - ')" onmouseout="hide()">.subPaths</a></span></pre>
+Массив из Path.<br><br>
 
-<pre id="3.7currentPath">.currentPath : array</pre>
+<pre id="3.7currentPath"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('current path - текущий путь')" onmouseout="hide()">.currentPath</a></span></pre>
 The current Path that is being generated.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="3.7bezierCurveTo">.bezierCurveTo ( cp1X : Float, cp1Y : Float, cp2X : Float, cp2Y : Float, x : Float, y : Float ) : null</pre>
+<pre id="3.7bezierCurveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bezier curve to - кривая Безье к')" onmouseout="hide()">.bezierCurveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp1X - сокращ. от англ. слов control point 1 X<br>- координата X первой контрольной точки')" onmouseout="hide()">cp1X</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp1Y - сокращ. от англ. слов control point 1 Y<br>- координата Y первой контрольной точки')" onmouseout="hide()">cp1Y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp2X - сокращ. от англ. слов control point 2 X<br>- координата X второй контрольной точки')" onmouseout="hide()">cp2X</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp2Y - сокращ. от англ. слов control point 2 Y<br>- координата Y второй контрольной точки')" onmouseout="hide()">cp2Y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод создает кривую Безье из
 This creates a bezier curve from the currentPath's offset to x and y with cp1X, cp1Y and cp1X, cp1Y as control points and updates the currentPath's offset to x and y.<br><br>
 
-<pre id="3.7lineTo">.lineTo ( x : Float, y : Float ) : null</pre>
-This creates a line from the currentPath's offset to X and Y and updates the offset to X and Y.<br><br>
+<pre id="3.7lineTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line to - линия для')" onmouseout="hide()">.lineTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод создает линию из This creates a line from the currentPath's offset to X and Y and updates the offset to X and Y.<br><br>
 
-<pre id="3.7moveTo">.moveTo ( x : Float, y : Float ) : null</pre>
+<pre id="3.7moveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('move to - переместить в')" onmouseout="hide()">.moveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
 Starts a new Path and calls Path.moveTo( x, y ) on that Path. Also points currentPath to that Path.<br><br>
 
-<pre id="3.7quadraticCurveTo">.quadraticCurveTo ( cpX : Float, cpY : Float, x : Float, y : Float ) : null</pre>
+<pre id="3.7quadraticCurveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('quadratic curve to - квадратичная кривая для')" onmouseout="hide()">.quadraticCurveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cpX - сокращ. от англ. слов control point X<br>- координата X контрольной точки')" onmouseout="hide()">cpX</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cpY - сокращ. от англ. слов control point Y<br>- координата Y контрольной точки')" onmouseout="hide()">cpY</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
 This creates a quadratic curve from the currentPath's offset to x and y with cpX and cpY as control point and updates the currentPath's offset to x and y.<br><br>
 
-<pre id="3.7splineThru">.splineThru ( points : Array ) : null</pre>
-<div class=list>points - An array of Vector2s</div>
+<pre id="3.7splineThru"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('spline thru - ')" onmouseout="hide()">.splineThru</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list>points - массив <a href="math.htm#18" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>.</div>
 Connects a new SplineCurve onto the currentPath.<br><br>
 
-<pre id="3.7toShapes">.toShapes ( isCCW : Boolean, noHoles : Boolean ) : Array</pre>
+<pre id="3.7toShapes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to shapes - для форм')" onmouseout="hide()">.toShapes</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CCW - сокращ. англ. слов is counterclockwise<br>- против часовой стрелки')" onmouseout="hide()">isCCW</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no holes - нет дырок')" onmouseout="hide()">noHoles</a></span> )</pre>
 <div class=list>isCCW -- Changes how solids and holes are generated</div>
 <div class=list>noHoles -- Whether or not to generate holes</div>
 Converts the subPaths array into an array of Shapes. By default solid shapes are defined clockwise (CW) and holes are defined counterclockwise (CCW). If isCCW is set to true, then those are flipped. If the paramater noHoles is set to true then all paths are set as solid shapes and isCCW is ignored.</div><br>
@@ -460,7 +464,7 @@ Converts the subPaths array into an array of Shapes. By default solid shapes are
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="4.2">CatmullRomCurve3</h3>
-Create a smooth 3d spline curve from a series of points using the <a href="https://en.wikipedia.org/wiki/Centripetal_Catmull-Rom_spline" target="_blank">Catmull-Rom algorithm</a>.<br><br>
+Создает гладкую трехмерную сплайновую кривую из ряда точек при помощи <a href="https://en.wikipedia.org/wiki/Centripetal_Catmull-Rom_spline" target="_blank">алгоритма Катмулл-Ром (Catmull-Rom)</a>.<br><br>
 
 <h4>Пример</h4>
 <pre>// Create a closed wavey loop
@@ -482,30 +486,30 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 <pre><a href="https://threejs.org/examples/webgl_geometry_extrude_splines" target="_blank">geometry / extrude / splines</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>CatmullRomCurve3( points : Array, closed : Boolean, curveType : String, tension : Float )</pre>
-<div class=list><tt>points</tt> – An array of Vector3 points</div>
-<div class=list><tt>closed</tt> – Whether the curve is closed. Значение по умолчанию является <tt>false</tt>.</div>
-<div class=list><tt>curveType</tt> – Type of the curve. Default is centripetal.</div>
-<div class=list><tt>tension</tt> – Tension of the curve. Значение по умолчанию равно <tt>0.5</tt>.</div><br>
+<pre>CatmullRomCurve3( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">.points</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closed - закрыть, замкнуть')" onmouseout="hide()">closed</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve type - тип кривой')" onmouseout="hide()">curveType</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tension - упругость, напряженность, натяжение')" onmouseout="hide()">tension</a></span> )</pre>
+<div class=list><tt>points</tt> – массив <a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерных векторов</a> - точек, определяющих кривую.</div>
+<div class=list><tt>closed</tt> – параметр определяет, будет ли замкнута кривая. Значение по умолчанию является <tt>false</tt>, т.е не замкнута.</div>
+<div class=list><tt>curveType</tt> – тип кривой. Значением по умолчанию является <tt>centripetal</tt> (центростремительный).</div>
+<div class=list><tt>tension</tt> – упругость кривой. Значение по умолчанию равно <tt>0.5</tt>.</div><br>
 
 <h4>Свойства</h4>
 Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
 <div class=blockindent><br>
-<pre id="4.2isCatmullRomCurve3">.isCatmullRomCurve3 : Boolean</pre>
+<pre id="4.2isCatmullRomCurve3"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CatmullRomCurve3 - является CatmullRomCurve3')" onmouseout="hide()">.isCatmullRomCurve3</a></span></pre>
 Свойство используется для проверки, является ли данный класс и производные от него CatmullRomCurve3. Значением по умолчанию является <tt>true</tt>.<br>
 Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
-<pre id="4.2points">.points : Array</pre>
-The array of Vector3 points that define the curve. It needs at least two entries.<br><br>
+<pre id="4.2points"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">.points</a></span></pre>
+Массив <a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерных векторов</a> - точек, определяющих кривую. Требуется, как минимум, две точки.<br><br>
 
-<pre id="4.2closed">.closed : Boolean</pre>
-The curve will loop back onto itself when this is true.<br><br>
+<pre id="4.2closed"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closed - закрыть, замкнуть')" onmouseout="hide()">.closed</a></span></pre>
+Если это значение установлено как <tt>true</tt>, кривая будет замкнута на себя (конец кривой будет соединен с её началом).<br><br>
 
-<pre id="4.2curveType">.curveType : String</pre>
-Possible values are centripetal, chordal and catmullrom.<br><br>
+<pre id="4.2curveType"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve type - тип кривой')" onmouseout="hide()">.curveType</a></span></pre>
+Возможными значениями являются: <tt>centripetal</tt> (центростремительный), <tt>chordal</tt> (хордовый) и <tt>catmullrom</tt> (тип по алгоритму Катмулл-Ром).<br><br>
 
-<pre id="4.2tension">.tension : float</pre>
-When .type is catmullrom, defines catmullrom's tension.</div><br>
+<pre id="4.2tension"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tension - упругость, напряженность, натяжение')" onmouseout="hide()">.tension</a></span></pre>
+При установке типа как <tt>catmullrom</tt>, определяет упругость сплайна по алгоритму Катмулл-Ром.</div><br>
 
 <h4>Методы</h4>
 Сведения об общих методах смотрите в описании базового класса <a href="#3.1">Curve</a>.<br><br>
@@ -516,7 +520,7 @@ When .type is catmullrom, defines catmullrom's tension.</div><br>
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="4.3">CubicBezierCurve</h3>
-Create a smooth 2d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg" target="_blank">cubic bezier curve</a>.
+Создает гладкую двумерную <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg" target="_blank">кубическую кривую Безье</a>.
 Статья Википедии <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank">о кривых Безье</a> на английском языке.
 Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.<br><br>
 
@@ -569,7 +573,7 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="4.4">CubicBezierCurve3</h3>
-Create a smooth 3d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg" target="_blank">cubic bezier curve</a>.
+Создает гладкую трехмерную <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg" target="_blank">кубическую кривую Безье</a>.
 Статья Википедии <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank">о кривых Безье</a> на английском языке.
 Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.<br><br>
 
@@ -622,7 +626,7 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="4.5">EllipseCurve</h3>
-Creates a 2d curve in the shape of an ellipse. Setting the xRadius equal to the yRadius will result in a circle.<br><br>
+Создает двумерную кривую в виде эллипса. При установке параметров <tt>xRadius</tt> и <tt>yRadius</tt> равными, получится окружность.<br><br>
 
 <h4>Пример</h4>
 <pre>var curve = new THREE.EllipseCurve(
@@ -640,45 +644,45 @@ var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
 var ellipse = new THREE.Line( geometry, material );</pre><br>
 
 <h4>Конструктор</h4>
-<pre>EllipseCurve( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aX</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aY</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">xRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">yRadius</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aStartAngle</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aEndAngle</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aClockwise</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">aRotation</a></span> )</pre>
-<div class=list>aX – The X center of the ellipse. Значение по умолчанию равно <tt>0</tt>.</div>
-<div class=list>aY – The Y center of the ellipse. Значение по умолчанию равно <tt>0</tt>.</div>
-<div class=list>xRadius – The radius of the ellipse in the x direction. Значение по умолчанию равно <tt>1</tt>.</div>
-<div class=list>yRadius – The radius of the ellipse in the y direction. Значение по умолчанию равно <tt>1</tt>.</div>
-<div class=list>aStartAngle – The start angle of the curve in radians starting from the middle right side. Значение по умолчанию равно <tt>0</tt>.</div>
-<div class=list>aEndAngle – The end angle of the curve in radians starting from the middle right side. Значением по умолчанию является <tt>2&#215;Math.PI</tt>.</div>
-<div class=list>aClockwise – рисовать ли эллипс в направлении по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
-<div class=list>aRotation – The rotation angle of the ellipse in radians, counterclockwise from the positive X axis (optional). Значение по умолчанию равно <tt>0</tt>.</div>
-<div class=note><b>Примечание:</b> When going clockwise it's best to set the start angle to (Math.PI * 2) and then work towards lower numbers.</div><br>
+<pre>EllipseCurve( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('aX - координата X')" onmouseout="hide()">aX</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('aY - координата Y')" onmouseout="hide()">aY</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x radius - радиус по оси x')" onmouseout="hide()">xRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y radius - радиус по оси y')" onmouseout="hide()">yRadius</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a start angle начальный угол')" onmouseout="hide()">aStartAngle</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a end angle - конечный угол')" onmouseout="hide()">aEndAngle</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a clockwise - по часовой стрелке')" onmouseout="hide()">aClockwise</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a rotation - поворот, вращение')" onmouseout="hide()">aRotation</a></span> )</pre>
+<div class=list><tt>aX</tt> – координата <tt>X</tt> центра эллипса. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>aY</tt> – координата <tt>Y</tt> центра эллипса. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>xRadius</tt> – радиус эллипса по горизонтали (по оси <tt>x</tt>). Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>yRadius</tt> – радиус эллипса по вертикали (по оси <tt>y</tt>). Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>aStartAngle</tt> – начальный угол кривой (в радианах), отсчитываемый от середины правой стороны, т.е. от положения на 3 часа. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>aEndAngle</tt> – конечный угол кривой (в радианах), отсчитываемый от середины правой стороны, т.е. от положения на 3 часа. Значением по умолчанию является <tt>2&#215;Math.PI</tt>.</div>
+<div class=list><tt>aClockwise</tt> – рисовать ли эллипс в направлении по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt>aRotation</tt> – угол поворота эллипса (в радианах), отсчитываемый против часовой стрелки от положительной ветви оси <tt>X</tt>. Дополнительный, необязательный параметр. Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=note><b>Примечание:</b> При движении против часовой стрелки (параметр <tt>aClockwise = true</tt>, лучше установить начальный угол (<tt>aStartAngle</tt>) как <tt>(Math.PI * 2)</tt> и затем работать в направлении меньших чисел.</div><br>
 
 <h4>Свойства</h4>
 Сведения об общих свойствах смотрите в описании базового класса <a href="#3.1">Curve</a>.
 <div class=blockindent><br>
-<pre id="4.5aX">.aX : Float</pre>
-The X center of the ellipse.<br><br>
+<pre id="4.5aX"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('aX - координата X')" onmouseout="hide()">.aX</a></span></pre>
+Координата <tt>X</tt> центра эллипса.<br><br>
 
-<pre id="4.5aY">.aY : Float</pre>
-The Y center of the ellipse.<br><br>
+<pre id="4.5aY"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('aY - координата Y')" onmouseout="hide()">.aY</a></span></pre>
+Координата <tt>Y</tt> центра эллипса.<br><br>
 
-<pre id="4.5xRadius">.xRadius : Radians</pre>
-The radius of the ellipse in the x direction.<br><br>
+<pre id="4.5xRadius"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x radius - радиус по оси x')" onmouseout="hide()">.xRadius</a></span></pre>
+Радиус эллипса по горизонтали (по оси <tt>x</tt>). Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
 
-<pre id="4.5yRadius">.yRadius : Radians</pre>
-The radius of the ellipse in the y direction.<br><br>
+<pre id="4.5yRadius"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y radius - радиус по оси y')" onmouseout="hide()">.yRadius</a></span></pre>
+Радиус эллипса по вертикали (по оси <tt>y</tt>). Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
 
-<pre id="4.5aStartAngle">.aStartAngle : Float</pre>
-The start angle of the curve in radians starting from the middle right side.<br><br>
+<pre id="4.5aStartAngle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a start angle начальный угол')" onmouseout="hide()">.aStartAngle</a></span></pre>
+Начальный угол кривой (в радианах), отсчитываемый от середины правой стороны, т.е. от положения на 3 часа. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
 
-<pre id="4.5aEndAngle">.aEndAngle : Float</pre>
-The end angle of the curve in radians starting from the middle right side.<br><br>
+<pre id="4.5aEndAngle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a end angle - конечный угол')" onmouseout="hide()">.aEndAngle</a></span></pre>
+Конечный угол кривой (в радианах), отсчитываемый от середины правой стороны, т.е. от положения на 3 часа. Значением по умолчанию является <tt>2&#215;Math.PI</tt>.<br><br>
 
-<pre id="4.5aClockwise">.aClockwise : Boolean</pre>
-Whether the ellipse is drawn clockwise.<br><br>
+<pre id="4.5aClockwise"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a clockwise - по часовой стрелке')" onmouseout="hide()">.aClockwise</a></span></pre>
+Свойство определяет, рисовать ли эллипс в направлении по часовой стрелке. Значением по умолчанию является <tt>false</tt>.<br><br>
 
-<pre id="4.5aRotation">.aRotation : Float</pre>
-The rotation angle of the ellipse in radians, counterclockwise from the positive X axis (optional). Default is 0.<br><br>
+<pre id="4.5aRotation"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a rotation - поворот, вращение')" onmouseout="hide()">.aRotation</a></span></pre>
+Угол поворота эллипса (в радианах), отсчитываемый против часовой стрелки от положительной ветви оси <tt>X</tt>. Дополнительный, необязательный параметр. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
-<pre id="4.5isEllipseCurve">.isEllipseCurve : Boolean</pre>
+<pre id="4.5isEllipseCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is EllipseCurve - является классом EllipseCurve,<br>т.е. эллиптической кривой')" onmouseout="hide()">.isEllipseCurve</a></span></pre>
 Свойство используется для проверки, является ли данный класс и производные от него EllipseCurve. Значением по умолчанию является <tt>true</tt>.<br>
 Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.</div><br>
 
@@ -749,7 +753,9 @@ The rotation angle of the ellipse in radians, counterclockwise from the positive
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="4.8">QuadraticBezierCurve</h3>
-Create a smooth 2d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">quadratic bezier curve</a>.<br><br>
+Создает гладкую двумерную <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">квадратичную кривую Безье</a>.<br>
+Статья Википедии <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank">о кривых Безье</a> на английском языке.
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
 <pre>var curve = new THREE.QuadraticBezierCurve(
@@ -795,7 +801,9 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="4.9">QuadraticBezierCurve3</h3>
-Create a smooth 3d <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">quadratic bezier curve</a>.<br><br>
+Создает гладкую трехмерную <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">квадратичную кривую Безье</a>.<br>
+Статья Википедии <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank">о кривых Безье</a> на английском языке.
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
 <pre>var curve = new THREE.QuadraticBezierCurve3(
@@ -841,7 +849,7 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="4.10">SplineCurve</h3>
-Create a smooth 2d spline curve from a series of points. Internally this uses <tt><a href="#3.4CatmullRom" onmouseover="show('Interpolations.CatmullRom')" onmouseout="hide()">Interpolations.CatmullRom</a></tt> to create the curve.<br><br>
+Создает гладкую <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD" target="_blank" onmouseover="show('сплайн (spline) - набор кривых линий, гладко состыкованных между собой')" onmouseout="hide()">сплайновую</a> кривую из ряда точек. Для создания кривой внутри этой функции используется <tt><a href="#3.4CatmullRom" onmouseover="show('Interpolations.CatmullRom')" onmouseout="hide()">Interpolations.CatmullRom</a></tt>.<br><br>
 
 <h4>Пример</h4>
 <pre>// Create a sine-like wave
@@ -894,8 +902,8 @@ var splineObject = new THREE.Line( geometry, material );</pre><br>
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="5.1render"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - визуализировать')" onmouseout="hide()">.render</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render callback - (функция) обратного вызова (для) визуализации')" onmouseout="hide()">renderCallback</a></span> )</pre>
-<div class=list><tt>renderCallback</tt> -- A function to render the generated object.</div>
-This function needs to be overridden to start the creation of the object and should call renderCallback when finished.</div><br>
+<div class=list><tt>renderCallback</tt> -- функция для визуализации сгенерированного объекта.</div>
+Данная функция должна быть переопределена для запуска создания объекта и по завершении создания объекта должна вызывать функцию обратного вызова <tt>renderCallback</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/objects/ImmediateRenderObject.js" target="_blank">ImmediateRenderObject.js на github.com</a></div><br><br>

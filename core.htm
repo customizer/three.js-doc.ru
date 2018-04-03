@@ -1227,18 +1227,22 @@ This is used by the lookAt method, for example, to determine the orientation of 
 Если установлено значение <tt>true</tt>, объект будет отображен. Значением по умолчанию является <tt>true</tt>.</div><br>
 
 <h4>Статические свойства</h4><br>
-Static properties and methods are defined per class rather than per instance of that class. This means that changing Object3D.DefaultUp or Object3D.DefaultMatrixAutoUpdate will change the values of up and matrixAutoUpdate for every	instance of Object3D (or derived classes) created after the change has been made (already created Object3Ds will not be affected).
+Статические свойства и методы устанавливаются для всего класса, а не для экземпляра этого класса.
+Это означает, что при изменении <tt><a href="#14DefaultUp" onmouseover="show('Object3D.DefaultUp')" onmouseout="hide()">Object3D.DefaultUp</a></tt> или
+<tt><a href="#14DefaultMatrixAutoUpdate" onmouseover="show('Object3D.DefaultMatrixAutoUpdate')" onmouseout="hide()">Object3D.DefaultMatrixAutoUpdate</a></tt>
+изменятся значения свойств <tt><a href="#14up" onmouseover="show('Object3D.up')" onmouseout="hide()">up</a></tt> и <tt><a href="#14matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate')" onmouseout="hide()">matrixAutoUpdate</a></tt>
+каждого экземпляра Object3D (или производных от него), созданных после внесения изменений (Object3D'ы, уже созданные до этого момента не будут затронуты).
 <div class=blockindent><br>
 <pre id="14DefaultUp"><a href="math.htm#19" onmouseover="show('Vector3.<br>default up - по умолчанию вверх')" onmouseout="hide()">.DefaultUp</a></pre>
 The default up direction for objects, also used as the default position for DirectionalLight, HemisphereLight and Spotlight (which creates lights shining from the top down).<br>
 По умолчанию устанавливается как <tt>( 0, 1, 0 )</tt>.<br><br>
 
-<pre id="14DefaultMatrixAutoUpdate">.DefaultMatrixAutoUpdate</pre>
+<pre id="14DefaultMatrixAutoUpdate"><a href="math.htm#19" onmouseover="show('Vector3.<br>default matrix auto update - автоматическое обновление матрицы по умолчанию')" onmouseout="hide()">.DefaultMatrixAutoUpdate</a></pre>
 The default setting for matrixAutoUpdate for newly created Object3Ds.</div><br>
 
 <h4>Методы</h4>
 В данном классе возможно применение методов <tt><a href="#5" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a></tt>.
-<div class=blockindent>
+<div class=blockindent><br>
 <pre id="14add"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add - добавить')" onmouseout="hide()">.add</a></span>( <a href="#14" onmouseover="show('Object3D')" onmouseout="hide()">object</a>, ... )</pre>
 Метод добавляет заданный объект в качестве дочернего к этому объекту. Можно добавлять произвольное количество объектов.<br>
 Посмотрите описание класса <tt><a href="objects.htm#2" onmouseover="show('Group')" onmouseout="hide()">Group</a></tt> для получения информации о группировке объектов вручную.<br><br>
@@ -1247,158 +1251,140 @@ The default setting for matrixAutoUpdate for newly created Object3Ds.</div><br>
 Применяет матричное преобразование к объекту и обновляет положение объекта, угол поворота объекта и масштаб объекта.<br><br>
 
 <pre id="14applyQuaternion"><a href="#14" onmouseover="show('Object3D.<br>apply quaternion - применить кватернион')" onmouseout="hide()">.applyQuaternion</a>( quaternion )</pre>
-Applies the rotation represented by the quaternion to the object.
+Примененяет поворот, представленный кватернионом, к объекту.<br><br>
 
+<pre id="14clone"><a href="#14" onmouseover="show('Object3D.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('recursive - рекурсивно')" onmouseout="hide()">recursive</a></span> )</pre>
+<div class=list><tt>recursive</tt> -- если значение установлено как <tt>true</tt>, то клонируются и потомки объекта. Значением по умолчанию является <tt>true</tt>.</div>
+Возвращает клон данного объекта и опционально клоны всех его потомков.<br><br>
 
-<pre id="14translateX">[method:null translateX]( [page:Float distance] )</pre>
-<div class=blockindent>distance - Distance.</div>
-Translates object along x axis by distance.
+<pre id="14copy"><a href="#14" onmouseover="show('Object3D.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('recursive - рекурсивно')" onmouseout="hide()">recursive</a></span> )</pre>
+<div class=list><tt>recursive</tt> -- если значение установлено как <tt>true</tt>, то клонируются и потомки объекта. Значением по умолчанию является <tt>true</tt>.</div>
+Метод копирует объект, заданный в аргументе <tt>object</tt> в данный объект.<br><br>
 
-<pre>[method:null translateY]( [page:Float distance] )</pre>
-<div class=blockindent>distance - Distance.</div>
-Translates object along y axis by distance.
+<pre id="14getObjectById"><a href="#14" onmouseover="show('Object3D.<br>get object by id - получить объект по идентификатору')" onmouseout="hide()">.getObjectById</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('id - сокращение от англ. слова identifier - идентификатор')" onmouseout="hide()">id</a></span> )</pre>
+<div class=list><tt>id</tt> -- уникальное число экземпляра объекта.</div>
+Метод проводит поиск среди дочерних элементов объекта и возвращает первый найденный с соответствующим идентификатором.<br>
+Обратите внимание, что идентификаторы назначаются в хронологическом порядке: 1, 2, 3, ..., увеличиваясь на единицу для каждого нового объекта.<br><br>
 
-<pre>[method:null translateZ]( [page:Float distance] )</pre>
-<div class=blockindent>distance - Distance.</div>
-Translates object along z axis by distance.
+<pre id="14getObjectByName"><a href="#14" onmouseover="show('Object3D.<br>get object by name - получить объект по имени')" onmouseout="hide()">.getObjectByName</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">name</a></span> )</pre>
+<div class=list><tt>name</tt> -- строковое значение в соответствии со свойством дочернего элемента <tt>Object3D.name</tt>.</div>
+Метод проводит поиск среди дочерних элементов объекта и возвращает первый найденный с соответствующим именем.<br>
+Обратите внимание, что для большинства объектов значением свойства <tt><a href="#14name" onmouseover="show('Object3D.name')" onmouseout="hide()">name</a></tt> по умолчанию является пустая строка. Так что для того, чтобы этот метод работал, нужно установить их вручную.<br><br>
 
-<pre>[method:null rotateX]( [page:Float rad] )</pre>
-<div class=blockindent>rad - the angle to rotate in radians.</div>
-Rotates the object around x axis in local space.
+<pre id="14getObjectByProperty"><a href="#14" onmouseover="show('Object3D.<br>get object by property - получить объект по свойству')" onmouseout="hide()">.getObjectByProperty</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">name</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt>name</tt> -- название разыскиваемого свойства.</div>
+<div class=list><tt>value</tt> -- значение заданного свойства.</div>
+Метод проводит поиск среди дочерних элементов объекта и возвращает первое найденное свойство, соответствующее заданному значению.<br><br>
 
-<pre>[method:null rotateY]( [page:Float rad] )</pre>
-<div class=blockindent>rad - the angle to rotate in radians.</div>
-Rotates the object around y axis in local space.
+<pre id="14getWorldPosition"><a href="math.htm#19" onmouseover="show('Vector3.<br>get world position - получить &#34;мировую&#34; позицию')" onmouseout="hide()">.getWorldPosition</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> — результат будет скопирован в этот Vector3.</div>
+Возвращает вектор, представляющий позицию объекта в "мировом" пространстве.<br><br>
 
-<pre>[method:null rotateZ]( [page:Float rad] )</pre>
-<div class=blockindent>rad - the angle to rotate in radians.</div>
-Rotates the object around z axis in local space.
+<pre id="14getWorldQuaternion"><a href="math.htm#13" onmouseover="show('Quaternion.<br>get world quaternion - получить<br>кватернион в &#34;мировом&#34;<br>(пространстве)')" onmouseout="hide()">.getWorldQuaternion</a>( <a href="math.htm#13" onmouseover="show('Quaternion.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> — результат будет скопирован в этот Quaternion.</div>
+Возвращает кватернион, представляющий поворот объекта в "мировом" пространстве.<br><br>
 
-<pre>[method:Vector3 localToWorld]( [page:Vector3 vector] )</pre>
-<div class=blockindent>vector - A local vector.</div>
-Updates the vector from local space to world space.
+<pre id="14getWorldScale"><a href="math.htm#19" onmouseover="show('Vector3.<br>get world scale - получить &#34;мировой&#34; масштаб')" onmouseout="hide()">.getWorldScale</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> — результат будет скопирован в этот Vector3.</div>
+Возвращает вектор коэффициентов масштабирования, примененных к объекту, для каждой оси в "мировом" пространстве.<br><br>
 
-<pre>[method:Vector3 worldToLocal]( [page:Vector3 vector] )</pre>
-<div class=blockindent>vector - A world vector.</div>
-Updates the vector from world space to local space.
+<pre id="14getWorldDirection"><a href="math.htm#19" onmouseover="show('Vector3.<br>get world direction - получить &#34;мировое&#34; направление')" onmouseout="hide()">.getWorldDirection</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> — результат будет скопирован в этот Vector3.</div>
+Возвращает вектор, представляющий направление положительной оси координат <tt>z</tt> в "мировом" пространстве.<br><br>
 
-<pre>[method:null lookAt]( [page:Vector3 vector] )</pre>
-<div class=blockindent>vector - A world vector to look at.</div>
-Rotates object to face point in space.
+<pre id="14localToWorld"><a href="math.htm#19" onmouseover="show('Vector3.<br>local to world - локальные в &#34;мировые&#34;')" onmouseout="hide()">.localToWorld</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>vector - вектор')" onmouseout="hide()">vector</a> )</pre>
+<div class=list><tt>vector</tt> - вектор, представляющий позицию в локальном пространстве (в пространстве объекта).</div>
+Метод конвертирует вектор из локального пространства в "мировое" пространство.<br><br>
 
-<pre>[method:null remove]( [page:Object3D object], ... )</pre>
-<div class=blockindent>object - An object.</div>
-Removes *object* as child of this object. An arbitrary number of objects may be removed.
+<pre id="14lookAt"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('look at - смотреть на')" onmouseout="hide()">.lookAt</a></span>( <a href="math.htm#19" onmouseover="show('Vector3.<br>vector - вектор')" onmouseout="hide()">vector</a> )
+<span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('look at - смотреть на')" onmouseout="hide()">.lookAt</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span> )</pre>
+<div class=list><tt>vector</tt> - вектор, представляющий позицию в "мировом" пространстве.</div>
+Опционально, компоненты <tt>x</tt>, <tt>y</tt> и <tt>z</tt> позиции в "мировом" пространстве.
+Optionally, the x, y and z components of the world space position.
+Метод поворачивает объект к заданной точке в "мировом" пространстве.
+Rotates the object to face a point in world space.
+Этот метод не поддерживает объекты с развернутым и/или перенесенным родительским объектом(ами).
+This method does not support objects with rotated and/or translated parent(s).<br><br>
 
-<pre>[method:null traverse]( [page:Function callback] )</pre>
-<div class=blockindent>callback - A function with as first argument an object3D object.</div>
-Executes the callback on this object and all descendants.
+<pre id="14raycast"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('raycast - бросок луча')" onmouseout="hide()">.raycast</a></span>( <a href="#15" onmouseover="show('Raycaster.<br>raycaster - излучатель, рейкастер')" onmouseout="hide()">raycaster</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects - пересечения')" onmouseout="hide()">intersects</a></span> )</pre>
+Абстрактный (пустой) метод для получения пересечений между брошенным лучом и данным объектом. Такие подклассы, как Mesh, Line и Points применяют этот метод, чтобы использовать рейкастинг.
+Abstract (empty) method to get intersections between a casted ray and this object. Subclasses such as Mesh, Line, and Points implement this method in order to use raycasting.<br><br>
 
-<pre>[method:null traverseVisible]( [page:Function callback] )</pre>
-<div class=blockindent>callback - A function with as first argument an object3D object.</div>
-Like traverse, but the callback will only be executed for visible objects.
-Descendants of invisible objects are not traversed.
+<pre id="14remove"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('remove - удалить')" onmouseout="hide()">.remove</a></span>( <a href="#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a>, ... )</pre>
+Метод удаляет объект как дочерний элемент данного объекта. Может быть удалено произвольное число объектов.
+Removes object as child of this object. An arbitrary number of objects may be removed.<br><br>
 
-<pre>[method:null traverseAncestors]( [page:Function callback] )</pre>
-<div class=blockindent>callback - A function with as first argument an object3D object.</div>
-Executes the callback on all ancestors.
+<pre id="14rotateOnAxis"><a href="#14" onmouseover="show('Object3D.<br>rotate on axis - повернуть по оси')" onmouseout="hide()">.rotateOnAxis</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>axis - ось')" onmouseout="hide()">axis</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('angle - угол')" onmouseout="hide()">angle</a></span> )</pre>
+<div class=list><tt>axis</tt> -- нормализованный вектор в пространстве объекта.</div>
+<div class=list><tt>angle</tt> -- угол в радианах.</div>
+Поворачивает объект по оси в пространстве объекта. Предполагается, что ось нормализована.<br><br>
 
-<pre>[method:null updateMatrix]()</pre>
-Updates local transform.
+<pre id="14rotateOnWorldAxis"><a href="#14" onmouseover="show('Object3D.<br>rotate on world axis - повернуть по &#34;мировой&#34; оси')" onmouseout="hide()">.rotateOnWorldAxis</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>axis - ось')" onmouseout="hide()">axis</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('angle - угол')" onmouseout="hide()">angle</a></span> )</pre>
+<div class=list><tt>axis</tt> -- нормализованный вектор в "мировом" пространстве.</div>
+<div class=list><tt>angle</tt> -- угол в радианах.</div>
+Поворачивает объект по оси в "мировом" пространстве. Предполагается, что ось нормализована. Метод не предполагает поворота родительского объекта.<br><br>
 
-<pre>[method:null updateMatrixWorld]( [page:Boolean force] )</pre>
-Updates global transform of the object and its children.
+<pre id="14rotateX"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotateX - поворот вокруг оси X')" onmouseout="hide()">.rotateX</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rad - сокращ. англ. слова radian - радиан')" onmouseout="hide()">rad</a></span> )</pre>
+<div class=list><tt>rad</tt> - угол поворота, в радианах.</div>
+Поворачивает объект вокруг оси <tt>x</tt> в локальном пространстве.<br><br>
 
-<pre>[method:Object3D clone]( [page:Boolean recursive] )</pre>
-<div class=blockindent>recursive -- if true, descendants of the object are also cloned. Default is true.</div>
-Returns a clone of this object and optionaly all descendants.
+<pre id="14rotateY"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotateY - поворот вокруг оси Y')" onmouseout="hide()">.rotateY</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rad - сокращ. англ. слова radian - радиан')" onmouseout="hide()">rad</a></span> )</pre>
+<div class=list><tt>rad</tt> - угол поворота, в радианах.</div>
+Поворачивает объект вокруг оси <tt>y</tt> в локальном пространстве.<br><br>
 
+<pre id="14rotateZ"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotateZ - поворот вокруг оси Z')" onmouseout="hide()">.rotateZ</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rad - сокращ. англ. слова radian - радиан')" onmouseout="hide()">rad</a></span> )</pre>
+<div class=list><tt>rad</tt> - угол поворота, в радианах.</div>
+Поворачивает объект вокруг оси <tt>z</tt> в локальном пространстве.<br><br>
 
-<pre>[method:Object3D getObjectByName]( [page:String name] )</pre>
-<div>
-name -- String to match to the children's Object3d.name property. <br>
-</div>
-<div>
-Searches through the object's children and returns the first with a matching name.
-</div>
+<pre id="14setRotationFromAxisAngle"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set rotation from axis angle - установить поворот по углу оси')" onmouseout="hide()">.setRotationFromAxisAngle</a></span>( <a href="math.htm#19" onmouseover="show('Vector3.<br>axis - ось')" onmouseout="hide()">axis</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('angle - угол')" onmouseout="hide()">angle</a></span> )</pre>
+<div class=list><tt>axis</tt> -- нормализованный вектор в пространстве объекта.</div>
+<div class=list><tt>angle</tt> -- угол в радианах.</div>
+Calls setFromAxisAngle( axis, angle ) on the .quaternion.<br><br>
 
-<pre>[method:Object3D getObjectById]( [page:Integer id] )</pre>
-<div>
-id -- Unique number of the object instance<br>
-</div>
-<div>
-Searches through the object's children and returns the first with a matching id.
-</div>
+<pre id="14setRotationFromEuler"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set rotation from euler - установить поворот по углу Эйлера')" onmouseout="hide()">.setRotationFromEuler</a></span>( <a href="math.htm#5" onmouseover="show('Euler.<br>euler - угол Эйлера')" onmouseout="hide()">euler</a> )</pre>
+<div class=list><tt>euler</tt> -- угол Эйлера, определяющий размер поворота объекта.</div>
+Calls setRotationFromEuler( euler) on the .quaternion.<br><br>
 
-<pre>[method:Vector3 getWorldPosition]( [page:Vector3 optionalTarget] )</pre>
-<div>
-optionalTarget — Optional target to set the result. Otherwise, a new `Vector3` is instantiated. (optional)<br>
-</div>
-<div>
-Returns a vector representing the position of the object in world space.
-</div>
+<pre id="14setRotationFromMatrix"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set rotation from matrix - установить поворот по матрице')" onmouseout="hide()">.setRotationFromMatrix</a></span>( <a href="math.htm#11" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+<div class=list><tt>m</tt> -- поворот кватерниона по компоненту вращения матрицы.</div>
+Calls setFromRotationMatrix( m ) on the .quaternion.<br>
+Note that this assumes that the upper 3x3 of m is a pure rotation matrix (i.e, unscaled).<br><br>
 
-<pre>[method:Quaternion getWorldQuaternion]( [page:Quaternion optionalTarget] )</pre>
-<div>
-optionalTarget — Optional target to set the result. Otherwise, a new `Quaternion` is instantiated. (optional)<br>
-</div>
-<div>
-Returns a quaternion representing the rotation of the object in world space.
-</div>
+<pre id="14setRotationFromQuaternion"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set rotation from quaternion - установить поворот по кватерниону')" onmouseout="hide()">.setRotationFromQuaternion</a></span>( <a href="math.htm#13" onmouseover="show('Quaternion.<br>q - сокращ. англ. слова quaternion')" onmouseout="hide()">q</a> )</pre>
+<div class=list><tt>q</tt> -- нормализованный кватернион.</div>
+Копирует заданный кватернион в <tt><a href="#14quaternion" onmouseover="show('Object3D.quaternion')" onmouseout="hide()">quaternion</a></tt>.<br><br>
 
-<pre>[method:Euler getWorldRotation]( [page:Euler optionalTarget] )</pre>
-<div>
-optionalTarget — Optional target to set the result. Otherwise, a new `Euler` is instantiated. (optional)<br>
-</div>
-<div>
-Returns the euler angles representing the rotation of the object in world space.
-</div>
+<pre id="14toJSON"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - сокр. от англ. слов to JavaScript Object<br>Notation, — то есть, в текстовый формат описания<br>объекта, основанный на JavaScript')" onmouseout="hide()">.toJSON</a></span>( <a href="math.htm#13" onmouseover="show('Quaternion.<br>q - сокращ. англ. слова quaternion')" onmouseout="hide()">q</a> )</pre>
+Конвертирует объект в формат JSON.<br><br>
 
-<pre>[method:Vector3 getWorldScale]( [page:Vector3 optionalTarget] )</pre>
-<div>
-optionalTarget — Optional target to set the result. Otherwise, a new `Vector3` is instantiated. (optional)<br>
-</div>
-<div>
-Returns a vector of the scaling factors applied to the object for each axis in world space.
-</div>
+<pre id="14translateOnAxis"><a href="#14" onmouseover="show('Object3D.<br>translate on axis - перенос по осям')" onmouseout="hide()">.translateOnAxis</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>axis - ось')" onmouseout="hide()">axis</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span> )</pre>
+<div class=list><tt>axis</tt> -- нормализованный вектор в пространстве объекта.</div>
+<div class=list><tt>distance</tt> -- расстояние переноса.</div>
+Метод переносит объект на расстояние, указанное в аргументе <tt>distance</tt>, по осям в пространстве объекта. Предполагается, что оси нормализованы.<br><br>
 
-<pre>[method:Vector3 getWorldDirection]( [page:Vector3 optionalTarget] )</pre>
-<div>
-optionalTarget — Optional target to set the result. Otherwise, a new `Vector3` is instantiated. (optional)<br>
-</div>
-<div>
-Returns a vector representing the direction of object's positive z-axis in world space.
-</div>
+<pre id="14translateX"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('translate X - перенос (перевод) по оси X')" onmouseout="hide()">.translateX</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span> )</pre>
+Translates object along x axis by distance units.<br><br>
 
-<pre>[method:Object3D translateOnAxis]( [page:Vector3 axis], [page:Float distance] )</pre>
-<div>
-axis -- A normalized vector in object space.<br>
-distance -- The distance to translate.
-</div>
-<div>
-Translate an object by distance along an axis in object space. The axis is assumed to be normalized.
-</div>
+<pre id="14translateY"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('translate Y - перенос (перевод) по оси Y')" onmouseout="hide()">.translateY</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span> )</pre>
+Translates object along y axis by distance units.<br><br>
 
-<pre>[method:Object3D rotateOnAxis]( [page:Vector3 axis], [page:Float angle] )</pre>
-<div>
-axis -- A normalized vector in object space. <br>
-angle -- The angle in radians.
-</div>
-<div>
-Rotate an object along an axis in object space. The axis is assumed to be normalized.
-</div>
+<pre id="14translateZ"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('translate Z - перенос (перевод) по оси Z')" onmouseout="hide()">.translateZ</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span> )</pre>
+Translates object along z axis by distance units.<br><br>
 
-<pre>[method:Array raycast]( [page:Raycaster raycaster], [page:Array intersects] )</pre>
+<pre id="14traverse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('traverse - перемещать, пересекать')" onmouseout="hide()">.traverse</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback - обратный (повторный) вызов')" onmouseout="hide()">callback</a></span> )</pre>
+<div class=list><tt>callback</tt> - функция с Object3D в качестве первого аргумента.</div>
+Метод выполняет функцию обратного вызова (<tt>callback</tt>) на данном объекте и всех его потомках.<br><br>
 
-Abstract method to get intersections between a casted ray and this object. Subclasses such as [page:Mesh], [page:Line], and [page:Points] implement this method in order to participate in raycasting.
+<pre id="14traverseVisible"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('traverse visible - перемещение видимых (объектов)')" onmouseout="hide()">.traverseVisible</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback - обратный (повторный) вызов')" onmouseout="hide()">callback</a></span> )</pre>
+<div class=list><tt>callback</tt> - функция с Object3D в качестве первого аргумента.</div>
+Like traverse, but the callback will only be executed for visible objects. Descendants of invisible objects are not traversed.<br><br>
 
-.traverseAncestors ( callback )
-callback - A function with as first argument an object3D object.
-
-Executes the callback on all ancestors.
+<pre id="14traverseAncestors"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('traverse ancestors - перемещение предков')" onmouseout="hide()">.traverseAncestors</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback - обратный (повторный) вызов')" onmouseout="hide()">callback</a></span> )</pre>
+<div class=list><tt>callback</tt> - функция с Object3D в качестве первого аргумента.</div>
+Метод выполняет функцию обратного вызова (<tt>callback</tt>) на всех предках данного объекта.<br><br>
 
 <pre id="14updateMatrix"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов update matrix - обновить матрицу')" onmouseout="hide()">.updateMatrix</a></span>( )</pre>
-Обновление локального преобразования. Update the local transform.
+Обновление локального преобразования. Update the local transform.<br><br>
 
 <pre id="14updateMatrixWorld"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов update matrix world - обновить матрицу мира')" onmouseout="hide()">.updateMatrixWorld</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова force - сила, принудительно')" onmouseout="hide()">force</a></span> )</pre>
 Обновление глобальных преобразований объекта и его дочерних объектов.<br><br>

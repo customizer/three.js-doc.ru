@@ -7,6 +7,48 @@
 </head>
 <body>
 <h2 class=head1>Примеры</h2>
+<div class=below>Здесь даются примеры реализации различных подсобных объектов и функций.<br><br>
+<table width=100%>
+<tr><td width=50%>
+<div class=blockindent>Контролы (элементы управления)
+<div class=list><a href="#1.1">OrbitControls</a> - элемент управления, позволяющий камере вращаться вокруг цели.</div></div>
+<div class=blockindent>Геометрические элементы
+<div class=list><a href="#2.1">ConvexBufferGeometry</a> - </div>
+<div class=list><a href="#2.2">ConvexGeometry</a> - </div>
+<div class=list><a href="#2.3">DecalGeometry</a> - </div></div>
+<div class=blockindent>Загрузчики
+<div class=list><a href="#3.1">BabylonLoader</a> - загрузка в формате <tt>babylon</tt></div>
+<div class=list><a href="#3.2">GLTFLoader</a> - загрузка в формате <tt>glTF 2.0</tt></div>
+<div class=list><a href="#3.3">MTLLoader</a> - загрузка в формате <tt>mtl</tt></div>
+<div class=list><a href="#3.4">OBJLoader</a> - загрузка в формате <tt>mtl</tt></div>
+<div class=list><a href="#3.5">OBJLoader2</a> - </div>
+<div class=list><a href="#3.6">LoaderSupport</a> - </div>
+<div class=list><a href="#3.7">PCDLoader</a> - </div>
+<div class=list><a href="#3.8">PDBLoader</a> - загрузка в формате <tt>pdb</tt></div>
+<div class=list><a href="#3.9">SVGLoader</a> - загрузка в формате <tt>svg</tt></div>
+<div class=list><a href="#3.10">TGALoader</a> - загрузка в формате <tt>tga</tt></div>
+<div class=list><a href="#3.11">PRWMLoader</a> - загрузка в формате <tt>prwm</tt></div></div>
+</td>
+<td width=50%>
+<div class=blockindent>Объекты
+<div class=list><a href="#4.1">LensFlare</a> -  имитация блика объектива камеры</div></div>
+<div class=blockindent>Экспортеры
+<div class=list><a href="#5.1">GLTFExporter</a> - </div></div>
+<div class=blockindent>Плагины
+<div class=list><a href="#6.1">LookupTable</a> - </div>
+<div class=list><a href="#6.2">SpriteCanvasMaterial</a> - </div></div>
+<div class=blockindent>QuickHull
+<div class=list><a href="#7.1">Face</a> - </div>
+<div class=list><a href="#7.2">HalfEdge</a> - </div>
+<div class=list><a href="#7.3">QuickHull</a> - </div>
+<div class=list><a href="#7.4">VertexNode</a> - </div>
+<div class=list><a href="#7.5">VertexList</a> - </div></div>
+<div class=blockindent>Визуализаторы (рендереры)
+<div class=list><a href="#8.1">CanvasRenderer</a> - </div></div>
+<div class=blockindent>Подсобные функции (утилиты)
+<div class=list><a href="#9.1">SceneUtils</a> - полезные функции для работы со сценой</div></div>
+</td></tr></table>
+</div>
 
 <h2 id="1">Контролы</h2>
 <h3 id="1.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OrbitControls</h3>
@@ -130,10 +172,13 @@ How far you can zoom in ( OrthographicCamera only ). Значение по ум�
 }</pre>
 
 <pre id="1object"><a href="cameras.htm#1" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">.object</a></pre>
-The camera ( or other object ) that is being controlled.<br><br>
+Камера, которой управляет контрол.<br><br>
 
 <pre id="1panningMode"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('panning mode - режим панорамирования')" onmouseout="hide()">.panningMode</a></span></pre>
-Panning mode. Defines how the camera's position is translated when panning. The options are THREE.ScreenSpacePanning, in which the camera pans in screen space, and THREE.HorizontalPanning, in which the camera pans in the plane orthogonal to the camera's up direction. Default is THREE.ScreenSpacePanning.<br><br>
+Режим панорамирования. Определяет, как изменяется позиция камеры при панорамировании.
+Возможными вариантами является THREE.ScreenSpacePanning, при котором камера панорамирует в экранном пространстве,
+и THREE.HorizontalPanning, при котором камера панорамирует в плоскости, ортогональной (перпендикулярной) направлению вверх камеры.
+Значением по умолчанию является THREE.ScreenSpacePanning.<br><br>
 
 <pre id="1panSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pan speed - скорость панорамирования')" onmouseout="hide()">.panSpeed</a></span></pre>
 Скорость панорамирования. Значение по умолчанию равно <tt>1</tt>.<br><br>
@@ -145,16 +190,19 @@ Used internally by the .saveState and .reset methods.<br><br>
 Скорость поворота. Значение по умолчанию равно <tt>1</tt>.<br><br>
 
 <pre id="1target0"><a href="math.htm#19" onmouseover="show('Vector3.<br>target 0 - цель 0')" onmouseout="hide()">.target0</a></pre>
-Used internally by the .saveState and .reset methods.<br><br>
+Данное свойство используется внутри контрола методами <tt><a href="#1saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>
+и <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>reset.<br><br>
 
 <pre id="1target"><a href="math.htm#19" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">.target</a></pre>
-The focus point of the controls, the .object orbits around this. It can be updated manually at any point to change the focus of the controls.<br><br>
+Точка фокуса элемента управления, вокруг которой вращается <a href="#1object" onmouseover="show('OrbitControls.object')" onmouseout="hide()">камера</a>.
+Для смены фокуса элемента управления её можно в любой момент обновить вручную.<br><br>
 
 <pre id="1zoom0"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom 0 - масштабирование 0')" onmouseout="hide()">.zoom0</a></span></pre>
-Used internally by the .saveState and .reset methods.<br><br>
+Данное свойство используется внутри контрола методами <tt><a href="#1saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>
+и <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>reset.<br><br>
 
 <pre id="1zoomSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom speed - скорость масштабирования')" onmouseout="hide()">.zoomSpeed</a></span></pre>
-Speed of zooming / dollying. Значение по умолчанию равно <tt>1</tt>.</div><br>
+Скорость масштабирования / наезда - отъезда камеры. Значение по умолчанию равно <tt>1</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
@@ -162,19 +210,21 @@ Speed of zooming / dollying. Значение по умолчанию равно
 Метод удаляет все прослушиватели (приемники) событий.<br><br>
 
 <pre id="1getAzimuthalAngle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get azimuthal angle - получить азимутальный угол')" onmouseout="hide()">.getAzimuthalAngle</a></span>( )</pre>
-Get the current horizontal rotation, in radians.<br><br>
+Получает текущий угол поворота по горизонтали, в радианах.<br><br>
 
 <pre id="1getPolarAngle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get polar angle - получить полярный угол')" onmouseout="hide()">.getPolarAngle</a></span>( )</pre>
-Get the current vertical rotation, in radians.<br><br>
+Получает текущий угол поворота по вертикали, в радианах.<br><br>
 
 <pre id="1reset"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset - сброс')" onmouseout="hide()">.reset</a></span>( )</pre>
-Reset the controls to their state from either the last time the .saveState was called, or the initial state.<br><br>
+Метод сбрасывает состояние элемента управления либо в его состояние, сохраненное последним вызовом <tt><a href="#1saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>, либо в исходное состояние.<br><br>
 
 <pre id="1saveState"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('save state - сохранить состояние')" onmouseout="hide()">.saveState</a></span>( )</pre>
-Save the current state of the controls. This can later be recovered with .reset.<br><br>
+Сохраняет текущее состояние элемента управления. Впоследствии оно может быть восстановлено с помощью метода <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>.<br><br>
 
 <pre id="1update"><span onclick="showClick('false')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">.update</a></span>( )</pre>
-Update the controls. Must be called after any manual changes to the camera's transform, or in the update loop if .autoRotate or .enableDamping are set.</div><br>
+Метод обновляет элемент управления. Должен вызываться после любых изменений состояния камеры вручную или в цикле обновления,
+если установлены <tt><a href="#1autoRotate" onmouseover="show('OrbitControls.autoRotate')" onmouseout="hide()">autoRotate</a></tt>
+или <tt><a href="#1enableDamping" onmouseover="show('OrbitControls.enableDamping')" onmouseout="hide()">enableDamping</a></tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/OrbitControls.js" target="_blank">OrbitControls.js на github.com</a></div><br><br>
@@ -252,7 +302,7 @@ scene.add( mesh );</pre>
 
 <h2 id="3">Загрузчики</h2>
 <h3 id="3.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BabylonLoader</h3>
-Загрузчик для загрузки ресурсов в формате <em>.babylon</em>.<br>
+Загрузчик для загрузки ресурсов в формате <em>babylon</em>.<br>
 Файловый формат <a href="https://doc.babylonjs.com/generals/file_format_map_(.babylon)" target="_blank">babylon</a> используется JavaScript'овским
 <a href="https://ru.wikipedia.org/wiki/%D0%A4%D1%80%D0%B5%D0%B9%D0%BC%D0%B2%D0%BE%D1%80%D0%BA" target="_blank">фреймворком</a> <a href="https://www.babylonjs.com/" target="_blank">Babylon.js</a>.<br><br>
 
@@ -301,14 +351,16 @@ loader.load(
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span></tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
-Начинает загрузку с URL-адреса и передает загруженную анимацию функции, указанной в <tt>onLoad</tt>.
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с .
 Begin loading from url and call onLoad with the parsed response content.<br><br>
 
-<pre id="3.1parse">[method:Object3D parse</a>( [page:Object json</a> )</pre>
-<div class=list>[page:Object json</a> — The <em>JSON</em> structure to parse.</div>
-Parse a <em>JSON</em> structure and return an [page:Object3D object</a> or a [page:Scene scene</a>.<br>
-Found objects are converted to [page:Mesh</a> with a [page:BufferGeometry</a> and a default [page:MeshPhongMaterial</a>.<br>
-Lights are parsed accordingly.</div><br>
+<pre id="3.1parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, структурный анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('json - сокр. от англ. слов JavaScript Object Notation —<br>текстовый формат описания объекта, основанный на JavaScript')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('json - сокр. от англ. слов JavaScript Object Notation —<br>текстовый формат описания объекта, основанный на JavaScript')" onmouseout="hide()">json</a></span></tt>
+— анализируемая JSON-структура.</div>
+Метод проводит анализ JSON-структуры и возвращает <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">объект</a> или <a href="scenes.htm#3" onmouseover="show('Scene')" onmouseout="hide()">сцену</a>.<br>
+Найденные объекты конвертируются в <a href="objects.htm#7" onmouseover="show('Mesh')" onmouseout="hide()">Mesh</a> c <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>
+и по умолчанию с <a href="materials.htm#8" onmouseover="show('MeshPhongMaterial')" onmouseout="hide()">MeshPhongMaterial</a>.<br>
+Освещение обрабатывается соответственно.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BabylonLoader.js" target="_blank">BabylonLoader.js на github.com</a></div><br><br>
@@ -316,41 +368,43 @@ Lights are parsed accordingly.</div><br>
 
 <span class="right_side"><a href="loaders.htm#12" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
 <h3 id="3.2">GLTFLoader</h3>
- A loader for loading glTF 2.0 resource.<br>
-glTF (GL Transmission Format) is an open format specification for efficient delivery and loading of 3D content. Assets may be provided either in JSON (.gltf) or binary (.glb) format. External files store textures (.jpg, .png, ...) and additional binary data (.bin). A glTF asset may deliver one or more scenes, including meshes, materials, textures, skins, skeletons, morph targets, animations, lights, and/or cameras.<br><br>
+Загрузчик для загрузки ресурсов в формате <em>glTF 2.0</em>.<br>
+Формат <a href="https://www.khronos.org/gltf" target="_blank">glTF (GL Transmission Format)</a> это <a href="https://github.com/KhronosGroup/glTF/tree/master/specification/2.0" target="_blank">спецификация открытого формата</a> для эффективной передачи и загрузки 3D content.
+Ресурсы могут быть предоставлены либо в формате JSON (с расширением <tt>.gltf</tt>), либо в бинарном формате (<tt>.glb</tt>). Текстуры (<tt>.jpg</tt>, <tt>.png</tt>, ...) и дополнительные бинарные данные (<tt>.bin</tt>) хранятся во внешних файлах.
+Ресурс glTF может представить одну или несколько сцен, включая сетки (mesh), материалы, текстуры, оболочки (skin), "скелеты", цели морфинга, анимации, освещение и/или камеры.<br><br>
 
 <h4>Расширения</h4>
-GLTFLoader supports the following glTF extensions:
+GLTFLoader поддерживает следующие <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/" target="_blank">расширения glTF</a>:
 <div class=blockindent>KHR_draco_mesh_compression<br>
 KHR_materials_pbrSpecularGlossiness<br>
 KHR_materials_unlit<br>
-KHR_lights (experimental)</div><br>
+KHR_lights (экспериментально)</div><br>
 
 <h4>Пример</h4>
 <pre>// Instantiate a loader (создание экземпляра загрузчика)
 var loader = new THREE.GLTFLoader();<br>
 // Optional: Provide a DRACOLoader instance to decode compressed mesh data
-// Optional: Provide a DRACOLoader instance to decode compressed mesh data
+// опционально: предоставление экземпляра DRACOLoader для декодирования сжатых данных сетки
 THREE.DRACOLoader.setDecoderPath( '/examples/js/libs/draco' );
 loader.setDRACOLoader( new THREE.DRACOLoader() );<br>
-// Load a glTF resource
+// Load a glTF resource (загрузка ресурсов в формате glTF)
 loader.load(
-  // resource URL
+  // resource URL (URL-адрес ресурса)
   'models/gltf/duck/duck.gltf',
-  // called when the resource is loaded
+  // called when the resource is loaded (вызывается по завершении загрузки)
   function ( gltf ) {<br>
     scene.add( gltf.scene );<br>
-    gltf.animations; // Array &#60;THREE.AnimationClip>
+    gltf.animations; // Array (массив) &#60;THREE.AnimationClip>
     gltf.scene; // THREE.Scene
-    gltf.scenes; // Array &#60;THREE.Scene>
-    gltf.cameras; // Array &#60;THREE.Camera>
-    gltf.asset; // Object<br>
+    gltf.scenes; // Array (массив) &#60;THREE.Scene>
+    gltf.cameras; // Array (массив) &#60;THREE.Camera>
+    gltf.asset; // Object (объект)<br>
   },
-  // called when loading is in progresses
+  // called when loading is in progresses (вызывается во время загрузки)
   function ( xhr ) {<br>
     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );<br>
   },
-  // called when loading has errors
+  // called when loading has errors (вызывается при ошибках в загрузке)
   function ( error ) {<br>
     console.log( 'An error happened' );
   }
@@ -1239,67 +1293,46 @@ This loader is additionally available on npm as three-prwm-loader.
 
 
 
-<h2 id="4">Объекты</h2>
+<h2 id="4">Объекты</h2><br>
+
 <span class="right_side"><a href="objects.htm#7" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
 <h3 id="4.1">LensFlare</h3>
-
 Создает имитацию блика объектива камеры, зависящего от направления освещения.
-Creates a simulated lens flare that tracks a light.
-<div class="note">Примечание: Для работы LensFlare у <a href="renderers.htm#1.2" title="WebGLRenderer">WebGLRenderer</a> аргумент <tt>alpha</tt> должен быть установлен как <tt>true</tt>.</div>
+<div class="note">Примечание: Для работы LensFlare у <a href="renderers.htm#1.2" title="WebGLRenderer">WebGLRenderer</a> аргумент <tt>alpha</tt> должен быть установлен как <tt>true</tt>.</div><br>
 
 <h4>Пример</h4>
-<div>[example:webgl_lensflares lensflares]</div>
+<pre>var light = new THREE.PointLight( 0xffffff, 1.5, 2000 );<br>
+var textureLoader = new THREE.TextureLoader();<br>
+var textureFlare0 = textureLoader.load( "textures/lensflare/lensflare0.png" );
+var textureFlare1 = textureLoader.load( "textures/lensflare/lensflare2.png" );
+var textureFlare2 = textureLoader.load( "textures/lensflare/lensflare3.png" );<br>
+var lensflare = new THREE.Lensflare();<br>
+lensflare.addElement( new THREE.LensflareElement( textureFlare0, 512, 0 ) );
+lensflare.addElement( new THREE.LensflareElement( textureFlare1, 512, 0 ) );
+lensflare.addElement( new THREE.LensflareElement( textureFlare2, 60, 0.6 ) );<br>
+light.add( lensflare );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_lensflares" target="_blank">webgl / lensflares</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>LensFlare( [page:Texture texture], [page:Float size], [page:Float distance], [page:Materials blending], [page:Color color] )</pre>
-<div class=blockindent><tt>texture</tt> — THREE.Texture (optional) <br>
-<tt>size</tt> — size in pixels (-1 = use texture.width) <br>
-<tt>distance</tt> — (0-1) from light source (0 = at light source) <br>
-<tt>blending</tt> — [page:Materials Blending Mode] - Defaults to THREE.NormalBlending <br>
-<tt>color</tt> — The color of the lens flare.</div>
-Automatically adds a lens flare to the lensFlares array if a texture is set.
+<pre>LensFlare( <a href="textures.htm#6" onmouseover="show('Texture.<br>texture - текстура')" onmouseout="hide()">texture</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер')" onmouseout="hide()">size</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span>, <a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <a href="constants.htm#5.3" onmouseover="show('Константы материалов - Режим смешивания<br>blending - смешивание')" onmouseout="hide()">blending</a> )</pre>
+<div class=list><tt>texture</tt> — THREE.Texture to use for the flare.</div>
+<div class=list><tt>size</tt> — размер в пикселах. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>distance</tt> — значение в диапазоне от <tt>0</tt> до <tt>1</tt>, начиная с источника света (значение 0 соответствует местоположению на источнике света). Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>color</tt> — цвет блика от линзы объектива. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>blending</tt> — <a href="constants.htm#5.3" onmouseover="show('Константы материалов - Режим смешивания<br>blending - смешивание')" onmouseout="hide()">режим смешивания</a>.
+Значением по умолчанию является <tt>THREE.NormalBlending</tt>. Дополнительный, необязательный аргумент.</div><br>
 
 <h4>Свойства</h4>
-
-
-
-		<pre>[property:array lensFlares]</pre>
-		<div>
-		The array of flares as set by [page:LensFlare.add]
-		</div>
-
-		<pre>[property:Vector3 positionScreen]</pre>
-		<div>
-		The position of the lens flare on the screen.
-		</div>
-
-		<pre>[property:Function customUpdateCallback]</pre>
-		<div>
-		A custom update callback
-		</div>
-
-  <h4>Методы</h4>
-
-
-		<pre>[method:null add]( [page:Texture texture], [page:Float size], [page:Float distance], [page:Materials blending], [page:Color color] )</pre>
-		<div>
-		Adds a lens flare. See the constructor for details on the parameters.
-		</div>
-
-
-		<pre>[method:null updateLensFlares]()</pre>
-		<div>
-		Updates the lens flare based on the [page:LensFlare.positionScreen positionScreen] property.
-		</div>
-
-		<pre>[method:Lens Flare clone]()</pre>
-		<div>
-		Returns a clone of this LensFlare object and its descendants.
-		</div>
-
+Сведения об общих свойствах смотрите в описании базового класса <a href="objects.htm#7">Mesh</a>.<br><br>
+<div class=blockindent><br>
+<pre id="4.1isLensflare"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is Lensflare - является классом Lensflare')" onmouseout="hide()">.isLensflare</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него Lensflare. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/src/[path].js src/[path].js]<br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/objects/Lensflare.js" target="_blank">LensFlare.js на github.com</a></div><br><br>
+
 
 <h2 id="5">Экспортеры</h2>
 <h3 id="5.1">GLTFExporter</h3>
@@ -1308,19 +1341,20 @@ Automatically adds a lens flare to the lensFlares array if a texture is set.
 glTF (GL Transmission Format) is an open format specification for efficient delivery and loading of 3D content. Assets may be provided either in JSON (.gltf) or binary (.glb) format. External files store textures (.jpg, .png, ...) and additional binary data (.bin). A glTF asset may deliver one or more scenes, including meshes, materials, textures, skins, skeletons, morph targets, animations, lights, and/or cameras.<br><br>
 
 <h4>Пример</h4>
-// Instantiate a exporter
-var exporter = new THREE.GLTFExporter( defaultOptions );
-
+<pre>// Instantiate a exporter (создаем экземпляр экспортера)
+var exporter = new THREE.GLTFExporter( defaultOptions );<br>
 // Parse the input and generate the glTF output
+// анализ входных данных и генерация выходных данных glTF
 exporter.parse( scene, function ( gltf ) {
 	console.log( gltf );
 	downloadJSON( gltf );
-}, options );
-misc_exporter_gltf
+}, options );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#misc_exporter_gltf" target="_blank">misc / exporter / gltf</a></pre><br>
 
 <h4>Конструктор</h4>
-GLTFExporter( )
-Creates a new GLTFExporter.
+<pre>GLTFExporter( )</pre>
+Создает новый GLTFExporter.<br><br>
 
 <h4>Методы</h4>
 #

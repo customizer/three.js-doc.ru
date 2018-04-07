@@ -96,17 +96,19 @@ function animate() {<br>
 Обратите внимание, если свойство <tt><a href="#1autoRotate" onmouseover="show('OrbitControls.autoRotate')" onmouseout="hide()">autoRotate</a></tt> включено, в цикле анимации нужно вызывать метод <tt><a href="#1update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update</a></tt>.<br><br>
 
 <pre id="1dampingFactor"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('damping factor - коэффициент демпфирования (затухания)')" onmouseout="hide()">.dampingFactor</a></span></pre>
-The damping inertia used if .enableDamping is set to true.<br>
+Затухающая инерция используется, если для параметра <tt><a href="#1enableDamping" onmouseover="show('OrbitControls.enableDamping')" onmouseout="hide()">enableDamping</a></tt> установлено как <tt>true</tt>.<br>
 Обратите внимание, для работы этого свойства в цикле анимации нужно вызывать метод <tt><a href="#1update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update</a></tt>.<br><br>
 
 <pre id="1domElement"><span class="lnk" onmouseover="show('domElement - HTML элемент DOM (от англ. Document Object Model — «объектная модель документа»)')" onmouseout="hide()">.domElement</span></pre>
-The HTMLDOMElement used to listen for mouse / touch events. This must be passed in the constructor; changing it here will not set up new event listeners.<br>Default is the whole document.<br><br>
+DOM элемент HTML, используется для прослушивания (приема) событий от мышки / касаний. Он должен быть передан в конструкторе; его изменение здесь не создаст новых приемников событий.<br>
+Значением по умолчанию является весь документ.<br>
+Статья о <a href="https://ru.wikipedia.org/wiki/Document_Object_Model" target="_blank">DOM</a> в Википедии.<br><br>
 
 <pre id="1enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включить (управление)')" onmouseout="hide()">.enabled</a></span></pre>
 Свойство определяет, будет или нет включено управление.<br><br>
 
 <pre id="1enableDamping"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable damping - включить затухание')" onmouseout="hide()">.enableDamping</a></span></pre>
-Set to true to enable damping (inertia), which can be used to give a sense of weight to the controls. Значением по умолчанию является <tt>false</tt>.<br>
+Установите значение этого свойства как <tt>true</tt> для включения затухания (инерции), которое может быть использовано чтобы придать ощущение веса элементам управления. Значением по умолчанию является <tt>false</tt>.<br>
 Обратите внимание, если данное свойство включено (т.е. <tt>true</tt>), в каждом цикле анимации требуется вызывать <a href="#1update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update( )</a>.<br><br>
 
 <pre id="1enableKeys"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable keys - включить клавиши<br>(в смысле - отслеживать нажатия<br>клавиш клавиатуры)')" onmouseout="hide()">.enableKeys</a></span></pre>
@@ -138,30 +140,32 @@ Set to true to enable damping (inertia), which can be used to give a sense of we
 Вот <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode" target="_blank">полный список кодов нажатий клавиш клавиатуры</a>.<br><br>
 
 <pre id="1maxAzimuthAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max azimuth angle - максимальный азимутальный угол')" onmouseout="hide()">.maxAzimuthAngle</a></span></pre>
-How far you can orbit horizontally, upper limit. Range is - Math.PI to Math.PI ( or Infinity for no limit ) and default is Infinity;<br><br>
+Свойство определяет, насколько велика может быть орбита по горизонтали, верхний предел. Возможный диапазон от <tt>- Math.PI</tt> до <tt>Math.PI</tt> (или <tt>Infinity</tt> для снятия ограничений). Значением по умолчанию является <tt>Infinity</tt>.<br><br>
 
 <pre id="1maxDistance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max distance - максимальное расстояние')" onmouseout="hide()">.maxDistance</a></span></pre>
-Свойство определяет, насколько далеко может отъехать камера (только для <a href="cameras.htm#4" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камеры с перспективной проекцией</a> ).
+Свойство определяет, насколько далеко может отъехать камера (только для <a href="cameras.htm#4" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камеры с перспективной проекцией</a>).
 Значением по умолчанию является <tt>Infinity</tt> (бесконечность).<br><br>
 
 <pre id="1maxPolarAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max polar angle - максимальный полярный угол')" onmouseout="hide()">.maxPolarAngle</a></span></pre>
-How far you can orbit vertically, upper limit. Range is 0 to Math.PI radians, and default is Math.PI.<br><br>
+Свойство определяет, насколько велика может быть орбита по вертикали, верхний предел. Возможный диапазон от <tt>0</tt> до <tt>Math.PI</tt>, в радианах.
+Значением по умолчанию является <tt>Math.PI</tt>.<br><br>
 
 <pre id="1maxZoom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max zoom - максимальное увеличение')" onmouseout="hide()">.maxZoom</a></span></pre>
-How far you can zoom out ( OrthographicCamera only ).
+How far you can zoom out (только для <a href="cameras.htm#3" onmouseover="show('OrthographicCamera')" onmouseout="hide()">камеры с ортографической проекцией</a>).
 Значением по умолчанию является <tt>Infinity</tt> (бесконечность).<br><br>
 
 <pre id="1minAzimuthAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min azimuth angle - минимальный азимутальный угол')" onmouseout="hide()">.minAzimuthAngle</a></span></pre>
 How far you can orbit horizontally, lower limit. Range is - Math.PI to Math.PI ( or - Infinity for no limit ) and default is - Infinity;<br><br>
 
 <pre id="1minDistance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min distance - минимальное расстояние')" onmouseout="hide()">.minDistance</a></span></pre>
-How far you can dolly in ( PerspectiveCamera only ). Значение по умолчанию равно <tt>0</tt>.<br><br>
+How far you can dolly in (только для <a href="cameras.htm#4" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камеры с перспективной проекцией</a>). Значение по умолчанию равно <tt>0</tt>.<br><br>
 
 <pre id="1minPolarAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min polar angle - минимальный полярный угол')" onmouseout="hide()">.minPolarAngle</a></span></pre>
-How far you can orbit vertically, lower limit. Range is 0 to Math.PI radians, and default is 0.<br><br>
+How far you can orbit vertically, lower limit. Range is 0 to Math.PI radians.
+Значение по умолчанию равно <tt>0</tt>.<br><br>
 
 <pre id="1minZoom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min zoom - минимальное увеличение')" onmouseout="hide()">.minZoom</a></span></pre>
-How far you can zoom in ( OrthographicCamera only ). Значение по умолчанию равно <tt>0</tt>.<br><br>
+How far you can zoom in (только для <a href="cameras.htm#3" onmouseover="show('OrthographicCamera')" onmouseout="hide()">камеры с ортографической проекцией</a>). Значение по умолчанию равно <tt>0</tt>.<br><br>
 
 <pre id="1mouseButtons"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mouse buttons - кнопки мышки')" onmouseout="hide()">.mouseButtons</a></span></pre>
 Этот объект содержит ссылки на кнопки мышки, используемые для управления камерой.
@@ -279,7 +283,7 @@ scene.add( mesh );</pre><br>
 
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="2.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DecalGeometry</h3>
-DecalGeometry можно использовать для создания сетки (mesh) с <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%B0%D0%BB%D1%8C" target="_blank">декалью</a>, которая служит различным видам целей, например добавление уникальных элементов к моделям, выполнение
+DecalGeometry можно использовать для создания сетки (mesh) с <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%B0%D0%BB%D1%8C" target="_blank">декалью</a>, которая служит различным видам целей, например добавление уникальных элементов к моделям, выполнение динамически видимых изменений окружающей среды или облицовка стыков.
 performing dynamic visual environmental changes or covering seams.<br><br>
 
 <h4>Пример</h4>
@@ -343,6 +347,7 @@ loader.load(
 <br><br>
 
 <h4>Методы</h4>
+<div class=blockindent><br>
 <pre id="3.1load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
 <div class=list><tt><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса.')" onmouseout="hide()">url</a></span></tt>
 — строка, содержащая путь/URL-адрес babylon-файла (обязательный аргумент).</div>
@@ -506,44 +511,43 @@ Parse a <em>mtl</em> text structure and return a [page:MTLLoaderMaterialCreator<
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/MTLLoader.js" target="_blank">MTLLoader.js на github.com</a></div><br><br>
 
 
-
 <h3 id="3.4">OBJLoader</h3>
-A loader for loading an <em>.obj</em> resource.
+Загрузчик для загрузки ресурсов в формате <em>obj</em>.<br>
+The <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" target="_blank">OBJ file format</a> is a simple data-format that represents 3D geometry in a human readable format as the position of each vertex, the UV position of each texture coordinate vertex, vertex normals, and the faces that make each polygon defined as a list of vertices, and texture vertices.<br>
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/Obj" target="_blank">о формате obj</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
+<pre>// instantiate a loader
+var loader = new THREE.OBJLoader();<br>
+// load a resource
+loader.load(
+  // resource URL
+  'models/monster.obj',
+  // called when resource is loaded
+  function ( object ) {
+     scene.add( object );
+  },<br>
+  // called when loading is in progresses
+  function ( xhr ) {
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );<br>
+  },<br>
+  // called when loading has errors
+  function ( error ) {
+     console.log( 'An error happened' );
+  }
+);</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_obj" target="_blank">webgl / loader / obj</a></pre><br>
 
-    <pre>
-				// instantiate a loader
-				var loader = new THREE.OBJLoader();
+<h4>Конструктор</h4>
+<pre>OBJLoader( [page:LoadingManager manager</a> )</pre>
+<div class=list>[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
+Создает новый OBJLoader.<br><br>
 
-				// load a resource
-				loader.load(
-					// resource URL
-					'models/monster.obj',
-					// Function when resource is loaded
-					function ( object ) {
-						scene.add( object );
-					}
-				);
-    </pre>
+<h4>Свойства</h4>
+<br><br>
 
-				[example:webgl_loader_obj</a>
-
-
-  <h4>Конструктор</h4>
-
-		<h3>OBJLoader( [page:LoadingManager manager</a> )</h3>
-		<div>
-		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
-		</div>
-		<div>
-		Creates a new [name</a>.
-		</div>
-
-  <h4>Свойства</h4>
-
-
-  <h4>Методы</h4>
+<h4>Методы</h4>
 
 		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
 		<div>

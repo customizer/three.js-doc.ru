@@ -674,64 +674,68 @@ Allows to set debug mode for the parser and the meshCreator.
 
 
 <h3 id="3.6">LoaderSupport</h3>
+Вспомогательные классы для загрузчиков файлов и
 Supporting classes for file loaders and web worker based loaders.
-<h4>Sub-Classes</h4>
-<pre>LoaderSupport.Builder
-LoaderSupport.LoadedMeshUserOverride
-LoaderSupport.WorkerSupport
-LoaderSupport.WorkerRunnerRefImpl
-LoaderSupport.WorkerDirector
-LoaderSupport.PrepData
-LoaderSupport.LoaderBase
-LoaderSupport.Callbacks
-LoaderSupport.Validator
-LoaderSupport.ConsoleLogger</pre>
+<h4>Подклассы</h4>
+<pre><a href="#3.6.1" onmouseover="show('LoaderSupport.Builder')" onmouseout="hide()">LoaderSupport.Builder</a>
+<a href="#3.6.2" onmouseover="show('LoaderSupport.LoadedMeshUserOverride')" onmouseout="hide()">LoaderSupport.LoadedMeshUserOverride</a>
+<a href="#3.6.3" onmouseover="show('LoaderSupport.WorkerSupport')" onmouseout="hide()">LoaderSupport.WorkerSupport</a>
+<a href="#3.6.4" onmouseover="show('LoaderSupport.WorkerRunnerRefImpl')" onmouseout="hide()">LoaderSupport.WorkerRunnerRefImpl</a>
+<a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector')" onmouseout="hide()">LoaderSupport.WorkerDirector</a>
+<a href="#3.6.6" onmouseover="show('LoaderSupport.PrepData')" onmouseout="hide()">LoaderSupport.PrepData</a>
+<a href="#3.6.7" onmouseover="show('LoaderSupport.LoaderBase')" onmouseout="hide()">LoaderSupport.LoaderBase</a>
+<a href="#3.6.8" onmouseover="show('LoaderSupport.Callbacks')" onmouseout="hide()">LoaderSupport.Callbacks</a>
+<a href="#3.6.9" onmouseover="show('LoaderSupport.Validator')" onmouseout="hide()">LoaderSupport.Validator</a></pre>
+
 <h4>Пример</h4>
-webgl_loader_obj2_meshspray - Example using LoaderSupport.LoaderWorkerDirector and LoaderSupport.LoaderWorkerSupport.
+<tt><a href="https://threejs.org/examples/#webgl_loader_obj2_meshspray" target="_blank">webgl / loader / obj2 / meshspray</a></tt>
+- пример использования <tt><a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector')" onmouseout="hide()">LoaderSupport.WorkerDirector</a></tt> и <tt><a href="#3.6.3" onmouseover="show('LoaderSupport.WorkerSupport')" onmouseout="hide()">LoaderSupport.WorkerSupport</a></tt>.<br><br>
 
 <h3 id="3.6.1">Builder</h3>
 <h4>Конструктор</h4>
-Builder()
-Builds one or many Mesh from one raw set of Arraybuffers, materialGroup descriptions and further parameters. Supports vertex, vertexColor, normal, uv and index buffers.
+<pre>Builder( )</pre>
+Builds one or many Mesh from one raw set of Arraybuffers, materialGroup descriptions and further parameters. Supports vertex, vertexColor, normal, uv and index buffers.<br><br>
+
 <h4>Методы</h4>
-#
-.setMaterials ( Array of materials )
+<div class=blockindent><br>
+<pre id="3.6.1setLogging"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set logging - установка ведения журнала (логирования)')" onmouseout="hide()">.setLogging</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('debug - отладка')" onmouseout="hide()">debug</a></span> )</pre>
+<div class=list><tt>enabled</tt> - True or false.</div>
+<div class=list><tt>debug</tt> - True or false.</div>
+Метод включает или отключает ведение журнала (логирование) в общем (за исключением предупреждений и ошибок), плюс включает или отключает логирование ошибок.<br><br>
+
+<pre id="3.6.1init"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('init - сокращ. англ. слова initialize - инициализация')" onmouseout="hide()">.init</a></span>( )</pre>
+Initializes the Builder (currently only default material initialisation).<br><br>
+
+<pre id="3.6.1setMaterials">.setMaterials ( Array of materials )</pre>
 Array of materials - Array of Materials
-Set materials loaded by any supplier of an Array of Materials.
-#
-.processPayload ( Object payload )
-payload - Raw Mesh or Material descriptions.
-Delegates processing of the payload (mesh building or material update) to the corresponding functions (BW-compatibility).
+Set materials loaded by any supplier of an Array of Materials.<br><br>
 
+<pre id="3.6.1processPayload">.processPayload ( Object payload )</pre>
+<div class=list>payload - Raw Mesh or Material descriptions.</div>
+Delegates processing of the payload (mesh building or material update) to the corresponding functions (BW-compatibility).<br><br>
 
-#
-.buildMeshes ( Object meshPayload )
-meshPayload - Raw mesh description (buffers, params, materials) used to build one to many meshes.
-Builds one or multiple meshes from the data described in the payload (buffers, params, material info).
+<pre id="3.6.1buildMeshes">.buildMeshes ( Object meshPayload )</pre>
+<div class=list>meshPayload - Raw mesh description (buffers, params, materials) used to build one to many meshes.</div>
+Builds one or multiple meshes from the data described in the payload (buffers, params, material info).<br><br>
 
+<pre id="3.6.1updateMaterials">.updateMaterials ( Object materialPayload )</pre>
+<div class=list>materialPayload - Material update instructions</div>
+Updates the materials with contained material objects (sync) or from alteration instructions (async).<br><br>
 
-#
-.updateMaterials ( Object materialPayload )
-materialPayload - Material update instructions
-Updates the materials with contained material objects (sync) or from alteration instructions (async).
+<pre id="3.6.1getMaterialsJSON">.getMaterialsJSON ()</pre>
+Returns the mapping object of material name and corresponding jsonified material.<br><br>
 
-
-#
-.getMaterialsJSON ()
-Returns the mapping object of material name and corresponding jsonified material.
-
-
-#
-.getMaterials ()
-Returns the mapping object of material name and corresponding material.
+<pre id="3.6.1getMaterials">.getMaterials ()</pre>
+Returns the mapping object of material name and corresponding material.</div><br>
 
 
 <h3 id="3.6.2">LoadedMeshUserOverride</h3>
 <h4>Конструктор</h4>
-LoadedMeshUserOverride( disregardMesh, bufferGeometry )
-disregardMesh - Tell implementation to completely disregard this mesh
-alteredMesh - Tell implementation that mesh(es) have been altered or added
-Object to return by callback onMeshAlter. Used to disregard a certain mesh or to return one to many meshes.
+<pre>LoadedMeshUserOverride( disregardMesh, bufferGeometry )</pre>
+<div class=list>disregardMesh - Tell implementation to completely disregard this mesh</div>
+<div class=list>alteredMesh - Tell implementation that mesh(es) have been altered or added</div>
+Object to return by callback onMeshAlter. Used to disregard a certain mesh or to return one to many meshes.<br><br>
+
 <h4>Методы</h4>
 #
 .addMesh ( mesh )
@@ -937,65 +941,21 @@ Register callback function that is called when materials have been loaded.
 
 
 <h3 id="3.6.9">Validator</h3>
-<h4>Constructor</h4>
-Validator()
-Validation functions.
-<h4>Методы</h4>
-#
-.isValid ( input )
-input - Can be anything
-If given input is null or undefined, false is returned otherwise true.
-#
-.verifyInput ( input, defaultValue )
-input - Can be anything defaultValue - Can be anything
-If given input is null or undefined, the defaultValue is returned otherwise the given input.
 
-
-<h3 id="3.6.10">ConsoleLogger</h3>
 <h4>Конструктор</h4>
-ConsoleLogger( enabled, debug )
-enabled - Tell if logger is enabled. debug - Toggle debug logging.
-Logging wrapper for console.
-<h4>Методы</h4>
-#
-.setDebug ( debug )
-debug - True or False
-Enable or disable debug logging.
-#
-.isDebug ()
-Returns if is enabled and debug.
-#
-.setEnabled ( enabled )
-enabled - True or False
-Enable or disable info, debug and time logging.
-#
-.isEnabled ()
-Returns if is enabled.
-#
-.logDebug ( message )
-message - Message to log
-Log a debug message if enabled and debug is set.
-#
-.logInfo ( message )
-message - Message to log
-Log an info message if enabled.
-#
-.logWarn ( message )
-message - Message to log
-Log a warn message (always).
-#
-.logError ( message )
-message - Message to log
-Log an error message (always).
-#
-.logTimeStart ( id )
-id - Time identification
-Start time measurement with provided id.
-#
-.logTimeEnd ( id )
-id - Time identification
-Stop time measurement started with provided id.
+<pre>Validator( )</pre>
+Функции проверки.<br><br>
 
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.6.9isValid"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is valid - является допустимым')" onmouseout="hide()">.isValid</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('input - вход, ввод')" onmouseout="hide()">input</a></span> )</pre>
+<div class=list><tt>input</tt> - значение может быть любым.</div>
+If given input is null or undefined, false is returned otherwise true.<br><br>
+
+<pre id="3.6.9verifyInput"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.verifyInput</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('input - вход, ввод')" onmouseout="hide()">input</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('default value - значение по умолчанию')" onmouseout="hide()">defaultValue</a></span> )</pre>
+<div class=list><tt>input</tt> - значение может быть любым.</div>
+<div class=list><tt>defaultValue</tt> - значение может быть любым.</div>
+If given input is null or undefined, the defaultValue is returned otherwise the given input.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/LoaderSupport.js" target="_blank">LoaderSupport.js на github.com</a></div><br><br>
@@ -2107,26 +2067,154 @@ Returns the [page:number hex</a> color.<br><br>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js" target="_blank">CanvasRenderer.js на github.com</a></div><br><br>
 
 
+<h3 id="8.2">CSS2DRenderer</h3>
+CSS2DRenderer является упрощенной версией <a href="#8.2" onmouseover="show('CSS3DRenderer')" onmouseout="hide()">CSS3DRenderer</a>. Единственная трансформация, здесь поддерживаемая, это перенос (translation).<br>
+The renderer is very useful if you want to combine HTML based labels with 3D objects. Here too, the respective DOM elements are wrapped into an instance of CSS2DObject and added to the scene graph.<br>
+В отличие от <a href="#8.2" onmouseover="show('CSS3DRenderer')" onmouseout="hide()">CSS3DRenderer</a>, здесь поддерживаются камеры с ортографической проекцией.<br><br>
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/webgl_loader_pdb.html" target="_blank">molecules</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>CSS2DRenderer()</pre><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="8.2getSize"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get size - получить размер')" onmouseout="hide()">.getSize</a></span>( )</pre>
+Возвращает объект, содержащий ширину и высоту рендерера.<br><br>
+
+<pre id="8.2render"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - представлять, отображать')" onmouseout="hide()">.render</a></span>( <a href="scenes.htm#3" onmouseover="show('Scene.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+Отображает сцену (аргумент <tt>scene</tt>) при помощи камеры (аргумент <tt>camera</tt>).<br><br>
+
+<pre id="8.2setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
+Изменяет размеры рендерера на указанные в аргументах <tt>width</tt> и <tt>height</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CSS2DRenderer.js" target="_blank">CSS2DRenderer.js на github.com</a></div><br><br>
+
+
+<h3 id="8.3">CSS3DRenderer</h3>
+CSS3DRenderer can be used to apply hierarchical 3D transformations to DOM elements via the CSS3 transform property.<br>
+This renderer is particular interesting if you want to apply 3D effects to a website without canvas based rendering. It can also be used in order to combine DOM elements with WebGL content.<br>
+Тем не менее, существуют значительные ограничения:
+<ul><li>нельзя использовать систему материалов <b>three.js</b>.</li>
+<li>также нет возможности использовать геометрические элементы (Geometry).</li>
+<li>на данный момент поддерживается только <a href="cameras.htm#4" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камера с перспективной проекцией</a>.</li></ul>
+Так что CSS3DRenderer сфокусирован только на обычных DOM-элементах. Эти элементы упаковываются в специальные объекты (CSS3DObject или CSS3DSprite), а затем добавляются в граф сцены.<br><br>
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/#css3d_molecules" target="_blank">molecules</a>
+<a href="https://threejs.org/examples/#css3d_panorama" target="_blank">panorama</a>
+<a href="https://threejs.org/examples/#css3d_periodictable" target="_blank">periodictable</a>
+<a href="https://threejs.org/examples/#css3d_sprites" target="_blank">sprites</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>CSS3DRenderer( )</pre><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="8.3getSize"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get size - получить размер')" onmouseout="hide()">.getSize</a></span>( )</pre>
+Возвращает объект, содержащий ширину и высоту рендерера.<br><br>
+
+<pre id="8.3render"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - представлять, отображать')" onmouseout="hide()">.render</a></span>( <a href="scenes.htm#3" onmouseover="show('Scene.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="cameras.htm#4" onmouseover="show('PerspectiveCamera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+Отображает сцену (аргумент <tt>scene</tt>) при помощи камеры (аргумент <tt>camera</tt>) с перспективной проекцией.<br><br>
+
+<pre id="8.3setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
+Изменяет размеры рендерера на указанные в аргументах <tt>width</tt> и <tt>height</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CSS3DRenderer.js" target="_blank">CSS3DRenderer.js на github.com</a></div><br><br>
+
+
+<h3 id="8.4">SVGRenderer</h3>
+SVGRenderer может быть применен для визуализации данных геометрических элементов, использующих формат SVG. Получаемая векторная графика особенно эффективна в следующих случаях применения:
+<ul><li>анимированные логотипы или иконки</li>
+<li>интерактивные двух-трехмерные диаграммы и графики.</li>
+<li>интерактивные карты</li>
+<li>сложные или анимированные пользовательские интерфейсы.</li></ul>
+SVGRenderer имеет различные достоинства. Он дает кристально чистый и резкий результат, который не зависит от фактического разрешения области видимости.<br>
+SVG-элементы можно оформить через CSS. И у них хорошая доступность, поскольку можно добавлять метаданные вроде названия (title) или описания (description) (используются поисковыми движками или программ считывания с экрана.
+SVG elements can be styled via CSS. And they have good accessibility since it's possible to add metadata like title or description (useful for search engines or screen readers).<br>
+Тем не менее, существуют значительные ограничения:
+<ul><li>нет дополнительной тонировки</li>
+<li>не поддерживается текстура</li>
+<li>не поддерживается тень.</li></ul><br>
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/#svg_lines" target="_blank">lines</a>
+<a href="https://threejs.org/examples/#svg_sandbox" target="_blank">sandbox</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>SVGRenderer( )</pre><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="8.4clear"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear - очистить')" onmouseout="hide()">.clear</a></span>( )</pre>
+Указывает рендереру очистить поверхность рисования. Tells the renderer to clear its drawing surface.<br><br>
+
+<pre id="8.4render"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - представлять, отображать')" onmouseout="hide()">.render</a></span>( <a href="scenes.htm#3" onmouseover="show('Scene.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+Отображает сцену (аргумент <tt>scene</tt>) при помощи камеры (аргумент <tt>camera</tt>).<br><br>
+
+<pre id="8.4setClearColor"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set clear color - установить прозрачный цвет')" onmouseout="hide()">.setClearColor</a></span>( <a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - альфа-канал (прозрачность)')" onmouseout="hide()">alpha</a></span> )</pre>
+Устанавливает прозрачный цвет (<tt>clearColor</tt>) и его коэффициент прозрачности (<tt>clearAlpha</tt>).<br><br>
+
+<pre id="8.4setPrecision"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set precision - установить точность')" onmouseout="hide()">.setPrecision</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('precision - точность')" onmouseout="hide()">precision</a></span> )</pre>
+Устанавливает точность данных, используемых для создания пути (контура).<br><br>
+
+<pre id="8.4setQuality"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set quality - установить качество')" onmouseout="hide()">.setQuality</a></span>( )</pre>
+Устанавливает качество визуализации. Возможные значения - <tt>low</tt> (низкое) и <tt>high</tt> (высокое). Значение по умолчанию - <tt>high</tt>.<br><br>
+
+<pre id="8.4setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
+Изменяет размеры рендерера на указанные в аргументах <tt>width</tt> и <tt>height</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/SVGRenderer.js" target="_blank">SVGRenderer.js на github.com</a></div><br><br>
+
+
 <h2 id="9">Подсобные функции (утилиты)</h2>
-<h3 id="9.1">SceneUtils</h3>
+<h3 id="9.1">BufferGeometryUtils</h3>
+ A class containing utility functions for BufferGeometry instances.<br><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="9.1computeTangents">.computeTangents ( geometry : BufferGeometry ) : null</pre>
+<div class=list>geometry -- A BufferGeometry instance, which must have index, position, normal, and uv attributes.</div>
+
+Calculates and adds tangent attribute to a geometry.<br><br>
+
+<pre id="9.1mergeBufferGeometries">.mergeBufferGeometries ( geometries : Array ) : BufferGeometry</pre>
+<div class=list>geometries -- Array of BufferGeometry instances.</div>
+
+Merges a set of geometries into a single instance. All geometries must have compatible attributes. If merge does not succeed, the method returns null.<br><br>
+
+<pre id="9.1mergeBufferAttributes">.mergeBufferAttributes ( attributes : Array ) : BufferAttribute</pre>
+<div class=list>attributes -- Array of BufferAttribute instances.</div>
+
+Merges a set of attributes into a single instance. All attributes must have compatible properties and types, and InterleavedBufferAttributes are not supported. If merge does not succeed, the method returns null.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/BufferGeometryUtils.js" target="_blank">BufferGeometryUtils.js на github.com</a></div><br><br>
+
+
+<h3 id="9.2">SceneUtils</h3>
 Класс, содержащий полезные служебные функции для работы со сценой.
 A class containing useful utility functions for scene manipulation.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="9.1createMultiMaterialObject">.createMultiMaterialObject ( geometry, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('materials - материалы')" onmouseout="hide()">materials</a></span> )</pre>
+<pre id="9.2createMultiMaterialObject">.createMultiMaterialObject ( geometry, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('materials - материалы')" onmouseout="hide()">materials</a></span> )</pre>
 <div class=list><tt>geometry</tt> -- The geometry for the set of materials.</div>
 <div class=list><tt>materials</tt> -- The materials for the object.</div>
 Creates a new Group that contains a new mesh for each material defined in materials. Beware that this is not the same as an array of materials which defines multiple materials for 1 mesh.<br>
 This is mostly useful for objects that need both a material and a wireframe implementation.<br><br>
 
-<pre id="9.1attach"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('attach - прикрепить, присоединить')" onmouseout="hide()">.attach</a></span>( <a href="core.htm#14" onmouseover="show('Object3D.<br>child - ребёнок, в данном случае - дочерний объект')" onmouseout="hide()">child</a>, <a href="core.htm#14" onmouseover="show('Object3D.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="core.htm#14" onmouseover="show('Object3D.<br>parent - родитель')" onmouseout="hide()">parent</a> )</pre>
+<pre id="9.2attach"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('attach - прикрепить, присоединить')" onmouseout="hide()">.attach</a></span>( <a href="core.htm#14" onmouseover="show('Object3D.<br>child - ребёнок, в данном случае - дочерний объект')" onmouseout="hide()">child</a>, <a href="core.htm#14" onmouseover="show('Object3D.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="core.htm#14" onmouseover="show('Object3D.<br>parent - родитель')" onmouseout="hide()">parent</a> )</pre>
 <div class=list><tt>child</tt> -- объект, добавляемый к родительскому объекту (указанному в <tt>parent</tt>.</div>
 <div class=list><tt>scene</tt> -- The scene to detach the object on.</div>
 <div class=list><tt>parent</tt> -- The parent to attach the object from.</div>
 Attaches the object to the parent without the moving the object in the worldspace. Beware that to do this the matrixWorld needs to be updated, this can be done by calling the updateMatrixWorld method on the parent object.<br><br>
 
-<pre id="9.1detach">.detach ( child, parent, scene )</pre>
+<pre id="9.2detach">.detach ( child, parent, scene )</pre>
 <div class=list><tt>child</tt> -- The object to remove from the parent</div>
 <div class=list><tt>scene</tt> -- The scene to attach the object on.</div>
 <div class=list><tt>parent</tt> -- The parent to detach the object from.</div>

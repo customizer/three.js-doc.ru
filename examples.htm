@@ -1263,7 +1263,7 @@ This loader is additionally available on npm as three-prwm-loader.
 <span class="right_side"><a href="objects.htm#7" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
 <h3 id="4.1">LensFlare</h3>
 Создает имитацию блика объектива камеры, зависящего от направления освещения.
-<div class="note">Примечание: Для работы LensFlare у <a href="renderers.htm#1.2" title="WebGLRenderer">WebGLRenderer</a> аргумент <tt>alpha</tt> должен быть установлен как <tt>true</tt>.</div><br>
+<div class=note><b>Примечание:</b> Для работы LensFlare у <a href="renderers.htm#1.2" title="WebGLRenderer">WebGLRenderer</a> аргумент <tt>alpha</tt> должен быть установлен как <tt>true</tt>.</div><br>
 
 <h4>Пример</h4>
 <pre>var light = new THREE.PointLight( 0xffffff, 1.5, 2000 );<br>
@@ -1322,150 +1322,46 @@ exporter.parse( scene, function ( gltf ) {
 Создает новый GLTFExporter.<br><br>
 
 <h4>Методы</h4>
-#
-.parse ( input, onCompleted, options )
-input — Scenes or objects to export. Valid options:
+<div class=blockindent><br>
+<pre id="5.1parse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - ')" onmouseout="hide()">.parse</a></span>( input, onCompleted, options )</pre>
+<div class=list><tt>input</tt> — сцены или объекты для экспорта. Допустимые параметры:<br>
+&#9679;&nbsp; экспорт сцен
+<pre>exporter.parse( scene1, ...)</pre>
+<pre>exporter.parse( [ scene1, scene2 ], ...)</pre>
+&#9679;&nbsp; экспорт объектов (при этом создается новая сцена для хранения всех объектов)
+<pre>exporter.parse( object1, ...)</pre>
+<pre>exporter.parse( [ object1, object2 ], ...)</pre>
+&#9679;&nbsp; смесь сцен и объектов (при этом, как обычно, экспортируются сцены, но будет создана новая сцена для хранения всех одиночных объектов.
+<pre>exporter.parse( [ scene1, object1, object2, scene2 ], ...)</pre></div>
 
-    Export scenes
-    exporter.parse( scene1, ...)
-    exporter.parse( [ scene1, scene2 ], ...)
-    Export objects (It will create a new Scene to hold all the objects)
-    exporter.parse( object1, ...)
-    exporter.parse( [ object1, object2 ], ...)
-    Mix scenes and objects (It will export the scenes as usual but it will create a new scene to hold all the single objects).
-    exporter.parse( [ scene1, object1, object2, scene2 ], ...)
+<div class=list><tt>onCompleted</tt> — Will be called when the export completes. The argument will be the generated glTF JSON or binary ArrayBuffer.</div>
+<div class=list><tt>options</tt> - Export options<br>
 
-onCompleted — Will be called when the export completes. The argument will be the generated glTF JSON or binary ArrayBuffer.
-options - Export options
+&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('trs - ')" onmouseout="hide()">trs</a></span></tt>
+- экспорт позиции (<tt>position</tt>), поворота (<tt>rotation</tt>) и масштаба (<tt>scale</tt>) вместо матрицы каждого узла. Значением по умолчанию является <tt>false</tt>.<br>
+&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('only visible - только видимый')" onmouseout="hide()">onlyVisible</a></span></tt>
+- экспорт только видимых объектов. Значением по умолчанию является <tt>true</tt>.<br>
+&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('truncate draw range - ')" onmouseout="hide()">truncateDrawRange</a></span></tt>
+- Export just the attributes within the drawRange, if defined, instead of exporting the whole array. Значением по умолчанию является <tt>true</tt>.<br>
+&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('binary - бинарный, двоичный')" onmouseout="hide()">binary</a></span></tt>
+- Export in binary (.glb) format, returning an ArrayBuffer. Значением по умолчанию является <tt>false</tt>.<br>
+&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('embed images - ')" onmouseout="hide()">embedImages</a></span></tt>
+- Export with images embedded into the glTF asset. Значением по умолчанию является <tt>true</tt>.<br>
+&#9679;&nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('animations - анимации')" onmouseout="hide()">animations</a></span></tt> - массив &#60;AnimationClip>. List of animations to be included in the export.<br>
+&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force indices - ')" onmouseout="hide()">forceIndices</a></span></tt>
+- Generate indices for non-index geometry and export with them. Значением по умолчанию является <tt>false</tt>.<br>
+&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force power of two textures - ')" onmouseout="hide()">forcePowerOfTwoTextures</a></span></tt>
+- Export with images resized to POT size. This option works only if embedImages is true. Значением по умолчанию является <tt>false</tt>.</div>
 
-    trs - bool. Export position, rotation and scale instead of matrix per node. Default is false
-    onlyVisible - bool. Export only visible objects. Default is true.
-    truncateDrawRange - bool. Export just the attributes within the drawRange, if defined, instead of exporting the whole array. Default is true.
-    binary - bool. Export in binary (.glb) format, returning an ArrayBuffer. Default is false.
-    embedImages - bool. Export with images embedded into the glTF asset. Default is true.
-    animations - Array &#60;AnimationClip>. List of animations to be included in the export.
+Generates a .gltf (JSON) or .glb (binary) output from the input (Scene or Objects)</div><br>
 
-Generates a .gltf (JSON) or .glb (binary) output from the input (Scene or Objects)
 <h4>Исходники</h4>
-examples/js/exporters/GLTFExporter.js
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/exporters/GLTFExporter.js" target="_blank">GLTFExporter.js на github.com</a></div><br><br>
 
 
+<h2 id="6">Плагины</h2><br>
 
-<h2 id="6">Плагины</h2>
-
-<span class="right_side"><a href="cameras.htm#1" title="Переход к родительскому классу: Camera"><tt>Camera &rarr;</tt></a></span>
-<h3 id="6.1">CombinedCamera</h3>
-A general purpose camera, for setting FOV, Lens Focal Length, and switching between perspective and orthographic views easily. Use this only if you do not wish to manage both an Orthographic and Perspective Camera.
-
-<h4>Примеры</h4>
-<div>[example:canvas_camera_orthographic2 camera / orthographic2 </a></div>
-<pre>//Create combined camera - создаем комбинированную камеру
-camera = new THREE.CombinedCamera( window.innerWidth / 2, window.innerHeight / 2, 70, 1, 1000, - 500, 1000 );</pre>
-
-<h4>Конструктор</h4>
-<pre>CombinedCamera(<a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">width</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">height</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">fov</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">near</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">far</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">orthoNear</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">orthoFar</a>)</pre>
-<div class="blockindent"><tt>width</tt> — Camera frustum width.<br>
-<tt>height</tt> — Camera frustum height.<br>
-<tt>fov</tt> — Camera frustum vertical field of view in perspective view.<br>
-<tt>near</tt> — Camera frustum near plane in perspective view.<br>
-<tt>far</tt> — Camera frustum far plane in perspective view.<br>
-<tt>orthoNear</tt> — Camera frustum near plane in orthographic view.<br>
-<tt>orthoFar</tt> — Camera frustum far plane in orthographic view.</div>
-Creates a CombinedCamera. This initializes 2 cameras, an OrthographicCamera and a PerspectiveCamera. The default is the perspective Camera.
-
-<h4>Свойства</h4>
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.fov</a></pre>
-Gets or sets the camera frustum vertical field of view in perspective view.
-
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.left</a></pre>
-Gets or sets the camera frustum left plane in orthographic view.
-
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.right</a></pre>
-Gets or sets the camera frustum right plane in orthographic view.
-
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.top</a></pre>
-Gets or sets the camera frustum top plane in orthographic view.
-
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.bottom</a></pre>
-Gets or sets the camera frustum bottom plane in orthographic view.
-
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.zoom</a></pre>
-Gets or sets the zoom factor of the camera.
-
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.near</a></pre>
-Gets camera frustum near plane.
-
-<pre><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_number,'Arial,9',10,10,0xffffff,0xd69967)">.far</a></pre>
-Gets camera frustum far plane.
-
-<pre>[property:Matrix4 projectionMatrix</a></pre>
-This is the matrix which contains the projection.
-
-<pre>[property:OrthographicCamera cameraO</a></pre>
-Gets or sets the internal OrthographicCamera used as camera.
-
-<pre>[property:PerspectiveCamera cameraP</a></pre>
-Gets or sets the internal PerspectiveCamera used as camera.
-
-<pre>[property:boolean inOrthographicMode</a></pre>
-Gets whether the combinedCamera is in Orthographic Mode.
-
-<pre>[property:boolean inPerspectiveMode</a></pre>
-Gets whether the combinedCamera is in Perspective Mode.
-
-<h4>Методы</h4>
-<pre>[method:null setFov</a>([page:Number fov</a>)</pre>
-<div class="blockindent">fov —  Camera frustum vertical field of view in perspective view.</div>
-sets the camera frustum vertical field of view in perspective view.
-
-<pre>[method:null setZoom</a>([page:Number zoom</a>)</pre>
-<div class="blockindent">zoom — The zoom factor.</div>
-Sets the zoomfactor.
-
-<pre>[method:null setLens</a>([page:number focalLength</a>, [page:Number filmGauge</a>)</pre>
-<div class="blockindent">focalLength — The focal length of a lens is defined as the distance from the optical center of a lens (or, the secondary principal point for a complex lens like a camera lens) to the focal point (sensor) when the lens is focused on an object at infinity. <br>
-		filmGauge — the size of the frame in mm. (default is *35*)</div>
-Sets the fov based on lens data.
-
-<pre>[method:null toFrontView</a>()</pre>
-Sets the camera to view the front of the target.
-
-<pre>[method:null toBackView</a>()</pre>
-Sets the camera to view the back of the target.
-
-<pre>[method:null toLeftView</a>()</pre>
-Sets the camera to view the left of the target.
-
-<pre>[method:null toRightView</a>()</pre>
-Sets the camera to view the right of the target.
-
-<pre>[method:null toTopView</a>()</pre>
-Sets the camera to view the top.
-
-<pre>[method:null toBottomView</a>()</pre>
-Sets the camera to view the bottom.
-
-<pre>[method:null setSize</a>([page:Number width</a>, [page:Number height</a>)</pre>
-<div class="blockindent">width — The width of the orthographic view.<br>
-height — The height of the orthographic view.</div>
-Sets the size of the orthographic view.
-
-<pre>[method:null toOrthographic</a>()</pre>
-Change the camera to orthographic view.
-
-<pre>[method:null toPerspective</a>()</pre>
-Change the camera to Perspective view.
-
-<pre>[method:null updateProjectionMatrix</a>()</pre>
-Updates the ProjectionMatrix.
-
-
-<h4>Source</h4>
-<div class=blockindent><a href="src/cameras/CombinedCamera.js.txt">CombinedCamera.js в этом справочнике</a><br>
-<a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/cameras/CombinedCamera.js" target="_blank">CombinedCamera.js на github.com</a></div><br>
-
-
-<h3 id="6.2">Lut</h3>
+<h3 id="6.1">Lut</h3>
 Represents a lookup table for colormaps. It is used to determine the color values from a range of data values.
 
 <h4>Пример</h4>
@@ -1540,34 +1436,36 @@ Insert a new color map into the set of available color maps.
 
 <pre>[method:Lut getColor</a>( value ) [page:Lut this</a></pre>
 <div class="blockindent">value — the data value to be displayed as a color.</div>
-Returns a Three.Color.
+Returns a Three.Color.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/math/[path</a>.js examples/js/math/[path</a>.js</a><br><br>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/math/Lut.js" target="_blank">Lut.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="materials.htm#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
-<h3 id="6.3">SpriteCanvasMaterial</h3>
-Create a material that can draw custom sprites using a 2d canvas.
+<h3 id="6.2">SpriteCanvasMaterial</h3>
+Create a material that can draw custom sprites using a 2d canvas.<br><br>
 
 <h4>Конструктор</h4>
-<pre>SpriteCanvasMaterial( [page:Object parameters</a> )</pre>
+<pre>SpriteCanvasMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
 parameters is an object that can be used to set up the default properties
-<div class="blockindent"><tt>color</tt> — the color of the sprite<br>
-<tt>program</tt> — the program used to draw the sprite</div>
+<div class=list><tt>color</tt> — the color of the sprite</div>
+<div class=list><tt>program</tt> — the program used to draw the sprite</div><br>
 
 <h4>Свойства</h4>
+<div class="blockindent"><br>
 <pre>[property:Color color</a></pre>
-The color of the sprite. The material will set up the color for the context before calling the material's program.
+The color of the sprite. The material will set up the color for the context before calling the material's program.</div><br>
 
 <h4>Методы</h4>
+<div class="blockindent"><br>
 <pre>[method:null program</a>([page:CanvasRenderingContext2D context</a>, [page:Color color</a>)</pre>
-<div class="blockindent"><tt>context</tt> — The canvas context<br>
-<tt>color</tt> — The color of the sprite</div>
-Define a program that will use the context to draw the sprite.
+<div class=list><tt>context</tt> — The canvas context</div>
+<div class=list><tt>color</tt> — The color of the sprite</div>
+Define a program that will use the context to draw the sprite.</div><br>
 
 <h4>Исходники</h4>
-[link:https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js examples/js/renderers/CanvasRenderer.js</a>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js" target="_blank">CanvasRenderer.js на github.com</a></div><br><br>
 
 
 <h2 id="7">QuickHull</h2>
@@ -1575,7 +1473,7 @@ Define a program that will use the context to draw the sprite.
 Represents a section bounded by a specific amount of half-edges. The current implmentation assumes that a face always consist of three edges.<br><br>
 
 <h4>Конструктор</h4>
-<pre>Face()</pre>
+<pre>Face( )</pre>
 <br><br>
 
 <h4>Свойства</h4>
@@ -1636,71 +1534,58 @@ Reference to the base edge of a face. To retrieve all edges, you can use the 'ne
 Returns the signed distance from a given point to the plane representation of this face.</div><br>
 
 <h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
 
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
 
-
-		<h3 id="7.2">HalfEdge</h3>
-The basis for a half-edge data structure, also known as doubly connected edge list (DCEL).
+<h3 id="7.2">HalfEdge</h3>
+Основа для  полурёберная структура данных (half-edge data structure),
+также известной как <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B2%D1%83%D1%81%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%80%D1%91%D0%B1%D0%B5%D1%80" target="_blank">двусвязный список рёбер</a>
+(doubly connected edge list - DCEL).
 
 <h4>Конструктор</h4>
-<h3>HalfEdge( [page:VertexNode vertex</a>, [page:Face face</a> )</h3>
-		[page:VertexNode vertex</a> - [page:VertexNode</a> A reference to its destination vertex.<br /><br />
-		[page:Face face</a> - [page:Face</a> A reference to its face.<br />
+<pre>HalfEdge( <a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="#7.1" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
+<div class=list><tt>vertex</tt> - [page:VertexNode</a> A reference to its destination vertex.</div>
+<div class=list><tt>face</tt> - [page:Face</a> A reference to its face.</div><br>
 
-		</div>
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="7.2vertex"><a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">.vertex</a></pre>
+Reference to the destination vertex. The origin vertex can be obtained by querying the destination of its twin, or of the previous half-edge.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
 
-  <h4>Свойства</h4>
+<pre id="7.2prev"><a href="#7.2" onmouseover="show('HalfEdge.<br>prev - сокращ. англ. слова previous - предыдущий')" onmouseout="hide()">.prev</a></pre>
+Reference to the previous half-edge of the same face. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-		<h3>[property:VertexNode vertex</a></h3>
-		<div>
-			Reference to the destination vertex. The origin vertex can be obtained by querying the destination of its twin, or of the previous half-edge. Default is undefined.
-		</div>
+<pre id="7.2next"><a href="#7.2" onmouseover="show('HalfEdge.<br>next - следующий')" onmouseout="hide()">.next</a></pre>
+Reference to the next half-edge of the same face. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-		<h3>[property:HalfEdge prev</a></h3>
-		<div>
-			Reference to the previous half-edge of the same face. Default is null.
-		</div>
+<pre id="7.2twin"><a href="#7.2" onmouseover="show('HalfEdge.<br>twin - двойной')" onmouseout="hide()">.twin</a></pre>
+Reference to the twin half-edge to reach the opposite face. Значением по умолчанию является <tt>null</tt>.<br>
 
-		<h3>[property:HalfEdge next</a></h3>
-		<div>
-			Reference to the next half-edge of the same face. Default is null.
-		</div>
+<pre id="7.2face"><a href="#7.1" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">.face</a></pre>
+Each half-edge bounds a single face and thus has a reference to that face.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
 
-		<h3>[property:HalfEdge twin</a></h3>
-		<div>
-			Reference to the twin half-edge to reach the opposite face. Default is null.
-		</div>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="7.2head">[method:VertexNode .head</a>()</pre>
+Возвращает целевую вершину (вершину назначения).<br><br>
 
-		<h3>[property:Face face</a></h3>
-		<div>
-			 Each half-edge bounds a single face and thus has a reference to that face. Default is undefined.
-		</div>
+<pre id="7.2tail">[method:VertexNode .tail</a>()</pre>
+Возвращает исходную (начальную) вершину. Returns the origin vertex.<br><br>
 
-  <h4>Методы</h4>
+<pre id="7.2length"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина')" onmouseout="hide()">.length</a></span>( )</pre>
+Returns the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a> (straight-line length) of the edge.<br><br>
 
-		<h3>[method:VertexNode head</a>()</h3>
-		<div>Returns the destintation vertex.</div>
+<pre id="7.2lengthSquared"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length squared - квадрат длины, или длина во второй степени')" onmouseout="hide()">.lengthSquared</a></span>( )</pre>
+Returns the square of the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a> (straight-line length) of the edge.<br><br>
 
-		<h3>[method:VertexNode tail</a>()</h3>
-		<div>Returns the origin vertex.</div>
+<pre id="7.2setTwin">[method:HalfEdge .setTwin</a>( [page:HalfEdge .edge</a> )</pre>
+<div class=list>[page:HalfEdge edge</a> - Any half-edge.</div>
+Sets the twin edge of this half-edge. It also ensures that the twin reference of the given half-edge is correctly set.</div><br>
 
-		<h3>[method:Float length</a>()</h3>
-		<div>Returns the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a>
-		(straight-line length) of the edge.</div>
-
-		<h3>[method:Float lengthSquared</a>()</h3>
-		<div>Returns the square of the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a>
-		(straight-line length) of the edge.</div>
-
-		<h3>[method:HalfEdge setTwin</a>( [page:HalfEdge edge</a> )</h3>
-		[page:HalfEdge edge</a> - Any half-edge.<br /><br />
-
-		<div>Sets the twin edge of this half-edge. It also ensures that the twin reference of the given half-edge is correctly set.</div>
-
-		<h2>Source</h2>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
 
 
 <h3 id="7.3">QuickHull</h3>
@@ -1852,12 +1737,10 @@ General information about the Quickhull algorithm: Dirk Gregorius. March 2014, G
 		<div>Cleans up internal properties after computing the convex hull.</div>
 
 		<h3>[method:QuickHull compute</a>()</h3>
+Starts the execution of the quick hull algorithm.</div>
 
-		<div>Starts the execution of the quick hull algorithm.</div>
-
-		<h2>Source</h2>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
 
 
 <h3 id="7.4">VertexNode</h3>
@@ -1888,84 +1771,70 @@ A vertex as a double linked list node.
 		</div>
 
 		<h3>[property:Face face</a></h3>
-		<div>
-			Reference to the face that is able to see this vertex. Default is undefined.
-		</div>
+Reference to the face that is able to see this vertex. Default is undefined.
+		</div><br>
 
-		<h2>Source</h2>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
 
 
 <h3 id="7.5">VertexList</h3>
-A doubly linked list of vertices.
+<a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA" target="_blank" onmouseover="show('Двусвязный список - двунаправленный связный список,<br>ссылки в каждом узле указывают на предыдущий и на<br>последующий узел в списке. Как и односвязный список,<br>двусвязный допускает только последовательный доступ<br>к элементам, но при этом дает возможность<br>перемещения в обе стороны.')" onmouseout="hide()">Двусвязный список</a> вершин.<br><br>
 
 <h4>Конструктор</h4>
-<h3>VertexList()</h3>
+<pre>VertexList( )</pre><br>
 
-  <h4>Свойства</h4>
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="7.5head"><a href="#7.4" onmouseover="show('VertexNode.<br>head - голова')" onmouseout="hide()">.head</a></pre>
+Ссылка на первую вершину в связном списке. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-		<h3>[property:VertexNode head</a></h3>
-		<div>
-			Reference to the first vertex of the linked list. Default is null.
-		</div>
+<pre id="7.5tail"><a href="#7.4" onmouseover="show('VertexNode.<br>tail - хвост, окончание')" onmouseout="hide()">.tail</a></pre>
+Ссылка на последнюю вершину в связном списке. Значением по умолчанию является <tt>null</tt>.</div><br>
 
-		<h3>[property:VertexNode tail</a></h3>
-		<div>
-			Reference to the last vertex of the linked list. Default is null.
-		</div>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="7.5first"><a href="#7.4" onmouseover="show('VertexNode.<br>first - первый')" onmouseout="hide()">.first</a>( )</pre>
+Возвращает головную ссылку, т.е. ссылка направлена в начало списка.<br><br>
 
-  <h4>Методы</h4>
+<pre id="7.5last"><a href="#7.4" onmouseover="show('VertexNode.<br>last - последний')" onmouseout="hide()">.last</a>( )</pre>
+Возвращает хвостовую ссылку, т.е. ссылка направлена в конец списка.<br><br>
 
-		<h3>[method:VertexNode first</a>()</h3>
-		<div>Returns the head reference.</div>
+<pre id="7.5clear"><a href="#7.5" onmouseover="show('VertexList.<br>clear - очистить')" onmouseout="hide()">.clear</a>( )</pre>
+Очищает связный список. Clears the linked list.<br><br>
 
-		<h3>[method:VertexNode last</a>()</h3>
-		<div>Returns the tail reference.</div>
+<pre id="7.5insertBefore"><a href="#7.5" onmouseover="show('VertexList.<br>insert before - вставить перед')" onmouseout="hide()">.insertBefore</a>( <span onmouseover="show('Vertex.<br>target - цель')" onmouseout="hide()">target</span>, <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
+<div class=list><tt>target</tt> - целевая вершина. Предполагается, что данная вершина входит в этот связный список.</div>
+<div class=list><tt>vertex</tt> - вершина, которую нужно вставить.</div>
+Метод вставляет вершину в список <b>перед</b> целевой вершиной.<br><br>
 
-		<h3>[method:VertexList clear</a>()</h3>
-		<div>Clears the linked list.</div>
+<pre id="7.5insertAfter"><a href="#7.5" onmouseover="show('VertexList.<br>insert after - вставить после')" onmouseout="hide()">.insertAfter</a>( [page:Vertex target</a>, [page:Vertex vertex</a> )</pre>
+<div class=list><tt>target</tt> - целевая вершина. Предполагается, что данная вершина входит в этот связный список.</div>
+<div class=list><tt>vertex</tt> - вершина, которую нужно вставить.</div>
+Метод вставляет вершину в список <b>после</b> целевой вершины.<br><br>
 
-		<h3>[method:VertexList insertBefore</a>( [page:Vertex target</a>, [page:Vertex vertex</a> )</h3>
-		[page:Vertex target</a> - The target vertex. It's assumed that this vertex belongs to the linked list.<br /><br />
-		[page:Vertex vertex</a> - The vertex to insert.<br /><br />
+<pre id="7.5append">[method:VertexList append</a>( [page:Vertex vertex</a> )</pre>
+<div class=list>[page:Vertex vertex</a> - The vertex to append.</div>
+Appends a vertex to the end of the linked list.<br><br>
 
-		<div>Inserts a vertex <strong>before</strong> a target vertex.</div>
+<pre id="7.5appendChain">[method:VertexList appendChain</a>( [page:Vertex vertex</a> )</pre>
+<div class=list>[page:Vertex vertex</a> - The head vertex of a chain of vertices.</div>
+Appends a chain of vertices where the given vertex is the head.<br><br>
 
-		<h3>[method:VertexList insertAfter</a>( [page:Vertex target</a>, [page:Vertex vertex</a> )</h3>
-		[page:Vertex target</a> - The target vertex. It's assumed that this vertex belongs to the linked list.<br /><br />
-		[page:Vertex vertex</a> - The vertex to insert.<br /><br />
+<pre id="7.5remove">[method:VertexList remove</a>( [page:Vertex vertex</a> )</pre>
+<div class=list>[page:Vertex vertex</a> - The vertex to remove.</div>
+Removes a vertex from the linked list.<br><br>
 
-		<div>Inserts a vertex <strong>after</strong> a target vertex.</div>
+<pre id="7.5removeSubList">[method:VertexList removeSubList</a>( [page:Vertex a</a>, [page:Vertex b</a> )</pre>
+<div class=list>[page:Vertex a</a> - The head of the sublist.</div>
+<div class=list>[page:Vertex b</a> - The tail of the sublist.</div>
+Removes a sublist of vertices from the linked list.<br><br>
 
-		<h3>[method:VertexList append</a>( [page:Vertex vertex</a> )</h3>
-		[page:Vertex vertex</a> - The vertex to append.<br /><br />
+<pre id="7.5isEmpty"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is empty - является пустым')" onmouseout="hide()">.isEmpty</a></span>( )</pre>
+Возвращает значение <tt>true</tt>, если связанный список пуст.</div>
 
-		<div>Appends a vertex to the end of the linked list.</div>
-
-		<h3>[method:VertexList appendChain</a>( [page:Vertex vertex</a> )</h3>
-		[page:Vertex vertex</a> - The head vertex of a chain of vertices.<br /><br />
-
-		<div>Appends a chain of vertices where the given vertex is the head.</div>
-
-		<h3>[method:VertexList remove</a>( [page:Vertex vertex</a> )</h3>
-		[page:Vertex vertex</a> - The vertex to remove.<br /><br />
-
-		<div>Removes a vertex from the linked list.</div>
-
-		<h3>[method:VertexList removeSubList</a>( [page:Vertex a</a>, [page:Vertex b</a> )</h3>
-		[page:Vertex a</a> - The head of the sublist.<br /><br />
-		[page:Vertex b</a> - The tail of the sublist.<br /><br />
-
-		<div>Removes a sublist of vertices from the linked list.</div>
-
-		<h3>[method:Boolean isEmpty</a>()</h3>
-
-		<div>Returns true if the linked list is empty.</div>
-
-		<h2>Source</h2>
-
-		[link:https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js examples/js/QuickHull.js</a>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
 
 
 <h2 id="8">Визуализаторы</h2>
@@ -2173,52 +2042,53 @@ SVG elements can be styled via CSS. And they have good accessibility since it's 
 
 <h2 id="9">Подсобные функции (утилиты)</h2>
 <h3 id="9.1">BufferGeometryUtils</h3>
- A class containing utility functions for BufferGeometry instances.<br><br>
+Класс, содержащий вспомогательные функции для экземпляров <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="9.1computeTangents">.computeTangents ( geometry : BufferGeometry ) : null</pre>
-<div class=list>geometry -- A BufferGeometry instance, which must have index, position, normal, and uv attributes.</div>
+<pre id="9.1computeTangents"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute tangents - вычислить касательные')" onmouseout="hide()">.computeTangents</a></span>( <a href="core.htm#2" onmouseover="show('BufferGeometry.<br>geometry - геометрия, в данном<br>случае - геометрический элемент')" onmouseout="hide()">geometry</a> )</pre>
+<div class=list><tt>geometry</tt> -- экземпляр <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>, у которого должны быть атрибуты <tt>index</tt>, <tt>position</tt>, <tt>normal</tt>, и <tt>uv</tt>.</div>
+Метод вычисляет касательные и добавляет данному геометрическому элементу атрибут <tt>tangent</tt>.<br><br>
 
-Calculates and adds tangent attribute to a geometry.<br><br>
+<pre id="9.1mergeBufferGeometries"><a href="core.htm#2" onmouseover="show('BufferGeometry.<br>merge BufferGeometries - слить (соединить) экземпляры BufferGeometry')" onmouseout="hide()">.mergeBufferGeometries</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('geometries - геометрии, в данном<br>случае - геометрические элементы')" onmouseout="hide()">geometries</a></span> )</pre>
+<div class=list><tt>geometries</tt> -- массив экземпляров <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.</div>
+Метод соединяет набор геометрических элементов в один экземпляр. Все геометрические элементы должны иметь совместимые атрибуты. Если объединение не получилось, метод возвращает значение <tt>null</tt>.<br><br>
 
-<pre id="9.1mergeBufferGeometries">.mergeBufferGeometries ( geometries : Array ) : BufferGeometry</pre>
-<div class=list>geometries -- Array of BufferGeometry instances.</div>
-
-Merges a set of geometries into a single instance. All geometries must have compatible attributes. If merge does not succeed, the method returns null.<br><br>
-
-<pre id="9.1mergeBufferAttributes">.mergeBufferAttributes ( attributes : Array ) : BufferAttribute</pre>
-<div class=list>attributes -- Array of BufferAttribute instances.</div>
-
-Merges a set of attributes into a single instance. All attributes must have compatible properties and types, and InterleavedBufferAttributes are not supported. If merge does not succeed, the method returns null.</div><br>
+<pre id="9.1mergeBufferAttributes"><a href="core.htm#2" onmouseover="show('BufferGeometry.<br>merge BufferAttributes - слить (соединить)<br>атрибуты буферных элементов')" onmouseout="hide()">.mergeBufferAttributes</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('attributes - атрибуты')" onmouseout="hide()">attributes</a></span> )</pre>
+<div class=list><tt>attributes</tt> -- массив экземпляров <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.</div>
+Метод соединяет набор атрибутов в один экземпляр. Все атрибуты должны иметь совместимые свойства и типы,
+а <a href="core.htm#12" onmouseover="show('InterleavedBufferAttributes')" onmouseout="hide()">InterleavedBufferAttributes</a> не поддерживается.
+Если объединение не получилось, метод возвращает значение <tt>null</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/BufferGeometryUtils.js" target="_blank">BufferGeometryUtils.js на github.com</a></div><br><br>
 
 
 <h3 id="9.2">SceneUtils</h3>
-Класс, содержащий полезные служебные функции для работы со сценой.
-A class containing useful utility functions for scene manipulation.<br><br>
+Класс, содержащий полезные служебные функции для работы со сценой.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="9.2createMultiMaterialObject">.createMultiMaterialObject ( geometry, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('materials - материалы')" onmouseout="hide()">materials</a></span> )</pre>
-<div class=list><tt>geometry</tt> -- The geometry for the set of materials.</div>
-<div class=list><tt>materials</tt> -- The materials for the object.</div>
-Creates a new Group that contains a new mesh for each material defined in materials. Beware that this is not the same as an array of materials which defines multiple materials for 1 mesh.<br>
-This is mostly useful for objects that need both a material and a wireframe implementation.<br><br>
+<pre id="9.2createMultiMaterialObject"><a href="objects.htm#2" onmouseover="show('Group.<br>create multimaterial object - создать многоматериальный объект')" onmouseout="hide()">.createMultiMaterialObject</a>( <a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном<br>случае - геометрический элемент')" onmouseout="hide()">geometry</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('materials - материалы')" onmouseout="hide()">materials</a></span> )</pre>
+<div class=list><tt>geometry</tt> -- геометрический элемент, для которого создается набор материалов.</div>
+<div class=list><tt>materials</tt> -- материалы для объекта, указанного в <tt>geometry</tt>.</div>
+Создает новую <a href="objects.htm#2" onmouseover="show('Group')" onmouseout="hide()">группу</a>, которая содержит новую сетку (mesh) для каждого материала, обозначенного в <tt>materials</tt>.
+Будьте осторожными и помните, что это не то же самое, что и массив материалов, устанавливающий множество материалов для 1 сетки.<br>
+В основном это выгодно для объектов, которым нужен как материал, так и реализация каркаса.<br><br>
 
 <pre id="9.2attach"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('attach - прикрепить, присоединить')" onmouseout="hide()">.attach</a></span>( <a href="core.htm#14" onmouseover="show('Object3D.<br>child - ребёнок, в данном случае - дочерний объект')" onmouseout="hide()">child</a>, <a href="core.htm#14" onmouseover="show('Object3D.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="core.htm#14" onmouseover="show('Object3D.<br>parent - родитель')" onmouseout="hide()">parent</a> )</pre>
 <div class=list><tt>child</tt> -- объект, добавляемый к родительскому объекту (указанному в <tt>parent</tt>.</div>
-<div class=list><tt>scene</tt> -- The scene to detach the object on.</div>
-<div class=list><tt>parent</tt> -- The parent to attach the object from.</div>
-Attaches the object to the parent without the moving the object in the worldspace. Beware that to do this the matrixWorld needs to be updated, this can be done by calling the updateMatrixWorld method on the parent object.<br><br>
+<div class=list><tt>scene</tt> -- сцена, от которой отсоединяется объект.</div>
+<div class=list><tt>parent</tt> -- родительский объект, к которому присоединяется объект <tt>child</tt>.</div>
+Метод присоединяет объект <tt>child</tt> к родительскому объекту <tt>parent</tt>, без перемещения объекта <tt>child</tt> в "мировом" пространстве.
+Помните, что для этого нужно обновить <tt>matrixWorld</tt>, это можно сделать вызвав для родительского объекта метод <tt>updateMatrixWorld</tt>.<br><br>
 
-<pre id="9.2detach">.detach ( child, parent, scene )</pre>
-<div class=list><tt>child</tt> -- The object to remove from the parent</div>
-<div class=list><tt>scene</tt> -- The scene to attach the object on.</div>
-<div class=list><tt>parent</tt> -- The parent to detach the object from.</div>
-Detaches the object from the parent and adds it back to the scene without moving in worldspace. Beware that to do this the matrixWorld needs to be updated, this can be done by calling the updateMatrixWorld method on the parent object.</div><br>
+<pre id="9.2detach"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('detach - отделить, отсоединить')" onmouseout="hide()">.detach</a></span>( <a href="core.htm#14" onmouseover="show('Object3D.<br>child - ребёнок, в данном случае - дочерний объект')" onmouseout="hide()">child</a>, <a href="core.htm#14" onmouseover="show('Object3D.<br>parent - родитель')" onmouseout="hide()">parent</a>, <a href="core.htm#14" onmouseover="show('Object3D.<br>scene - сцена')" onmouseout="hide()">scene</a> )</pre>
+<div class=list><tt>child</tt> -- объект, удаляемый от родительского объекта <tt>parent</tt>.</div>
+<div class=list><tt>scene</tt> -- сцена, к которой присоединяется объект <tt>child</tt>.</div>
+<div class=list><tt>parent</tt> -- родительский объект, от которого отсоединяется объект <tt>child</tt>.</div>
+Метод отсоединяет объект <tt>child</tt> от родительского объекта <tt>parent</tt> и добавляет его обратно на сцену, без перемещения в "мировом" пространстве.
+Помните, что для этого нужно обновить <tt>matrixWorld</tt>, это можно сделать вызвав для родительского объекта метод <tt>updateMatrixWorld</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/utils/SceneUtils.js" target="_blank">SceneUtils.js на github.com</a></div><br><br>

@@ -1135,49 +1135,38 @@ Begin loading from url and call onLoad with the response content.</div><br>
 Class for loading a <em>.tga</em> [page:DataTexture texture</a>.
 
 <h4>Пример</h4>
-
-  <pre>
-		// instantiate a loader
-		var loader = new THREE.TGALoader();
-
-		// load a resource
-		var texture = loader.load(
-			// resource URL
-			'textures/crate_grey8.tga'
-			// Function when resource is loaded
-			function ( texture ) {
-				console.log( 'Texture is loaded' );
-			},
-			// Function called when download progresses
-			function ( xhr ) {
-				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-			},
-			// Function called when download errors
-			function ( xhr ) {
-				console.log( 'An error happened' );
-			}
-		);
-
-		var material = new THREE.MeshPhongMaterial( {
-			color: 0xffffff,
-			map: texture
-		} );
-  </pre>
+<pre>// instantiate a loader
+var loader = new THREE.TGALoader();<br>
+  // load a resource
+  var texture = loader.load(
+    // resource URL
+    'textures/crate_grey8.tga'
+    // Function when resource is loaded
+    function ( texture ) {
+      console.log( 'Texture is loaded' );
+    },
+    // Function called when download progresses
+    function ( xhr ) {
+      console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+    },
+    // Function called when download errors
+    function ( xhr ) {
+      console.log( 'An error happened' );
+    }
+  );<br>
+var material = new THREE.MeshPhongMaterial( {
+  color: 0xffffff,
+  map: texture
+} );</pre>
 
 		[example:webgl_materials_texture_tga</a>
 
-  <h4>Конструктор</h4>
+<h4>Конструктор</h4>
+<pre>TGALoader( [page:LoadingManager manager</a> )</pre>
+<div class=list>[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
+Creates a new TGALoader.<br><br>
 
-		<h3>TGALoader( [page:LoadingManager manager</a> )</h3>
-		<div>
-		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
-		</div>
-		<div>
-		Creates a new TGALoader.
-		</div>
-
-
-  <h4>Методы</h4>
+<h4>Методы</h4>
 
 		<h3>[method:DataTexture load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
 		<div>
@@ -1325,32 +1314,32 @@ exporter.parse( scene, function ( gltf ) {
 <div class=blockindent><br>
 <pre id="5.1parse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - ')" onmouseout="hide()">.parse</a></span>( input, onCompleted, options )</pre>
 <div class=list><tt>input</tt> — сцены или объекты для экспорта. Допустимые параметры:<br>
-&#9679;&nbsp; экспорт сцен
+&nbsp; &#9679; &nbsp; экспорт сцен
 <pre>exporter.parse( scene1, ...)</pre>
 <pre>exporter.parse( [ scene1, scene2 ], ...)</pre>
-&#9679;&nbsp; экспорт объектов (при этом создается новая сцена для хранения всех объектов)
+&nbsp; &#9679; &nbsp; экспорт объектов (при этом создается новая сцена для хранения всех объектов)
 <pre>exporter.parse( object1, ...)</pre>
 <pre>exporter.parse( [ object1, object2 ], ...)</pre>
-&#9679;&nbsp; смесь сцен и объектов (при этом, как обычно, экспортируются сцены, но будет создана новая сцена для хранения всех одиночных объектов.
+&nbsp; &#9679; &nbsp; смесь сцен и объектов (при этом, как обычно, экспортируются сцены, но будет создана новая сцена для хранения всех одиночных объектов.
 <pre>exporter.parse( [ scene1, object1, object2, scene2 ], ...)</pre></div>
 
 <div class=list><tt>onCompleted</tt> — Will be called when the export completes. The argument will be the generated glTF JSON or binary ArrayBuffer.</div>
 <div class=list><tt>options</tt> - Export options<br>
 
-&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('trs - ')" onmouseout="hide()">trs</a></span></tt>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('trs - ')" onmouseout="hide()">trs</a></span></tt>
 - экспорт позиции (<tt>position</tt>), поворота (<tt>rotation</tt>) и масштаба (<tt>scale</tt>) вместо матрицы каждого узла. Значением по умолчанию является <tt>false</tt>.<br>
-&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('only visible - только видимый')" onmouseout="hide()">onlyVisible</a></span></tt>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('only visible - только видимый')" onmouseout="hide()">onlyVisible</a></span></tt>
 - экспорт только видимых объектов. Значением по умолчанию является <tt>true</tt>.<br>
-&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('truncate draw range - ')" onmouseout="hide()">truncateDrawRange</a></span></tt>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('truncate draw range - ')" onmouseout="hide()">truncateDrawRange</a></span></tt>
 - Export just the attributes within the drawRange, if defined, instead of exporting the whole array. Значением по умолчанию является <tt>true</tt>.<br>
-&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('binary - бинарный, двоичный')" onmouseout="hide()">binary</a></span></tt>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('binary - бинарный, двоичный')" onmouseout="hide()">binary</a></span></tt>
 - Export in binary (.glb) format, returning an ArrayBuffer. Значением по умолчанию является <tt>false</tt>.<br>
-&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('embed images - ')" onmouseout="hide()">embedImages</a></span></tt>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('embed images - ')" onmouseout="hide()">embedImages</a></span></tt>
 - Export with images embedded into the glTF asset. Значением по умолчанию является <tt>true</tt>.<br>
-&#9679;&nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('animations - анимации')" onmouseout="hide()">animations</a></span></tt> - массив &#60;AnimationClip>. List of animations to be included in the export.<br>
-&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force indices - ')" onmouseout="hide()">forceIndices</a></span></tt>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('animations - анимации')" onmouseout="hide()">animations</a></span></tt> - массив &#60;AnimationClip>. List of animations to be included in the export.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force indices - ')" onmouseout="hide()">forceIndices</a></span></tt>
 - Generate indices for non-index geometry and export with them. Значением по умолчанию является <tt>false</tt>.<br>
-&#9679;&nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force power of two textures - ')" onmouseout="hide()">forcePowerOfTwoTextures</a></span></tt>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force power of two textures - ')" onmouseout="hide()">forcePowerOfTwoTextures</a></span></tt>
 - Export with images resized to POT size. This option works only if embedImages is true. Значением по умолчанию является <tt>false</tt>.</div>
 
 Generates a .gltf (JSON) or .glb (binary) output from the input (Scene or Objects)</div><br>
@@ -1469,83 +1458,73 @@ Define a program that will use the context to draw the sprite.</div><br>
 
 
 <h2 id="7">QuickHull</h2>
+Алгоритм быстрой оболочки (QuickHull) — алгоритм построения <a href="https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D0%BF%D1%83%D0%BA%D0%BB%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BE%D0%BB%D0%BE%D1%87%D0%BA%D0%B0" target="_blank">выпуклой оболочки</a> на плоскости. Использует идею <a href="https://ru.wikipedia.org/wiki/%D0%91%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F_%D1%81%D0%BE%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0" target="_blank">быстрой сортировки Хоара</a>.<br>
+Статья русскоязычной Википедии <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BE%D0%BB%D0%BE%D1%87%D0%BA%D0%B8" target="_blank">"Алгоритм быстрой оболочки"</a>.<br>
+Статья англоязычной Википедии <a href="https://en.wikipedia.org/wiki/Quickhull" target="_blank">"QuickHull"</a>.<br><br>
+
 <h3 id="7.1">Face</h3>
-Represents a section bounded by a specific amount of half-edges. The current implmentation assumes that a face always consist of three edges.<br><br>
+Представляет секцию, ограниченную определенным числом полуребер. Текущая реализация предполагает, что грань всегда состоит из трех ребер.
+Represents a section bounded by a specific amount of half-edges. The current implementation assumes that a face always consist of three edges.<br><br>
 
 <h4>Конструктор</h4>
 <pre>Face( )</pre>
-<br><br>
+<br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre>[property:Vector3 normal</a></pre>
-The normal vector of the face. Default is a [page:Vector3</a> at (0, 0, 0).<br><br>
+<pre id="7.1normal"><a href="math.htm#19" onmouseover="show('Vector3.<br>normal - нормаль')" onmouseout="hide()">.normal</a></pre>
+Вектор нормали к грани. Значением по умолчанию является <a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a> <tt>(0, 0, 0)</tt>.<br><br>
 
+<pre id="7.1midpoint"><a href="math.htm#19" onmouseover="show('Vector3.<br>midpoint - средняя точка')" onmouseout="hide()">.midpoint</a></pre>
+Средняя точка или центроид грани. Значением по умолчанию является <a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a> <tt>(0, 0, 0)</tt>.<br><br>
 
-		<h3>[property:Vector3 midpoint</a></h3>
-		<div>
-			The midpoint or centroid of the face. Default is a [page:Vector3</a> at (0, 0, 0).
-		</div>
+<pre id="7.1area"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('area - площадь')" onmouseout="hide()">.area</a></span></pre>
+Площадь грани. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
-		<h3>[property:Float area</a></h3>
-		<div>
-			The area of the face. Default is 0.
-		</div>
+<pre id="7.1constant"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constant - постоянная, константа')" onmouseout="hide()">.constant</a></pre>
+Знаковое расстояние от грани до начала координат. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
-		<h3>[property:Float constant</a></h3>
-		<div>
-			Signed distance from face to the origin. Default is 0.
-		</div>
+<pre id="7.1outside"><a href="#7.4" onmouseover="show('VertexNode.<br>outside - за пределами, снаружи')" onmouseout="hide()">.outside</a></pre>
+Reference to a vertex in a vertex list this face can see. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-		<h3>[property:VertexNode outside</a></h3>
-		<div>
-			Reference to a vertex in a vertex list this face can see. Default is null.
-		</div>
+<pre id="7.1mark"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mark - метка')" onmouseout="hide()">.mark</a></span></pre>
+Свойство указывает, видима грань или удалена. Значением по умолчанию является <tt>Visible</tt>.
 
-		<h3>[property:Integer mark</a></h3>
-		<div>
-			Marks if a face is visible or deleted. Default is 'Visible'.
-		</div>
-
-		<h3>[property:HalfEdge edge</a></h3>
-Reference to the base edge of a face. To retrieve all edges, you can use the 'next' reference of the current edge. Default is null.
-		</div>
+<pre id="7.1edge"><a href="#7.2" onmouseover="show('HalfEdge.<br>edge - ребро, край')" onmouseout="hide()">.edge</a></pre>
+Ссылка на базовое ребро грани. Для получения всех ребер можно воспользоваться ссылкой <tt><a href="#7.2next" onmouseover="show('HalfEdge.next')" onmouseout="hide()">next</a></tt> текущей грани. Значением по умолчанию является <tt>null</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-		<h3>[method:Face create</a>( [page:VertexNode a</a>, [page:VertexNode b</a>, [page:VertexNode c</a> )</h3>
-		[page:VertexNode a</a> - First vertex of the face.<br /><br />
-		[page:VertexNode b</a> - Second vertex of the face.<br /><br />
-		[page:VertexNode c</a> - Third vertex of the face.<br /><br />
+<pre id="7.1create"><a href="#7.1" onmouseover="show('Face.<br>create - создать')" onmouseout="hide()">.create</a>( <a href="#7.4" onmouseover="show('VertexNode')" onmouseout="hide()">a</a>, <a href="#7.4" onmouseover="show('VertexNode')" onmouseout="hide()">b</a>, <a href="#7.4" onmouseover="show('VertexNode')" onmouseout="hide()">c</a> )</pre>
+<div class=list><tt>a</tt> - первая вершина грани.</div>
+<div class=list><tt>b</tt> - вторая вершина грани.</div>
+<div class=list><tt>c</tt> - третья вершина грани.</div>
+Создает грань.<br><br>
 
-		<div>Creates a face.</div>
+<pre id="7.1getEdge"><a href="#7.2" onmouseover="show('HalfEdge.<br>get edge - получить ребро')" onmouseout="hide()">.getEdge</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('i - сокращ. от англ. слова index - индекс')" onmouseout="hide()">i</a></span> )</pre>
+<div class=list><tt>i</tt> - индекс ребра.</div>
+Возвращает ребро по заданному индексу.<br><br>
 
-		<h3>[method:HalfEdge getEdge</a>( [page:Integer i</a> )</h3>
-		[page:Integer i</a> - The index of the edge.<br /><br />
+<pre id="7.1compute"><a href="#7.1" onmouseover="show('Face.<br>compute - вычислить')" onmouseout="hide()">.compute</a>( )</pre>
+Вычисляет все свойства этой грани.<br><br>
 
-		<div>Returns an edge by the given index.</div>
-
-		<h3>[method:Face compute</a> ()</h3>
-
-		<div>Computes all properties of the face.</div>
-
-<h3>[method:Float distanceToPoint</a>( [page:Vector3 point</a> )</h3>
-		[page:Vector3 point</a> - Any point in 3D space.<br /><br />
-Returns the signed distance from a given point to the plane representation of this face.</div><br>
+<pre id="7.1distanceToPoint"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to point - расстояние до точки')" onmouseout="hide()">.distanceToPoint</a></span>( <a href="math.htm#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - любая точка в трехмерном пространстве.</div>
+Возвращает знаковое расстояние от заданной точки до плоскости, представленной данной гранью.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
 
 
 <h3 id="7.2">HalfEdge</h3>
-Основа для  полурёберная структура данных (half-edge data structure),
+Основа для полурёберной структуры данных (half-edge data structure),
 также известной как <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B2%D1%83%D1%81%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%80%D1%91%D0%B1%D0%B5%D1%80" target="_blank">двусвязный список рёбер</a>
 (doubly connected edge list - DCEL).
 
 <h4>Конструктор</h4>
 <pre>HalfEdge( <a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="#7.1" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
-<div class=list><tt>vertex</tt> - [page:VertexNode</a> A reference to its destination vertex.</div>
-<div class=list><tt>face</tt> - [page:Face</a> A reference to its face.</div><br>
+<div class=list><tt>vertex</tt> - ссылка на свою целевую вершину.</div>
+<div class=list><tt>face</tt> - ссылка на свою грань.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
@@ -1554,21 +1533,23 @@ Reference to the destination vertex. The origin vertex can be obtained by queryi
 Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
 
 <pre id="7.2prev"><a href="#7.2" onmouseover="show('HalfEdge.<br>prev - сокращ. англ. слова previous - предыдущий')" onmouseout="hide()">.prev</a></pre>
-Reference to the previous half-edge of the same face. Значением по умолчанию является <tt>null</tt>.<br><br>
+Ссылка на предыдущее полуребро той же самой грани. Значением по умолчанию является <tt>null</tt>.<br><br>
 
 <pre id="7.2next"><a href="#7.2" onmouseover="show('HalfEdge.<br>next - следующий')" onmouseout="hide()">.next</a></pre>
-Reference to the next half-edge of the same face. Значением по умолчанию является <tt>null</tt>.<br><br>
+Ссылка на следующее полуребро той же самой грани. Значением по умолчанию является <tt>null</tt>.<br><br>
 
 <pre id="7.2twin"><a href="#7.2" onmouseover="show('HalfEdge.<br>twin - двойной')" onmouseout="hide()">.twin</a></pre>
+Ссылка на парное полуребро для достижения противоположной грани.
 Reference to the twin half-edge to reach the opposite face. Значением по умолчанию является <tt>null</tt>.<br>
 
 <pre id="7.2face"><a href="#7.1" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">.face</a></pre>
+Каждое полуребро ограничивает отдельную грань и поэтому имеет ссылку на эту грань.
 Each half-edge bounds a single face and thus has a reference to that face.
 Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="7.2head">[method:VertexNode .head</a>()</pre>
+<pre id="7.2head"><a href="#7.4" onmouseover="show('VertexNode.<br>head - голова')" onmouseout="hide()">.head</a>( )</pre>
 Возвращает целевую вершину (вершину назначения).<br><br>
 
 <pre id="7.2tail">[method:VertexNode .tail</a>()</pre>
@@ -1580,8 +1561,8 @@ Returns the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean len
 <pre id="7.2lengthSquared"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length squared - квадрат длины, или длина во второй степени')" onmouseout="hide()">.lengthSquared</a></span>( )</pre>
 Returns the square of the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a> (straight-line length) of the edge.<br><br>
 
-<pre id="7.2setTwin">[method:HalfEdge .setTwin</a>( [page:HalfEdge .edge</a> )</pre>
-<div class=list>[page:HalfEdge edge</a> - Any half-edge.</div>
+<pre id="7.2setTwin"><a href="#7.2" onmouseover="show('HalfEdge.<br>set twin - установить двойника (парное ребро)')" onmouseout="hide()">.setTwin</a>( <a href="#7.2" onmouseover="show('HalfEdge.<br>edge - ребро')" onmouseout="hide()">.edge</a> )</pre>
+<div class=list>[page:HalfEdge .edge</a> - любое полуребро.</div>
 Sets the twin edge of this half-edge. It also ensures that the twin reference of the given half-edge is correctly set.</div><br>
 
 <h4>Исходники</h4>
@@ -1589,155 +1570,116 @@ Sets the twin edge of this half-edge. It also ensures that the twin reference of
 
 
 <h3 id="7.3">QuickHull</h3>
-General information about the Quickhull algorithm: Dirk Gregorius. March 2014, Game Developers Conference: [link:http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf Implementing QuickHull</a>.
+Общие сведения об алгоритме Quickhull: Dirk Gregorius. March 2014, Game Developers Conference: <a href="http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf" target="_blank">Implementing QuickHull</a>.<br><br>
 
-  <h4>Конструктор</h4>
-<h3>QuickHull()</h3>
+<h4>Конструктор</h4>
+<pre>QuickHull()</pre><br>
 
 <h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="7.3tolerance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tolerance - допустимое отклонение')" onmouseout="hide()">.tolerance</a></span></pre>
+The epsilon value that is used for internal comparative operations. Вычисление этого значения зависит от размера геометрического элемента. Значение по умолчанию равно <tt>-1</tt>.<br><br>
 
-		<h3>[property:Float tolerance</a></h3>
-		<div>
-			The epsilon value that is used for internal comparative operations. The calculation of this value depends on the size of the geometry. Default is -1.
-		</div>
+<pre id="7.3faces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('faces - грани')" onmouseout="hide()">.faces</a></span></pre>
+The generated faces of the convex hull. Значением по умолчанию является пустой массив.<br><br>
 
-		<h3>[property:Array faces</a></h3>
-		<div>
-			The generated faces of the convex hull. Default is an empty array.
-		</div>
+<pre id="7.3newFaces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('new faces - новые грани')" onmouseout="hide()">.newFaces</a></span></pre>
+This array holds the faces that are generated within a single iteration. Значением по умолчанию является пустой массив.<br><br>
 
-		<h3>[property:Array newFaces</a></h3>
-		<div>
-			This array holds the faces that are generated within a single iteration. Default is an empty array.
-		</div>
+<pre id="7.3assigned"><a href="#7.5" onmouseover="show('VertexList.<br>assigned - присвоить, назначить')" onmouseout="hide()">.assigned</a></pre>
+Данный <a href="#7.5" onmouseover="show('VertexList')" onmouseout="hide()">список вершин</a> содержит все вершины, назначенные грани. Значением по умолчанию является пустой список вершин.<br><br>
 
-		<h3>[property:VertexList assigned</a></h3>
-		<div>
-			This [page:VertexList vertex list</a> holds all vertices that are assigned to a face. Default is an empty vertex list.
-		</div>
+<pre id="7.3unassigned"><a href="#7.5" onmouseover="show('VertexList.<br>unassigned - неназначить, отменить присвоенное')" onmouseout="hide()">.unassigned</a></pre>
+Данный <a href="#7.5" onmouseover="show('VertexList')" onmouseout="hide()">список вершин</a> содержит все вершины, не назначенные грани. Значением по умолчанию является пустой список вершин.<br><br>
 
-		<h3>[property:VertexList unassigned</a></h3>
-		<div>
-			This [page:VertexList vertex list</a> holds all vertices that are not assigned to a face. Default is an empty vertex list.
-		</div>
+<pre id="7.3vertices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices - вершины')" onmouseout="hide()">.vertices</a></span></pre>
+The internal representation of the given geometry data (an array of [page:VertexNode vertices</a>).</div><br>
 
-		<h3>[property:Array vertices</a></h3>
-		<div>
-			The internal representation of the given geometry data (an array of [page:VertexNode vertices</a>).
-		</div>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="7.3setFromPoints"><a href="#7.3" onmouseover="show('QuickHull.<br>set from points - установить из точек')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> - массив <a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерных векторов</a>, который будет содержать получающаяся выпуклая оболочка.</div>
+Вычисляет выпуклую оболочку по заданному массиву точек.<br><br>
 
-  <h4>Методы</h4>
+<pre id="7.3setFromObject"><a href="#7.3" onmouseover="show('QuickHull.<br>set from object - установить из объекта')" onmouseout="hide()">.setFromObject</a>( <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
+<div class=list><tt>object</tt> - <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> по которому вычисляется выпуклая оболочка.</div>
+Computes the convex hull of an [page:Object3D</a> (including its children), accounting for the world transforms of both the object and its childrens.<br><br>
 
-		<h3>[method:QuickHull setFromPoints</a>( [page:Array points</a> )</h3>
-		[page:Array points</a> - Array of [page:Vector3 Vector3s</a> that the resulting convex hull will contain.<br /><br />
+<pre id="7.3makeEmpty"><a href="#7.3" onmouseover="show('QuickHull.<br>make empty - сделать пустой')" onmouseout="hide()">.makeEmpty</a>()</pre>
+Делает данную выпуклую оболочку пустой.<br><br>
 
-		<div>Computes to convex hull for the given array of points.</div>
+<pre id="7.3addVertexToFace">[method:QuickHull .addVertexToFace</a>( [page:VertexNode vertex</a>, [page:Face face</a> )</pre>
+<div class=list>[page:VertexNodeNode vertex</a> - The vetex to add.</div>
+<div class=list>[page:Face face</a> - The target face.</div>
+Adds a vertex to the 'assigned' list of vertices and assigns it to the given face.<br><br>
 
-		<h3>[method:QuickHull setFromObject</a>( [page:Object3D object</a> )</h3>
-		[page:Object3D object</a> - [page:Object3D</a> to compute the convex hull of.<br /><br />
+<pre id="7.3removeVertexFromFace">[method:QuickHull .removeVertexFromFace</a>( [page:VertexNode vertex</a>, [page:Face face</a> )</pre>
+<div class=list>[page:VertexNode vertex</a> - удаляемая вершина.</div>
+<div class=list>[page:Face face</a> - целевая грань.</div>
+Removes a vertex from the 'assigned' list of vertices and from the given face. It also makes sure that the link from 'face' to the first vertex it sees in 'assigned' is linked correctly after the removal.<br><br>
 
-		<div>Computes the convex hull of an [page:Object3D</a> (including its children),
-		accounting for the world transforms of both the object and its childrens.</div>
+<pre id="7.3removeAllVerticesFromFace">[method:VertexNode .removeAllVerticesFromFace</a>( [page:Face face</a> )</pre>
+<div class=list>[page:Face face</a> - The given face.</div>
+Removes all the visible vertices that a given face is able to see which are stored in the 'assigned' vertext list.<br><br>
 
-		<h3>[method:QuickHull makeEmpty</a>()</h3>
+<pre id="7.3deleteFaceVertices">[method:QuickHull .deleteFaceVertices</a>( [page:Face face</a>, [page:Face absorbingFace</a> )</pre>
+<div class=list>[page:Face face</a> - The given face.</div>
+<div class=list>[page:Face absorbingFace</a> - An optional face that tries to absorb the vertices of the first face.</div>
+Removes all the visible vertices that 'face' is able to see.<br>
+&nbsp; &#9679; &nbsp; If 'absorbingFace' doesn't exist, then all the removed vertices will be added to the 'unassigned' vertex list.<br>
+&nbsp; &#9679; &nbsp; If 'absorbingFace' exists, then this method will assign all the vertices of 'face' that can see 'absorbingFace'.<br>
+&nbsp; &#9679; &nbsp; If a vertex cannot see 'absorbingFace', it's added to the 'unassigned' vertex list.<br><br>
 
-		<div>Makes this convex hull empty.</div>
+<pre id="7.3resolveUnassignedPoints">[method:QuickHull .resolveUnassignedPoints</a>( [page:Array newFaces</a> )</pre>
+<div class=list>[page:Face newFaces</a> - массив новых граней.</div>
+Reassigns as many vertices as possible from the unassigned list to the new faces.
 
-		<h3>[method:QuickHull addVertexToFace</a>( [page:VertexNode vertex</a>, [page:Face face</a>	)</h3>
-		[page:VertexNodeNode vertex</a> - The vetex to add.<br /><br />
-		[page:Face face</a> - The target face.<br /><br />
+<pre id="7.3computeExtremes">[method:Object .computeExtremes</a>()</pre>
+Computes the extremes values (min/max vectors) which will be used to compute the inital hull.<br><br>
 
-		<div>Adds a vertex to the 'assigned' list of vertices and assigns it to the given face.</div>
+<pre id="7.3computeInitialHull">[method:QuickHull .computeInitialHull</a>()</pre>
+Computes the initial simplex assigning to its faces all the points that are candidates to form part of the hull.<br><br>
 
-		<h3>[method:QuickHull removeVertexFromFace</a>( [page:VertexNode vertex</a>, [page:Face face</a>	)</h3>
-		[page:VertexNode vertex</a> - The vetex to remove.<br /><br />
-		[page:Face face</a> - The target face.<br /><br />
+<pre id="7.3reindexFaces">[method:QuickHull .reindexFaces</a>()</pre>
+Removes inactive (e.g. deleted) faces from the internal face list.<br><br>
 
-		<div>Removes a vertex from the 'assigned' list of vertices and from the given face. It also makes sure that the link from 'face' to the first vertex it sees in 'assigned' is linked correctly after the removal.</div>
+<pre id="7.3nextVertexToAdd">[method:VertexNode .nextVertexToAdd</a>()</pre>
+Finds the next vertex to create faces with the current hull.<br>
+&nbsp; &#9679; &nbsp; Let the initial face be the first face existing in the 'assigned' vertex list.<br>
+&nbsp; &#9679; &nbsp; If a face doesn't exist then return since there're no vertices left.<br>
+&nbsp; &#9679; &nbsp; Otherwise for each vertex that face sees find the one furthest away from it.<br><br>
 
-		<h3>[method:VertexNode removeAllVerticesFromFace</a>( [page:Face face</a>	)</h3>
-		[page:Face face</a> - The given face.<br /><br />
+<pre id="7.3computeHorizon">[method:QuickHull .computeHorizon</a>( [page:Vector3 eyePoint</a>, [page:HalfEdge crossEdge</a>, [page:Face face</a>, [page:Array horizon</a> )</pre>
+<div class=list>[page:Vector3 eyePoint</a> - The 3D-coordinates of a point.</div>
+<div class=list>[page:HalfEdge crossEdge</a> - The edge used to jump to the current face.</div>
+<div class=list>[page:Face face</a> - The current face being tested.</div>
+<div class=list>[page:Array horizon</a> - The edges that form part of the horizon in CCW order.</div>
+Computes a chain of half edges in CCW order called the 'horizon'. For an edge to be part of the horizon it must join a face that can see 'eyePoint' and a face that cannot see 'eyePoint'.<br><br>
 
-		<div>Removes all the visible vertices that a given face is able to see which are stored in the 'assigned' vertext list.</div>
+<pre id="7.3addAdjoiningFace">[method:HalfEdge .addAdjoiningFace</a>( [page:VertexNode eyeVertex</a>, [page:HalfEdge horizonEdge</a> )</pre>
+<div class=list>[page:VertexNode eyeVertex</a> - The vertex that is added to the hull.</div>
+<div class=list>[page:HalfEdge horizonEdge</a> - A single edge of the horizon.</div>
+Creates a face with the vertices 'eyeVertex.point', 'horizonEdge.tail' and 'horizonEdge.head' in CCW order.<br>
+All the half edges are created in CCW order thus the face is always pointing outside the hull<br><br>
 
-		<h3>[method:QuickHull deleteFaceVertices</a>( [page:Face face</a>, [page:Face absorbingFace</a>	)</h3>
-		[page:Face face</a> - The given face.<br /><br />
-		[page:Face absorbingFace</a> - An optional face that tries to absorb the vertices of the first face.<br /><br />
+<pre id="7.3addNewFaces"><a href="#7.3" onmouseover="show('QuickHull.<br>add new faces - добавить новые грани')" onmouseout="hide()">.addNewFaces</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина')" onmouseout="hide()">eyeVertex</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>horizon - горизонт')" onmouseout="hide()">horizon</a> )</pre>
+<div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
+<div class=list><tt>horizon</tt> - массив полуребер, формирующий горизонт.</div>
+Adds 'horizon.length' faces to the hull, each face will be linked with the horizon opposite face and the face on the left/right.<br><br>
 
-		<div>Removes all the visible vertices that 'face' is able to see.
-			<ul>
-				<li>If 'absorbingFace' doesn't exist, then all the removed vertices will be added to the 'unassigned' vertex list.</li>
-				<li>If 'absorbingFace' exists, then this method will assign all the vertices of 'face' that can see 'absorbingFace'.</li>
-				<li>If a vertex cannot see 'absorbingFace', it's added to the 'unassigned' vertex list.</li>
-			</ul>
-		</div>
+<pre id="7.3addVertexToHull"><a href="#7.3" onmouseover="show('QuickHull.<br>add vertex to hull - добавить вершину к оболочке')" onmouseout="hide()">.addVertexToHull</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина')" onmouseout="hide()">eyeVertex</a> )</pre>
+<div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
+Метод добавляет вершину к оболочке по следующему алгоритму:<br>
+&nbsp; &#9679; &nbsp; Compute the 'horizon' which is a chain of half edges. For an edge to belong to this group it must be the edge connecting a face that can see 'eyeVertex' and a face which cannot see 'eyeVertex'.<br>
+&nbsp; &#9679; &nbsp; All the faces that can see 'eyeVertex' have its visible vertices removed from the assigned vertex list.<br>
+&nbsp; &#9679; &nbsp; A new set of faces is created with each edge of the 'horizon' and 'eyeVertex'. Each face is connected with the opposite horizon face and the face on the left/right.<br>
+&nbsp; &#9679; &nbsp; The vertices removed from all the visible faces are assigned to the new faces if possible.<br><br>
 
-		<h3>[method:QuickHull resolveUnassignedPoints</a>( [page:Array newFaces</a>	)</h3>
-		[page:Face newFaces</a> - An array of new faces.<br /><br />
+<pre id="7.3cleanup"><a href="#7.3" onmouseover="show('QuickHull.<br>clean up - очистить')" onmouseout="hide()">.cleanup</a>( )</pre>
+Cleans up internal properties after computing the convex hull.<br><br>
 
-		<div>Reassigns as many vertices as possible from the unassigned list to the new faces.</div>
-
-		<h3>[method:Object computeExtremes</a>()</h3>
-
-		<div>Computes the extremes values (min/max vectors) which will be used to compute the inital hull.</div>
-
-		<h3>[method:QuickHull computeInitialHull</a>()</h3>
-
-		<div>Computes the initial simplex assigning to its faces all the points that are candidates to form part of the hull.</div>
-
-		<h3>[method:QuickHull reindexFaces</a>()</h3>
-
-		<div>Removes inactive (e.g. deleted) faces from the internal face list.</div>
-
-		<h3>[method:VertexNode nextVertexToAdd</a>()</h3>
-
-		<div>Finds the next vertex to create faces with the current hull.
-			<ul>
-				<li>Let the initial face be the first face existing in the 'assigned' vertex list.</li>
-				<li>If a face doesn't exist then return since there're no vertices left.</li>
-				<li>Otherwise for each vertex that face sees find the one furthest away from it.</li>
-			</ul>
-		</div>
-
-		<h3>[method:QuickHull computeHorizon</a>( [page:Vector3 eyePoint</a>, [page:HalfEdge crossEdge</a>, [page:Face face</a>, [page:Array horizon</a>	)</h3>
-		[page:Vector3 eyePoint</a> - The 3D-coordinates of a point.<br /><br />
-		[page:HalfEdge crossEdge</a> - The edge used to jump to the current face.<br /><br />
-		[page:Face face</a> - The current face being tested.<br /><br />
-		[page:Array horizon</a> - The edges that form part of the horizon in CCW order.<br /><br />
-
-		<div>Computes a chain of half edges in CCW order called the 'horizon'. For an edge to be part of the horizon it must join a face that can see 'eyePoint' and a face that cannot see 'eyePoint'.</div>
-
-		<h3>[method:HalfEdge addAdjoiningFace</a>( [page:VertexNode eyeVertex</a>, [page:HalfEdge horizonEdge</a> )</h3>
-		[page:VertexNode eyeVertex</a> - The vertex that is added to the hull.<br /><br />
-		[page:HalfEdge horizonEdge</a> - A single edge of the horizon.<br /><br />
-
-		<div>Creates a face with the vertices 'eyeVertex.point', 'horizonEdge.tail' and 'horizonEdge.head' in CCW order.
-			All the half edges are created in CCW order thus the face is always pointing outside the hull</div>
-
-		<h3>[method:QuickHull addNewFaces</a>( [page:VertexNode eyeVertex</a>, [page:HalfEdge horizonEdge</a> )</h3>
-		[page:VertexNode eyeVertex</a> - The vertex that is added to the hull.<br /><br />
-		[page:HalfEdge horizon</a> - An array of half-edges that form the horizon.<br /><br />
-
-		<div>Adds 'horizon.length' faces to the hull, each face will be linked with the horizon opposite face and the face on the left/right.</div>
-
-		<h3>[method:QuickHull addVertexToHull</a>( [page:VertexNode eyeVertex</a> )</h3>
-		[page:VertexNode eyeVertex</a> - The vertex that is added to the hull.<br /><br />
-
-		<div>Adds a vertex to the hull with the following algorithm
-			<ul>
-				<li>Compute the 'horizon' which is a chain of half edges. For an edge to belong to this group it must be the edge connecting a face that can see 'eyeVertex' and a face which cannot see 'eyeVertex'.</li>
-				<li>All the faces that can see 'eyeVertex' have its visible vertices removed from the assigned vertex list.</li>
-				<li>A new set of faces is created with each edge of the 'horizon' and 'eyeVertex'. Each face is connected with the opposite horizon face and the face on the left/right.</li>
-				<li>The vertices removed from all the visible faces are assigned to the new faces if possible.</li>
-			</ul>
-		</div>
-
-		<h3>[method:QuickHull cleanup</a>()</h3>
-
-		<div>Cleans up internal properties after computing the convex hull.</div>
-
-		<h3>[method:QuickHull compute</a>()</h3>
-Starts the execution of the quick hull algorithm.</div>
+<pre id="7.3compute"><a href="#7.3" onmouseover="show('QuickHull.<br>compute - вычислить')" onmouseout="hide()">.compute</a>( )</pre>
+Запускает выполнение алгоритма построения выпуклой оболочки (QuickHull).</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>

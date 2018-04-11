@@ -387,6 +387,8 @@ KHR_materials_unlit<br>
 KHR_lights (экспериментально)</div><br>
 
 <h4>Пример</h4>
+<div><a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
+<div style='display:none;'>
 <pre>// Instantiate a loader (создание экземпляра загрузчика)
 var loader = new THREE.GLTFLoader();<br>
 // Optional: Provide a DRACOLoader instance to decode compressed mesh data
@@ -414,16 +416,19 @@ loader.load(
   function ( error ) {<br>
     console.log( 'An error happened' );
   }
-);</pre>
+);</pre></div></div>
 <h5>Другие примеры:</h5>
 <pre><a href="https://threejs.org/examples/#webgl_loader_gltf" target="_blank">webgl / loader / gltf</a></pre><br>
 
 <h4>Совместимость с браузером</h4>
-GLTFLoader relies on ES6 Promises, which are not supported in IE11. To use the loader in IE11, you must include a polyfill providing a Promise replacement.<br><br>
+GLTFLoader полагается на <a href="https://learn.javascript.ru/promise" target="_blank">обещания (Promise)</a> от ES6, которые не поддерживаются в IE11.
+Для использования загрузчика в IE11, нужно подключить полифилл предоставляющий подмену Promise (обещания).<br><br>
 
 <h4>Конструктор</h4>
-<pre>GLTFLoader( manager )</pre>
-<div class=list><tt>manager</tt> — The loadingManager for the loader to use. Default is THREE.DefaultLoadingManager.</div>
+<pre>GLTFLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt><a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a></tt>
+— <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 Создает новый GLTFLoader.<br><br>
 
 <h4>Свойства</h4>
@@ -431,8 +436,8 @@ GLTFLoader relies on ES6 Promises, which are not supported in IE11. To use the l
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="3.2load">.load ( url, onLoad, onProgress, onError )</pre>
-<div class=list><tt>url</tt> — A string containing the path/URL of the .gltf or .glb file.</div>
+<pre id="3.2load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>.gltf</tt> или <tt>.glb</tt> файла.</div>
 <div class=list><tt>onLoad</tt> — A function to be called after the loading is successfully completed. The function receives the loaded JSON response returned from parse.</div>
 <div class=list><tt>onProgress</tt> — (optional) A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, that contains .total and .loaded bytes.</div>
 <div class=list><tt>onError</tt> — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.</div>
@@ -440,10 +445,10 @@ Begin loading from url and call the callback function with the parsed response c
 
 <pre id="3.2setPath">.setPath ( path )</pre>
 <div class=list><tt>path</tt> — Base path for loading additional resources e.g. textures and .bin data.</div>
-Set the base path for additional resources.
+Set the base path for additional resources.<br><br>
 
 <pre id="3.2setCrossOrigin">.setCrossOrigin ( value )</pre>
-<div class=list><tt>value</tt> — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.</div>
+<div class=list><tt>value</tt> — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.</div><br>
 
 <pre id="3.2parse">.parse ( data, path, onLoad, onError )</pre>
 <div class=list><tt>data</tt> — glTF asset to parse, as an ArrayBuffer or JSON string.</div>
@@ -457,9 +462,10 @@ Parse a glTF-based ArrayBuffer or JSON String and fire onLoad callback when comp
 
 
 <h3 id="3.3">MTLLoader</h3>
-A loader for loading an <em>.mtl</em> resource, used internaly by [page:OBJMTLLoader</a> and [page:UTF8Loader</a>.
-A loader for loading an .mtl resource, used internaly by OBJLoader and UTF8Loader.
-The Material Template Library format (MTL) or .MTL File Format is a companion file format to .OBJ that describes surface shading (material) properties of objects within one or more .OBJ files.<br><br>
+Загрузчик для загрузки ресурсов в формате <em>.mtl</em>, который используется загрузчиками
+<a href="#3.4" onmouseover="show('OBJLoader')" onmouseout="hide()">OBJLoader</a> и <a href="#" onmouseover="show('UTF8Loader')" onmouseout="hide()">UTF8Loader</a>.
+Формат MTL (Material Template Library, т.е. библиотека шаблонов материала) или файловый формат <tt>.MTL</tt> - это формат, сопутствующий файлам <a href="https://ru.wikipedia.org/wiki/Obj" target="_blank">формата <tt>.OBJ</tt></a>,
+который описывает свойства поверхности затенения (материала) объектов в одном или нескольких файлах <tt>.OBJ</tt>.<br><br>
 
 <h4>Конструктор</h4>
 <pre>MTLLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">loadingManager</a> )</pre>
@@ -473,34 +479,35 @@ The Material Template Library format (MTL) or .MTL File Format is a companion fi
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="3.3load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</pre>
-<div class=list>[page:String url</a> — required</div>
-<div class=list>[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:MTLLoaderMaterialCreator MTLLoader.MaterialCreator</a> instance.</div>
-<div class=list>[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.</div>
-<div class=list>[page:Function onError</a> — Will be called when load errors.</div>
-Begin loading from url and return the loaded material.<br><br>
+<pre id="3.3load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> —  строка, содержащая путь/URL-адрес <tt>.mtl</tt> файла.</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает загруженный экземпляр <tt>MTLLoader.MaterialCreator</tt>.</div>
+<div class=list><tt>onProgress</tt> —  функция, которая будет вызываться пока идет процесс загрузки. Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с переданного url-адреса и возвращает загруженный материал.<br><br>
 
 <pre id="3.3setPath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set path - установить путь')" onmouseout="hide()">.setPath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span> )</pre>
-<div class=list>[page:String path</a> — required</div>
-Set base path for resolving references. If set this path will be prepended to each loaded and found reference.<br><br>
+<div class=list><tt>path</tt> — обязательный параметр.</div>
+Устанавливает базовый путь для решающих ссылок. Если это установлено, этот путь будет добавлен к каждой загруженной и найденной ссылке.<br><br>
 
-<pre id="3.3setTexturePath">[method:null setTexturePath</a>( [page:String path</a> )</pre>
-<div class=list>[page:String path</a> — required</div>
-Set base path for resolving texture references. If set this path will be prepended found texture reference. If not set and setPath is, it will be used as texture base path.<br><br>
+<pre id="3.3setTexturePath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture path - установить путь (к) текстуре')" onmouseout="hide()">.setTexturePath</a></span>( [page:String path</a> )</pre>
+<div class=list><tt>path</tt> — обязательный параметр.</div>
+Устанавливает базовый путь для решающих ссылок к текстуре. Если он установлен, этот путь будет добавлен к каждой загруженной и найденной ссылке к текстуре.
+Если не установлен, а <tt>setPath</tt> имеется, он будет использоваться в качестве базового пути к текстуре.<br><br>
 
-<pre id="3.3setCrossOrigin">[method:null setCrossOrigin</a>( [page:boolean useCrossOrigin</a> )</pre>
-<div class=list>[page:boolean useCrossOrigin</a> — required</div>
-Set to true if you need to load textures from a different origin.<br><br>
+<pre id="3.3setCrossOrigin"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use cross origin - использовать перекрестный источник')" onmouseout="hide()">useCrossOrigin</a></span> )</pre>
+<div class=list><tt>useCrossOrigin</tt> — обязательный параметр.</div>
+Установите значение <tt>true</tt>, если нужно загрузить текстуры из другого источника.<br><br>
 
-<pre id="3.3setMaterialOptions">[method:null setMaterialOptions</a>( [page:Object options</a> )</pre>
-<div class=list>[page:Object options</a> — required
-			<ul>
-				<li>side: Which side to apply the material. THREE.FrontSide (default), THREE.BackSide, THREE.DoubleSide</li>
-				<li>wrap: What type of wrapping to apply for textures. THREE.RepeatWrapping (default), THREE.ClampToEdgeWrapping, THREE.MirroredRepeatWrapping</li>
-				<li>normalizeRGB: RGBs need to be normalized to 0-1 from 0-255. Default: false, assumed to be already normalized</li>
-				<li>ignoreZeroRGBs: Ignore values of RGBs (Ka,Kd,Ks) that are all 0's. Default: false</li>
-			</ul>
-		</div>
+<pre id="3.3setMaterialOptions"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set material options - установить параметры материала')" onmouseout="hide()">.setMaterialOptions</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции, параметры, варианты')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list><tt>options</tt> — обязательный параметр.<br>
+&nbsp; &#9679; &nbsp; <tt>side</tt>: Which side to apply the material. THREE.FrontSide (default), THREE.BackSide, THREE.DoubleSide<br>
+&nbsp; &#9679; &nbsp; <tt>wrap</tt>: What type of wrapping to apply for textures. THREE.RepeatWrapping (default), THREE.ClampToEdgeWrapping, THREE.MirroredRepeatWrapping<br>
+&nbsp; &#9679; &nbsp; <tt>normalizeRGB</tt>: RGBs need to be normalized to 0-1 from 0-255. Default: false, assumed to be already normalized<br>
+&nbsp; &#9679; &nbsp; <tt>ignoreZeroRGBs</tt>: Ignore values of RGBs (Ka,Kd,Ks) that are all 0's. Default: false</div>
+Устанавливает параметры построения материалов.
 Set of options on how to construct the materials<br><br>
 
 <pre id="3.3parse">[method:MTLLoaderMaterialCreator parse</a>( [page:String text</a> )</pre>
@@ -1573,7 +1580,7 @@ Sets the twin edge of this half-edge. It also ensures that the twin reference of
 Общие сведения об алгоритме Quickhull: Dirk Gregorius. March 2014, Game Developers Conference: <a href="http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf" target="_blank">Implementing QuickHull</a>.<br><br>
 
 <h4>Конструктор</h4>
-<pre>QuickHull()</pre><br>
+<pre>QuickHull( )</pre><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
@@ -1605,60 +1612,60 @@ The internal representation of the given geometry data (an array of [page:Vertex
 <div class=list><tt>object</tt> - <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> по которому вычисляется выпуклая оболочка.</div>
 Computes the convex hull of an [page:Object3D</a> (including its children), accounting for the world transforms of both the object and its childrens.<br><br>
 
-<pre id="7.3makeEmpty"><a href="#7.3" onmouseover="show('QuickHull.<br>make empty - сделать пустой')" onmouseout="hide()">.makeEmpty</a>()</pre>
+<pre id="7.3makeEmpty"><a href="#7.3" onmouseover="show('QuickHull.<br>make empty - сделать пустой')" onmouseout="hide()">.makeEmpty</a>( )</pre>
 Делает данную выпуклую оболочку пустой.<br><br>
 
-<pre id="7.3addVertexToFace">[method:QuickHull .addVertexToFace</a>( [page:VertexNode vertex</a>, [page:Face face</a> )</pre>
-<div class=list>[page:VertexNodeNode vertex</a> - The vetex to add.</div>
-<div class=list>[page:Face face</a> - The target face.</div>
+<pre id="7.3addVertexToFace"><a href="#7.3" onmouseover="show('QuickHull.<br>add vertex to face - добавить вершину к грани')" onmouseout="hide()">.addVertexToFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
+<div class=list><tt>vertex</tt> - добавляемая вершина.</div>
+<div class=list><tt>face</tt> - целевая грань.</div>
 Adds a vertex to the 'assigned' list of vertices and assigns it to the given face.<br><br>
 
-<pre id="7.3removeVertexFromFace">[method:QuickHull .removeVertexFromFace</a>( [page:VertexNode vertex</a>, [page:Face face</a> )</pre>
-<div class=list>[page:VertexNode vertex</a> - удаляемая вершина.</div>
-<div class=list>[page:Face face</a> - целевая грань.</div>
+<pre id="7.3removeVertexFromFace"><a href="#7.3" onmouseover="show('QuickHull.<br>remove vertex from face - удалить вершину грани')" onmouseout="hide()">.removeVertexFromFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
+<div class=list><tt>vertex</tt> - удаляемая вершина.</div>
+<div class=list><tt>face</tt> - целевая грань.</div>
 Removes a vertex from the 'assigned' list of vertices and from the given face. It also makes sure that the link from 'face' to the first vertex it sees in 'assigned' is linked correctly after the removal.<br><br>
 
-<pre id="7.3removeAllVerticesFromFace">[method:VertexNode .removeAllVerticesFromFace</a>( [page:Face face</a> )</pre>
-<div class=list>[page:Face face</a> - The given face.</div>
+<pre id="7.3removeAllVerticesFromFace"><a href="#7.4" onmouseover="show('VertexNode.<br>remove all vertices from face - удалить все вершины грани')" onmouseout="hide()">.removeAllVerticesFromFace</a>( <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
+<div class=list><tt>face</tt> - The given face.</div>
 Removes all the visible vertices that a given face is able to see which are stored in the 'assigned' vertext list.<br><br>
 
-<pre id="7.3deleteFaceVertices">[method:QuickHull .deleteFaceVertices</a>( [page:Face face</a>, [page:Face absorbingFace</a> )</pre>
-<div class=list>[page:Face face</a> - The given face.</div>
-<div class=list>[page:Face absorbingFace</a> - An optional face that tries to absorb the vertices of the first face.</div>
+<pre id="7.3deleteFaceVertices"><a href="#7.3" onmouseover="show('QuickHull.<br>delete face vertices - удалить вершины грани')" onmouseout="hide()">.deleteFaceVertices</a>( <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a>, <a href="#7.2" onmouseover="show('Face.<br>absorbing face - поглощающая грань')" onmouseout="hide()">absorbingFace</a> )</pre>
+<div class=list><tt>face</tt> - The given face.</div>
+<div class=list><tt>absorbingFace</tt> - An optional face that tries to absorb the vertices of the first face.</div>
 Removes all the visible vertices that 'face' is able to see.<br>
 &nbsp; &#9679; &nbsp; If 'absorbingFace' doesn't exist, then all the removed vertices will be added to the 'unassigned' vertex list.<br>
 &nbsp; &#9679; &nbsp; If 'absorbingFace' exists, then this method will assign all the vertices of 'face' that can see 'absorbingFace'.<br>
 &nbsp; &#9679; &nbsp; If a vertex cannot see 'absorbingFace', it's added to the 'unassigned' vertex list.<br><br>
 
-<pre id="7.3resolveUnassignedPoints">[method:QuickHull .resolveUnassignedPoints</a>( [page:Array newFaces</a> )</pre>
-<div class=list>[page:Face newFaces</a> - массив новых граней.</div>
-Reassigns as many vertices as possible from the unassigned list to the new faces.
+<pre id="7.3resolveUnassignedPoints"><a href="#7.3" onmouseover="show('QuickHull.<br>resolve unassigned points - разрешить неназначенные точки')" onmouseout="hide()">.resolveUnassignedPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('new faces - новые грани')" onmouseout="hide()">newFaces</a></span> )</pre>
+<div class=list><tt>newFaces</tt> - массив новых граней.</div>
+Reassigns as many vertices as possible from the unassigned list to the new faces.<br><br>
 
-<pre id="7.3computeExtremes">[method:Object .computeExtremes</a>()</pre>
-Computes the extremes values (min/max vectors) which will be used to compute the inital hull.<br><br>
+<pre id="7.3computeExtremes"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute extremes - вычислить экстремумы')" onmouseout="hide()">.computeExtremes</a></span>( )</pre>
+Метод вычисляет экстремальные значения (минимальный и максимальный векторы), которые будут использованы для расчета начальной оболочки.<br><br>
 
-<pre id="7.3computeInitialHull">[method:QuickHull .computeInitialHull</a>()</pre>
+<pre id="7.3computeInitialHull"><a href="#7.3" onmouseover="show('QuickHull.<br>compute initial hull - вычислить начальную оболочку')" onmouseout="hide()">.computeInitialHull</a>( )</pre>
 Computes the initial simplex assigning to its faces all the points that are candidates to form part of the hull.<br><br>
 
-<pre id="7.3reindexFaces">[method:QuickHull .reindexFaces</a>()</pre>
-Removes inactive (e.g. deleted) faces from the internal face list.<br><br>
+<pre id="7.3reindexFaces"><a href="#7.3" onmouseover="show('QuickHull.<br>reindex faces - переиндексация граней')" onmouseout="hide()">.reindexFaces</a>()</pre>
+Удаляет неактивные (то есть, удаленные) грани из внутреннего списка граней.<br><br>
 
-<pre id="7.3nextVertexToAdd">[method:VertexNode .nextVertexToAdd</a>()</pre>
+<pre id="7.3nextVertexToAdd"><a href="#7.4" onmouseover="show('VertexNode.<br>next vertex to add - следующая добавляемая вершина')" onmouseout="hide()">.nextVertexToAdd</a>( )</pre>
 Finds the next vertex to create faces with the current hull.<br>
 &nbsp; &#9679; &nbsp; Let the initial face be the first face existing in the 'assigned' vertex list.<br>
 &nbsp; &#9679; &nbsp; If a face doesn't exist then return since there're no vertices left.<br>
 &nbsp; &#9679; &nbsp; Otherwise for each vertex that face sees find the one furthest away from it.<br><br>
 
-<pre id="7.3computeHorizon">[method:QuickHull .computeHorizon</a>( [page:Vector3 eyePoint</a>, [page:HalfEdge crossEdge</a>, [page:Face face</a>, [page:Array horizon</a> )</pre>
-<div class=list>[page:Vector3 eyePoint</a> - The 3D-coordinates of a point.</div>
-<div class=list>[page:HalfEdge crossEdge</a> - The edge used to jump to the current face.</div>
-<div class=list>[page:Face face</a> - The current face being tested.</div>
-<div class=list>[page:Array horizon</a> - The edges that form part of the horizon in CCW order.</div>
+<pre id="7.3computeHorizon"><a href="#7.3" onmouseover="show('QuickHull.<br>compute horizon - вычислить горизонт')" onmouseout="hide()">.computeHorizon</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>eye point - ')" onmouseout="hide()">eyePoint</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>cross edge - ')" onmouseout="hide()">crossEdge</a>, <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('horizon - горизонт')" onmouseout="hide()">horizon</a></span> )</pre>
+<div class=list><tt>eyePoint</tt> - координаты точки в трехмерном пространстве.</div>
+<div class=list><tt>crossEdge</tt> - The edge used to jump to the current face.</div>
+<div class=list><tt>face</tt> - The current face being tested.</div>
+<div class=list><tt>horizon</tt> - The edges that form part of the horizon in CCW order.</div>
 Computes a chain of half edges in CCW order called the 'horizon'. For an edge to be part of the horizon it must join a face that can see 'eyePoint' and a face that cannot see 'eyePoint'.<br><br>
 
-<pre id="7.3addAdjoiningFace">[method:HalfEdge .addAdjoiningFace</a>( [page:VertexNode eyeVertex</a>, [page:HalfEdge horizonEdge</a> )</pre>
-<div class=list>[page:VertexNode eyeVertex</a> - The vertex that is added to the hull.</div>
-<div class=list>[page:HalfEdge horizonEdge</a> - A single edge of the horizon.</div>
+<pre id="7.3addAdjoiningFace"><a href="#7.2" onmouseover="show('HalfEdge.<br>add adjoining face - добавить прилегающую грань')" onmouseout="hide()">.addAdjoiningFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина')" onmouseout="hide()">eyeVertex</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>horizon edge - край (ребро) горизонта')" onmouseout="hide()">horizonEdge</a> )</pre>
+<div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
+<div class=list><tt>horizonEdge</tt> - один край горизонта.</div>
 Creates a face with the vertices 'eyeVertex.point', 'horizonEdge.tail' and 'horizonEdge.head' in CCW order.<br>
 All the half edges are created in CCW order thus the face is always pointing outside the hull<br><br>
 
@@ -1686,35 +1693,27 @@ Cleans up internal properties after computing the convex hull.<br><br>
 
 
 <h3 id="7.4">VertexNode</h3>
-A vertex as a double linked list node.
+Вершина в качестве узла двусвязного списка.<br><br>
 
 <h4>Конструктор</h4>
+<pre>VertexNode( <a href="math.htm#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - точка-<a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a> <tt>(x, y, z)</tt> в трехмерном пространстве.</div><br>
 
-<h3>VertexNode( [page:Vector3 point</a> )</h3>
-		[page:Vector3 point</a> - [page:Vector3</a> A point (x, y, z) in 3D space.<br /><br />
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="7.4point"><a href="math.htm#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">.point</a></pre>
+A point (x, y, z) in 3D space.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
 
-		</div>
+<pre id="7.4prev"><a href="#7.4" onmouseover="show('VertexNode.<br>prev - сокращ. англ. слова previous - предыдущий')" onmouseout="hide()">.prev</a></pre>
+Reference to the previous vertex in the double linked list. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-  <h4>Свойства</h4>
+<pre id="7.4next"><a href="#7.4" onmouseover="show('VertexNode.<br>next - следующий')" onmouseout="hide()">.next</a></pre>
+Reference to the next vertex in the double linked list. Значением по умолчанию является <tt>null</tt>.<br><br>
 
-		<h3>[property:Vector3 point</a></h3>
-		<div>
-			A point (x, y, z) in 3D space. Default is undefined.
-		</div>
-
-		<h3>[property:VertexNode prev</a></h3>
-		<div>
-			Reference to the previous vertex in the double linked list. Default is null.
-		</div>
-
-		<h3>[property:VertexNode next</a></h3>
-		<div>
-			Reference to the next vertex in the double linked list. Default is null.
-		</div>
-
-		<h3>[property:Face face</a></h3>
-Reference to the face that is able to see this vertex. Default is undefined.
-		</div><br>
+<pre id="7.4face"><a href="#7.1" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">.face</a></pre>
+Reference to the face that is able to see this vertex.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
@@ -1755,22 +1754,22 @@ Reference to the face that is able to see this vertex. Default is undefined.
 <div class=list><tt>vertex</tt> - вершина, которую нужно вставить.</div>
 Метод вставляет вершину в список <b>после</b> целевой вершины.<br><br>
 
-<pre id="7.5append">[method:VertexList append</a>( [page:Vertex vertex</a> )</pre>
-<div class=list>[page:Vertex vertex</a> - The vertex to append.</div>
-Appends a vertex to the end of the linked list.<br><br>
+<pre id="7.5append"><a href="#7.5" onmouseover="show('VertexList.<br>append - добавлять, присоединять')" onmouseout="hide()">.append</a>( [page:Vertex vertex</a> )</pre>
+<div class=list><tt>vertex</tt> - добавляемая вершина.</div>
+Добавляет вершину в конец связного списка.<br><br>
 
-<pre id="7.5appendChain">[method:VertexList appendChain</a>( [page:Vertex vertex</a> )</pre>
-<div class=list>[page:Vertex vertex</a> - The head vertex of a chain of vertices.</div>
+<pre id="7.5appendChain"><a href="#7.5" onmouseover="show('VertexList.<br>append chain - добавить цепочку')" onmouseout="hide()">.appendChain</a>( [page:Vertex vertex</a> )</pre>
+<div class=list><tt>vertex</tt> - The head vertex of a chain of vertices.</div>
 Appends a chain of vertices where the given vertex is the head.<br><br>
 
-<pre id="7.5remove">[method:VertexList remove</a>( [page:Vertex vertex</a> )</pre>
-<div class=list>[page:Vertex vertex</a> - The vertex to remove.</div>
-Removes a vertex from the linked list.<br><br>
+<pre id="7.5remove"><a href="#7.5" onmouseover="show('VertexList.<br>remove - удалить')" onmouseout="hide()">.remove</a>( [page:Vertex vertex</a> )</pre>
+<div class=list><tt>vertex</tt> - удаляемая вершина.</div>
+Удаляет вершину из связного списка.<br><br>
 
-<pre id="7.5removeSubList">[method:VertexList removeSubList</a>( [page:Vertex a</a>, [page:Vertex b</a> )</pre>
-<div class=list>[page:Vertex a</a> - The head of the sublist.</div>
-<div class=list>[page:Vertex b</a> - The tail of the sublist.</div>
-Removes a sublist of vertices from the linked list.<br><br>
+<pre id="7.5removeSubList"><a href="#7.5" onmouseover="show('VertexList.<br>remove sublist - удалить вложенный список')" onmouseout="hide()">.removeSubList</a>( [page:Vertex a</a>, [page:Vertex b</a> )</pre>
+<div class=list><tt>a</tt> - голова (начало) вложенного списка.</div>
+<div class=list><tt>b</tt> - хвост (конец) вложенного списка.</div>
+Удаляет вложенный список вершин из связного списка.<br><br>
 
 <pre id="7.5isEmpty"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is empty - является пустым')" onmouseout="hide()">.isEmpty</a></span>( )</pre>
 Возвращает значение <tt>true</tt>, если связанный список пуст.</div>
@@ -1807,16 +1806,14 @@ Don't confuse either CanvasRenderer with the SoftwareRenderer example, which sim
 
 <h4>Конструктор</h4>
 <pre>CanvasRenderer( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
-        <div>parameters is an optional object with properties defining the renderer's behaviour. The constructor also accepts no parameters at all. In all cases, it will assume sane defaults when parameters are missing.</div>
-
-		<div>
-		canvas — A [page:Canvas</a> where the renderer draws its output.
-		</div><br>
+<tt>parameters</tt> - это дополнительный, необязательный объект со свойствами, определяющими поведение визуализатора. Конструктор также не принимает параметров вообще. Во всех случаях, когда параметры отсутствуют, он будет принимать обычные значения по умолчанию.
+<div class=list><tt>canvas</tt> - A canvas where the renderer draws its output. This corresponds to the domElement property below. Если он не передается здесь, то будет создан новый элемент <tt>canvas</tt>.</div>
+<div class=list><tt>alpha</tt> - будет ли <tt>canvas</tt> содержать буфер альфа-канала (прозрачность) или нет. Значением по умолчанию является <tt>false</tt>.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
 <pre id="8.1info"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('info - информация, сведения')" onmouseout="hide()">.info</a></span></pre>
-An object with a series of statistical information about the graphics board memory and the rendering process. Useful for debugging or just for the sake of curiosity. The object contains the following fields:
+Объект с рядом статистических сведений о памяти видеокарты и процессе рендеринга (визуализации). Годится для отладки или просто ради любопытства. Объект содержит следующие поля:
 <div class=blockindent>render:
 <div class=blockindent>vertices<br>
 faces</div></div><br>

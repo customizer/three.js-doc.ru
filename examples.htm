@@ -421,8 +421,9 @@ loader.load(
 <pre><a href="https://threejs.org/examples/#webgl_loader_gltf" target="_blank">webgl / loader / gltf</a></pre><br>
 
 <h4>Совместимость с браузером</h4>
-GLTFLoader полагается на <a href="https://learn.javascript.ru/promise" target="_blank">обещания (Promise)</a> от ES6, которые не поддерживаются в IE11.
-Для использования загрузчика в IE11, нужно подключить полифилл предоставляющий подмену Promise (обещания).<br><br>
+GLTFLoader полагается на <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">обещания (Promise)</a> от ES6, которые не поддерживаются в IE11.
+Для использования загрузчика в IE11, нужно подключить полифилл предоставляющий подмену Promise (обещания).<br>
+Вот <a href="https://learn.javascript.ru/promise" target="_blank">описание Promise на javascript.ru</a>.<br><br>
 
 <h4>Конструктор</h4>
 <pre>GLTFLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
@@ -492,7 +493,7 @@ Parse a glTF-based ArrayBuffer or JSON String and fire onLoad callback when comp
 <div class=list><tt>path</tt> — обязательный параметр.</div>
 Устанавливает базовый путь для решающих ссылок. Если это установлено, этот путь будет добавлен к каждой загруженной и найденной ссылке.<br><br>
 
-<pre id="3.3setTexturePath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture path - установить путь (к) текстуре')" onmouseout="hide()">.setTexturePath</a></span>( [page:String path</a> )</pre>
+<pre id="3.3setTexturePath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture path - установить путь (к) текстуре')" onmouseout="hide()">.setTexturePath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь, контур')" onmouseout="hide()">path</a></span> )</pre>
 <div class=list><tt>path</tt> — обязательный параметр.</div>
 Устанавливает базовый путь для решающих ссылок к текстуре. Если он установлен, этот путь будет добавлен к каждой загруженной и найденной ссылке к текстуре.
 Если не установлен, а <tt>setPath</tt> имеется, он будет использоваться в качестве базового пути к текстуре.<br><br>
@@ -503,16 +504,24 @@ Parse a glTF-based ArrayBuffer or JSON String and fire onLoad callback when comp
 
 <pre id="3.3setMaterialOptions"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set material options - установить параметры материала')" onmouseout="hide()">.setMaterialOptions</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции, параметры, варианты')" onmouseout="hide()">options</a></span> )</pre>
 <div class=list><tt>options</tt> — обязательный параметр.<br>
-&nbsp; &#9679; &nbsp; <tt>side</tt>: Which side to apply the material. THREE.FrontSide (default), THREE.BackSide, THREE.DoubleSide<br>
-&nbsp; &#9679; &nbsp; <tt>wrap</tt>: What type of wrapping to apply for textures. THREE.RepeatWrapping (default), THREE.ClampToEdgeWrapping, THREE.MirroredRepeatWrapping<br>
-&nbsp; &#9679; &nbsp; <tt>normalizeRGB</tt>: RGBs need to be normalized to 0-1 from 0-255. Default: false, assumed to be already normalized<br>
-&nbsp; &#9679; &nbsp; <tt>ignoreZeroRGBs</tt>: Ignore values of RGBs (Ka,Kd,Ks) that are all 0's. Default: false</div>
-Устанавливает параметры построения материалов.
-Set of options on how to construct the materials<br><br>
+&nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('side - сторона')" onmouseout="hide()">side</span></tt>: сторона, к которой применяется материал.
+<a href="constants.htm#5.1" onmouseover="show('front side - передняя сторона')" onmouseout="hide()">THREE.FrontSide</a> (значение по умолчанию),
+<a href="constants.htm#5.1" onmouseover="show('back side - обратная (задняя) сторона')" onmouseout="hide()">THREE.BackSide</a>,
+<a href="constants.htm#5.1" onmouseover="show('double side - две стороны')" onmouseout="hide()">THREE.DoubleSide</a><br>
+&nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('wrap - упаковка, укладка')" onmouseout="hide()">wrap</span></tt>: тип укладки, применяемый для текстур.
+<a href="constants.htm#7.2" onmouseover="show('repeat wrapping - повторяющаяся укладка<br>- текстура повторяется до бесконечности')" onmouseout="hide()">THREE.RepeatWrapping</a> (значение по умолчанию),
+<a href="constants.htm#7.2" onmouseover="show('clamp to edge wrapping - укладка стыковать<br>с прикреплением к краю - укладка, при которой<br>последний пиксел текстуры растягивается<br>до края сетки (mesh)')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a>,
+<a href="constants.htm#7.2" onmouseover="show('mirrored repeat wrapping - повторяющася<br>укладка с зеркальным отражением - укладка<br>текстуры, при которой она повторяется<br>бесконечно, зеркально отображаясь при<br>каждом повторе')" onmouseout="hide()">THREE.MirroredRepeatWrapping</a>.<br>
+&nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('normalize RGB - нормализовать значения RGB (компонентов цвета)')" onmouseout="hide()">normalizeRGB</span></tt>: компоненты RGB должны быть нормализованы до <tt>0-1</tt> из <tt>0-255</tt>. Значением по умолчанию является <tt>false</tt>, предполагается, что они уже нормализованы.<br>
+&nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('ignore zero RGBs - игнорировать нулевые<br>(значения) RGB (компонентов цвета)')" onmouseout="hide()">ignoreZeroRGBs</span></tt>:
+игнорировать значения в RGB формате (<tt><span class="lnk" onmouseover="show('цвет окружающего освещения')" onmouseout="hide()">Ka</span></tt>,
+<tt><span class="lnk" onmouseover="show('диффузный цвет')" onmouseout="hide()">Kd</span></tt>, <tt><span class="lnk" onmouseover="show('цвет зеркального отражения')" onmouseout="hide()">Ks</span></tt>),
+равные <tt>0</tt>. Значением по умолчанию является <tt>false</tt>.</div>
+Устанавливает параметры построения материалов.<br><br>
 
-<pre id="3.3parse">[method:MTLLoaderMaterialCreator parse</a>( [page:String text</a> )</pre>
-<div class=list>[page:String text</a> — The textual <em>mtl</em> structure to parse.</div>
-Parse a <em>mtl</em> text structure and return a [page:MTLLoaderMaterialCreator</a> instance.</div><br>
+<pre id="3.3parse"><span onclick="showClick('MTLLoaderMaterialCreator')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span> )</pre>
+<div class=list><tt>text</tt> — текстовая структура <tt>mtl</tt> для разбора (синтаксического анализа).</div>
+Метод проводит синтаксический анализ текстовой структуры <tt>mtl</tt> и возвращает экземпляр <tt>MTLLoader.MaterialCreator</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/MTLLoader.js" target="_blank">MTLLoader.js на github.com</a></div><br><br>
@@ -520,25 +529,27 @@ Parse a <em>mtl</em> text structure and return a [page:MTLLoaderMaterialCreator<
 
 <h3 id="3.4">OBJLoader</h3>
 Загрузчик для загрузки ресурсов в формате <em>obj</em>.<br>
-The <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" target="_blank">OBJ file format</a> is a simple data-format that represents 3D geometry in a human readable format as the position of each vertex, the UV position of each texture coordinate vertex, vertex normals, and the faces that make each polygon defined as a list of vertices, and texture vertices.<br>
+<a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" target="_blank"  onmouseover="show('OBJ - сокращ. англ. слова object - объект')" onmouseout="hide()">Формат файла OBJ</a> - это простой формат данных,
+представляющий трехмерную геометрию в удобочитаемой для человека форме, в виде положения каждой вершины, UV-координат позиции каждой текстуры, связанных с вершиной, нормалей вершин,
+граней, образуемых каждым многоугольником, определяемым списком вершин, и вершин текстур.<br>
 Статья Википедии <a href="https://ru.wikipedia.org/wiki/Obj" target="_blank">о формате obj</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
-<pre>// instantiate a loader
+<pre>// instantiate a loader (создание экземпляра загрузчика)
 var loader = new THREE.OBJLoader();<br>
-// load a resource
+// load a resource (загрузка ресурса)
 loader.load(
-  // resource URL
+  // resource URL (адрес ресурса)
   'models/monster.obj',
-  // called when resource is loaded
+  // called when resource is loaded (вызывается по завершении загрузки)
   function ( object ) {
      scene.add( object );
   },<br>
-  // called when loading is in progresses
+  // called when loading is in progresses (вызывается во время загрузки)
   function ( xhr ) {
     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );<br>
   },<br>
-  // called when loading has errors
+  // called when loading has errors (вызывается при ошибках в загрузке)
   function ( error ) {
      console.log( 'An error happened' );
   }
@@ -547,134 +558,148 @@ loader.load(
 <pre><a href="https://threejs.org/examples/#webgl_loader_obj" target="_blank">webgl / loader / obj</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>OBJLoader( [page:LoadingManager manager</a> )</pre>
-<div class=list>[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
+<pre>OBJLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">loadingManager</a> )</pre>
+<div class=list><tt><a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a></tt>
+— <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 Создает новый OBJLoader.<br><br>
 
 <h4>Свойства</h4>
 <br><br>
 
 <h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.4load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>obj</tt>-файла (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает загруженный <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с .
+Begin loading from url and call onLoad with the parsed response content.<br><br>
 
-		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
-		<div>
-		[page:String url</a> — required<br />
-		[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:Object3D</a>.<br />
-		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
-		[page:Function onError</a> — Will be called when load errors.<br />
-		</div>
-		<div>
-		Begin loading from url and call onLoad with the parsed response content.
-		</div>
-
-		<h3>[method:Object3D parse</a>( [page:String text</a> )</h3>
-		<div>
-		[page:String text</a> — The textual <em>obj</em> structure to parse.
-		</div>
-Returns an [page:Object3D</a>. It contains the parsed meshes as [page:Mesh</a> and lines as [page:LineSegments</a>.<br />
-		All geometry is created as [page:BufferGeometry</a>. Default materials are created as [page:MeshPhongMaterial</a>.<br />
-		If an <em>obj</em> object or group uses multiple materials while declaring faces geometry groups and an array of materials are used.
-		</div><br>
+<pre id="3.4parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span> )</pre>
+<div class=list><tt>text</tt> — текстовая структура <tt>obj</tt> для разбора (синтаксического анализа).</div>
+Метод возвращает <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>. Он содержит обработанные сетки в виде <a href="objects.htm#7" onmouseover="show('Mesh')" onmouseout="hide()">Mesh</a> и линии в виде <a href="objects.htm#5" onmouseover="show('LineSegments')" onmouseout="hide()">LineSegments</a>.<br>
+Все геометрические элементы созданы как <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.
+Материалы по умолчанию создаются как <a href="materials.htm#8" onmouseover="show('MeshPhongMaterial')" onmouseout="hide()">MeshPhongMaterial</a>.<br>
+Если <tt>obj</tt>-объект или группа при объявлении граней используют несколько материалов, применяют массивы материалов и группы геометрических элементов.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader.js" target="_blank">OBJLoader.js на github.com</a></div><br><br>
 
 
 <h3 id="3.5">OBJLoader2</h3>
-A loader for loading a <em>.obj</em> resource.<br>
-The OBJ file format is a simple data-format that represents 3D geometry in a human redeable format as, the position of each vertex, the UV position of each texture coordinate vertex, vertex normals, and the faces that make each polygon defined as a list of vertices, and texture vertices.
+Загрузчик для загрузки ресурсов в формате <em>obj</em>.<br>
+<a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" target="_blank"  onmouseover="show('OBJ - сокращ. англ. слова object - объект')" onmouseout="hide()">Формат файла OBJ</a> - это простой формат данных,
+представляющий трехмерную геометрию в удобочитаемой для человека форме, в виде положения каждой вершины, UV-координат позиции каждой текстуры, связанных с вершиной, нормалей вершин,
+граней, образуемых каждым многоугольником, определяемым списком вершин, и вершин текстур.<br>
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/Obj" target="_blank">о формате obj</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
-<pre>
-		// instantiate the loader
-		var loader = new THREE.OBJLoader2();
+<pre>// instantiate the loader (создание экземпляра загрузчика)
+var loader = new THREE.OBJLoader2();<br>
+// function called on successful load (вызывается по успешному завершению загрузки)
+var callbackOnLoad = function ( event ) {
+  scene.add( event.detail.loaderRootNode );
+};<br>
+// load a resource from provided URL synchronously
+// синхронная загрузка ресурса из предоставленного URL-адреса
+loader.load( 'obj/female02/female02.obj', callbackOnLoad, null, null, null, false );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_obj2" target="_blank">webgl / loader / obj2</a> - простой пример
+Example for multiple use-cases (parse, load and run with instructions (sync and async)
+<a href="https://threejs.org/examples/#webgl_loader_obj2_options" target="_blank">webgl / loader / obj2 / options</a>
+Advanced example using LoaderSupport.LoaderWorkerDirector for orchestration of multiple workers.
+<a href="https://threejs.org/examples/#webgl_loader_obj2_run_director" target="_blank">webgl / loader / obj2 / run / director</a></pre><br>
 
-		// function called on successful load
-		var intergrateIntoScene = function ( object ) {
-			scene.add( object );
-		};
+<h4>Конструктор</h4>
+<pre>OBJLoader2( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">loadingManager</a>, <a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector.<br>logger - регистратор, логгер, самописец')" onmouseout="hide()">logger</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+<div class=list><tt>logger</tt> - используемый регистратор.</div>
 
-		// load a resource from provided URL
-		loader.load( 'obj/female02/female02.obj', intergrateIntoScene );
-  </pre>
+Use OBJLoader2 to load OBJ data from files or to parse OBJ data from arraybuffer or text.<br><br>
 
-		[example:webgl_loader_obj2</a>
+<h4>Свойства</h4>
+<br><br>
 
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.5parse">.parse ( {content : arraybuffer|content : String] ) : Object3D</pre>
+<div class=list>[content|content] OBJ data as Uint8Array or String</div>
+Parses OBJ data synchronously from arraybuffer or string and returns the loaderRoorNode.<br><br>
 
-  <h4>Конструктор</h4>
+<pre id="3.5parseAsync">.parseAsync ( content : arraybuffer, onLoad : Function ) : Object3D</pre>
+<div class=list>content - OBJ data as Uint8Array</div>
+<div class=list>onLoad - Called after worker successfully completed loading</div>
+Parses OBJ content asynchronously from arraybuffer.<br><br>
 
-		<h3>OBJLoader2( [page:LoadingManager manager</a> )</h3>
-		<div>
-		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
-		</div>
-		<div>
-			Use [name</a> to load OBJ data from files or to parse OBJ data from arraybuffer or text.
-		</div>
+<pre id="3.5load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on mesh alter - на изменение сетки (mesh)')" onmouseout="hide()">onMeshAlter</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use async - использовать асинхронную (загрузку)')" onmouseout="hide()">useAsync</a></span>  )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес загружаемого файла (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает загруженный <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки, дополнительный, необязательный параметр.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+<div class=list><tt>onMeshAlter</tt> - (optional) A function to be called after a new mesh raw data becomes available for alteration.</div>
+<div class=list><tt>useAsync</tt> - (optional) If true, uses async loading with worker, if false loads data synchronously.</div>
+Use this convenient method to load a file at the given URL. By default the fileLoader uses an ArrayBuffer.<br><br>
 
-  <h4>Свойства</h4>
+<pre id="3.5run">.run ( params : LoaderSupport.PrepData, workerSupportExternal : LoaderSupport.WorkerSupport ) : null</pre>
+<div class=list>params - prepData All parameters and resources required for execution</div>
+<div class=list>workerSupportExternal - Use pre-existing WorkerSupport</div>
+Run the loader according the provided instructions.<br><br>
 
+<pre id="3.5setLogging"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set logging - установить ведение журнала (логирование)')" onmouseout="hide()">.setLogging</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('debug - отладка')" onmouseout="hide()">debug</a></span> )</pre>
+<div class=list><tt>enabled</tt> True or false.</div>
+<div class=list><tt>debug</tt> True or false.</div>
+Enable or disable logging in general (except warn and error), plus enable or disable debug logging.<br><br>
 
-  <h4>Методы</h4>
+<pre id="3.5setModelName"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set model name - установить название модели')" onmouseout="hide()">.setModelName</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('model name - название модели')" onmouseout="hide()">modelName</a></span> )</pre>
+<div class=list><tt>modelName</tt></div>
+Метод устанавливает название (имя) модели.<br><br>
 
-		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a>, [page:Boolean useArrayBuffer</a> )</h3>
-		<div>
-			[page:String url</a> — URL of the file to load<br />
-			[page:Function onLoad</a> — Called after loading was successfully completed. The argument will be the loaded [page:Object3D</a>.<br />
-			[page:Function onProgress</a> — Called to report progress of loading. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
-			[page:Function onError</a>  Called after an error occurred during loading.<br />
-			[page:boolean useArrayBuffer</a> — Set this to false to force string based parsing<br />
-		</div>
-		<div>
-			Use this convenient method to load an OBJ file at the given URL. Per default the fileLoader uses an arraybuffer
-		</div>
+<pre id="3.5setPath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set path - установить путь')" onmouseout="hide()">.setPath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь, контур')" onmouseout="hide()">path</a></span> )</pre>
+<div class=list><tt>path</tt> - URL-адрес.</div>
+The URL of the base path.<br><br>
 
-		<h3>[method:Object3D parse</a>( [page:ArrayBuffer arrayBuffer</a> )</h3>
-		<div>
-			[page:ArrayBuffer arrayBuffer</a> — OBJ data as Uint8Array
-		</div>
-		<div>
-			Default parse function: Parses OBJ file content stored in arrayBuffer and returns the [page:Object3D sceneGraphBaseNode</a>.
-		</div>
+<pre id="3.5setStreamMeshesTo">.setStreamMeshesTo ( streamMeshesTo : Object3D ) : null</pre>
+<div class=list>streamMeshesTo - Object already attached to scenegraph where new meshes will be attached to</div>
+Set the node where the loaded objects will be attached directly.<br><br>
 
-		<h3>[method:Object3D parseText</a>( [page:String test</a> )</h3>
-		<div>
-			[page:String text</a> — OBJ data as string
-		</div>
-		<div>
-			Legacy parse function: Parses OBJ file content stored in string and returns the [page:Object3D sceneGraphBaseNode</a>.
-		</div>
+<pre id="3.5setMaterials">.setMaterials ( Array of materials : Material ) : null</pre>
+<div class=list>Array of materials - Array of Materials</div>
+Set materials loaded by MTLLoader or any other supplier of an Array of Materials.<br><br>
 
-		<h3>[method:null setMaterials</a> ( Array of [page:Material materials</a> )</h3>
-		<div>
-			Array of [page:Material materials</a> — Array of [page:Material Materials</a> from MTLLoader
-		</div>
-		<div>
-			Set materials loaded by MTLLoader or any other supplier of an Array of [page:Material Materials</a>.
-		</div>
+<pre id="3.5setUseIndices">.setUseIndices ( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use indices - использовать индексы')" onmouseout="hide()">useIndices</a></span> ) : null</pre>
+<div class=list><tt>useIndices</tt></div>
+Instructs loaders to create indexed BufferGeometry.<br><br>
 
-		<h3>[method:null setPath</a> ( [page:String path</a> )</h3>
-		<div>
-			[page:String path</a> — The basePath
-		</div>
-		<div>
-			Base path to use.
-		</div>
+<pre id="3.5setDisregardNormals"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set disregard normals - установить пренебрежение нормалями')" onmouseout="hide()">.setDisregardNormals</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('disregard normals - игнорировать нормали')" onmouseout="hide()">disregardNormals</a></span> )</pre>
+<div class=list><tt>disregardNormals</tt></div>
+Tells whether normals should be completely disregarded and regenerated.<br><br>
 
-		<h3>[method:null setSceneGraphBaseNode</a> ( [page:Object3D sceneGraphBaseNode</a> )</h3>
-		<div>
-			[page:Object3D sceneGraphBaseNode</a> — Scenegraph object where meshes will be attached
-		</div>
-		<div>
-			Set the node where the loaded objects will be attached.
-		</div>
+<pre id="3.5setMaterialPerSmoothingGroup"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set material per smoothing group - установить материал для каждой сглаживающей группы')" onmouseout="hide()">.setMaterialPerSmoothingGroup</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material per smoothing group - материал для каждой сглаживающей группы')" onmouseout="hide()">materialPerSmoothingGroup</a></span> )</pre>
+<div class=list><tt>materialPerSmoothingGroup</tt></div>
+Tells whether a material shall be created per smoothing group.<br><br>
 
-		<h3>[method:null setDebug</a>( [page:Boolean parserDebug</a>, [page:Boolean meshCreatorDebug</a> )</h3>
-		<div>
-			[page:Boolean parserDebug</a> — Internal Parser will produce debug output<br>
-			[page:Boolean meshCreatorDebug</a> — Internal MeshCreator will produce debug output
-		</div>
-Allows to set debug mode for the parser and the meshCreator.
-		</div><br>
+<pre id="3.5onProgress"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">.onProgress</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('numerical value - числовое значение')" onmouseout="hide()">numericalValue</a></span> )</pre>
+<div class=list><tt>type</tt> - тип события.</div>
+<div class=list><tt>text</tt> - текстовое описание события.</div>
+<div class=list><tt>numericalValue</tt> - числовое значение, характеризующее ход процесса.</div>
+Announce feedback which is give to the registered <a href="#3.6.8" onmouseover="show('LoaderSupport.Callbacks')" onmouseout="hide()">LoaderSupport.Callbacks</a>.<br><br>
+
+<pre id="3.5loadMtl"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load MTL - загрузить (файл в формате MTL)')" onmouseout="hide()">.loadMtl</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('content - содержимое')" onmouseout="hide()">content</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback on load - функция обратного<br>вызова (по окончании) загрузки')" onmouseout="hide()">callbackOnLoad</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">crossOrigin</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material options - параметры материала')" onmouseout="hide()">materialOptions</a></span> )</pre>
+<div class=list><tt>url</tt> - URL-адрес файла.</div>
+<div class=list><tt>content</tt> - содержимое файла в виде массив буфера (arraybuffer)или текста.</div>
+<div class=list><tt>callbackOnLoad</tt> - функция обратного вызова, которая будет вызвана после успешной загрузки.</div>
+<div class=list><tt>crossOrigin</tt> - значение <a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>materialOptions</tt> - Set material loading options for MTLLoader. Дополнительный, необязательный аргумент.</div>
+Utility method for loading an mtl file according resource description. Provide url or content.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader2.js" target="_blank">OBJLoader2.js на github.com</a></div><br><br>
@@ -970,7 +995,7 @@ If given input is null or undefined, the defaultValue is returned otherwise the 
 
 <h3 id="3.7">PCDLoader</h3>
 A loader for <em>PCD</em> files. Loads ascii and binary.
-			Compressed binary files are not supported.</div>
+Compressed binary files are not supported.<br><br>
 
 <h4>Пример</h4>
 
@@ -1008,10 +1033,10 @@ A loader for <em>PCD</em> files. Loads ascii and binary.
 		<h3>[page:Boolean littleEndian</a></h3>
 		<div>
 		Default value is true.
-		</div>
+		</div><br>
 
-  <h4>Методы</h4>
-
+<h4>Методы</h4>
+<div class=blockindent><br>
 		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
 		<div>
 		[page:String url</a> — required<br />
@@ -1040,8 +1065,7 @@ Parse an <em>pcd</em> binary structure and return an [page:Object3D</a>.<br />
 
 <h3 id="3.8">PDBLoader</h3>
 A loader for loading a <em>.pdb</em> resource.<br>
-		The <a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.
-		</div>
+The <a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.<br><br>
 
   <h4>Пример</h4>
 
@@ -1071,21 +1095,17 @@ A loader for loading a <em>.pdb</em> resource.<br>
 		[example:webgl_loader_pdb</a>
 
 
-  <h4>Конструктор</h4>
+<h4>Конструктор</h4>
+<pre>PDBLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">loadingManager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый PDBLoader.<br><br>
 
-		<h3>PDBLoader( [page:LoadingManager manager</a> )</h3>
-		<div>
-		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
-		</div>
-		<div>
-		Creates a new PDBLoader.
-		</div>
+<h4>Свойства</h4>
+<br><br>
 
-  <h4>Свойства</h4>
-
-
-  <h4>Методы</h4>
-
+<h4>Методы</h4>
+<div class=blockindent><br>
 		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
 		<div>
 		[page:String url</a> — required. URL to the <em>.pdb</em> file<br />
@@ -1112,6 +1132,7 @@ A loader for loading a <em>.pdb</em> resource.<br>
 		</div>
 Parse a <em>(JSON) pdb</em> structure and return two [page:BufferGeometry</a>: one for atoms, one for bonds.
 		</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PDBLoader.js" target="_blank">PDBLoader.js на github.com</a></div><br><br>
 
@@ -1174,7 +1195,7 @@ var material = new THREE.MeshPhongMaterial( {
 Creates a new TGALoader.<br><br>
 
 <h4>Методы</h4>
-
+<div class=blockindent><br>
 		<h3>[method:DataTexture load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
 		<div>
 		[page:String url</a> — required<br />
@@ -1383,6 +1404,7 @@ The maximum value to be represented with the lookup table. Default is 1.
 The legend of the lookup table.
 
 <h4>Методы</h4>
+<div class=blockindent><br>
 <pre>[method:null copy</a>( [page:Lut lut</a> ) [page:Lut this</a></pre>
 <div class="blockindent">color — Lut to copy.</div>
 Copies given lut.
@@ -1445,8 +1467,8 @@ Create a material that can draw custom sprites using a 2d canvas.<br><br>
 <h4>Конструктор</h4>
 <pre>SpriteCanvasMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
 parameters is an object that can be used to set up the default properties
-<div class=list><tt>color</tt> — the color of the sprite</div>
-<div class=list><tt>program</tt> — the program used to draw the sprite</div><br>
+<div class=list><tt>color</tt> — цвет спрайта.</div>
+<div class=list><tt>program</tt> — программа для прорисовки спрайта.</div><br>
 
 <h4>Свойства</h4>
 <div class="blockindent"><br>
@@ -1488,7 +1510,7 @@ Represents a section bounded by a specific amount of half-edges. The current imp
 <pre id="7.1area"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('area - площадь')" onmouseout="hide()">.area</a></span></pre>
 Площадь грани. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
-<pre id="7.1constant"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constant - постоянная, константа')" onmouseout="hide()">.constant</a></pre>
+<pre id="7.1constant"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constant - постоянная, константа')" onmouseout="hide()">.constant</a></span></pre>
 Знаковое расстояние от грани до начала координат. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
 <pre id="7.1outside"><a href="#7.4" onmouseover="show('VertexNode.<br>outside - за пределами, снаружи')" onmouseout="hide()">.outside</a></pre>

@@ -470,7 +470,7 @@ Parse a glTF-based ArrayBuffer or JSON String and fire onLoad callback when comp
 
 <h4>Конструктор</h4>
 <pre>MTLLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">loadingManager</a> )</pre>
-<div class=list><tt><a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a></tt>
+<div class=list><tt><a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>loading manager - менеджер загрузки, управляющий загрузкой')" onmouseout="hide()">loadingManager</a></tt>
 — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
 Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 Создает новый MTLLoader.<br><br>
@@ -558,7 +558,7 @@ loader.load(
 <pre><a href="https://threejs.org/examples/#webgl_loader_obj" target="_blank">webgl / loader / obj</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>OBJLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">loadingManager</a> )</pre>
+<pre>OBJLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
 <div class=list><tt><a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a></tt>
 — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
 Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
@@ -616,7 +616,7 @@ Advanced example using LoaderSupport.LoaderWorkerDirector for orchestration of m
 <a href="https://threejs.org/examples/#webgl_loader_obj2_run_director" target="_blank">webgl / loader / obj2 / run / director</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>OBJLoader2( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">loadingManager</a>, <a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector.<br>logger - регистратор, логгер, самописец')" onmouseout="hide()">logger</a> )</pre>
+<pre>OBJLoader2( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a>, <a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector.<br>logger - регистратор, логгер, самописец')" onmouseout="hide()">logger</a> )</pre>
 <div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
 Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 <div class=list><tt>logger</tt> - используемый регистратор.</div>
@@ -951,26 +951,27 @@ Announce feedback which is give to the registered LoaderSupport.Callbacks.
 
 <h3 id="3.6.8">Callbacks</h3>
 <h4>Конструктор</h4>
-Callbacks()
-Callbacks utilized by loaders and builder.
-<h4>Методы</h4>
-#
-.setCallbackOnProgress ( callbackOnProgress )
-callbackOnProgress - Callback function for described functionality
-Register callback function that is invoked by internal function "announceProgress" to print feedback.
-#
-.setCallbackOnMeshAlter ( callbackOnMeshAlter )
-callbackOnMeshAlter - Callback function for described functionality
-Register callback function that is called every time a mesh was loaded. Use LoadedMeshUserOverride for alteration instructions (geometry, material or disregard mesh).
-#
-.setCallbackOnLoad ( callbackOnLoad )
-callbackOnLoad - Callback function for described functionality
-Register callback function that is called once loading of the complete OBJ file is completed.
-#
-.setCallbackOnLoadMaterials ( callbackOnLoadMaterials )
-callbackOnLoadMaterials - Callback function for described functionality
-Register callback function that is called when materials have been loaded.
+<pre>Callbacks( )</pre>
+Callbacks utilized by loaders and builder.<br><br>
 
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.6.8setCallbackOnProgress"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set callback on progress - установить функцию<br>обратного вызова на событие &#171;ход процесса&#187;')" onmouseout="hide()">.setCallbackOnProgress</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback on progress - функция обратного<br>вызова на событие &#171;ход процесса&#187;')" onmouseout="hide()">callbackOnProgress</a></span> )</pre>
+<div class=list><tt>callbackOnProgress</tt> - Callback function for described functionality</div>
+Register callback function that is invoked by internal function "announceProgress" to print feedback.<br><br>
+
+<pre id="3.6.8setCallbackOnMeshAlter"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.setCallbackOnMeshAlter</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">callbackOnMeshAlter</a></span> )</pre>
+<div class=list><tt>callbackOnMeshAlter</tt> - Callback function for described functionality</div>
+Register callback function that is called every time a mesh was loaded. Use LoadedMeshUserOverride for alteration instructions (geometry, material or disregard mesh).<br><br>
+
+<pre id="3.6.8setCallbackOnLoad"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.setCallbackOnLoad</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">callbackOnLoad</a></span> )</pre>
+<div class=list><tt>callbackOnLoad</tt> - Callback function for described functionality</div>
+Register callback function that is called once loading of the complete OBJ file is completed.<br><br>
+
+<pre id="3.6.8setCallbackOnLoadMaterials"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.setCallbackOnLoadMaterials</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">callbackOnLoadMaterials</a></span> )</pre>
+<div class=list><tt>callbackOnLoadMaterials</tt> - Callback function for described functionality</div>
+Register callback function that is called when materials have been loaded.
+</div><br><br>
 
 <h3 id="3.6.9">Validator</h3>
 
@@ -994,109 +995,102 @@ If given input is null or undefined, the defaultValue is returned otherwise the 
 
 
 <h3 id="3.7">PCDLoader</h3>
-A loader for <em>PCD</em> files. Loads ascii and binary.
-Compressed binary files are not supported.<br><br>
+Загрузчик для загрузки ресурсов в формате <em>pcd</em>.<br>
+Формат файла <tt><span class="lnk" onmouseover="show('от Point Cloud Data - данные облака точек')" onmouseout="hide()">pcd</span></tt> - это формат файла для <a href="https://en.wikipedia.org/wiki/Point_Cloud_Library" target="_blank" onmouseover="show('point cloud library - библиотека облака точек')" onmouseout="hide()">Point Cloud Library</a>.
+Вот статья Википедии об <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE_%D1%82%D0%BE%D1%87%D0%B5%D0%BA" target="_blank">облаке точек</a>.<br>
+Загрузчик поддерживает формат ascii и бинарный формат. Сжатые бинарные файлы не поддерживаются.<br><br>
 
 <h4>Пример</h4>
+<pre>// instantiate a loader (создание экземпляра загрузчика)
+var loader = new THREE.PCDLoader();<br>
+// load a resource (загрузка ресурса)
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  'pointcloud.pcd',<br>
+  // called when the resource is loaded (вызывается по завершении загрузки)
+  function ( mesh ) {
+    scene.add( mesh );
+  },<br>
+  // called when loading is in progresses (вызывается во время загрузки)
+  function ( xhr ) {
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+  },<br>
+  // called when loading has errors (вызывается при ошибках в загрузке)
+  function ( error ) {
+    console.log( 'An error happened' );
+  }
+);</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_pcd" target="_blank">webgl / loader / pcd</a></pre><br>
 
-  <pre>
+<h4>Конструктор</h4>
+<pre>PCDLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый PCDLoader.<br><br>
 
-		// instantiate a loader
-		var loader = new THREE.PCDLoader();
-
-		// load a resource
-		loader.load(
-			// resource URL
-			'pointcloud.pcd' ,
-			// Function when resource is loaded
-			function ( mesh ) {
-				scene.add( mesh );
-			}
-		);
-  </pre>
-
-		[example:webgl_loader_pcd</a>
-
-
-  <h4>Конструктор</h4>
-
-		<h3>PCDLoader( [page:LoadingManager manager</a> )</h3>
-		<div>
-		[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.
-		</div>
-		<div>
-		Creates a new [name</a>.
-		</div>
-
-  <h4>Свойства</h4>
-
-		<h3>[page:Boolean littleEndian</a></h3>
-		<div>
-		Default value is true.
-		</div><br>
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="3.7littleEndian"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('')" onmouseout="hide()">.littleEndian</a></span></pre>
+Значением по умолчанию является <tt>true</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
-		<div>
-		[page:String url</a> — required<br />
-		[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:Object3D</a>.<br />
-		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
-		[page:Function onError</a> — Will be called when load errors.<br />
-		</div>
-		<div>
-		Begin loading from url and call onLoad with the parsed response content.
-		</div>
+<pre id="3.7load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>pcd</tt>-файла (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает загруженный <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с .
+Begin loading from url and call onLoad with the parsed response content.<br><br>
 
-		<h3>[method:Object3D parse</a>( [page:Arraybuffer data</a>,[page:String url</a> )</h3>
-		<div>
-		[page:Arraybuffer data</a> — The binary structure to parse.
-		</div>
-		<div>
-		[page:String url</a> — The file name or file url.
-		</div>
-Parse an <em>pcd</em> binary structure and return an [page:Object3D</a>.<br />
-		The object is converted to [page:Points</a> with a [page:BufferGeometry</a> and a [page:PointsMaterial</a>.
-		</div><br>
+<pre id="3.7parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick('Arraybuffer - значением является буферный массив')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('data - данные')" onmouseout="hide()">data</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - url-адрес')" onmouseout="hide()">url</a></span> )</pre>
+<div class=list><tt>data</tt> — двоичная структура для разбора (синтаксического анализа).</div>
+<div class=list><tt>url</tt> — имя файла или url-адрес файла.</div>
+Метод производит синтаксический анализ (разбор) двоичной структуры в формате <tt>pcd</tt> и возвращает <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.<br>
+Объект конвертируется в <a href="objects.htm#8" onmouseover="show('Points')" onmouseout="hide()">Points</a> с <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>
+и <a href="materials.htm#12" onmouseover="show('PointsMaterial')" onmouseout="hide()">PointsMaterial</a>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PCDLoader.js" target="_blank">PCDLoader.js на github.com</a></div><br><br>
 
 
 <h3 id="3.8">PDBLoader</h3>
-A loader for loading a <em>.pdb</em> resource.<br>
-The <a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.<br><br>
+Загрузчик для загрузки ресурсов в формате <em>.pdb</em>.<br>
+The <a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.
+The Protein Data Bank (pdb) file format is a textual file format describing the three-dimensional structures of molecules held in the <a href="https://en.wikipedia.org/wiki/Protein_Data_Bank" target="_blank">Protein Data Bank</a>.<br><br>
 
-  <h4>Пример</h4>
-
-  <pre>
-		// instantiate a loader
-		var loader = new THREE.PDBLoader();
-
-		// load a PDB resource
-		loader.load(
-			// resource URL
-			'models/molecules/caffeine.pdb',
-			// Function when resource is loaded
-			function ( geometryAtoms, geometryBonds, json ) {
-				console.log( 'This molecule has ' + json.atoms.length + ' atoms' );
-			},
-			// Function called when download progresses
-			function ( xhr ) {
-				console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-			},
-			// Function called when download errors
-			function ( xhr ) {
-				console.log( 'An error happened' );
-			}
-		);
-  </pre>
-
-		[example:webgl_loader_pdb</a>
-
+<h4>Пример</h4>
+<pre>// instantiate a loader (создание экземпляра загрузчика)
+var loader = new THREE.PDBLoader();<br>
+// load a PDB resource (загрузка PDB ресурса)
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  'models/molecules/caffeine.pdb',<br>
+  // called when the resource is loaded (вызывается по завершении загрузки)
+  function ( pdb ) {
+    var geometryAtoms = pdb.geometryAtoms;
+    var geometryBonds = pdb.geometryBonds;
+    var json = pdb.json;
+    console.log( 'This molecule has ' + json.atoms.length + ' atoms' );
+  },<br>
+  // called when loading is in progresses (вызывается во время загрузки)
+  function ( xhr ) {
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+  },<br>
+  // called when loading has errors (вызывается при ошибках в загрузке)
+  function ( error ) {
+    console.log( 'An error happened' );
+  }
+);</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_pdb" target="_blank">webgl / loader / pdb</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>PDBLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">loadingManager</a> )</pre>
+<pre>PDBLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
 <div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
 Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 Создает новый PDBLoader.<br><br>
@@ -1106,42 +1100,59 @@ The <a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)">Prote
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-		<h3>[method:null load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
-		<div>
-		[page:String url</a> — required. URL to the <em>.pdb</em> file<br />
-		[page:Function onLoad</a> — Will be called when load completes. The arguments will be an [page:BufferGeometry geometryAtoms</a>, [page:BufferGeometry geometryBonds</a> and the [page:Object JSON</a> structure.<br />
-		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
-		[page:Function onError</a> — Will be called when load errors.<br />
-		</div>
-		<div>
-		Begin loading from url and call onLoad with the parsed response content.
-		</div>
+<pre id="3.8load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>pdb</tt>-файла (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает <a href="core.htm#2" onmouseover="show('BufferGeometry.<br>geometry atoms - геометрия атомов')" onmouseout="hide()">geometryAtoms</a>,
+<a href="core.htm#2" onmouseover="show('BufferGeometry.<br>geometry bonds - геометрия связей')" onmouseout="hide()">geometryBonds</a>
+и структуру <span class="lnk" onmouseover="show('json - сокр. от англ. слов JavaScript Object Notation —<br>текстовый формат описания объекта, основанный на JavaScript')" onmouseout="hide()">JSON</span>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с .
+Begin loading from url and call onLoad with the parsed response content.<br><br>
 
-		<h3>[method:Object parsePDB</a>( [page:String text</a> )</h3>
-		<div>
-		[page:String text</a> — The textual <em>pdb</em> structure to parse.
-		</div>
-		<div>
-		Parse a <em>pdb</em> text and return a <em>JSON</em> structure.<br />
-		</div>
-
-		<h3>[method:null createModel</a>( [page:Object json</a>, [page:Function callback</a> )</h3>
-		<div>
-		[page:Object json</a> — The <em>(JSON) pdb</em> structure to parse.<br />
-		[page:Function callback</a> — Will be called when parse completes, with three arguments: [page:BufferGeometry geometryAtoms</a>, [page:BufferGeometry geometryBonds</a> and the original [page:Object json</a>.<br />
-		</div>
-Parse a <em>(JSON) pdb</em> structure and return two [page:BufferGeometry</a>: one for atoms, one for bonds.
-		</div><br>
+<pre id="3.8parse"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span> )</pre>
+<div class=list><tt>text</tt> — текстовая структура <tt>pdb</tt> для разбора (синтаксического анализа).</div>
+Метод проводит синтаксический анализ (разбор) текста <tt>pdb</tt>-файла и возвращает структуру JSON.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PDBLoader.js" target="_blank">PDBLoader.js на github.com</a></div><br><br>
 
 
 <h3 id="3.9">SVGLoader</h3>
-Загрузчик для загрузки ресурса в формате <em>.svg</em>.
+Загрузчик для загрузки ресурса в формате <em>.svg</em>.<br>
+Формат <tt><a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" target="_blank" onmouseover="show('svg - сокращ. англ. слов scalabe vector graphics - масштабируемая векторная графика')" onmouseout="hide()">svg</a></tt> основанный на формате векторных изображений XML для двумерной графики с поддержкой интерактивности и анимации.<br>
+Статья Википедии о <a href="https://ru.wikipedia.org/wiki/SVG" target="_blank">SVG на русском языке</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создание экземпляра загрузчика)
+var loader = new THREE.SVGLoader();<br>
+// load a SVG resource (загрузка SVG ресурса)
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  'data/svgSample.svg',<br>
+  // called when the resource is loaded (вызывается по завершении загрузки)
+  function ( doc ) {
+    scene.add( new THREE.SVGObject(doc) );
+  },<br>
+  // called when loading is in progresses (вызывается во время загрузки)
+  function ( xhr ) {
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+  },<br>
+  // called when loading has errors (вызывается при ошибках в загрузке)
+  function ( error ) {
+    console.log( 'An error happened' );
+  }
+);</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_svg" target="_blank">webgl / loader / svg</a></pre><br>
+
 <h4>Конструктор</h4>
-<pre>SVGLoader( <a href="loaders.htm#16.2" title="LoadingManager">manager</a> )</pre>
-<div class=list><a href="loaders.htm#16.2" title="LoadingManager">manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
+<pre>SVGLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 Создает новый SVGLoader.<br><br>
 
 <h4>Свойства</h4><br>
@@ -1149,10 +1160,12 @@ Parse a <em>(JSON) pdb</em> structure and return two [page:BufferGeometry</a>: o
 <h4>Методы</h4><br>
 <div class=blockindent>
 <pre id="2.10load"><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_null,'Arial,9',10,10,0xffffff,0xd69967)" title="load - загрузить">.load</a>( <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="url - сокращ. от англ. слов Uniform Resource Locator — единообразный локатор (определитель местонахождения) ресурса">url</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on load - на загрузку">onLoad</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on progress - на ход процесса">onProgress</a>, <a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on error - на ошибку">onError</a> )</pre>
-<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="url - сокращ. от англ. слов Uniform Resource Locator — единообразный локатор (определитель местонахождения) ресурса">url</a></tt> — обязательный параметр</div>
-<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on load - на загрузку">onLoad</a></tt> — функция, которая должна быть вызвана по завершении загрузки. Её аргументом должен быть загруженный [page:SVGDocument</a>.</div>
-<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on progress - на ход процесса">onProgress</a></tt> — функция, которая будет вызвана во время хода процесса загрузки. Аргументом этой функции должен быть экземпляр XMLHttpRequest, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.</div>
-<div class=indent1><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on error - на ошибку">onError</a></tt> — функция, которая будет вызвана при ошибках загрузки.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_string,'Arial,9',10,10,0xffffff,0xd69967)" title="url - сокращ. от англ. слов Uniform Resource Locator — единообразный локатор (определитель местонахождения) ресурса">url</a></tt> — обязательный параметр</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on load - на загрузку">onLoad</a></tt> — функция, которая должна быть вызвана по завершении загрузки. Её аргументом должен быть загруженный <a href="https://ru.wikipedia.org/wiki/SVG#.D0.A1.D1.82.D1.80.D1.83.D0.BA.D1.82.D1.83.D1.80.D0.B0_.D0.B4.D0.BE.D0.BA.D1.83.D0.BC.D0.B5.D0.BD.D1.82.D0.B0_SVG" target="_blank">SVGDocument</a>.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on progress - на ход процесса">onProgress</a></tt> — функция, которая будет вызываться во время хода процесса загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt><a class=popupspot href="JavaScript:hhctrl.TextPopup(type_func,'Arial,9',10,10,0xffffff,0xd69967)" title="on error - на ошибку">onError</a></tt> — функция, которая будет вызвана при ошибках загрузки.</div>
 Begin loading from url and call onLoad with the response content.</div><br>
 
 <h4>Исходники</h4>
@@ -1160,119 +1173,122 @@ Begin loading from url and call onLoad with the response content.</div><br>
 
 
 <h3 id="3.10">TGALoader</h3>
-Class for loading a <em>.tga</em> [page:DataTexture texture</a>.
+Загрузчик для загрузки ресурса в формате <em>.tga</em>.<br>
+<a href="https://en.wikipedia.org/wiki/Truevision_TGA" target="_blank" onmouseover="show('TGA - Truevision TGA, часто называемый как TARGA, - это формат файлов для растровой графики, созданный Truevision Inc. (сейчас это часть Avid Technology)')" onmouseout="hide()">TGA</a> - формат файлов для растровой графики.<br>
+Вот статья Википедии <a href="https://ru.wikipedia.org/wiki/Truevision_TGA" target="_blank">о формате TGA</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
-<pre>// instantiate a loader
+<pre>// instantiate a loader (создание экземпляра загрузчика)
 var loader = new THREE.TGALoader();<br>
-  // load a resource
-  var texture = loader.load(
-    // resource URL
-    'textures/crate_grey8.tga'
-    // Function when resource is loaded
-    function ( texture ) {
-      console.log( 'Texture is loaded' );
-    },
-    // Function called when download progresses
-    function ( xhr ) {
-      console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-    },
-    // Function called when download errors
-    function ( xhr ) {
-      console.log( 'An error happened' );
-    }
-  );<br>
+// load a resource (загрузка ресурса)
+var texture = loader.load(
+  // resource URL (URL-адрес ресурса)
+  'textures/crate_grey8.tga'<br>
+  // called when loading is completed (вызывается по завершении загрузки)
+  function ( texture ) {
+    console.log( 'Texture is loaded' );
+  },<br>
+  // called when the loading is in progresses (вызывается во время загрузки)
+  function ( xhr ) {
+     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+  },<br>
+  // called when the loading failes (вызывается при ошибках в загрузке)
+  function ( error ) {
+    console.log( 'An error happened' );
+  }
+);<br>
 var material = new THREE.MeshPhongMaterial( {
   color: 0xffffff,
   map: texture
 } );</pre>
-
-		[example:webgl_materials_texture_tga</a>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_texture_tga" target="_blank">webgl / loader / texture / tga</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>TGALoader( [page:LoadingManager manager</a> )</pre>
-<div class=list>[page:LoadingManager manager</a> — The [page:LoadingManager loadingManager</a> for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager</a>.</div>
-Creates a new TGALoader.<br><br>
+<pre>TGALoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый TGALoader.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-		<h3>[method:DataTexture load</a>( [page:String url</a>, [page:Function onLoad</a>, [page:Function onProgress</a>, [page:Function onError</a> )</h3>
-		<div>
-		[page:String url</a> — required<br />
-		[page:Function onLoad</a> — Will be called when load completes. The argument will be the loaded [page:DataTexture</a>.<br />
-		[page:Function onProgress</a> — Will be called while load progresses. The argument will be the XMLHttpRequest instance, which contains .[page:Integer total</a> and .[page:Integer loaded</a> bytes.<br />
-		[page:Function onError</a> — Will be called when load errors.<br />
-		</div>
-Begin loading from url and pass the loaded [page:DataTexture texture</a> to onLoad. The [page:DataTexture texture</a> is also directly returned for immediate use (but may not be fully loaded).
-		</div><br>
+<pre id="3.10load"><a href="textures.htm#4" onmouseover="show('DataTexture.<br>load - загрузить')" onmouseout="hide()">.load</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>tga</tt>-файла (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает загруженную <a href="textures.htm#4" onmouseover="show('DataTexture')" onmouseout="hide()">DataTexture</a>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения передает загруженную <a href="textures.htm#4" onmouseover="show('DataTexture')" onmouseout="hide()">текстуру</a> функции, указанную в <tt>onLoad</tt>.
+Эта текстура также сразу возвращается для немедленного использования (но может быть полностью не загружена).</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/TGALoader.js" target="_blank">TGALoader.js на github.com</a></div><br><br>
 
 
 <h3 id="3.11">PRWMLoader</h3>
-A loader for loading a .prwm resource.
+Загрузчик для загрузки ресурса в формате <em>.prwm</em>.<br>
+
 Packed Raw WebGL Model is an open-source binary file format for nD geometries specifically designed for JavaScript and WebGL with a strong focus on fast parsing (from 1ms to 0.1ms in Chrome 59 on a MBP Late 2013). The parsing of PRWM file is especially fast when the endianness of the file is the same as the endianness of the client platform. More information on this here.<br><br>
 
 <h4>Пример</h4>
-// instantiate a loader
-var loader = new THREE.PRWMLoader();
-
-// load a resource
+<pre>// instantiate a loader (создание экземпляра загрузчика)
+var loader = new THREE.PRWMLoader();<br>
+// load a resource (загрузка ресурса)
 loader.load(
-	// resource URL
-	'models/nefertiti.le.prwm',
-	// called when resource is loaded
-	function ( bufferGeometry ) {
-
-		var object = new THREE.Mesh( bufferGeometry, new THREE.MeshNormalMaterial() );
-		scene.add( object );
-
-	},
-	// called when loading is in progresses
-	function ( xhr ) {
-
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-	},
-	// called when loading has errors
-	function ( error ) {
-
-		console.log( 'An error happened' );
-
-	}
-);
-webgl_loader_prwm
+  // resource URL (URL-адрес ресурса)
+  'models/nefertiti.le.prwm',<br>
+  // called when resource is loaded (вызывается по завершении загрузки)
+  function ( bufferGeometry ) {
+  var object = new THREE.Mesh( bufferGeometry, new THREE.MeshNormalMaterial() );
+    scene.add( object );
+  },<br>
+  // called when loading is in progresses (вызывается во время загрузки)
+  function ( xhr ) {
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+  },<br>
+  // called when loading has errors (вызывается при ошибках в загрузке)
+  function ( error ) {
+    console.log( 'An error happened' );
+  }
+);</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_prwm" target="_blank">webgl / loader / prwm</a></pre><br>
 
 <h4>Конструктор</h4>
-PRWMLoader( manager )
-manager — The loadingManager for the loader to use. Default is THREE.DefaultLoadingManager.
-Creates a new PRWMLoader.
+<pre>PRWMLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый PRWMLoader.<br><br>
 
 <h4>Свойства</h4>
 <br><br>
 
 <h4>Методы</h4>
-#
-.load ( url, onLoad, onProgress, onError )
-url — A string containing the path/URL of the .prwm file. Any * character in the URL will be automatically replaced by le or be depending on the platform endianness.
-onLoad — (optional) A function to be called after the loading is successfully completed. The function receives the loaded BufferGeometry as an argument.
-onProgress — (optional) A function to be called while the loading is in progress. The function receives a XMLHttpRequest instance, which contains total and loaded bytes.
-onError — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.
-Begin loading from url and call onLoad with the parsed response content.
-#
-.parse ( arrayBuffer )
-arrayBuffer — ArrayBuffer containing the prwm data.
-Parse a prwm file passed as an ArrayBuffer and directly return an instance of BufferGeometry.
-PRWMLoader.isBigEndianPlatform( )
-Return true if the endianness of the platform is Big Endian, false otherwise.
+<div class=blockindent><br>
+<pre id="3.11load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>prwm</tt>-файла (обязательный аргумент). Any * character in the URL will be automatically replaced by le or be depending on the platform endianness.</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает загруженный <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с разобранным содержимым ответа.
+Begin loading from url and call onLoad with the parsed response content.<br><br>
+
+<pre id="3.11parse"><a href="core.htm#2" onmouseover="show('BufferGeometry.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span class="lnk" onmouseover="show('array buffer - буферный массив')" onmouseout="hide()">arrayBuffer</span> )</pre>
+<div class=list><tt>arrayBuffer</tt> — ArrayBuffer containing the <tt>prwm</tt> data.</div>
+Parse a prwm file passed as an ArrayBuffer and directly return an instance of BufferGeometry.<br><br>
+
+<pre id="3.11isBigEndianPlatform"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is big endian platform - ')" onmouseout="hide()">.isBigEndianPlatform</a></span>( )</pre>
+Возвращает значение <tt>true</tt>, if the endianness of the platform is Big Endian, в противном случае значение <tt>false</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PRWMLoader.js" target="_blank">PRWMLoader.js на github.com</a></div>
-<h4>Additional notes</h4>
-This loader is additionally available on npm as three-prwm-loader.
-<br><br>
-
+<h4>Дополнительные замечания</h4>
+Данный загрузчик также доступен на <tt>npm</tt> как <tt>three-prwm-loader</tt>.<br><br>
 
 
 <h2 id="4">Объекты</h2><br>
@@ -1379,48 +1395,47 @@ Generates a .gltf (JSON) or .glb (binary) output from the input (Scene or Object
 <h2 id="6">Плагины</h2><br>
 
 <h3 id="6.1">Lut</h3>
-Represents a lookup table for colormaps. It is used to determine the color values from a range of data values.
+Represents a lookup table for colormaps. It is used to determine the color values from a range of data values.<br><br>
 
 <h4>Пример</h4>
-		<pre>var lut = new THREE.Lut( "rainbow", 512 );</pre>
-		<pre>var data = [0, 10.1, 4.2, 3.4, 63, 28</a>;</pre>
-		<pre>lut.setMax(63);</pre>
-		<pre>color = lut.getColor(10);</pre>
+<pre>var lut = new THREE.Lut( "rainbow", 512 );<br>
+var data = [0, 10.1, 4.2, 3.4, 63, 28];<br>
+lut.setMax(63);<br>
+color = lut.getColor(10);</pre><br>
 
 <h4>Конструктор</h4>
 <pre>Lut( colormap, numberOfColors )</pre>
-<div class="blockindent">colormap — optional argument that sets a colormap from predefined colormaps. Available colormaps are : "rainbow", "cooltowarm", "blackbody".<br>
-numberOfColors — optional argument that sets the number of colors used to represent the data array.</div>
+<div class=list><tt>colormap</tt> — optional argument that sets a colormap from predefined colormaps. Available colormaps are : "rainbow", "cooltowarm", "blackbody".</div>
+<div class=list><tt>numberOfColors</tt> — optional argument that sets the number of colors used to represent the data array.</div><br>
 
 <h4>Свойства</h4>
+<div class="blockindent"><br>
+<pre id="6.1minV"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minV - сокращ. англ. слов minimum value - минимальное значение')" onmouseout="hide()">.minV</a></span></pre>
+The minimum value to be represented with the lookup table. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
-<pre>[property:Float minV</a></pre>
-The minimum value to be represented with the lookup table. Default is 0.
+<pre id="6.1maxV"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('maxV - сокращ. англ. слов maximum value - максимальное значение')" onmouseout="hide()">.maxV</a></span></pre>
+The maximum value to be represented with the lookup table. Значение по умолчанию равно <tt>1</tt>.<br><br>
 
-<pre>[property:Float maxV</a></pre>
-The maximum value to be represented with the lookup table. Default is 1.
-
-<pre>.[legend</a></pre>
-The legend of the lookup table.
+<pre id="6.1legend">.[legend</a></pre>
+The legend of the lookup table.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre>[method:null copy</a>( [page:Lut lut</a> ) [page:Lut this</a></pre>
-<div class="blockindent">color — Lut to copy.</div>
-Copies given lut.
-<pre>.setLegendOn [parameters</a></pre>
+<pre id="6.1copy"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('copy - копировать')" onmouseout="hide()">.copy</a></span>( [page:Lut lut</a> ) [page:Lut this</a></pre>
+<div class=list>color — Lut to copy.</div>
+Copies given lut.<br><br>
+
+<pre id="6.1">.setLegendOn [parameters</a></pre>
 <div class="blockindent">parameters — { layout: value, position: { x: value, y: value, z: value }, dimensions: { width: value, height: value } }
 		layout — Horizontal or vertical layout. Default is vertical.<br>
 		position — The position x,y,z of the legend.<br>
 		dimensions — The dimensions (width and height) of the legend.</div>
-Sets this Lut with the legend on.
+Sets this Lut with the legend on.<br><br>
 
+<pre id="6.1">.setLegendOff</pre>
+Sets this Lut with the legend off.<br><br>
 
-<pre>.setLegendOff</pre>
-Sets this Lut with the legend off.
-
-
-<pre>.setLegendLabels [parameters, callback</a></pre>
+<pre id="6.1">.setLegendLabels [parameters, callback</a></pre>
 <div class="blockindent">parameters — { fontsize: value, fontface: value, title: value, um: value, ticks: value, decimal: value, notation: value }
 		fontsize — Font size to be used for labels.<br>
 		fontface — Font type to be used for labels.<br>
@@ -1430,30 +1445,30 @@ Sets this Lut with the legend off.
 		decimal — The number of decimals to be used for legend values.<br>
 		notation — Legend notation: standard (default) or scientific.<br>
 		callback — An optional callback to be used to format the legend labels.</div>
-Sets the labels of the legend of this Lut.
+Sets the labels of the legend of this Lut.<br><br>
 
-<pre>[method:Lut setminV</a>( [page:Float minV</a> )</pre>
-<div class="blockindent">minV — The minimum value to be represented with the lookup table.</div>
-Sets this Lut with the minimum value to be represented.
+<pre id="6.1">[method:Lut setminV</a>( [page:Float minV</a> )</pre>
+<div class=list>minV — The minimum value to be represented with the lookup table.</div>
+Sets this Lut with the minimum value to be represented.<br><br>
 
-<pre>[method:Lut setmaxV</a>( [page:Float maxV</a> )</pre>
-<div class="blockindent">maxV — The maximum value to be represented with the lookup table.</div>
-Sets this Lut with the maximum value to be represented.
+<pre id="6.1">[method:Lut setmaxV</a>( [page:Float maxV</a> )</pre>
+<div class=list>maxV — The maximum value to be represented with the lookup table.</div>
+Sets this Lut with the maximum value to be represented.<br><br>
 
-<pre>[method:Lut changeNumberOfColors</a>( [page:Float numberOfColors</a> )</pre>
-<div class="blockindent">numberOfColors — The number of colors to be used to represent the data array.</div>
-Sets this Lut with the number of colors to be used.
+<pre id="6.1">[method:Lut changeNumberOfColors</a>( [page:Float numberOfColors</a> )</pre>
+<div class=list>numberOfColors — The number of colors to be used to represent the data array.</div>
+Sets this Lut with the number of colors to be used.<br><br>
 
 
-<pre>[method:Lut changeColorMap</a>( [page:Float colorMap</a> )</pre>
-<div class="blockindent">colorMap — The name of the color map to be used to represent the data array.</div>
-Sets this Lut with the colormap to be used.
+<pre id="6.1">[method:Lut changeColorMap</a>( [page:Float colorMap</a> )</pre>
+<div class=list>colorMap — The name of the color map to be used to represent the data array.</div>
+Sets this Lut with the colormap to be used.<br><br>
 
-<pre>[method:Lut addColorMap</a>( colorMapName, arrayOfColors )</pre>
-Insert a new color map into the set of available color maps.
+<pre id="6.1addColorMap">[method:Lut addColorMap</a>( colorMapName, arrayOfColors )</pre>
+Insert a new color map into the set of available color maps.<br><br>
 
-<pre>[method:Lut getColor</a>( value ) [page:Lut this</a></pre>
-<div class="blockindent">value — the data value to be displayed as a color.</div>
+<pre id="6.1getColor">[method:Lut getColor</a>( value ) [page:Lut this</a></pre>
+<div class=list>value — the data value to be displayed as a color.</div>
 Returns a Three.Color.</div><br>
 
 <h4>Исходники</h4>

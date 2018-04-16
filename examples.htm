@@ -28,10 +28,10 @@
 <div class=list><a href="#3.9">SVGLoader</a> - загрузка в формате <tt>svg</tt></div>
 <div class=list><a href="#3.10">TGALoader</a> - загрузка в формате <tt>tga</tt></div>
 <div class=list><a href="#3.11">PRWMLoader</a> - загрузка в формате <tt>prwm</tt></div></div>
-</td>
-<td width=50%>
 <div class=blockindent>Объекты
 <div class=list><a href="#4.1">LensFlare</a> -  имитация блика объектива камеры</div></div>
+</td>
+<td width=50%>
 <div class=blockindent>Экспортеры
 <div class=list><a href="#5.1">GLTFExporter</a> - </div></div>
 <div class=blockindent>Плагины
@@ -44,9 +44,13 @@
 <div class=list><a href="#7.4">VertexNode</a> - </div>
 <div class=list><a href="#7.5">VertexList</a> - </div></div>
 <div class=blockindent>Визуализаторы (рендереры)
-<div class=list><a href="#8.1">CanvasRenderer</a> - </div></div>
+<div class=list><a href="#8.1">CanvasRenderer</a> - </div>
+<div class=list><a href="#8.2">CSS2DRenderer</a> - </div>
+<div class=list><a href="#8.3">CSS3DRenderer</a> - </div>
+<div class=list><a href="#8.4">SVGRenderer</a> - </div></div>
 <div class=blockindent>Подсобные функции (утилиты)
-<div class=list><a href="#9.1">SceneUtils</a> - полезные функции для работы со сценой</div></div>
+<div class=list><a href="#9.1">BufferGeometryUtils</a> - </div>
+<div class=list><a href="#9.2">SceneUtils</a> - полезные функции для работы со сценой</div></div>
 </td></tr></table>
 </div>
 
@@ -810,19 +814,22 @@ Runs the parser with the provided configuration.
 
 
 <h3 id="3.6.4">WorkerRunnerRefImpl</h3>
+<br>
+
 <h4>Конструктор</h4>
-WorkerRunnerRefImpl()
-Default implementation of the WorkerRunner responsible for creation and configuration of the parser within the worker.
+<pre>WorkerRunnerRefImpl( )</pre>
+Default implementation of the WorkerRunner responsible for creation and configuration of the parser within the worker.<br><br>
+
 <h4>Методы</h4>
-#
-.applyProperties ( parser, params )
-parser - The parser instance
-params - The parameter object
-Applies values from parameter object via set functions or via direct assignment.
-#
-.run ( payload )
-payload - Raw mesh description (buffers, params, materials) used to build one to many meshes.
-Configures the Parser implementation according the supplied configuration object.
+<div class=blockindent><br>
+<pre id="3.6.4applyProperties"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('apply properties - применить свойтсва')" onmouseout="hide()">.applyProperties</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parser - парсер, синтаксический анализатор, разборщик')" onmouseout="hide()">parser</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>parser</tt> - экземпляр синтаксического анализатора.</div>
+<div class=list><tt>params</tt> - The parameter object</div>
+Метод применяет значения из объекта <tt>params</tt> с помощью набора функций или через прямое присваивание.<br><br>
+
+<pre id="3.6.4run"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('run - запустить')" onmouseout="hide()">.run</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('payload - полезная нагрузка')" onmouseout="hide()">payload</a></span> )</pre>
+<div class=list><tt>payload</tt> - Raw mesh description (buffers, params, materials) used to build one to many meshes.</div>
+Configures the Parser implementation according the supplied configuration object.</div><br><br>
 
 
 <h3 id="3.6.5">WorkerDirector</h3>
@@ -1395,7 +1402,8 @@ Generates a .gltf (JSON) or .glb (binary) output from the input (Scene or Object
 <h2 id="6">Плагины</h2><br>
 
 <h3 id="6.1">Lut</h3>
-Represents a lookup table for colormaps. It is used to determine the color values from a range of data values.<br><br>
+Представляет <a href="https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0" target="_blank" onmouseover="show('lut - сокращ. англ. слов lookup table - таблица поиска, просмотра')" onmouseout="hide()">таблицу поиска</a> для карт цвета.
+Она используется для определения значений цвета из ряда значений данных.<br><br>
 
 <h4>Пример</h4>
 <pre>var lut = new THREE.Lut( "rainbow", 512 );<br>
@@ -1404,38 +1412,38 @@ lut.setMax(63);<br>
 color = lut.getColor(10);</pre><br>
 
 <h4>Конструктор</h4>
-<pre>Lut( colormap, numberOfColors )</pre>
-<div class=list><tt>colormap</tt> — optional argument that sets a colormap from predefined colormaps. Available colormaps are : "rainbow", "cooltowarm", "blackbody".</div>
-<div class=list><tt>numberOfColors</tt> — optional argument that sets the number of colors used to represent the data array.</div><br>
+<pre>Lut( <span class="lnk" onmouseover="show('color map - карта цвета')" onmouseout="hide()">colormap</span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('number of colors - число значений цвета')" onmouseout="hide()">numberOfColors</a></span> )</pre>
+<div class=list><tt>colormap</tt> — дополнительный, необязательный аргумент, устанавливающий цветовую карту из предустановленных цветовых карт. Доступны карты цвета: "<span class="lnk" onmouseover="show('rainbow - радуга')" onmouseout="hide()">rainbow</span>", "<span class="lnk" onmouseover="show('cool to warm - (от) холодного к теплому')" onmouseout="hide()">cooltowarm</span>", "<span class="lnk" onmouseover="show('black body - черное тело')" onmouseout="hide()">blackbody</span>".</div>
+<div class=list><tt>numberOfColors</tt> — дополнительный, необязательный аргумент, который устанавливает количество значений цвета, используемых для представления  массива данных.</div><br>
 
 <h4>Свойства</h4>
 <div class="blockindent"><br>
 <pre id="6.1minV"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minV - сокращ. англ. слов minimum value - минимальное значение')" onmouseout="hide()">.minV</a></span></pre>
-The minimum value to be represented with the lookup table. Значение по умолчанию равно <tt>0</tt>.<br><br>
+Минимальное значение, которое должно быть представлено в таблице поиска. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
 <pre id="6.1maxV"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('maxV - сокращ. англ. слов maximum value - максимальное значение')" onmouseout="hide()">.maxV</a></span></pre>
-The maximum value to be represented with the lookup table. Значение по умолчанию равно <tt>1</tt>.<br><br>
+Максимальное значение, которое должно быть представлено в таблице поиска. Значение по умолчанию равно <tt>1</tt>.<br><br>
 
-<pre id="6.1legend">.[legend</a></pre>
-The legend of the lookup table.</div><br>
+<pre id="6.1legend"><span class="lnk" onmouseover="show('legend - легенда, надпись, условное обозначение')" onmouseout="hide()">.legend</span></pre>
+Обозначение (легенда) таблицы поиска.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="6.1copy"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('copy - копировать')" onmouseout="hide()">.copy</a></span>( [page:Lut lut</a> ) [page:Lut this</a></pre>
-<div class=list>color — Lut to copy.</div>
-Copies given lut.<br><br>
+<pre id="6.1copy"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('copy - копировать')" onmouseout="hide()">.copy</a></span>( <a href="#6.1" onmouseover="show('Lut.<br>lut - сокращ. англ. слов lookup table - таблица поиска, просмотра')" onmouseout="hide()">lut</a> ) <a href="#6.1" onmouseover="show('Lut.<br>this - этот, данный')" onmouseout="hide()">this</a></pre>
+<div class=list><tt>color</tt> — копируемая таблица поиска.</div>
+Копирует заданную таблицу поиска.<br><br>
 
-<pre id="6.1">.setLegendOn [parameters</a></pre>
-<div class="blockindent">parameters — { layout: value, position: { x: value, y: value, z: value }, dimensions: { width: value, height: value } }
+<pre id="6.1setLegendOn">.setLegendOn [parameters</a></pre>
+<div class=list>parameters — { layout: value, position: { x: value, y: value, z: value }, dimensions: { width: value, height: value } }
 		layout — Horizontal or vertical layout. Default is vertical.<br>
 		position — The position x,y,z of the legend.<br>
 		dimensions — The dimensions (width and height) of the legend.</div>
 Sets this Lut with the legend on.<br><br>
 
-<pre id="6.1">.setLegendOff</pre>
+<pre id="6.1setLegendOff">.setLegendOff</pre>
 Sets this Lut with the legend off.<br><br>
 
-<pre id="6.1">.setLegendLabels [parameters, callback</a></pre>
+<pre id="6.1setLegendLabels">.setLegendLabels [parameters, callback</a></pre>
 <div class="blockindent">parameters — { fontsize: value, fontface: value, title: value, um: value, ticks: value, decimal: value, notation: value }
 		fontsize — Font size to be used for labels.<br>
 		fontface — Font type to be used for labels.<br>
@@ -1447,29 +1455,28 @@ Sets this Lut with the legend off.<br><br>
 		callback — An optional callback to be used to format the legend labels.</div>
 Sets the labels of the legend of this Lut.<br><br>
 
-<pre id="6.1">[method:Lut setminV</a>( [page:Float minV</a> )</pre>
-<div class=list>minV — The minimum value to be represented with the lookup table.</div>
-Sets this Lut with the minimum value to be represented.<br><br>
+<pre id="6.1setminV"><a href="#6.1" onmouseover="show('Lut.<br>set minV - установить значение minV')" onmouseout="hide()">.setminV</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minV - сокращ. англ. слов minimum value - минимальное значение')" onmouseout="hide()">minV</a></span> )</pre>
+<div class=list><tt>minV</tt> — минимальное значение, которое должно быть представлено в таблице поиска.</div>
+Устанавливает данный Lut с представленным минимальным значением.<br><br>
 
-<pre id="6.1">[method:Lut setmaxV</a>( [page:Float maxV</a> )</pre>
-<div class=list>maxV — The maximum value to be represented with the lookup table.</div>
-Sets this Lut with the maximum value to be represented.<br><br>
+<pre id="6.1setmaxV"><a href="#6.1" onmouseover="show('Lut.<br>set maxV - установить значение maxV')" onmouseout="hide()">.setmaxV</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('maxV - сокращ. англ. слов maximum value - максимальное значение')" onmouseout="hide()">maxV</a></span> )</pre>
+<div class=list><tt>maxV</tt> - максимальное значение, которое должно быть представлено в таблице поиска.</div>
+Устанавливает данный Lut с представленным максимальным значением.<br><br>
 
-<pre id="6.1">[method:Lut changeNumberOfColors</a>( [page:Float numberOfColors</a> )</pre>
-<div class=list>numberOfColors — The number of colors to be used to represent the data array.</div>
-Sets this Lut with the number of colors to be used.<br><br>
+<pre id="6.1changeNumberOfColors"><a href="#6.1" onmouseover="show('Lut.<br>change number of colors - изменить число значений цвета')" onmouseout="hide()">.changeNumberOfColors</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('number of colors - число значений цвета')" onmouseout="hide()">numberOfColors</a></span> )</pre>
+<div class=list><tt>numberOfColors</tt> — количество значений цвета, используемых для представления  массива данных.</div>
+Устанавливает данный Lut с количеством используемых значений цвета.<br><br>
 
-
-<pre id="6.1">[method:Lut changeColorMap</a>( [page:Float colorMap</a> )</pre>
-<div class=list>colorMap — The name of the color map to be used to represent the data array.</div>
+<pre id="6.1changeColorMap"><a href="#6.1" onmouseover="show('Lut.<br>change color map - изменить карту цвета')" onmouseout="hide()">.changeColorMap</a>( [page:Float colorMap</a> )</pre>
+<div class=list><tt>colorMap</tt> — The name of the color map to be used to represent the data array.</div>
 Sets this Lut with the colormap to be used.<br><br>
 
-<pre id="6.1addColorMap">[method:Lut addColorMap</a>( colorMapName, arrayOfColors )</pre>
+<pre id="6.1addColorMap"><a href="#6.1" onmouseover="show('Lut.<br>add color map - добавить карту цвета')" onmouseout="hide()">.addColorMap</a>( colorMapName, arrayOfColors )</pre>
 Insert a new color map into the set of available color maps.<br><br>
 
-<pre id="6.1getColor">[method:Lut getColor</a>( value ) [page:Lut this</a></pre>
-<div class=list>value — the data value to be displayed as a color.</div>
-Returns a Three.Color.</div><br>
+<pre id="6.1getColor"><a href="#6.1" onmouseover="show('Lut.<br>get color - получить цвет')" onmouseout="hide()">.getColor</a>( value ) <a href="#6.1" onmouseover="show('Lut.<br>this - этот, данный')" onmouseout="hide()">this</a></pre>
+<div class=list><tt>value</tt> — значение данных, отображаемое в виде цвета.</div>
+Метод возвращает <a href="math.htm#3" onmouseover="show('Color')" onmouseout="hide()">Color</a>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/math/Lut.js" target="_blank">Lut.js на github.com</a></div><br><br>
@@ -1481,20 +1488,20 @@ Create a material that can draw custom sprites using a 2d canvas.<br><br>
 
 <h4>Конструктор</h4>
 <pre>SpriteCanvasMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
-parameters is an object that can be used to set up the default properties
+Аргумент <tt>parameters</tt> является объектом, который можно использовать для установки в свойства значений по умолчанию
 <div class=list><tt>color</tt> — цвет спрайта.</div>
 <div class=list><tt>program</tt> — программа для прорисовки спрайта.</div><br>
 
 <h4>Свойства</h4>
 <div class="blockindent"><br>
-<pre>[property:Color color</a></pre>
-The color of the sprite. The material will set up the color for the context before calling the material's program.</div><br>
+<pre id="6.2color"><a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+Цвет спрайта. The material will set up the color for the context before calling the material's program.</div><br>
 
 <h4>Методы</h4>
 <div class="blockindent"><br>
-<pre>[method:null program</a>([page:CanvasRenderingContext2D context</a>, [page:Color color</a>)</pre>
+<pre id="6.2program"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('program - программа')" onmouseout="hide()">.program</a></span>( [page:CanvasRenderingContext2D context</a>, <a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
 <div class=list><tt>context</tt> — The canvas context</div>
-<div class=list><tt>color</tt> — The color of the sprite</div>
+<div class=list><tt>color</tt> — цвет спрайта.</div>
 Define a program that will use the context to draw the sprite.</div><br>
 
 <h4>Исходники</h4>
@@ -1823,21 +1830,21 @@ The Canvas renderer displays your beautifully crafted scenes <em>not</em> using 
 Если, все же потребуется его использование, можно найти его здесь: <a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js" target="_blank">examples/js/renderers/CanvasRenderer.js</a>.</div>
 Этот визуализатор может быть хорошей альтернативой <a href="renderers.htm#1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>'у для простых сцен:
 <pre>function webglAvailable() {
-  try {
-    var canvas = document.createElement( 'canvas' );
-    return !!( window.WebGLRenderingContext && (
-      canvas.getContext( 'webgl' ) ||
-      canvas.getContext( 'experimental-webgl' ) )
-    );
-  } catch ( e ) {
-    return false;
- }
-}<br>
-if ( webglAvailable() ) {
-  renderer = new THREE.WebGLRenderer();
-} else {
-  renderer = new THREE.CanvasRenderer();
-}</pre>
+    try {
+      var canvas = document.createElement( 'canvas' );
+      return !!( window.WebGLRenderingContext && (
+        canvas.getContext( 'webgl' ) ||
+        canvas.getContext( 'experimental-webgl' ) )
+      );
+    } catch ( e ) {
+      return false;
+    }
+  }<br>
+  if ( webglAvailable() ) {
+    renderer = new THREE.WebGLRenderer();
+  } else {
+    renderer = new THREE.CanvasRenderer();
+  }</pre>
 <div class=note><b>Примечание:</b> both WebGLRenderer and CanvasRenderer are embedded in the web page using an HTML5 &lt;canvas&gt; tag. The "Canvas" in CanvasRenderer means it uses Canvas 2D instead of WebGL.</div>
 Don't confuse either CanvasRenderer with the SoftwareRenderer example, which simulates a screen buffer in a Javascript array.<br><br>
 

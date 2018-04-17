@@ -239,7 +239,7 @@ How far you can zoom in (только для <a href="cameras.htm#3" onmouseover
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/OrbitControls.js" target="_blank">OrbitControls.js на github.com</a></div><br><br>
 
 
-<h2 id="2">Геометрические элементы</h2>
+<h2 id="2">Геометрические элементы</h2><br>
 
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="2.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ConvexBufferGeometry</h3>
@@ -727,7 +727,7 @@ Supporting classes for file loaders and web worker based loaders.
 <tt><a href="https://threejs.org/examples/#webgl_loader_obj2_meshspray" target="_blank">webgl / loader / obj2 / meshspray</a></tt>
 - пример использования <tt><a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector')" onmouseout="hide()">LoaderSupport.WorkerDirector</a></tt> и <tt><a href="#3.6.3" onmouseover="show('LoaderSupport.WorkerSupport')" onmouseout="hide()">LoaderSupport.WorkerSupport</a></tt>.<br><br>
 
-<h3 id="3.6.1">Builder</h3>
+<h3 id="3.6.1">Builder</h3><br>
 <h4>Конструктор</h4>
 <pre>Builder( )</pre>
 Builds one or many Mesh from one raw set of Arraybuffers, materialGroup descriptions and further parameters. Supports vertex, vertexColor, normal, uv and index buffers.<br><br>
@@ -766,6 +766,7 @@ Returns the mapping object of material name and corresponding material.</div><br
 
 
 <h3 id="3.6.2">LoadedMeshUserOverride</h3>
+
 <h4>Конструктор</h4>
 <pre>LoadedMeshUserOverride( disregardMesh, bufferGeometry )</pre>
 <div class=list>disregardMesh - Tell implementation to completely disregard this mesh</div>
@@ -773,48 +774,49 @@ Returns the mapping object of material name and corresponding material.</div><br
 Object to return by callback onMeshAlter. Used to disregard a certain mesh or to return one to many meshes.<br><br>
 
 <h4>Методы</h4>
-#
-.addMesh ( mesh )
-mesh - Mesh
-Add a mesh created within callback.
-#
-.isDisregardMesh ()
-Answers if mesh shall be disregarded completely.
-#
-.providesAlteredMeshes ()
-Answers if new mesh(es) were created.
+<div class=blockindent><br>
+<pre id="3.6.2addMesh">.addMesh ( mesh )</pre>
+<div class=list>mesh - Mesh</div>
+Add a mesh created within callback.<br><br>
+
+<pre id="3.6.2isDisregardMesh">.isDisregardMesh( )</pre>
+Answers if mesh shall be disregarded completely.<br><br>
+
+<pre id="3.6.2providesAlteredMeshes">.providesAlteredMeshes( )</pre>
+Answers if new mesh(es) were created.</div><br>
 
 
 <h3 id="3.6.3">WorkerSupport</h3>
+
 <h4>Конструктор</h4>
-WorkerSupport( logger )
-logger - logger to be used
-This class provides means to transform existing parser code into a web worker. It defines a simple communication protocol which allows to configure the worker and receive raw mesh data during execution.
+<pre>WorkerSupport( logger )</pre>
+<div class=list>logger - logger to be used</div>
+This class provides means to transform existing parser code into a web worker. It defines a simple communication protocol which allows to configure the worker and receive raw mesh data during execution.<br><br>
+
 <h4>Методы</h4>
-#
-.validate ( functionCodeBuilder, Array of libLocations, libPath, runnerImpl )
-functionCodeBuilder - Function that is invoked with funcBuildObject and funcBuildSingelton that allows stringification of objects and singletons.
-Array of libLocations - URL of libraries that shall be added to worker code relative to libPath.
-libPath - Base path used for loading libraries.
-runnerImpl - The default worker parser wrapper implementation (communication and execution). An extended class could be passed here.
-Validate the status of worker code and the derived worker.
-#
-.setTerminateRequested ( terminateRequested )
-terminateRequested - True or false.
-Request termination of worker once parser is finished.
-#
-.setCallbacks ( builder, onLoad )
-builder - The builder function. Default is LoaderSupport.Builder.
-onLoad - The function that is called when parsing is complete.
-Specify functions that should be build when new raw mesh data becomes available and when the parser is finished.
-#
-.run ( payload )
-payload - Raw mesh description (buffers, params, materials) used to build one to many meshes.
-Runs the parser with the provided configuration.
+<div class=blockindent><br>
+<pre id="3.6.3validate">.validate ( functionCodeBuilder, Array of libLocations, libPath, runnerImpl )</pre>
+<div class=list>functionCodeBuilder - Function that is invoked with funcBuildObject and funcBuildSingelton that allows stringification of objects and singletons.</div>
+<div class=list>Array of libLocations - URL of libraries that shall be added to worker code relative to libPath.</div>
+<div class=list>libPath - Base path used for loading libraries.</div>
+<div class=list>runnerImpl - The default worker parser wrapper implementation (communication and execution). An extended class could be passed here.</div>
+Validate the status of worker code and the derived worker.<br><br>
+
+<pre id="3.6.3setTerminateRequested">.setTerminateRequested ( terminateRequested )</pre>
+<div class=list>terminateRequested - True or false.</div>
+Request termination of worker once parser is finished.<br><br>
+
+<pre id="3.6.3setCallbacks">.setCallbacks ( builder, onLoad )</pre>
+<div class=list>builder - The builder function. Default is LoaderSupport.Builder.</div>
+<div class=list>onLoad - The function that is called when parsing is complete.</div>
+Specify functions that should be build when new raw mesh data becomes available and when the parser is finished.<br><br>
+
+<pre id="3.6.3run">.run ( payload )</pre>
+<div class=list>payload - Raw mesh description (buffers, params, materials) used to build one to many meshes.</div>
+Runs the parser with the provided configuration.</div><br>
 
 
 <h3 id="3.6.4">WorkerRunnerRefImpl</h3>
-<br>
 
 <h4>Конструктор</h4>
 <pre>WorkerRunnerRefImpl( )</pre>
@@ -829,54 +831,56 @@ Default implementation of the WorkerRunner responsible for creation and configur
 
 <pre id="3.6.4run"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('run - запустить')" onmouseout="hide()">.run</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('payload - полезная нагрузка')" onmouseout="hide()">payload</a></span> )</pre>
 <div class=list><tt>payload</tt> - Raw mesh description (buffers, params, materials) used to build one to many meshes.</div>
-Configures the Parser implementation according the supplied configuration object.</div><br><br>
-
+Configures the Parser implementation according the supplied configuration object.</div><br>
 
 <h3 id="3.6.5">WorkerDirector</h3>
+
 <h4>Конструктор</h4>
-WorkerDirector( classDef, logger )
-classDef - Class definition to be used for construction
-logger - logger to be used
+<pre>WorkerDirector( classDef, logger )</pre>
+<div class=list>classDef - Class definition to be used for construction</div>
+<div class=list>logger - logger to be used</div>
 Orchestrate loading of multiple OBJ files/data from an instruction queue with a configurable amount of workers (1-16).
-- Workflow:
-- prepareWorkers
-- enqueueForRun
-- processQueue
-- tearDown
+<div class=blockindent>- Workflow:<br>
+- prepareWorkers<br>
+- enqueueForRun<br>
+- processQueue<br>
+- tearDown</div><br>
 
 <h4>Методы</h4>
-#
-.prepareWorkers ( globalCallbacks, maxQueueSize, maxWebWorkers )
-globalCallbacks - Register global callbacks used by all web workers
-maxQueueSize - Set the maximum size of the instruction queue (1-1024)
-maxWebWorkers - Set the maximum amount of workers (1-16)
-Create or destroy workers according limits. Set the name and register callbacks for dynamically created web workers.
-#
-.enqueueForRun ( runParams )
-runParams
-Store run instructions in internal instructionQueue.
-#
-.processQueue ()
-Process the instructionQueue until it is depleted.
-#
-.tearDown ( callbackOnFinishedProcessing )
-callbackOnFinishedProcessing - Function called once all workers finished processing.
-Terminate all workers.
-#
-.getMaxQueueSize ()
-Returns the maximum length of the instruction queue.
-#
-.getMaxWebWorkers ()
-Returns the maximum number of workers.
-#
-.isRunning ()
-Returns if any workers are running.
-#
-.setCrossOrigin ( crossOrigin )
-crossOrigin - CORS value
-Sets the CORS string to be used.
+<div class=blockindent><br>
+<pre id="3.6.5prepareWorkers">.prepareWorkers ( globalCallbacks, maxQueueSize, maxWebWorkers )</pre>
+<div class=list>globalCallbacks - Register global callbacks used by all web workers</div>
+<div class=list>maxQueueSize - Set the maximum size of the instruction queue (1-1024)</div>
+<div class=list>maxWebWorkers - Set the maximum amount of workers (1-16)</div>
+Create or destroy workers according limits. Set the name and register callbacks for dynamically created web workers.<br><br>
+
+<pre id="3.6.5enqueueForRun">.enqueueForRun ( runParams )</pre>
+<div class=list>runParams</div>
+Store run instructions in internal instructionQueue.<br><br>
+
+<pre id="3.6.5processQueue">.processQueue ()</pre>
+Process the instructionQueue until it is depleted.<br><br>
+
+<pre id="3.6.5tearDown">.tearDown ( callbackOnFinishedProcessing )</pre>
+<div class=list>callbackOnFinishedProcessing - Function called once all workers finished processing.</div>
+Terminate all workers.<br><br>
+
+<pre id="3.6.5getMaxQueueSize">.getMaxQueueSize ()</pre>
+Returns the maximum length of the instruction queue.<br><br>
+
+<pre id="3.6.5getMaxWebWorkers">.getMaxWebWorkers ()</pre>
+Returns the maximum number of workers.<br><br>
+
+<pre id="3.6.5isRunning">.isRunning ()</pre>
+Returns if any workers are running.<br><br>
+
+<pre id="3.6.5setCrossOrigin">.setCrossOrigin ( crossOrigin )</pre>
+<div class=list>crossOrigin - CORS value</div>
+Sets the CORS string to be used.</div><br>
+
 
 <h3 id="3.6.6">PrepData</h3>
+
 <h4>Конструктор</h4>
 PrepData( modelName )
 modelName - Overall name of the model
@@ -1433,26 +1437,26 @@ color = lut.getColor(10);</pre><br>
 <div class=list><tt>color</tt> — копируемая таблица поиска.</div>
 Копирует заданную таблицу поиска.<br><br>
 
-<pre id="6.1setLegendOn">.setLegendOn [parameters</a></pre>
-<div class=list>parameters — { layout: value, position: { x: value, y: value, z: value }, dimensions: { width: value, height: value } }
-		layout — Horizontal or vertical layout. Default is vertical.<br>
-		position — The position x,y,z of the legend.<br>
-		dimensions — The dimensions (width and height) of the legend.</div>
+<pre id="6.1setLegendOn">.setLegendOn( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt>parameters</tt> — { layout: value, position: { x: value, y: value, z: value }, dimensions: { width: value, height: value } }<br>
+&nbsp; &#9679; &nbsp; <tt>layout</tt> — Horizontal or vertical layout. Default is vertical.<br>
+&nbsp; &#9679; &nbsp; <tt>position</tt> — The position x,y,z of the legend.<br>
+&nbsp; &#9679; &nbsp; <tt>dimensions</tt> — The dimensions (width and height) of the legend.</div>
 Sets this Lut with the legend on.<br><br>
 
 <pre id="6.1setLegendOff">.setLegendOff</pre>
 Sets this Lut with the legend off.<br><br>
 
-<pre id="6.1setLegendLabels">.setLegendLabels [parameters, callback</a></pre>
-<div class="blockindent">parameters — { fontsize: value, fontface: value, title: value, um: value, ticks: value, decimal: value, notation: value }
-		fontsize — Font size to be used for labels.<br>
-		fontface — Font type to be used for labels.<br>
-		title — The title of the legend.<br>
-		um — The unit of measurements of the legend.<br>
-		ticks — The number of ticks to be displayed.<br>
-		decimal — The number of decimals to be used for legend values.<br>
-		notation — Legend notation: standard (default) or scientific.<br>
-		callback — An optional callback to be used to format the legend labels.</div>
+<pre id="6.1setLegendLabels">.setLegendLabels( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback - обратный (повторный) вызов')" onmouseout="hide()">callback</a></span> )</pre>
+<div class=list><tt>parameters</tt> — { fontsize: value, fontface: value, title: value, um: value, ticks: value, decimal: value, notation: value }<br>
+&nbsp; &#9679; &nbsp; <tt>fontsize</tt> — размер шрифта, используемого для надписей.<br>
+&nbsp; &#9679; &nbsp; <tt>fontface</tt> — тип шрифта, используемого для надписей.<br>
+&nbsp; &#9679; &nbsp; <tt>title</tt> — The title of the legend.<br>
+&nbsp; &#9679; &nbsp; <tt>um</tt> — единицы измерения The unit of measurements of the legend.<br>
+&nbsp; &#9679; &nbsp; <tt>ticks</tt> — The number of ticks to be displayed.<br>
+&nbsp; &#9679; &nbsp; <tt>decimal</tt> — The number of decimals to be used for legend values.<br>
+&nbsp; &#9679; &nbsp; <tt>notation</tt> — Legend notation: standard (default) or scientific.</div>
+<div class=list><tt>callback</tt> — An optional callback to be used to format the legend labels.</div>
 Sets the labels of the legend of this Lut.<br><br>
 
 <pre id="6.1setminV"><a href="#6.1" onmouseover="show('Lut.<br>set minV - установить значение minV')" onmouseout="hide()">.setminV</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minV - сокращ. англ. слов minimum value - минимальное значение')" onmouseout="hide()">minV</a></span> )</pre>
@@ -1467,8 +1471,8 @@ Sets the labels of the legend of this Lut.<br><br>
 <div class=list><tt>numberOfColors</tt> — количество значений цвета, используемых для представления  массива данных.</div>
 Устанавливает данный Lut с количеством используемых значений цвета.<br><br>
 
-<pre id="6.1changeColorMap"><a href="#6.1" onmouseover="show('Lut.<br>change color map - изменить карту цвета')" onmouseout="hide()">.changeColorMap</a>( [page:Float colorMap</a> )</pre>
-<div class=list><tt>colorMap</tt> — The name of the color map to be used to represent the data array.</div>
+<pre id="6.1changeColorMap"><a href="#6.1" onmouseover="show('Lut.<br>change color map - изменить карту цвета')" onmouseout="hide()">.changeColorMap</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color map - карта цвета')" onmouseout="hide()">colorMap</a></span> )</pre>
+<div class=list><tt>colorMap</tt> — название карты цвета, которая будет использоваться для представления массива данных.</div>
 Sets this Lut with the colormap to be used.<br><br>
 
 <pre id="6.1addColorMap"><a href="#6.1" onmouseover="show('Lut.<br>add color map - добавить карту цвета')" onmouseout="hide()">.addColorMap</a>( colorMapName, arrayOfColors )</pre>
@@ -1499,7 +1503,7 @@ Create a material that can draw custom sprites using a 2d canvas.<br><br>
 
 <h4>Методы</h4>
 <div class="blockindent"><br>
-<pre id="6.2program"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('program - программа')" onmouseout="hide()">.program</a></span>( [page:CanvasRenderingContext2D context</a>, <a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
+<pre id="6.2program"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('program - программа')" onmouseout="hide()">.program</a></span>( <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D" target="_blank" onmouseover="show('CanvasRenderingContext2D.<br>context - контекст')" onmouseout="hide()">context</a>, <a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
 <div class=list><tt>context</tt> — The canvas context</div>
 <div class=list><tt>color</tt> — цвет спрайта.</div>
 Define a program that will use the context to draw the sprite.</div><br>
@@ -1603,18 +1607,20 @@ Each half-edge bounds a single face and thus has a reference to that face.
 <pre id="7.2head"><a href="#7.4" onmouseover="show('VertexNode.<br>head - голова')" onmouseout="hide()">.head</a>( )</pre>
 Возвращает целевую вершину (вершину назначения).<br><br>
 
-<pre id="7.2tail">[method:VertexNode .tail</a>()</pre>
-Возвращает исходную (начальную) вершину. Returns the origin vertex.<br><br>
+<pre id="7.2tail"><a href="#7.4" onmouseover="show('VertexNode.<br>tail - хвост')" onmouseout="hide()">.tail</a>()</pre>
+Возвращает исходную (начальную) вершину.<br><br>
 
 <pre id="7.2length"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина')" onmouseout="hide()">.length</a></span>( )</pre>
-Returns the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a> (straight-line length) of the edge.<br><br>
+Возвращает <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">эвклидову длину</a> (расстояние по прямой) ребра.<br>
+Статья Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">эвклидовом расстоянии</a> на русском языке.<br><br>
 
 <pre id="7.2lengthSquared"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length squared - квадрат длины, или длина во второй степени')" onmouseout="hide()">.lengthSquared</a></span>( )</pre>
-Returns the square of the [link:https://en.wikipedia.org/wiki/Euclidean_distance Euclidean length</a> (straight-line length) of the edge.<br><br>
+Возвращает квадрат <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">эвклидовой длины</a> (расстояние по прямой) ребра.<br>
+Статья Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">эвклидовом расстоянии</a> на русском языке.<br><br>
 
 <pre id="7.2setTwin"><a href="#7.2" onmouseover="show('HalfEdge.<br>set twin - установить двойника (парное ребро)')" onmouseout="hide()">.setTwin</a>( <a href="#7.2" onmouseover="show('HalfEdge.<br>edge - ребро')" onmouseout="hide()">.edge</a> )</pre>
-<div class=list>[page:HalfEdge .edge</a> - любое полуребро.</div>
-Sets the twin edge of this half-edge. It also ensures that the twin reference of the given half-edge is correctly set.</div><br>
+<div class=list><tt>edge</tt> - любое полуребро.</div>
+Метод устанавливает парное ребро к данному полуребру. Также он правильно устанавливает двойную ссылку заданного полуребра.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/QuickHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
@@ -1644,7 +1650,7 @@ This array holds the faces that are generated within a single iteration. Зна�
 Данный <a href="#7.5" onmouseover="show('VertexList')" onmouseout="hide()">список вершин</a> содержит все вершины, не назначенные грани. Значением по умолчанию является пустой список вершин.<br><br>
 
 <pre id="7.3vertices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices - вершины')" onmouseout="hide()">.vertices</a></span></pre>
-The internal representation of the given geometry data (an array of [page:VertexNode vertices</a>).</div><br>
+Внутреннее представление сведений о заданных геометрических элементах (массив <a href="#7.4" onmouseover="show('VertexNode')" onmouseout="hide()">вершин</a>).</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
@@ -1654,7 +1660,7 @@ The internal representation of the given geometry data (an array of [page:Vertex
 
 <pre id="7.3setFromObject"><a href="#7.3" onmouseover="show('QuickHull.<br>set from object - установить из объекта')" onmouseout="hide()">.setFromObject</a>( <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
 <div class=list><tt>object</tt> - <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> по которому вычисляется выпуклая оболочка.</div>
-Computes the convex hull of an [page:Object3D</a> (including its children), accounting for the world transforms of both the object and its childrens.<br><br>
+Вычисляет выпуклую оболочку по <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> (включая его дочерние элементы), с учетом "мировых" преобразований как самого объекта, так и его потомков.<br><br>
 
 <pre id="7.3makeEmpty"><a href="#7.3" onmouseover="show('QuickHull.<br>make empty - сделать пустой')" onmouseout="hide()">.makeEmpty</a>( )</pre>
 Делает данную выпуклую оболочку пустой.<br><br>
@@ -1786,31 +1792,31 @@ Reference to the face that is able to see this vertex.
 Возвращает хвостовую ссылку, т.е. ссылка направлена в конец списка.<br><br>
 
 <pre id="7.5clear"><a href="#7.5" onmouseover="show('VertexList.<br>clear - очистить')" onmouseout="hide()">.clear</a>( )</pre>
-Очищает связный список. Clears the linked list.<br><br>
+Очищает связный список.<br><br>
 
 <pre id="7.5insertBefore"><a href="#7.5" onmouseover="show('VertexList.<br>insert before - вставить перед')" onmouseout="hide()">.insertBefore</a>( <span onmouseover="show('Vertex.<br>target - цель')" onmouseout="hide()">target</span>, <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
 <div class=list><tt>target</tt> - целевая вершина. Предполагается, что данная вершина входит в этот связный список.</div>
 <div class=list><tt>vertex</tt> - вершина, которую нужно вставить.</div>
 Метод вставляет вершину в список <b>перед</b> целевой вершиной.<br><br>
 
-<pre id="7.5insertAfter"><a href="#7.5" onmouseover="show('VertexList.<br>insert after - вставить после')" onmouseout="hide()">.insertAfter</a>( [page:Vertex target</a>, [page:Vertex vertex</a> )</pre>
+<pre id="7.5insertAfter"><a href="#7.5" onmouseover="show('VertexList.<br>insert after - вставить после')" onmouseout="hide()">.insertAfter</a>( <span onmouseover="show('Vertex.<br>target - цель')" onmouseout="hide()">target</span>, <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
 <div class=list><tt>target</tt> - целевая вершина. Предполагается, что данная вершина входит в этот связный список.</div>
 <div class=list><tt>vertex</tt> - вершина, которую нужно вставить.</div>
 Метод вставляет вершину в список <b>после</b> целевой вершины.<br><br>
 
-<pre id="7.5append"><a href="#7.5" onmouseover="show('VertexList.<br>append - добавлять, присоединять')" onmouseout="hide()">.append</a>( [page:Vertex vertex</a> )</pre>
+<pre id="7.5append"><a href="#7.5" onmouseover="show('VertexList.<br>append - добавлять, присоединять')" onmouseout="hide()">.append</a>( <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
 <div class=list><tt>vertex</tt> - добавляемая вершина.</div>
 Добавляет вершину в конец связного списка.<br><br>
 
-<pre id="7.5appendChain"><a href="#7.5" onmouseover="show('VertexList.<br>append chain - добавить цепочку')" onmouseout="hide()">.appendChain</a>( [page:Vertex vertex</a> )</pre>
-<div class=list><tt>vertex</tt> - The head vertex of a chain of vertices.</div>
-Appends a chain of vertices where the given vertex is the head.<br><br>
+<pre id="7.5appendChain"><a href="#7.5" onmouseover="show('VertexList.<br>append chain - добавить цепочку')" onmouseout="hide()">.appendChain</a>( <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
+<div class=list><tt>vertex</tt> - головная (начальная) вершина в цепочке вершин.</div>
+Метод добавляет цепочку вершин, в которой заданная вершина является началом.<br><br>
 
-<pre id="7.5remove"><a href="#7.5" onmouseover="show('VertexList.<br>remove - удалить')" onmouseout="hide()">.remove</a>( [page:Vertex vertex</a> )</pre>
+<pre id="7.5remove"><a href="#7.5" onmouseover="show('VertexList.<br>remove - удалить')" onmouseout="hide()">.remove</a>( <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
 <div class=list><tt>vertex</tt> - удаляемая вершина.</div>
 Удаляет вершину из связного списка.<br><br>
 
-<pre id="7.5removeSubList"><a href="#7.5" onmouseover="show('VertexList.<br>remove sublist - удалить вложенный список')" onmouseout="hide()">.removeSubList</a>( [page:Vertex a</a>, [page:Vertex b</a> )</pre>
+<pre id="7.5removeSubList"><a href="#7.5" onmouseover="show('VertexList.<br>remove sublist - удалить вложенный список')" onmouseout="hide()">.removeSubList</a>( <span onmouseover="show('Vertex.<br>a - первая буква алфавита - здесь просто<br>обозначение первой (головной) вершины')" onmouseout="hide()">a</span>, <span onmouseover="show('Vertex.<br>b - вторая буква алфавита - здесь просто<br>обозначение конечной (хвостовой) вершины')" onmouseout="hide()">b</span> )</pre>
 <div class=list><tt>a</tt> - голова (начало) вложенного списка.</div>
 <div class=list><tt>b</tt> - хвост (конец) вложенного списка.</div>
 Удаляет вложенный список вершин из связного списка.<br><br>
@@ -1830,9 +1836,9 @@ The Canvas renderer displays your beautifully crafted scenes <em>not</em> using 
 Если, все же потребуется его использование, можно найти его здесь: <a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CanvasRenderer.js" target="_blank">examples/js/renderers/CanvasRenderer.js</a>.</div>
 Этот визуализатор может быть хорошей альтернативой <a href="renderers.htm#1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>'у для простых сцен:
 <pre>function webglAvailable() {
-    try {
-      var canvas = document.createElement( 'canvas' );
-      return !!( window.WebGLRenderingContext && (
+  try {
+    var canvas = document.createElement( 'canvas' );
+    return !!( window.WebGLRenderingContext && (
         canvas.getContext( 'webgl' ) ||
         canvas.getContext( 'experimental-webgl' ) )
       );
@@ -1851,20 +1857,22 @@ Don't confuse either CanvasRenderer with the SoftwareRenderer example, which sim
 <h4>Конструктор</h4>
 <pre>CanvasRenderer( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
 <tt>parameters</tt> - это дополнительный, необязательный объект со свойствами, определяющими поведение визуализатора. Конструктор также не принимает параметров вообще. Во всех случаях, когда параметры отсутствуют, он будет принимать обычные значения по умолчанию.
-<div class=list><tt>canvas</tt> - A canvas where the renderer draws its output. This corresponds to the domElement property below. Если он не передается здесь, то будет создан новый элемент <tt>canvas</tt>.</div>
+<div class=list><tt>canvas</tt> - <a href="https://developer.mozilla.org/ru/docs/Web/HTML/Element/canvas" target="_blank" onmouseover="show('Canvas')" onmouseout="hide()">холст</a>, на котором визуализатор рисует результат своей работы.
+Он соответствует свойству <tt><a href="#8.1domElement" onmouseover="show('CanvasRenderer.domElement')" onmouseout="hide()">domElement</a></tt>, описанному ниже. Если он не передается здесь, то будет создан новый элемент <tt>canvas</tt>.</div>
 <div class=list><tt>alpha</tt> - будет ли <tt>canvas</tt> содержать буфер альфа-канала (прозрачность) или нет. Значением по умолчанию является <tt>false</tt>.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
 <pre id="8.1info"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('info - информация, сведения')" onmouseout="hide()">.info</a></span></pre>
 Объект с рядом статистических сведений о памяти видеокарты и процессе рендеринга (визуализации). Годится для отладки или просто ради любопытства. Объект содержит следующие поля:
-<div class=blockindent>render:
-<div class=blockindent>vertices<br>
-faces</div></div><br>
+<pre>render:       -- визуализация
+  vertices    -- вершины
+  faces       -- грани</pre><br>
 
-<pre id="8.1domElement">[property:DOMElement domElement</a></pre>
-A [page:Canvas</a> where the renderer draws its output.<br>
-This is automatically created by the renderer in the constructor (if not provided already); you just need to add it to your page.<br><br>
+<pre id="8.1domElement"><span class="lnk" onmouseover="show('domElement - элемент DOM (от англ. Document Object Model — «объектная модель документа»)')" onmouseout="hide()">.domElement</span></pre>.
+<a href="https://developer.mozilla.org/ru/docs/Web/HTML/Element/canvas" target="_blank" onmouseover="show('Canvas')" onmouseout="hide()">Холст</a>, на котором визуализатор рисует результат своей работы.<br>
+Он создается автоматически в конструкторе (если не предоставлен ранее); нужно просто добавить его на страницу.<br>
+Статья о <a href="https://ru.wikipedia.org/wiki/Document_Object_Model" target="_blank">DOM</a> в Википедии.<br><br>
 
 <pre id="8.1autoClear"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear - автоматическая очистка')" onmouseout="hide()">.autoClear</a></span></pre>
 Defines whether the renderer should automatically clear its output before rendering.<br><br>
@@ -1886,23 +1894,24 @@ Defines whether the renderer should sort the face of each object. Значени
 <pre id="8.1clear"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear - очистить')" onmouseout="hide()">.clear</a></span>()</pre>
 Tells the renderer to clear its color drawing buffer with the clearcolor.<br><br>
 
-<pre id="8.1setClearColor">[method:null setClearColor</a>([page:Color color</a>, [page:number alpha</a>)</pre>
-<div class=list>color -- The color to clear the canvas with.</div>
-<div class=list>alpha -- The alpha channel to clear the canvas with.</div>
-This set the clearColor and the clearAlpha.<br><br>
+<pre id="8.1setClearColor"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set clear color - установить прозрачный цвет')" onmouseout="hide()">.setClearColor</a></span>( <a href="math.htm#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - альфа(канал) - канал прозрачности')" onmouseout="hide()">alpha</a></span> )</pre>
+<div class=list><tt>color</tt> -- The color to clear the canvas with.</div>
+<div class=list><tt>alpha</tt> -- The alpha channel to clear the canvas with.</div>
+Метод устанавливает значение прозрачного цвета (<tt>clearColor</tt>) и значение коэффициента прозрачности (<tt>clearAlpha</tt>).<br><br>
 
 <pre id="8.1setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
 <div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span></tt> -- ширина холста для рисования.</div>
 <div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span></tt> -- высота холста для рисования.</div>
-This set the size of the drawing canvas and if updateStyle is set, then the css of the canvas is updated too.<br><br>
+Метод устанавливает размер холста для рисования и, если установлен <tt>updateStyle</tt>,
+то также обновляется <tt><a href="https://ru.wikipedia.org/wiki/CSS" target="_blank" onmouseover="show('css - сокращ. англ. слов cascading style sheets — каскадные таблицы стилей')" onmouseout="hide()">css</a></tt> холста.<br><br>
 
-<pre id="8.1setClearColorHex">[method:null setClearColorHex</a>([page:number hex</a>, [page:number alpha</a>)</pre>
-<div class=list>hex -- The the hexadecimal value of the color to clear the canvas with.</div>
-<div class=list>alpha -- The alpha channel to clear the canvas with.</div>
-This set the clearColor and the clearAlpha.<br><br>
+<pre id="8.1setClearColorHex"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set clear color hex - установить шестнадцатиричное значение прозрачного цвета')" onmouseout="hide()">.setClearColorHex</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal - шестнадцатиричный')" onmouseout="hide()">hex</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - альфа(канал) - канал прозрачности')" onmouseout="hide()">alpha</a></span> )</pre>
+<div class=list><tt>hex</tt> -- шестнадцатиричное значение цвета, удаляемого с холста.</div>
+<div class=list><tt>alpha</tt> -- значение альфа-канала (канала прозрачности) The alpha channel to clear the canvas with.</div>
+Данный метод устанавливает значение прозрачного цвета (<tt>clearColor</tt>) и значение коэффициента прозрачности (<tt>clearAlpha</tt>).<br><br>
 
-<pre id="8.1getClearColorHex">[method:number getClearColorHex</a>()</pre>
-Returns the [page:number hex</a> color.<br><br>
+<pre id="8.1getClearColorHex"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get clear color hex - получить шестнадцатиричное значение прозрачного цвета')" onmouseout="hide()">.getClearColorHex</a></span>( )</pre>
+Возвращает шестнадцатиричное значение цвета.<br><br>
 
 <pre id="8.1getClearAlpha"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get clear alpha - получить чистое (значение) альфа(-канала)')" onmouseout="hide()">.getClearAlpha</a></span>()</pre>
 Метод возвращает значение альфа-канала.<br><br>

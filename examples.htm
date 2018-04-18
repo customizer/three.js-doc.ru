@@ -718,8 +718,8 @@ Supporting classes for file loaders and web worker based loaders.
 <a href="#3.6.3" onmouseover="show('LoaderSupport.WorkerSupport')" onmouseout="hide()">LoaderSupport.WorkerSupport</a>
 <a href="#3.6.4" onmouseover="show('LoaderSupport.WorkerRunnerRefImpl')" onmouseout="hide()">LoaderSupport.WorkerRunnerRefImpl</a>
 <a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector')" onmouseout="hide()">LoaderSupport.WorkerDirector</a>
-<a href="#3.6.6" onmouseover="show('LoaderSupport.PrepData')" onmouseout="hide()">LoaderSupport.PrepData</a>
-<a href="#3.6.7" onmouseover="show('LoaderSupport.LoaderBase')" onmouseout="hide()">LoaderSupport.LoaderBase</a>
+<a href="#3.6.6" onmouseover="show('LoaderSupport.LoaderBase')" onmouseout="hide()">LoaderSupport.ResourceDescriptor</a>
+<a href="#3.6.7" onmouseover="show('LoaderSupport.PrepData')" onmouseout="hide()">LoaderSupport.PrepData</a>
 <a href="#3.6.8" onmouseover="show('LoaderSupport.Callbacks')" onmouseout="hide()">LoaderSupport.Callbacks</a>
 <a href="#3.6.9" onmouseover="show('LoaderSupport.Validator')" onmouseout="hide()">LoaderSupport.Validator</a></pre>
 
@@ -729,7 +729,9 @@ Supporting classes for file loaders and web worker based loaders.
 
 <h3 id="3.6.1">Builder</h3><br>
 <h4>Конструктор</h4>
+
 <pre>Builder( )</pre>
+Создает одну или несколько сеток из одного необработанного набора буферных массивов, описаний групп материалов и последующих параметров. Поддерживаются буферы вершин, цвета вершин, нормалей, UV-координат и индексов.
 Builds one or many Mesh from one raw set of Arraybuffers, materialGroup descriptions and further parameters. Supports vertex, vertexColor, normal, uv and index buffers.<br><br>
 
 <h4>Методы</h4>
@@ -740,7 +742,7 @@ Builds one or many Mesh from one raw set of Arraybuffers, materialGroup descript
 Метод включает или отключает ведение журнала (логирование) в общем (за исключением предупреждений и ошибок), плюс включает или отключает логирование ошибок.<br><br>
 
 <pre id="3.6.1init"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('init - сокращ. англ. слова initialize - инициализация')" onmouseout="hide()">.init</a></span>( )</pre>
-Initializes the Builder (currently only default material initialisation).<br><br>
+Инициализирует Builder (на настоящий момент только инициализация материала по умолчанию).<br><br>
 
 <pre id="3.6.1setMaterials">.setMaterials ( Array of materials )</pre>
 Array of materials - Array of Materials
@@ -836,9 +838,8 @@ Configures the Parser implementation according the supplied configuration object
 <h3 id="3.6.5">WorkerDirector</h3>
 
 <h4>Конструктор</h4>
-<pre>WorkerDirector( classDef, logger )</pre>
-<div class=list>classDef - Class definition to be used for construction</div>
-<div class=list>logger - logger to be used</div>
+<pre>WorkerDirector( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('class def - сокращ. англ. слов class definition - определение класса')" onmouseout="hide()">classDef</a></span> )</pre>
+<div class=list><tt>classDef</tt> - Class definition to be used for construction</div>
 Orchestrate loading of multiple OBJ files/data from an instruction queue with a configurable amount of workers (1-16).
 <div class=blockindent>- Workflow:<br>
 - prepareWorkers<br>
@@ -848,122 +849,96 @@ Orchestrate loading of multiple OBJ files/data from an instruction queue with a 
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="3.6.5prepareWorkers">.prepareWorkers ( globalCallbacks, maxQueueSize, maxWebWorkers )</pre>
-<div class=list>globalCallbacks - Register global callbacks used by all web workers</div>
-<div class=list>maxQueueSize - Set the maximum size of the instruction queue (1-1024)</div>
-<div class=list>maxWebWorkers - Set the maximum amount of workers (1-16)</div>
+<pre id="3.6.5setLogging"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set logging - установить ведение журнала (логирование)')" onmouseout="hide()">.setLogging</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('debug - отладка')" onmouseout="hide()">debug</a></span> )</pre>
+<div class=list><tt>enabled</tt> - True or false.</div>
+<div class=list><tt>debug</tt> - True or false.</div>
+Метод включает или отключает ведение журнала (логирование) вообще (за исключением предупреждений и ошибок), плюс включает или отключает логирование ошибок.<br><br>
+
+<pre id="3.6.5setForceWorkerDataCopy"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set force worker data copy - установить принудительное копирование данных работника')" onmouseout="hide()">.setForceWorkerDataCopy</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force worker data copy - принудительное копирование данных работника')" onmouseout="hide()">forceWorkerDataCopy</a></span> )</pre>
+<div class=list><tt>forceWorkerDataCopy</tt> - True or false.</div>
+Forces all ArrayBuffers to be transferred to worker to be copied.<br><br>
+
+<pre id="3.6.5prepareWorkers"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('prepare workers - подготовка работников')" onmouseout="hide()">.prepareWorkers</a></span>( globalCallbacks, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max queue size - максимальный размер очереди')" onmouseout="hide()">maxQueueSize</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max web workers - максимум веб работников')" onmouseout="hide()">maxWebWorkers</a></span> )</pre>
+<div class=list><tt>globalCallbacks</tt> - Register global callbacks used by all web workers</div>
+<div class=list><tt>maxQueueSize</tt> - установка максимального размера очереди  инструкций (команд) (от 1 до 1024).</div>
+<div class=list><tt>maxWebWorkers</tt> - установка максимального числа работников (от 1 до 16).</div>
 Create or destroy workers according limits. Set the name and register callbacks for dynamically created web workers.<br><br>
 
 <pre id="3.6.5enqueueForRun">.enqueueForRun ( runParams )</pre>
-<div class=list>runParams</div>
+<div class=list><tt>runParams</tt></div>
 Store run instructions in internal instructionQueue.<br><br>
 
-<pre id="3.6.5processQueue">.processQueue ()</pre>
-Process the instructionQueue until it is depleted.<br><br>
+<pre id="3.6.5processQueue"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('process queue - обработать очередь')" onmouseout="hide()">.processQueue</a></span>( )</pre>
+Метод обрабатывает очередь инструкций (команд) пока она не закончится.<br><br>
 
-<pre id="3.6.5tearDown">.tearDown ( callbackOnFinishedProcessing )</pre>
-<div class=list>callbackOnFinishedProcessing - Function called once all workers finished processing.</div>
-Terminate all workers.<br><br>
+<pre id="3.6.5tearDown"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tear down - сорвать, снести, разорвать, разрушить')" onmouseout="hide()">.tearDown</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback on finished processing - функция повторного вызова на завершение обработки')" onmouseout="hide()">callbackOnFinishedProcessing</a></span> )</pre>
+<div class=list><tt>callbackOnFinishedProcessing</tt> - функция, вызываемая по завершении обработки всеми работниками.</div>
+Метод прекращает работу всех работников.<br><br>
 
-<pre id="3.6.5getMaxQueueSize">.getMaxQueueSize ()</pre>
-Returns the maximum length of the instruction queue.<br><br>
+<pre id="3.6.5getMaxQueueSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max queue size - получить максимальный размер очереди')" onmouseout="hide()">.getMaxQueueSize</a></span>( )</pre>
+Возвращает максимальную длину очереди инструкций (команд).<br><br>
 
-<pre id="3.6.5getMaxWebWorkers">.getMaxWebWorkers ()</pre>
-Returns the maximum number of workers.<br><br>
+<pre id="3.6.5getMaxWebWorkers"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max web workers - получить максимальное число веб работников')" onmouseout="hide()">.getMaxWebWorkers</a></span>( )</pre>
+Возвращает максимальное число работников.<br><br>
 
-<pre id="3.6.5isRunning">.isRunning ()</pre>
-Returns if any workers are running.<br><br>
+<pre id="3.6.5isRunning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is running - является работающим')" onmouseout="hide()">.isRunning</a></span>( )</pre>
+Возвращает значение <tt>true</tt>, если кто-либо из работников находится в работе.<br><br>
 
-<pre id="3.6.5setCrossOrigin">.setCrossOrigin ( crossOrigin )</pre>
-<div class=list>crossOrigin - CORS value</div>
-Sets the CORS string to be used.</div><br>
+<pre id="3.6.5setCrossOrigin"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">crossOrigin</a></span> )</pre>
+<div class=list><tt>crossOrigin</tt> - значение <a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>.</div>
+Устанавливает строковое значение CORS, которое будет использоваться.</div><br>
 
 
-<h3 id="3.6.6">PrepData</h3>
+<h3 id="3.6.6">ResourceDescriptor</h3>
 
 <h4>Конструктор</h4>
-PrepData( modelName )
-modelName - Overall name of the model
-Configuration instructions to be used by run method.
+<pre>ResourceDescriptor( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extension - расширение')" onmouseout="hide()">extension</a></span> )</pre>
+<div class=list><tt>url</tt> - URL-адрес к файлу.</div>
+<div class=list><tt>extension</tt> - расширение файла (тип).</div>
+Описание ресурса, используемое <tt><a href="#3.6.7" onmouseover="show('LoaderSupport.PrepData')" onmouseout="hide()">LoaderSupport.PrepData</a></tt> и другими.<br><br>
+
 <h4>Методы</h4>
-#
-.setStreamMeshesTo ( streamMeshesTo )
-streamMeshesTo - Object already attached to scenegraph where new meshes will be attached to
-Set the node where the loaded objects will be attached directly.
-#
-.setMaterialPerSmoothingGroup ( materialPerSmoothingGroup )
-materialPerSmoothingGroup
-Tells whether a material shall be created per smoothing group.
-#
-.setUseIndices ( useIndices )
-useIndices - Default is false
-Instructs loaders to create indexed BufferGeometry.
-#
-.setDisregardNormals ( disregardNormals )
-disregardNormals
-Tells whether normals should be completely disregarded and regenerated.
-#
-.getCallbacks ()
-Returns all callbacks as LoaderSupport.Callbacks.
-#
-.setCrossOrigin ( crossOrigin )
-crossOrigin - CORS value
-Sets the CORS string to be used.
-#
-.addResource ( resource )
-resource
-Add a resource description.
-#
-.setUseAsync ( useAsync )
-useAsync
-If true uses async loading with worker, if false loads data synchronously.
+<div class=blockindent><br>
+<pre id="3.6.6setContent"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set content - установить контент (содержимое)')" onmouseout="hide()">.setContent</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('content - контент (содержимое)')" onmouseout="hide()">content</a></span> )</pre>
+<div class=list><tt>content</tt> - содержимое файла в форме буферного массива или текста.</div>
+Метод устанавливает содержимое данного ресурса.</div><br>
 
 
-<h3 id="3.6.7">LoaderBase</h3>
+<h3 id="3.6.7">PrepData</h3>
+
 <h4>Конструктор</h4>
-LoaderBase( manager, logger )
-manager - The loadingManager for the loader to use. Default is THREE.DefaultLoadingManager. logger - logger to be used
-Base class to be used by loaders.
+<pre>PrepData( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('model name - название модели')" onmouseout="hide()">modelName</a></span> )</pre>
+<div class=list><tt>modelName</tt> - общее название модели.</div>
+Configuration instructions to be used by run method.<br><br>
+
 <h4>Методы</h4>
-#
-.getLogger ()
-Returns LoaderSupport.ConsoleLogger.
-#
-.setModelName ( modelName )
-modelName
-Set the name of the model.
-#
-.setPath ( path )
-path - URL
-The URL of the base path.
-#
-.setStreamMeshesTo ( streamMeshesTo )
-streamMeshesTo - Object already attached to scenegraph where new meshes will be attached to
-Set the node where the loaded objects will be attached directly.
-#
-.setMaterials ( Array of materials )
-Array of materials - Array of Materials
-Set materials loaded by MTLLoader or any other supplier of an Array of Materials.
-#
-.setUseIndices ( useIndices )
-useIndices
-Instructs loaders to create indexed BufferGeometry.
-#
-.setDisregardNormals ( disregardNormals )
-disregardNormals
-Tells whether normals should be completely disregarded and regenerated.
-#
-.onProgress ( type, text, numericalValue )
-type - The type of event
-text - Textual description of the event
-numericalValue - Numerical value describing the progress
-Announce feedback which is give to the registered LoaderSupport.Callbacks.
+<div class=blockindent><br>
+<pre id="3.6.7setLogging"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set logging - установить ведение журнала (логирование)')" onmouseout="hide()">.setLogging</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('debug - отладка')" onmouseout="hide()">debug</a></span> )</pre>
+<div class=list><tt>enabled</tt> - True or false.</div>
+<div class=list><tt>debug</tt> - True or false.</div>
+Метод включает или отключает ведение журнала (логирование) вообще (за исключением предупреждений и ошибок), плюс включает или отключает логирование ошибок.<br><br>
+
+<pre id="3.6.7getCallbacks"><a href="#3.6.8" onmouseover="show('LoaderSupport.Callbacks')" onmouseout="hide()">.getCallbacks</a>( )</pre>
+Возвращает все функции обратного вызова в форме <a href="#3.6.8" onmouseover="show('LoaderSupport.Callbacks')" onmouseout="hide()">LoaderSupport.Callbacks</a>.<br><br>
+
+<pre id="3.6.7addResource"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add resource - добавить ресурс')" onmouseout="hide()">.addResource</a></span>( <a href="#3.6.6" onmouseover="show('LoaderSupport.ResourceDescriptor.<br>resource - ресурс')" onmouseout="hide()">resource</a> )</pre>
+<div class=list><tt>resource</tt> - добавляемый <a href="#3.6.6" onmouseover="show('LoaderSupport.ResourceDescriptor')" onmouseout="hide()">LoaderSupport.ResourceDescriptor</a>.</div>
+Метод добавляет описание ресурса.<br><br>
+
+<pre id="3.6.7checkResourceDescriptorFiles"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('check resource descriptor files - проверить файлы описания ресурса')" onmouseout="hide()">.checkResourceDescriptorFiles</a></span>( <a href="#3.6.6" onmouseover="show('LoaderSupport.ResourceDescriptor.<br>resources - ресурсы')" onmouseout="hide()">resources</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('file desc - сокращ. англ. слов file description - описание файла')" onmouseout="hide()">fileDesc</a></span> )</pre>
+<div class=list><tt>resources</tt> - массив <a href="#3.6.6" onmouseover="show('LoaderSupport.ResourceDescriptor')" onmouseout="hide()">LoaderSupport.ResourceDescriptor</a>.</div>
+<div class=list><tt>fileDesc</tt> - объект, описывающий, какие ресурсы представляют интерес - ext, type (строковые или UInt8Array), а какие игнорируются - логические (boolean).</div>
+Распознает файлы или содержимое, представляющее интерес, из массива <a href="#3.6.6" onmouseover="show('LoaderSupport.ResourceDescriptor')" onmouseout="hide()">LoaderSupport.ResourceDescriptor</a>. Возвращает объект с каждым <tt>ext</tt> и соответствующим <a href="#3.6.6" onmouseover="show('LoaderSupport.ResourceDescriptor')" onmouseout="hide()">LoaderSupport.ResourceDescriptor</a>.<br><br>
+
+<pre id="3.6.7clone"><a href="#3.6.7" onmouseover="show('PrepData.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Метод клонирует данный объект и впоследствии возвращает его. Функции обратного вызова и ресурсы в глубину не клонируются (ссылки!).</div><br>
 
 
 <h3 id="3.6.8">Callbacks</h3>
+
 <h4>Конструктор</h4>
 <pre>Callbacks( )</pre>
-Callbacks utilized by loaders and builder.<br><br>
+Функции обратного вызова, используемые загрузчиками и builder.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>

@@ -361,8 +361,7 @@ loader.load(
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span></tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
-Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с .
-Begin loading from url and call onLoad with the parsed response content.<br><br>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с разобранным содержимым ответа.<br><br>
 
 <pre id="3.1parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, структурный анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('json - сокр. от англ. слов JavaScript Object Notation —<br>текстовый формат описания объекта, основанный на JavaScript')" onmouseout="hide()">json</a></span> )</pre>
 <div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('json - сокр. от англ. слов JavaScript Object Notation —<br>текстовый формат описания объекта, основанный на JavaScript')" onmouseout="hide()">json</a></span></tt>
@@ -443,23 +442,31 @@ GLTFLoader полагается на <a href="https://developer.mozilla.org/ru/d
 <div class=blockindent><br>
 <pre id="3.2load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
 <div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>.gltf</tt> или <tt>.glb</tt> файла.</div>
-<div class=list><tt>onLoad</tt> — A function to be called after the loading is successfully completed. The function receives the loaded JSON response returned from parse.</div>
-<div class=list><tt>onProgress</tt> — (optional) A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, that contains .total and .loaded bytes.</div>
-<div class=list><tt>onError</tt> — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.</div>
-Begin loading from url and call the callback function with the parsed response content.<br><br>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки. В качестве аргумента, эта функция получает загруженный ответ в формате JSON, возвращенный функцией <tt>parse</tt>.</div>
+<div class=list><tt>onProgress</tt> —  функция, которая будет вызываться пока идет процесс загрузки, дополнительный, необязательный параметр.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию обратного вызова с разобранным содержимым ответа.<br><br>
 
-<pre id="3.2setPath">.setPath ( path )</pre>
-<div class=list><tt>path</tt> — Base path for loading additional resources e.g. textures and .bin data.</div>
-Set the base path for additional resources.<br><br>
+<pre id="3.2setPath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set path - установить путь')" onmouseout="hide()">.setPath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span> )</pre>
+<div class=list><tt>path</tt> — базовый путь для загрузки дополнительных ресурсов, например текстур или двоичных данных (<tt>.bin</tt>).</div>
+Устанавливает базовый путь для дополнительных ресурсов.<br><br>
 
-<pre id="3.2setCrossOrigin">.setCrossOrigin ( value )</pre>
-<div class=list><tt>value</tt> — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.</div><br>
+<pre id="3.2setCrossOrigin"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt>value</tt> — строковое значение <tt><span class="lnk" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">crossOrigin</span></tt> для реализации
+<a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>
+для загрузки url-адреса с другого домена, который предоставляет CORS.</div><br>
 
-<pre id="3.2parse">.parse ( data, path, onLoad, onError )</pre>
-<div class=list><tt>data</tt> — glTF asset to parse, as an ArrayBuffer or JSON string.</div>
-<div class=list><tt>path</tt> — The base path from which to find subsequent glTF resources such as textures and .bin data files.</div>
-<div class=list><tt>onLoad</tt> — A function to be called when parse completes.</div>
-<div class=list><tt>onError</tt> — (optional) A function to be called if an error occurs during parsing. The function receives error as an argument.</div>
+<pre id="3.2setDRACOLoader"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set DRACO loader - установить загрузчик DRACO')" onmouseout="hide()">.setDRACOLoader</a></span>( dracoLoader : DRACOLoader )</pre>
+<div class=list><tt>dracoLoader</tt> — экземпляр THREE.DRACOLoader, который будет использоваться для декодирования компонентов, сжатых с расширением KHR_draco_mesh_compression.</div>
+Подробности о Draco и его декодере смотрите <a href="https://github.com/mrdoob/three.js/tree/dev/examples/js/libs/draco#readme" target="_blank">здесь</a>.<br><br>
+
+<pre id="3.2parse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( <span onclick="showClick('ArrayBuffer')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('data - данные')" onmouseout="hide()">data</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>data</tt> — glTF компонент для синтаксического анализа, в виде буфера массива (<span class="lnk" onmouseover="show('Объект ArrayBuffer - это стандартный набор бинарных данных<br>с фиксированной длиной. Нельзя манипулировать содержимым<br>ArrayBuffer напрямую. Вместо этого, необходимо создать<br>типизованное представление DataView, которое будет отображать<br>буфер в определенном формате, и даст доступ на запись и<br>чтение его содержимого.')" onmouseout="hide()">ArrayBuffer</span>) или строки в формате JSON.</div>
+<div class=list><tt>path</tt> — базовый путь, по которому находятся последующие glTF-ресурсы, такие как текстуры и файлы двоичных данных (<tt>.bin</tt>).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершению синтаксического анализа.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки во время синтаксического анализа (парсинга), дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
 Parse a glTF-based ArrayBuffer or JSON String and fire onLoad callback when complete. The argument to onLoad will be an object that contains loaded parts: .scene, .scenes, .cameras, and .animations.</div><br>
 
 <h4>Исходники</h4>
@@ -581,8 +588,7 @@ loader.load(
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
-Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с .
-Begin loading from url and call onLoad with the parsed response content.<br><br>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с разобранным содержимым ответа.<br><br>
 
 <pre id="3.4parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span> )</pre>
 <div class=list><tt>text</tt> — текстовая структура <tt>obj</tt> для разбора (синтаксического анализа).</div>
@@ -710,8 +716,7 @@ Utility method for loading an mtl file according resource description. Provide u
 
 
 <h3 id="3.6">LoaderSupport</h3>
-Вспомогательные классы для загрузчиков файлов и
-Supporting classes for file loaders and web worker based loaders.
+Вспомогательные классы для загрузчиков файлов и веб обработчиков на основе загрузчиков.<br><br>
 <h4>Подклассы</h4>
 <pre><a href="#3.6.1" onmouseover="show('LoaderSupport.Builder')" onmouseout="hide()">LoaderSupport.Builder</a>
 <a href="#3.6.2" onmouseover="show('LoaderSupport.LoadedMeshUserOverride')" onmouseout="hide()">LoaderSupport.LoadedMeshUserOverride</a>
@@ -732,8 +737,7 @@ Supporting classes for file loaders and web worker based loaders.
 
 <h4>Конструктор</h4>
 <pre>Builder( )</pre>
-Создает одну или несколько сеток из одного необработанного набора буферных массивов, описаний групп материалов и последующих параметров. Поддерживаются буферы вершин, цвета вершин, нормалей, UV-координат и индексов.
-Builds one or many Mesh from one raw set of Arraybuffers, materialGroup descriptions and further parameters. Supports vertex, vertexColor, normal, uv and index buffers.<br><br>
+Создает одну или несколько сеток из одного необработанного (исходного) набора буферных массивов, описаний групп материалов и последующих параметров. Поддерживаются буферы вершин, цвета вершин, нормалей, UV-координат и индексов.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
@@ -747,23 +751,19 @@ Builds one or many Mesh from one raw set of Arraybuffers, materialGroup descript
 
 <pre id="3.6.1setMaterials"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set materials - установить материалы')" onmouseout="hide()">.setMaterials</a></span>( <a href="materials.htm#3" onmouseover="show('Material.<br>array of materials - массив материалов')" onmouseout="hide()">Array of materials</a> )</pre>
 <div class=list><tt>Array of materials</tt> - массив <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">материалов</a>.</div>
-Устанавливает материалы, загруженные любым загрузчиком из массива материалов.
-Set materials loaded by any supplier of an Array of Materials.<br><br>
+Устанавливает материалы, загруженные любым загрузчиком из массива материалов.<br><br>
 
 <pre id="3.6.1processPayload"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('process payload - обработать полезную нагрузку')" onmouseout="hide()">.processPayload</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('payload - полезная нагрузка')" onmouseout="hide()">payload</a></span> )</pre>
 <div class=list><tt>payload</tt> - необработанные описания сетки (Mesh) или материала (Material).</div>
-Делегирует обработку полезной нагрузки (построение сетки или обновление материала) соответствующим функциям (BW-совместимость).
-Delegates processing of the payload (mesh building or material update) to the corresponding functions (BW-compatibility).<br><br>
+Делегирует обработку полезной нагрузки (построение сетки или обновление материала) соответствующим функциям (BW-совместимость).<br><br>
 
 <pre id="3.6.1buildMeshes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('build meshes - построить сетки')" onmouseout="hide()">.buildMeshes</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mesh payload - полезная нагрузка сетки')" onmouseout="hide()">meshPayload</a></span> )</pre>
 <div class=list><tt>meshPayload</tt> - необработанное описание сетки (буферы, параметры, материалы), используемые для построения одной или нескольких сеток.</div>
-Создает одну или несколько сеток из данных, описанных в полезной нагрузке (сведения о буферах, параметрах, материале).
-Builds one or multiple meshes from the data described in the payload (buffers, params, material info).<br><br>
+Создает одну или несколько сеток из данных, описанных в полезной нагрузке (сведения о буферах, параметрах, материале).<br><br>
 
 <pre id="3.6.1updateMaterials"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update materials - обновление материалов')" onmouseout="hide()">.updateMaterials</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material payload - полезная нагрузка материала')" onmouseout="hide()">materialPayload</a></span> )</pre>
 <div class=list><tt>materialPayload</tt> - инструкции по обновлению материала.</div>
-Обновляет материалы с объектами, содержащими материал, (синхронно) или с инструкциями по изменению (асинхронно).
-Updates the materials with contained material objects (sync) or from alteration instructions (async).<br><br>
+Обновляет материалы с объектами, содержащими материал, (синхронно) или с инструкциями по изменению (асинхронно).<br><br>
 
 <pre id="3.6.1getMaterialsJSON"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get materials JSON - получить материалы в формате JSON')" onmouseout="hide()">.getMaterialsJSON</a></span>( )</pre>
 Returns the mapping object of material name and corresponding jsonified material.<br><br>
@@ -775,83 +775,92 @@ Returns the mapping object of material name and corresponding material.</div><br
 <h3 id="3.6.2">LoadedMeshUserOverride</h3>
 
 <h4>Конструктор</h4>
-<pre>LoadedMeshUserOverride( disregardMesh, bufferGeometry )</pre>
-<div class=list>disregardMesh - Tell implementation to completely disregard this mesh</div>
-<div class=list>alteredMesh - Tell implementation that mesh(es) have been altered or added</div>
-Object to return by callback onMeshAlter. Used to disregard a certain mesh or to return one to many meshes.<br><br>
+<pre>LoadedMeshUserOverride( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('disregard mesh - игнорировать сетку')" onmouseout="hide()">disregardMesh</a></span>, <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">bufferGeometry</a> )</pre>
+<div class=list><tt>disregardMesh</tt> - указывает реализации о полном игнорировании этой сетки.</div>
+<div class=list><tt>alteredMesh</tt> - указывает реализации что сетка/сетки была изменена или добавлена.</div>
+Объект, возвращаемый функцией обратного вызова <a href="#3.6.8setCallbackOnMeshAlter" onmouseover="show('Callbacks.setCallbackOnMeshAlter')" onmouseout="hide()">на изменение сетки</a>. Используется для игнорирования определенной сетки или для возврата одной или нескольких сеток.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="3.6.2addMesh">.addMesh ( mesh )</pre>
-<div class=list>mesh - Mesh</div>
-Add a mesh created within callback.<br><br>
+<pre id="3.6.2addMesh"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add mesh - добавить сетку')" onmouseout="hide()">.addMesh</a></span>( mesh )</pre>
+<div class=list><tt>mesh</tt> - <a href="objects.htm#7" onmouseover="show('Mesh')" onmouseout="hide()">сетка</a></div>
+Добавляет сетку, созданную внутри функции обратного вызова.<br><br>
 
-<pre id="3.6.2isDisregardMesh">.isDisregardMesh( )</pre>
-Answers if mesh shall be disregarded completely.<br><br>
+<pre id="3.6.2isDisregardMesh"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is disregard mesh - является игнорируемой сеткой')" onmouseout="hide()">.isDisregardMesh</a></span>( )</pre>
+Отвечает, если сетка должна быть полностью проигнорирована.<br><br>
 
-<pre id="3.6.2providesAlteredMeshes">.providesAlteredMeshes( )</pre>
-Answers if new mesh(es) were created.</div><br>
+<pre id="3.6.2providesAlteredMeshes"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('provides altered meshes - предоставлять измененные сетки')" onmouseout="hide()">.providesAlteredMeshes</a></span>( )</pre>
+Отвечает, если была создана новая сетка/сетки.</div><br>
 
 
 <h3 id="3.6.3">WorkerSupport</h3>
 
 <h4>Конструктор</h4>
-<pre>WorkerSupport( logger )</pre>
-<div class=list>logger - logger to be used</div>
-This class provides means to transform existing parser code into a web worker. It defines a simple communication protocol which allows to configure the worker and receive raw mesh data during execution.<br><br>
+<pre>WorkerSupport( )</pre>
+Этот класс предоставляет средства для преобразования существующего кода синтаксического анализатора (парсера) в веб обработчика.
+Он определяет простой протокол связи, который позволяет настроить обработчика и во время выполнения принять необработанные данные сетки (mesh).<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="3.6.3validate">.validate ( functionCodeBuilder, Array of libLocations, libPath, runnerImpl )</pre>
-<div class=list>functionCodeBuilder - Function that is invoked with funcBuildObject and funcBuildSingelton that allows stringification of objects and singletons.</div>
-<div class=list>Array of libLocations - URL of libraries that shall be added to worker code relative to libPath.</div>
-<div class=list>libPath - Base path used for loading libraries.</div>
-<div class=list>runnerImpl - The default worker parser wrapper implementation (communication and execution). An extended class could be passed here.</div>
-Validate the status of worker code and the derived worker.<br><br>
+<pre id="3.6.3setLogging"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set logging - установить ведение журнала (логирование)')" onmouseout="hide()">.setLogging</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('debug - отладка')" onmouseout="hide()">debug</a></span> )</pre>
+<div class=list><tt>enabled</tt> - логическое значение - <tt>true</tt> или <tt>false</tt>.</div>
+<div class=list><tt>debug</tt> - логическое значение - <tt>true</tt> или <tt>false</tt>.</div>
+Метод включает или отключает ведение журнала (логирование) вообще (за исключением предупреждений и ошибок), плюс включает или отключает логирование ошибок.<br><br>
 
-<pre id="3.6.3setTerminateRequested">.setTerminateRequested ( terminateRequested )</pre>
-<div class=list>terminateRequested - True or false.</div>
-Request termination of worker once parser is finished.<br><br>
+<pre id="3.6.3setForceWorkerDataCopy"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set force worker data copy - установить принудительное копирование данных обработчика')" onmouseout="hide()">.setForceWorkerDataCopy</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force worker data copy - принудительное копирование данных обработчика')" onmouseout="hide()">forceWorkerDataCopy</a></span> )</pre>
+<div class=list><tt>forceWorkerDataCopy</tt> - логическое значение - <tt>true</tt> или <tt>false</tt>.</div>
+Принудительно передает все буферы массивов обработчикам для копирования.<br><br>
 
-<pre id="3.6.3setCallbacks">.setCallbacks ( builder, onLoad )</pre>
-<div class=list>builder - The builder function. Default is LoaderSupport.Builder.</div>
-<div class=list>onLoad - The function that is called when parsing is complete.</div>
-Specify functions that should be build when new raw mesh data becomes available and when the parser is finished.<br><br>
+<pre id="3.6.3validate"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('validate - проверка')" onmouseout="hide()">.validate</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('function code builder - ')" onmouseout="hide()">functionCodeBuilder</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array of lib(rary) locations - массив расположений библиотек')" onmouseout="hide()">Array of libLocations</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lib(rary) path - путь к библиотеке')" onmouseout="hide()">libPath</a></span>, <a href="#3.6.4" onmouseover="show('LoaderSupport.WorkerRunnerRefImpl')" onmouseout="hide()">runnerImpl</a> )</pre>
+<div class=list><tt>functionCodeBuilder</tt> - функция, которая вызывается с <tt>funcBuildObject</tt> и <tt>funcBuildSingelton</tt>, что позволяет превращать в строку код объектов и
+<a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%B4%D0%B8%D0%BD%D0%BE%D1%87%D0%BA%D0%B0_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)" target="_blank" onmouseover="show('singleton - одиночка,- класс, у которого имеется только один экземпляр')" onmouseout="hide()">синглтонов</a>.</div>
+<div class=list><tt>Array of libLocations</tt> - URL-адрес библиотек, которые должны быть добавлены к рабочему коду относительно пути, переданном в аргументе <tt>libPath</tt>.</div>
+<div class=list><tt>libPath</tt> - базовый путь, используемый для загрузки библиотек.</div>
+<div class=list><tt>runnerImpl</tt> - реализация оболочки парсера обработчика по умолчанию (соединение и исполнение). Здесь может быть передан расширенный класс.</div>
+Проверяет состояние рабочего кода и полученного обработчика.<br><br>
 
-<pre id="3.6.3run">.run ( payload )</pre>
-<div class=list>payload - Raw mesh description (buffers, params, materials) used to build one to many meshes.</div>
-Runs the parser with the provided configuration.</div><br>
+<pre id="3.6.3setTerminateRequested"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set terminate requested - установить завершение запроса')" onmouseout="hide()">.setTerminateRequested</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('terminate requested - завершение запроса')" onmouseout="hide()">terminateRequested</a></span> )</pre>
+<div class=list><tt>terminateRequested</tt> - логическое значение - <tt>true</tt> или <tt>false</tt>.</div>
+Запрашивает прекращение обработчика после завершения работы синтаксического анализатора (парсера).<br><br>
+
+<pre id="3.6.3setCallbacks"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set callbacks - установить функции обратного вызова')" onmouseout="hide()">.setCallbacks</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('builder - сборщик, строитель')" onmouseout="hide()">builder</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span> )</pre>
+<div class=list><tt>builder</tt> - функция сборки. По умолчанию это <a href="#3.6.1" onmouseover="show('LoaderSupport.Builder')" onmouseout="hide()">LoaderSupport.Builder</a>.</div>
+<div class=list><tt>onLoad</tt> - функция, вызываемая по завершению синтаксического анализа (парсинга).</div>
+Определяет функцию, которая должна выполнить сборку, когда станут доступными новые исходные данные сетки, и функцию, вызываемую по завершению синтаксического анализа (парсинга).<br><br>
+
+<pre id="3.6.3run"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('run - бежать, запускать')" onmouseout="hide()">.run</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('payload - полезная нагрузка')" onmouseout="hide()">payload</a></span> )</pre>
+<div class=list><tt>payload</tt> - необработанное описание сетки (mesh) (буферы, параметры, материалы), используемые для построения одной или нескольких сеток.</div>
+Запускает в работу синтаксический анализатор (парсер) с предоставленными настройками.</div><br>
 
 
 <h3 id="3.6.4">WorkerRunnerRefImpl</h3>
 
 <h4>Конструктор</h4>
 <pre>WorkerRunnerRefImpl( )</pre>
-Default implementation of the WorkerRunner responsible for creation and configuration of the parser within the worker.<br><br>
+Реализация по умолчанию WorkerRunner, ответственного за создание и настройку парсера внутри обработчика.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="3.6.4applyProperties"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('apply properties - применить свойтсва')" onmouseout="hide()">.applyProperties</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parser - парсер, синтаксический анализатор, разборщик')" onmouseout="hide()">parser</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<pre id="3.6.4applyProperties"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('apply properties - применить свойства')" onmouseout="hide()">.applyProperties</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parser - парсер, синтаксический анализатор, разборщик')" onmouseout="hide()">parser</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
 <div class=list><tt>parser</tt> - экземпляр синтаксического анализатора.</div>
 <div class=list><tt>params</tt> - объект с параметрами.</div>
 Метод применяет значения из объекта <tt>params</tt> с помощью набора функций или через прямое присваивание.<br><br>
 
 <pre id="3.6.4run"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('run - запустить')" onmouseout="hide()">.run</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('payload - полезная нагрузка')" onmouseout="hide()">payload</a></span> )</pre>
-<div class=list><tt>payload</tt> - Raw mesh description (buffers, params, materials) used to build one to many meshes.</div>
-Configures the Parser implementation according the supplied configuration object.</div><br>
+<div class=list><tt>payload</tt> - необработанное описание сетки (mesh) (буферы, параметры, материалы), используемые для построения одной или нескольких сеток.</div>
+Настраивает реализацию синтаксического анализатора (парсера) в соответствии с предоставленным объектом конфигурации.</div><br>
 
 <h3 id="3.6.5">WorkerDirector</h3>
 
 <h4>Конструктор</h4>
 <pre>WorkerDirector( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('class def - сокращ. англ. слов class definition - определение класса')" onmouseout="hide()">classDef</a></span> )</pre>
-<div class=list><tt>classDef</tt> - Class definition to be used for construction</div>
-Организует загрузку нескольких OBJ-файлов/данных исходя из очереди инструкций (команд) с настраиваемым числом работников (1-16).
-Orchestrate loading of multiple OBJ files/data from an instruction queue with a configurable amount of workers (1-16).
-<div class=blockindent>- Последовательность операций (workflow):<br>
-- подготовка работников (prepareWorkers)<br>
-- постановка в очередь на запуск (enqueueForRun)<br>
-- обработка очереди (processQueue)<br>
-- прекращение работы (tearDown)</div><br>
+<div class=list><tt>classDef</tt> - определение класса, используемого для построения</div>
+Организует загрузку нескольких OBJ-файлов/данных исходя из очереди инструкций (команд) с настраиваемым числом обработчиков (<tt>1-16</tt>).
+<div class=blockindent>Последовательность операций:<br>
+&nbsp;- подготовка обработчиков (<tt>prepareWorkers</tt>)<br>
+&nbsp;- постановка в очередь на запуск (<tt>enqueueForRun</tt>)<br>
+&nbsp;- обработка очереди (<tt>processQueue</tt>)<br>
+&nbsp;- прекращение работы (<tt>tearDown</tt>)</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
@@ -860,16 +869,15 @@ Orchestrate loading of multiple OBJ files/data from an instruction queue with a 
 <div class=list><tt>debug</tt> - логическое значение - <tt>true</tt> или <tt>false</tt>.</div>
 Метод включает или отключает ведение журнала (логирование) вообще (за исключением предупреждений и ошибок), плюс включает или отключает логирование ошибок.<br><br>
 
-<pre id="3.6.5setForceWorkerDataCopy"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set force worker data copy - установить принудительное копирование данных работника')" onmouseout="hide()">.setForceWorkerDataCopy</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force worker data copy - принудительное копирование данных работника')" onmouseout="hide()">forceWorkerDataCopy</a></span> )</pre>
+<pre id="3.6.5setForceWorkerDataCopy"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set force worker data copy - установить принудительное копирование данных обработчика')" onmouseout="hide()">.setForceWorkerDataCopy</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force worker data copy - принудительное копирование данных обработчика')" onmouseout="hide()">forceWorkerDataCopy</a></span> )</pre>
 <div class=list><tt>forceWorkerDataCopy</tt> - логическое значение - <tt>true</tt> или <tt>false</tt>.</div>
-Forces all ArrayBuffers to be transferred to worker to be copied.<br><br>
+Принудительно передает все буферы массивов обработчикам для копирования.<br><br>
 
-<pre id="3.6.5prepareWorkers"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('prepare workers - подготовка работников')" onmouseout="hide()">.prepareWorkers</a></span>( globalCallbacks, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max queue size - максимальный размер очереди')" onmouseout="hide()">maxQueueSize</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max web workers - максимум веб работников')" onmouseout="hide()">maxWebWorkers</a></span> )</pre>
-<div class=list><tt>globalCallbacks</tt> - Register global callbacks used by all web workers</div>
+<pre id="3.6.5prepareWorkers"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('prepare workers - подготовка обработчиков')" onmouseout="hide()">.prepareWorkers</a></span>( <a href="#3.6.8" onmouseover="show('WWOBJLoader2.Callbacks')" onmouseout="hide()">globalCallbacks</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max queue size - максимальный размер очереди')" onmouseout="hide()">maxQueueSize</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max web workers - максимум веб обработчиков')" onmouseout="hide()">maxWebWorkers</a></span> )</pre>
+<div class=list><tt>globalCallbacks</tt> - реестр (список) глобальных (общих) функций обратного вызова, используемых всеми веб обработчиками.</div>
 <div class=list><tt>maxQueueSize</tt> - установка максимального размера очереди  инструкций (команд) (от <tt>1</tt> до <tt>1024</tt>).</div>
-<div class=list><tt>maxWebWorkers</tt> - установка максимального числа работников (от <tt>1</tt> до <tt>16</tt>).</div>
-Создает или удаляет работников в соответствии с ограничениями. Устанавливает название и регистрирует функции обратного вызова для динамического создания веб работников.
-Create or destroy workers according limits. Set the name and register callbacks for dynamically created web workers.<br><br>
+<div class=list><tt>maxWebWorkers</tt> - установка максимального числа обработчиков (от <tt>1</tt> до <tt>16</tt>).</div>
+Создает или удаляет обработчики в соответствии с ограничениями. Устанавливает название и регистрирует функции обратного вызова для динамического создания веб обработчиков.<br><br>
 
 <pre id="3.6.5enqueueForRun"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enqueue for run - постановка в очередь')" onmouseout="hide()">.enqueueForRun</a></span>( <a href="#3.6.7" onmouseover="show('LoaderSupport.PrepData.<br>run params - параметры запуска')" onmouseout="hide()">runParams</a> )</pre>
 <div class=list><tt>runParams</tt></div>
@@ -879,17 +887,17 @@ Create or destroy workers according limits. Set the name and register callbacks 
 Метод обрабатывает очередь инструкций (команд) пока она не закончится.<br><br>
 
 <pre id="3.6.5tearDown"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tear down - сорвать, снести, разорвать, разрушить')" onmouseout="hide()">.tearDown</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback on finished processing - функция повторного вызова на завершение обработки')" onmouseout="hide()">callbackOnFinishedProcessing</a></span> )</pre>
-<div class=list><tt>callbackOnFinishedProcessing</tt> - функция, вызываемая по завершении обработки всеми работниками.</div>
-Метод прекращает работу всех работников.<br><br>
+<div class=list><tt>callbackOnFinishedProcessing</tt> - функция, вызываемая по завершении обработки всеми обработчиками.</div>
+Метод прекращает работу всех обработчиков.<br><br>
 
 <pre id="3.6.5getMaxQueueSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max queue size - получить максимальный размер очереди')" onmouseout="hide()">.getMaxQueueSize</a></span>( )</pre>
 Возвращает максимальную длину очереди инструкций (команд).<br><br>
 
-<pre id="3.6.5getMaxWebWorkers"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max web workers - получить максимальное число веб работников')" onmouseout="hide()">.getMaxWebWorkers</a></span>( )</pre>
-Возвращает максимальное число работников.<br><br>
+<pre id="3.6.5getMaxWebWorkers"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max web workers - получить максимальное число веб обработчиков')" onmouseout="hide()">.getMaxWebWorkers</a></span>( )</pre>
+Возвращает максимальное число обработчиков.<br><br>
 
 <pre id="3.6.5isRunning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is running - является работающим')" onmouseout="hide()">.isRunning</a></span>( )</pre>
-Возвращает значение <tt>true</tt>, если кто-либо из работников находится в работе.<br><br>
+Возвращает значение <tt>true</tt>, если кто-либо из обработчиков находится в работе.<br><br>
 
 <pre id="3.6.5setCrossOrigin"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">crossOrigin</a></span> )</pre>
 <div class=list><tt>crossOrigin</tt> - значение <a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>.</div>
@@ -946,7 +954,7 @@ Create or destroy workers according limits. Set the name and register callbacks 
 
 <h4>Конструктор</h4>
 <pre>Callbacks( )</pre>
-Функции обратного вызова, используемые загрузчиками и builder.<br><br>
+Функции обратного вызова, используемые загрузчиками и сборщиком (builder).<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>

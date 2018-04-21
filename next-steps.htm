@@ -160,7 +160,7 @@ camera.updateProjectionMatrix();</pre><br><br>
 
 <h2 id="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Матричные преобразования</h2>
 В <em>three.js</em> для кодирования 3-мерных преобразований - перемещения (изменения положения), вращения и масштабирования используются <b>матрицы</b>.
-Каждый экземпляр <a href="core.htm#7" title="Object3D">Object3D</a> имеет свойство <a href="core.htm#matrix" title="Object3D.matrix">matrix</a>, в котором хранится положение, угол поворота и масштаб этого объекта.
+Каждый экземпляр <a href="core.htm#7" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> имеет свойство <a href="core.htm#matrix" onmouseover="show('Object3D.matrix')" onmouseout="hide()">matrix</a>, в котором хранится положение, угол поворота и масштаб этого объекта.
 На этой странице описывается как обновлять преобразование (трансформацию) объекта.
 
 <h4>Преимущества свойств и <tt>matrixAutoUpdate</tt></h4>
@@ -173,7 +173,7 @@ camera.updateProjectionMatrix();</pre><br><br>
 <pre>object.matrixAutoUpdate = false;</pre>
 И после изменения каких-либо свойств, вручную обновить матрицу:
 <pre>object.updateMatrix();</pre></li>
-<li>Непосредственно изменить матрицу объекта. Класс <a href="math.htm#9" title="Matrix4">Matrix4</a> имеет различные методы для изменения матрицы:
+<li>Непосредственно изменить матрицу объекта. Класс <a href="math.htm#9" onmouseover="show('Matrix4')" onmouseout="hide()">Matrix4</a> имеет различные методы для изменения матрицы:
 <pre>object.matrix.setRotationFromQuaternion(quaternion);
     object.matrix.setPosition(start_position);
     object.matrixAutoUpdate = false;</pre>
@@ -183,8 +183,8 @@ camera.updateProjectionMatrix();</pre><br><br>
 <h4>Матрицы объекта и world</h4>
 
 An object's [page:Object3D.matrix matrix</a> stores the object's transformation <em>relative</em> to the object's [page:Object3D.parent parent</a>; to get the object's transformation in <em>world</em> coordinates, you must access the object's [page:Object3D.matrixWorld</a>.<br><br>
-При изменениях в преобразовании родительского или дочернего объекта можно запросить обновление свойства <a href="core.htm#14matrixWorld" title="Object3D.matrixWorld">matrixWorld</a> дочернего объекта
-вызовом метода <a href="core.htm#14updateMatrixWorld" title="Object3D.updateMatrixWorld">updateMatrixWorld</a>.
+При изменениях в преобразовании родительского или дочернего объекта можно запросить обновление свойства <a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld')" onmouseout="hide()">matrixWorld</a> дочернего объекта
+вызовом метода <a href="core.htm#14updateMatrixWorld" onmouseover="show('Object3D.updateMatrixWorld')" onmouseout="hide()">updateMatrixWorld</a>.
 
 <h4>Вращение и кватернионы</h4>
 <!-- Кватернионы (от лат. quaterni, по четыре) — система гиперкомплексных чисел, образующая векторное пространство размерностью четыре над полем вещественных чисел. Предложены Уильямом Гамильтоном в 1843 году.
@@ -192,20 +192,20 @@ An object's [page:Object3D.matrix matrix</a> stores the object's transformation 
 Кватернионы удобны для описания изометрий трёх- и четырёхмерного евклидовых пространств, и поэтому получили широкое распространение в механике. Также их используют в вычислительной математике, например, при создании трёхмерной графики.
 Кватернионы предоставляют удобное математическое обозначение положения и вращения объектов в пространстве. В сравнении с углами Эйлера, кватернионы позволяют проще комбинировать вращения, а также избежать проблемы, связанной с невозможностью поворота вокруг оси, независимо от совершённого вращения по другим осям (на иллюстрации). В сравнении с матрицами они обладают большей вычислительной устойчивостью и могут быть более эффективными. Кватернионы нашли своё применение в компьютерной графике, робототехнике, навигации, молекулярной динамике.
 Проще говоря, кватернион это четырехмерный вектор, т.е. три вектора x, y, z - это положение объекта в трехмерном пространстве, а четвертый вектор (в случае с three.js он обозначается буквой w) определяет вращение объекта вокруг какой-либо оси пространства. -->
-Three.js предоставляет два способа представления трехмерных вращений: <a href="math.htm#4" title="Euler">углы Эйлера</a> и <a href="math.htm#11" title="Quaternion">Quaternions</a>, а также методы конвертирования между ними.
+Three.js предоставляет два способа представления трехмерных вращений: <a href="math.htm#4" onmouseover="show('Euler')" onmouseout="hide()">углы Эйлера</a> и <a href="math.htm#11" onmouseover="show('Quaternion')" onmouseout="hide()">Quaternions</a>, а также методы конвертирования между ними.
 
-Three.js provides two ways of representing 3D rotations: <a href="math.htm#4" title="Euler">Euler angles</a> and <a href="math.htm#11" title="Quaternion">Quaternions</a>, as well as methods for converting between the two.
+Three.js provides two ways of representing 3D rotations: <a href="math.htm#4" onmouseover="show('Euler')" onmouseout="hide()">Euler angles</a> and <a href="math.htm#11" onmouseover="show('Quaternion')" onmouseout="hide()">Quaternions</a>, as well as methods for converting between the two.
 Euler angles are subject to a problem called "gimbal lock," where certain configurations can lose a degree of freedom (preventing the object from being rotated about one axis).
-По этой причине, вращение объекта <b>всегда</b> сохраняется в его свойстве <a href="core.htm#quaternion" title="Object3D.quaternion">quaternion</a>.
-For this reason, object rotations are <em>always</em> stored in the object's <a href="core.htm#quaternion" title="Object3D.quaternion">quaternion</a>.<br><br>
-Предыдущие версии библиотеки включали в себя свойство <tt>useQuaternion</tt>, которое, будучи установленное как <tt>false</tt>, приводило к расчету <a href="core.htm#matrix" title="Object3D.matrix">матрицы</a> объекта из углов Эйлера.
-Эта практика устарела - взамен следует использовать метод <a href="math.htm#11" title="Object3D.setRotationFromEuler">setRotationFromEuler</a> method, which will update the quaternion.
+По этой причине, вращение объекта <b>всегда</b> сохраняется в его свойстве <a href="core.htm#quaternion" onmouseover="show('Object3D.quaternion')" onmouseout="hide()">quaternion</a>.
+For this reason, object rotations are <em>always</em> stored in the object's <a href="core.htm#quaternion" onmouseover="show('Object3D.quaternion')" onmouseout="hide()">quaternion</a>.<br><br>
+Предыдущие версии библиотеки включали в себя свойство <tt>useQuaternion</tt>, которое, будучи установленное как <tt>false</tt>, приводило к расчету <a href="core.htm#matrix" onmouseover="show('Object3D.matrix')" onmouseout="hide()">матрицы</a> объекта из углов Эйлера.
+Эта практика устарела - взамен следует использовать метод <a href="math.htm#11" onmouseover="show('Object3D.setRotationFromEuler')" onmouseout="hide()">setRotationFromEuler</a> method, which will update the quaternion.
 
 
 <h2 id="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Система анимации</h2>
 <h3>Обзор</h3>
 В рамках анимационной системы <em>three.js</em> можно анимировать различные свойства модели:
-кости (bone) <a href="objects.htm#11" title="SkinnedMesh">skinned and rigged model</a>, <a href="core.htm#7morphTargets" title="Geometry.morphTargets">цели морфинга (morph targets)</a>,
+кости (bone) <a href="objects.htm#11" onmouseover="show('SkinnedMesh')" onmouseout="hide()">skinned and rigged model</a>, <a href="core.htm#7morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">цели морфинга (morph targets)</a>,
 различные свойства материала (цвета, непрозрачность, логику), видимость и преобразования.
 Свойствами анимации могут быть постепенное появление (faded in), постепенное исчезновение (faded out), плавное появление на фоне плавного исчезновения (crossfaded) и деформация (warped).
 &#171;Веса&#769;&#187; (weight) и временны&#769;е масштабы (time scales) различных одновременных анимаций как на одном и том же объекте, так и на разных объектах, могут быть изменены независимо друг от друга. Можно синхронизировать различные анимации как на одном и том же объекте, так и на разных объектах.<br><br>
@@ -223,35 +223,35 @@ one of the geometry's properties of the loaded mesh should be an array named "an
 Each *AnimationClip* usually holds the data for a certain activity of the object. If the mesh is a character, for example, there may be one AnimationClip for a walkcycle, a second for a jump, a third for sidestepping and so on.
 
 <h3>Треки ключевых кадров Keyframe Tracks</h3>
-Внутри такого &#171;AnimationClip&#187; данные для каждого свойства анимации хранятся в отдельном <a href="animation.htm#6" title="от англ. слов key frame track - трек ключевого кадра">KeyframeTrack</a>.
+Внутри такого &#171;AnimationClip&#187; данные для каждого свойства анимации хранятся в отдельном <a href="animation.htm#6" onmouseover="show('от англ. слов key frame track - трек ключевого кадра')" onmouseout="hide()">KeyframeTrack</a>.
 Допустим, персонифицированный объект имеет <a href="objects.htm#10">скелет</a> и один трек ключевого кадра может хранить данные изменений положения кости предплечья во времени, другой трек - данные изменения поворота этой же самой кости,
 а третий отслеживать положение, поворот или изменение масштаба другой кости и так далее. Понятно, что AnimationClip может состоять из множества подобных треков.<br><br>
-Предположим, что у модели имеются <a href="core.htm#7morphTargets" title="Geometry.morphTargets">цели морфинга</a> (например, одна цель морфинга показывает приветливое лицо, а другая - сердитое),
-каждый трек хранит сведения о том, как <a href="objects.htm#8" title="Mesh.morphTargetInfluences">воздействие (influence)</a> некоторой цели морфинга изменяется во время выполнения клипа.
+Предположим, что у модели имеются <a href="core.htm#7morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">цели морфинга</a> (например, одна цель морфинга показывает приветливое лицо, а другая - сердитое),
+каждый трек хранит сведения о том, как <a href="objects.htm#8" onmouseover="show('Mesh.morphTargetInfluences')" onmouseout="hide()">воздействие (influence)</a> некоторой цели морфинга изменяется во время выполнения клипа.
 Assumed the model has [page:Geometry.morphTargets morph targets] (for example one morph target showing a friendly face and another showing an angry face), each track holds the information as to how the [page:Mesh.morphTargetInfluences influence] of a certain morph target changes during the performance of the clip.
 
 <h3>Микшер анимации (Animation Mixer)</h3>
-Сохраненные данные формируют только основу анимации - фактическое воспроизведение контролируется <a href="animation.htm#3" title="AnimationMixer">AnimationMixer</a>. Можно представить это не только как игрока для анимации, но и как симуляцию аппаратного обеспечения, например, реальной микшерной консоли, которая может одновременно управлять несколькими анимациями, смешивая и объединяя их.
+Сохраненные данные формируют только основу анимации - фактическое воспроизведение контролируется <a href="animation.htm#3" onmouseover="show('AnimationMixer')" onmouseout="hide()">AnimationMixer</a>. Можно представить это не только как игрока для анимации, но и как симуляцию аппаратного обеспечения, например, реальной микшерной консоли, которая может одновременно управлять несколькими анимациями, смешивая и объединяя их.
 The stored data form only the basis for the animations - actual playback is controlled by the [page:AnimationMixer]. You can imagine this not only as a player for animations, but as a simulation of a hardware like a real mixer console, which can control several animations simultaneously, blending and merging them.
 
 <h3>Действия анимации (Animation Actions)</h3>
-Собственно сам &#171;AnimationMixer&#187; имеет только очень мало (общих) свойств и методов, потому что им можно управлять с помощью <a href="animation.htm#1" title="AnimationAction">AnimationActions</a>.
+Собственно сам &#171;AnimationMixer&#187; имеет только очень мало (общих) свойств и методов, потому что им можно управлять с помощью <a href="animation.htm#1" onmouseover="show('AnimationAction')" onmouseout="hide()">AnimationActions</a>.
 The *AnimationMixer* itself has only very few (general) properties and methods, because it can be controlled by the [page:AnimationAction AnimationActions].
 Настройкой &#171;AnimationAction&#187; можно определять когда конкретный &#171;AnimationClip&#187; будет воспроизводиться, устанавливаться в паузу или быть остановленным на одном из микшеров, будет ли он повторяться и если будет,
 как часто, должен ли он выполняться с затуханием или масштабироваться по времени, и другими дополнительными особенностями вроде кроссфейдинга или синхронизации.
 By configuring an *AnimationAction* you can determine when a certain *AnimationClip* shall be played, paused or stopped on one of the mixers, if and how often the clip has to be repeated, whether it shall be performed with a fade or a time scaling, and some additional things, such crossfading or synchronizing.
 
 <h3>Анимация групп объектов</h3>
-Если нужно чтобы группа объектов приобрела совместно используемое состояние анимации, можно использовать <a href="animation.htm#4" title="AnimationObjectGroup">AnimationObjectGroup</a>.
+Если нужно чтобы группа объектов приобрела совместно используемое состояние анимации, можно использовать <a href="animation.htm#4" onmouseover="show('AnimationObjectGroup')" onmouseout="hide()">AnimationObjectGroup</a>.
 
 <h3>Поддерживаемые форматы и загрузчики</h3>
-Обратите внимание, не все форматы моделей включают анимацию (в частности OBJ не включает), и что только некоторые загрузчики <em>three.js</em> поддерживают последовательности <a href="animation.htm#2" title="AnimationClip">AnimationClip</a>.
+Обратите внимание, не все форматы моделей включают анимацию (в частности OBJ не включает), и что только некоторые загрузчики <em>three.js</em> поддерживают последовательности <a href="animation.htm#2" onmouseover="show('AnimationClip')" onmouseout="hide()">AnimationClip</a>.
 Note that not all model formats include animation (OBJ notably does not), and that only some three.js loaders support [page:AnimationClip AnimationClip] sequences. Several that <i>do</i> support this animation type:
-<ul><li><a href="loaders.htm#11" title="JSONLoader">THREE.JSONLoader</a></li>
-<li><a href="loaders.htm#14" title="ObjectLoader">THREE.ObjectLoader</a></li>
+<ul><li><a href="loaders.htm#11" onmouseover="show('JSONLoader')" onmouseout="hide()">THREE.JSONLoader</a></li>
+<li><a href="loaders.htm#14" onmouseover="show('ObjectLoader')" onmouseout="hide()">THREE.ObjectLoader</a></li>
 <li>THREE.BVHLoader</li>
 <li>THREE.FBXLoader</li>
-<li><a href="examples.htm#2.3" title="GLTF2Loader">THREE.GLTF2Loader</a></li>
+<li><a href="examples.htm#3.2" onmouseover="show('GLTFLoader')" onmouseout="hide()">THREE.GLTFLoader</a></li>
 <li>THREE.MMDLoader</li>
 <li>THREE.SEA3DLoader</li></ul>
 Обратите внимание, что в настоящее время 3ds max и Maya не могут экспортировать несколько анимаций (то есть, анимаций, которые не находятся на одном и том же временном промежутке) непосредственно в один файл.

@@ -200,7 +200,7 @@ WebGL поддерживается следующими браузерами: Go
 
 <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Используемые в three.js функции на языке JavaScript или Web API</h3>
 Вот несколько функций, используемых в <em>three.js</em>. Для некоторых из них может потребоваться дополнение полифиллами.
-<table class="tbl_1" border="1" cellpadding="5px" width="90%">
+<table class="tbl_1" border="1" cellpadding="5" width="90%">
 <tr class="head"><td>функции<br>Feature</td><td>область&nbsp;применения<br>Use Scope</td><td>модули<br>Modules</td></tr>
 <tr valign="top"><td>Typed Arrays </td><td>Исходник</td><td>BufferAttribute, BufferGeometry и т.д.</td></tr>
 <tr valign="top"><td>Web Audio API</td><td>Исходник</td><td>Audio, AudioContext, AudioListener и т.д.</td></tr>
@@ -315,8 +315,8 @@ python -m http.server</pre>
 Другие простейшие варианты обсуждаются например на <a href="http://stackoverflow.com/q/12905426/24874" target="_blank">Stack Overflow</a>.</div><br><br>
 
 <h2 id="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Рисование линий</h2>
-Предположим, нужно нарисовать линию или круг, без каркасной <a href="objects.htm#8" title="Mesh">сетки</a>.
-Вначале нужно установить <a href="renderers.htm" title="WebGLRenderer">рендерер (визуализатор)</a>, <a href="scenes.htm#3">сцену</a> и камеру (смотрите страницу <a href="#1">Создание сцены</a>).<br><br>
+Предположим, нужно нарисовать линию или круг, без каркасной <a href="objects.htm#8" onmouseover="show('Mesh')" onmouseout="hide()">сетки</a>.
+Вначале нужно установить <a href="renderers.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">рендерер (визуализатор)</a>, <a href="scenes.htm#3">сцену</a> и камеру (смотрите страницу <a href="#1">Создание сцены</a>).<br><br>
 Вот код, который для этого будет использоваться:
 <pre>var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -337,7 +337,7 @@ geometry.vertices.push(new THREE.Vector3(10, 0, 0));</pre>
 Обратите внимание, что линии проведены между каждой последующей парой вершин, но не между первой и последней (то есть, эта линия не замкнута).<br><br>
 Теперь, когда есть точки для двух линий и материал, можно сложить все вместе для формирования линии.
 <pre>var line = new THREE.Line(geometry, material);</pre>
-Все что осталось, вывести (добавить) её на сцену и вызвать <a href="renderers.htm#method_render" title="WebGLRenderer.render">рендерер</a>.
+Все что осталось, вывести (добавить) её на сцену и вызвать <a href="renderers.htm#method_render" onmouseover="show('WebGLRenderer.render')" onmouseout="hide()">рендерер</a>.
 <pre>scene.add(line);
 renderer.render(scene, camera);</pre>
 Теперь вы должны увидеть стрелку из двух синих линий, направленную вверх.<br><br>
@@ -360,7 +360,7 @@ This is the method used for descriptive overlays in most three.js examples.<br><
 	display:block;
 }</pre>
 
-<h3>2. Нарисовать текст на canvas и использовать его как <a href="textures.htm#6" title="Texture">текстуру</a></h3>
+<h3>2. Нарисовать текст на canvas и использовать его как <a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">текстуру</a></h3>
 Используйте этот способ, если хочется просто нарисовать текст на плоскости, на своей three.js-сцене.
 
 <h3>3. Создать модель текста в выбранной вами программе 3D-графики<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;и экспортировать её в three.js</h3>
@@ -371,18 +371,18 @@ This is the method used for descriptive overlays in most three.js examples.<br><
 If you prefer to work purely in THREE.js or to create procedural and dynamic 3D text geometries, you can create a mesh whose geometry is an instance of THREE.TextGeometry:
 <pre>new THREE.TextGeometry( text, parameters );</pre>
 Для того, чтобы это сработало, для TextGeometry будет нужен экземпляр THREE.Font, установленный в качестве значения его параметра "font" - шрифт.
-Посмотрите страницу <a href="geometries.htm#34" title="TextGeometry">TextGeometry</a> для получения дополнительных сведений о том, как это можно сделать с описанием каждого принимаемого параметра и списком <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank" title="сокращение от англ. слов JavaScript Object Notation, обычно произносится как 'джейсэн') — текстовый формат обмена данными, основанный на JavaScript. Как и многие другие текстовые форматы, JSON легко читается людьми. Формат JSON был разработан Дугласом Крокфордом.">JSON</a>-шрифтов, поставляемых в составе самого THREE.js.
+Посмотрите страницу <a href="geometries.htm#34" onmouseover="show('TextGeometry')" onmouseout="hide()">TextGeometry</a> для получения дополнительных сведений о том, как это можно сделать с описанием каждого принимаемого параметра и списком <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank" onmouseover="show('сокращение от англ. слов JavaScript Object Notation,<br>обычно произносится как 'джейсэн') — текстовый формат<br>обмена данными, основанный на JavaScript.<br>Как и многие другие текстовые форматы, JSON легко<br>читается людьми. Формат JSON был разработан<br>Дугласом Крокфордом.')" onmouseout="hide()">JSON</a>-шрифтов, поставляемых в составе самого THREE.js.
 
 <h4>Примеры</h4>
 <a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank"> WebGL / geometry / text</a><br>
 <a href="https://threejs.org/examples/#canvas_geometry_text" target="_blank">canvas / geometry / text</a><br>
 <a href="https://threejs.org/examples/#webgl_shadowmap" target="_blank"> WebGL / shadowmap</a><br><br>
 Если шрифт не работает или нужно использовать шрифт, которого здесь нет, существует <a href="http://www.jaanga.com/2012/03/blender-to-threejs-create-3d-text-with.html" target="_blank">руководство со скриптом на языке Python</a> для
-<a href="https://www.blender.org/" target="_blank" title="свободный, профессиональный пакет для создания трёхмерной компьютерной графики, включающий в себя средства моделирования, анимации, рендеринга, постобработки и монтажа видео со звуком">Blender'а</a>, который позволяет экспортировать текст в понятном для Three.js формате JSON.<br><br>
+<a href="https://www.blender.org/" target="_blank" onmouseover="show('свободный, профессиональный пакет для создания<br>трёхмерной компьютерной графики, включающий в себя<br>средства моделирования, анимации, рендеринга,<br>постобработки и монтажа видео со звуком')" onmouseout="hide()">Blender'а</a>, который позволяет экспортировать текст в понятном для Three.js формате JSON.<br><br>
 
 
 <h2 id="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Руководство по миграции и стилю кода</h2>
-Руководство <a href="#" onclick="return false" class="hover-tip">по миграции<span>то есть, по переводу программ three.js, сделанных в одной версии, для работы в другой версии three.js</span></a> хранится на <a href="https://github.com/mrdoob/three.js/wiki" target="_blank">wiki</a>.
+Руководство <span class="lnk" onmouseover="show('то есть, по переводу программ three.js, сделанных<br>в одной версии, для работы в другой версии three.js')" onmouseout="hide()">по миграции</span> хранится на <a href="https://github.com/mrdoob/three.js/wiki" target="_blank">wiki</a>.
 Оно содержит список изменений каждой версии three.js, начиная с релиза r45.<br>
 Его можно найти <a href="https://github.com/mrdoob/three.js/wiki/Migration-Guide" target="_blank">здесь</a>.<br>
 <div class=note_trans><b>Примечание переводчика:</b> Вики (англ. wiki) — веб-сайт, <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
@@ -397,7 +397,7 @@ If you prefer to work purely in THREE.js or to create procedural and dynamic 3D 
 <div class=list>Особый язык разметки — так называемая вики-разметка, которая позволяет легко и быстро размечать в тексте структурные элементы и гиперссылки; форматировать и оформлять отдельные элементы.</div>
 <div class=list>Учёт изменений (версий) страниц: возможность сравнения редакций и восстановления ранних.</div></li>
 <li>Проявление изменений сразу после их внесения.</li>
-<li>Разделение содержимого на именованные страницы.</li>
+<li>Разделение содержимого на именованные страницы.
 <div class=list>Гипертекст: связь страниц и подразделов сайта через контекстные гиперссылки.</div></li>
 <li>Множество авторов. Некоторые вики могут править все посетители сайта.</li></ul><br>
 <span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D0%BA%D0%B8' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span></div></div><br>

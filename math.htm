@@ -801,26 +801,23 @@ Resets the euler angle with a new order by creating a quaternion from this euler
 
 
 <h3 id="7">Interpolant</h3>
-Абстрактный базовый класс интерполяций по параметрическим примерам.
-Abstract base class of interpolants over parametric samples.<br>
-Область параметра является одномерной, обычно это время или путь вдоль кривой, определяемой данными.
-The parameter domain is one dimensional, typically the time or a path along a curve defined by the data.<br>
-Значения выборок могут иметь любую размерность, а производные классы могут применять к данным специальные интерпретации.
-The sample values can have any dimensionality and derived classes may apply special interpretations to the data.<br>
+Абстрактный базовый класс <span class="lnk" onmouseover="show('интерполянт или интерполирующая функция<br>— в вычислительной математике это функция,<br>которая строится по значениям в некоторых<br>точках')" onmouseout="hide()">интерполянтов</span> по выборкам параметра. Статья Википедии об <a href="https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BF%D0%BE%D0%BB%D1%8F%D1%86%D0%B8%D1%8F" target="_blank">интерполяции</a>.<br>
+Область параметра является одномерной, обычно это время или путь вдоль кривой, определяемой данными.<br>
+Значения выборок могут иметь любую размерность, а производные классы могут применять к данным специальные интерпретации.<br>
+Данный класс предоставляет поиск интервала в <a href="https://ru.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)" target="_blank" onmouseover="show('Шаблонный метод (англ. Template method)<br>— поведенческий шаблон проектирования,<br>определяющий основу алгоритма и<br>позволяющий наследникам переопределять<br>некоторые шаги алгоритма, не изменяя его<br>структуру в целом.')" onmouseout="hide()">шаблонном методе</a>,
+перекладывая интерполяцию на производные (дочерние) классы.<br>
+<a href="https://ru.wikipedia.org/wiki/%D0%92%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B0" target="_blank" onmouseover="show('временная сложность – зависимость времени выполнения<br>алгоритма от количества обрабатываемых входных данных')" onmouseout="hide()">Временна&#769;я сложность алгоритма</a>
+равна <tt>O(1)</tt> (т.е. алгоритм постоянного времени) при линейном переходе не более чем через две точки, и равна <tt>O(log N)</tt> (логарифмическое время) для произвольной выборки, где <tt>N</tt> - это число позиций.<br>
 
-This class provides the interval seek in a Template Method, deferring the actual interpolation to derived classes.<br>
-
-Time complexity is *O(1)* for linear access crossing at most two points and *O(log N)* for random access, where *N* is the number of positions.<br>
-
-References:	<a href="http://www.oodesign.com/template-method-pattern.html" target="_blank">http://www.oodesign.com/template-method-pattern.html</a><br><br>
+Ссылки:	<a href="http://www.oodesign.com/template-method-pattern.html" target="_blank">http://www.oodesign.com/template-method-pattern.html</a><br><br>
 
 <h4>Конструктор</h4>
 <pre>Interpolant( <span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameter positions - позиции параметра')" onmouseout="hide()">parameterPositions</a></span>, sampleValues, sampleSize, <span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('result buffer - результирующий буфер')" onmouseout="hide()">resultBuffer</a></span> )</pre>
-<div class=list><tt><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameter positions - позиции параметра')" onmouseout="hide()">parameterPositions</a></span></tt> -- массив позиций.</div>
-<div class=list><tt>sampleValues</tt> -- array of samples</div>
-<div class=list><tt>sampleSize</tt> -- number of samples</div>
+<div class=list><tt><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameter positions - позиции параметра')" onmouseout="hide()">parameterPositions</a></span></tt> -- массив позиций параметра.</div>
+<div class=list><tt>sampleValues</tt> -- массив выборок.</div>
+<div class=list><tt>sampleSize</tt> -- количество выборок.</div>
 <div class=list><tt><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('result buffer - результирующий буфер')" onmouseout="hide()">resultBuffer</a></span></tt> -- буфер для хранения результатов интерполяции.</div>
-<div class=note><b>Примечание:</b> Этот конструктор не предназначен для вызова напрямую.</div><br>
+<div class=note><b>Примечание:</b> Этот конструктор не предназначен для непосредственного вызова.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
@@ -830,11 +827,11 @@ References:	<a href="http://www.oodesign.com/template-method-pattern.html" targe
 <pre id="7resultBuffer"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('result buffer - результирующий буфер')" onmouseout="hide()">.resultBuffer</a></span></pre>
 <br><br>
 
-<pre id="7sampleValues"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sample values - примеры значений')" onmouseout="hide()">.sampleValues</a></span></pre>
+<pre id="7sampleValues"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sample values - значения выборок')" onmouseout="hide()">.sampleValues</a></span></pre>
 <br><br>
 
 <pre id="7settings"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('settings - настройки, параметры')" onmouseout="hide()">.settings</a></span></pre>
-Optional, subclass-specific settings structure.<br><br>
+Дополнительная, необязательная структура параметров, специфичных для подкласса.<br><br>
 
 <pre id="7valueSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value size - размер значения')" onmouseout="hide()">.valueSize</a></span></pre>
 </div><br>
@@ -842,8 +839,7 @@ Optional, subclass-specific settings structure.<br><br>
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="7evaluate"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('evaluate - вычисление')" onmouseout="hide()">.evaluate</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - сокращ. от англ. слова target - цель')" onmouseout="hide()">t</a></span> )</pre>
-Вычисляет интерполяцию на позицию <tt>t</tt>.
-Evaluate the interpolant at position <tt>t</tt>.</div><br>
+Вычисляет <span class="lnk" onmouseover="show('интерполянт или интерполирующая функция<br>— в вычислительной математике это функция,<br>которая строится по значениям в некоторых<br>точках')" onmouseout="hide()">интерполянт</span> на позицию <tt>t</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Interpolant.js" target="_blank">Interpolant.js на Гитхабе</a></div><br><br>
@@ -863,10 +859,10 @@ interpolant.evaluate( 0.5 );</pre><br>
 
 <h4>Конструктор</h4>
 <pre>CubicInterpolant( parameterPositions, sampleValues, sampleSize, resultBuffer )</pre>
-<div class=list>parameterPositions -- array of positions</div>
-<div class=list>sampleValues -- array of samples</div>
-<div class=list>sampleSize -- number of samples</div>
-<div class=list>resultBuffer -- buffer to store the interpolation results.</div><br>
+<div class=list><tt>parameterPositions</tt> -- массив позиций параметра.</div>
+<div class=list><tt>sampleValues</tt> -- array of samples</div>
+<div class=list><tt>sampleSize</tt> -- number of samples</div>
+<div class=list><tt>resultBuffer</tt> -- буфер для хранения результатов интерполяции.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
@@ -876,7 +872,7 @@ interpolant.evaluate( 0.5 );</pre><br>
 <pre id="7.1resultBuffer"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('result buffer - результирующий буфер')" onmouseout="hide()">.resultBuffer</a></span></pre>
 <br><br>
 
-<pre id="7.1sampleValues"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sample values - примеры значений')" onmouseout="hide()">.sampleValues</a></span></pre>
+<pre id="7.1sampleValues"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sample values - значения выборок')" onmouseout="hide()">.sampleValues</a></span></pre>
 <br><br>
 
 <pre id="7.1settings"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('settings - настройки, параметры')" onmouseout="hide()">.settings</a></span></pre>
@@ -888,7 +884,7 @@ interpolant.evaluate( 0.5 );</pre><br>
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="7.1evaluate"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('evaluate - вычисление')" onmouseout="hide()">.evaluate</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - сокращ. от англ. слова target - цель')" onmouseout="hide()">t</a></span> )</pre>
-Вычисляет интерполяцию на позицию <tt>t</tt>.</div><br>
+Вычисляет <span class="lnk" onmouseover="show('интерполянт или интерполирующая функция<br>— в вычислительной математике это функция,<br>которая строится по значениям в некоторых<br>точках')" onmouseout="hide()">интерполянт</span> на позицию <tt>t</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/interpolants/CubicInterpolant.js" target="_blank">CubicInterpolant.js на Гитхабе</a></div><br><br>
@@ -953,10 +949,10 @@ interpolant.evaluate( 0.5 );</pre><br>
 
 <h4>Конструктор</h4>
 <pre>LinearInterpolant( parameterPositions, sampleValues, sampleSize, resultBuffer )</pre>
-<div class=list>parameterPositions -- array of positions</div>
-<div class=list>sampleValues -- array of samples</div>
-<div class=list>sampleSize -- number of samples</div>
-<div class=list>resultBuffer -- buffer to store the interpolation results.</div><br>
+<div class=list><tt>parameterPositions</tt> -- массив позиций. array of positions</div>
+<div class=list><tt>sampleValues</tt> -- массив значений выборок. array of samples</div>
+<div class=list><tt>sampleSize</tt> -- число выборок. number of samples</div>
+<div class=list><tt>resultBuffer</tt> -- буфер для хранения результатов интерполяции.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>

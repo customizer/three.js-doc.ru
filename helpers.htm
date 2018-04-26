@@ -11,17 +11,19 @@
 <div class=list><a href="#1">ArrowHelper</a> - стрелка как указатель направления.</div>
 <div class=list><a href="#2">AxesHelper</a> - визуализация осей координат.</div>
 <div class=list><a href="#3">BoxHelper</a> - отображение вокруг какого-либо объекта ограничительного каркаса из линий, ориентированных по осям мира.</div>
-<div class=list><a href="#4">CameraHelper</a> - вспомогательный элемент, показывающий область видимости камеры.</div>
-<div class=list><a href="#5">DirectionalLightHelper</a> - отображение направленного света в виде линии, показывающей направление, и плоскости, показывающей положение источника света.</div>
-<div class=list><a href="#6">FaceNormalsHelper</a> - стрелки для визуализации векторов нормалей к граням объекта.</div>
-<div class=list><a href="#7">GridHelper</a> - прямоугольная сетка</div>
-<div class=list><a href="#8">HemisphereLightHelper</a> - вспомогательный элемент, состоящий из сферической сетки для отображения зоны освещения от HemisphereLight.</div>
-<div class=list><a href="#9">PointLightHelper</a> - вспомогательный элемент, состоящий из сферической сетки для отображения зоны освещения от PointLight - точечного освещения.</div>
-<div class=list><a href="#10">PolarGridHelper</a> - полярная сетка</div>
-<div class=list><a href="#11">RectAreaLightHelper</a> - вспомогательный элемент для отображения зоны освещения от RectAreaLight.</div>
-<div class=list><a href="#12">SkeletonHelper</a> -  визуализация объекта Skeleton.</div>
-<div class=list><a href="#13">SpotLightHelper</a> - показывает границы конуса света для прожекторного освещения (SpotLight).</div>
-<div class=list><a href="#14">VertexNormalsHelper</a> - стрелки для визуализации векторов нормалей к вершинам объекта.</div></div><br>
+<div class=list><a href="#4">Box3Helper</a> - вспомогательный элемент для визуализации объекта <a href="math.htm#2" onmouseover="show('Box3')" onmouseout="hide()">Box3</a> - прямоугольный параллелепипед или куб в трехмерном пространстве.</div>
+<div class=list><a href="#5">CameraHelper</a> - вспомогательный элемент, показывающий область видимости камеры.</div>
+<div class=list><a href="#6">DirectionalLightHelper</a> - отображение направленного света в виде линии, показывающей направление, и плоскости, показывающей положение источника света.</div>
+<div class=list><a href="#7">FaceNormalsHelper</a> - стрелки для визуализации векторов нормалей к граням объекта.</div>
+<div class=list><a href="#8">GridHelper</a> - прямоугольная сетка</div>
+<div class=list><a href="#9">HemisphereLightHelper</a> - вспомогательный элемент, состоящий из сферической сетки для отображения зоны освещения от HemisphereLight.</div>
+<div class=list><a href="#10">PlaneHelper</a> - вспомогательный элемент для визуализации объекта <a href="math.htm#12" onmouseover="show('Plane')" onmouseout="hide()">Plane</a> - плоскости в трехмерном пространстве.</div>
+<div class=list><a href="#11">PointLightHelper</a> - вспомогательный элемент, состоящий из сферической сетки для отображения зоны освещения от PointLight - точечного освещения.</div>
+<div class=list><a href="#12">PolarGridHelper</a> - полярная сетка</div>
+<div class=list><a href="#13">RectAreaLightHelper</a> - вспомогательный элемент для отображения зоны освещения от RectAreaLight.</div>
+<div class=list><a href="#14">SkeletonHelper</a> -  визуализация объекта Skeleton.</div>
+<div class=list><a href="#15">SpotLightHelper</a> - показывает границы конуса света для прожекторного освещения (SpotLight).</div>
+<div class=list><a href="#16">VertexNormalsHelper</a> - стрелки для визуализации векторов нормалей к вершинам объекта.</div></div><br>
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
 <h3 id="1">ArrowHelper</h3>
@@ -46,37 +48,44 @@ scene.add( arrowHelper );</pre>
 
 <h4>Конструктор</h4>
 <pre>ArrowHelper( <a href="math.htm#19" onmouseover="show('Vector3.<br>dir - сокращ. англ. слова direction - направление');" onmouseout="hide()">dir</a>, <a href="math.htm#19"  onmouseover="show('Vector3.<br>origin - начало, источник');" onmouseout="hide()">origin</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина');" onmouseout="hide()">length</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal - шестнадцатиричный');" onmouseout="hide()">hex</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head length - длина головки');" onmouseout="hide()">headLength</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head width - ширина головки');" onmouseout="hide()">headWidth</a></span> )</pre>
-<div class=list><tt><a href="math.htm#19" onmouseover="show('Vector3.<br>dir - сокращ. англ. слова direction - направление');" onmouseout="hide()">dir</a></tt> -- направление из <tt>origin</tt> (т.е из начальной точки стрелки). Должен быть единичным вектором.</div>
-<div class=list><tt><a href="math.htm#19"  onmouseover="show('Vector3.<br>origin - начало, источник');" onmouseout="hide()">origin</a></tt> -- точка из которой начинается стрелка.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина');" onmouseout="hide()">length</a></span></tt> -- длина стрелки. Значением по умолчанию является <tt>1</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal - шестнадцатиричный');" onmouseout="hide()">hex</a></span></tt> -- шестнадцатиричное значение, определяющее цвет. Значение по умолчанию равно <tt>0xffff00</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head length - длина головки');" onmouseout="hide()">headLength</a></span></tt> -- длина наконечника стрелки. Значение по умолчанию равно <tt>0.2 * length</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head width - ширина головки');" onmouseout="hide()">headWidth</a></span></tt> -- ширина наконечника стрелки. Значение по умолчанию равно <tt>0.2 * headLength</tt>.</div><br>
+<div class=list><tt>dir</tt> -- направление из <tt>origin</tt> (т.е из начальной точки стрелки). Должен быть единичным вектором.</div>
+<div class=list><tt>origin</tt> -- точка из которой начинается стрелка.</div>
+<div class=list><tt>length</tt> -- длина стрелки. Значением по умолчанию является&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>hex</tt> -- шестнадцатиричное значение, определяющее цвет. Значение по умолчанию равно&nbsp;<tt>0xffff00</tt>.</div>
+<div class=list><tt>headLength</tt> -- длина наконечника стрелки. Значение по умолчанию равно&nbsp;<tt>0.2&nbsp;*&nbsp;length</tt>.</div>
+<div class=list><tt>headWidth</tt> -- ширина наконечника стрелки. Значение по умолчанию равно&nbsp;<tt>0.2&nbsp;*&nbsp;headLength</tt>.</div><br>
+
 <h4>Свойства</h4>
 Для информации об общих свойствах посмотрите базовый класс <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>.
 <div class=blockindent><br>
-<pre id="1line"><a href="objects.htm#4" onmouseover="show('line - линия. Родительский класс - Line');" onmouseout="hide()">.line</a></pre>
+<pre id="1line"><a href="objects.htm#3" onmouseover="show('line - линия. Родительский класс - Line');" onmouseout="hide()">.line</a></pre>
 Содержит линейную часть <tt>arrowHelper</tt>.<br><br>
-<pre id="1cone"><a href="objects.htm#8" onmouseover="show('cone - конус. Родительский класс - Mesh');" onmouseout="hide()">.cone</a></pre>
+
+<pre id="1cone"><a href="objects.htm#7" onmouseover="show('cone - конус. Родительский класс - Mesh');" onmouseout="hide()">.cone</a></pre>
 Содержит коническую часть <tt>arrowHelper</tt>.</div><br>
+
 <h4>Методы</h4>
 Для информации об общих методах посмотрите базовый класс <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>.
 <div class=blockindent><br>
 <pre id="1setColor"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set color - установить цвет');" onmouseout="hide()">.setColor</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращение англ. слова hexadecimal - шестнадцатиричный');" onmouseout="hide()">hex</a></span> )</pre>
 <div class=list><tt>hex</tt> -- шестнадцатиричное значение, определяющее цвет.</div>
 Устанавливает цвет <tt>arrowHelper</tt>.<br><br>
-<pre id="1setLength"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов set length - установить длину');" onmouseout="hide()">.setLength</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head length - длина головки');" onmouseout="hide()">headLength</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head width - ширина головки');" onmouseout="hide()">headWidth</a></span> )</pre>
+
+<pre id="1setLength"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов set length - установить длину');" onmouseout="hide()">.setLength</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина');" onmouseout="hide()">length</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head length - длина головки');" onmouseout="hide()">headLength</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head width - ширина головки');" onmouseout="hide()">headWidth</a></span> )</pre>
 <div class=list><tt>length</tt> -- желаемая длина стрелки.</div>
 <div class=list><tt>headLength</tt> -- длина наконечника стрелки.</div>
 <div class=list><tt>headWidth</tt> -- ширина наконечника стрелки.</div>
 Устанавливает длину <tt>arrowHelper</tt>.<br><br>
+
 <pre id="1setDirection"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов set direction - установить направление');" onmouseout="hide()">.setDirection</a></span>( <a href="math.htm#19" onmouseover="show('Vector3.<br>dir - сокращ. англ. слова direction - направление');" onmouseout="hide()">dir</a> )</pre>
 <div class=list><tt>dir</tt> -- желаемое направление. Должен быть единичным вектором.</div>
 Устанавливает направление <tt>arrowHelper</tt>.</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/ArrowHelper.js" target="_blank">ArrowHelper.js на github.com</a></div><br><br>
 
-<span class="right_side"><a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+
+<span class="right_side"><a href="objects.htm#5" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
 <h3 id="2">AxesHelper</h3>
 Объект для визуализации трех осей координат простым способом.<br>
 Ось <tt>X</tt> красного цвета, ось <tt>Y</tt> - зеленая, ось <tt>Z</tt> - синяя.
@@ -94,19 +103,24 @@ scene.add( axesHelper );</pre>
 <h4>Конструктор</h4>
 <pre>AxesHelper( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">size</a></span> )</pre>
 <div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">size</a></span></tt> -- длина линий, представляющих оси (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div><br>
+
 <h4>Свойства</h4>
-Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.<br><br>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.<br><br>
+
 <h4>Методы</h4>
-Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.<br><br>
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.<br><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/AxesHelper.js" target="_blank">AxesHelper.js на github.com</a></div><br><br>
 
-<span class="right_side"><a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+
+<span class="right_side"><a href="objects.htm#5" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
 <h3 id="3">BoxHelper</h3>
 Вспомогательный объект для отображения вокруг какого-либо объекта ограничительного каркаса из линий, сориентированного по осям мира.<br>
-Обратите внимание, для того чтобы это работало, объект должен иметь либо <a href="core.htm#7" onmouseover="show('Geometry');" onmouseout="hide()">Geometry</a>, либо <a href="core.htm#2" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a>, так что со <a href="objects.htm#12" onmouseover="show('Sprite');" onmouseout="hide()">спрайтами</a> он не будет работать.
+Обратите внимание, для того чтобы это работало, объект должен иметь либо <a href="core.htm#7" onmouseover="show('Geometry');" onmouseout="hide()">Geometry</a>, либо <a href="core.htm#2" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a>, так что со <a href="objects.htm#11" onmouseover="show('Sprite');" onmouseout="hide()">спрайтами</a> он не будет работать.
 <div class="caption"><img src="img/boxHelper.png" width=300><br>
 BoxHelper вокруг икосаэдра</div><br>
+
 <h4>Пример</h4>
 <pre>var sphere = new THREE.SphereGeometry();
 var object = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( 0xff0000 ) );
@@ -116,29 +130,69 @@ scene.add( box );</pre>
 <pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL / helpers</a>
 <a href="https://threejs.org/examples/#webgl_loader_nrrd" target="_blank">WebGL / loader / nrrd</a>
 <a href="https://threejs.org/examples/#webgl_buffergeometry_drawcalls" target="_blank">advanced / buffergeometry / drawcalls</a></pre><br>
+
 <h4>Конструктор</h4>
-<pre>BoxHelper( <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">object</a>, <span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span> )</pre>
-<div class=list><tt><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">object</a></tt> -- трехмерный (3D) объект, который нужно показать в ограничивающем его каркасе из линий, ориентированном по осям мира (дополнительный, необязательный параметр).</div>
-<div class=list><tt><span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> -- шестнадцатиричное значение, определяющее цвет каркаса (сторон параллелипипеда) (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>0xffff00</tt>.</div>
-Создает новый каркас, ограничивающий переданный объект. Внутри, для вычисления размеров, используется метод <tt><a href="math.htm#2" onmouseover="show('Box3.setFromObject');" onmouseout="hide()">Box3.setFromObject</a></tt>.
+<pre>BoxHelper( <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">object</a>, <a href="math.htm#3" onmouseover="show('Color.<br>color - цвет');" onmouseout="hide()">color</a> )</pre>
+<div class=list><tt>object</tt> -- трехмерный (3D) объект, который нужно показать в ограничивающем его каркасе из линий, ориентированном по осям мира (дополнительный, необязательный параметр).</div>
+<div class=list><tt>color</tt> -- шестнадцатиричное значение, определяющее цвет каркаса (сторон параллелипипеда) (дополнительный, необязательный параметр). Значение по умолчанию равно&nbsp;<tt>0xffff00</tt>.</div>
+Создает новый каркас, ограничивающий переданный объект. Внутри, для вычисления размеров, используется метод <tt><a href="math.htm#2setFromObject" onmouseover="show('Box3.setFromObject');" onmouseout="hide()">Box3.setFromObject</a></tt>.
 Обратите внимание на то, что при этом в каркас включаются все дочерние объекты.<br><br>
+
 <h4>Свойства</h4>
-Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.<br><br>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.<br><br>
+
 <h4>Методы</h4>
-Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
 <div class=blockindent><br>
 <pre id="3update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
-Обновляет геометрию вспомогательного объекта в соответствии с размерами объекта, включая любые дочерние объекты. Смотрите описание метода <tt><a href="math.htm#2" onmouseover="show('Box3.setFromObject');" onmouseout="hide()">Box3.setFromObject</a></tt>.<br><br>
-<pre id="3setFromObject"><a href="#3" onmouseover="show('BoxHelper');" onmouseout="hide()">.setFromObject</a>( <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">object</a> )</pre>
-<div class=list><tt><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">object</a></tt> -- трехмерный (3D) объект, вокруг которого создается вспомогательный объект.</div>
+Обновляет геометрию вспомогательного объекта в соответствии с размерами объекта, включая любые дочерние объекты. Смотрите описание метода <tt><a href="math.htm#2setFromObject" onmouseover="show('Box3.setFromObject');" onmouseout="hide()">Box3.setFromObject</a></tt>.<br><br>
+
+<pre id="3setFromObject"><a href="#3" onmouseover="show('BoxHelper.<br>set from object - установить из объекта');" onmouseout="hide()">.setFromObject</a>( <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект');" onmouseout="hide()">object</a> )</pre>
+<div class=list><tt>object</tt> -- трехмерный (3D) объект, вокруг которого создается вспомогательный объект.</div>
 Обновляет каркас ограничивающего параллелипипеда для переданного объекта.</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/BoxHelper.js" target="_blank">BoxHelper.js на github.com</a></div><br><br>
 
-<span class="right_side"><a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
-<h3 id="4">CameraHelper</h3>
+
+<span class="right_side"><a href="objects.htm#5" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="4">Box3Helper</h3>
+вспомогательный элемент для визуализации объекта <a href="math.htm#2" onmouseover="show('Box3')" onmouseout="hide()">Box3</a> - прямоугольный параллелепипед или куб в трехмерном пространстве.<br><br>
+
+<h4>Пример</h4>
+<pre>var box = new THREE.Box3();
+box.setFromCenterAndSize( new THREE.Vector3( 1, 1, 1 ), new THREE.Vector3( 2, 1, 3 ) );<br>
+var helper = new THREE.Box3Helper( box, 0xffff00 );
+scene.add( helper );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>Box3Helper( <a href="math.htm#2" onmouseover="show('Box3.<br>box - ')" onmouseout="hide()">box</a>, <a href="math.htm#3" onmouseover="show('Color.<br>color - цвет');" onmouseout="hide()">color</a> )</pre>
+<div class=list><tt>box</tt> -- <a href="math.htm#2" onmouseover="show('Box3')" onmouseout="hide()">Box3</a>, который нужно показать.</div>
+<div class=list><tt>color</tt> -- шестнадцатиричное значение, определяющее цвет каркаса (сторон параллелипипеда) (дополнительный, необязательный параметр). Значение по умолчанию равно&nbsp;<tt>0xffff00</tt>.</div>
+Создает новый каркасный параллелепипед, представляющий переданный <a href="math.htm#2" onmouseover="show('Box3');" onmouseout="hide()">Box3</a>.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
+<div class=blockindent><br>
+<pre id="4box"><a href="math.htm#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка');" onmouseout="hide()">.box</a></pre>
+<a href="math.htm#2" onmouseover="show('Box3')" onmouseout="hide()">Box3</a>, который нужно показать.</div><br>
+
+
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
+<div class=blockindent><br>
+<pre id="4updateMatrixWorld"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update matrix world - обновить матрицу мира');" onmouseout="hide()">.updateMatrixWorld</a></span>( force )</pre>
+Этот метод переопределяет метод в базовом классе <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>, чтобы он также обновлял параллелепипед каркаса по размерам объекта, указанного в свойстве <tt><a href="#4box" onmouseover="show('Box3Helper.box');" onmouseout="hide()">box</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/Box3Helper.js" target="_blank">Box3Helper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="objects.htm#5" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="5">CameraHelper</h3>
 Этот вспомогательный объект для определения того, что попадает в объем усеченной пирамиды, который будет видим камере.<br>
-Он показывает эту область видимости камеры при помощи <a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()"><tt>LineSegments</tt></a>.<br><br>
+Он показывает эту область видимости камеры при помощи <a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()"><tt>LineSegments</tt></a>.<br><br>
+
 <h4>Пример</h4>
 <pre>var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 var helper = new THREE.CameraHelper( camera );
@@ -146,38 +200,48 @@ scene.add( helper );</pre>
 <h5>Другие примеры</h5>
 <pre><a href="https://threejs.org/examples/#webgl_camera" target="_blank">WebGL / camera</a>
 <a href="https://threejs.org/examples/#webgl_geometry_extrude_splines" target="_blank">WebGL / extrude / splines</a></pre><br>
+
 <h4>Конструктор</h4>
-<pre>CameraHelper( <a href="cameras.htm#1" onmouseover="show('Camera');" onmouseout="hide()">camera</a> )</pre>
-<div class=list><tt><a href="cameras.htm#1" onmouseover="show('Camera');" onmouseout="hide()">camera</a></tt> -- камера, область видимости которой, нужно показать.</div>
-Создает новый <tt>CameraHelper</tt> для указанной камеры.<br><br>
+<pre>CameraHelper( <a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера');" onmouseout="hide()">camera</a> )</pre>
+<div class=list><tt>camera</tt> -- камера, область видимости которой, нужно показать.</div>
+Создает новый CameraHelper для указанной камеры.<br><br>
+
 <h4>Свойства</h4>
-Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
 <div class=blockindent><br>
-<pre id="4camera"><a href="cameras.htm#1" onmouseover="show('Camera');" onmouseout="hide()">.camera</a></pre>
+<pre id="5camera"><a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера');" onmouseout="hide()">.camera</a></pre>
 Камера, область видимости которой нужно показать.<br><br>
-<pre id="4pointMap"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('point map - карта точек');" onmouseout="hide()">.pointMap</a></span></pre>
+
+<pre id="5pointMap"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('point map - карта точек');" onmouseout="hide()">.pointMap</a></span></pre>
 Здесь содержаться точки, используемые для визуализации области видимости камеры.<br><br>
-<pre id="4matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица');" onmouseout="hide()">.matrix</a></span></pre>
-Обратитесь к <a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">camera.matrixWorld</a>.<br><br>
-<pre id="4matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+
+<pre id="5matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица');" onmouseout="hide()">.matrix</a></span></pre>
+Ссылка на <a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">camera.matrixWorld</a>.<br><br>
+
+<pre id="5matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
 Смотрите описание свойства <tt><a href="core.htm#14matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a></tt>.
 Установите здесь значение <tt>false</tt>, так как этот вспомогательный объект использует <tt><a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt> камеры.</div><br>
+
 <h4>Методы</h4>
-Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
 <div class=blockindent><br>
-<pre id="4update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+<pre id="5update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
 Метод обновляет вспомогательный объект, основываясь на <tt>projectionMatrix</tt> камеры.</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/CameraHelper.js" target="_blank">CameraHelper.js на github.com</a></div><br><br>
 
+
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="5">DirectionalLightHelper</h3>
+<h3 id="6">DirectionalLightHelper</h3>
 Вспомогательный объект для помощи с отображением на сцене эффекта <tt><a href="lights.htm#2" onmouseover="show('DirectionalLight');" onmouseout="hide()">DirectionalLight</a></tt>, т.е. направленного света.<br>
 Он состоит из плоскости и линии, представляющих положение и направление света.<br><br>
+
 <h4>Пример</h4>
 <pre>var light = new THREE.DirectionalLight( 0xFFFFFF );
 var helper = new THREE.DirectionalLightHelper( light, 5 );
 scene.add( helper );</pre><br>
+
 <h4>Конструктор</h4>
 <pre>DirectionalLightHelper( <a href="lights.htm#2" onmouseover="show('DirectionalLight.<br>light - свет');" onmouseout="hide()">light</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">size</a></span>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span> )</pre>
 <div class=list><tt><a href="lights.htm#2" onmouseover="show('DirectionalLight.<br>light - свет');" onmouseout="hide()">light</a></tt> -- свет, который нужно показать.</div>
@@ -187,36 +251,36 @@ scene.add( helper );</pre><br>
 <h4>Свойства</h4>
 Для информации об общих свойствах посмотрите базовый класс <tt><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a></tt>.
 <div class=blockindent><br>
-<pre id="5lightPlane"><a href="objects.htm#4" onmouseover="show('Line.<br>light plane - плоскость света');" onmouseout="hide()">.lightPlane</a></pre>
+<pre id="6lightPlane"><a href="objects.htm#4" onmouseover="show('Line.<br>light plane - плоскость света');" onmouseout="hide()">.lightPlane</a></pre>
 Содержит сетку (mesh) линии, показывающую расположение направленного света.<br><br>
 
-<pre id="5light"><a href="lights.htm#2" onmouseover="show('DirectionalLight.<br>light - свет');" onmouseout="hide()">.light</a></pre>
+<pre id="6light"><a href="lights.htm#2" onmouseover="show('DirectionalLight.<br>light - свет');" onmouseout="hide()">.light</a></pre>
 Ссылка на отображаемый <tt><a href="lights.htm#2" onmouseover="show('DirectionalLight');" onmouseout="hide()">directionalLight</a></tt>.<br><br>
 
-<pre id="5matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица');" onmouseout="hide()">.matrix</a></span></pre>
+<pre id="6matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица');" onmouseout="hide()">.matrix</a></span></pre>
 Ссылка на <tt><a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt> освещения.<br><br>
 
-<pre id="5matrixWorld"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+<pre id="6matrixWorld"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
 Смотрите описание <tt><a href="core.htm#14matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a></tt>. Установите здесь значение <tt>false</tt>, так как вспомогательный элемент использует <tt><a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt> освещения.<br><br>
 
-<pre id="5color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
+<pre id="6color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
 Параметр цвета, переданный в конструктор. Значение по умолчанию неопределено. Если его не изменить, цвет вспомогательного объекта будет обновлен при следующем вызове обновления.</div><br>
 
 <h4>Методы</h4>
 Для информации об общих методах посмотрите базовый класс <tt><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a></tt>.
 <div class=blockindent><br>
-<pre id="5dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
+<pre id="6dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
 Метод удаляет <tt>DirectionalLightHelper</tt>.<br><br>
 
-<pre id="5update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновить');" onmouseout="hide()">.update</a></span>()</pre>
+<pre id="6update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновить');" onmouseout="hide()">.update</a></span>()</pre>
 Метод обновляет вспомогательный элемент в соответствии с позицией и направлением отображаемого <a href="#5light" onmouseover="show('DirectionalLightHelper.light');" onmouseout="hide()">направленного света</a>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/DirectionalLightHelper.js" target="_blank">DirectionalLightHelper.js на github.com</a></div><br><br>
 
 
-<span class="right_side"><a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
-<h3 id="6">FaceNormalsHelper</h3>
+<span class="right_side"><a href="objects.htm#5" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="7">FaceNormalsHelper</h3>
 Показывает <a href="#1" onmouseover="show('ArrowHelper');" onmouseout="hide()">стрелки</a> для визуализации нормалей <a href="core.htm#6" onmouseover="show('Face3');" onmouseout="hide()">граней</a> объекта.
 Требуется, чтобы нормали граней были указаны для всех <a href="core.htm#6" onmouseover="show('Face3');" onmouseout="hide()">граней</a> или были вычислены с помощью метода <tt><a href="core.htm#7computeFaceNormals" onmouseover="show('Geometry.computeFaceNormals');" onmouseout="hide()">computeFaceNormals</a></tt>.<br>
 Обратите внимание, что этот вспомогательный объект работает только с объектами, чья геометрия является экземпляром <tt><a href="core.htm#7" onmouseover="show('Geometry');" onmouseout="hide()">Geometry</a></tt>. Для <tt><a href="core.htm#2" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a></tt> вместо него используйте <tt><a href="#14" onmouseover="show('VertexNormalsHelper');" onmouseout="hide()">VertexNormalsHelper</a></tt>.
@@ -242,22 +306,22 @@ scene.add( helper );</pre>
 <div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - ширина (толщина) линии');" onmouseout="hide()">linewidth</a></span></tt> -- ширина линий стрелок (дополнительный, необязательный параметр).  Значение по умолчанию равно <tt>1</tt>.</div><br>
 
 <h4>Свойства</h4>
-Для информации об общих свойствах посмотрите базовый класс <a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
+Для информации об общих свойствах посмотрите базовый класс <a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
 <div class=blockindent><br>
-<pre id="6matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+<pre id="7matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
 Посмотрите описание <a href="core.htm#14matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a>.
 Установите данное свойство как <tt>false</tt>, так как этот вспомогательный элемент использует <a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a> объекта.<br><br>
 
-<pre id="6object"><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">.object</a></pre>
+<pre id="7object"><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">.object</a></pre>
 Объект, для которого должны быть показаны нормали граней.<br><br>
 
-<pre id="6size"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">.size</a></span></pre>
+<pre id="7size"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">.size</a></span></pre>
 Длина стрелок, значение по умолчанию равно <tt>1</tt>.</div><br>
 
 <h4>Методы</h4>
-Для информации об общих методах посмотрите базовый класс <a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
+Для информации об общих методах посмотрите базовый класс <a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
 <div class=blockindent><br>
-<pre id="6update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+<pre id="7update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
 Обновляет предпросмотр нормалей граней на основе перемещения объекта.</div><br>
 
 <h4>Исходники</h4>
@@ -265,7 +329,7 @@ scene.add( helper );</pre>
 
 
 <span class="right_side"><a href="objects.htm#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
-<h3 id="7">GridHelper</h3>
+<h3 id="8">GridHelper</h3>
 <tt>GridHelper</tt> - это объект для установки сеток. Сетка является двумерным массивом линий.
 <div class="caption"><img src="img/arrowAndGrid.png" width=600><br>
 Сетка и стрелка</div><br>
@@ -286,12 +350,13 @@ scene.add( gridHelper );</pre>
 <div class=list><tt><span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color grid - цвет сетки');" onmouseout="hide()">colorGrid</a></span></tt> -- цвет линий сетки.
 Это может быть как шестнадцатиричное значение  <a href="math.htm#3" onmouseover="show('Color');" onmouseout="hide()">цвета</a>, так и название цвета в CSS. Значение по умолчанию равно&nbsp;<tt>0x888888</tt>.</div>
 Создает новый <tt>GridHelper</tt> размером <tt>size</tt> с <tt>divisions</tt> ячеек с каждой стороны. Цвета являются необязательными аргументами.<br><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/GridHelper.js" target="_blank">GridHelper.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="8">HemisphereLightHelper</h3>
+<h3 id="9">HemisphereLightHelper</h3>
 Создает видимый вспомогательный элемент, состоящий из сферической <a href="objects.htm#8" onmouseover="show('Mesh');" onmouseout="hide()">сетки</a> для отображения зоны освещения от <tt><a href="lights.htm#3" onmouseover="show('HemisphereLight');" onmouseout="hide()">HemisphereLight</a></tt>.<br><br>
 
 <h4>Пример</h4>
@@ -308,36 +373,73 @@ scene.add( helper );</pre><br>
 <h4>Свойства</h4>
 Для информации об общих свойствах посмотрите базовый класс <tt><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a></tt>.
 <div class=blockindent><br>
-<pre id="8light"><a href="lights.htm#3" onmouseover="show('HemisphereLight');" onmouseout="hide()">.light</a></pre>
+<pre id="9light"><a href="lights.htm#3" onmouseover="show('HemisphereLight');" onmouseout="hide()">.light</a></pre>
 Reference to the HemisphereLight being visualized.<br><br>
 
-
-<pre id="8matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица');" onmouseout="hide()">.matrix</a></span></pre>
+<pre id="9matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица');" onmouseout="hide()">.matrix</a></span></pre>
 Reference to the hemisphereLight's [page:Object3D.matrixWorld matrixWorld].<br><br>
 
-<pre id="8matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+<pre id="9matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
 Смотрите свойство <tt><a href="core.htm#14matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a></tt>.
 Set to *false* here as the helper is using the hemisphereLight's [page:Object3D.matrixWorld matrixWorld].<br><br>
 
-<pre id="8color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
-Параметр цвета, переданный в конструктор. По умолчанию значение равно <tt>undefined</tt>, т.е. неопределено. Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове метода <tt><a href="#8update" onmouseover="show('HemisphereLightHelper.update');" onmouseout="hide()">update</a></tt>.</div><br>
+<pre id="9color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
+Параметр цвета, переданный в конструктор. По умолчанию значение равно <tt>undefined</tt>, т.е. неопределено. Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове метода <tt><a href="#9update" onmouseover="show('HemisphereLightHelper.update');" onmouseout="hide()">update</a></tt>.</div><br>
 
 <h4>Методы</h4>
 Для информации об общих методах посмотрите базовый класс <tt><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a></tt>.
 <div class=blockindent><br>
-<pre id="8dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
+<pre id="9dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
 Метод удаляет <tt>HemisphereLightHelper</tt>.<br><br>
 
-<pre id="8update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
-Метод обновляет вспомогательный элемент в соответствии с позицией и направлением <tt><a href="#8light" onmouseover="show('HemisphereLightHelper.light');" onmouseout="hide()">light</a></tt>.</div><br>
+<pre id="9update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+Метод обновляет вспомогательный элемент в соответствии с позицией и направлением <tt><a href="#9light" onmouseover="show('HemisphereLightHelper.light');" onmouseout="hide()">light</a></tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/HemisphereLightHelper.js" target="_blank">HemisphereLightHelper.js на github.com</a></div><br><br>
 
 
-<span class="right_side"><a href="objects.htm#8" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
-<h3 id="9">PointLightHelper</h3>
-Создает видимый вспомогательный элемент, состоящий из сферической <a href="objects.htm#8" onmouseover="show('Mesh');" onmouseout="hide()">сетки</a> для отображения зоны освещения от <a href="lights.htm#5" onmouseover="show('PointLight');" onmouseout="hide()">PointLight</a> - точечного освещения.<br><br>
+<span class="right_side"><a href="objects.htm#5" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="10">PlaneHelper</h3>
+Вспомогательный элемент для визуализации объекта <a href="math.htm#12" onmouseover="show('Plane')" onmouseout="hide()">Plane</a> - плоскости в трехмерном пространстве.<br><br>
+
+<h4>Пример</h4>
+<pre>var plane = new THREE.Plane( new THREE.Vector3( 1, 1, 0.2 ), 3 );
+var helper = new THREE.PlaneHelper( plane, 1, 0xffff00 );
+scene.add( helper );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>PlaneHelper( plane : Plane, size : Float, hex : Color )</pre>
+<div class=list><tt>plane</tt> -- the plane to visualize.</div>
+<div class=list><tt>size</tt> -- (optional) side length of plane helper. Default is 1.</div>
+<div class=list><tt>color</tt> -- (optional) the color of the helper. Default is 0xffff00.</div>
+Создает новый каркас, представляющий переданную плоскость.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
+<div class=blockindent><br>
+<pre id="10plane">.plane : Plane</pre>
+
+The plane being visualized.<br><br>
+
+<pre id="10size">.size : Float</pre>
+
+The side lengths of plane helper.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
+<div class=blockindent><br>
+<pre id="10updateMatrixWorld">.updateMatrixWorld ( force ) : void</pre>
+
+This overrides the method in the base Object3D class so that it also updates the helper object according to the .plane and .size properties.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/PlaneHelper.js" target="_blank">PlaneHelper.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="objects.htm#7" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
+<h3 id="11">PointLightHelper</h3>
+Создает видимый вспомогательный элемент, состоящий из сферической <a href="objects.htm#7" onmouseover="show('Mesh');" onmouseout="hide()">сетки</a> для отображения зоны освещения от <a href="lights.htm#5" onmouseover="show('PointLight');" onmouseout="hide()">PointLight</a> - точечного освещения.<br><br>
 
 <h4>Пример</h4>
 <pre>var pointLight = new THREE.PointLight( 0xff0000, 1, 100 );
@@ -350,41 +452,44 @@ scene.add( pointLightHelper );</pre>
 <pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL /  helpers</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>PointLightHelper( <a href="lights.htm#5" onmouseover="show('PointLight.<br>light - свет');" onmouseout="hide()">light</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sphere size - размер сферы');" onmouseout="hide()">sphereSize</a></span>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span> )</pre>
-<div class=list><tt><a href="lights.htm#5" onmouseover="show('PointLight.<br>light - свет');" onmouseout="hide()">light</a></tt> -- освещение, которое нужно визуализировать.</div>
-<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sphere size - размер сферы');" onmouseout="hide()">sphereSize</a></span></tt> -- размер сферы вспомогательного элемента. Значение по умолчанию равно <tt>1</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
+<pre>PointLightHelper( <a href="lights.htm#5" onmouseover="show('PointLight.<br>light - свет, освещение');" onmouseout="hide()">light</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sphere size - размер сферы');" onmouseout="hide()">sphereSize</a></span>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span> )</pre>
+<div class=list><tt>light</tt> -- освещение, которое нужно визуализировать.</div>
+<div class=list><tt>sphereSize</tt> -- размер сферы вспомогательного элемента. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>color</tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
 
 <h4>Свойства</h4>
-Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#8" onmouseover="show('Mesh');" onmouseout="hide()">Mesh</a></tt>.
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#7" onmouseover="show('Mesh');" onmouseout="hide()">Mesh</a></tt>.
 <div class=blockindent><br>
-<pre id="9light"><a href="lights.htm#5" onmouseover="show('PointLight.<br>light - свет');" onmouseout="hide()">.light</a></pre>
+<pre id="11light"><a href="lights.htm#5" onmouseover="show('PointLight.<br>light - свет');" onmouseout="hide()">.light</a></pre>
 Точечное освещение (<tt><a href="lights.htm#5" onmouseover="show('PointLight');" onmouseout="hide()">PointLight</a></tt>), которое нужно визуализировать.<br><br>
-<pre id="9matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица');" onmouseout="hide()">.matrix</a></span></pre>
+
+<pre id="11matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица');" onmouseout="hide()">.matrix</a></span></pre>
 Ссылка на <tt><a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt>, отображаемого точечного освещения.<br><br>
-<pre id="9matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+
+<pre id="11matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
 Смотрите описание <tt><a href="core.htm#14matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a></tt>.
 Установите здесь значение <tt>false</tt>, так как вспомогательный элемент использует <tt><a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt> точечного освещения.<br><br>
-<pre id="9color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
+
+<pre id="11color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
 Параметр цвета, переданный в конструктор. По умолчанию значение равно <tt>undefined</tt>, т.е. неопределено.
-Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове метода <tt><a href="#9update" onmouseover="show('PointLightHelper.update');" onmouseout="hide()">update</a></tt>.</div><br>
+Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове метода <tt><a href="#11update" onmouseover="show('PointLightHelper.update');" onmouseout="hide()">update</a></tt>.</div><br>
 
 <h4>Методы</h4>
-Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#8" onmouseover="show('Mesh');" onmouseout="hide()">Mesh</a></tt>.
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#7" onmouseover="show('Mesh');" onmouseout="hide()">Mesh</a></tt>.
 <div class=blockindent><br>
-<pre id="9dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
+<pre id="11dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
 Метод удаляет <tt>PointLightHelper</tt>.<br><br>
 
-<pre id="9update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
-Метод обновляет вспомогательный элемент в соответствии с позицией <tt><a href="#9light" onmouseover="show('PointLightHelper.light');" onmouseout="hide()">light</a></tt>.</div><br>
+<pre id="11update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+Метод обновляет вспомогательный элемент в соответствии с позицией <tt><a href="#11light" onmouseover="show('PointLightHelper.light');" onmouseout="hide()">light</a></tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/PointLightHelper.js" target="_blank">PointLightHelper.js на github.com</a></div><br><br>
 
 
-<span class="right_side"><a href="objects.htm#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
-<h3 id="10">PolarGridHelper</h3>
-<tt>PolarGridHelper</tt> - это объект для установки полярных сеток. Сетка является двумерным массивом линий.
+<span class="right_side"><a href="objects.htm#3" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
+<h3 id="12">PolarGridHelper</h3>
+PolarGridHelper - это объект для установки полярных сеток. Сетка является двумерным массивом линий.
 <div class="caption"><img src="img/axisAndPolarGrid.png" width=600><br>
 Оси координат и полярная сетка</div><br>
 
@@ -400,16 +505,14 @@ scene.add( helper );</pre>
 
 <h4>Конструктор</h4>
 <pre>PolarGridHelper( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус');" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radials - радиалы');" onmouseout="hide()">radials</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('circles - круги');" onmouseout="hide()">circles</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - разделы');" onmouseout="hide()">divisions</a></span>, <span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color1</a></span>, <span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color2</a></span> )</pre>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус');" onmouseout="hide()">radius</a></span></tt> -- радиус полярной сетки. Он может быть любым положительный числом. Значение по умолчанию равно&nbsp;<tt>10</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radials - радиалы');" onmouseout="hide()">radials</a></span></tt> -- число радиальных линий.
-Оно может быть любым положительным целым числом. Значение по умолчанию равно&nbsp;<tt>16</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('circles - круги');" onmouseout="hide()">circles</a></span></tt> -- число окружностей. Это может быть любое положительное целое число. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - разделы');" onmouseout="hide()">divisions</a></span></tt> -- число отрезков линии, из которых составлена каждая из окружностей.
-Это можеть быть любое положительное целое число, равное&nbsp;3 или большее. Значение по умолчанию равно <tt>64</tt>.
-<div class=note_trans><b>Примечание переводчика:</b> То есть, при значении <tt>divisions</tt> равному <tt>3</tt> окружности будут треугольниками, при <tt>8</tt> - восьмиугольниками. С увеличением значения <tt>divisions</tt>, окружности становятся все более "круглыми".</div></div>
-<div class=list><tt><span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color1</a></span></tt> -- Первый цвет, используемый для элементов сетки.
+<div class=list><tt>radius</tt> -- радиус полярной сетки. Он может быть любым положительный числом. Значение по умолчанию равно&nbsp;<tt>10</tt>.</div>
+<div class=list><tt>radials</tt> -- число радиальных линий. Оно может быть любым положительным целым числом. Значение по умолчанию равно&nbsp;<tt>16</tt>.</div>
+<div class=list><tt>circles</tt> -- число окружностей. Это может быть любое положительное целое число. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt>divisions</tt> -- число отрезков линии, из которых составлена каждая из окружностей. Это можеть быть любое положительное целое число, равное&nbsp;3 или большее. Значение по умолчанию равно&nbsp;<tt>64</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> То есть, при значении <tt>divisions</tt> равному&nbsp;<tt>3</tt> окружности будут треугольниками, при&nbsp;<tt>8</tt> - восьмиугольниками. С увеличением значения <tt>divisions</tt>, окружности становятся все более "круглыми".</div></div>
+<div class=list><tt>color1</tt> -- первый цвет, используемый для элементов сетки.
 Это может быть как шестнадцатиричное значение  <a href="math.htm#3" onmouseover="show('Color');" onmouseout="hide()">цвета</a>, так и название цвета в CSS. Значение по умолчанию равно&nbsp;<tt>0x444444</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color2</a></span></tt> -- Второй цвет, используемый для элементов сетки.
+<div class=list><tt>color2</tt> -- второй цвет, используемый для элементов сетки.
 Это может быть как шестнадцатиричное значение <a href="math.htm#3" onmouseover="show('Color');" onmouseout="hide()">цвета</a>, так и название цвета в CSS. Значение по умолчанию равно&nbsp;<tt>0x888888</tt>.</div>
 Создает новый <tt>PolarGridHelper</tt> с радиусом, определенным в параметре <tt>radius</tt>, числом лучей (радиалов), указанных в параметре <tt>radials</tt>, и числом окружностей, переданных в <tt>circles</tt>,
 где каждая окружность состоит из отрезков, число которых указано в <tt>divisions</tt>. Аргументы со значениями цвета являются дополнительными, необязательными.<br><br>
@@ -419,8 +522,8 @@ scene.add( helper );</pre>
 
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="11">RectAreaLightHelper</h3>
-Создает видимый вспомогательный элемент для отображения зоны освещения от <tt><a href="lights.htm#6" onmouseover="show('RectAreaLight');" onmouseout="hide()">RectAreaLight</a></tt>.
+<h3 id="13">RectAreaLightHelper</h3>
+Создает видимый вспомогательный элемент для отображения зоны освещения от <tt><a href="lights.htm#6" onmouseover="show('RectAreaLight - освещение от прямоугольной области');" onmouseout="hide()">RectAreaLight</a></tt>.
 
 <h4>Пример</h4>
 <pre>var light = new THREE.RectAreaLight( 0xffffbb, 1.0, 5, 5 );
@@ -428,35 +531,35 @@ var helper = new THREE.RectAreaLightHelper( light );
 scene.add( helper );</pre>
 
 <h4>Конструктор</h4>
-<pre>RectAreaLightHelper( <a href="lights.htm#6" onmouseover="show('RectAreaLight');" onmouseout="hide()">light</a>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span> )</pre>
-<div class=list><tt><a href="lights.htm#6" onmouseover="show('RectAreaLight');" onmouseout="hide()">light</a></tt> -- освещение, которое нужно визуализировать.</div>
-<div class=list><tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
+<pre>RectAreaLightHelper( <a href="lights.htm#6" onmouseover="show('RectAreaLight.<br>light - свет, освещение');" onmouseout="hide()">light</a>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span> )</pre>
+<div class=list><tt>light</tt> -- освещение, которое нужно визуализировать.</div>
+<div class=list><tt>color</tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
 
 <h4>Свойства</h4><br>
 Для информации об общих свойствах посмотрите базовый класс <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>.
 <div class=blockindent><br>
-<pre id="11light"><a href="lights.htm#6" onmouseover="show('RectAreaLight');" onmouseout="hide()">.light</a></pre>
+<pre id="13light"><a href="lights.htm#6" onmouseover="show('RectAreaLight.<br>light - свет, освещение');" onmouseout="hide()">.light</a></pre>
 Ссылка на <tt><a href="lights.htm#6" onmouseover="show('RectAreaLight');" onmouseout="hide()">RectAreaLight</a></tt>, который нужно визуализировать.<br><br>
 
-<pre id="11color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
-Параметр цвета, переданный в конструктор. Значение по умолчанию <tt>undefined</tt>, т.е. не определено. Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове метода <tt><a href="#11update" onmouseover="show('RectAreaLightHelper.update')" onmouseout="hide()">update</a></tt>.</div><br>
+<pre id="13color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
+Параметр цвета, переданный в конструктор. Значение по умолчанию <tt>undefined</tt>, т.е. не определено. Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове метода <tt><a href="#13update" onmouseover="show('RectAreaLightHelper.update')" onmouseout="hide()">update</a></tt>.</div><br>
 
 <h4>Методы</h4>
 Для информации об общих методах посмотрите базовый класс <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>.
 <div class=blockindent><br>
-<pre id="11dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
+<pre id="13dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
 Метод удаляет <tt>RectAreaLightHelper</tt>.<br><br>
 
-<pre id="11update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>( )</pre>
-Обновляет вспомогательный элемент в соответствии с положением и направлением <a href="#11light" onmouseover="show('RectAreaLightHelper.light')" onmouseout="hide()">источника освещения в виде прямоугольной области</a>.</div><br>
+<pre id="13update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+Обновляет вспомогательный элемент в соответствии с положением и направлением <a href="#13light" onmouseover="show('RectAreaLightHelper.light')" onmouseout="hide()">источника освещения в виде прямоугольной области</a>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/RectAreaLightHelper.js" target="_blank">RectAreaLightHelper.js на github.com</a></div><br><br>
 
 
-<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> &nbsp; <a href="objects.htm#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a> &nbsp; <a href="objects.htm#6" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
-<h3 id="12">SkeletonHelper</h3>
-Вспомогательный объект для помощи с визуализацией объекта <tt><a href="objects.htm#10" onmouseover="show('Skeleton');" onmouseout="hide()">Skeleton</a></tt>. Визуализация производится при помощи <tt><a href="materials.htm#1" onmouseover="show('LineBasicMaterial');" onmouseout="hide()">LineBasicMaterial</a></tt>.
+<span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> &nbsp; <a href="objects.htm#3" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a> &nbsp; <a href="objects.htm#5" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3 id="14">SkeletonHelper</h3>
+Вспомогательный объект для помощи с визуализацией объекта <tt><a href="objects.htm#9" onmouseover="show('Skeleton');" onmouseout="hide()">Skeleton</a></tt>. Визуализация производится при помощи <tt><a href="materials.htm#1" onmouseover="show('LineBasicMaterial');" onmouseout="hide()">LineBasicMaterial</a></tt>.
 <div class="caption"><img src="img/skeletonHelper.png" width=600><br>
 Вспомогательный элемент для скелета</div><br>
 
@@ -466,26 +569,28 @@ helper.material.linewidth = 3;
 scene.add( helper );</pre>
 <h5>Другие примеры</h5>
 <pre><a href="https://threejs.org/examples/#webgl_animation_skinning_blending" target="_blank">animation / skinning / blending</a>
-<a href="https://threejs.org/examples/#wwebgl_animation_skinning_morph" target="_blank">animation / skinning / morph</a>
+<a href="https://threejs.org/examples/#webgl_animation_skinning_morph" target="_blank">animation / skinning / morph</a>
 <a href="https://threejs.org/examples/#webgl_loader_bvh" target="_blank">loader / bvh</a></pre><br>
 
 <h4>Конструктор</h4>
 <pre>SkeletonHelper( object )</pre>
 <div class=list><tt>object</tt> -- может быть любым объектом, имеющим в качестве вложенного объекта, массив "<a href="objects.htm#1" onmouseover="show('Bone')" onmouseout="hide()">костей</a>".<br>
-Например, <tt><a href="objects.htm#10" onmouseover="show('Skeleton');" onmouseout="hide()">Skeleton</a></tt> или <tt><a href="objects.htm#11" onmouseover="show('SkinnedMesh');" onmouseout="hide()">SkinnedMesh</a></tt>.</div><br>
+Например, <tt><a href="objects.htm#9" onmouseover="show('Skeleton');" onmouseout="hide()">Skeleton</a></tt> или <tt><a href="objects.htm#10" onmouseover="show('SkinnedMesh');" onmouseout="hide()">SkinnedMesh</a></tt>.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="12bones"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bones - кости');" onmouseout="hide()">.bones</a></span></pre>
-Список костей, которые вспомогательный элемент представляет как <a href="objects.htm#4" onmouseover="show('Line');" onmouseout="hide()">линии</a>.<br><br>
-<pre id="12root"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('root - корень');" onmouseout="hide()">.root</a></span></pre>
+<pre id="14bones"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bones - кости');" onmouseout="hide()">.bones</a></span></pre>
+Список "костей", которые вспомогательный элемент представляет как <a href="objects.htm#3" onmouseover="show('Line');" onmouseout="hide()">линии</a>.<br><br>
+
+<pre id="14root"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('root - корень');" onmouseout="hide()">.root</a></span></pre>
 Объект, переданный в конструктор.</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/SkeletonHelper.js" target="_blank">SkeletonHelper.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="core.htm#14" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
-<h3 id="13">SpotLightHelper</h3>
+<h3 id="15">SpotLightHelper</h3>
 Показывает вспомогательный объект в виде конуса для <a href="lights.htm#7" onmouseover="show('spotlight - прожектор');" onmouseout="hide()">SpotLight</a>.<br><br>
 
 <h4>Пример</h4>
@@ -499,35 +604,36 @@ scene.add( spotLightHelper );</pre>
 
 <h4>Конструктор</h4>
 <pre>SpotLightHelper( <a href="lights.htm#7" onmouseover="show('SpotLight.<br>light - освещение');" onmouseout="hide()">light</a>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span> )</pre>
-<div class=list><tt><a href="lights.htm#7" onmouseover="show('SpotLight.<br>light - освещение');" onmouseout="hide()">light</a></tt> -- <a href="lights.htm#7" onmouseover="show('spotlight - прожектор');" onmouseout="hide()">SpotLight</a>, конус света которого нужно показать.</div>
-<div class=list><tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
+<div class=list><tt>light</tt> -- <a href="lights.htm#7" onmouseover="show('SpotLight.<br>spotlight - прожектор');" onmouseout="hide()">прожектор</a>, конус света от которого нужно показать.</div>
+<div class=list><tt>color</tt> -- дополнительный, необязательный параметр, если он не установлен, вспомогательный элемент принимает цвет освещения.</div><br>
 
 <h4>Свойства</h4>
 Для информации об общих свойствах посмотрите базовый класс <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>.
 <div class=blockindent><br>
-<pre id="13color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
-Параметр цвета, переданный в конструктор. Значение по умолчанию <tt>undefined</tt>, т.е. не определено. Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове метода <tt><a href="#13update" onmouseover="show('SpotLightHelper.update')" onmouseout="hide()">update</a></tt>.<br><br>
+<pre id="15color"><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
+Параметр цвета, переданный в конструктор. Значение по умолчанию <tt>undefined</tt>, т.е. не определено.
+Если его изменить, цвет вспомогательного элемента будет обновлен при следующем вызове метода <tt><a href="#15update" onmouseover="show('SpotLightHelper.update')" onmouseout="hide()">update</a></tt>.<br><br>
 
-<pre id="13cone"><a href="objects.htm#5" onmouseover="show('LineSegments.<br>cone - конус')" onmouseout="hide()">.cone</a></pre>
+<pre id="15cone"><a href="objects.htm#5" onmouseover="show('LineSegments.<br>cone - конус')" onmouseout="hide()">.cone</a></pre>
 <a href="objects.htm#5" onmouseover="show('LineSegments')" onmouseout="hide()">Отрезки линий</a>, используемые для визуализации освещения.<br><br>
 
-<pre id="13light"><a href="lights.htm#7" onmouseover="show('SpotLight.<br>light - освещение');" onmouseout="hide()">.light</a></pre>
+<pre id="15light"><a href="lights.htm#7" onmouseover="show('SpotLight.<br>light - освещение');" onmouseout="hide()">.light</a></pre>
 Ссылка на визуализируемое <a href="lights.htm#7" onmouseover="show('SpotLight');" onmouseout="hide()">прожекторное освещение</a>.<br><br>
 
-<pre id="13matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица')" onmouseout="hide()">.matrix</a></span></pre>
+<pre id="15matrix"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix - матрица')" onmouseout="hide()">.matrix</a></span></pre>
 Ссылка на <tt><a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt>, визуализируемого прожекторного освещения.<br><br>
 
-<pre id="13matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы')" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+<pre id="15matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы')" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
 Смотрите описание <tt><a href="core.htm#14matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a></tt>.
 Установите здесь значение <tt>false</tt>, так как вспомогательный элемент использует <tt><a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">Object3D.matrixWorld</a></tt>, визуализируемого прожекторного освещения.</div><br>
 
 <h4>Методы</h4>
 Для информации об общих методах посмотрите базовый класс <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>.
 <div class=blockindent><br>
-<pre id="13dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
+<pre id="15dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, устранить, выбросить');" onmouseout="hide()">.dispose</a></span>()</pre>
 Метод удаляет <tt>SpotLightHelper</tt>.<br><br>
 
-<pre id="13update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+<pre id="15update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
 Обновление вспомогательного элемента для прожекторного освещения.</div><br>
 
 <h4>Исходники</h4>
@@ -535,10 +641,10 @@ scene.add( spotLightHelper );</pre>
 
 
 <span class="right_side"><a href="objects.htm#4" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a></span>
-<h3 id="14">VertexNormalsHelper</h3>
+<h3 id="16">VertexNormalsHelper</h3>
 Отображает <a href="#1" onmouseover="show('ArrowHelper');" onmouseout="hide()">стрелки</a> для визуализации векторов нормалей к вершинам объекта.
-Требуется, чтобы нормали были указаны в <a href="core.htm#1" onmouseover="show('BufferAttribute');" onmouseout="hide()">custom attribute</a> или были вычислены с помощью метода <a href="core.htm#7computeVertexNormals" onmouseover="show('Geometry.computeVertexNormals');" onmouseout="hide()">computeVertexNormals</a>.<br>
-В отличие от <a href="#6" onmouseover="show('FaceNormalsHelper');" onmouseout="hide()">FaceNormalsHelper</a>, данный класс работает с <a href="core.htm#2" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a>.
+Требуется, чтобы нормали были указаны в <a href="core.htm#1" onmouseover="show('BufferAttribute');" onmouseout="hide()">специальном атрибуте</a> или были вычислены с помощью метода <a href="core.htm#7computeVertexNormals" onmouseover="show('Geometry.computeVertexNormals');" onmouseout="hide()">computeVertexNormals</a>.<br>
+В отличие от <a href="#7" onmouseover="show('FaceNormalsHelper');" onmouseout="hide()">FaceNormalsHelper</a>, данный класс работает с <a href="core.htm#2" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a>.
 <div class="caption"><img src="img/normals.png" width=300><br>
 Нормали к вершинам (красные) и граням (зеленые)</div><br>
 
@@ -553,26 +659,30 @@ scene.add( helper );</pre>
 <pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL / helpers</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>VertexNormalsHelper( <a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">object</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">size</a></span>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - ширина линий');" onmouseout="hide()">linewidth</a></span> )</pre>
-<div class=list><tt><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">object</a></tt> -- объект, для которого нужно показать нормали вершин.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">size</a></span></tt> -- длина стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> -- шестнадцатиричное значение цвета стрелок. Значение по умолчанию равно <tt>0xff0000</tt>.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - ширина линий');" onmouseout="hide()">linewidth</a></span></tt> -- ширина линий стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div><br>
+<pre>VertexNormalsHelper( <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект');" onmouseout="hide()">object</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">size</a></span>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - ширина линий');" onmouseout="hide()">linewidth</a></span> )</pre>
+<div class=list><tt>object</tt> -- объект, для которого нужно показать нормали вершин.</div>
+<div class=list><tt>size</tt> -- длина стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+<div class=list><tt>color</tt> -- шестнадцатиричное значение цвета стрелок. Значение по умолчанию равно <tt>0xff0000</tt>.</div>
+<div class=list><tt>linewidth</tt> -- ширина линий стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно&nbsp;<tt>1</tt>.</div><br>
 
 <h4>Свойства</h4>
-Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
+Для информации об общих свойствах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
 <div class=blockindent><br>
-<pre id="14matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+<pre id="16matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
 Смотрите <a href="core.htm#14matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a>. Установите его как <tt>false</tt>, так как данный вспомогательный элемент использует <a href="core.htm#14matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a> объекта.<br><br>
-<pre id="14object"><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">.object</a></pre>
+
+<pre id="16object"><a href="core.htm#14" onmouseover="show('Object3D');" onmouseout="hide()">.object</a></pre>
 Объект, для которого нужно показать нормали вершин.<br><br>
-<pre id="14size"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">.size</a></span></pre>
+
+<pre id="16size"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">.size</a></span></pre>
 Длина стрелок. Значение по умолчанию равно <tt>1</tt>.</div><br>
+
 <h4>Методы</h4>
-Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#6" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
+Для информации об общих методах посмотрите базовый класс <tt><a href="objects.htm#5" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a></tt>.
 <div class=blockindent><br>
-<pre id="14update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+<pre id="16update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
 Обновляет представление нормалей вершин, основываясь на перемещении объекта.</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/VertexNormalsHelper.js" target="_blank">VertexNormalsHelper.js на github.com</a></div>
 <br><br>

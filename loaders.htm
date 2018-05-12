@@ -730,116 +730,116 @@ loader.load(
 
 
 <h3 id="13">Loader</h3>
-Base class for implementing loaders.
+Основной класс для реализации загрузчиков.<br><br>
 
 <h4>Конструктор</h4>
-<pre>Loader()</pre>
-Creates a new Loader. This should be called as base class.
+<pre>Loader( )</pre>
+Создает новый Loader. This should be called as base class.<br><br>
 
 <h4>Свойства</h4>
-<pre id="13onLoadStart">[property:Function onLoadStart]</pre>
-		<div>Will be called when load starts.</div>
-		<div>The default is a function with empty body.</div>
+<div class=blockindent><br>
+<pre id="13onLoadStart"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load start - на запуск загрузки')" onmouseout="hide()">.onLoadStart</a></span></pre>
+Функция будет вызываться при старте загрузки.<br>
+Значением по умолчанию является <span class="lnk" onmouseover="show('функция это синтаксическая конструкция<pre>function идентификатор(параметры) {<br>  инструкции<br>  return выражение<br>}</pre> где имеется:<br>&nbsp; &nbsp; ключевое слово function<br>&nbsp; &nbsp; идентификатор (обязательно)<br>&nbsp; &nbsp; список имён формальных параметров (и значений по<br>&nbsp; &nbsp; &nbsp; &nbsp; умолчанию) в круглых скобках разделенных запятыми<br>&nbsp; &nbsp; тело функции в фигурных скобках вида {}.')" onmouseout="hide()">функция с пустым телом</span>.<br><br>
 
-		<pre>[property:Function onLoadProgress]</pre>
-		<div>Will be called while load progresses.</div>
-		<div>The default is a function with empty body.</div>
+<pre id="13onLoadProgress"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load progress - на ход процесса загрузки')" onmouseout="hide()">.onLoadProgress</a></span></pre>
+Функция будет вызываться в процессе загрузки.<br>
+Значением по умолчанию является функция с пустым телом.<br><br>
 
-		<pre>[property:Function onLoadComplete]</pre>
-		<div>Will be called when load completes.</div>
-		<div>The default is a function with empty body.</div>
+<pre id="13onLoadComplete"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load complete - на завершение загрузки')" onmouseout="hide()">.onLoadComplete</a></span></pre>
+Функция будет вызываться по завершению загрузки.<br>
+Значением по умолчанию является функция с пустым телом.<br><br>
 
-		<pre>[property:string crossOrigin]</pre>
-		<div>
-		The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
-		</div>
+<pre id="13crossOrigin"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">.crossOrigin</a></span></pre>
+Строковое значение <tt>crossOrigin</tt> для реализации
+<a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>
+для загрузки url-адреса с другого домена, который предоставляет CORS.</div><br>
 
-  <h4>Методы</h4>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="13createMaterial"><a href="materials.htm#3" onmouseover="show('Material.<br>create material - создать материал')" onmouseout="hide()">.createMaterial</a>( <span onclick="showClick(type_object)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('m - сокращ. от material - материал')" onmouseout="hide()">m</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('texture path - путь к текстуре')" onmouseout="hide()">texturePath</a></span> )</pre>
+<div class=list><tt>m</tt> — параметра для создания материала.</div>
+<div class=list><tt>texturePath</tt> — базовый путь к текстурам.</div>
+Создает <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">материал</a> на основе параметров, переданных в аргументе <tt>m</tt>.<br><br>
 
-		<pre>[method:Material createMaterial]( [page:object m], [page:string texturePath] )</pre>
-		<div>
-		[page:Object m] — The parameters to create the material. <br>
-		[page:String texturePath] — The base path of the textures.
-		</div>
-		<div>
-		Creates the Material based on the parameters m.
-		</div>
-
-		<pre>[method:Array initMaterials]( [page:Array materials], [page:string texturePath] )</pre>
-		<div>
-		[page:Array materials] — an array of parameters to create materials. <br>
-		[page:String texturePath] —  The base path of the textures.
-		</div>
-		<div>
-		Creates an array of [page:Material] based on the array of parameters m. The index of the parameters decide the correct index of the materials.
-		</div>
-
-<pre>[method:String extractUrlBase]( [page:string url] )</pre>
-<div>[page:String url] —  The url to extract the base url from.</div>
-Extract the base from the URL.
+<pre id="13initMaterials"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('init materials - исходные материалы')" onmouseout="hide()">.initMaterials</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('materials - материалы')" onmouseout="hide()">materials</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('texture path - путь к текстуре')" onmouseout="hide()">texturePath</a></span> )</pre>
+<div class=list><tt>materials</tt> — массив параметров для создания материалов.</div>
+<div class=list><tt>texturePath</tt> — базовый путь к текстурам.</div>
+Создает массив <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">материалов</a> на основе параметров, переданных в аргументе <tt>materials</tt>. Индекс параметров определяет правильный индекс материалов.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/Loader.js" target="_blank">Loader.js на github.com</a></div><br><br>
 
 
 <h3 id="14">LoaderUtils</h3>
-An object with several loader utility functions.<br><br>
+Объект с некоторыми вспомогательными, загрузочными функциями.<br><br>
 
 <h4>Функции</h4>
 <div class=blockindent><br>
-<pre id="14decodeText">.decodeText ( array : TypedArray ) : String</pre>
-<div class=list>array — A stream of bytes as a typed array.</div>
-The function takes a stream of bytes as input and returns a string representation.<br><br>
+<pre id="14decodeText"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decode text - декодировать текст')" onmouseout="hide()">.decodeText</a></span>( <span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span> )</pre>
+<div class=list><tt>array</tt> — поток байтов как типизированный массив.</div>
+Функция в качестве входных данный принимает поток байтов и возвращает его строковое представление.<br><br>
 
-<pre id="14extractUrlBase">.extractUrlBase ( url : string ) : String</pre>
-<div class=list>url — The url to extract the base url from.</div>
-Extract the base from the URL.</div><br>
+<pre id="14extractUrlBase"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extract url base - извлечь основу url-адреса')" onmouseout="hide()">.extractUrlBase</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span> )</pre>
+<div class=list><tt>url</tt> — url-адрес, из которого извлекается основная часть.</div>
+Извлекает базовую часть URL-адреса.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/LoaderUtils.js" target="_blank">LoaderUtils.js на github.com</a></div><br><br>
 
 
 <h3 id="15">MaterialLoader</h3>
-A loader for loading a [page:Material] in JSON format.
-
-<h4>Конструктор</h4>
-<pre>MaterialLoader( [page:LoadingManager manager] )</pre>
-<div>[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
-Создает новый MaterialLoader.
-
-<h4>Методы</h4>
-<pre id="15load">[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
-<div>[page:String url] — required<br>
-		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Material].<br>
-		[page:Function onProgress] — Will be called while load progresses. The argument will be the progress event.<br>
-		[page:Function onError] — Will be called when load errors.</div>
-Begin loading from url and return the [page:Material] object that will contain the data.
-
-<pre>[method:Material parse]( [page:Object json] )</pre>
-<div>[page:Object json] — The json object containing the parameters of the Material.</div>
-Parse a <em>JSON</em> structure and create a new [page:Material] of the type [page:String json.type] with parameters defined in the json object.
-
+A loader for loading a [page:Material] in JSON format. This uses the FileLoader internally for loading files.<br><br>
 
 <h4>Пример</h4>
 <pre>// instantiate a loader
 var loader = new THREE.MaterialLoader();<br>
 // load a resource
 loader.load(
-	// resource URL
-	'path/to/material.json',
-	// Function when resource is loaded
-	function ( material ) {
-		object.material = material;
-	},
-	// Function called when download progresses
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
-	// Function called when download errors
-	function ( xhr ) {
-		console.log( 'An error happened' );
-	}
-);</pre>
+  // resource URL
+  'path/to/material.json',<br>
+  // onLoad callback
+  function ( material ) {
+    object.material = material;
+  },<br>
+  // onProgress callback
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+  },<br>
+  // onError callback
+  function ( err ) {
+    console.log( 'An error happened' );
+  }
+);</pre><br>
+
+<h4>Конструктор</h4>
+<pre>MaterialLoader( [page:LoadingManager manager] )</pre>
+<div>[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
+Создает новый MaterialLoader.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="15manager">.manager : LoadingManager</pre>
+The loadingManager the loader is using. Default is DefaultLoadingManager.<br><br>
+
+<pre id="15textures"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('textures - текстуры')" onmouseout="hide()">.textures</a></span></pre>
+Объект, содержащий любые текстуры, используемые материалом. Смотрите описание метода <tt><a href="#15setTextures" onmouseover="show('MaterialLoader.setTextures')" onmouseout="hide()">setTextures</a></tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="15load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь или URL-адрес к файлу. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<div class=list>[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Material].</div>
+<div class=list>[page:Function onProgress] — Will be called while load progresses. The argument will be the progress event.</div>
+<div class=list>[page:Function onError] — Will be called when load errors.</div>
+Begin loading from url and return the [page:Material] object that will contain the data.<br><br>
+
+<pre id="15parse">[method:Material parse]( [page:Object json] )</pre>
+<div class=list>[page:Object json] — The json object containing the parameters of the Material.</div>
+Parse a <em>JSON</em> structure and create a new [page:Material] of the type [page:String json.type] with parameters defined in the json object.<br><br>
+
+<pre id="15setTextures"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set textures - установить текстуры')" onmouseout="hide()">.setTextures</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('textures - текстуры')" onmouseout="hide()">textures</a></span> )</pre>
+<div class=list><tt>textures</tt> — объект, содержащий любые текстуры, используемые материалом.</div></div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/MaterialLoader.js" target="_blank">MaterialLoader.js на github.com</a></div><br><br>
@@ -939,12 +939,24 @@ loader.load(
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="17crossOrigin">[property:String crossOrigin]</pre>
-<div>default — *null*.</div>
-If set, assigns the *crossOrigin* attribute of the image to the value of *crossOrigin*, prior to starting the load.
-</div><br>
+<pre id="17crossOrigin"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">.crossOrigin</a></span>string</pre>
+
+If set, assigns the crossOrigin attribute of the image to the value of crossOrigin, prior to starting the load. Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
+
+<pre id="17manager">.manager : LoadingManager</pre>
+
+The loadingManager the loader is using. Default is DefaultLoadingManager.<br><br>
+
+<pre id="17path"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">.path</a></span></pre>
+
+The base path from which files will be loaded. See .setPath. Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
+
+<pre id="17withCredentials"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('with credentials - с учетными данными')" onmouseout="hide()">.withCredentials</a></span></pre>
+
+Whether the XMLHttpRequest uses credentials - see .setWithCredentials. Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
 
 <h4>Методы</h4>
+<div class=blockindent><br>
 <pre id="17load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
 <div class=list><tt><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span></tt>
 — путь или URL к файлу (обязательный аргумент). Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
@@ -957,36 +969,7 @@ If set, assigns the *crossOrigin* attribute of the image to the value of *crossO
 <div class=list><tt><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span></tt> — Функция, которая будет вызвана в случае ошибки при загрузке.</div>
 
 Begin loading from url and pass the loaded [page:Texture texture] to onLoad.
-
-<h4>Пример</h4>
-<pre>// instantiate a loader (создаем экземпляр загрузчика)
-var loader = new THREE.TextureLoader();<br>
-// load a resource (загружаем ресурс)
-loader.load(
-	// resource URL (URL-адрес ресурса)
-	'textures/land_ocean_ice_cloud_2048.jpg',
-	// Function when resource is loaded
-    // функция, вызываемая после загрузки ресурса
-	function ( texture ) {
-		// do something with the texture
-		var material = new THREE.MeshBasicMaterial( {
-			map: texture
-		 } );
-	},
-	// Function called when download progresses
-	// функция, вызываемая в процессе загрузки
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
-	// Function called when download errors
-	// функция, вызываемая в случае ошибок загрузки
-	function ( xhr ) {
-		console.log( 'An error happened' );
-	}
-);</pre>
-
-		[example:canvas_geometry_earth]
-<br><br>
+</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/TextureLoader.js" target="_blank">TextureLoader.js на github.com</a></div><br><br>

@@ -734,7 +734,7 @@ loader.load(
 
 <h4>Конструктор</h4>
 <pre>Loader( )</pre>
-Создает новый Loader. This should be called as base class.<br><br>
+Создает новый Loader. Он будет вызываться как базовый класс.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
@@ -789,26 +789,26 @@ loader.load(
 
 
 <h3 id="15">MaterialLoader</h3>
-A loader for loading a [page:Material] in JSON format. This uses the FileLoader internally for loading files.<br><br>
+Загрузчик для загрузки <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">Material</a> в формате <span class="lnk" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">JSON</span>. Внутри себя для загрузки файлов он использует <a href="#8" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br><br>
 
 <h4>Пример</h4>
-<pre>// instantiate a loader
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
 var loader = new THREE.MaterialLoader();<br>
-// load a resource
+// load a resource (загружаем ресурс)
 loader.load(
-  // resource URL
-  'path/to/material.json',<br>
-  // onLoad callback
+  // resource URL (URL-адрес ресурса)
+  'путь/к/material.json',<br>
+  // onLoad callback (функция обратного вызова на окончание загрузки)
   function ( material ) {
     object.material = material;
   },<br>
-  // onProgress callback
+  // onProgress callback (функция обратного вызова в процессе загрузки)
   function ( xhr ) {
     console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
   },<br>
-  // onError callback
+  // onError callback (функция обратного вызова на ошибки загрузки)
   function ( err ) {
-    console.log( 'An error happened' );
+    console.log( 'Произошла ошибка' );
   }
 );</pre><br>
 
@@ -829,13 +829,13 @@ The loadingManager the loader is using. Default is DefaultLoadingManager.<br><br
 <div class=blockindent><br>
 <pre id="15load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
 <div class=list><tt>url</tt> — путь или URL-адрес к файлу. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
-<div class=list>[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Material].</div>
-<div class=list>[page:Function onProgress] — Will be called while load progresses. The argument will be the progress event.</div>
-<div class=list>[page:Function onError] — Will be called when load errors.</div>
-Begin loading from url and return the [page:Material] object that will contain the data.<br><br>
+<div class=list><tt>onLoad</tt> — функция, вызываемая по завершению загрузки.Её аргументом будет загруженный <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.</div>
+<div class=list><tt>onProgress</tt> — функция, вызываемая во время процесса загрузки.</div>
+<div class=list><tt>onError</tt> — функция, вызываемая при ошибках загрузки.</div>
+Метод начинает загрузку с указанного url-адреса (аргумент <tt>url</tt>) и возвращает объект <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>, содержащий данные.<br><br>
 
-<pre id="15parse">[method:Material parse]( [page:Object json] )</pre>
-<div class=list>[page:Object json] — The json object containing the parameters of the Material.</div>
+<pre id="15parse"><a href="materials.htm#3" onmouseover="show('Material.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — объект в формате json, содержащий параметры материала. object containing the parameters of the Material.</div>
 Parse a <em>JSON</em> structure and create a new [page:Material] of the type [page:String json.type] with parameters defined in the json object.<br><br>
 
 <pre id="15setTextures"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set textures - установить текстуры')" onmouseout="hide()">.setTextures</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('textures - текстуры')" onmouseout="hide()">textures</a></span> )</pre>
@@ -846,53 +846,125 @@ Parse a <em>JSON</em> structure and create a new [page:Material] of the type [pa
 
 
 <h3 id="16">ObjectLoader</h3>
-A loader for loading a JSON resource. Unlike the [page:JSONLoader], this one make use of the <em>.type</em> attributes of objects to map them to their original classes.
-
-<h4>Конструктор</h4>
-<pre>ObjectLoader( [page:LoadingManager manager] )</pre>
-		<div>
-		[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].
-		</div>
-Создает новый ObjectLoader.
-
-<h4>Свойства</h4>
-
-<h4>Методы</h4>
-<pre id="16load">[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
-		<div>
-		[page:String url] — required<br>
-		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Object3D object].<br>
-		[page:Function onProgress] — Will be called while load progresses. The argument will be the XmlHttpRequest instance, that contain .[page:Integer total] and .[page:Integer loaded] bytes.<br>
-		[page:Function onError] — Will be called when load errors.<br>
-		</div>
-		<div>
-		Begin loading from url and call onLoad with the parsed response content.
-		</div>
-
-
-		<pre>[method:Object3D parse]( [page:Object json] )</pre>
-		<div>
-		[page:Object json] — required. The JSON source to parse<br>
-		</div>
-		<div>
-		Parse a <em>JSON</em> content and return a threejs object.
-		</div>
-
-		<pre>[method:null setCrossOrigin]( [page:String value] )</pre>
-		<div>
-		[page:String value] — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
-		</div>
-
+A loader for loading a JSON resource. Unlike the [page:JSONLoader], this one make use of the <em>.type</em> attributes of objects to map them to their original classes.<br><br>
 
 <h4>Пример</h4>
-<pre>// instantiate a loader (создаем экземпляр загрузчика)
-var loader = new THREE.ObjectLoader();<br>
-// assuming we loaded a JSON structure from elsewhere
-// предполагаем, что структура JSON загружена из другого места
+<pre>var loader = new THREE.ObjectLoader();<br>
+loader.load(
+  // resource URL
+  "models/json/example.json",<br>
+  // onLoad callback
+  // Here the loaded data is assumed to be an object
+  function ( obj ) {
+    // Add the loaded object to the scene
+    scene.add( obj );
+  },<br>
+  // onProgress callback
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+  },<br>
+  // onError callback
+  function ( err ) {
+    console.error( 'An error happened' );
+  }
+);<br><br>
+// Alternatively, to parse a previously loaded JSON structure
 var object = loader.parse( a_json_object );<br>
 scene.add( object );</pre>
 
-		[example:webgl_loader_msgpack]
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_animation_scene" target="_blank">WebGL / animation / scene</a>
+<a href="https://threejs.org/examples/#webgl_loader_json_claraio" target="_blank">WebGL / loader / json / claraio</a>
+<a href="https://threejs.org/examples/#webgl_loader_msgpack" target="_blank">WebGL / loader / msgpack</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>ObjectLoader( [page:LoadingManager manager] )</pre>
+<div class=list>[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
+Создает новый ObjectLoader.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="16crossOrigin">.crossOrigin : String</pre>
+If set, assigns the crossOrigin attribute of the image to the value of crossOrigin, prior to starting the load. Default is undefined.<br><br>
+
+<pre id="16manager">.manager : LoadingManager</pre>
+The loadingManager the loader is using. Default is DefaultLoadingManager.<br><br>
+
+<pre id="16texturePath">.texturePath : String</pre>
+The base path or URL from which textures will be loaded. See .setTexturePath. Default is the empty string.</div><br>
+
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="16load">[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
+<div class=list>[page:String url] — required</div>
+<div class=list>[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Object3D object].</div>
+<div class=list>[page:Function onProgress] — Will be called while load progresses. The argument will be the XmlHttpRequest instance, that contain .[page:Integer total] and .[page:Integer loaded] bytes.</div>
+<div class=list>[page:Function onError] — Will be called when load errors.</div>
+Begin loading from url and call onLoad with the parsed response content.<br><br>
+
+<pre id="16parse">[method:Object3D parse]( [page:Object json] )</pre>
+<div class=list>[page:Object json] — required. The JSON source to parse</div>
+Parse a <em>JSON</em> content and return a threejs object.<br><br>
+
+<pre id="16parseGeometries">.parseGeometries ( json : Object ) : Object3D</pre>
+
+<div class=list>json — required. The JSON source to parse.</div>
+
+This is used .parse to parse any geometries or buffer geometries in the JSON structure. Internally it uses JSONLoader for geometries and BufferGeometryLoader for buffer geometries.<br><br>
+
+<pre id="16parseMaterials">.parseMaterials ( json : Object ) : Object3D</pre>
+
+<div class=list>json — required. The JSON source to parse.</div>
+
+This is used .parse to parse any materials in the JSON structure using MaterialLoader.<br><br>
+
+<pre id="16parseAnimations">.parseAnimations ( json : Object ) : Object3D</pre>
+
+<div class=list>json — required. The JSON source to parse.</div>
+
+This is used .parse to parse any animations in the JSON structure, using AnimationClip.parse.<br><br>
+
+<pre id="16parseImages">.parseImages ( json : Object ) : Object3D</pre>
+
+<div class=list>json — required. The JSON source to parse.</div>
+
+This is used .parse to parse any images in the JSON structure, using ImageLoader.<br><br>
+
+<pre id="16parseTextures">.parseTextures ( json : Object ) : Object3D</pre>
+
+<div class=list>json — required. The JSON source to parse.</div>
+
+This is used .parse to parse any textures in the JSON structure.<br><br>
+
+<pre id="16parseObject">.parseObject ( json : Object ) : Object3D</pre>
+
+<div class=list>json — required. The JSON source to parse.</div>
+
+This is used .parse to parse any objects in the JSON structure. Объекты могут быть следующих типов:
+<div class=blockindent><div class=list><a href="scenes.htm#3">Scene</a></div>
+<div class=list><a href="cameras.htm#4">PerspectiveCamera</a></div>
+<div class=list><a href="cameras.htm#3">OrthographicCamera</a></div>
+<div class=list><a href="lights.htm#1">AmbientLight</a></div>
+<div class=list><a href="lights.htm#2">DirectionalLight</a></div>
+<div class=list><a href="lights.htm#5">PointLight</a></div>
+<div class=list><a href="lights.htm#7">SpotLight</a></div>
+<div class=list><a href="lights.htm#3">HemisphereLight</a></div>
+<div class=list><a href="objects.htm#7">Mesh</a></div>
+<div class=list><a href="objects.htm#6">LOD</a></div>
+<div class=list><a href="objects.htm#3">Line</a></div>
+<div class=list><a href="objects.htm#5">LineSegments</a></div>
+<div class=list><a href="objects.htm#8">Points</a></div>
+<div class=list><a href="objects.htm#11">Sprite</a></div>
+<div class=list><a href="objects.htm#2">Group</a></div>
+<div class=list><a href="core.htm#14">Object3D</a></div></div><br>
+
+
+<pre id="16setCrossOrigin">[method:null setCrossOrigin]( [page:String value] )</pre>
+<div class=list>[page:String value] — The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.</div>
+
+<pre id="16setTexturePath">.setTexturePath ( value : String ) : ObjectLoader</pre>
+<div class=list>value — The base path or URL from which textures will be loaded.</div></div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/ObjectLoader.js" target="_blank">ObjectLoader.js на github.com</a></div><br><br>

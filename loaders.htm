@@ -77,8 +77,7 @@ loader.load(
 <div class=blockindent><br>
 <pre id="1load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
 <div class=list><tt>url</tt> — путь или URL к файлу. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
-<!-- https://ru.wikipedia.org/wiki/URI
-https://ru.wikipedia.org/wiki/Data:_URL -->
+<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
 <div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженная <a href="animation.htm#1" onmouseover="show('Animation')" onmouseout="hide()">анимация</a>.</div>
 <div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
@@ -523,7 +522,7 @@ loader.load(
 <pre id="8setWithCredentials"><a href="#8" onmouseover="show('FileLoader.<br>set with credentials - установить с учетными данными')" onmouseout="hide()">.setWithCredentials</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
 Метод устанавливает, будет ли <a href="https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest" target="_blank">XMLHttpRequest</a> использовать учетные данные, такие как куки, заголовки авторизации или <a href="https://ru.wikipedia.org/wiki/TLS" target="_blank">клиентские сертификаты TLS</a>.
 Смотрите описание <tt><a href="https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest/withCredentials" target="_blank">XMLHttpRequest.withCredentials</a></tt>.<br>
-Обратите внимание, что метод не действует, если файлы загружаются локалльно или из одного и того же домена.</div><br>
+Обратите внимание, что метод не действует, если файлы загружаются локально или из одного и того же домена.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/FileLoader.js" target="_blank">FileLoader.js на github.com</a></div><br><br>
@@ -668,39 +667,36 @@ loader.load(
 
 
 <h3 id="11">ImageLoader</h3>
-Загрузчик для загрузки [page:Image].
-A loader for loading an Image. This uses the FileLoader internally for loading files, and is used internally by the CubeTextureLoader, ObjectLoader and TextureLoader.<br><br>
+Загрузчик для загрузки изображений. Для загрузки файлов, внутри класса используется <a href="#8" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>,
+а также данный загрузчик используется внутри <a href="#6" onmouseover="show('CubeTextureLoader')" onmouseout="hide()">CubeTextureLoader</a>, <a href="#16" onmouseover="show('ObjectLoader)" onmouseout="hide()">ObjectLoader</a> и <a href="#17" onmouseover="show('TextureLoader')" onmouseout="hide()">TextureLoader</a>.<br><br>
 
 <h4>Пример</h4>
-<pre>// instantiate a loader
-var loader = new THREE.ImageLoader();
-
-// load a image resource
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.ImageLoader();<br>
+// load a image resource (загрузка ресурса)
 loader.load(
-	// resource URL
-	'textures/skyboxsun25degtest.png',
-
-	// onLoad callback
-	function ( image ) {
-		// use the image, e.g. draw part of it on a canvas
-		var canvas = document.createElement( 'canvas' );
-		var context = canvas.getContext( '2d' );
-		context.drawImage( image, 100, 100 );
-	},
-
-	// onProgress callback currently not supported
-	undefined,
-
-	// onError callback
-	function () {
-		console.error( 'An error happened.' );
-	}
+  // resource URL (URL-адрес ресурса)
+  'textures/skyboxsun25degtest.png',<br>
+  // onLoad callback (функция обратного вызова, вызываемая по окончании загрузки)
+  function ( image ) {
+    // use the image, e.g. draw part of it on a canvas
+    // используем изображение, например прорисовываем его часть на canvas (холсте)
+    var canvas = document.createElement( 'canvas' );
+    var context = canvas.getContext( '2d' );
+    context.drawImage( image, 100, 100 );
+  },<br>
+  // onProgress callback currently not supported
+  // функция обратного вызова, вызываемая в процессе загрузки, в настоящий момент не поддерживается
+  undefined,<br>
+  // onError callback (функция обратного вызова, вызываемая при ошибке)
+  function () {
+    console.error( 'Произошла ошибка.' );
+  }
 );</pre>
+Обратите внимание, что версия <em>three.js</em> r84 для ImageLoader прекратила поддержку событий на ход процесса (on progress). Для ImageLoader с поддержкой событий ход процесса, смотрите <a href="https://github.com/mrdoob/three.js/issues/10439#issuecomment-275785639" target="_blank">эту тему</a>.
 <h5>Другие примеры</h5>
 <pre><a href="https://threejs.org/examples/#webgl_loader_obj" target="_blank">WebGL / loader / obj</a>
-<a href="https://threejs.org/examples/#webgl_shaders_ocean" target="_blank">WebGL / shaders / ocean</a></pre>
-
-Please note three.js r84 dropped support for ImageLoader progress events. For an ImageLoader that supports progress events, see this thread.<br><br>
+<a href="https://threejs.org/examples/#webgl_shaders_ocean" target="_blank">WebGL / shaders / ocean</a></pre><br>
 
 <h4>Конструктор</h4>
 <pre>ImageLoader( <a href="#18.2" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
@@ -710,51 +706,64 @@ Please note three.js r84 dropped support for ImageLoader progress events. For an
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="11crossOrigin">[property:String crossOrigin]</pre>
-The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.</div><br>
+<pre id="11crossOrigin"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">.crossOrigin</a></span></pre>
+Если значение свойства установлено, то перед началом загрузки атрибуту изображения <tt><a href="https://developer.mozilla.org/ru/docs/Web/HTML/CORS_settings_attributes" target="_blank">crossOrigin</a></tt> присваивается значение данного свойства <tt>crossOrigin</tt>.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
+
+<pre id="11manager"><a href="#18.2" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">.manager</a></pre>
+<a href="#18.2" onmouseover="show('LoadingManager')" onmouseout="hide()">Менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="#18.1" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.<br><br>
+
+<pre id="11path"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">.path</a></span></pre>
+Базовый путь к расположению, из которого будут загружаться файлы. Смотрите описание метода <tt><a href="#11setPath" onmouseover="show('ImageLoader.setPath')" onmouseout="hide()">setPath</a></tt>.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="11load">[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
-<div class=list>[page:String url] — required</div>
-<div class=list>[page:Function onLoad] — Will be called when load completes. The argument will be the loaded [page:Image image].</div>
-<div class=list>[page:Function onProgress] — Will be called while load progresses. The argument will be the progress event.</div>
-<div class=list>[page:Function onError] — Will be called when load errors.</div>
-Begin loading from url and return the [page:Image image] object that will contain the data.
+<pre id="11load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь к файлу или URL-адрес файла. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженное изображение.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет событие в ходе процесса загрузки.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Метод начинает загрузку из источника (аргумент <tt>url</tt>) и возвращает объект <tt>Image</tt>, который будет содержать данные.<br><br>
 
-<pre id="11setCrossOrigin">[method:null setCrossOrigin]( [page:String value] )</pre>
-<div class=list>[page:String value] — The crossOrigin string.</div>
-The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.</div><br>
+<pre id="11setCrossOrigin"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set cross origin - установить')" onmouseout="hide()">.setCrossOrigin</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+Метод устанавливает атрибут свойства <tt><a href="#11crossOrigin" onmouseover="show('ImageLoader.crossOrigin')" onmouseout="hide()">crossOrigin</a></tt>.<br><br>
+
+<pre id="11setPath"><a href="#8" onmouseover="show('FileLoader.<br>set path - установить путь')" onmouseout="hide()">.setPath</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span> )</pre>
+Метод устанавливает базовый путь или URL-адрес, с которого загружаются файлы. При загрузке множества изображений из одного и того же адреса, он может быть полезен.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/ImageLoader.js" target="_blank">ImageLoader.js на github.com</a></div><br><br>
 
 
 <h3 id="12">JSONLoader</h3>
-Загрузчик для загрузки объектов в JSON формате. Для загрузки файлов, внутри класса используется <a href="#8" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br><br>
+Загрузчик для загрузки объектов в <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">JSON</a> формате. Для загрузки файлов, внутри класса используется <a href="#8" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br><br>
 
 <h4>Пример</h4>
-<pre>// instantiate a loader
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
 var loader = new THREE.JSONLoader();<br>
-// load a resource
+// load a resource (загрузка ресурса)
 loader.load(
-  // resource URL
+  // resource URL (URL-адрес ресурса)
   'models/animated/monster/monster.js',<br>
-  // onLoad callback
+  // onLoad callback (функция обратного вызова, вызываемая по окончании загрузки)
   function ( geometry, materials ) {
     var material = materials[ 0 ];
     var object = new THREE.Mesh( geometry, material );
     scene.add( object );
   },<br>
-  // onProgress callback
+  // onProgress callback (функция обратного вызова, вызываемая в процессе загрузки)
   function ( xhr ) {
     console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
   },<br>
-  // onError callback
+  // onError callback (функция обратного вызова, вызываемая при ошибке)
   function( err ) {
-    console.log( 'An error happened' );
+    console.log( 'Произошла ошибка' );
   }
-)</pre>
+);</pre>
 <h5>Другие примеры</h5>
 <pre><a href="https://threejs.org/examples/#webgl_loader_json_blender" target="_blank">WebGL / loader / json / blender</a>
 <a href="https://threejs.org/examples/#webgl_loader_json_objconverter" target="_blank">WebGL / loader / json / objconverter</a></pre><br>
@@ -765,39 +774,32 @@ loader.load(
 Значением по умолчанию является <a href="#18.1" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 Создает новый JSONLoader.<br><br>
 
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="12manager"><a href="#18.2" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">.manager</a></pre>
+<a href="#18.2" onmouseover="show('LoadingManager')" onmouseout="hide()">Менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="#18.1" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.<br><br>
+
+<pre id="12withCredentials"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('with credentials - с учетными данными')" onmouseout="hide()">.withCredentials</a></span></pre>
+Свойство определяет, использует ли XMLHttpRequest учетные данные. Значением по умолчанию является <tt>false</tt>.</div><br>
+
 <h4>Методы</h4>
-<pre id="12load">[method:null load]( [page:String url], [page:Function onLoad], [page:Function onProgress], [page:Function onError] )</pre>
-<div class="blockindent">[page:String url] — required.<br>
-		[page:Function onLoad] — Will be called when load completes. The argument will be the loaded text response.<br>
-		[page:Function onProgress] — Will be called while load progresses. The argument will be the XmlHttpRequest instance, that contain .[page:Integer total] and .[page:Integer loaded] bytes.<br>
-		[page:Function onError] — Will be called when load errors.</div>
-Begin loading from url and pass the <em>JSON</em> to onLoad.
+<div class=blockindent><br>
+<pre id="12load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь к файлу или URL-адрес файла. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженное изображение.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки. Аргументом будет загруженный объект JSON.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Метод начинает загрузку из источника (аргумент <tt>url</tt>) и передает объект <tt>JSON</tt> функции, указанной в аргументе <tt>onLoad</tt>.<br><br>
 
-<pre>[method:null setTexturePath]( [page:String texturePath] )</pre>
-<div class="blockindent">[page:String texturePath] — Base path for textures.</div>
-Set the base path for textures.
+<pre id="12setTexturePath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture path - установить путь к текстуре')" onmouseout="hide()">.setTexturePath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('texture path - путь к текстуре')" onmouseout="hide()">texturePath</a></span> )</pre>
+Метод устанавливает базовый путь или URL-адрес, с которого загружаются файлы. При загрузке множества файлов из одного и того же адреса, он может быть полезен.<br><br>
 
-<pre>[method:Object3D parse]( [page:Object json], [page:String texturePath] )</pre>
-<div class="blockindent">[page:String json] — JSON object to parse.<br>
-		[page:String texturePath] — Base path for textures.</div>
-Parse a <em>JSON</em> structure and return an [page:object] containing the parsed [page:Geometry geometry] and [page:Array materials].
-
-<h4>Пример</h4>
-<pre>// instantiate a loader
-var loader = new THREE.JSONLoader();<br>
-// load a resource
-loader.load(
-	// resource URL
-	'models/animated/monster/monster.js',
-	// Function when resource is loaded
-	function ( geometry, materials ) {
-		var material = new THREE.MultiMaterial( materials );
-		var object = new THREE.Mesh( geometry, material );
-		scene.add( object );
-	}
-);</pre>
-
-[example:webgl_loader_json_blender]
+<pre id="12parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, структурный анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick('объект JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('texture path - путь к текстуре')" onmouseout="hide()">texturePath</a></span> )</pre>
+<div class=list><tt>json</tt> — объект JSON для синтаксического анализа (обязательный аргумент).</div>
+<div class=list><tt>texturePath</tt> — базовый путь к текстурам.</div>
+Анализирует (разбирает) JSON-структуру и возвращает объект, содержащий разобранные <a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">геометрические элементы</a> и массив <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">материалов</a>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/JSONLoader.js" target="_blank">JSONLoader.js на github.com</a></div><br>
@@ -887,8 +889,9 @@ loader.load(
 );</pre><br>
 
 <h4>Конструктор</h4>
-<pre>MaterialLoader( [page:LoadingManager manager] )</pre>
-<div>[page:LoadingManager manager] — The [page:LoadingManager loadingManager] for the loader to use. Default is [page:LoadingManager THREE.DefaultLoadingManager].</div>
+<pre>MaterialLoader( <a href="#18.2" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="#18.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="#18.1" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 Создает новый MaterialLoader.<br><br>
 
 <h4>Свойства</h4>
@@ -910,8 +913,8 @@ loader.load(
 Метод начинает загрузку с указанного url-адреса (аргумент <tt>url</tt>) и возвращает объект <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>, содержащий данные.<br><br>
 
 <pre id="15parse"><a href="materials.htm#3" onmouseover="show('Material.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
-<div class=list><tt>json</tt> — объект в формате json, содержащий параметры материала. object containing the parameters of the Material.</div>
-Parse a <em>JSON</em> structure and create a new [page:Material] of the type [page:String json.type] with parameters defined in the json object.<br><br>
+<div class=list><tt>json</tt> — объект в формате JSON, содержащий параметры <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">материала</a>.</div>
+Метод проводит синтаксический анализ (разбор) JSON-структуры и создает новый <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">материал</a> of the type [page:String json.type] с параметрами, определенными в объекте JSON.<br><br>
 
 <pre id="15setTextures"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set textures - установить текстуры')" onmouseout="hide()">.setTextures</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('textures - текстуры')" onmouseout="hide()">textures</a></span> )</pre>
 <div class=list><tt>textures</tt> — объект, содержащий любые текстуры, используемые материалом.</div></div><br>
@@ -929,24 +932,26 @@ Parse a <em>JSON</em> structure and create a new [page:Material] of the type [pa
 <h4>Пример</h4>
 <pre>var loader = new THREE.ObjectLoader();<br>
 loader.load(
-  // resource URL
+  // resource URL (URL-адрес ресурса)
   "models/json/example.json",<br>
-  // onLoad callback
-  // Here the loaded data is assumed to be an object
+  // onLoad callback (функция обратного вызова на окончание загрузки)
+  // Here the loaded data is assumed to be an object 
+  // здесь предполагается, что загруженные данные являются объектом
   function ( obj ) {
-    // Add the loaded object to the scene
+    // Add the loaded object to the scene (добавляем загруженный объект на сцену)
     scene.add( obj );
   },<br>
-  // onProgress callback
+  // onProgress callback (функция обратного вызова в процессе загрузки)
   function ( xhr ) {
     console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
   },<br>
-  // onError callback
+  // onError callback (функция обратного вызова при ошибках загрузки)
   function ( err ) {
-    console.error( 'An error happened' );
+    console.error( 'Произошла ошибка' );
   }
 );<br><br>
 // Alternatively, to parse a previously loaded JSON structure
+// Также можно проанализировать ранее загруженную JSON-структуру
 var object = loader.parse( a_json_object );<br>
 scene.add( object );</pre>
 
@@ -988,7 +993,7 @@ scene.add( object );</pre>
 <pre id="16parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span> )</pre>
 <div class=list><tt>json</tt> — исходник JSON для синтаксического анализа (обязательный аргумент).</div>
 <div class=list><tt>onLoad</tt> — функция, вызываемая после завершения синтаксического анализа (разбора). Её аргументом будет разобранный объект.</div>
-Метод производит синтаксический анализ содержимого <tt>json</tt> и возвращает объект threejs.
+Метод производит синтаксический анализ содержимого <tt>json</tt> и возвращает объект <em>threejs</em>.
 Он используется внутри метода <tt><a href="#16load" onmouseover="show('ObjectLoader.load')" onmouseout="hide()">load</a></tt>, но также может использоваться напрямую для синтаксического анализа ранее загруженной JSON-структуры.<br><br>
 
 <pre id="16parseGeometries"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse geometries - разбор, синтаксический<br>анализ геометрических элементов')" onmouseout="hide()">.parseGeometries</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
@@ -1077,7 +1082,7 @@ loader.load(
     console.error( 'An error happened.' );
   }
 );</pre>
-Обратите внимание, что версия three.js r84 для TextureLoader прекратила поддержку событий на ход процесса (on progress). Для TextureLoader с поддержкой событий ход процесса, смотрите <a href="https://github.com/mrdoob/three.js/issues/10439#issuecomment-293260145" target="_blank">эту тему</a>.
+Обратите внимание, что версия <em>three.js</em> r84 для ImageLoader прекратила поддержку событий на ход процесса (on progress). Для TextureLoader с поддержкой событий ход процесса, смотрите <a href="https://github.com/mrdoob/three.js/issues/10439#issuecomment-293260145" target="_blank">эту тему</a>.
 <h5>Другие примеры</h5>
 <pre><a href="https://threejs.org/examples/#webgl_geometry_cube" target="_blank">WebGL / geometry / cube</a></pre><br>
 
@@ -1126,7 +1131,7 @@ Whether the XMLHttpRequest uses credentials - see .setWithCredentials. Знач�
 <pre id="17setWithCredentials"><a href="#17" onmouseover="show('TextureLoader.<br>set with credentials - установить с учетными данными')" onmouseout="hide()">.setWithCredentials</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
 Метод устанавливает, будет ли <a href="https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest" target="_blank">XMLHttpRequest</a> использовать учетные данные, такие как куки, заголовки авторизации или <a href="https://ru.wikipedia.org/wiki/TLS" target="_blank">клиентские сертификаты TLS</a>.
 Смотрите описание <tt><a href="https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest/withCredentials" target="_blank">XMLHttpRequest.withCredentials</a></tt>.<br>
-Обратите внимание, что метод не действует, если файлы загружаются локалльно или из одного и того же домена.</div><br>
+Обратите внимание, что метод не действует, если файлы загружаются локально или из одного и того же домена.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/TextureLoader.js" target="_blank">TextureLoader.js на github.com</a></div><br><br>

@@ -413,7 +413,7 @@ MeshBasicMaterial плоский (flat) и каркасный (wireframe).</div>
 <pre id="4alphaMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>alpha map - карта альфа-канала,<br>т.е. карта прозрачности')" onmouseout="hide()">.alphaMap</a></pre>
 Альфа-карта представляет собой текстуру в оттенках серого, которая управляет непрозрачностью по всей поверхности (черный цвет: полностью прозрачный; белый: полностью непрозрачный). Значением по умолчанию является <tt>null</tt>.<br>
 Используется только цвет текстуры, альфа-канал (если он существует) игнорируется.
-Для текстур <a href="https://ru.wikipedia.org/wiki/RGB" target="_blank">RGB</a> и <a href="https://en.wikipedia.org/wiki/RGBA_color_space" target="_blank">RGBA</a> визуализатор <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> будет использовать канал зеленого цвета
+Для текстур <a href="https://ru.wikipedia.org/wiki/RGB" target="_blank">RGB</a> и <a href="https://en.wikipedia.org/wiki/RGBA_color_space" target="_blank">RGBA</a> визуализатор <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> будет использовать канал зеленого цвета при дискретизации этой текстуры, из-за
 For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats.
 из-за дополнительного бита точности, предоставляемого зеленым каналом, в сжатом DXT и несжатом RGB 565 форматах.
 Текстуры только с каналом яркости и яркости/прозрачности (альфа-канал) также будут работать как и ожидалось.
@@ -505,7 +505,7 @@ Define whether the material uses skinning. Значением по умолча�
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="5">MeshDepthMaterial</h3>
-Материал для рисования геометрических элементов фигуры в глубину. Глубина зависит от ближней и дальней плоскостей отсечения камеры. Белый - самый ближний, черный - самый дальний.
+Материал для рисования геометрических элементов фигуры в глубину. Глубина зависит от ближней и дальней плоскостей отсечения камеры. Чем белее цвет, тем ближе находится элемент фигуры, чем темнее - тем дальше.
 <div class="caption"><img src="img/MeshDepthMaterial.png" width=700><br>
 MeshDepthMaterial плоский (flat) и каркасный (wireframe).</div><br>
 
@@ -518,22 +518,29 @@ MeshDepthMaterial плоский (flat) и каркасный (wireframe).</div>
 <h4>Свойства</h4>
 Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
-<pre id="5alphaMap">.alphaMap</a></pre>
-The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.<br>
+<pre id="5alphaMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>alpha map - карта альфа-канала')" onmouseout="hide()">.alphaMap</a></pre>
+Карта значений альфа-канала (карта прозрачности) - это текстура оттенков серого, которая управляет непрозрачностью всей поверхности (черный цвет: полная прозрачность; белый цвет: полная непрозрачность).
+Значением по умолчанию является <tt>null</tt>.<br>
+Используется только цвет текстуры, если существует альфа-канал, то он игнорируется.
+Для текстур в формате RGB и RGBA, при выборке этой текстуры визуализатор WebGL будет использовать канал зеленого цвета из-за дополнительного бита точности,
+предоставляемого для зеленого цвета в сжатом <a href="constants.htm#7.7" onmouseover="show('форматы сжатия текстур DDS / ST3C')" onmouseout="hide()">DXT формате</a> и упаковке в <a href="constants.htm#7.5" onmouseover="show('типы упаковки')" onmouseout="hide()">формате RGB 565</a>.
+Форматы текстур только <a href="constants.htm#7.6" onmouseover="show('форматы')" onmouseout="hide()">яркости и яркости+альфа-канала</a> также будут работать должным образом.<br><br>
 
-Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.<br><br>
+<pre id="5depthPacking"><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth packing - упаковка (значений) глубины')" onmouseout="hide()">.depthPacking</a></span></pre>
+Кодирование для упаковки значений глубины. Значением по умолчанию является <tt><a href="constants.htm#7" onmouseover="show('Константы текстур.<br>BasicDepthPacking')" onmouseout="hide()">BasicDepthPacking</a></tt>.<br><br>
 
-<pre id="5depthPacking">.depthPacking</a></pre>
-Encoding for depth packing. Default is BasicDepthPacking.<br><br>
-
-<pre id="5displacementMap">.displacementMap</a></pre>
+<pre id="5displacementMap"><a href="textures.htm#6" onmouseover="show('Texture.<br>displacement map - карта сдвига')" onmouseout="hide()">.displacementMap</a></pre>
+Карта сдвига влияет на положение вершин сетки (mesh).
+В отличие от других карт, влияющих только на свет и тень материала, сдвиг вершин может отбрасывать тени, блокировать другие объекты, а то и действовать как реальные геометрические элементы.
+Текстура сдвига - это изображение, в котором значение каждого пиксела (белый считается самым верхним) сопоставляется
 The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.<br><br>
 
-<pre id="5displacementScale">.displacementScale</a></pre>
-How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied. Значение по умолчанию равно <tt>1</tt>.<br><br>
+<pre id="5displacementScale"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('displacement scale - масштаб сдвига')" onmouseout="hide()">.displacementScale</a></span></pre>
+Значение свойства определяет как сильно карта сдвига влияет на сетку (где черный цвет, там нет сдвига, а где белый - сдвиг максимален). Без установки карты сдвига данное значение не применяется.
+Значение по умолчанию равно <tt>1</tt>.<br><br>
 
-<pre id="5displacementBias">.displacementBias</a></pre>
-The offset of the displacement map's values on the mesh's vertices. Without a displacement map set, this value is not applied. Значение по умолчанию равно <tt>0</tt>.<br><br>
+<pre id="5displacementBias"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('displacement bias - смещение сдвига')" onmouseout="hide()">.displacementBias</a></span></pre>
+Смещение значений карты сдвига на вершинах сетки (mesh). Без установки карты сдвига данное значение не применяется. Значение по умолчанию равно <tt>0</tt>.<br><br>
 
 <pre id="5fog"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fog - туман')" onmouseout="hide()">.fog</a></span></pre>
 Свойство определяет, будет ли материал подвержен влиянию тумана. Значением по умолчанию является <tt>false</tt>.<br><br>

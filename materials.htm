@@ -25,16 +25,16 @@ var note_3 = '<br>Из-за ограничений в <a href="https://code.goog
 <div class=list><a href="#4">MeshBasicMaterial</a> - базовая сетка</div>
 <div class=list><a href="#5">MeshDepthMaterial</a> - сетка с прорисовкой глубины</div>
 <div class=list><a href="#6">MeshLambertMaterial</a> - матовая сетка с расчетом коэффициента отражения по Ламберту</div>
-<div class=list><a href="#7">MeshNormalMaterial</a> - </div>
-<div class=list><a href="#8">MeshPhongMaterial</a> - </div>
-<div class=list><a href="#9">MeshPhysicalMaterial</a> - </div>
+<div class=list><a href="#7">MeshNormalMaterial</a> - материал отображающий векторы нормалей как цвета в RGB-формате</div>
+<div class=list><a href="#8">MeshPhongMaterial</a> - материал для блестящих поверхностей с зеркальными бликами</div>
+<div class=list><a href="#9">MeshPhysicalMaterial</a> - расширение MeshStandardMaterial, увеличивающее регулировку способности к отражению</div>
 <div class=list><a href="#10">MeshStandardMaterial</a> - стандартная сетка</div>
 <div class=list><a href="#11">MeshToonMaterial</a> - сетка с тонировкой</div>
 <div class=list><a href="#12">PointsMaterial</a> - матерал точек</div>
-<div class=list><a href="#13">RawShaderMaterial</a> - </div>
-<div class=list><a href="#14">ShaderMaterial</a> - </div>
-<div class=list><a href="#15">ShadowMaterial</a> - теневой материал, он может принимать тень, а в остальном полностью прозрачен</div>
-<div class=list><a href="#16">SpriteMaterial</a> - спрайт</div></div><br>
+<div class=list><a href="#13">RawShaderMaterial</a> - тоже что и ShaderMaterial, но нет автоматического добавления определений встроенных атрибутов и униформов</div>
+<div class=list><a href="#14">ShaderMaterial</a> - материал, отображаемый с помощью собственных (заказных) шейдеров.</div>
+<div class=list><a href="#15">ShadowMaterial</a> - теневой материал, который может принимать тень, а в остальном полностью прозрачен</div>
+<div class=list><a href="#16">SpriteMaterial</a> - материал для спрайтов</div></div><br>
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="1">LineBasicMaterial</h3>
@@ -244,22 +244,27 @@ Custom depth material to be used by this material when rendering to the depth ma
 <pre id="3customDistanceMaterial"><a href="#3" onmouseover="show('Material.<br>custom distance material -<br>настраиваемая отдаление материала')" onmouseout="hide()">.customDistanceMaterial</a></pre>
 Тоже самое, что и <tt>customDepthMaterial</tt>, но используется с точечным освещением (<a href="lights.htm#5" onmouseover="show('PointLight')" onmouseout="hide()">PointLight</a>). Значением по умолчанию является <tt>undefined</tt>.<br><br>
 
-<pre id="3defines">.defines</a></pre>
-Custom defines to be injected into the shader. These are passed in form of an object literal, with key/value pairs. { MY_CUSTOM_DEFINE: '' , PI2: Math.PI * 2 }. The pairs are defined in both vertex and fragment shaders. Значением по умолчанию является <tt>undefined</tt>.<br><br>
+<pre id="3defines"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('defines - определения')" onmouseout="hide()">.defines</a></span></pre>
+Пользовательские определения для введения в шейдер. Custom defines to be injected into the shader. Они передаются в виде объектного литерала, парами ключ/значение.
+<tt>{ MY_CUSTOM_DEFINE: '' , PI2: Math.PI * 2 }</tt>.
+Пары определяются как в вершинном шейдере, так и в шейдере фрагментов. Значением по умолчанию является <tt>undefined</tt>.<br><br>
 
-<pre id="3depthFunc">.depthFunc</a></pre>
-Which depth function to use. Default is LessEqualDepth. See the depth mode constants for all possible values.<br><br>
+<pre id="3depthFunc"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth func - сокращ. англ. слов<br>depth function - функция глубины')" onmouseout="hide()">.depthFunc</a></span></pre>
+Свойство определяет используемую функцию глубины, т.е. функцию, используемую материалом для сравнения значения входящего пиксела глубины (значения по оси <tt>Z</tt>) с текущим значением буфера глубины.
+Если результатом этого сравнения будет значение <tt>true</tt>, пиксель будет прорисован.
+Значением по умолчанию является <tt><a href="constants.htm#5.4" onmouseover="show('режим глубины - depth mode')" onmouseout="hide()">LessEqualDepth</a></tt>.
+Все возможные значения смотрите в <a href="constants.htm#5.4" onmouseover="show('режим глубины - depth mode')" onmouseout="hide()">описании констант режима глубины</a>.<br><br>
 
-<pre id="3depthTest">.depthTest</a></pre>
-Whether to have depth test enabled when rendering this material. Значение по умолчанию <tt>true</tt>.<br><br>
+<pre id="3depthTest"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth test - проверка глубины')" onmouseout="hide()">.depthTest</a></span></pre>
+Свойство определяет, включать ли проверку глубины при визуализации данного материала. Значение по умолчанию <tt>true</tt>.<br><br>
 
 <pre id="3depthWrite"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth write - записывать глубину')" onmouseout="hide()">.depthWrite</a></span></pre>
 Whether rendering this material has any effect on the depth buffer. Значение по умолчанию <tt>true</tt>.<br>
-
+При прорисовке двумерных наложений, возможно будет полезно отключить запись глубины, чтобы сложить вместе несколько объектов без создания артефактов z-индекса.
 When drawing 2D overlays it can be useful to disable the depth writing in order to layer several things together without creating z-index artifacts.<br><br>
 
 <pre id="3dithering"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dithering - размывание')" onmouseout="hide()">.dithering</a></span></pre>
-Whether to apply dithering to the color to remove the appearance of banding. Значение по умолчанию <tt>false</tt>.<br><br>
+Свойство определяет, применять ли размытие цвета для устранения появления полос на изображении. Значение по умолчанию <tt>false</tt>.<br><br>
 
 <pre id="3flatShading"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('flat shading - плоское затенение')" onmouseout="hide()">.flatShading</a></span></pre>
 Define whether the material is rendered with flat shading. Значение по умолчанию <tt>false</tt>.<br><br>
@@ -281,7 +286,7 @@ Define whether the material is rendered with flat shading. Значение по
 Дополнительное, необязательное название объекта (необязательно быть уникальным). По умолчанию это пустая строка ("").<br><br>
 
 <pre id="3needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('needs update - требуется обновление')" onmouseout="hide()">.needsUpdate</a></span></pre>
-Specifies that the material needs to be updated at the WebGL level. Set it to true if you made changes that need to be reflected in WebGL.<br>
+Указывает, что материал необходимо обновить на уровне WebGL. Установите значение <tt>true</tt>, если были внесены изменения, которые должны быть отображены в WebGL.<br>
 При создании экземпляра нового материала, данное свойство автоматически устанавливается как <tt>true</tt>.<br><br>
 
 <pre id="3opacity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('opacity - непрозрачность')" onmouseout="hide()">.opacity</a></span></pre>
@@ -290,10 +295,12 @@ Specifies that the material needs to be updated at the WebGL level. Set it to tr
 Если свойство <tt><a href="#3transparent" onmouseover="show('Material.transparent')" onmouseout="hide()">transparent</a></tt> материала не установлено как <tt>true</tt>, материал будет оставаться полностью непрозрачным и данное значение будет влиять только на его цвет.<br><br>
 
 <pre id="3overdraw"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('overdraw - превышение')" onmouseout="hide()">.overdraw</a></span></pre>
-Amount of triangle expansion at draw time. This is a workaround for cases when gaps appear between triangles when using CanvasRenderer. 0.5 tends to give good results across browsers. Значение по умолчанию <tt>0</tt>.<br><br>
+Величина расширения треугольника во время рисования.
+Это обходное решение для случаев когда при использовании <a href="examples.htm#8.1" onmouseover="show('CanvasRenderer')" onmouseout="hide()">CanvasRenderer</a> между треугольников появляются зазоры.
+Среди браузеров хорошие результаты получаются при значении <tt>0.5</tt>. Значение по умолчанию <tt>0</tt>.<br><br>
 
 <pre id="3polygonOffset"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('polygon offset - смещение полигона')" onmouseout="hide()">.polygonOffset</a></span></pre>
-Свойство устанавливает, будет ли использоваться смещение полигонов. Значение по умолчанию <tt>false</tt>. Это свойство соответствует свойству WebGL <tt>GL_POLYGON_OFFSET_FILL</tt>.<br><br>
+Свойство устанавливает, будет ли использоваться смещение полигонов. Значение по умолчанию <tt>false</tt>. Это свойство соответствует свойству WebGL <tt>GL_POLYGON_OFFSET_FILL</tt>.
 <!--
 glPolygonOffset — set the scale and units used to calculate depth values
 
@@ -307,6 +314,23 @@ is the smallest value that is guaranteed to produce a resolvable offset for a gi
 glPolygonOffset is useful for rendering hidden-line images, for applying decals to surfaces, and for rendering solids with highlighted edges.
 https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glPolygonOffset.xhtml
 http://www.opengl-master.ru/function.php?id=42 -->
+
+
+<div class=note_trans>Для чего нужно свойство <tt>polygonOffset</tt>? Вот описание Z-конфликта из книги Коичи Мацуда, Роджер Ли &#171;WebGL: программирование трехмерной графики&#187;.<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Поддержка удаления скрытых поверхностей – сложная и мощная особенность системы WebGL, которая в большинстве действует безупречно.
+Однако иногда, когда две фигуры или два объекта располагаются слишком близко друг к другу, результат ее работы выглядит менее естественно.
+Этот феномен известен как Z-конфликт (Z-fighting) и показан на рис. 7.30. Здесь мы нарисовали два треугольника, имеющих одну и ту же координату Z.<br><br>
+<div class="caption"><img src="img/Zfighting.png" width=700><br>
+Рис. 7.30. Визуальный эффект, обусловленный Z-конфликтом (слева)</div>
+Z-конфликт возникает из-за того, что вычисления с буфером глубины имеют ограниченную точность и иногда система оказывается неспособна определить, какой объект находится спереди, а какой сзади.
+Технически этого конфликта можно избежать, если уделить особое внимание значениям координаты Z на этапе создания модели; однако, реализация такого решения выглядит нереалистичной в ситуациях, когда воспроизводится анимация с участием нескольких объектов.<br><br>
+Чтобы помочь решить эту проблему, WebGL предоставляет функцию, которая называется добавление сдвига к глубине (polygon offset).
+Эта функция автоматически выполняет сдвиг координаты Z, на величину, которая является функцией наклона объекта по отношению к линии взгляда.
+<pre>gl.polygonOffset(factor, units)</pre>
+Определяет поправку к координате Z для каждой вершины, которая будет нарисована после вызова этого метода.
+Поправка вычисляется по формуле m * factor + r * units, где m представляет наклон треугольника относительно линии взгляда, а r – наименьшая разница между двумя значениями координаты Z, которые могут оказаться неразличимыми для WebGL.
+</div></div><br>
+
 
 <pre id="3polygonOffsetFactor"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('polygon offset factor - коэффициент<br>масштабирования смещения полигонов')" onmouseout="hide()">.polygonOffsetFactor</a></span></pre>
 Устанавливает <span class="lnk" onmouseover="show('коэффициент масштабирования, который используется<br>для создания переменного смещения глубины<br>каждого полигона')" onmouseout="hide()">коэффициент масштабирования</span> смещения полигонов. Значение по умолчанию <tt>0</tt>.<br><br>
@@ -328,11 +352,12 @@ http://www.opengl-master.ru/function.php?id=42 -->
 <tt><a href="constants.htm#5.1" onmouseover="show('Константы материала.<br>back side - задняя сторона')" onmouseout="hide()">THREE.BackSide</a></tt>
 или <tt><a href="constants.htm#5.1" onmouseover="show('Константы материала.<br>double side - две стороны')" onmouseout="hide()">THREE.DoubleSide</a></tt>. Значение по умолчанию <tt>null</tt>.<br>
 Если установлено значение <tt>null</tt>, сторона отбрасывающая тень определяется следующим образом:
-<table width="400">
-<tr><td><a href="#3side" onmouseover="show('Material.side')" onmouseout="hide()">Material.side</a></td><td>Сторона, отбрасывающая тени</td>
-<tr><td>THREE.FrontSide</td><td>задняя сторона</td>
-<tr><td>THREE.BackSide</td><td>передняя сторона</td>
-<tr><td>THREE.DoubleSide</td><td>обе стороны</td></table><br>
+<table rules="rows">
+<tr><td><a href="#3side" onmouseover="show('Material.side')" onmouseout="hide()">Material.side</a></td><td width=20></td><td>Сторона, отбрасывающая тени</td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td>THREE.FrontSide</td><td></td><td>задняя сторона</td></tr>
+<tr><td>THREE.BackSide</td><td></td><td>передняя сторона</td></tr>
+<tr><td>THREE.DoubleSide</td><td></td><td>обе стороны</td></tr></table><br>
  
 <pre id="3side"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('side - сторона')" onmouseout="hide()">.side</a></span></pre>
 Свойство определяет сторону грани, которая будет отображаться, - передняя, задняя или обе.
@@ -690,8 +715,7 @@ Defines whether the material uses morphNormals. Set as true to pass morphNormal 
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="7">MeshNormalMaterial</h3>
-Материал, который сопоставляет векторы нормалей в RGB цвета.
-A material that maps the normal vectors to RGB colors.
+Материал отображающий векторы нормалей как цвета в RGB-формате.
 <div class="caption"><img src="img/MeshNormalMaterial.png" width=1020><br>
 MeshNormalMaterial, MeshNormalMaterial с включенным <tt>flatShading</tt> и MeshNormalMaterial с включенным <tt>wireframe</tt>.</div><br>
 
@@ -1513,7 +1537,7 @@ scene.add( plane );</pre>
 
 <span class="right_side"><a href="#3" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3 id="16">SpriteMaterial</h3>
-Материал для использования со <a href="objects.htm#12" onmouseover="show('Sprite')" onmouseout="hide()">Sprite</a>.<br><br>
+Материал для использования со <a href="objects.htm#11" onmouseover="show('Sprite')" onmouseout="hide()">Sprite</a>.<br><br>
 <h4>Пример</h4>
 <pre>var spriteMap = new THREE.TextureLoader().load( 'textures/sprite.png' );<br>
 var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap, color: 0xffffff } );<br>

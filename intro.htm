@@ -160,8 +160,7 @@ cube.rotation.y += 0.1;</pre>
 Это значит, что для включения <em>three.js</em> в проект, нужно просто запустить "<tt>npm install three</tt>".
 <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Импорт модуля</h3>
 Предположим, что вы объединяете файлы с помощью такого инструмента как <a href="https://webpack.github.io/" target="_blank">Webpack</a> или <a href="https://github.com/substack/node-browserify" target="_blank">Browserify</a>,
-которые позволяют
-Assuming that you're bundling your files with a tool such as Webpack or Browserify, which allow you to "require('modules') in the browser by bundling up all of your dependencies."
+которые позволяют "<tt class=lnk onmouseover="show('require(&quot;modules&quot;) - затребовать модули')" onmouseout="hide()">require('modules')</tt> в браузере, объединив все свои зависимости".
 Теперь можно внести модуль в свои исходные файлы и продолжить использовать его в обычном режиме.
 <pre>var THREE = require('three');<br>
 var scene = new THREE.Scene();
@@ -346,8 +345,7 @@ renderer.render(scene, camera);</pre>
 Часто бывает так, что в приложении three.js нужно использовать текст - вот несколько способов, как можно это сделать.
 
 <h3>1. DOM + CSS</h3>
-Использование HTML - это наиболее простой и быстрый способ добавления текста.
-This is the method used for descriptive overlays in most three.js examples.<br><br>
+Использование HTML - это наиболее простой и быстрый способ добавления текста. Этот метод используется для прилагаемых изображений к большинству примеров <em>three.js</em>.<br><br>
 Можно добавить содержимое в
 <pre>&lt;div id="info"&gt;Description&lt;/div&gt;</pre>
 и использовать CSS-разметку для размещения в абсолютно независимой позиции и поверх всего остального по z-индексу, особенно если приложение three.js работает в полноэкранном режиме.
@@ -367,11 +365,11 @@ This is the method used for descriptive overlays in most three.js examples.<br><
 Используйте этот способ, если предпочитаете работать со своей программой 3D-графики и вставьте эту модель в three.js.
 
 <h3>4. Procedural Text Geometry</h3>
-Если предпочитаете работать исключительно в three.js или создавать
-If you prefer to work purely in THREE.js or to create procedural and dynamic 3D text geometries, you can create a mesh whose geometry is an instance of THREE.TextGeometry:
+Если предпочитаете работать исключительно в three.js или создавать procedural and dynamic 3D текстовые геометрические элементы,
+можно создать сетку, геометрические элементы которой являются экземпляром THREE.TextGeometry:
 <pre>new THREE.TextGeometry( text, parameters );</pre>
 Для того, чтобы это сработало, для TextGeometry будет нужен экземпляр THREE.Font, установленный в качестве значения его параметра "font" - шрифт.
-Посмотрите страницу <a href="geometries.htm#34" onmouseover="show('TextGeometry')" onmouseout="hide()">TextGeometry</a> для получения дополнительных сведений о том, как это можно сделать с описанием каждого принимаемого параметра и списком <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank" onmouseover="show('сокращение от англ. слов JavaScript Object Notation,<br>обычно произносится как 'джейсэн') — текстовый формат<br>обмена данными, основанный на JavaScript.<br>Как и многие другие текстовые форматы, JSON легко<br>читается людьми. Формат JSON был разработан<br>Дугласом Крокфордом.')" onmouseout="hide()">JSON</a>-шрифтов, поставляемых в составе самого THREE.js.
+Посмотрите страницу <a href="geometries.htm#34" onmouseover="show('TextGeometry')" onmouseout="hide()">TextGeometry</a> для получения дополнительных сведений о том, как это можно сделать с описанием каждого принимаемого параметра и списком <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank" onmouseover="show('сокращение от англ. слов JavaScript Object Notation<br>(обычно произносится как джейсэн) — текстовый формат<br>обмена данными, основанный на JavaScript.<br>Как и многие другие текстовые форматы, JSON легко<br>читается людьми. Формат JSON был разработан<br>Дугласом Крокфордом.')" onmouseout="hide()">JSON</a>-шрифтов, поставляемых в составе самого THREE.js.
 
 <h4>Примеры</h4>
 <a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank"> WebGL / geometry / text</a><br>
@@ -381,7 +379,50 @@ If you prefer to work purely in THREE.js or to create procedural and dynamic 3D 
 <a href="https://www.blender.org/" target="_blank" onmouseover="show('свободный, профессиональный пакет для создания<br>трёхмерной компьютерной графики, включающий в себя<br>средства моделирования, анимации, рендеринга,<br>постобработки и монтажа видео со звуком')" onmouseout="hide()">Blender'а</a>, который позволяет экспортировать текст в понятном для Three.js формате JSON.<br><br>
 
 
-<h2 id="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Руководство по миграции и стилю кода</h2>
+<h2 id="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Загрузка трехмерных моделей</h2>
+3D-модели доступны в сотнях форматов файлов, каждый из которых имеет разное назначение, разнообразные функции и различную сложность.
+Хотя <em>three.js</em> <a href="https://github.com/mrdoob/three.js/tree/dev/examples/js/loaders" target="_blank">предоставляет множество загрузчиков</a>, выбор правильного формата и рабочего процесса позволит сохранить время и избежать разочарования в дальнейшем.
+С некоторыми форматами сложно работать из-за неэффективной работы в реальном времени или  из-за того, что нет полной поддержки в настоящее время.<br>
+Данное руководство предоставляет рекомендуемый рабочий процесс, подходящий большинству пользователей, и предложения о том, что нужно делать, если все идет не так, как ожидалось.<br><br>
+
+<h3>Прежде чем начать</h3>
+Если вы плохо знакомы с управлением локального сервера, для начала ознакомьтесь со статьей <a href="#5">&#171;Как все это запустить локально&#187;</a>. Большинство распространенных ошибок, связанных с просмотром 3D-моделей, можно избежать правильным размещением файлов.<br><br>
+
+<h3>Рекомендуемый рабочий процесс</h3>
+Там, где это возможно, рекомендуется использовать формат glTF (GL Transmission Format).
+Поддерживаются оба варианта формата и GLB, и GLTF. Поскольку этот формат ориентирован на доставку ресурса во время выполнения кода, он компактен для передачи и быстр для загрузки.
+Возможности формата включают в себя сетки (mesh), материалы, текстуры, скины (skin), скелеты (skeleton), цели морфинга (morph target), анимации, виды освещения и камеры.<br>
+Общедоступные glTF-файлы имеются на таких сайтах, как <a href="https://sketchfab.com/models?features=downloadable&sort_by=-likeCount&type=models" target="_blank">Sketchfab</a>, или в различных инструментах включен экспорт glTF:
+<ul><li><a href="https://github.com/KhronosGroup/glTF-Blender-Exporter" target="_blank">glTF-Blender-Exporter</a> от Khronos Group</li>
+<li><a href="https://github.com/KhronosGroup/COLLADA2GLTF" target="_blank">COLLADA2GLTF</a> от Khronos Group</li>
+<li><a href="https://github.com/facebookincubator/FBX2glTF" target="_blank">FBX2GLTF</a> от Facebook</li>
+<li><a href="https://github.com/AnalyticalGraphicsInc/obj2gltf" target="_blank">OBJ2GLTF</a> от Analytical Graphics Inc</li>
+<li><a href="https://www.allegorithmic.com/products/substance-painter" target="_blank">Substance Painter</a> от Allegorithmic</li>
+<li><a href="https://www.foundry.com/products/modo" target="_blank">Modo</a> от Foundry</li>
+<li><a href="https://www.marmoset.co/toolbag/" target="_blank">Toolbag</a> от Marmoset</li>
+<li>и <a href="https://github.com/khronosgroup/gltf#gltf-tools" target="_blank">многое другое</a> ...</li></ul>
+Если предпочитаемые инструменты не поддерживают glTF, можно запросить экспорт glTF у авторов или опубликовать его в потоке дорожной карты glTF.
+If your preferred tools do not support glTF, consider requesting glTF export from the authors, or posting on the glTF roadmap thread.<br>
+Когда glTF - это не вариант, популярные форматы, такие как FBX, OBJ или COLLADA, также доступны и правильно поддерживаются.<br><br>
+
+<h3>Поиск и устранение неисправностей</h3>
+Затратив часы на моделирование своего рукотворного шедевра, запускаете его загрузку на веб-страницу и бац, - не работает! Он искажен, обесцвечен или вообще отсутствует. Начните поиск и устранение неисправностей со следующих шагов:
+<ol><li>Проверьте консоль JavaScript на ошибки и убедитесь, что используется функция обратного вызова на событие <tt class=lnk onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</tt>
+при вызове метода <tt class=lnk onmouseover="show('load - загрузка')" onmouseout="hide()">load</tt> для записи результата.</li>
+<li>Посмотрите модель в другом приложении. Для glTF, программы просмотра с перетаскиванием доступны на three.js и babylon.js.
+Если модель правильно представляется в одном или более приложении, считайте что ошибка в <em>three.js</em>.
+Если модель не отображается ни в одном из приложений, настоятельно рекомендуется увязать ошибку с приложением, которое использовалось для создания данной модели.</li>
+<li>Попробуйте масштабировать модель, уменьшив или увеличив её в 1000 раз. Множество моделей масштабируются по-разному, и крупные модели могут не отображаться, если камера окажется внутри модели.</li>
+<li>Присмотритесь нет ли неудачных запросов текстуры в сетевых закладках, вроде <tt>C:\\Path\To\Model\texture.jpg</tt>.
+Вместо них используйте пути относительно своей модели, такие как <tt>images/texture.jpg</tt> - при этом может понадобиться изменение файла модели в текстовом редакторе.</li></ol>
+
+<h3>Обратитесь за помощью</h3>
+Если процесс поиска неисправностей, указанный выше, пройден, а модель так и не работает, правильно будет обратиться за помощью, что ускорит решение проблемы.
+Задайте вопрос на форуме <em>three.js</em> и, если возможно, включите свою модель (или какую-либо более простую модель с той же самой проблемой) в любом доступном формате.
+Включите достаточно сведений для того, чтобы кто-то другой быстро воспроизвел проблему - в идеале, демонстрационный пример &#171;вживую&#187;.<br><br>
+
+
+<h2 id="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Руководство по миграции и стилю кода</h2>
 Руководство <span class="lnk" onmouseover="show('то есть, по переводу программ three.js, сделанных<br>в одной версии, для работы в другой версии three.js')" onmouseout="hide()">по миграции</span> хранится на <a href="https://github.com/mrdoob/three.js/wiki" target="_blank">wiki</a>.
 Оно содержит список изменений каждой версии three.js, начиная с релиза r45.<br>
 Его можно найти <a href="https://github.com/mrdoob/three.js/wiki/Migration-Guide" target="_blank">здесь</a>.<br>
@@ -401,12 +442,15 @@ If you prefer to work purely in THREE.js or to create procedural and dynamic 3D 
 <div class=list>Гипертекст: связь страниц и подразделов сайта через контекстные гиперссылки.</div></li>
 <li>Множество авторов. Некоторые вики могут править все посетители сайта.</li></ul><br>
 <span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D0%BA%D0%B8' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span></div></div><br>
-Весь код и примеры на three.js написаны в стиле кода от Mr.doob. Конечно, можно использовать любой, предпочитаемый вами для работы, стиль, но при добавлении кода в библиотеку или в примеры, требуется следовать этому руководству.
+Весь код и примеры на three.js написаны в стиле кода от <span class=lnk onmouseover="show('Ricardo Cabello - автор <em>three.js</em>')" onmouseout="hide()">Mr.doob</span>. Конечно, можно использовать любой, предпочитаемый вами для работы, стиль, но при добавлении кода в библиотеку или в примеры, требуется следовать этому руководству.
 Подробности можно найти <a href="https://github.com/mrdoob/three.js/wiki/Mr.doob%27s-Code-Style%E2%84%A2" target="_blank">здесь</a>.<br><br>
 
-<h2 id="9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ЧАсто задаваемые ВОпросы</h2>
+<h2 id="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ЧАсто задаваемые ВОпросы</h2>
 <h3>Какой формат импорта/экспорта лучше всего поддерживается?</h3>
-TODO<br><br>
+Рекомендуемым форматом для импорта и экспорта ресурсов является glTF (GL Transmission Format). Потому как этот формат ориентирован на доставку ресурса во время выполнения кода, он компактен для передачи и быстр для загрузки.<br>
+Библиотека <em>three.js</em> также предоставляет загрузчики для множества других, популярных форматов, вроде FBX, Collada или OBJ.
+Тем не менее, следует в проектах всегда вначале попытаться установить рабочий процесс на основе формата glTF. Более подробную информацию смотрите в описании <a href="#8">загрузки 3D моделей</a>.
+<br><br>
 
 <h3>Почему в примерах присутствуют теги meta для окна просмотра (viewport)?</h3>
 <pre>&lt;meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"&gt;</pre>
@@ -428,10 +472,10 @@ TODO<br><br>
 И в обычных условиях при выборе удаляется задняя, невидимая сторона. Если проблема в этом, измените сторону материала на THREE.DoubleSide.
 <pre>material.side = THREE.DoubleSide</pre>
 
-<h2 id="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ссылки на полезные ресурсы</h2>
+<h2 id="11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ссылки на полезные ресурсы</h2>
 Ниже приведена коллекция ссылок, которые возможно будут полезными при изучении three.js.<br>
 Если вы нашли что-либо, что хочется сюда добавить, или считаете, что одна из приведенных ссылок больше не уместна или не работает, не стесняйтесь кликнуть кнопку 'edit' (редактировать) справа вверху и внести некоторые изменения!<br><br>
-Отметьте также, что three.js довольно быстро развивается, многие из этих ссылок будут содержать устаревшие сведения - если что-то работает не так, как ожидалось или как указывается в этой ссылке,
+Отметьте также, что <em>three.js</em> довольно быстро развивается, многие из этих ссылок будут содержать устаревшие сведения - если что-то работает не так, как ожидалось или как указывается в этой ссылке,
 проверьте консоль браузера на наличие предупреждений и ошибок, соответствующие разделы этой справки и особенно страницу <a href="deprecated-list.htm">DeprecatedList</a> (список устаревших элементов API).<br><br>
 В дополнение к этой странице, mrdoob поддерживает коллекцию ссылок, связанных с three.js в Google+. Посмотри их <a href="https://plus.google.com/+ThreejsOrg" target="_blank">здесь</a>.
 

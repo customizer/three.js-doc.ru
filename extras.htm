@@ -14,21 +14,21 @@
 <div class=list><a href="#3.1">Curve</a> - базовый класс для кривых линий</div>
 <div class=list><a href="#3.2">CurvePath</a> - базовый класс массивов кривых линий</div>
 <div class=list><a href="#3.3">Font</a> - создание набора форм для шрифтов</div>
-<div class=list><a href="#3.4">Interpolations</a> - </div>
-<div class=list><a href="#3.5">Path</a> - </div>
-<div class=list><a href="#3.6">Shape</a> - </div>
-<div class=list><a href="#3.7">ShapePath</a> - </div></div>
+<div class=list><a href="#3.4">Interpolations</a> - методы интерполяции (Катмулл-Ром, Безье)</div>
+<div class=list><a href="#3.5">Path</a> - представление двумерного пути (контура)</div>
+<div class=list><a href="#3.6">Shape</a> - произвольная двумерная фигурная плоскость с дополнительными отверстиями</div>
+<div class=list><a href="#3.7">ShapePath</a> - класс для конвертирования ряда фигур в массив из Path</div></div>
 <div class=blockindent>Дополнения к кривым
-<div class=list><a href="#4.1">ArcCurve</a> - </div>
-<div class=list><a href="#4.2">CatmullRomCurve3</a> - </div>
-<div class=list><a href="#4.3">CubicBezierCurve</a> - </div>
-<div class=list><a href="#4.4">CubicBezierCurve3</a> - </div>
-<div class=list><a href="#4.5">EllipseCurve</a> - </div>
-<div class=list><a href="#4.6">LineCurve</a> - </div>
-<div class=list><a href="#4.7">LineCurve3</a> - </div>
-<div class=list><a href="#4.8">QuadraticBezierCurve</a> - </div>
-<div class=list><a href="#4.9">QuadraticBezierCurve3</a> - </div>
-<div class=list><a href="#4.10">SplineCurve</a> - </div></div>
+<div class=list><a href="#4.1">ArcCurve</a> - псевдоним (алиас) для EllipseCurve</div>
+<div class=list><a href="#4.2">CatmullRomCurve3</a> - трехмерная кривая по алгоритму Катмулл-Ром</div>
+<div class=list><a href="#4.3">CubicBezierCurve</a> - кубическая кривая Безье</div>
+<div class=list><a href="#4.4">CubicBezierCurve3</a> - трехмерная кубическая кривая Безье</div>
+<div class=list><a href="#4.5">EllipseCurve</a> - двумерная кривая в виде эллипса</div>
+<div class=list><a href="#4.6">LineCurve</a> - отрезок линии в двумерном пространстве</div>
+<div class=list><a href="#4.7">LineCurve3</a> - отрезок линии в трехмерном пространстве</div>
+<div class=list><a href="#4.8">QuadraticBezierCurve</a> - квадратичная кривая Безье</div>
+<div class=list><a href="#4.9">QuadraticBezierCurve3</a> - трехмерная квадратичная кривая Безье</div>
+<div class=list><a href="#4.10">SplineCurve</a> - сплайновая кривая</div></div>
 <div class=blockindent>Дополнения к объектам
 <div class=list><a href="#5.1">ImmediateRenderObject</a> - класс для немедленной визуализации объектов</div></div></div>
 
@@ -95,7 +95,7 @@
 Создает клон данного экземпляра кривой линии.<br><br>
 
 <pre id="3.1computeFrenetFrames"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute frenet frames - вычислить реперы Френе')" onmouseout="hide()">.computeFrenetFrames</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('segments - части, сегменты')" onmouseout="hide()">segments</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closed - закрыть, замкнуть')" onmouseout="hide()">closed</a></span> )</pre>
-Generates the Frenet Frames.
+Метод генерирует <a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D1%91%D1%85%D0%B3%D1%80%D0%B0%D0%BD%D0%BD%D0%B8%D0%BA_%D0%A4%D1%80%D0%B5%D0%BD%D0%B5" target="_blank">репер Френе</a>.
 Используется в геометрических элементах вроде <a href="geometries.htm#41" onmouseover="show('TubeGeometry')" onmouseout="hide()">TubeGeometry</a> или <a href="geometries.htm#12" onmouseover="show('ExtrudeGeometry')" onmouseout="hide()">ExtrudeGeometry</a>.<br><br>
 
 <pre id="3.1copy"><a href="#3.1" onmouseover="show('Curve.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#3.1" onmouseover="show('Curve.<br>source - источник, исходник')" onmouseout="hide()">source</a> )</pre>
@@ -120,29 +120,30 @@ Generates the Frenet Frames.
 <div class=list><tt>optionalTarget</tt> — если аргумент указан, то результат метод будет скопирован в переданный вектор, в противном случае будет создан новый вектор. Дополнительный, необязательный параметр.</div>
 Метод возвращает вектор заданной позиции на кривой, соответствующей длине дуги.<br><br>
 
-<pre id="3.1getPoints"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get points - получить точки')" onmouseout="hide()">.getPoints</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - ')" onmouseout="hide()">divisions</a></span> )</pre>
+<pre id="3.1getPoints"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get points - получить точки')" onmouseout="hide()">.getPoints</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - части, отделы, секции')" onmouseout="hide()">divisions</a></span> )</pre>
 <div class=list><tt>divisions</tt> -- количество частей, на которые разделена кривая. Значение по умолчанию равно&nbsp;<tt>5</tt>.</div>
-Метод, при помощи <tt>getPoint( t )</tt> возвращает набор точек из <tt>divisions + 1</tt>. Returns a set of divisions + 1 points using getPoint( t ).<br><br>
+Метод, при помощи <tt><a href="#3.1getPoint" onmouseover="show('Curve.getPoint')" onmouseout="hide()">getPoint( t )</a></tt> возвращает набор точек из <tt>divisions + 1</tt>.<br><br>
 
-<pre id="3.1getSpacedPoints">.getSpacedPoints( divisions : Integer ) : Array</pre>
-<div class=list>divisions -- number of pieces to divide the curve into. Default is 5.</div>
-Returns a set of divisions + 1 equi-spaced points using getPointAt( u ).<br><br>
+<pre id="3.1getSpacedPoints"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get spaced points - получить ')" onmouseout="hide()">.getSpacedPoints</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - части, отделы, секции')" onmouseout="hide()">divisions</a></span> )</pre>
+<div class=list><tt>divisions</tt> -- количество частей, на которые разделена кривая. Значение по умолчанию равно&nbsp;<tt>5</tt>.</div>
+Метод, при помощи <tt><a href="#3.1getPointAt" onmouseover="show('Curve.getPointAt')" onmouseout="hide()">getPointAt( u )</a></tt> возвращает набор равноразнесенных точек из <tt>divisions + 1</tt>.<br><br>
 
 <pre id="3.1getTangent"><span onclick="showClick('Vector')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get tangent - получить касательную')" onmouseout="hide()">.getTangent</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - ')" onmouseout="hide()">t</a></span> )</pre>
-Метод возвращает единичный вектор Returns a unit vector tangent at t. If the derived curve does not implement its tangent derivation, two points a small delta apart will be used to find its gradient which seems to give a reasonable approximation.<br><br>
+Метод возвращает единичный вектор, касательный к точке <tt>t</tt>.
+ Returns a unit vector tangent at t. If the derived curve does not implement its tangent derivation, two points a small delta apart will be used to find its gradient which seems to give a reasonable approximation.<br><br>
 
 <pre id="3.1getTangentAt"><span onclick="showClick('Vector')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get tangent at - получить касательную в')" onmouseout="hide()">.getTangentAt</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('u - ')" onmouseout="hide()">u</a></span> )</pre>
-Возвращает касательную к точке, равноудаленной от концов кривой, из точки, заданной в <tt><a href="#3.1getTangent" onmouseover="show('Curve.getTangent')" onmouseout="hide()">getTangent</a></tt>.
-Returns tangent at a point which is equidistant to the ends of the curve from the point given in .getTangent.<br><br>
+Возвращает касательную к точке, равноудаленной от концов кривой, из точки, заданной в <tt><a href="#3.1getTangent" onmouseover="show('Curve.getTangent')" onmouseout="hide()">getTangent</a></tt>.<br><br>
 
-<pre id="3.1getUtoTmapping">.getUtoTmapping( u : Float, distance : Float ) : Float</pre>
-Given u in the range ( 0 .. 1 ), returns t also in the range ( 0 .. 1 ). u and t can then be used to give you points which are equidistant from the ends of the curve, using .getPoint.<br><br>
+<pre id="3.1getUtoTmapping"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get U to T mapping - получить соответствие значений U к T')" onmouseout="hide()">.getUtoTmapping</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('u - ')" onmouseout="hide()">u</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span> )</pre>
+Аргумент <tt>u</tt> задается в диапазоне <tt>( 0 .. 1 )</tt>, метод возвращает значение <tt>t</tt>, также в диапазоне <tt>( 0 .. 1 )</tt>.
+<tt>u</tt> и <tt>t</tt> далее могут, с помощью <tt><a href="#3.1getPoint" onmouseover="show('Curve.getPoint')" onmouseout="hide()">getPoint</a></tt>, использоваться для получения точек, равноудаленных от концов кривой.<br><br>
 
 <pre id="3.1toJSON"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в формат JSON')" onmouseout="hide()">.toJSON</a></span>( )</pre>
 Метод возвращает объект в формате <a href="https://ru.wikipedia.org/wiki/JSON" onmouseover="show('JSON - сокр. от англ. слов JavaScript Object Notation —<br>текстовый формат описания объекта, основанный на JavaScript')" onmouseout="hide()" target="_blank">JSON</a>, представляющий данный экземпляр Curve.<br><br>
 
 <pre id="3.1updateArcLengths"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update arc lengths - обновить длины дуг')" onmouseout="hide()">.updateArcLengths</a></span>( )</pre>
-Метод обновляет кэш накопленных размеров частей кривой. Update the cumulative segment distance cache.</div><br>
+Метод обновляет кэш накопленных размеров частей кривой.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/Curve.js" target="_blank">Curve.js на github.com</a></div><br><br>
@@ -216,30 +217,77 @@ Given u in the range ( 0 .. 1 ), returns t also in the range ( 0 .. 1 ). u and t
 
 
 <h3 id="3.4">Interpolations</h3>
+Здесь рассматриваются методы интерполяции по алгоритму Катмулл-Ром и Безье.
+<h5>Кривые Безье</h5>
+<div>Это типы кривых, предложенные в 60-х годах XX века независимо друг от друга Пьером Безье и Полем де Кастельжо. Они являются частным случаем многочленов Бернштейна, описанных Сергеем Натановичем Бернштейном в 1912 году.
+<a class='link' onclick='javascript:spoiler(this)'> ... читать далее</a>
+<div style='display:none;'>
+Для расчета кривой требуются координаты опорных точек. Их может быть две, три, четыре и т.д. Здесь они подразделяются на начальную, конечную и контрольные точки. Причем в случае с двумя опорными точками, контрольной точки нет.
+Расчет производится в зависимости от параметра <tt>t</tt> - интерполяционный вес (шаг, с которым высчитывается положение кривой).<br>
+Например, имеется две опорные точки с координатами <tt>x<sub>0</sub></tt>, <tt>y<sub>0</sub></tt> (назовем её P<sub>0</sub>) и <tt>x<sub>1</sub></tt>, <tt>y<sub>1</sub></tt> (P<sub>1</sub>).
+Параметр <tt>t</tt> изменяется в диапазоне от <tt>0</tt> до <tt>1</tt> с шагом <tt>0,02</tt>. Для каждого значения <tt>t</tt> высчитываются координаты кривой по формулам:
+<pre>x = (1−t)x<sub>0</sub> + t*x<sub>1</sub>
+y = (1−t)y<sub>0</sub> + t*y<sub>1</sub></pre>
+<table><tr><td valign=top>Получится вот такая "кривая" Безье. Она называется линейная кривая или кривая первой степени или же первого порядка.<br>
+Степень или порядок кривой всегда меньше числа опорных точек на единицу.<br>
+Если бы эта кривая размещалась в трехмерном пространстве, тогда точно также была рассчитана и третья координата.
+<pre>z = (1−t)z<sub>0</sub> + t*z<sub>1</sub></pre>
+</td>
+<td><img src="img/Bezier_1.gif" width=360>
+<div class="caption">Линейная кривая.</div></td></tr></table>
+Увеличим число опорных точек до трех и получим квадратичную кривую Безье (или кривую Безье второй степени).
+<table><tr><td valign=top>Здесь имеется три опорных точки: начальная P<sub>0</sub>, контрольная P<sub>1</sub> и конечная P<sub>2</sub> с соответствующими координатами <tt>x</tt> и <tt>y</tt>. Точки Q<sub>0</sub> и Q<sub>1</sub> перемещаются (т.е. их координаты изменяются) по отрезкам P<sub>0</sub>-P<sub>1</sub> и P<sub>1</sub>-P<sub>2</sub> с шагом <tt>t=0.02</tt>, т.е. они двигаются по линейным кривым.<br>
+Точка B перемещается от Q<sub>0</sub> к Q<sub>1</sub> и описывает квадратичную кривую Безье.<br>
+Математически это описывается так:
+<pre>x = (1−t)<sup>2</sup>x<sub>0</sub> + 2(1−t)t*x<sub>1</sub> + t<sup>2</sup>x<sub>2</sub>
+y = (1−t)<sup>2</sup>y<sub>0</sub> + 2(1−t)t*y<sub>1</sub> + t<sup>2</sup>y<sub>2</sub></pre>
+Для трехмерного варианта добавился бы расчет третьей координаты
+<pre>z = (1−t)<sup>2</sup>z<sub>0</sub> + 2(1−t)t*z<sub>1</sub> + t<sup>2</sup>z<sub>2</sub></pre>
 
-TODO<br><br>
+
+</td>
+
+<td><img src="img/Bezier_2.png" width=360><div class="caption">Квадратичная кривая.</div>
+<img src="img/Bezier_2_anim.gif" width=360><div class="caption">Анимация построения квадратичной кривой Безье.</div></td></tr></table>
+При добавлении второй контрольной точки получится кубическая кривая Безье или кривая третьего порядка.
+<table><tr><td valign=top>Итак, здесь имеются четыре опорных точки: начальная (P<sub>0</sub>), две контрольных (P<sub>1</sub>, P<sub>2</sub>) и конечная - (P<sub>3</sub>) с соответствующими координатами <tt>x</tt> и <tt>y</tt>.
+
+<pre>x = (1−t)<sup>3</sup>x<sub>0</sub> + 3(1−t)<sup>2</sup>t*x<sub>1</sub> + 3(1−t)t<sup>2</sup>x<sub>3</sub> + t<sup>3</sup>x<sub>4</sub>
+y = (1−t)<sup>3</sup>y<sub>0</sub> + 3(1−t)<sup>2</sup>t*y<sub>1</sub> + 3(1−t)t<sup>2</sup>y<sub>3</sub> + t<sup>3</sup>y<sub>4</sub></pre>
+Для трехмерного варианта добавился бы расчет третьей координаты
+<pre>z = (1−t)<sup>3</sup>z<sub>0</sub> + 3(1−t)<sup>2</sup>t*z<sub>1</sub> + 3(1−t)t<sup>2</sup>z<sub>3</sub> + t<sup>3</sup>z<sub>4</sub></pre>
+</td>
+<td><img src="img/Bezier_3.png" width=360><div class="caption">Кубическая кривая.</div>
+<img src="img/Bezier_3_anim.gif" width=360><div class="caption">Анимация построения кубическая кривой Безье.</div></td></tr></table><br>
+<div style='width:100%; background-color:#f0f0f0;'>&nbsp;<span style='float:right; background-color:#f0f0f0;'>сведения из <a href='https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5' target='_blank'>Википедии</a>
+и сайта <a href='https://learn.javascript.ru/bezier' target='_blank'>javascript.ru</a></span></div></div></div>
+<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="3.4CatmullRom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('CatmullRom - ')" onmouseout="hide()">.CatmullRom</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - ')" onmouseout="hide()">t</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p0</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p2</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p3</a></span> )</pre>
-<div class=list><tt>t</tt> -- interpolation weight.</div>
+<div class=list><tt>t</tt> -- интерполяционный вес (значение) (шаг, с которым высчитывается положение кривой).</div>
 <div class=list><tt>p0</tt>, <tt>p1</tt>, <tt>p2</tt>, <tt>p3</tt> -- точки, определяющие <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD" target="_blank">сплайновую</a> кривую.</div>
 Используется внутри функции <a href="#4.10" onmouseover="show('SplineCurve')" onmouseout="hide()">SplineCurve</a>.
 <div class=note_trans><b>Примечание переводчика:</b> Edwin Catmull и Raphael Rom
-</div>
+a Catmull–Rom spline is obtained, being a special case of a cardinal spline. This assumes uniform parameter spacing.
+
+The curve is named after Edwin Catmull and Raphael Rom. The principal advantage of this technique is that the points along the original set of points also make up the control points for the spline curve. Two additional points are required on either end of the curve.
+По умолчанию выполнение алгоритма Catmull–Rom может создавать циклы и самопересечения.
+The default implementation of the Catmull–Rom algorithm can produce loops and self intersections. The chordal and centripetal Catmull–Rom implementations solve this problem, but use a slightly different calculation.
+In computer graphics, Catmull–Rom splines are frequently used to get smooth interpolated motion between key frames. For example, most camera path animations generated from discrete key-frames are handled using Catmull–Rom splines.
+They are popular mainly for being relatively easy to compute, guaranteeing that each key frame position will be hit exactly, and also guaranteeing that the tangents of the generated curve are continuous over multiple segments.</div>
 <br><br>
 
-<pre id="3.4QuadraticBezier"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('quadratic Bezier - ')" onmouseout="hide()">.QuadraticBezier</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - ')" onmouseout="hide()">t</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p0</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p2</a></span> )</pre>
-<div class=list><tt>t</tt> -- interpolation weight.</div>
+<pre id="3.4QuadraticBezier"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('quadratic Bezier - квадратичная (кривая) Безье')" onmouseout="hide()">.QuadraticBezier</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - ')" onmouseout="hide()">t</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p0</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p2</a></span> )</pre>
+<div class=list><tt>t</tt> -- интерполяционный вес (значение) (шаг, с которым высчитывается положение кривой).</div>
 <div class=list><tt>p0</tt>, <tt>p1</tt>, <tt>p2</tt> -- начальная, контрольная и конечная точки, определяющие кривую.</div>
-
-Used internally by QuadraticBezierCurve3, QuadraticBezierCurve and Font.<br><br>
+Используется внутри классов <a href="#4.9" onmouseover="show('QuadraticBezierCurve3')" onmouseout="hide()">QuadraticBezierCurve3</a>, <a href="#4.8" onmouseover="show('QuadraticBezierCurve')" onmouseout="hide()">QuadraticBezierCurve</a> и <a href="#3.3" onmouseover="show('Font')" onmouseout="hide()">Font</a>.<br><br>
 
 <pre id="3.4CubicBezier"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cubic Bezier - ')" onmouseout="hide()">.CubicBezier</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - ')" onmouseout="hide()">t</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p0</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p2</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ.англ. слова point - точка')" onmouseout="hide()">p3</a></span> )</pre>
-<div class=list><tt>t</tt> -- interpolation weight.</div>
-<div class=list><tt>p0</tt>, <tt>p1</tt>, <tt>p2</tt>, <tt>p3</tt> -- начальная, контрольная (дважды) и конечная точки, определяющие кривую.</div>
-
-Used internally by CubicBezierCurve3, CubicBezierCurve and Font.</div><br>
+<div class=list><tt>t</tt> -- интерполяционный вес (значение) (шаг, с которым высчитывается положение кривой).</div>
+<div class=list><tt>p0</tt>, <tt>p1</tt>, <tt>p2</tt>, <tt>p3</tt> -- начальная, две контрольных и конечная точки, определяющие кривую.</div>
+Используется внутри классов <a href="#4.4" onmouseover="show('CubicBezierCurve3')" onmouseout="hide()">CubicBezierCurve3</a>, <a href="#4.3" onmouseover="show('CubicBezierCurve')" onmouseout="hide()">CubicBezierCurve</a> и <a href="#3.3" onmouseover="show('Font')" onmouseout="hide()">Font</a>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Interpolations.js" target="_blank">Interpolations.js на github.com</a></div><br><br>
@@ -522,7 +570,8 @@ var curveObject = new THREE.Line( geometry, material );</pre>
 <h3 id="4.3">CubicBezierCurve</h3>
 Создает гладкую двумерную <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg" target="_blank">кубическую кривую Безье</a>.
 Статья Википедии <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank">о кривых Безье</a> на английском языке.
-Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.<br><br>
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.
+Статья <a href="https://learn.javascript.ru/bezier" target="_blank">о кривых Безье на javascript.ru</a>.<br><br>
 
 <h4>Пример</h4>
 <pre>var curve = new THREE.CubicBezierCurve(

@@ -10,7 +10,7 @@ txt.style.display="none";
 function spoiler(a) {
     if (a.parentNode.getElementsByTagName("div")[0].style.display != "") {
     a.parentNode.getElementsByTagName("div")[0].style.display = "";
-    a.innerText = "       скрыть";
+    a.innerHTML = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; скрыть";
     }
 else {
     a.parentNode.getElementsByTagName("div")[0].style.display = "none";

@@ -76,7 +76,7 @@
 <h2 id="3">Дополнения к основным элементам <em>three.js</em></h2>
 
 <h3 id="3.1">Curve</h3>
-Абстрактный базовый класс для создания объекта Curve, который содержит методы интерполяции. Массив объектов Curve рассматривается в <a href="#3.2" onmouseover="show('CurvePath')" onmouseout="hide()">CurvePath</a>.<br><br>
+Абстрактный базовый класс для создания объекта <span class="lnk" onmouseover="show('curve - кривая линия или попросту кривая')" onmouseout="hide()">Curve</span>, который содержит методы интерполяции. Массив объектов Curve рассматривается в <a href="#3.2" onmouseover="show('CurvePath.<br>curve path - криволинейный путь')" onmouseout="hide()">CurvePath</a>.<br><br>
 
 <h4>Конструктор</h4>
 <pre>Curve( )</pre>
@@ -151,7 +151,8 @@
 
 <span class="right_side"><a href="#3.1" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
 <h3 id="3.2">CurvePath</h3>
-Абстрактный базовый класс дальшейшего расширения возможностей <a href="#3.1" onmouseover="show('Curve')" onmouseout="hide()">Curve</a>. CurvePath - это просто массив связанных кривых, поддерживающий интрефейс (API) отдельной кривой.<br><br>
+Абстрактный базовый класс дальнейшего расширения возможностей <a href="#3.1" onmouseover="show('Curve.<br>curve - кривая')" onmouseout="hide()">Curve</a>.
+<span class="lnk" onmouseover="show('curve path - криволинейный путь')" onmouseout="hide()">CurvePath</span> - это просто массив связанных кривых, поддерживающий интрефейс (API) отдельной кривой.<br><br>
 
 <h4>Конструктор</h4>
 <pre>CurvePath( )</pre>
@@ -219,36 +220,52 @@
 <h3 id="3.4">Interpolations</h3>
 Здесь рассматриваются методы построения кривых по алгоритму Катмулл-Ром и Безье.<br><br>
 <h5>Сплайновые кривые по алгоритму Катмулл-Ром</h5>
-<div>Edwin Catmull и Raphael Rom
-<a class='link' onclick='javascript:spoiler(this)'> ... читать далее</a>
-<div style='display:none;'>
+<div>Сплайн назван в честь авторов: Эдвина Катмулла (Edwin Catmull) и Рафаэля Рома (Raphael Rom).<a class='link' onclick='javascript:spoiler(this)'> ... читать далее</a>
+<div style='display:none;'>Как следует из статьи <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD_%D0%AD%D1%80%D0%BC%D0%B8%D1%82%D0%B0" target="_blank">Сплайн Эрмита</a> в Википедии, сплайновая кривая по алгоритму Катмулл-Ром является частным случаем кардинального сплайна, которая, в свою очередь, является видом кубического сплайна Эрмита.
+
+
+ и  https://www.mvps.org/directx/articles/catmull/
+https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD
+https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD_%D0%AD%D1%80%D0%BC%D0%B8%D1%82%D0%B0
+
 a Catmull–Rom spline is obtained, being a special case of a cardinal spline. This assumes uniform parameter spacing.
 
 The curve is named after Edwin Catmull and Raphael Rom. The principal advantage of this technique is that the points along the original set of points also make up the control points for the spline curve. Two additional points are required on either end of the curve.
 По умолчанию выполнение алгоритма Catmull–Rom может создавать циклы и самопересечения.
 The default implementation of the Catmull–Rom algorithm can produce loops and self intersections. The chordal and centripetal Catmull–Rom implementations solve this problem, but use a slightly different calculation.
 In computer graphics, Catmull–Rom splines are frequently used to get smooth interpolated motion between key frames. For example, most camera path animations generated from discrete key-frames are handled using Catmull–Rom splines.
-They are popular mainly for being relatively easy to compute, guaranteeing that each key frame position will be hit exactly, and also guaranteeing that the tangents of the generated curve are continuous over multiple segments.</div></div><br>
+They are popular mainly for being relatively easy to compute, guaranteeing that each key frame position will be hit exactly, and also guaranteeing that the tangents of the generated curve are continuous over multiple segments.<br><br>
+Кривая будет рассчитываться по следующей формуле
+<pre>B(t) = (2P<sub>1</sub> - 2P<sub>2</sub> + V<sub>0</sub> + V<sub>1</sub>)t<sup>3</sup> + (-3P<sub>1</sub> + 3P<sub>2</sub> - 2V<sub>0</sub> - V<sub>1</sub>)t<sup>2</sup> + V<sub>0</sub>t + P<sub>1</sub></pre>
+где
+<pre>V<sub>0</sub> = (P<sub>2</sub> - P<sub>0</sub>)0.5
+V<sub>1</sub> = (P<sub>3</sub> - P<sub>1</sub>)0.5</pre>
+То есть, <tt>B(t)</tt> - это координаты точек на рассчитываемой кривой <tt>B</tt> в зависимости от шага <tt>t</tt>, с которым рассчитывается данная кривая.
+<tt>P<sub>0</sub> - P<sub>3</sub></tt> - координаты заданных точек, определяющих кривую.
+<tt>V<sub>0</sub>, V<sub>1</sub></tt> - дополнительные точки, производные от опорных точек, в данном случае это среднеарифметические значения координат предыдущей и последующей точек.
+
+</div></div><br>
 
 <h5>Кривые Безье</h5>
 <div>Это типы кривых, предложенные в 60-х годах XX века независимо друг от друга Пьером Безье и Полем де Кастельжо. Они являются частным случаем многочленов Бернштейна, описанных Сергеем Натановичем Бернштейном в 1912 году.
 <a class='link' onclick='javascript:spoiler(this)'> ... читать далее</a>
-<div style='display:none;'>
+<div style='display:none;'><br>
 Для расчета кривой требуются координаты опорных точек. Их может быть две, три, четыре и т.д. Здесь они подразделяются на начальную, конечную и контрольные точки. Причем в случае с двумя опорными точками, контрольной точки нет.
-Расчет производится в зависимости от параметра <tt>t</tt> - интерполяционный вес (шаг, с которым высчитывается положение кривой).<br>
-Например, имеется две опорные точки с координатами <tt>x<sub>0</sub></tt>, <tt>y<sub>0</sub></tt> (назовем её P<sub>0</sub>) и <tt>x<sub>1</sub></tt>, <tt>y<sub>1</sub></tt> (P<sub>1</sub>).
+Расчет производится в зависимости от параметра <tt>t</tt> - интерполяционный вес (шаг, с которым высчитывается положение кривой).
+<table><tr><td valign=top>Например, имеется две опорные точки с координатами <tt>x<sub>0</sub></tt>, <tt>y<sub>0</sub></tt> (назовем её P<sub>0</sub>) и <tt>x<sub>1</sub></tt>, <tt>y<sub>1</sub></tt> (P<sub>1</sub>).
 Параметр <tt>t</tt> изменяется в диапазоне от <tt>0</tt> до <tt>1</tt> с шагом <tt>0,02</tt>. Для каждого значения <tt>t</tt> высчитываются координаты кривой по формулам:
 <pre>x = (1−t)x<sub>0</sub> + t*x<sub>1</sub>
 y = (1−t)y<sub>0</sub> + t*y<sub>1</sub></pre>
-<table><tr><td valign=top>Получится вот такая "кривая" Безье. Она называется линейная кривая или кривая первой степени или же первого порядка.<br>
+Получится вот такая "кривая" Безье. Она называется линейная кривая или кривая первой степени или же первого порядка.<br>
 Степень или порядок кривой всегда меньше числа опорных точек на единицу.<br>
 Если бы эта кривая размещалась в трехмерном пространстве, тогда точно также была рассчитана и третья координата.
 <pre>z = (1−t)z<sub>0</sub> + t*z<sub>1</sub></pre>
 </td>
 <td><img src="img/Bezier_1.gif" width=360>
-<div class="caption">Линейная кривая.</div></td></tr></table>
-Увеличим число опорных точек до трех и получим квадратичную кривую Безье (или кривую Безье второй степени).
-<table><tr><td valign=top>Здесь имеется три опорных точки: начальная P<sub>0</sub>, контрольная P<sub>1</sub> и конечная P<sub>2</sub> с соответствующими координатами <tt>x</tt> и <tt>y</tt>. Точки Q<sub>0</sub> и Q<sub>1</sub> перемещаются (т.е. их координаты изменяются) по отрезкам P<sub>0</sub>-P<sub>1</sub> и P<sub>1</sub>-P<sub>2</sub> с шагом <tt>t=0.02</tt>, т.е. они двигаются по линейным кривым.<br>
+<div class="caption">Линейная кривая.</div></td></tr></table><br>
+
+<table><tr><td valign=top>Увеличим число опорных точек до трех и получим квадратичную кривую Безье (или кривую Безье второй степени).<br>
+Здесь имеется три опорных точки: начальная P<sub>0</sub>, контрольная P<sub>1</sub> и конечная P<sub>2</sub> с соответствующими координатами <tt>x</tt> и <tt>y</tt>. Точки Q<sub>0</sub> и Q<sub>1</sub> перемещаются (т.е. их координаты изменяются) по отрезкам P<sub>0</sub>-P<sub>1</sub> и P<sub>1</sub>-P<sub>2</sub> с шагом <tt>t=0.02</tt>, т.е. они двигаются по линейным кривым.<br>
 Точка B перемещается от Q<sub>0</sub> к Q<sub>1</sub> (также с шагом <tt>t=0.02</tt>) и описывает квадратичную кривую Безье.<br>
 Математически это описывается так:
 <pre>x = (1−t)<sup>2</sup>x<sub>0</sub> + 2(1−t)t*x<sub>1</sub> + t<sup>2</sup>x<sub>2</sub>
@@ -260,10 +277,13 @@ y = (1−t)<sup>2</sup>y<sub>0</sub> + 2(1−t)t*y<sub>1</sub> + t<sup>2</sup>y<
 </td>
 
 <td><img src="img/Bezier_2.png" width=360><div class="caption">Квадратичная кривая.</div>
-<img src="img/Bezier_2_anim.gif" width=360><div class="caption">Анимация построения квадратичной кривой Безье.</div></td></tr></table>
-При добавлении второй контрольной точки получится кубическая кривая Безье или кривая третьего порядка.
-<table><tr><td valign=top>Итак, здесь имеются четыре опорных точки: начальная (P<sub>0</sub>), две контрольных (P<sub>1</sub>, P<sub>2</sub>) и конечная - (P<sub>3</sub>) с соответствующими координатами <tt>x</tt> и <tt>y</tt>.
+<img src="img/Bezier_2_anim.gif" width=360><div class="caption">Анимация построения квадратичной кривой Безье.</div></td></tr></table><br>
 
+<table><tr><td valign=top>При добавлении второй контрольной точки получится кубическая кривая Безье или кривая третьего порядка.<br>
+Итак, имеются четыре опорных точки: начальная (P<sub>0</sub>), две контрольных (P<sub>1</sub>, P<sub>2</sub>) и конечная - (P<sub>3</sub>) с соответствующими координатами <tt>x</tt> и <tt>y</tt>.<br>
+Точки Q<sub>0</sub>, Q<sub>1</sub> и Q<sub>2</sub> перемещаются (т.е. их координаты изменяются) по отрезкам P<sub>0</sub>-P<sub>1</sub>, P<sub>1</sub>-P<sub>2</sub> и P<sub>2</sub>-P<sub>3</sub> с шагом <tt>t=0.02</tt>, т.е. они двигаются по линейным кривым.<br>
+Точки R<sub>0</sub> и R<sub>1</sub> перемещаются по отрезкам Q<sub>0</sub>-Q<sub>1</sub> и Q<sub>1</sub>-Q<sub>2</sub>. Они движутся по квадратичным кривым.<br>
+А вот по отрезку R<sub>0</sub>-R<sub>1</sub> движется точка B (с тем же самым шагом <tt>t</tt>), которая описывает кривую третьего порядка, т.е. кубическую кривую.
 <pre>x = (1−t)<sup>3</sup>x<sub>0</sub> + 3(1−t)<sup>2</sup>t*x<sub>1</sub> + 3(1−t)t<sup>2</sup>x<sub>3</sub> + t<sup>3</sup>x<sub>4</sub>
 y = (1−t)<sup>3</sup>y<sub>0</sub> + 3(1−t)<sup>2</sup>t*y<sub>1</sub> + 3(1−t)t<sup>2</sup>y<sub>3</sub> + t<sup>3</sup>y<sub>4</sub></pre>
 Для трехмерного варианта добавился бы расчет третьей координаты
@@ -271,6 +291,19 @@ y = (1−t)<sup>3</sup>y<sub>0</sub> + 3(1−t)<sup>2</sup>t*y<sub>1</sub> + 3(1
 </td>
 <td><img src="img/Bezier_3.png" width=360><div class="caption">Кубическая кривая.</div>
 <img src="img/Bezier_3_anim.gif" width=360><div class="caption">Анимация построения кубическая кривой Безье.</div></td></tr></table><br>
+
+Свойства кривой Безье
+<ul><li>непрерывность заполнения сегмента между начальной и конечной точками;</li>
+<li>кривая всегда располагается внутри фигуры, образованной линиями, соединяющими контрольные точки;</li>
+<li>при наличии только двух контрольных точек сегмент представляет собой прямую линию;</li>
+<li>прямая линия образуется при коллинеарном (на одной прямой) размещении управляющих точек;</li>
+<li>кривая Безье симметрична, то есть обмен местами между начальной и конечной точками (изменение направления траектории) не влияет на форму кривой;</li>
+<li>масштабирование и изменение пропорций кривой Безье не нарушает её стабильности, так как она с математической точки зрения «аффинно инвариантна»;</li>
+<li>изменение координат хотя бы одной из точек ведет к изменению формы всей кривой Безье;</li>
+<li>любой частичный отрезок кривой Безье также является кривой Безье;</li>
+<li>степень (порядок) кривой всегда на одну ступень меньше числа контрольных точек. Например, при трех контрольных точках форма кривой — парабола, так как парабола — кривая 2-го порядка;</li>
+<li>окружность не может быть описана параметрическим уравнением кривой Безье;</li>
+<li>невозможно создать параллельные кривые Безье, за исключением тривиальных случаев (прямые линии и совпадающие кривые), хотя существуют алгоритмы, строящие приближённую параллельную кривую Безье с приемлемой для практики точностью.</li></ul>
 <div style='width:100%; background-color:#f0f0f0;'>&nbsp;<span style='float:right; background-color:#f0f0f0;'>сведения из <a href='https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5' target='_blank'>Википедии</a>
 и сайта <a href='https://learn.javascript.ru/bezier' target='_blank'>javascript.ru</a></span></div></div></div><br>
 
@@ -419,8 +452,8 @@ If no points are specified, an empty shape is created and the .currentPoint is s
 <h4>Свойства</h4>
 Сведения об общих свойствах смотрите в описании базового класса <a href="#3.5">Path</a>.
 <div class=blockindent><br>
-<pre id="3.6holes">.holes : array</pre>
-An array of paths that define the holes in the shape.<br><br>
+<pre id="3.6holes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('holes - отверстия, дыры')" onmouseout="hide()">.holes</a></span></pre>
+Массив путей, определяющих отверстия в форме. An array of paths that define the holes in the shape.<br><br>
 
 <pre id="3.6uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uuid - сокращ. англ. слов universally unique identifier<br>- универсальный уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
 <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank">UUID</a> данного экземпляра.

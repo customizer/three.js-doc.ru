@@ -252,7 +252,7 @@ In addition to the the built-in attributes, you can set your own custom attribut
 This hashmap has as id the name of the attribute to be set and as value the buffer to set it to. Rather than accessing this property directly, use addAttribute and getAttribute to access attributes of this geometry.</div>
 
 
-<div class=note_trans><b>Примечание переводчика:</b> Вот чуть более подробно о хешировании, хеш-таблицах (хеш-картах) и ассоциативных таблицах. <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div class="note_trans" id="hash_map"><b>Примечание переводчика:</b> Вот чуть более подробно о хешировании, хеш-таблицах (хеш-картах) и ассоциативных таблицах. <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
 <div style='display:none;'>Хеширование или хэширование (англ. hashing) — преобразование массива входных данных произвольной длины в (выходную) битовую строку фиксированной длины, выполняемое определённым алгоритмом.
 Функция, реализующая алгоритм и выполняющая преобразование, называется «хеш-функцией» или «функцией свёртки». Исходные данные называются входным массивом, «ключом» или «сообщением».
 Результат преобразования (выходные данные) называется «хешем», «хеш-кодом», «хеш-суммой», «сводкой сообщения».<br><br>
@@ -733,12 +733,11 @@ geometry.computeBoundingSphere();</pre>
 Если установить значение равным <tt>0.5</tt>, преобразование будет иметь эффект в 50%. При установке <tt>1</tt>, будет влияние на 100%. Если существует только одна кость, связанная с конкретной вершиной, нужно побеспокоиться только о первом компоненте приданного вектора, остальные можно проигнорировать и установить равными <tt>0</tt>.<br><br>
 
 <pre id="7skinIndices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skin indices - ')" onmouseout="hide()">.skinIndices</a></span></pre>
-Точно также как у свойства skinWeights, значения свойста skinIndices соответствуют вершинам геометрического элемента. Каждая вершина может иметь до четырех вершин, связанных с ней.
-Поэтому, если посмотреть на первую вершину (vertex) и первый индекс оболочки (skinIndex), то они расскажут о костях, связанный с данной вершиной.
+Точно также как у свойства <tt>skinWeights</tt>, значения свойста <tt>skinIndices</tt> соответствуют вершинам геометрического элемента. Каждая вершина может иметь до четырех вершин, связанных с ней.
+Поэтому, если посмотреть на первую вершину (vertex) и первый индекс оболочки (<tt>skinIndex</tt>), то они расскажут о костях, связанный с данной вершиной.
 Например предположим, первая вершина имеет значение <tt>( 10.05, 30.10, 12.12 )</tt>, значением первого индекса оболочки может быть <tt>( 10, 2, 0, 0 )</tt>, а первый вес оболочки имеет значение <tt>( 0.8, 0.2, 0, 0 )</tt>.
-
-In affect this would take the first vertex, and then the bone <tt>mesh.bones[10]</tt> and apply it 80% of the way.
-Then it would take the bone <tt>skeleton.bones[2]</tt> and apply it 20% of the way. Последующие два значения имеют вес равный 0, так что они не будут оказывать никакого влияния.<br><br>
+В результате это будет воспринято первой вершиной и затем костью <tt>mesh.bones[10]</tt> и к ней применено 80% воздействия. Затем это будет воспринято костью <tt>skeleton.bones[2]</tt> и к ней применено 20% воздействия.
+Последующие два значения имеют вес равный&nbsp;<tt>0</tt>, так что они не будут оказывать никакого влияния.<br><br>
 Код подобного примера может выглядеть так:
 <pre>// e.g. (например)
 geometry.skinIndices[15] = new THREE.Vector4(   0,   5,   9, 0 );
@@ -760,7 +759,7 @@ skeleton.bones[10]; // weight of 0 (вес 0)</pre><br>
 <pre id="7vertices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices - вершины')" onmouseout="hide()">.vertices</a></span></pre>
 Массив <a href="math.htm#19" onblur="hideClick()" onmouseover="show('Vector3')" onmouseout="hide()">вершин</a>.<br>
 Массив вершин содержит положение каждой вершины геометрического элемента.
-To signal an update in this array, значение свойства <tt><a href="#7verticesNeedUpdate" onmouseover="show('Geometry.verticesNeedUpdate')" onmouseout="hide()">verticesNeedUpdate</a></tt> должно быть установлено как <tt>true</tt>.<br><br>
+Для подачи сигнала по обновлению данного массива, значение свойства <tt><a href="#7verticesNeedUpdate" onmouseover="show('Geometry.verticesNeedUpdate')" onmouseout="hide()">verticesNeedUpdate</a></tt> должно быть установлено как <tt>true</tt>.<br><br>
 
 <pre id="7verticesNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices need update - вершинам нужно обновление')" onmouseout="hide()">.verticesNeedUpdate</a></span></pre>
 Установите значение свойства как <tt>true</tt>, если <a href="#7vertices" onmouseover="show('Geometry.vertices')" onmouseout="hide()">массив вершин</a> был изменен.<br><br>
@@ -830,11 +829,11 @@ To signal an update in this array, значение свойства <tt><a href
 <pre id="7fromBufferGeometry"><a href="#7" onmouseover="show('Geometry.<br>from buffer geometry - из буферной геометрии')" onmouseout="hide()">.fromBufferGeometry</a>( <a href="#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">geometry</a> )</pre>
 Метод конвертирует <a href="#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a> в Geometry.<br><br>
 
-<pre id="7lookAt"><a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">.lookAt</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>vector - вектор')" onmouseout="hide()">vector</a> )</pre>
-<div class=list><tt>vector</tt> - A world vector to look at.</div>
-
-Rotates the geometry to face point in space. This is typically done as a one time operation but not during the render loop.<br>
-Use <tt><a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()">Object3D.lookAt</a></tt> for typical real-time mesh usage.<br><br>
+<pre id="7lookAt"><a href="#7" onmouseover="show('Geometry.<br>look at - смотреть на')" onmouseout="hide()">.lookAt</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>vector - вектор')" onmouseout="hide()">vector</a> )</pre>
+<div class=list><tt>vector</tt> -  вектор, представляющий позицию в "мировом" пространстве, на которую должен "смотреть" геометрический элемент.</div>
+Метод поворачивает этот геометрический элемент к указанной точке пространства.
+Обычно выполняется как однократная операция, но не во время цикла визуализации.<br>
+Для стандартного обращения к сетке в реальном времени используйте метод <tt><a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()">Object3D.lookAt</a></tt>.<br><br>
 
 <pre id="7merge"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('merge - сливать, соединять')" onmouseout="hide()">.merge</a></span>( <a href="#7" onmouseover="show('Geometry.<br>geometry - геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="math.htm#11" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material index offset - смещение индекса материала')" onmouseout="hide()">materialIndexOffset</a></span> )</pre>
 Метод объединяет два геометрических элемента или геометрический элемент и геометрический элемент из объекта (используя преобразование объекта).<br><br>
@@ -843,7 +842,7 @@ Use <tt><a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hi
 Метод объединяет геометрию сетки (mesh) с данным геометрическим элементом, также применяется трансформация сетки.<br><br>
 
 <pre id="7mergeVertices"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('merge vertices - объединить вершины')" onmouseout="hide()">.mergeVertices</a></span>( )</pre>
-При помощи hashmap проводится проверка вершин на дубликаты.<br>
+При помощи <a href="#hash_map" onmouseover="show('хеш-таблица - hash map')" onmouseout="hide()">хеш-таблицы</a> проводится проверка вершин на дубликаты.<br>
 Продублированные вершины удаляются, а вершины граней обновляются.<br><br>
 
 <pre id="7normalize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('normalize - нормализовать')" onmouseout="hide()">.normalize</a></span>( )</pre>
@@ -869,14 +868,14 @@ Use <tt><a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hi
 Метод сортирует массив граней в соответствии с индексом материала. Для сложных геометрических элементов с несколкими материалами, это может привести к снижению вызовов прорисовки и улучшению производительности.<br><br>
 
 <pre id="7scale"><a href="#7" onmouseover="show('Geometry.<br>scale - масштаб')" onmouseout="hide()">.scale</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span> )</pre>
-Метод масштабирует данные геометрического элемента. This is typically done as a one time operation but not during the render loop.<br>
+Метод масштабирует данные геометрического элемента. Обычно выполняется как однократная операция, но не во время цикла визуализации.<br>
 Для обычного масштабирования сетки (mesh) в реальном времени используйте <tt><a href="#14scale" onmouseover="show('Object3D.scale')" onmouseout="hide()">Object3D.scale</a></tt>.<br><br>
 
 <pre id="7toJSON"><span onclick="showClick('JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - сокр. от англ. слов to JavaScript Object<br>Notation, — то есть, в текстовый формат описания<br>объекта, основанный на JavaScript')" onmouseout="hide()">.toJSON</a></span>( )</pre>
 Метод конвертирует геометрический элемент в JSON формат.<br><br>
 
 <pre id="7translate"><a href="#7" onmouseover="show('Geometry.<br>translate - перевод, перенос')" onmouseout="hide()">.translate</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span> )</pre>
-Translate the geometry. This is typically done as a one time operation but not during the render loop.<br>
+Метод переставляет геометрический элемент. Обычно выполняется как однократная операция, но не во время цикла визуализации.<br>
 Для обычного переноса сетки (mesh) в реальном времени используйте <tt><a href="#14position" onmouseover="show('Object3D.position')" onmouseout="hide()">Object3D.position</a></tt>.</div><br>
 
 <h4>Исходники</h4>
@@ -1166,57 +1165,68 @@ An instanced version of BufferAttribute.
 Матрица локальных преобразований.<br><br>
 
 <pre id="14matrixAutoUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы')" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
-When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is Object3D.DefaultMatrixAutoUpdate (true).<br><br>
+При установке данного свойства как <tt>true</tt>, рассчитывается матрица положения (поворот или кватернион) и масштаб каждого кадра, а также пересчитывается значение свойства <tt>matrixWorld</tt>.
+Значением по умолчанию является <tt><a href="#14DefaultMatrixAutoUpdate" onmouseover="show('Object3D.DefaultMatrixAutoUpdate')" onmouseout="hide()">Object3D.DefaultMatrixAutoUpdate</a></tt> (<tt>true</tt>).<br><br>
 
 <pre id="14matrixWorld"><a href="math.htm#11" onmouseover="show('Matrix4.<br>matrix world - матрица мира')" onmouseout="hide()">.matrixWorld</a></pre>
 Глобальное трансформация объекта. Если Object3D не имеет родителя, то она идентична <a href="#14matrix" onmouseover="show('Object3D.matrix')" onmouseout="hide()">матрице локального преобразования</a>.<br><br>
 
 <pre id="14matrixWorldNeedsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix world needs update - требуется обновление матрицы мира')" onmouseout="hide()">.matrixWorldNeedsUpdate</a></span></pre>
-When this is set, it calculates the matrixWorld in that frame and resets this property to false. Значением по умолчанию является <tt>false</tt>.<br><br>
+При установке данного свойства как <tt>true</tt>, вычисляется <tt>matrixWorld</tt> в данном кадре и сбрасывается значение этого свойства в <tt>false</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
 
-<pre id="14modelViewMatrix"><a href="math.htm#11" onmouseover="show('Matrix4.<br>model view matrix - ')" onmouseout="hide()">.modelViewMatrix</a></pre>
-This is passed to the shader and used to calculate the position of the object.<br><br>
+<pre id="14modelViewMatrix"><a href="math.htm#11" onmouseover="show('Matrix4.<br>model view matrix - матрица вида (представления) модели')" onmouseout="hide()">.modelViewMatrix</a></pre>
+Это свойство передается шейдеру и используется для вычисления положения объекта.<br><br>
 
 <pre id="14name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">.name</a></span></pre>
-Дополнительное, необязательное названия объекта (оно может быть и не уникальным). Значением по умолчанию является пустая строка (<tt>""</tt>).<br><br>
+Дополнительное, необязательное название объекта (оно может быть и не уникальным). Значением по умолчанию является пустая строка (<tt>""</tt>).<br><br>
 
 <pre id="14normalMatrix"><a href="math.htm#10" onmouseover="show('Matrix3.<br>normal matrix - матрица нормалей')" onmouseout="hide()">.normalMatrix</a></pre>
-This is passed to the shader and used to calculate lighting for the object. It is the transpose of the inverse of the upper left 3x3 sub-matrix of this object's modelViewMatrix.<br>
-
-The reason for this special matrix is that simply using the modelViewMatrix could result in a non-unit length of normals (on scaling) or in a non-perpendicular direction (on non-uniform scaling).<br>
-
-On the other hand the translation part of the modelViewMatrix is not relevant for the calculation of normals. Thus a Matrix3 is sufficient.<br><br>
+Это свойство передается шейдеру и используется для расчета освещения объекта. Представляет собой транспонирование инверсии вложенной верхней левой матрицы <tt>3&#215;3</tt> матрицы <tt>modelViewMatrix</tt> данного объекта.<br>
+Причиной применения такой особой матрицы является то, что простое использование <tt>modelViewMatrix</tt> может привести к неединичной длине нормалей
+(при масштабировании) или к неперпендикулярному направлению (при неравномерном масштабировании по осям).<br>
+С другой стороны, переставляемая часть <tt>modelViewMatrix</tt> не имеет отношения к вычислению нормалей.
+Так что достаточно <a href="math.htm#10" onmouseover="show('Matrix3')" onmouseout="hide()">.трехмерной матрицы</a>.<br><br>
 
 <pre id="14onAfterRender"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on after render - на (событие) после визуализации')" onmouseout="hide()">.onAfterRender</a></span></pre>
-An optional callback that is executed immediately after the Object3D is rendered. This function is called with the following parameters: renderer, scene, camera, geometry, material, group.<br><br>
+Дополнительная, необязательная функция обратного вызова, которая выполняется сразу после визуализации Object3D.
+Эта функция вызывается со следующими параметрами: <tt><span class="lnk" onmouseover="show('renderer - визуализатор, рендерер')" onmouseout="hide()">renderer</span></tt>,
+<tt><span class="lnk" onmouseover="show('scene - сцена')" onmouseout="hide()">scene</span></tt>, <tt><span class="lnk" onmouseover="show('camera - камера')" onmouseout="hide()">camera</span></tt>,
+<tt><span class="lnk" onmouseover="show('geometry - геометрический элемент')" onmouseout="hide()">geometry</span></tt>, <tt><span class="lnk" onmouseover="show('material - материал')" onmouseout="hide()">material</span></tt>,
+<tt><span class="lnk" onmouseover="show('group - группа')" onmouseout="hide()">group</span></tt>.<br><br>
 
 <pre id="14onBeforeRender"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on before render - на (событие) перед визуализацией')" onmouseout="hide()">.onBeforeRender</a></span></pre>
-An optional callback that is executed immediately before the Object3D is rendered. This function is called with the following parameters: renderer, scene, camera, geometry, material, group.<br><br>
+Дополнительная, необязательная функция обратного вызова, которая выполняется непосредственно перед визуализацией Object3D.
+Эта функция вызывается со следующими параметрами: <tt><span class="lnk" onmouseover="show('renderer - визуализатор, рендерер')" onmouseout="hide()">renderer</span></tt>,
+<tt><span class="lnk" onmouseover="show('scene - сцена')" onmouseout="hide()">scene</span></tt>, <tt><span class="lnk" onmouseover="show('camera - камера')" onmouseout="hide()">camera</span></tt>,
+<tt><span class="lnk" onmouseover="show('geometry - геометрический элемент')" onmouseout="hide()">geometry</span></tt>, <tt><span class="lnk" onmouseover="show('material - материал')" onmouseout="hide()">material</span></tt>,
+<tt><span class="lnk" onmouseover="show('group - группа')" onmouseout="hide()">group</span></tt>.<br><br>
 
 <pre id="14parent"><a href="#14" onmouseover="show('Object3D.<br>parent - родитель')" onmouseout="hide()">.parent</a></pre>
-Родительский объект в <a href="https://en.wikipedia.org/wiki/Scene_graph" target="_blank">графе сцены</a>. Вот эта <a href="https://ru.wikipedia.org/wiki/%D0%93%D1%80%D0%B0%D1%84_%D1%81%D1%86%D0%B5%D0%BD%D1%8B" target="_blank">статья Википедии</a> на русском языке.<br><br>
+Родительский объект в <a href="https://en.wikipedia.org/wiki/Scene_graph" target="_blank">графе сцены</a>. Вот статья Википедии &#171;<a href="https://ru.wikipedia.org/wiki/%D0%93%D1%80%D0%B0%D1%84_%D1%81%D1%86%D0%B5%D0%BD%D1%8B" target="_blank">Граф сцены</a>&#187; на русском языке.<br><br>
 
 <pre id="14position"><a href="math.htm#19" onmouseover="show('Vector3.<br>position - позиция')" onmouseout="hide()">.position</a></pre>
 <a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">Трехмерный вектор</a>, представляющий локальную позицию объекта. Значение по умолчанию равно <tt>(0, 0, 0)</tt>.<br><br>
 
 <pre id="14quaternion"><a href="math.htm#13" onmouseover="show('Quaternion.<br>quaternion - кватернион')" onmouseout="hide()">.quaternion</a></pre>
-Object's local rotation as a Quaternion.<br><br>
+Локальный поворот объекта в виде <a href="math.htm#13" onmouseover="show('Quaternion')" onmouseout="hide()">кватерниона</a>.<br><br>
 
 <pre id="14receiveShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('receive shadow - получить тень')" onmouseout="hide()">.receiveShadow</a></span></pre>
-Whether the material receives shadows. Значением по умолчанию является <tt>false</tt>.<br><br>
+Свойство определяет, будет ли материал получать тени. Значением по умолчанию является <tt>false</tt>.<br><br>
 
 <pre id="14renderOrder"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render order - порядок отображения')" onmouseout="hide()">.renderOrder</a></span></pre>
-This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently. Sorting is from lowest to highest renderOrder. Значением по умолчанию является <tt>0</tt>.<br><br>
+Значение этого свойства позволяет переопределить порядок отображения графических объектов на сцене, хотя сортировка прозрачных и непрозрачных объектов остается раздельной.
+Сортировка происходит от самого низкого до самого высокого значения <tt>renderOrder</tt>. Значением по умолчанию является <tt>0</tt>.<br><br>
 
 <pre id="14rotation"><a href="math.htm#5" onmouseover="show('Euler.<br>rotation - вращение, поворот')" onmouseout="hide()">.rotation</a></pre>
-Object's local rotation (<a href="https://en.wikipedia.org/wiki/Euler_angles" target="_blank">Euler angles</a>), в радианах.<br><br>
+Локальный поворот объекта (смотрите статью &#171;<a href="https://en.wikipedia.org/wiki/Euler_angles" target="_blank">Euler angles</a>&#187;), в радианах.<br>
+Статья &#171;<a href="https://ru.wikipedia.org/wiki/%D0%A3%D0%B3%D0%BB%D1%8B_%D0%AD%D0%B9%D0%BB%D0%B5%D1%80%D0%B0" target="_blank">Углы Эйлера</a>&#187; в Википедии на русском языке.<br><br>
 
 <pre id="14scale"><a href="math.htm#19" onmouseover="show('Vector3.<br>scale - масштаб')" onmouseout="hide()">.scale</a></pre>
 Локальный масштаб объекта. Значением по умолчанию является <tt><a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>( 1, 1, 1 )</tt>. <br><br>
 
 <pre id="14up"><a href="math.htm#19" onmouseover="show('Vector3.<br>up - вверх')" onmouseout="hide()">.up</a></pre>
 Это свойство используется методом <tt><a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()">lookAt</a></tt>, например для определения ориентации результата.<br>
-Значением по умолчанию является <tt><a href="#14DefaultUp" onmouseover="show('Object3D.DefaultUp')" onmouseout="hide()">Object3D.DefaultUp</a></tt> - то есть, <tt>( 0, 1, 0 )</tt>.
+Значением по умолчанию является <tt><a href="#14DefaultUp" onmouseover="show('Object3D.DefaultUp')" onmouseout="hide()">Object3D.DefaultUp</a></tt> - то есть, <tt>( 0, 1, 0 )</tt>.<br><br>
 
 <pre id="14userData"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('user data - данные пользователя')" onmouseout="hide()">.userData</a></span></pre>
 Объект, который можно использовать для хранения пользовательских данных об Object3D. Он не должен содержать ссылки на функции, так как они не будут клонированы.<br><br>

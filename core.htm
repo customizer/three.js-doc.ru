@@ -213,44 +213,38 @@ var mesh = new THREE.Mesh( geometry, material );</pre>
 <a href="https://threejs.org/examples/#webgl_buffergeometry_rawshader" target="_blank">Raw Shaders</a> (необработанные шейдеры).</pre>
 
 <h4 id="AccessingAttributes">Обращение к атрибутам Accessing attributes</h4>
-WebGL хранит данные, связанные с отдельными вершинами геометрии в <em>атрибутах</em>.
-WebGL stores data associated with individual vertices of a geometry in <em>attributes</em>.
-Примеры включают положение вершины, вектор нормали вершины, цвет вершины и т.д.
-Examples include the position of the vertex, the normal vector for the vertex, the vertex color, and so on.
+WebGL хранит данные, связанные с отдельными вершинами геометрии в <em>атрибутах</em>. Примеры включают положение вершины, вектор нормали вершины, цвет вершины и т.д.
 При использовании <a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a>, <a href="renderers.htm#1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">рендерер</a> берет на себя заботу о переносе этой информации в буферы типизированного массива и отправлении этих данных в шейдер.
-When using [page:Geometry], the [page:WebGLRenderer renderer] takes care of wrapping up this information into typed array buffers and sending this data to the shader.
-С BufferGeometry все эти данные хранятся в буферах, связанных с отдельными атрибутами.
-With BufferGeometry, all of this data is stored in buffers associated with an individual attributes.
-Это значит, что для получения данных о положении, связанных с вершиной (например), нужно вызвать метод <tt><a href="#getAttribute" onmouseover="show('BufferGeometry.getAttribute')" onmouseout="hide()">.getAttribute</a></tt> для доступа к <a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">атрибуту</a> <tt><a href="#position" onmouseover="show('position - положение, позиция')" onmouseout="hide()">position</a></tt>, затем обращаться к отдельным координатам <tt>x</tt>, <tt>y</tt>, и <tt>z</tt>.
-This means that to get the position data associated with a vertex (for instance), you must call [page:.getAttribute] to access the 'position' [page:BufferAttribute attribute], then access the individual x, y, and z coordinates of the position.<br><br>
+В случае с BufferGeometry все эти данные хранятся в буферах, связанных с отдельными атрибутами.
+Это значит, что для получения данных о положении, связанных с вершиной (например), нужно вызвать метод <tt><a href="#getAttribute" onmouseover="show('BufferGeometry.getAttribute')" onmouseout="hide()">.getAttribute</a></tt>
+для доступа к <a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">атрибуту</a> <tt><a href="#position" onmouseover="show('position - положение, позиция')" onmouseout="hide()">position</a></tt>,
+затем обращаться к отдельным координатам <tt>x</tt>, <tt>y</tt>, и <tt>z</tt> этой позиции.<br><br>
 Различными элементами этого класса устанавливаются следующие атрибуты:
-<div class=blockindent>
-<pre id="position"><a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">position</a> (itemSize: 3)</pre>
-Содержит координаты <tt>x</tt>, <tt>y</tt>, и <tt>z</tt> каждой вершины данной геометрии. Устанавливается при помощи метода <a href="#fromGeometry" onmouseover="show('BufferGeometry.fromGeometry')" onmouseout="hide()">.fromGeometry</a>().<br><br>
+<div class=blockindent><br>
+<pre id="2position"><a href="#1" onmouseover="show('BufferAttribute.<br>position - позиция, положение')" onmouseout="hide()">position</a> (itemSize: 3)</pre>
+Содержит координаты <tt>x</tt>, <tt>y</tt>, и <tt>z</tt> каждой вершины данной геометрии. Устанавливается при помощи метода <tt><a href="#2fromGeometry" onmouseover="show('BufferGeometry.fromGeometry')" onmouseout="hide()">.fromGeometry</a>()</tt>.<br><br>
 
-<pre id="normal"><a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">normal</a> (itemSize: 3)</pre>
-Содержит компоненты x, y и z векторов нормалей к каждой вершине в данной геометрии. Устанавливается при помощи метода <a href="#fromGeometry" onmouseover="show('BufferGeometry.fromGeometry')" onmouseout="hide()">.fromGeometry</a>().<br><br>
+<pre id="2normal"><a href="#1" onmouseover="show('BufferAttribute.<br>normal - нормаль, перпендикуляр')" onmouseout="hide()">normal</a> (itemSize: 3)</pre>
+Содержит компоненты <tt>x</tt>, <tt>y</tt>, и <tt>z</tt> векторов нормалей к каждой вершине в данной геометрии.
+Устанавливается при помощи метода <tt><a href="#2fromGeometry" onmouseover="show('BufferGeometry.fromGeometry')" onmouseout="hide()">.fromGeometry</a>()</tt>.<br><br>
 
-<pre id="color"><a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">color</a> (itemSize: 3)</pre>
-Содержит каналы красного, зеленого и синего цвета каждой вершины в данной геометрии. Устанавливается при помощи метода <a href="#fromGeometry" onmouseover="show('BufferGeometry.fromGeometry')" onmouseout="hide()">.fromGeometry</a>().<br><br>
+<pre id="2color"><a href="#1" onmouseover="show('BufferAttribute.<br>color - цвет')" onmouseout="hide()">color</a> (itemSize: 3)</pre>
+Содержит каналы красного, зеленого и синего цвета каждой вершины в данной геометрии. Устанавливается при помощи метода <tt><a href="#2fromGeometry" onmouseover="show('BufferGeometry.fromGeometry')" onmouseout="hide()">.fromGeometry</a>()</tt>.</div><br>
 
-<pre id="index"><a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">index</a> (itemSize: 1)</pre>
-Allows for vertices to be re-used across multiple triangles; this is called using "indexed triangles," and works much the same as it does in [page:Geometry]: each triangle is associated with the index of three vertices. This attribute therefore stores the index of each vertex for each triangular face.</div>
-If this attribute is not set, the [page:WebGLRenderer renderer] assumes that each three contiguous positions represent a single triangle.<br><br>
-In addition to the the built-in attributes, you can set your own custom attributes using the addAttribute method. With [page:Geometry], these attributes are set and stored on the [page:Material]. In BufferGeometry, the attributes are stored with the geometry itself. Note that you still need to set the attributes information on the material as well, but the value of each attribute is stored in the BufferGeometry.<br><br>
+В дополнение к встроенным атрибутам, можно устанавливать свои собственные настраиваемые атрибуты при помощи метода <tt><a href="#2addAttribute" onmouseover="show('BufferGeometry.addAttribute')" onmouseout="hide()">addAttribute</a></tt>.
+При работе с <a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a>, эти атрибуты установлены и хранятся в <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">материале</a>.
+В BufferGeometry эти атрибуты сохраняются вместе с самой геометрией. Обратите внимание, что по-прежнему нужно задавать сведения об атрибутах в материале, но значение каждого атрибута хранится в BufferGeometry.<br><br>
 
 <h4>Конструктор</h4>
-<pre>BufferGeometry()</pre>
+<pre>BufferGeometry( )</pre>
 Конструктор создает новый BufferGeometry, а также задает некоторым свойствам значение по умолчанию.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="attributes"><span onclick="showClick(type_hashmap)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('attributes - атрибуты')" onmouseout="hide()">.attributes</a></span></pre>
-У этой хеш-карты имя атрибута устанавливается как идентификатор, а в качестве значения устанавливается <a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">буфер</a>.
+<pre id="2attributes"><span onclick="showClick(type_hashmap)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('attributes - атрибуты')" onmouseout="hide()">.attributes</a></span></pre>
+У этой <a href="#hash_map" onmouseover="show('hashmap')" onmouseout="hide()">хеш-таблицы</a> имя атрибута устанавливается как идентификатор, а в качестве значения устанавливается <a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">буфер</a>.
 Вместо непосредственного обращения к данному свойству, для доступа к атрибутам этой геометрии используйте методы
-<a href="#2addAttribute" onmouseover="show('BufferGeometry.addAttribute<br>add attribute - добавить атрибут')" onmouseout="hide()">addAttribute</a> и <a href="#2getAttribute" onmouseover="show('BufferGeometry.getAttribute<br>get attribute - получить атрибут')" onmouseout="hide()">getAttribute</a>.
-This hashmap has as id the name of the attribute to be set and as value the buffer to set it to. Rather than accessing this property directly, use addAttribute and getAttribute to access attributes of this geometry.</div>
-
+<a href="#2addAttribute" onmouseover="show('BufferGeometry.addAttribute<br>add attribute - добавить атрибут')" onmouseout="hide()">addAttribute</a> и <a href="#2getAttribute" onmouseover="show('BufferGeometry.getAttribute<br>get attribute - получить атрибут')" onmouseout="hide()">getAttribute</a>.</div>
 
 <div class="note_trans" id="hash_map"><b>Примечание переводчика:</b> Вот чуть более подробно о хешировании, хеш-таблицах (хеш-картах) и ассоциативных таблицах. <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
 <div style='display:none;'>Хеширование или хэширование (англ. hashing) — преобразование массива входных данных произвольной длины в (выходную) битовую строку фиксированной длины, выполняемое определённым алгоритмом.
@@ -261,15 +255,11 @@ This hashmap has as id the name of the attribute to be set and as value the buff
 Хеш-таблица — это структура данных, реализующая интерфейс ассоциативного массива, а именно, она позволяет хранить пары (ключ, значение) и выполнять три операции: операцию добавления новой пары, операцию поиска и операцию удаления пары по ключу.<br><br>
 <span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://ru.wikipedia.org/wiki/%D0%A5%D0%B5%D1%88-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span><br>
 В информатике, хеш-таблицей (hash table) или хеш-картой (hash map) называется структура данных, которая реализует ассоциативный массив с абстрактным типом данных, и может сопоставлять ключи и значения.
-Хеш-таблица использует хеш-функцию для вычисления индекса в массиве
-In computing, a hash table (hash map) is a data structure which implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.<br>
+Хеш-таблица использует хеш-функцию для вычисления индекса в массиве of buckets or slots, из которого может быть найдено желаемое значение.<br>
 В идеале хеш-функция будет присваивать каждому ключу свое уникальное  хеш-значение, но большинство конструкций хеш-таблиц применяет несовершенную хеш-функцию, которая может вызывать хеш-коллизии, когда она создает одинаковый индекс для более чем одного ключа.
-Такие коллизии должны каким-то образом улаживаться.
-Ideally, the hash function will assign each key to a unique bucket, but most hash table designs employ an imperfect hash function, which might cause hash collisions where the hash function generates the same index for more than one key. Such collisions must be accommodated in some way.<br>
-В хорошо подобранной хеш-таблице средние затраты (количество инструкций) на каждый поиск не зависит от числа элементов, хранящихся в таблице. Большинство проектов хеш-таблиц также позволяет произвольные вставки и удаления пар ключ-значение, при неизменных (amortized[2]) средних затратах на операцию.
-In a well-dimensioned hash table, the average cost (number of instructions) for each lookup is independent of the number of elements stored in the table. Many hash table designs also allow arbitrary insertions and deletions of key-value pairs, at (amortized[2]) constant average cost per operation.<br>
-Во многих случаях хеш-таблицы оказываются более эффективными, чем поисковые деревья или любые другие структуры просмотра таблиц. Поэтому они широко используются во многих видах компьютерных программ, в частности для ассоциативных массивос, индексирования баз данных, кэшей и наборов.
-In many situations, hash tables turn out to be more efficient than search trees or any other table lookup structure. For this reason, they are widely used in many kinds of computer software, particularly for associative arrays, database indexing, caches, and sets.<br><br>
+Такие коллизии должны каким-то образом улаживаться.<br>
+В хорошо подобранной хеш-таблице средние затраты (количество инструкций) на каждый поиск не зависит от числа элементов, хранящихся в таблице. Большинство проектов хеш-таблиц также позволяет произвольные вставки и удаления пар ключ-значение, при неизменных средних затратах на операцию.<br>
+Во многих случаях хеш-таблицы оказываются более эффективными, чем поисковые деревья или любые другие структуры просмотра таблиц. Поэтому они широко используются во многих видах компьютерных программ, в частности для ассоциативных массивов, индексирования баз данных, кэшей и наборов.<br><br>
 <span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://en.wikipedia.org/wiki/Hash_table' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span><br>
 
 Ассоциативный массив — абстрактный тип данных (интерфейс к хранилищу данных), позволяющий хранить пары вида «(ключ, значение)» и поддерживающий операции добавления пары, а также поиска и удаления пары по ключу:
@@ -287,30 +277,41 @@ REMOVE(ключ)</pre>
 <pre id="2boundingBox"><a href="math.htm#2" onmouseover="show('Box3<br>bounding box - ограничительная рамка')" onmouseout="hide()">.boundingBox</a></pre>
 Ограничительная рамка для bufferGeometry, которая может быть рассчитана при помощи метода <a href="#2computeBoundingBox" onmouseover="show('BufferGeometry.computeBoundingBox')" onmouseout="hide()">.computeBoundingBox</a>().
 Значением по умолчанию является <tt>null</tt>.<br><br>
+
 <pre id="2boundingSphere"><a href="math.htm#15" onmouseover="show('Sphere.<br>bounding sphere - ограничительная сфера')" onmouseout="hide()">.boundingSphere</a></pre>
 Ограничительная сфера для bufferGeometry, которая может быть рассчитана при помощи метода <a href="#2computeBoundingSphere" onmouseover="show('BufferGeometry.computeBoundingSphere')" onmouseout="hide()">.computeBoundingSphere</a>(). Значением по умолчанию является <tt>null</tt>.<br><br>
+
 <pre id="2drawRange"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('draw range - область рисования')" onmouseout="hide()">.drawRange</a></span></pre>
 Используется для определения, какая часть геометрии должна быть визуализирована. Это свойство не устанавливается напрямую, взамен используйте метод <a href="#2setDrawRange" onmouseover="show('BufferGeometry.setDrawRange')" onmouseout="hide()">.setDrawRange</a>.<br>
 Значением по умолчанию является <tt>{ start: 0, count: Infinity }</tt>.<br><br>
+
 <pre id="2groups"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('groups - группы')" onmouseout="hide()">.groups</a></span></pre>
-Разделите геометрию на группы, каждая из которых будет отображаться в отдельном вызове рисования WebGL. Это позволит использовать с bufferGeometry массив материалов.
-Split the geometry into groups, each of which will be rendered in a separate WebGL draw call. This allows an array of materials to be used with the bufferGeometry.<br>
+Разделите геометрию на группы, каждая из которых будет отображаться в отдельном вызове рисования WebGL. Это позволит использовать массив материалов с буферным геометрическим элементом.<br>
 Каждая группа представляет собой объект в виде:
 <pre>{ <span class="lnk" onmouseover="show('start - начало')" onmouseout="hide()">start</span>: <span class="lnk" onmouseover="show('integer - целое число')" onmouseout="hide()">Integer</span>, <span class="lnk" onmouseover="show('count - счет')" onmouseout="hide()">count</span>: <span class="lnk" onmouseover="show('integer - целое число')" onmouseout="hide()">Integer</span>, <span class="lnk" onmouseover="show('material index - индекс материала')" onmouseout="hide()">materialIndex</span>: <span class="lnk" onmouseover="show('integer - целое число')" onmouseout="hide()">Integer</span> }</pre>
 где <tt>start</tt> указывает индекс первой вершины в этом вызове рисования, <tt>count</tt> определяет количество включенных вершин, а <tt>materialIndex</tt> устанавливает индекс используемого массива материала.<br>
-Для добавления групп, вместо непосредственного изменения массива <tt>groups</tt>, используйте метод <tt><a href="#2.addGroup" onmouseover="show('BufferGeometry.addGroup')" onmouseout="hide()">.addGroup</a></tt>.<br><br>
+Для добавления групп, вместо непосредственного изменения массива <tt>groups</tt>, используйте метод <tt><a href="#2addGroup" onmouseover="show('BufferGeometry.addGroup')" onmouseout="hide()">.addGroup</a></tt>.<br><br>
 
 <pre id="2id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
 Уникальное число для данного экземпляра <tt>bufferGeometry</tt>.<br><br>
-<pre id="2index"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">.index</a></span></pre>
-Описание этого свойства смотрите выше, в разделе "<a href="#AccessingAttributes">Accessing Attributes</a>". Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="2index"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">.index</a></span></pre>
+Свойство позволяет повторно использовать вершины для нескольких треугольников; это называется использованием "индексированных треугольников" и работает также,
+как и в <a href="#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a>: каждый треугольник связан с индексами трех вершин.
+Таким образом данный атрибут хранит индекс каждой вершины каждой треугольной грани.
+Если этот атрибут не установлен, <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">визуализатор (рендерер)</a> полагает, что каждая из трех смежных позиций представляет отдельный треугольник.
+Значением по умолчанию является <tt>null</tt>.<br><br>
+
 <pre id="2isBufferGeometry"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов is buffer geometry - является буферной геометрией')" onmouseout="hide()">.isBufferGeometry</a></span></pre>
 Используется для проверки, является ли данный класс и производные от него буферными геометриями (BufferGeometry). Значением по умолчанию является <tt>true</tt>.
 Это свойство нельзя изменять, поскольку оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
 <pre id="2morphAttributes"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов morphing attributes - атрибуты морфинга')" onmouseout="hide()">.morphAttributes</a></span></pre>
 Хеш-карта <a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">BufferAttribute</a>'ов, содержащая сведения о <tt><a href="#7morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">morphTargets</a></tt> (целях морфинга) геометрии.<br><br>
+
 <pre id="2name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">.name</a></span></pre>
 Необязательное (дополнительное) имя для данного экземпляра <tt>bufferGeometry</tt>. Значением по умолчанию является пустая строка.<br><br>
+
 <pre id="2uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение англ. слов Universally Unique Identifier<br>- универсальный уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
 <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank" onmouseover="show('сокращение англ. слов Universally Unique Identifier<br>- универсальный уникальный идентификатор')" onmouseout="hide()">UUID</a> данного экземпляра объекта. Он присваивается автоматически и не должен изменяться.</div><br>
 
@@ -319,12 +320,12 @@ Split the geometry into groups, each of which will be rendered in a separate Web
 <div class=blockindent><br>
 <pre id="2addAttribute"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add attribute - добавить атрибут')" onmouseout="hide()">.addAttribute</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">name</a></span>, <a href="#1" onmouseover="show('BufferAttribute.<br>attribute - атрибут')" onmouseout="hide()">attribute</a> )</pre>
 Метод добавляет атрибут в заданную геометрию. Использование этого метода лучше использования свойства атрибутов, так как для ускорения перебора поддерживается внутренний массив <a href="#attributes" onmouseover="show('BufferGeometry.attributes')" onmouseout="hide()">атрибутов</a>.<br><br>
+
 <pre id="2addGroup"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add group - добавить группу')" onmouseout="hide()">.addGroup</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start - начало')" onmouseout="hide()">start</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет')" onmouseout="hide()">count</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material index - индекс материала')" onmouseout="hide()">materialIndex</a></span> )</pre>
 Добавляет группу в заданную геометрию; подробности смотрите в свойстве <a href="#groups" onmouseover="show('BufferGeometry.groups')" onmouseout="hide()">groups</a>.<br><br>
 
 <pre id="2applyMatrix"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов apply matrix - применение матрицы')" onmouseout="hide()">.applyMatrix</a></span>( <a href="math.htm#11" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
-Передает преобразование матрицы непосредственно в координаты вершин.
-Bakes matrix transform directly into vertex coordinates.<br><br>
+Передает матричное изменение непосредственно в координаты вершин.<br><br>
 
 <pre id="2center"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('center - центр')" onmouseout="hide()">.center</a></span>( )</pre>
 Центрирует геометрию исходя из ограничительной рамки.<br><br>
@@ -367,44 +368,57 @@ Bakes matrix transform directly into vertex coordinates.<br><br>
 Возвращает <tt><a href="#2index" onmouseover="show('BufferGeometry.index')" onmouseout="hide()">.index</a></tt> - индекс буфера.<br><br>
 
 <pre id="2lookAt"><a href="#2" onmouseover="show('BufferGeometry,<br>от англ. слов look at - смотреть на')" onmouseout="hide()">.lookAt</a>( <a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">vector</a> )</pre>
-<div class=list><tt>vector</tt> - A world vector to look at.</div>
-Поворачивает геометрию к лицевой точке в пространстве. Обычно выполняется как одноразовая операция, и не в процессе цикла. Используйте метод
-Rotates the geometry to face point in space. This is typically done as a one time operation, and not during a loop
-Use <a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()">Object3D.lookAt</a> for typical real-time mesh usage.<br><br>
+<div class=list><tt>vector</tt> - вектор, представляющий позицию в "мировом" пространстве, на которую должен "смотреть" геометрический элемент.</div>
+Поворачивает геометрию к указанной точке в пространстве. Обычно выполняется как одноразовая операция, и не в процессе цикла.
+Для стандартного обращения к сетке в реальном времени используйте метод <a href="#14lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()">Object3D.lookAt</a>.<br><br>
 
 <pre id="2merge"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('merge - сливать, объединять')" onmouseout="hide()">merge</a></span>( <a href="#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">bufferGeometry</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
 Объединение с другой BufferGeometry с дополнительным смещением, от которого начинается слияние.<br><br>
+
 <pre id="2normalizeNormals"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов normalize normals - нормализовать нормали')" onmouseout="hide()">.normalizeNormals</a></span>( )</pre>
 Каждый вектор нормали геометрического элемента будет иметь единичную величину. Это исправит освещение геометрических поверхностей.<br><br>
+
 <pre id="2removeAttribute"><a href="#1" onmouseover="show('BufferAttribute,<br>от англ. слов remove attribute - удалить атрибут')" onmouseout="hide()">.removeAttribute</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">name</a></span> )</pre>
 Удаляет <tt><a href="#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">атрибут</a></tt> с указанным именем.<br><br>
+
 <pre id="2rotateX"><a href="#2" onmouseover="show('BufferGeometry,<br>rotate X - поворот (по оси) X')" onmouseout="hide()">rotateX</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radians - радианы')" onmouseout="hide()">radians</a></span> )</pre>
 Поворот геометрии вокруг оси <tt>X</tt>. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>
 Для обычного поворота сетки (mesh) в реальном времени используйте свойство <tt><a href="#14rotation" onmouseover="show('Object3D.rotation')" onmouseout="hide()">Object3D.rotation</a></tt>.<br><br>
+
 <pre id="2rotateY"><a href="#2" onmouseover="show('BufferGeometry,<br>rotate Y - поворот (по оси) Y')" onmouseout="hide()">rotateY</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radians - радианы')" onmouseout="hide()">radians</a></span> )</pre>
 Поворот геометрии вокруг оси <tt>Y</tt>. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>
 Для обычного поворота сетки (mesh) в реальном времени используйте свойство <tt><a href="#14rotation" onmouseover="show('Object3D.rotation')" onmouseout="hide()">Object3D.rotation</a></tt>.<br><br>
+
 <pre id="2rotateZ"><a href="#2" onmouseover="show('BufferGeometry,<br>rotate Z - поворот (по оси) Z')" onmouseout="hide()">rotateZ</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radians - радианы')" onmouseout="hide()">radians</a></span> )</pre>
 Поворот геометрии вокруг оси <tt>Z</tt>. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>
 Для обычного поворота сетки (mesh) в реальном времени используйте свойство <tt><a href="#14rotation" onmouseover="show('Object3D.rotation')" onmouseout="hide()">Object3D.rotation</a></tt>.<br><br>
+
 <pre id="2scale"><a href="#2" onmouseover="show('BufferGeometry,<br>scale - масштаб')" onmouseout="hide()">scale</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата z')" onmouseout="hide()">z</a></span> )</pre>
 Масштабирует данные геометрии. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>
 Для обычного масштабирования сетки (mesh) в реальном времени используйте свойство <tt><a href="#14scale" onmouseover="show('Object3D.scale')" onmouseout="hide()">Object3D.scale</a></tt>.<br><br>
+
 <pre id="2setIndex"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов set index - установить индекс')" onmouseout="hide()">.setIndex</a></span>( <a href="#1" onmouseover="show('BufferAttribute,<br>index - индекс')" onmouseout="hide()">index</a> )</pre>
 Устанавливает <tt><a href="#2index" onmouseover="show('BufferGeometry.index')" onmouseout="hide()">.index</a></tt> - индекс буфера.<br><br>
+
 <pre id="2setDrawRange"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов set draw range - установить диапазон рисования')" onmouseout="hide()">.setDrawRange</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start - начало')" onmouseout="hide()">start</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет')" onmouseout="hide()">count</a></span> )</pre>
 Устанавливает значение свойства буфера <tt><a href="#2drawRange" onmouseover="show('BufferGeometry.drawRange')" onmouseout="hide()">.drawRange</a></tt>. Подробнее смотрите в описании этого свойства.<br><br>
+
 <pre id="2setFromObject"><a href="#2" onmouseover="show('BufferGeometry.<br>set from object - установить из объекта')" onmouseout="hide()">.setFromObject</a>( <a href="#14" onmouseover="show('Object3D')" onmouseout="hide()">object</a> )</pre>
 Устанавливает атрибуты из <a href="#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> для данной <tt>BufferGeometry</tt>.<br><br>
+
 <pre id="2setFromPoints"><a href="#2" onmouseover="show('BufferGeometry.<br>set from points - установить из точек')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
 Устанавливает атрибуты данной <tt>BufferGeometry</tt> из массива точек.<br><br>
+
 <pre id="2toJSON"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - сокр. от англ. слов to JavaScript Object<br>Notation, — то есть, в текстовый формат описания<br>объекта, основанный на JavaScript')" onmouseout="hide()">.toJSON</a></span>( )</pre>
 Возвращает необработанное представление объекта <tt>BufferGeometry</tt>.<br><br>
+
 <pre id="2toNonIndexed"><a href="#2" onmouseover="show('BufferGeometry.<br>to non indexed - в неиндексированном (виде)')" onmouseout="hide()">.toNonIndexed</a>( )</pre>
 Возвращает неиндексированную версию индексированной BufferGeometry.<br><br>
+
 <pre id="2translate"><a href="#2" onmouseover="show('BufferGeometry.<br>translate - перевод, перенос, перемещение')" onmouseout="hide()">.translate</a> ( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата z')" onmouseout="hide()">z</a></span> )</pre>
 Перевод (смещение) координат геометрии. Обычно выполняется как одноразовая операция, и не в процессе цикла.<br>
 Для обычного перевода координат сетки (mesh) в реальном времени используйте свойство <a href="#14position" onmouseover="show('Object3D.position')" onmouseout="hide()">Object3D.position</a>.<br><br>
+
 <pre id="2updateFromObject"><a href="#2" onmouseover="show('BufferGeometry.<br>update from object - обновить из объекта')" onmouseout="hide()">.updateFromObject</a> ( <a href="#14" onmouseover="show('Object3D')" onmouseout="hide()">object</a> )</pre>
 Обновляет для данной <tt>BufferGeometry</tt> атрибуты из <a href="#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.</div><br>
 

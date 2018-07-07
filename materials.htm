@@ -867,7 +867,7 @@ The RGB values affect the surface normal for each pixel fragment and change the 
 How shiny the .specular highlight is; a higher value gives a sharper highlight. Значение по умолчанию равно&nbsp;<tt>30</tt>.<br><br>
 
 <pre id="8skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - скиннинг (операция обворачивания<br>3D-модели полигональной сеткой)')" onmouseout="hide()">.skinning</a></span></pre>
-Свойство определяет, будет ли использоватья <span class="lnk" onmouseover="show('(от английского слова skin - кожа,<br>skinning - процесс создания кожи<br>- операция обворачивания 3D-модели<br>полигональной сеткой.')" onmouseout="hide()">скиннинг (skinning)</span>. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+Свойство определяет, будет ли использоваться <span class="lnk" onmouseover="show('(от английского слова skin - кожа,<br>skinning - процесс создания кожи<br>- операция обворачивания 3D-модели<br>полигональной сеткой.')" onmouseout="hide()">скиннинг (skinning)</span>. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="8specular"><a href="math.htm#3" onmouseover="show('Color.<br>specular - зеркальный, отражающий')" onmouseout="hide()">.specular</a></pre>
 Цвет, отражаемый материалом. Значением по умолчанию является <a href="math.htm#3" onmouseover="show('Color')" onmouseout="hide()">Color</a>, установленный как <tt>0x111111</tt> (темно-темно-серый).<br>
@@ -1228,8 +1228,7 @@ scene.add( starField );</pre>
 
 <span class="right_side"><a href="#14" title="Переход к родительскому классу: ShaderMaterial"><tt>ShaderMaterial &rarr;</tt></a></span>
 <h3 id="13">RawShaderMaterial</h3>
-Данный класс работает также как класс <a href="#14" onmouseover="show('ShaderMaterial')" onmouseout="hide()">ShaderMaterial</a>, за исключением того, что определения встроенных атрибутов и uniform не добавляются к коду шейдера GLSL автоматически.
- except that definitions of built-in uniforms and attributes are not automatically prepended to the GLSL shader code.<br><br>
+Данный класс работает также как класс <a href="#14" onmouseover="show('ShaderMaterial')" onmouseout="hide()">ShaderMaterial</a>, за исключением того, что определения встроенных атрибутов и униформ не добавляются автоматически к коду шейдера GLSL.<br><br>
 <h4>Пример</h4>
 <pre>var material = new THREE.RawShaderMaterial( {<br>
   uniforms: {
@@ -1272,23 +1271,24 @@ scene.add( starField );</pre>
 для запуска на <span class="lnk" onmouseover="show('сокращ. англ. слов graphics processing unit -<br>блок графической обработки, т.е. видеокарта')" onmouseout="hide()">GPU</span>.
 Можно использовать заказной шейдер, если требуется:
 <ul><li>реализовать эффект не включенный ни в один из встроенных <a href="#3" onmouseover="show('Material')" onmouseout="hide()">материалов</a></li>
-<li>для повышения производительности объединить несколько объектов в одной <b><a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a></b> или <b><a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a></b></li></ul>
+<li>для повышения производительности объединить несколько объектов в одной <a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> или <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a></li></ul>
 При использовании <b>ShaderMaterial</b> нужно учитывать следующие замечания:
-<ul><li><b>ShaderMaterial</b> будет отображаться только с помощью <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>,
+<ul><li>ShaderMaterial будет отображаться только с помощью <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>,
 поскольку GLSL-код в свойствах <tt><a href="https://en.wikipedia.org/wiki/Shader#Vertex_shaders" target="_blank">vertexShader</a></tt> и <tt><a href="https://en.wikipedia.org/wiki/Shader#Pixel_shaders" target="_blank">fragmentShader</a></tt> должен быть скомпилирован и запущен на графическом процессоре, использующим WebGL.</li>
-<li>Начиная с версии THREE r72, в <b>ShaderMaterial</b> больше не поддерживается прямое назначение атрибутов. A [page:BufferGeometry] instance (instead of a [page:Geometry] instance) must be used instead, using [page:BufferAttribute] instances to define custom attributes.</li>
+<li>Начиная с версии THREE r72, в ShaderMaterial больше не поддерживается прямое назначение атрибутов. Взамен следует использовать экземпляр <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>
+(вместо экземпляра <a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a>), воспользовавшися экземплярами <a href="core.htm#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">BufferAttribute</a> для определения настраиваемых атрибутов.</li>
 <li>Начиная с версии THREE r77, экземпляры <a href="renderers.htm#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()">WebGLRenderTarget</a>
 или <a href="renderers.htm#1.3" onmouseover="show('WebGLRenderTargetCube')" onmouseout="hide()">WebGLRenderTargetCube</a> не должны больше использоваться как униформы.
-Вместо этого нужно воспользоваться их свойством <a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">texture</a>.</li>
+Вместо этого нужно воспользоваться свойством их <a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">текстуры</a>.</li>
 <li>Встроенные атрибуты и униформы передаются шейдерам вместе с кодом. Если не требуется, чтобы <a href="dev-ref.htm#2.1" onmouseover="show('WebGLProgram')" onmouseout="hide()">WebGLProgram</a> добавляла что-либо к коду шейдера, вместо данного класса можно использовать <a href="#13" onmouseover="show('RawShaderMaterial')" onmouseout="hide()">RawShaderMaterial</a>.</li>
 <li>Для того, чтобы развернуть цикл <tt>for</tt> в GLSL с помощью препроцессора шейдера можно использовать директиву <tt>#pragma unroll_loop</tt>.
 Директива должна располагаться непосредственно над циклом. Форматирование цикла должно соответствовать определенному стандарту:
-<div class=blockindent>цикл должен быть нормализован<br>
-переменной цикла должна быть <tt>i</tt><br>
-цикл должен использовать определенное форматирование пробелов.
+<div class=blockindent>&#9675;&nbsp;&nbsp;цикл должен быть нормализован<br>
+&#9675;&nbsp;&nbsp;переменной цикла должна быть <tt>i</tt><br>
+&#9675;&nbsp;&nbsp;цикл должен использовать определенное форматирование пробелов.
 <pre>#pragma unroll_loop
 for ( int i = 0; i &#60; 10; i ++ ) {<br>
-	// ...<br>
+  // ...<br>
 }</pre></div></li></ul><br>
 
 <h4>Пример</h4>
@@ -1338,28 +1338,31 @@ for ( int i = 0; i &#60; 10; i ++ ) {<br>
 <ul><li>Вначале запускается <em>вершинный шейдер</em> (vertex shader); он принимает атрибуты, вычисляет/управляет положение каждой отдельной вершиной и передает дополнительные данные  шейдеру фрагмента.</li>
 <li>Вторым номером запускается <em>шейдер фрагмента</em> (fragment shader); он устанавливает цвет каждого отдельного фрагмента (пикселя) отображаемого на экране.</li></ul>
 В шейдерах существует три типа переменных: униформы (uniforms), атрибуты (attributes) и вариации (varyings):
-<ul><li>Униформы (<tt>uniforms</tt>) - это переменные, что имеют однообразное значение для всех вершин; освещение, туман и карты тени - вот примеры данных, которые будут храниться в униформах.
-Uniforms can be accessed by both the vertex shader and the fragment shader.</li>
-<li>Атрибуты (<tt>attributes</tt>) - это переменные, связанные с каждой вершиной - например, положение вершины, нормаль к грани и цвет вершины - это все примеры данных, которые будут хранится в атрибутах. Атрибуты могут быть доступны <b>только</b> внутри вершинного шейдера.</li>
-<li>Вариации (<tt>varyings</tt>) - это переменные, которые передаются из вершинного шейдера в шейдер фрагмента. Для каждого фрагмента значение каждой вариации будет плавно интерполироваться из значений смежных вершин.</li></ul>
-Обратите внимание, что <b>внутри</b> собственно самого шейдера, униформы и атрибуты действуют как константы; можно только изменять их значения передачей различных значений в буферы из JavaScript кода.
-Note that <b>within</b> the shader itself, uniforms and attributes act like constants; you can only modify their values by passing different values to the buffers from your JavaScript code.<br><br>
+<ul><li><b>Униформы</b> (<tt>uniforms</tt>) - это переменные, что имеют единообразное значение для всех вершин; освещение, туман и карты тени - вот примеры данных, которые будут храниться в униформах.
+Обращаться к униформам можно как с помощью вершинного шейдера, так и с помощью шейдера фрагментов.</li>
+<li><b>Атрибуты</b> (<tt>attributes</tt>) - это переменные, связанные с каждой вершиной - например, положение вершины, нормаль к грани и цвет вершины - это все примеры данных, которые будут хранится в атрибутах. Атрибуты могут быть доступны <b>только</b> внутри вершинного шейдера.</li>
+<li><b>Вариации</b> (<tt>varyings</tt>) - это переменные, которые передаются из вершинного шейдера в шейдер фрагмента. Для каждого фрагмента значение каждой вариации будет плавно интерполироваться из значений смежных вершин.</li></ul>
+Обратите внимание, что <b>внутри</b> собственно самого шейдера, униформы и атрибуты действуют как константы; изменять их значения можно только передачей различных значений в буферы из JavaScript кода.<br><br>
 
 <h4>Встроенные атрибуты и униформы</h4>
 По умолчанию <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a> предоставляет шейдерам множество атрибутов и униформов; определения этих переменных добавляются в код <tt>fragmentShader</tt> и <tt>vertexShader</tt> с помощью <a href="dev-ref.htm#2.1" onmouseover="show('WebGLProgram')" onmouseout="hide()">WebGLProgram</a> при компиляции шейдера; отдельно объявлять их самих не требуется.
-Подробнее об этих переменных смотрите в описании <a href="dev-ref.htm#2.1" onmouseover="show('WebGLProgram')" onmouseout="hide()">WebGLProgram</a>.<br><br>
+Подробнее об этих переменных смотрите в описании <a href="dev-ref.htm#2.1" onmouseover="show('WebGLProgram')" onmouseout="hide()">WebGLProgram</a>.<br>
 Некоторые из этих униформ или атрибутов (например связанные с освещением, туманом и т.д.) требуют установки свойств материала,
-чтобы <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a> мог скопировать соответствующие значения для GPU - не забудьте установить эти флаги, если хотите в своем собственном шейдере использовать данные функции.<br><br>
-Если не требуется, чтобы <a href="dev-ref.htm#2.1" onmouseover="show('WebGLProgram')" onmouseout="hide()">WebGLProgram</a> добавляла что-либо к коду шейдера, вместо данного класса можно использовать <a href="#13" onmouseover="show('RawShaderMaterial')" onmouseout="hide()">RawShaderMaterial</a>.
+чтобы <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a> мог скопировать соответствующие значения
+для <span class="lnk" onmouseover="show('GPU - сокращ. от англ. слов graphics processing unit<br>- блок графической обработки - видеокарта')" onmouseout="hide()">GPU</span>
+- не забудьте установить эти <span class="lnk" onmouseover="show('флагами часто называют свойства с логическими значениями')" onmouseout="hide()">флаги</span>, если хотите в своем собственном шейдере использовать данные функции.<br>
+Если не требуется, чтобы <a href="dev-ref.htm#2.1" onmouseover="show('WebGLProgram')" onmouseout="hide()">WebGLProgram</a> добавляла что-либо к коду шейдера, вместо данного класса можно использовать <a href="#13" onmouseover="show('RawShaderMaterial')" onmouseout="hide()">RawShaderMaterial</a>.<br><br>
 
 <h4>Настраиваемые атрибуты и униформы</h4>
 Оба типа переменных (и настраиваемые атрибуты, и униформы), должны быть объявлены в GLSL коде шейдера (внутри <tt>vertexShader</tt> и/или <tt>fragmentShader</tt>).
-Both custom attributes and uniforms must be declared in your GLSL shader code (within *vertexShader* and/or *fragmentShader*). Custom uniforms must be defined in <b>both</b> the *uniforms* property of your *ShaderMaterial*, whereas any custom attributes must be defined via [page:BufferAttribute] instances. Note that *varying*s only need to be declared within the shader code (not within the material).<br><br>
-To declare a custom attribute, please reference the [page:BufferGeometry] page for an overview, and the [page:BufferAttribute] page for a detailed look at the *BufferAttribute* API.<br><br>
-При создании собственных атрибутов имейте ввиду, что каждый типизированный массив, для хранения данных вашего атрибута, должен быть кратным размеру вашего типа данных.
+Настраиваемые униформы должны быть определены также как в свойстве <tt><a href="#14uniforms" onmouseover="show('ShaderMaterial.uniforms')" onmouseout="hide()">uniforms</a></tt> вашего ShaderMaterial,
+тогда как любые настраиваемые атрибуты должны быть определены через экземпляры <a href="core.htm#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">BufferAttribute</a>.
+Обратите внимание, что вариации должны объявляться только внутри кода шейдера (не в материале).<br>
+Для объявления настраиваемого атрибута за общими сведениями обратитесь к описанию <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>,
+а подробности API BufferAttribute можно увидеть в описании <a href="core.htm#1" onmouseover="show('BufferAttribute')" onmouseout="hide()">BufferAttribute</a>.<br>
+При создании собственных атрибутов имейте ввиду, что каждый типизированный массив для хранения данных вашего атрибута, должен быть кратным размеру вашего типа данных.
 Например, если типом атрибута будет <tt><a href="math.htm#19" onmouseover="show('Vector3')" onmouseout="hide()">THREE.Vector3</a></tt> и в вашей <tt><a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a></tt> имеется <tt>3000</tt> вершин,
 то величина создаваемого типизированного массива должна иметь длину <tt>3000 * 3</tt> или <tt>9000</tt> (т.е. одно значение на каждый элемент).
-When creating your attributes, each typed array that you create to hold your attribute's data must be a multiple of your data type's size. For example, if your attribute is a [page:Vector3 THREE.Vector3] type, and you have 3000 vertices in your [page:BufferGeometry], your typed array value must be created with a length of 3000 * 3, or 9000 (one value per-component).
 Для справки ниже приведена таблица размеров для каждого типа данных:<br>
 
 <span class="caption_top"><a id="attribute-sizes">Размеры атрибутов</a></span>
@@ -1382,7 +1385,7 @@ When creating your attributes, each typed array that you create to hold your att
 
 <h4>Конструктор</h4>
 <pre>ShaderMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
-<script>document.write(note_0);</script><br>
+<script>document.write(note_0);</script><br><br>
 
 <h4>Свойства</h4>
 Для информации об общих свойствах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
@@ -1391,7 +1394,7 @@ When creating your attributes, each typed array that you create to hold your att
 Свойство определяет, будет ли данный материал поддерживать обрезку; чтобы разрешить визуализатору передать униформы <tt>clippingPlanes</tt> установите <tt>true</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
 
 <pre id="14defaultAttributeValues"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('default attribute values - значения атрибута по умолчанию')" onmouseout="hide()">.defaultAttributeValues</a></span></pre>
-When the rendered geometry doesn't include these attributes but the material does, these default values will be passed to the shaders. This avoids errors when buffer data is missing.
+Эти значения по умолчанию будут переданы шейдерам в случае, когда материал создан, а визуализируемый геометрический элемент не содержит этих атрибутов. Это позволяет избежать ошибок при отсутствии данных в буфере.
 <pre>this.defaultAttributeValues = {
   'color': [ 1, 1, 1 ],
   'uv': [ 0, 0 ],
@@ -1399,15 +1402,14 @@ When the rendered geometry doesn't include these attributes but the material doe
 };</pre><br>
 
 <pre id="14defines"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('defines - определяет')" onmouseout="hide()">.defines</a></span></pre>
-Defines custom constants using *#define* directives within the GLSL code for both the vertex shader and the fragment shader; each key/value pair yields another directive:
+Свойство определяет настраиваемые константы при помощи директив <tt>#define</tt> внутри GLSL-кода как в шейдере вершин, так и в шейдере фрагментов; каждая пара ключ/значение выведет новую директиву:
 <pre>defines: {
   FOO: 15,
   BAR: true
 }</pre>
-yields the lines
+выдаст в коде GLSL строки
 <pre>#define FOO 15
-#define BAR true</pre>
-in the GLSL code.<br><br>
+#define BAR true</pre><br>
 
 <pre id="14extensions"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extensions - расширения')" onmouseout="hide()">.extensions</a></span></pre>
 Объект со следующими свойствами:
@@ -1415,54 +1417,58 @@ in the GLSL code.<br><br>
   derivatives: false, // set to use derivatives (установить при использовании производных)
   fragDepth: false, // set to use fragment depth values (установить при использовании значений глубины фрагмента)
   drawBuffers: false, // set to use draw buffers (установить при использовании буферов рисования)
-  shaderTextureLOD: false // set to use shader texture LOD (установить при использовании )
+  shaderTextureLOD: false // set to use shader texture LOD (установить при использовании
+                          // шейдера текстуры с уровнями детализации)
 };</pre><br>
 
 <pre id="14fog"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fog - туман')" onmouseout="hide()">.fog</a></span></pre>
-Define whether the material color is affected by global fog settings; true to pass fog uniforms to the shader. По умолчанию значение равно <tt>false</tt>.<br><br>
+Свойство определяет, будет ли цвет материала зависеть от параметров глобального тумана; установите как <tt>true</tt> для передачи униформов тумана в шейдер. По умолчанию значение равно&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="14fragmentShader"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fragment shader - шейдер фрагментов')" onmouseout="hide()">.fragmentShader</a></span></pre>
 Fragment shader GLSL code. This is the actual code for the shader. In the example above, the vertexShader and fragmentShader code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.<br><br>
 
 <pre id="14index0AttributeName"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index 0 attribute name - ')" onmouseout="hide()">.index0AttributeName</a></span></pre>
-If set, this calls gl.bindAttribLocation to bind a generic vertex index to an attribute variable. По умолчанию значение равно <tt>undefined</tt>.<br><br>
+If set, this calls gl.bindAttribLocation to bind a generic vertex index to an attribute variable. По умолчанию значение равно&nbsp;<tt>undefined</tt>.<br><br>
 
 <pre id="14isShaderMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is shader material - является материалом шейдера')" onmouseout="hide()">.isShaderMaterial</a></span></pre>
-Используется для проверки, является ли данный объект, или производные от него, материалами шейдера. По умолчанию значение равно <tt>true</tt>.<br>
+Используется для проверки, является ли данный объект, или производные от него, материалами шейдера. По умолчанию значение равно&nbsp;<tt>true</tt>.<br>
 Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
 
 <pre id="14lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
-Defines whether this material uses lighting; true to pass uniform data related to lighting to this shader. По умолчанию значение равно&nbsp;<tt>false</tt>.
+Defines whether this material uses lighting; true to pass uniform data related to lighting to this shader. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="14linewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - ширина линии')" onmouseout="hide()">.linewidth</a></span></pre>
-Свойство управляет толщиной линий каркаса. Значением по умолчанию является&nbsp;<tt>1</tt>.
-<script>document.write(note_3);</script><br><br>
+Свойство управляет толщиной линий каркаса. По умолчанию значение равно&nbsp;<tt>1</tt>.
+<script>document.write(note_3);</script><br>
 
-<pre id="14morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
-Defines whether the material uses morphTargets; true morphTarget attributes to this shader<br><br>
+<pre id="14morphNormals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph normals - сокращ. англ. слов<br>morphing normals - нормали морфинга')" onmouseout="hide()">.morphNormals</a></span></pre>
+Свойство определяет, будет ли материал использовать нормали морфинга. Установите его как <tt>true</tt> для передачи атрибутов
+<tt><a href="core.htm#7morphNormals" onmouseover="show('Geometry.morphNormals')" onmouseout="hide()">morphNormals</a></tt> из
+<a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> в шейдер. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
-<pre id="14morphNormals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph normals - ')" onmouseout="hide()">.morphNormals</a></span></pre>
-Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the Geometry to the shader. По умолчанию значение равно <tt>false</tt>.<br><br>
+<pre id="14morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - сокращ. англ. слов morphing targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
+Свойство определяет, будет ли материал использовать цели морфинга.
+Установите его как <tt>true</tt> для передачи атрибутов <tt><a href="core.htm#7morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">morphTargets</a></tt> в шейдер.
+Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="14program"><a href="dev-ref.htm#2.1" onmouseover="show('WebGLProgram.<br>program - программа')" onmouseout="hide()">.program</a></pre>
-The compiled shader program associated with this material, generated by WebGLRenderer. You should not need to access this property.<br><br>
+Скомпилированная шейдерная программа, связанная с данным материалом; созданная с помощью <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>. Доступ к этому свойству не требуется.<br><br>
 
 <pre id="14flatShading"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('flat shading - ')" onmouseout="hide()">.flatShading</a></span></pre>
-Define whether the material is rendered with flat shading. Default is false.<br><br>
+Define whether the material is rendered with flat shading. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
-<pre id="14skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - ')" onmouseout="hide()">.skinning</a></span></pre>
-Define whether the material uses skinning; true to pass skinning attributes to the shader. Default is false.<br><br>
+<pre id="14skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - скиннинг (операция обворачивания<br>3D-модели полигональной сеткой)')" onmouseout="hide()">.skinning</a></span></pre>
+Свойство определяет, будет ли материал использовать <span class="lnk" onmouseover="show('(от английского слова skin - кожа,<br>skinning - процесс создания кожи<br>- операция обворачивания 3D-модели<br>полигональной сеткой.')" onmouseout="hide()">скиннинг (skinning)</span>;
+установите его как <tt>true</tt> для передачи атрибутов скиннинга в шейдер. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="14uniforms"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uniforms - ')" onmouseout="hide()">.uniforms</a></span></pre>
-An object of the form:
-<pre>{ "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }</pre>
-specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form
-<pre>{ value: 1.0 }</pre>
-where value is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.<br><br>
+Объект в виде: <tt>{ "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }</tt>
+определяет униформы, передаваемые в код шейдера; ключами являются названия униформов, значениями - определения в виде: <tt>{ value: 1.0 }</tt>, где <tt>value</tt> является значением униформа.
+Названия должны совпадать с названием униформа, установленного в коде GLSL.
+Обратите внимание, что униформы обновляются на каждом кадре, так что обновление значения униформа будет происходить сразу, как только обновление значения станет доступным GLSL-коду.<br><br>
 
 <pre id="14vertexColors"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertex colors - цвета вершин')" onmouseout="hide()">.vertexColors</a></span></pre>
 Свойство определяет, как окрашиваются вершины, путем задания способа заполнения атрибута цвета.
-Define how the vertices are colored, by defining how the colors attribute gets populated.
 Возможными значениями являются <tt><a href="constants.htm#5.2" onmouseover="show('Константы материалов.<br>no colors - не окрашено')" onmouseout="hide()">THREE.NoColors</a></tt>,
 <tt><a href="constants.htm#5.2" onmouseover="show('Константы материалов.<br>face colors - цвета граней')" onmouseout="hide()">THREE.FaceColors</a></tt>
 и <tt><a href="constants.htm#5.2" onmouseover="show('Константы материалов.<br>vertex colors - цвета вершин')" onmouseout="hide()">THREE.VertexColors</a></tt>. Значение по умолчанию <tt>THREE.NoColors</tt>.<br><br>
@@ -1470,19 +1476,22 @@ Define how the vertices are colored, by defining how the colors attribute gets p
 <pre id="14vertexShader"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertex shader - вершинный шейдер')" onmouseout="hide()">.vertexShader</a></span></pre>
 Код GLSL вершинного шейдера. Для шейдера он является действующим кодом. В примере выше, код вершинного шейдера (<tt>vertexShader</tt>) и шейдера фрагмента (<tt>fragmentShader</tt>) извлекается из <a href="https://ru.wikipedia.org/wiki/Document_Object_Model" target="_blank">DOM</a>;
 вместо этого, он мог быть передан напрямую, в виде строки или загружен через <a href="https://ru.wikipedia.org/wiki/AJAX" target="_blank">AJAX</a>.<br><br>
+
 <pre id="14wireframe"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe - каркас')" onmouseout="hide()">.wireframe</a></span></pre>
-Отображать ли геометрию как каркас Render geometry as wireframe (применяется <tt>GL_LINES</tt> вместо <tt>GL_TRIANGLES</tt>). Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и визуализация происходит при помощи плоских многоугольников).<br><br>
+Свойство определяет, отображать ли геометрический элемент как каркас (применяется <tt>GL_LINES</tt> вместо <tt>GL_TRIANGLES</tt>).
+Значением по умолчанию является&nbsp;<tt>false</tt> (т.е. каркас не виден и визуализация происходит при помощи плоских многоугольников).<br><br>
+
 <pre id="14wireframeLinewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line width - толщина линии каркаса')" onmouseout="hide()">.wireframeLinewidth</a></span></pre>
-Свойство управляет толщиной линий каркаса. Значением по умолчанию является&nbsp;<tt>1</tt>.
+Свойство управляет толщиной линий каркаса. Значение по умолчанию равно&nbsp;<tt>1</tt>.
 <script>document.write(note_3);</script></div><br>
 
 <h4>Методы</h4>
-Для информации об общих методах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
+Для информации об общих методах смотрите базовый класс <a href="#3" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
 <pre id="14clone"><a href="#14" onmouseover="show('ShaderMaterial.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( ) <a href="#14" onmouseover="show('ShaderMaterial.<br>this - этот')" onmouseout="hide()">this</a></pre>
-Generates a shallow copy of this material. Обратите внимание на то, что <tt>vertexShader</tt> и <tt>fragmentShader</tt> копируются <b>по ссылке</b>, as are the definitions of the *attributes*; this means that clones of the material will share the same compiled [page:WebGLProgram].
-А вот униформы копируются <b>по значению</b>, что позволяет иметь различные наборы униформ для разных копий материала.
-However, the *uniforms* are copied <b>by value</b>, which allows you to have different sets of uniforms for different copies of the material.</div><br>
+Метод генерирует мелкие копии данного материала. Обратите внимание на то, что <tt>vertexShader</tt> и <tt>fragmentShader</tt> копируются <b>по ссылке</b>, так как являются определениями атрибутов;
+это означает что клоны данного материала будут совместно использовать одну и ту же скомпилированную <a href="dev-ref.htm#2.1" onmouseover="show('WebGLProgram')" onmouseout="hide()">WebGLProgram</a>.
+А вот униформы копируются <b>по значению</b>, что позволяет иметь различные наборы униформ для разных копий материала.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/ShaderMaterial.js" target="_blank">ShaderMaterial.js на github.com</a></div><br><br>

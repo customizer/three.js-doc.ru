@@ -22,8 +22,8 @@
 <li><a href="#7.4">QuaternionLinearInterpolant</a> - линейная интерполяция кватернионов</li></ul></div>
 <div class=list><a href="#8">Line3</a> - линия</div>
 <div class=list><a href="#9">Math</a> - объект с некоторыми вспомогательными математическими функциями.</div>
-<div class=list><a href="#10">Matrix3</a> - матрица 3&#215;3</div>
-<div class=list><a href="#11">Matrix4</a> - матрица 4&#215;4</div>
+<div class=list><a href="#10">Matrix3</a> - матрица <tt>3&#215;3</tt></div>
+<div class=list><a href="#11">Matrix4</a> - матрица <tt>4&#215;4</tt></div>
 <div class=list><a href="#12">Plane</a> - плоскость</div>
 <div class=list><a href="#13">Quaternion</a> - кватернион</div>
 <div class=list><a href="#14">Ray</a> - луч</div>
@@ -170,8 +170,12 @@ Adds offset to both the upper and lower bounds of this box, effectively moving t
 
 <h4>Конструктор</h4>
 <pre>Box3( <a href="#19" onmouseover="show('Vector3.<br>сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">min</a>, <a href="#19" onmouseover="show('Vector3.<br>сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">max</a> )</pre>
-<div class=list><tt>min</tt> - <a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a>, представляющий нижнюю границу <tt>(x, y, z)</tt> прямоугольника, дополнительный, необязательный параметр. Значением по умолчанию является <tt>( +Infinity, +Infinity, +Infinity )</tt>.</div>
-<div class=list><tt>max</tt> - трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий верхнюю границу <tt>(x, y, z)</tt> прямоугольника, дополнительный, необязательный параметр. Значением по умолчанию является <tt>( -Infinity, -Infinity, -Infinity )</tt>.</div>
+<div class=list><tt>min</tt> - <a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a>,
+представляющий нижний предел значений координат <tt>(x, y, z)</tt> параллелепипеда, дополнительный, необязательный параметр.
+Значением по умолчанию является <tt>( +Infinity, +Infinity, +Infinity )</tt>.</div>
+<div class=list><tt>max</tt> - трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>),
+представляющий наименьший верхний предел значений координат <tt>(x, y, z)</tt> параллелепипеда, дополнительный, необязательный параметр.
+Значением по умолчанию является <tt>( -Infinity, -Infinity, -Infinity )</tt>.</div>
 Создает Box3, с границами по <tt>min</tt> и <tt>max</tt>.<br><br>
 
 <h4>Свойства</h4>
@@ -181,17 +185,18 @@ Adds offset to both the upper and lower bounds of this box, effectively moving t
 Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
 
 <pre id="2min"><a href="#19" onmouseover="show('Vector3.<br>сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">.min</a></pre>
-Трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий нижнюю границу <tt>(x, y, z)</tt> Box3. Значением по умолчанию является <tt>( +Infinity, +Infinity, +Infinity )</tt>.<br><br>
+Трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий нижнюю границу значений координат <tt>(x, y, z)</tt> Box3.
+Значением по умолчанию является <tt>( +Infinity, +Infinity, +Infinity )</tt>.<br><br>
 
 <pre id="2max"><a href="#19" onmouseover="show('Vector3.<br>сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">.max</a></pre>
-Трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий верхнюю границу <tt>(x, y, z)</tt> Box3. Значением по умолчанию является <tt>( -Infinity, -Infinity, -Infinity )</tt>.</div><br>
+Трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий наименьшую верхнюю границу значений координат <tt>(x, y, z)</tt> Box3.
+Значением по умолчанию является <tt>( -Infinity, -Infinity, -Infinity )</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="2applyMatrix4"><a href="#2" onmouseover="show('Box3.<br>apply matrix 4 - применить четырехмерную матрицу')" onmouseout="hide()">.applyMatrix4</a>( <a href="#11" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
 <div class=list><tt>matrix</tt> - применяемая Matrix4.</div>
-Метод преобразует данный Box3 посредством прилагаемой матрицы.
-Transforms this Box3 with the supplied matrix.<br><br>
+Метод преобразует данный Box3 посредством прилагаемой матрицы.<br><br>
 
 <pre id="2clampPoint"><a href="#19" onmouseover="show('Vector3.<br>clamp point - зажать (закрепить) точку')" onmouseout="hide()">.clampPoint</a>( <a href="#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a>, <a href="#19" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
 <div class=list><tt>point</tt> - трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector2</a>), который нужно зафиксировать.</div>
@@ -213,14 +218,14 @@ Transforms this Box3 with the supplied matrix.<br><br>
 
 <pre id="2containsPoint"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('contains point - содержит точку')" onmouseout="hide()">.containsPoint</a></span>( <a href="#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
 <div class=list><tt>point</tt> - трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) для проверки на включение.</div>
-Возвращает значение <tt>true</tt>, если точка, указанная в параметре <tt><a href="#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a></tt>, лежит внутри или на границах данного параллелепипеда.<br><br>
+Возвращает значение <tt>true</tt>, если точка, указанная в параметре <tt>point</tt>, лежит внутри или на границах данного параллелепипеда.<br><br>
 
 <pre id="2copy"><a href="#2" onmouseover="show('Box3.<br>copy - копировать')" onmouseout="hide()">.copy</a> ( <a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
-Копирует значения <tt><a href="#2min" onmouseover="show('Box3.min')" onmouseout="hide()">min</a></tt> и <tt><a href="#2max" onmouseover="show('Box3.max')" onmouseout="hide()">max</a></tt> из параллелепипеда указанного в <tt><a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a></tt> в данный параллелепипед.<br><br>
+Копирует значения <tt><a href="#2min" onmouseover="show('Box3.min')" onmouseout="hide()">min</a></tt> и <tt><a href="#2max" onmouseover="show('Box3.max')" onmouseout="hide()">max</a></tt> из параллелепипеда, указанного в <tt>box</tt>, в данный параллелепипед.<br><br>
 
 <pre id="2distanceToPoint"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to point - расстояние до точки')" onmouseout="hide()">.distanceToPoint</a></span>( <a href="#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
 <div class=list><tt>point</tt> - трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) до которого измеряется расстояние.</div>
-Метод возвращает расстояние от любого края данного параллелепипеда до указанной точки. Если точка (<tt><a href="#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a></tt>) лежит внутри данного параллелепипеда, то расстояние будет равно <tt>0</tt>.<br><br>
+Метод возвращает расстояние от любого края данного параллелепипеда до указанной точки. Если точка (параметр <tt>point</tt>) лежит внутри данного параллелепипеда, то расстояние будет равно <tt>0</tt>.<br><br>
 
 <pre id="2equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
 <div class=list><tt>box</tt> - параллелепипед для сравнения с данным параллелепипедом.</div>
@@ -228,12 +233,11 @@ Transforms this Box3 with the supplied matrix.<br><br>
 
 <pre id="2expandByObject"><a href="#2" onmouseover="show('Box3.<br>expand by object - расширить по объекту')" onmouseout="hide()">.expandByObject</a>( <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
 <div class=list><tt>object</tt> - <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>, под который нужно расширить параллелепипед.</div>
-Расширяет границы данного параллелепипеда, чтобы включить объект с его дочерними объектами с учетом их глобальных преобразований.
-Expands the boundaries of this box to include object and its children, accounting for the object's, and children's, world transforms.<br><br>
+Расширяет границы данного параллелепипеда, чтобы включить объект с его дочерними объектами с учетом их глобальных преобразований.<br><br>
 
 <pre id="2expandByPoint"><a href="#2" onmouseover="show('Box3.<br>expand by point - расширить до точки')" onmouseout="hide()">.expandByPoint</a>( <a href="#17" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
 <div class=list><tt>point</tt> - вектор (<a href="#17" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), который должен быть включен в этот параллелепипед.</div>
-Расширяет границы данного параллелепипеда для включения точки <tt><a href="#17" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a></tt>.<br><br>
+Расширяет границы данного параллелепипеда для включения точки, указанной в <tt>point</tt>.<br><br>
 
 <pre id="2expandByScalar"><a href="#2" onmouseover="show('Box3.<br>expand by scalar - расширить<br>на скаляр(ное значение)')" onmouseout="hide()">.expandByScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scalar - скаляр')" onmouseout="hide()">scalar</a></span> )</pre>
 <div class=list><tt>scalar</tt> - расстояние, на которое будет расширен параллелепипед.</div>
@@ -1125,7 +1129,7 @@ Returns a point parameter based on the closest point as projected on the line se
 А вот статья из англоязычной Википедии о <a href="https://en.wikipedia.org/wiki/Linear_map" target="_blank">Linear mapping</a>.<br><br>
 
 <pre id="9nearestPowerOfTwo"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('nearest power of two - ближайшая степень двойки')" onmouseout="hide()">.nearestPowerOfTwo</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('n - ')" onmouseout="hide()">n</a></span> )</pre>
-Возвращает ближайшую степень числа <tt>2</tt> для заданного числа <tt>n</tt>.<br><br>
+Возвращает ближайшую степень числа&nbsp;<tt>2</tt> для заданного числа&nbsp;<tt>n</tt>.<br><br>
 
 <pre id="9nextPowerOfTwo"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('next power of two - следующая степень двойки')" onmouseout="hide()">.nextPowerOfTwo</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('n - ')" onmouseout="hide()">n</a></span> )</pre>
 Возвращает ближайшую степень числа <tt>2</tt> для заданного числа <tt>n</tt>, но которая больше числа <tt>n</tt>.<br><br>
@@ -1152,9 +1156,9 @@ Returns a value between 0-1 that represents the percentage that x has moved betw
 
 <pre id="9smootherstep"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('smoother step - ')" onmouseout="hide()">.smootherstep</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minimum - минимум, минимальный')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от maximum - максимальный, максимум')" onmouseout="hide()">max</a></span> )</pre>
 <div class=list><tt>x</tt> -- The value to evaluate based on its position between min and max.</div>
-<div class=list><tt>min</tt> -- любое значение <tt>x</tt> меньше значения <tt>min</tt> будет равно <tt>0</tt>.</div>
-<div class=list><tt>max</tt> --  любое значение <tt>x</tt> больше значения <tt>max</tt> будет равно <tt>1</tt>.</div>
-Возвращает значение в диапазоне от <tt>0</tt> до <tt>1</tt>. Функция работает также как <tt>smoothstep</tt>, но более плавно. but more smooth.
+<div class=list><tt>min</tt> -- любое значение <tt>x</tt> меньше значения <tt>min</tt> будет равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>max</tt> --  любое значение <tt>x</tt> больше значения <tt>max</tt> будет равно&nbsp;<tt>1</tt>.</div>
+Возвращает значение в диапазоне от <tt>0</tt> до <tt>1</tt>. Функция работает также как <tt>smoothstep</tt>, но ещё более плавно.
 Эта функция - вариант функции <tt>smoothstep</tt>, имеющий
  A variation on smoothstep that has zero 1st and 2nd order derivatives at x=0 and x=1. </div><br>
 

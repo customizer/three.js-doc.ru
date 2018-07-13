@@ -229,7 +229,7 @@ Adds offset to both the upper and lower bounds of this box, effectively moving t
 
 <pre id="2equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
 <div class=list><tt>box</tt> - параллелепипед для сравнения с данным параллелепипедом.</div>
-Возвращает значение <tt>true</tt>, если данный параллелепипед и параллелепипед <tt>box</tt> имеют одни и теже нижние и верхние границы.<br><br>
+Возвращает значение <tt>true</tt>, если данный параллелепипед и параллелепипед <tt>box</tt> имеют одни и те же нижние и верхние границы.<br><br>
 
 <pre id="2expandByObject"><a href="#2" onmouseover="show('Box3.<br>expand by object - расширить по объекту')" onmouseout="hide()">.expandByObject</a>( <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
 <div class=list><tt>object</tt> - <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>, под который нужно расширить параллелепипед.</div>
@@ -244,9 +244,9 @@ Adds offset to both the upper and lower bounds of this box, effectively moving t
 Метод увеличивает каждое измерение данного параллелепипеда на скалярное значение. Если оно отрицательное, размеры параллелепипеда будут уменьшены.<br><br>
 
 <pre id="2expandByVector"><a href="#2" onmouseover="show('Box3.<br>expand by vector - расширить на вектор')" onmouseout="hide()">.expandByVector</a>( <a href="#19" onmouseover="show('Vector3.<br>vector - вектор')" onmouseout="hide()">vector</a> )</pre>
-<div class=list><tt>vector</tt> - Vector3 to expand the box by.</div>
-
-Expands this box equilaterally by vector. The width of this box will be expanded by the x component of vector in both directions. The height of this box will be expanded by the y component of vector in both directions. The depth of this box will be expanded by the z component of vector in both directions.<br><br>
+<div class=list><tt>vector</tt> - трехмерный вектор, на который будет расширен параллелепипед.</div>
+Метод равносторонне расширяет данный параллелепипед на вектор, указанный в <tt>vector</tt>. Ширина данного параллелепипеда будет расширена на значение компонента <tt>x</tt> вектора в обоих направлениях.
+Высота данного параллелепипеда будет расширена на значение компонента <tt>y</tt> вектора в обоих направлениях. Глубина данного параллелепипеда будет расширена на значение компонента <tt>z</tt> вектора в обоих направлениях.<br><br>
 
 <pre id="2getBoundingSphere"><a href="#15" onmouseover="show('Sphere.<br>get bounding sphere - получить сферу,<br>ограниченную (параллелепипедом)')" onmouseout="hide()">.getBoundingSphere</a>( <a href="#15" onmouseover="show('Sphere.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
 <div class=list><tt>optionalTarget</tt> — если этот параметр указан, то результат будет скопирован в данную сферу (<tt>Sphere</tt>),
@@ -269,83 +269,67 @@ Expands this box equilaterally by vector. The width of this box will be expanded
 в противном случае будет создан новый <tt>Vector3</tt>. Дополнительный, необязательный параметр.</div>
 Возвращает ширину, высоту и глубину данного параллелепипеда.<br><br>
 
-<pre id="2intersect">.intersect ( <a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> ) : Box3</pre>
-<div class=list><tt>box</tt> - Box to intersect with.</div>
-Возвращает пересечение данного прямоугольника с прямоугольником, переданным в аргументе <tt>box</tt>, устанавливая верхнюю границу данного прямоугольника наименьшей из верхних границ двух прямоугольников, а нижнюю границу данного прямоугольника наибольшей из нижних границ двух прямоугольников.<br><br>
+<pre id="2intersect"><a href="#2" onmouseover="show('Box3.<br>intersect - перекрывать, пересекать')" onmouseout="hide()">.intersect</a>( <a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - параллелепипед, проверяемый на перекрытие.</div>
+Возвращает перекрытие данного параллелепипеда с параллелепипедом, переданным в аргументе <tt>box</tt>, устанавливая верхнюю границу данного параллелепипеда наименьшей из верхних границ двух параллелепипедов,
+а нижнюю границу данного параллелепипеда наибольшей из нижних границ двух параллелепипедов.<br><br>
 
 <pre id="2intersectsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects box - пересечение с параллелепипедом')" onmouseout="hide()">.intersectsBox</a></span>( <a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
-<div class=list><tt>box</tt> - Box to check for intersection against.</div>
+<div class=list><tt>box</tt> - параллелепипед, проверяемый на пересечение.</div>
+Метод определяет, пересекается ли данный параллелепипед с параллелепипедом, указанным в <tt>box</tt>.<br><br>
 
-Determines whether or not this box intersects box.<br><br>
+<pre id="2intersectsPlane"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects plane - пересечение плоскости')" onmouseout="hide()">.intersectsPlane</a></span>( <a href="#12" onmouseover="show('Plane.<br>plane - плоскость')" onmouseout="hide()">plane</a> )</pre>
+<div class=list><tt>plane</tt> - плоскость, проверяемая на пересечение.</div>
+Метод определяет, пересекается ли данный параллелепипед с плоскостью, указанной в <tt>plane</tt>.<br><br>
 
-<pre id="2intersectsPlane">.intersectsPlane ( plane : Plane ) : Boolean</pre>
-<div class=list><tt>plane</tt> - Plane to check for intersection against.</div>
+<pre id="2intersectsSphere"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects sphere - пересечение сферы')" onmouseout="hide()">.intersectsSphere</a></span>( <a href="#15" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a> )</pre>
+<div class=list><tt>sphere</tt> - сфера, проверяемая на пересечение.</div>
+Метод определяет, пересекается ли данный параллелепипед со сферой, указанной в <tt>sphere</tt>.<br><br>
 
-Determines whether or not this box intersects plane.<br><br>
-
-<pre id="2intersectsSphere">.intersectsSphere ( sphere : Sphere ) : Boolean</pre>
-<div class=list><tt>sphere</tt> - Sphere to check for intersection against.</div>
-
-Determines whether or not this box intersects sphere.<br><br>
-
-<pre id="2intersectsTriangle">.intersectsTriangle ( triangle : Triangle ) : Boolean</pre>
-<div class=list><tt>triangle</tt> - Triangle to check for intersection against.</div>
-
-Determines whether or not this box intersects triangle.<br><br>
+<pre id="2intersectsTriangle"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects triangle - пересечение треугольника')" onmouseout="hide()">.intersectsTriangle</a></span>( <a href="#17" onmouseover="show('Triangle.<br>triangle - треугольник')" onmouseout="hide()">triangle</a> )</pre>
+<div class=list><tt>triangle</tt> - треугольник, проверяемый на пересечение.</div>
+Метод определяет, пересекается ли данный параллелепипед с треугольником, указанным в <tt>triangle</tt>.<br><br>
 
 <pre id="2isEmpty"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is empty - является пустым')" onmouseout="hide()">.isEmpty</a></span>( )</pre>
-Метод возвращает значение true, если данный параллелепипед содержит нулевые точки внутри своих границ.<br>
-Обратите внимание, что прямоугольник с одинаковыми нижними и верхними границами все же включает одну точку, которая принадлежит одновременно обоим границам
-Returns true if this box includes zero points within its bounds.<br><br>
+Метод возвращает значение <tt>true</tt>, если данный параллелепипед содержит ноль точек внутри своих границ.<br>
+Обратите внимание, что прямоугольник с одинаковыми нижними и верхними границами все же включает одну точку, которая принадлежит одновременно обоим границам.<br><br>
 
-<pre id="2makeEmpty">.makeEmpty( ) : Box3</pre>
-Makes this box empty.<br><br>
+<pre id="2makeEmpty"><a href="#2" onmouseover="show('Box3.<br>make empty - сделать пустым')" onmouseout="hide()">.makeEmpty</a>( )</pre>
+Метод делает данный параллелепипед пустым.<br><br>
 
-<pre id="2set">.set ( min : Vector3, max : Vector3 ) : Box3</pre>
-<div class=list><tt>min</tt> - Vector3 representing the lower (x, y, z) boundary of the box.</div>
-<div class=list><tt>max</tt> - Vector3 representing the lower upper (x, y, z) boundary of the box.</div>
+<pre id="2set"><a href="#2" onmouseover="show('Box3.<br>set - установить')" onmouseout="hide()">.set</a>( <a href="#19" onmouseover="show('Vector3.<br>min - минимум')" onmouseout="hide()">min</a>, <a href="#19" onmouseover="show('Vector3.<br>max - максимум')" onmouseout="hide()">max</a> )</pre>
+<div class=list><tt>min</tt> - <a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a>, представляющий нижнюю границу значений координат <tt>(x, y, z)</tt> этого Box3.</div>
+<div class=list><tt>max</tt> - <a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a>, представляющий наименьшую верхнюю границу значений координат <tt>(x, y, z)</tt> Box3.</div>
+Метод устанавливает нижние и верхние границы значений координат <tt>x</tt>, <tt>y</tt> и <tt>z</tt> данного параллелепипеда.<br><br>
 
-Sets the lower and upper (x, y, z) boundaries of this box.<br><br>
+<pre id="2setFromArray"><a href="#2" onmouseover="show('Box3.<br>set from array -<br>установить из массива')" onmouseout="hide()">.setFromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span> )</pre>
+<div class=list><tt>array</tt> -- массив с данными положения, которые результирующий параллелепипед должен охватить.</div>
+Устанавливает верхние и нижние границы данного параллелепипеда, чтобы он включал в себя все данные из <tt>array</tt>.<br><br>
 
-<pre id="2setFromArray">.setFromArray ( array : Array ) : Box3 <a href="#2" onmouseover="show('Box3.<br>this - этот')" onmouseout="hide()">this</a></pre>
-<div class=list><tt>array</tt> -- An array of position data that the resulting box will envelop.</div>
+<pre id="2setFromBufferAttribute"><a href="#2" onmouseover="show('Box3.<br>set from buffer attribute -<br>установить из буферного атрибута')" onmouseout="hide()">.setFromBufferAttribute</a>( <a href="core.htm#1" onmouseover="show('BufferAttribute.<br>attribute - атрибут')" onmouseout="hide()">attribute</a> )</pre>
+<div class=list><tt>attribute</tt> - буферный атрибут с данными положения, которые результирующий параллелепипед должен охватить.</div>
+Устанавливает верхние и нижние границы данного параллелепипеда, чтобы он включал в себя все данные из <tt>attribute</tt>.<br><br>
 
-Sets the upper and lower bounds of this box to include all of the data in array.<br><br>
-
-<pre id="2setFromBufferAttribute">.setFromBufferAttribute ( attribute : BufferAttribute ) : Box3 <a href="#2" onmouseover="show('Box3.<br>this - этот')" onmouseout="hide()">this</a></pre>
-<div class=list><tt>attribute</tt> - A buffer attribute of position data that the resulting box will envelop.</div>
-
-Sets the upper and lower bounds of this box to include all of the data in attribute.<br><br>
-
-<pre id="2setFromCenterAndSize">.setFromCenterAndSize ( center : Vector3, size : Vector3 ) : Box3</pre>
-<div class=list><tt>center</tt> - Desired center position of the box (Vector3).</div>
-<div class=list><tt>size</tt> - Desired x, y and z dimensions of the box (Vector3).</div>
-
-Centers this box on center and sets this box's width and height to the values specified in size.<br><br>
-
-<pre id="2setFromCenterAndSizeThis"><a href="#2" onmouseover="show('Box3.<br>set from center and size - установить из центра и размера')" onmouseout="hide()">.setFromCenterAndSize</a>( <a href="#19" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a>, <a href="#19" onmouseover="show('Vector3.<br>size - размер')" onmouseout="hide()">size</a> ) <a href="#2" onmouseover="show('Box3.<br>this - этот')" onmouseout="hide()">this</a></pre>
+<pre id="2setFromCenterAndSize"><a href="#2" onmouseover="show('Box3.<br>set from center and size -<br>установить из центра и размера')" onmouseout="hide()">.setFromCenterAndSize</a>( <a href="#19" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a>, <a href="#19" onmouseover="show('Vector3.<br>size - размер')" onmouseout="hide()">size</a> )</pre>
 <div class=list><tt>center</tt> - желаемое положение центра параллелепипеда.</div>
-<div class=list><tt>size</tt> - желаемые размеры x, y и z параллелепипеда.</div>
-
-Centers this box on center and sets this box's width, height and depth to the values specified in size<br><br>
+<div class=list><tt>size</tt> - желаемые размеры <tt>x</tt>, <tt>y</tt> и <tt>z</tt> параллелепипеда.</div>
+Метод центрирует данный параллелепипед по значениям, указанным в <tt>center</tt>, и устанавливает его ширину, высоту и глубину по значениям из <tt>size</tt>.<br><br>
 
 <pre id="2setFromObject"><a href="#2" onmouseover="show('Box3.<br>set from object - установить из объекта')" onmouseout="hide()">.setFromObject</a>( <a href="core#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
 <div class=list><tt>object</tt> - <a href="core#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> для которого рассчитывается ограничительная рамка, в виде параллелепипеда.</div>
 Метод рассчитывает, выровненную по "мировым" осям, ограничительную рамку вокруг трехмерного объекта (включая его потомков), с учетом "мировых" изменений для объекта и его потомков.<br><br>
 
 <pre id="2setFromPoints"><a href="#2" onmouseover="show('Box3.<br>set from points - установить из точек')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
-<div class=list><tt>points</tt> - массив из трехмерных векторов (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), которые будет содержать получающийся прямоугольник.</div>
-Устанавливает верхние и нижние границы данного параллелепипеда так, что в него будут входить все точки, указанные в <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span></tt>.<br><br>
+<div class=list><tt>points</tt> - массив из трехмерных векторов (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), которые будет содержать получающийся параллелепипед.</div>
+Устанавливает верхние и нижние границы данного параллелепипеда так, что в него будут входить все точки, указанные в <tt>points</tt>.<br><br>
 
 <pre id="2translate"><a href="#2" onmouseover="show('Box3.<br>translate - перевод, перенос')" onmouseout="hide()">.translate</a> ( <a href="#19" onmouseover="show('Vector3.<br>offset - смещение')" onmouseout="hide()">offset</a> )</pre>
 <div class=list><tt>offset</tt> - направление и расстояние смещения.</div>
-Добавляет смещение к обоим, верхней и нижней, границам данного прямоугольника, фактически перемещая этот прямоугольник
-Adds offset to both the upper and lower bounds of this box, effectively moving this box offset units in 2D space.<br><br>
+Добавляет смещение к обоим, верхней и нижней, границам данного параллелепипеда, фактически перемещая этот прямоугольник в трехмерном пространстве.<br><br>
 
 <pre id="2union"><a href="#2" onmouseover="show('Box3.<br>union - соединение')" onmouseout="hide()">.union</a>( <a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
 <div class=list><tt>box</tt> - прямоугольный параллелепипед, который будет объединен с данным прямоугольным параллелепипедом.</div>
-Метод объединяет данный прямоугольник с прямоугольником, представленным в параметре <tt><a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a></tt>,
-устанавливая верхнюю границу данного параллелепипеда по наибольшей из верхних границ обоих параллелепипедов,
+Метод объединяет данный параллелепипед с параллелепипедом, представленным в параметре <tt>box</tt>, устанавливая верхнюю границу данного параллелепипеда по наибольшей из верхних границ обоих параллелепипедов,
 а нижнюю границу этого параллелепипеда по наименьшей из нижних границ обоих параллелепипедов.</div><br>
 
 <h4>Исходники</h4>
@@ -405,10 +389,13 @@ var color = new THREE.Color( 1, 0, 0 );</pre><br>
 <pre id="3isColor"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is color - является цветом')" onmouseout="hide()">.isColor</a></span></pre>
 Свойство используется для проверки, является ли данный и производные от него классы цветом. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
 Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
+
 <pre id="3r"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова red - красный')" onmouseout="hide()">.r</a></span></pre>
 Значение красного канала цвета, от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. По умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
 <pre id="3g"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова green - зеленый')" onmouseout="hide()">.g</a></span></pre>
 Значение зеленого канала цвета, от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. По умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
 <pre id="3b"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова blue - синий')" onmouseout="hide()">.b</a></span></pre>
 Значение синего канала цвета, от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. По умолчанию равно&nbsp;<tt>1</tt>.</div><br>
 
@@ -459,9 +446,9 @@ http://www.cambridgeincolour.com/ru/tutorials-ru/gamma-correction.htm
 -->
 Copies the given color into this color while converting it from gamma to linear space by taking r, g and b to the power of gammaFactor.<br><br>
 
-<pre id="3copyLinearToGamma"><a href="#3" onmouseover="show('Color.<br>copy linear to gamma - копировать<br>(с преобразованием из) линейного<br>в гамма-пространство')" onmouseout="hide()">.copyLinearToGamma</a>( <a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - ')" onmouseout="hide()">gammaFactor</a></span> )</pre>
+<pre id="3copyLinearToGamma"><a href="#3" onmouseover="show('Color.<br>copy linear to gamma - копировать<br>(с преобразованием из) линейного<br>в гамма-пространство')" onmouseout="hide()">.copyLinearToGamma</a>( <a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
 <div class=list><tt>color</tt> — копируемый цвет.</div>
-<div class=list><tt>gammaFactor</tt> - (optional). Значение по умолчанию равно <tt>2.0</tt>.</div>
+<div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно <tt>2.0</tt>.</div>
 Метод копирует цвет, переданный в аргументе <tt>color</tt> в данный цвет, преобразовывая его из линейного в гамма-пространство, принимая <tt>r</tt>, <tt>g</tt> и <tt>b</tt> как степень от <tt>1/gammaFactor</tt>.
 Copies the given color into this color while converting it from linear to gamma space by taking r, g and b to the power of 1 / gammaFactor.<br><br>
 
@@ -574,9 +561,9 @@ Copies the given color into this color while converting it from linear to gamma 
 
 <h4>Конструктор</h4>
 <pre>Cylindrical( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - угол тэта')" onmouseout="hide()">theta</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
-<div class=list><tt>radius</tt> - расстояние от начала координат до точки в плоскости <tt>x</tt>-<tt>z</tt>. Значение по умолчанию равно <tt>1.0</tt>.</div>
-<div class=list><tt>theta</tt> - угол против часовой стрелки в плоскости <tt>x</tt>-<tt>z</tt>, измеренный в радианах от положительной оси <tt>z</tt>. Значение по умолчанию равно <tt>0</tt>.</div>
-<div class=list><tt>y></tt> - высота над плоскостью <tt>x</tt>-<tt>z</tt>. Значение по умолчанию равно <tt>0</tt>.</div><br>
+<div class=list><tt>radius</tt> - расстояние от начала координат до точки в плоскости <tt>x</tt>-<tt>z</tt>. Значение по умолчанию равно&nbsp;<tt>1.0</tt>.</div>
+<div class=list><tt>theta</tt> - угол против часовой стрелки в плоскости <tt>x</tt>-<tt>z</tt>, измеренный в радианах от положительной оси <tt>z</tt>. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>y</tt> - высота над плоскостью <tt>x</tt>-<tt>z</tt>. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
@@ -590,21 +577,23 @@ Copies the given color into this color while converting it from linear to gamma 
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="4clone"><a href="#4" onmouseover="show('Cylindrical.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
-Метод возвращает новый cylindrical с теми же самыми свойствами <tt><a href="#4radius" onmouseover="show('Cylindrical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#4theta" onmouseover="show('Cylindrical.theta')" onmouseout="hide()">theta</a></tt> и <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt> как у данного.<br><br>
+Метод возвращает новый объект Cylindrical с теми же самыми свойствами <tt><a href="#4radius" onmouseover="show('Cylindrical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#4theta" onmouseover="show('Cylindrical.theta')" onmouseout="hide()">theta</a></tt> и <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt> как у данного.<br><br>
 
 <pre id="4copy"><a href="#4" onmouseover="show('Cylindrical.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#4" onmouseover="show('Cylindrical.<br>other - другой')" onmouseout="hide()">other</a> )</pre>
-Метод копирует значения свойств <tt><a href="#4radius" onmouseover="show('Cylindrical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#4theta" onmouseover="show('Cylindrical.theta')" onmouseout="hide()">theta</a></tt> и <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt> Cylindrical,
-переданного в аргументе <tt><a href="#4" onmouseover="show('Cylindrical.<br>other - другой')" onmouseout="hide()">other</a></tt>, в данный cylindrical.<br><br>
+Метод копирует значения свойств <tt><a href="#4radius" onmouseover="show('Cylindrical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#4theta" onmouseover="show('Cylindrical.theta')" onmouseout="hide()">theta</a></tt>
+и <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt> объекта Cylindrical,
+переданного в аргументе <tt><a href="#4" onmouseover="show('Cylindrical.<br>other - другой')" onmouseout="hide()">other</a></tt>, в данный Cylindrical.<br><br>
 
 <pre id="4set"><a href="#4" onmouseover="show('Cylindrical.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - угол тэта')" onmouseout="hide()">theta</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
-Устанавливает значения свойств <tt><a href="#4radius" onmouseover="show('Cylindrical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#4theta" onmouseover="show('Cylindrical.theta')" onmouseout="hide()">theta</a></tt> и <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt> данного Cylindrical.<br><br>
+Устанавливает значения свойств <tt><a href="#4radius" onmouseover="show('Cylindrical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#4theta" onmouseover="show('Cylindrical.theta')" onmouseout="hide()">theta</a></tt>
+и <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt> данного объекта Cylindrical.<br><br>
 
 <pre id="4setFromVector3"><a href="#4" onmouseover="show('Cylindrical.<br>set from vector 3 - установить из трехмерного вектора')" onmouseout="hide()">.setFromVector3</a>( <a href="#19" onmouseover="show('Vector3.<br>vec3 - сокращ. англ. слова vector 3 - трехмерный вектор')" onmouseout="hide()">vec3</a> )</pre>
 Устанавливает значения свойств <tt><a href="#4radius" onmouseover="show('Cylindrical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#4theta" onmouseover="show('Cylindrical.theta')" onmouseout="hide()">theta</a></tt> и <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt>
-данного Cylindrical из трехмерного вектора, переданного в аргументе <tt><a href="#19" onmouseover="show('Vector3.<br>vec3 - сокращ. англ. слова vector 3 - трехмерный вектор')" onmouseout="hide()">vec3</a></tt>.<br>
+данного объекта Cylindrical из трехмерного вектора, переданного в аргументе <tt>vec3</tt>.<br>
 Значение свойства <tt><a href="#4radius" onmouseover="show('Cylindrical.radius')" onmouseout="hide()">radius</a></tt> устанавливается как длина вектора от начала координат, измеряемая вдоль плоскости <tt>x-z</tt>,
 тогда как значение свойства <tt><a href="#4theta" onmouseover="show('Cylindrical.theta')" onmouseout="hide()">theta</a></tt> устанавливается по его направлению на плоскости <tt>x-z</tt>,
-а значение свойства <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt> задается из y-компоненты вектора.</div><br>
+а значение свойства <tt><a href="#4y" onmouseover="show('Cylindrical.y')" onmouseout="hide()">y</a></tt> задается из <tt>y</tt>-компоненты вектора.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/src/math/Cylindrical.js" target="_blank">Cylindrical.js на Гитхабе</a></div><br><br>
@@ -621,15 +610,15 @@ b.applyEuler(a);</pre>
 
 <h4>Конструктор</h4>
 <pre>Euler( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата z')" onmouseout="hide()">z</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">order</a></span> )</pre>
-<div class=list><tt>x</tt> -- угол по оси <tt>x</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно <tt>0</tt>.</div>
-<div class=list><tt>y</tt> -- угол по оси <tt>y</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно <tt>0</tt>.</div>
-<div class=list><tt>z</tt> -- угол по оси <tt>z</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt>x</tt> -- угол по оси <tt>x</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>y</tt> -- угол по оси <tt>y</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>z</tt> -- угол по оси <tt>z</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
 <div class=list><tt>order</tt> -- строковое значение, представляющее порядок применения вращения. Дополнительный, необязательный параметр, значением по умолчанию является <tt>XYZ</tt> (символы должны быть в верхнем регистре).</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
 <pre id="5isEuler"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is Euler - является (классом) Euler')" onmouseout="hide()">.isEuler</a></span></pre>
-Свойство используется для проверки, является ли данный класс и производные от него классом Euler. Значением по умолчанию является <tt>true</tt>.<br>
+Свойство используется для проверки, является ли данный класс и производные от него классом Euler. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
 Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
 <pre id="5order"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">.order</a></span></pre>
@@ -655,13 +644,13 @@ b.applyEuler(a);</pre>
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="5copy"><a href="#5" onmouseover="show('Euler.<br>copy - копировать')" onmouseout="hide()">.copy</a> ( <a href="#5" onmouseover="show('Euler')" onmouseout="hide()">euler</a> )</pre>
-Копирует значение, переданное в аргументе <tt><a href="#5" onmouseover="show('Euler')" onmouseout="hide()">euler</a></tt> в данный Euler.<br><br>
+Копирует значение, переданное в аргументе <tt>euler</tt> в данный Euler.<br><br>
 
 <pre id="5clone"><a href="#5" onmouseover="show('Euler.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
 Возвращает новый <tt>Euler</tt> с теми же самыми параметрами, как у этого.<br><br>
 
 <pre id="5equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#5" onmouseover="show('Euler')" onmouseout="hide()">euler</a> )</pre>
-Метод проверяет на строгое равенство данного <tt>Euler</tt> и приведенного в аргументе <tt><a href="#5" onmouseover="show('Euler')" onmouseout="hide()">euler</a></tt>.<br><br>
+Метод проверяет на строгое равенство данного <tt>Euler</tt> и приведенного в аргументе <tt>euler</tt>.<br><br>
 
 <pre id="5fromArray"><a href="#5" onmouseover="show('Euler.<br>from array - из массива')" onmouseout="hide()">.fromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span> )</pre>
 Массив <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span></tt> длиной 3 или 4.
@@ -681,8 +670,7 @@ b.applyEuler(a);</pre>
 а также после вызова большинства устанавливающих функций (подробности смотрите в их описании).<br><br>
 
 <pre id="5reorder"><a href="#5" onmouseover="show('Euler.<br>reorder - переупорядочить')" onmouseout="hide()">.reorder</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('new order - новый порядок')" onmouseout="hide()">newOrder</a></span> )</pre>
-Метод сбрасывает угол Эйлера с новым порядком, создавая кватернион с данным углом Эйлера и затем установливая данный угол Эйлера с кватернионом и новым порядком.
-Resets the euler angle with a new order by creating a quaternion from this euler angle and then setting this euler angle with the quaternion and the new order.
+Метод сбрасывает угол Эйлера с новым порядком, создавая кватернион с данным углом Эйлера, и затем устанавливает данный угол Эйлера с кватернионом и новым порядком..
 <div class=warning><b>Предупреждение:</b> при этом методе отбрасывается информация о вращении.</div><br>
 
 <pre id="5set"><a href="#5" onmouseover="show('Euler.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата z')" onmouseout="hide()">z</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">order</a></span> )</pre>
@@ -751,11 +739,11 @@ Resets the euler angle with a new order by creating a quaternion from this euler
 
 <pre id="6containsPoint"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('contains point - содержит точку')" onmouseout="hide()">.containsPoint</a></span>( <a href="#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
 <div class=list><tt>point</tt> - проверяемый трехмерный вектор (<a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>).</div>
-Метод проверяет, находится ли <a href="#19" onmouseover="show('Vector3')" onmouseout="hide()">точка</a> в усеченной пирамиде области просмотра камеры (Frustum).<br><br>
+Метод проверяет, находится ли точка (параметр <tt>point</tt>) в усеченной пирамиде области просмотра камеры (Frustum).<br><br>
 
 <pre id="6copy"><a href="#6" onmouseover="show('Frustum.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#6" onmouseover="show('Frustum.<br>frustum - усеченная пирамида')" onmouseout="hide()">frustum</a> )</pre>
 <div class=list><tt>frustum</tt> - копируемая усеченная пирамида (frustum).</div>
-Копирует свойства переданной <tt><a href="#6" onmouseover="show('Frustum.<br>frustum - усеченная пирамида')" onmouseout="hide()">frustum</a></tt> в данную.<br><br>
+Копирует свойства переданной <tt>frustum</tt> в данную.<br><br>
 
 <pre id="6intersectsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects box - пересечение с параллелепипедом')" onmouseout="hide()">.intersectsBox</a></span>( <a href="#2" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
 <div class=list><tt>box</tt> - <a href="#2" onmouseover="show('Box3')" onmouseout="hide()">Box3</a> для проверки на пересечение.</div>

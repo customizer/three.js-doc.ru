@@ -437,29 +437,27 @@ var color = new THREE.Color( 1, 0, 0 );</pre><br>
 <div class=list><tt>color</tt> — копируемый класс Color.</div>
 <div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно <tt>2.0</tt>.</div>
 <!--
-Параметр телекамеры, характеризующий способность компенсировать степенную (квадратичную) зависимость яркости кинескопа в мониторе от величины сигнала , приводящую к уменьшению контрастности на темных участках изображения и к увеличению на ярких. Для компенсации обшей нелинейности всего тракта, в современной камере производится специальная корректировка сигнала с показателем степени 1/2.2, т.е. 0.45. Некоторые камеры предоставляют выбор коэффициента гамма-коррекции, например, вариант 0.61 приводит к повышению контрастности темных областей, что нередко производит впечатление более "четкой" картинки на пользователя оборудования.
-
+Параметр телекамеры, характеризующий способность компенсировать степенную (квадратичную) зависимость яркости кинескопа в мониторе от величины сигнала, приводящую к уменьшению контрастности на темных участках изображения и к увеличению на ярких. Для компенсации обшей нелинейности всего тракта, в современной камере производится специальная корректировка сигнала с показателем степени 1/2.2, т.е. 0.45. Некоторые камеры предоставляют выбор коэффициента гамма-коррекции, например, вариант 0.61 приводит к повышению контрастности темных областей, что нередко производит впечатление более "четкой" картинки на пользователя оборудования.
 https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D0%BC%D0%BC%D0%B0-%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%86%D0%B8%D1%8F
+http://www.cambridgeincolour.com/ru/tutorials-ru/gamma-correction.htm -->
 
-http://www.cambridgeincolour.com/ru/tutorials-ru/gamma-correction.htm
-
--->
-Copies the given color into this color while converting it from gamma to linear space by taking r, g and b to the power of gammaFactor.<br><br>
+Метод копирует цвет, переданный в аргументе <tt>color</tt>, в данный цвет, преобразовывая его из гамма-пространства в линейное,
+возводя значения компонентов цвета <tt>r</tt>, <tt>g</tt> и <tt>b</tt> в степень, равную значению аргумента <tt>gammaFactor</tt>.<br><br>
 
 <pre id="3copyLinearToGamma"><a href="#3" onmouseover="show('Color.<br>copy linear to gamma - копировать<br>(с преобразованием из) линейного<br>в гамма-пространство')" onmouseout="hide()">.copyLinearToGamma</a>( <a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
 <div class=list><tt>color</tt> — копируемый цвет.</div>
 <div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно <tt>2.0</tt>.</div>
-Метод копирует цвет, переданный в аргументе <tt>color</tt> в данный цвет, преобразовывая его из линейного в гамма-пространство, принимая <tt>r</tt>, <tt>g</tt> и <tt>b</tt> как степень от <tt>1/gammaFactor</tt>.
-Copies the given color into this color while converting it from linear to gamma space by taking r, g and b to the power of 1 / gammaFactor.<br><br>
+Метод копирует цвет, переданный в аргументе <tt>color</tt>, в данный цвет, преобразовывая его из линейного в гамма-пространство,
+возводя значения компонентов цвета <tt>r</tt>, <tt>g</tt> и <tt>b</tt> в степень, равную <tt>1/gammaFactor</tt>.<br><br>
 
 <pre id="3copyLinearToSRGB"><a href="#3" onmouseover="show('Color.<br>copy linear to sRGB - копировать цвет и затем<br>преобразовать его из линейного пространства в sRGB')" onmouseout="hide()">.copyLinearToSRGB</a>( <a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
 <div class=list><tt>color</tt> — копируемый цвет.</div>
-Метод копирует цвет, заданный в аргументе <tt>color</tt> в данный цвет и затем конвертирует данный цвет из линейного пространства цвета в
+Метод копирует цвет, заданный в аргументе <tt>color</tt>, в данный цвет и затем конвертирует данный цвет из линейного пространства цвета в
 <a href="https://ru.wikipedia.org/wiki/SRGB" target="_blank" onmouseover="show('sRGB - сокращ. англ. слов standard Red Green Blue<br>- стандартные красный, зеленый, синий')" onmouseout="hide()">sRGB</a>.<br><br>
 
 <pre id="3copySRGBToLinear"><a href="#3" onmouseover="show('Color.<br>copy sRGB to linear - копировать цвет и затем<br>преобразовать его из sRGB в линейное пространство')" onmouseout="hide()">.copySRGBToLinear</a>( <a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
 <div class=list><tt>color</tt> — копируемый цвет.</div>
-Метод копирует цвет, заданный в аргументе <tt>color</tt> в данный цвет и затем конвертирует данный цвет из пространства цвета sRGB в линейное пространство цвета.<br><br>
+Метод копирует цвет, заданный в аргументе <tt>color</tt>, в данный цвет и затем конвертирует данный цвет из пространства цвета sRGB в линейное пространство цвета.<br><br>
 
 <pre id="3equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
 Метод сравнивает значения RGB, переданные в аргументе <tt><a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></tt> с такими же значениями данного объекта.
@@ -1142,17 +1140,15 @@ Returns a point parameter based on the closest point as projected on the line se
 <div class=list><tt>x</tt> -- значение для вычисления, в зависимости от его позиции между значениями <tt>min</tt> и <tt>max</tt>.</div>
 <div class=list><tt>min</tt> -- любое значение <tt>x</tt> меньше значения <tt>min</tt> будет равно <tt>0</tt>.</div>
 <div class=list><tt>max</tt> -- любое значение <tt>x</tt> больше значения <tt>max</tt> будет равно <tt>1</tt>.</div>
-Возвращает значение в диапазоне между <tt>0</tt> и <tt>1</tt>, представляющее
-Returns a value between 0-1 that represents the percentage that x has moved between min and max, but smoothed or slowed down the closer X is to the min and max.<br>
+Возвращает значение в диапазоне между <tt>0</tt> и <tt>1</tt>, представляющее процентное соотношение отрезков, на которые делит точка <tt>x</tt> перемещаясь между <tt>min</tt> и <tt>max</tt>, но все более сглаженное или замедленное при приближении <tt>x</tt> к <tt>min</tt> и <tt>max</tt>.<br>
 Подробности смотрите в статье Википедии <a href="http://en.wikipedia.org/wiki/Smoothstep" target="_blank">Smoothstep</a><br><br>
 
 <pre id="9smootherstep"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('smoother step - ')" onmouseout="hide()">.smootherstep</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minimum - минимум, минимальный')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от maximum - максимальный, максимум')" onmouseout="hide()">max</a></span> )</pre>
-<div class=list><tt>x</tt> -- The value to evaluate based on its position between min and max.</div>
+<div class=list><tt>x</tt> -- значение для вычисления, в зависимости от его позиции между значениями <tt>min</tt> и <tt>max</tt>.</div>
 <div class=list><tt>min</tt> -- любое значение <tt>x</tt> меньше значения <tt>min</tt> будет равно&nbsp;<tt>0</tt>.</div>
 <div class=list><tt>max</tt> --  любое значение <tt>x</tt> больше значения <tt>max</tt> будет равно&nbsp;<tt>1</tt>.</div>
 Возвращает значение в диапазоне от <tt>0</tt> до <tt>1</tt>. Функция работает также как <tt>smoothstep</tt>, но ещё более плавно.
-Эта функция - вариант функции <tt>smoothstep</tt>, имеющий
- A variation on smoothstep that has zero 1st and 2nd order derivatives at x=0 and x=1. </div><br>
+Эта функция - вариант функции <tt>smoothstep</tt>, имеющий нулевые производные первого и второго порядка при <tt>x=0</tt> и <tt>x=1</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Math.js" target="_blank">Math.js на Гитхабе</a></div><br><br>
@@ -1377,7 +1373,7 @@ m.set( 11, 12, 13, 14,
 Выполняется на основе метода, изложенного <a href="http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm" target="_blank">здесь</a>.<br><br>
 
 <pre id="11equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равнять')" onmouseout="hide()">.equals</a></span>( <a href="#11" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
-Возвращает значение <tt>true</tt>, если данная матрица и матрица, указанная в параметре <tt>m</tt> равны.<br><br>
+Возвращает значение <tt>true</tt>, если данная матрица и матрица, указанная в параметре <tt>m</tt>, равны.<br><br>
 
 <pre id="11extractBasis"><a href="#11" onmouseover="show('Matrix4.<br>extract basis - извлечь базис,<br>т.е. основные (элементы)')" onmouseout="hide()">.extractBasis</a>( <a href="#19" onmouseover="show('Vector3.<br>x axis - ось x')" onmouseout="hide()">xAxis</a>, <a href="#19" onmouseover="show('Vector3.<br>y axis - ось y')" onmouseout="hide()">yAxis</a>, <a href="#19" onmouseover="show('Vector3.<br>z axis - ось z')" onmouseout="hide()">zAxis</a> )</pre>
 Метод извлекает <a href="https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D0%B7%D0%B8%D1%81" target="_blank">базис</a> (<a href="https://en.wikipedia.org/wiki/Basis_(linear_algebra)" target="_blank">basis</a>),
@@ -1407,7 +1403,7 @@ zAxis = (c, g, k)</pre><br>
 при помощи способа, <a href="http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm" target="_blank">описанного здесь</a>.
 Если аргумент <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('throw on degenerate - выбросить при вырождении')" onmouseout="hide()">throwOnDegenerate</a></span></tt> не установлен,
 а матрица необратима (т.е. <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%80%D0%B0%D1%82%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">обратной матрицы</a> не существует),
-то данная матрица устанавливается как <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">единичная матрица</a> <tt>4</tt>&#215;<tt>4</tt>.<br><br>
+то данная матрица устанавливается как <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">единичная матрица</a>&nbsp;<tt>4</tt>&#215;<tt>4</tt>.<br><br>
 
 <pre id="11getMaxScaleOnAxis"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max scale on axis - получить<br>максимальный масштаб по осям')" onmouseout="hide()">.getMaxScaleOnAxis</a></span>( )</pre>
 Метод получает максимальное значение масштаба по трем осям.<br><br>
@@ -1418,7 +1414,7 @@ zAxis = (c, g, k)</pre><br>
 
 <pre id="11lookAt"><a href="#11" onmouseover="show('Matrix4.<br>look at - смотреть на')" onmouseout="hide()">.lookAt</a>( <a href="#19" onmouseover="show('Vector3.<br>eye - глаз')" onmouseout="hide()">eye</a>, <a href="#19" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a>, <a href="#19" onmouseover="show('Vector3.<br>up - вверх')" onmouseout="hide()">up</a> )</pre>
 Метод создает матрицу вращения, наблюдающую из позиции, переданной в параметре <tt><a href="#19" onmouseover="show('Vector3.<br>eye - глаз')" onmouseout="hide()">eye</a></tt>, в направлении координат,
-переданных в параметре <tt><a href="#19" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a></tt>, ориентируясь по вектору, переданному в <tt><a href="#19" onmouseover="show('Vector3.<br>up - вверх')" onmouseout="hide()">up</a></tt>.<br><br>
+переданных в параметре <tt><a href="#19" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a></tt>, ориентируясь по вектору, переданному в&nbsp;<tt><a href="#19" onmouseover="show('Vector3.<br>up - вверх')" onmouseout="hide()">up</a></tt>.<br><br>
 
 <pre id="11makeRotationAxis"><a href="#11" onmouseover="show('Matrix4.<br>make rotation axis - сделать оси вращения')" onmouseout="hide()">.makeRotationAxis</a>( <a href="#19" onmouseover="show('Vector3.<br>axis - оси')" onmouseout="hide()">axis</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - буква греческого алфавита тэта')" onmouseout="hide()">theta</a></span> )</pre>
 <div class=list><tt>axis</tt> — оси вращения, должны быть нормализованы.</div>
@@ -1459,8 +1455,7 @@ xAxis.z, yAxis.z, zAxis.z, 0,
 
 <pre id="11makeRotationX"><a href="#11" onmouseover="show('Matrix4.<br>make rotation X - сделать поворот (вокруг оси X)')" onmouseout="hide()">.makeRotationX</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span> )</pre>
 <div class=list><tt>theta</tt> — угол поворота в радианах.</div>
-Метод устанавливает данную матрицу как изменение поворота вокруг оси X на угол, указанный в параметре
-<tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span></tt> (&#952;), в радианах.
+Метод устанавливает данную матрицу как изменение поворота вокруг оси&nbsp;<tt>X</tt> на угол, указанный в параметре <tt>theta</tt> (&#952;), в радианах.
 В результате получится матрица:
 <pre>1    0        0      0
 0  cos(&#952;)  -sin(&#952;)   0
@@ -1469,8 +1464,7 @@ xAxis.z, yAxis.z, zAxis.z, 0,
 
 <pre id="11makeRotationY"><a href="#11" onmouseover="show('Matrix4.<br>make rotation Y - сделать поворот (вокруг оси Y)')" onmouseout="hide()">.makeRotationY</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span> )</pre>
 <div class=list><tt>theta</tt> — угол поворота в радианах.</div>
-Метод устанавливает данную матрицу как изменение поворота вокруг оси Y на угол, указанный в параметре
-<tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span></tt> (&#952;), в радианах.
+Метод устанавливает данную матрицу как изменение поворота вокруг оси&nbsp;<tt>Y</tt> на угол, указанный в параметре <tt>theta</tt> (&#952;), в радианах.
 В результате получится матрица:
 <pre> cos(&#952;)  0  sin(&#952;)  0
    0     1    0     0
@@ -1479,8 +1473,7 @@ xAxis.z, yAxis.z, zAxis.z, 0,
 
 <pre id="11makeRotationZ"><a href="#11" onmouseover="show('Matrix4.<br>make rotation Z - сделать поворот (вокруг оси Z)')" onmouseout="hide()">.makeRotationZ</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span> )</pre>
 <div class=list><tt>theta</tt> — угол поворота в радианах.</div>
-Метод устанавливает данную матрицу как изменение поворота вокруг оси Z на угол, указанный в параметре
-<tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span></tt> (&#952;), в радианах.
+Метод устанавливает данную матрицу как изменение поворота вокруг оси&nbsp;<tt>Z</tt> на угол, указанный в параметре <tt>theta</tt> (&#952;), в радианах.
 В результате получится матрица:
 <pre>cos(&#952;) -sin(&#952;)  0   0
 sin(&#952;)  cos(&#952;)  0   0
@@ -1488,9 +1481,9 @@ sin(&#952;)  cos(&#952;)  0   0
   0      0      0   1</pre><br>
 
 <pre id="11makeScale"><a href="#11" onmouseover="show('Matrix4.<br>make scale - сделать масштабирование')" onmouseout="hide()">.makeScale</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ось X')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - ось Y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - ось Z')" onmouseout="hide()">z</a></span> )</pre>
-<div class=list><tt>x</tt> - величина масштабирования по оси X.</div>
-<div class=list><tt>y</tt> - величина масштабирования по оси Y.</div>
-<div class=list><tt>z</tt> - величина масштабирования по оси Z.</div>
+<div class=list><tt>x</tt> - величина масштабирования по оси&nbsp;<tt>X</tt>.</div>
+<div class=list><tt>y</tt> - величина масштабирования по оси&nbsp;<tt>Y</tt>.</div>
+<div class=list><tt>z</tt> - величина масштабирования по оси&nbsp;<tt>Z</tt>.</div>
 Устанавливает данную матрицу в измененном масштабе:
 <pre>x, 0, 0, 0,
 0, y, 0, 0,
@@ -1498,9 +1491,9 @@ sin(&#952;)  cos(&#952;)  0   0
 0, 0, 0, 1</pre><br>
 
 <pre id="11makeShear"><a href="#11" onmouseover="show('Matrix4.<br>make shear - сделать сдвиг')" onmouseout="hide()">.makeShear</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ось X')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - ось Y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - ось Z')" onmouseout="hide()">z</a></span> )</pre>
-<div class=list><tt>x</tt> - величина сдвига по оси X.</div>
-<div class=list><tt>y</tt> - величина сдвига по оси Y.</div>
-<div class=list><tt>z</tt> - величина сдвига по оси Z.</div>
+<div class=list><tt>x</tt> - величина сдвига по оси&nbsp;<tt>X</tt>.</div>
+<div class=list><tt>y</tt> - величина сдвига по оси&nbsp;<tt>Y</tt>.</div>
+<div class=list><tt>z</tt> - величина сдвига по оси&nbsp;<tt>Z</tt>.</div>
 Устанавливает данную матрицу с изменением на величину сдвига:
 <pre>1, y, z, 0,
 x, 1, z, 0,
@@ -1508,9 +1501,9 @@ x, y, 1, 0,
 0, 0, 0, 1</pre><br>
 
 <pre id="11makeTranslation"><a href="#11" onmouseover="show('Matrix4.<br>make translation - сделать перемещение')" onmouseout="hide()">.makeTranslation</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата z')" onmouseout="hide()">z</a></span> )</pre>
-<div class=list><tt>x</tt> - величина для переноса по оси X.</div>
-<div class=list><tt>y</tt> - величина для переноса по оси Y.</div>
-<div class=list><tt>z</tt> - величина для переноса по оси Z.</div>
+<div class=list><tt>x</tt> - величина для переноса по оси&nbsp;<tt>X</tt>.</div>
+<div class=list><tt>y</tt> - величина для переноса по оси&nbsp;<tt>Y</tt>.</div>
+<div class=list><tt>z</tt> - величина для переноса по оси&nbsp;<tt>Z</tt>.</div>
 Устанавливает данную матрицу с изменением перемещения:
 <pre>1, 0, 0, x,
 0, 1, 0, y,
@@ -1531,7 +1524,7 @@ x, y, 1, 0,
 Предварительно умножает данную матрицу на матрицу, переданную в аргументе&nbsp;<tt>m</tt>.<br><br>
 
 <pre id="11scale"><a href="#11" onmouseover="show('Matrix4.<br>scale - масштаб')" onmouseout="hide()">.scale</a>( <a href="#19" onmouseover="show('Vector3.<br>сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
-Метод умножает колонки данной матрицы на вектор <tt>v</tt>.<br><br>
+Метод умножает колонки данной матрицы на вектор&nbsp;<tt>v</tt>.<br><br>
 
 <pre id="11set"><a href="#11" onmouseover="show('Matrix4.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n11</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n12</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n13</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n14</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n21</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n22</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n23</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n24</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n31</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n32</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n33</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n34</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n41</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n42</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n43</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n44</a></span> )</pre>
 Метод устанавливает <a href="#11elements" onmouseover="show('Matrix4.elements')" onmouseout="hide()">элементы</a> данной матрицы для представления значений

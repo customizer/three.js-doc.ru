@@ -419,13 +419,15 @@ var color = new THREE.Color( 1, 0, 0 );</pre><br>
 
 <pre id="3convertGammaToLinear"><a href="#3" onmouseover="show('Color.<br>convert gamma to linear -<br>конвертировать гамма в линейное')" onmouseout="hide()">.convertGammaToLinear</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
 <div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно&nbsp;<tt>2.0</tt>.</div>
-Метод конвертирует данный цвет из гамма-пространства в линейное возведением в квадрат значений <tt><a href="#3r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>, <tt><a href="#3g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#3b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt>.
+Метод конвертирует данный цвет из гамма-пространства в линейное, возводя значения компонентов цвета <tt><a href="#3r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>,
+<tt><a href="#3g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#3b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt> в степень, равную значению аргумента <tt>gammaFactor</tt>.
 <div class=note_trans><b>Примечание переводчика:</b> чтобы иметь представление о линейном освещении и освещении с гамма-коррекцией посмотрите статью на
 <a href="https://docs.unity3d.com/Manual/LinearLighting.html" target="_blank">английском</a> и <a href="https://docs.unity3d.com/ru/current/Manual/LinearLighting.html" target="_blank">русском</a> языках.</div><br>
 
 <pre id="3convertLinearToGamma"><a href="#3" onmouseover="show('Color.<br>convert linear to gamma -<br>конвертировать линейное в гамма')" onmouseout="hide()">.convertLinearToGamma</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
 <div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно&nbsp;<tt>2.0</tt>.</div>
-Метод конвертирует данный цвет из линейного в гамма-пространство с помощью извлечения квадратного корня из значений <tt><a href="#3r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>, <tt><a href="#3g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#3b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt>.<br><br>
+Метод конвертирует данный цвет из линейного в гамма-пространство, возводя значения компонентов цвета <tt><a href="#3r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>,
+<tt><a href="#3g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#3b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt> в степень, равную <tt>1/gammaFactor</tt>.<br><br>
 
 <pre id="3convertLinearToSRGB"><a href="#3" onmouseover="show('Color.<br>convert linear to sRGB - конвертировать из линейного в sRGB')" onmouseout="hide()">.convertLinearToSRGB</a>( )</pre>
 Конвертирует данный цвет из линейного пространства в пространство цвета <a href="https://ru.wikipedia.org/wiki/SRGB" target="_blank" onmouseover="show('sRGB - сокращ. англ. слов standard Red Green Blue<br>- стандартные красный, зеленый, синий')" onmouseout="hide()">sRGB</a>.<br><br>
@@ -436,13 +438,11 @@ var color = new THREE.Color( 1, 0, 0 );</pre><br>
 <pre id="3copyGammaToLinear"><a href="#3" onmouseover="show('Color.<br>copy gamma to linear - копировать<br>(с преобразованием из)<br>гамма-пространства в линейное')" onmouseout="hide()">.copyGammaToLinear</a>( <a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
 <div class=list><tt>color</tt> — копируемый класс Color.</div>
 <div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно <tt>2.0</tt>.</div>
-<!--
-Параметр телекамеры, характеризующий способность компенсировать степенную (квадратичную) зависимость яркости кинескопа в мониторе от величины сигнала, приводящую к уменьшению контрастности на темных участках изображения и к увеличению на ярких. Для компенсации обшей нелинейности всего тракта, в современной камере производится специальная корректировка сигнала с показателем степени 1/2.2, т.е. 0.45. Некоторые камеры предоставляют выбор коэффициента гамма-коррекции, например, вариант 0.61 приводит к повышению контрастности темных областей, что нередко производит впечатление более "четкой" картинки на пользователя оборудования.
-https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D0%BC%D0%BC%D0%B0-%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%86%D0%B8%D1%8F
-http://www.cambridgeincolour.com/ru/tutorials-ru/gamma-correction.htm -->
-
 Метод копирует цвет, переданный в аргументе <tt>color</tt>, в данный цвет, преобразовывая его из гамма-пространства в линейное,
-возводя значения компонентов цвета <tt>r</tt>, <tt>g</tt> и <tt>b</tt> в степень, равную значению аргумента <tt>gammaFactor</tt>.<br><br>
+возводя значения компонентов цвета <tt>r</tt>, <tt>g</tt> и <tt>b</tt> в степень, равную значению аргумента <tt>gammaFactor</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> коэффициент гамма-коррекции нужен для корректировки цветового сигнала, так как глаз человека и объектив видеокамеры воспринимают изображение по-разному.<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Параметр телекамеры, характеризующий способность компенсировать степенную (квадратичную) зависимость яркости кинескопа в мониторе от величины сигнала, приводящую к уменьшению контрастности на темных участках изображения и к увеличению на ярких. Для компенсации обшей нелинейности всего тракта, в современной камере производится специальная корректировка сигнала с показателем степени 1/2.2, т.е. 0.45. Некоторые камеры предоставляют выбор коэффициента гамма-коррекции, например, вариант 0.61 приводит к повышению контрастности темных областей, что нередко производит впечатление более "четкой" картинки на пользователя оборудования.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'>из статьи Википедии &#171;<a href='https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D0%BC%D0%BC%D0%B0-%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%86%D0%B8%D1%8F' target='_blank'>Гамма-коррекция</a>&#187;, а также статья &#171;<a href="http://www.cambridgeincolour.com/ru/tutorials-ru/gamma-correction.htm" target="_blank">Что такое коррекция гаммы</a>&#187;</span></div></div><br>
 
 <pre id="3copyLinearToGamma"><a href="#3" onmouseover="show('Color.<br>copy linear to gamma - копировать<br>(с преобразованием из) линейного<br>в гамма-пространство')" onmouseout="hide()">.copyLinearToGamma</a>( <a href="#3" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
 <div class=list><tt>color</tt> — копируемый цвет.</div>
@@ -1035,11 +1035,11 @@ interpolant.evaluate( 0.5 );</pre><br>
 Метод возвращает точку на линии, ближайшую к точке, указанной в аргументе <tt>point</tt>. Если аргумент <tt>clampToLine</tt> указан как <tt>true</tt>, то возвращаемое значение будет "прижато" к отрезку линии.<br><br>
 
 <pre id="8closestPointToPointParameter"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closest point to point parameter -<br>ближайшая точка к параметру точки')" onmouseout="hide()">.closestPointToPointParameter</a></span>( <a href="#19" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clamp to line - прижать к линии')" onmouseout="hide()">clampToLine</a></span> )</pre>
-<div class=list><tt>point</tt> - the point for which to return a point parameter.</div>
-<div class=list><tt>clampToLine</tt> - Whether to clamp the result to the range [0, 1].</div>
-
+<div class=list><tt>point</tt> - точка, для которой возвращаются параметры. the point for which to return a point parameter.</div>
+<div class=list><tt>clampToLine</tt> - будет ли результат метода "зажат" в диапазоне <tt>[0, 1]</tt>.</div>
+Метод возвращает параметр точки исходя из ближайшей точки как проекции на отрезок линии.
 Returns a point parameter based on the closest point as projected on the line segement.
-Если <tt>clampToLine</tt> установлен как <tt>true</tt>, возвращаемое значение будет в диапазоне от&nbsp;0 до&nbsp;1.<br><br>
+Если <tt>clampToLine</tt> установлен как <tt>true</tt>, возвращаемое значение будет в диапазоне от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>.<br><br>
 
 <pre id="8copy"><a href="#8" onmouseover="show('Line3.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#8" onmouseover="show('Line3.<br>line - линия')" onmouseout="hide()">line</a> )</pre>
 Метод копирует начальный (<tt><a href="#8start" onmouseover="show('Line3.start')" onmouseout="hide()">start</a></tt>) и конечный (<tt><a href="#8end" onmouseover="show('Line3.end')" onmouseout="hide()">end</a></tt>) векторы линии, переданной в аргументе <tt><a href="#8" onmouseover="show('Line3.<br>line - линия')" onmouseout="hide()">line</a></tt>, в данную линию.<br><br>

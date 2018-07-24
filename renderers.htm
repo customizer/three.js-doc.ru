@@ -351,21 +351,20 @@ This method sets the correct texture to the correct slot for the WebGL shader. T
 Целевой буфер визуализации, назначенный по умолчанию, называется обратным буфером - это часть видеопамяти, которая содержит следующий кадр, что будет прорисован.
 С помощью класса <a href="https://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.rendertarget2d.aspx" target="_blank">RenderTarget2D</a> можно создавать другие целевые буферы - по сути, резервируя новые области видеопамяти для рисования.
 Большинство игр предоставляют множество контента другим целевым буферам визуализации ("вне экрана", ну или "за кадром", т.е. невидимо для пользователя), помимо обратного буфера, затем поэтапно собирают разные графические элементы, объединяя их, для создания окончательного варианта в обратном буфере.<br><br>
-
 Целевой буфер визуализации имеет ширину и высоту. Ширина и высота обратного буфера - это конечное разрешение экрана вашей игры (хотя на Xbox 360 этот конечный результат масштабируется в соответствии с экраном пользователя).
 Внеэкранный целевой буфер визуализации необязательно должен иметь те же самые ширину и высоту, что и обратный буфер.
-An offscreen render target does not need to have the same width and height as the back buffer. Small parts of the final image can be rendered in small render targets, then copied to another render target later.
+Небольшие части конечного изображения могут быть визуализированы в меньших по размеру целевых буферах визуализации и впоследствии скопированы в другой целевой буфер визуализации.
 Также у целевого буфера визуализации имеется формат поверхности, который описывает сколько бит выделяется для каждого пикселя и как они распределяются между красным (red), зеленым (green), синим (blue) значениями цвета и каналом прозрачности (alpha).
 Например, <tt><a href="https://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.surfaceformat.aspx#SurfaceFormat.Bgr32" target="_blank">SurfaceFormat.Bgr32</a></tt> выделяет 32 бита на пиксель: 8 бит для каждого цвета и 8 бит для альфа-канала.
 Как вариант, целевой буфер визуализации может выполнять сглаживание (антиалиасинг) на всех изображениях, представленных в нем.<br><br>
-
 Для использования целевого буфера визуализации создайте объект <a href="https://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.rendertarget2d(v=xnagamestudio.31).aspx" target="_blank">RenderTarget2D</a> с шириной, высотой и другими, нужными параметрами.
 Затем вызовите метод <a href="https://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.graphicsdevice.setrendertarget(v=xnagamestudio.31).aspx" target="_blank">GraphicsDevice.SetRenderTarget</a>, чтобы сделать целевой буфер визуализации текущим буфером визуализации.
 С этого момента любые вызовы Draw будут отрисовываться в целевом буфере визуализации.
-From this point on, any Draw calls you make will draw into your render target. When you are finished with the render target, call GraphicsDevice.SetRenderTarget to a new render target (or null for the back buffer). Then at any time you can call RenderTarget2D.GetTexture to get the contents of the render target for further processing.<br><br>
-
-Render targets work in conjunction with the depth-stencil buffer. If you set a new render target, it will use the existing depth-stencil buffer. If the new render target has different multisampling settings than the depth-stencil buffer, or a larger width and height, you will need a new depth-stencil buffer to match. You must also use a depth format in your depth-stencil buffer that is compatible with the surface format of your render target.<br><br>
-
+По окончании работы с целевым буфером визуализации вызывается GraphicsDevice.SetRenderTarget для нового целевого буфера визуализации (или значение <tt>null</tt> для обратного буфера).
+Затем в любое время можно вызывать RenderTarget2D.GetTexture для получения содержимого целевого буфера визуализации для дальнейшей обработки.<br><br>
+Целевые буферы визуализации работают в соединении с буфером глубины/трафарета. Если устанавливается новый буфер визуализации, он будет использовать существующий буфер глубины/трафарета.
+Если новый буфер целевой визуализации имеет другие параметры мультивыборки, чем у буфера глубины/трафарета, или большую ширину и высоту, для соответствия потребуется новый буфер глубины/трафарета.
+Также в буфере глубины/трафарета следует использовать формат глубины, совместимый с форматом поверхности цели визуализации.<br><br>
 Иногда можно одновременно отображать содержимое нескольких целевых буферов визуализации. Число одновременных целевых буферов визуализации, поддерживаемых графическим устройством,
 задается свойством <tt><a href="https://msdn.microsoft.com/en-us/library/microsoft.xna.framework.graphics.graphicsdevicecapabilities.maxsimultaneousrendertargets.aspx" target="_blank">MaxSimultaneousRenderTargets</a></tt>.
 В случае применения нескольких целевых буферов визуализации существует множество предостережений. Более подробные сведения смотрите в статье <a href="https://msdn.microsoft.com/en-us/library/bb975911.aspx" target="_blank">Render Targets</a>.</div></div>
@@ -404,26 +403,31 @@ Render targets work in conjunction with the depth-stencil buffer. If you set a n
 <div class=blockindent><br>
 <pre id="1.2uuid"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uuid - сокращ. англ. слов Universally Unique Identifier<br>- универсальный уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
 Уникальное число для данного экземпляра целевого буфера визуализации.<br><br>
+
 <pre id="1.2width"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">.width</a></span></pre>
 Ширина целевого буфера визуализации.<br><br>
+
 <pre id="1.2height"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">.height</a></span></pre>
 Высота целевого буфера визуализации.<br><br>
+
 <pre id="1.2scissor"><a href="math.htm#20" onmouseover="show('Vector4.<br>scissor - вырезать ножницами')" onmouseout="hide()">.scissor</a></pre>
 Прямоугольная область внутри окна просмотра целевого буфера визуализации. Фрагменты, находящиеся за пределами этой области, будут отбрасываться.<br><br>
 
 <pre id="1.2scissorTest"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scissor test - проверка обрезки')" onmouseout="hide()">.scissorTest</a></span></pre>
-Свойство показывает, активна или нет проверка обрезки. Indicates whether the scissor test is active or not.<br><br>
+Свойство показывает, активна или нет проверка обрезки.<br><br>
 
 <pre id="1.2viewport"><a href="math.htm#20" onmouseover="show('Vector4.<br>viewport - окно (область) просмотра')" onmouseout="hide()">.viewport</a></pre>
 Область (окно) просмотра данного целевого буфера визуализации.<br><br>
 
 <pre id="1.2texture"><a href="textures.htm#6" onmouseover="show('Texture.<br>texture - текстура')" onmouseout="hide()">.texture</a></pre>
-This texture instance holds the rendered pixels. Use it as input for further processing.<br><br>
+Данный экземпляр текстуры содержит отображаемые пиксели. Используется в качестве входных данных для дальнешей обработки.<br><br>
 
 <pre id="1.2depthBuffer"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth buffer - буфер глубины')" onmouseout="hide()">.depthBuffer</a></span></pre>
 Свойство определяет, представлять ли буфер глубины. Значением по умолчанию является <tt>true</tt>.<br><br>
+
 <pre id="1.2stencilBuffer"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil buffer - буфер трафарета')" onmouseout="hide()">.stencilBuffer</a></span></pre>
 Свойство определяет, представлять ли буфер трафаретов. Значением по умолчанию является <tt>true</tt>.<br><br>
+
 <pre id="1.2depthTexture"><a href="textures.htm#5" onmouseover="show('DepthTexture.<br>depth texture - текстура глубины')" onmouseout="hide()">depthTexture</a></pre>
 Если это свойство установлено, глубина сцены будет отображаться по данной текстуре. Значением по умолчанию является <tt>null</tt>.</div><br>
 
@@ -431,13 +435,16 @@ This texture instance holds the rendered pixels. Use it as input for further pro
 <div class=blockindent>
 <pre id="1.2setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
 Устанавливает размеры данного целевого буфера визуализации.<br><br>
+
 <pre id="1.2clone"><a href="#1.2" onmouseover="show('WebGLRenderTarget.<br>clone - клонировать')" onmouseout="hide()">.clone</a>()</pre>
 Создает копию данного целевого буфера визуализации.<br><br>
+
 <pre id="1.2copy"><a href="#1.2" onmouseover="show('WebGLRenderTarget.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#1.2" onmouseover="show('WebGLRenderTarget.<br>source - источник')" onmouseout="hide()">source</a> )</pre>
 Перенимает настройки заданного (в параметре <tt>source</tt>) целевого буфера визуализации.<br><br>
 
 <pre id="1.2dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - выбросить, избавиться, удалить')" onmouseout="hide()">.dispose</a></span>()</pre>
-Метод отправляет Dispatches a dispose event.</div><br>
+Метод отправляет удаляемое событие.</div><br>
+
 Для данного класса доступны методы <a href="core.htm#5" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a>.<br><br>
 
 <h4>Исходники</h4>
@@ -446,9 +453,10 @@ This texture instance holds the rendered pixels. Use it as input for further pro
 
 <span class="right_side"><a href="#1.2" title="Переход к родительскому классу"><tt>WebGLRenderTarget &rarr;</tt></a></span>
 <h3 id="1.3">WebGLRenderTargetCube</h3>
-Данный буфер целевой визуализации используется <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>'ой в качестве своего <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.
+Данный буфер целевой визуализации используется <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>'ой в качестве своего <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.<br><br>
+
 <h4>Примеры</h4>
-Примеры смотрите в описании <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.<br>
+Примеры смотрите в описании <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.<br><br>
 
 <h4>Конструктор</h4>
 <pre>WebGLRenderTargetCube( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции')" onmouseout="hide()">options</a></span> )</pre>
@@ -470,7 +478,7 @@ This texture instance holds the rendered pixels. Use it as input for further pro
 - константа, значением по умолчанию является <tt><a href="constants.htm#7.6" onmouseover="show('RGBA format - формат передачи цвета (сокращ. по первым буквам)<br>- красный, зеленый, синий, альфа-канал (прозрачность)')" onmouseout="hide()">THREE.RGBAFormat</a></tt>.</div>
 <div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span></tt>
 - константа, значением по умолчанию является <tt><a href="constants.htm#7.5" onmouseover="show('unsigned byte type - беззнаковый тип байтов')" onmouseout="hide()">THREE.UnsignedByteType</a></tt>.</div>
-<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия, т.е. неравномерность<br>свойств среды по разным направлениям')" onmouseout="hide()">anisotropy</a></span></tt> — значением по умолчанию является <tt>1</tt>.
+<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия, т.е. неравномерность<br>свойств среды по разным направлениям')" onmouseout="hide()">anisotropy</a></span></tt> — значением по умолчанию является&nbsp;<tt>1</tt>.
 Смотрите описание свойства <tt><a href="textures.htm#6anisotropy" onmouseover="show('Texture.anisotropy')" onmouseout="hide()">Texture.anisotropy</a></tt>.</div>
 <div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('encoding - кодировка')" onmouseout="hide()">encoding</a></span></tt>
 - константа, значением по умолчанию является <tt><a href="constants.htm#7.10" onmouseover="show('linear encoding - линейное кодирование')" onmouseout="hide()">THREE.LinearEncoding</a></tt>.</div>
@@ -484,7 +492,7 @@ This texture instance holds the rendered pixels. Use it as input for further pro
 Для ознакомления с унаследованными свойствами смотрите <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.
 <div class=blockindent><br>
 <pre id="1.3activeCubeFace"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('active cube face - активная грань куба')" onmouseout="hide()">.activeCubeFace</a></span></pre>
-Свойство <tt>activeCubeFace</tt> соответствует стороне куба (PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5) and is used and set internally by the <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.</div><br>
+Свойство <tt>activeCubeFace</tt> соответствует стороне куба <tt><span class="lnk" onmouseover="show('здесь буквами X, Y и Z соответствуют осям координат,<br>а P и N обозначают positive - положительный и<br>negative - отрицательный')" onmouseout="hide()">(PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5)</span></tt>, устанавливается и используется внутри <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.</div><br>
 
 <h4>Методы</h4>
 Для ознакомления с унаследованными методами смотрите <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.<br><br>
@@ -493,6 +501,7 @@ This texture instance holds the rendered pixels. Use it as input for further pro
 
 
 <h2 id="2">Шейдеры</h2>
+
 <h3 id="2.1">ShaderChunk</h3>
 Блоки шейдеров для библиотеки WebLG Shader
 <h4>Свойства</h4>
@@ -507,18 +516,15 @@ This texture instance holds the rendered pixels. Use it as input for further pro
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/ShaderLib.js" target="_blank">ShaderLib.js на github.com</a></div><br><br>
 
-<h3 id="2.13">UniformsLib</h3>
-Библиотека однообразных переменных (uniform) для общеиспользуемых webgl шейдеров.
-Uniforms library for shared webgl shaders
-
+<h3 id="2.3">UniformsLib</h3>
+Библиотека переменных типа униформ (uniform) для общеиспользуемых webgl шейдеров.
 <h4>Свойства</h4>
 <h4>Методы</h4>
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/shaders/UniformsLib.js" target="_blank">UniformsLib.js на github.com</a></div><br><br>
 
 <h3 id="2.4">UniformsUtils</h3>
-Uniform Utilities. Поддерживает слияние и клонирование однообразных переменных (uniform).
-
+Вспомогательные функции для переменных униформ. Поддерживает слияние и клонирование переменных типа униформ (uniform).
 <h4>Свойства</h4>
 <h4>Методы</h4>
 <h4>Исходники</h4>

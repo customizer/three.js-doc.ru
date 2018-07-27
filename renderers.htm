@@ -42,7 +42,55 @@
 В простейшем случае буфер трафарета используется для ограничения области отрисовки (шаблонизации).
 Более широкое применение буфера трафарета позволяет использовать тесную связь между буфером глубины и буфером трафарета в <a href="https://en.wikipedia.org/wiki/Graphics_pipeline" target="_blank">передаче конвейером</a>.<br><br>
 Простая комбинация проверки глубины и модификаторов трафарета делает возможным огромное количество эффектов (таких как
-such as stencil shadow volumes, Two-Sided Stencil, compositing, decaling, dissolves, fades, swipes, silhouettes, рисование контуров или выделение пересечений в соединениях простых геометрических элементов) хотя зачастую они требуют несколько проходов отрисовки и поэтому представляют большую нагрузку для видеокарты.<br><br>
+such as stencil shadow volumes,
+Two-Sided Stencil,
+
+
+<span class="lnk" onmouseover="show('Приложение может использовать буфер трафарета для<br>композитных (т.е. составных) 2D или 3D изображений<br>на 3D-сцене. '
++'Маска в буфере трафарета используется<br>для перекрытия области поверхности целевого отображения.<br>Затем, сохраненную двумерную информацию, в виде<br>текста или растрового изображения, можно записать<br>в эту перекрытую область. '
++'Кроме того, приложение может<br>отображать дополнительные 3D-примитивы в области<br>маскирования трафарета на поверхности целевого<br>отображения. Можно отобразить даже всю сцену целиком.<br><br>'
++'Игры часто объединяют несколько 3D-сцен вместе.<br>Например, при вождении машины в играх обычно<br>отображается зеркало заднего вида. Оно показывает<br>3D-сцену за водителем. Это, по сути, вторая 3D-сцена,<br>соединенная с представлением вида перед водителем.')" onmouseout="hide()">составные отображения (compositing)</span>,
+
+decaling,
+<!--
+Direct3D applications use decaling to control which pixels from a particular primitive image are drawn to the rendering target surface. Applications apply decals to the images of primitives to enable coplanar polygons to render correctly.
+
+For instance, when applying tire marks and yellow lines to a roadway, the markings should appear directly on top of the road. However, the z values of the markings and the road are the same. Therefore, the depth buffer might not produce a clean separation between the two. Some pixels in the back primitive may be rendered on top of the front primitive and vice versa. The resulting image appears to shimmer from frame to frame. This effect is called z-fighting or flimmering.
+
+To solve this problem, use a stencil to mask the section of the back primitive where the decal will appear. Turn off z-buffering and render the image of the front primitive into the masked-off area of the render-target surface.
+
+Although multiple texture blending can be used to solve this problem, doing so limits the number of other special effects that your application can produce. Using the stencil buffer to apply decals frees up texture blending stages for other effects.
+
+https://docs.microsoft.com/ru-ru/windows/desktop/direct3d9/stencil-buffer-techniques
+-->
+
+
+<span class="lnk" onmouseover="show('При растворении одно изображение постепенно заменяется<br>другим в плавной последовательности кадров.<br>Приложение, выполняющее растворение (dissolve) должно<br>отображать два разных изображения. При этом используется<br>буфер трафарета для управления тем, какие пиксели от<br>каждого изображения будут прорисованы на поверхности<br>целевого отображения. Можно определить серию масок<br>трафарета и копировать их в буфер трафарета в кадры,<br>следующие один за другим. С другой стороны, можно<br>определить базовую маску трафарета для первого кадра<br>и постепенно ее изменять.')" onmouseout="hide()">растворение (dissolve)</span>,
+<span class="lnk" onmouseover="show('Постепенное появление (fading in) и затухание (fading out)<br>- это особые случаи эффекта растворения (dissolve).<br><br>При постепенном появлении буфер трафарета используется<br>для растворения из черного или белого фона в отображение<br>3D сцены. При затухании все происходит наоборот,<br>приложение начинает отображать 3D сцену, которая<br>постепенно растворяется в черный или белый фон.<br>Постепенное появление (fading in) и затухание (fading out)<br>могут быть сделаны с помошью любого произвольного<br>шаблона, какой захотелось применить.')" onmouseout="hide()">fades</span>,
+<span class="lnk" onmouseover="show('')" onmouseout="hide()">swipes</span>,
+<!-- Increasingly, applications employ special effects that are commonly used in movies and video, such as dissolves, swipes, and fades.
+
+
+At the beginning of the dissolve, your application sets the stencil function and stencil mask so that most of the pixels from the starting image pass the stencil test. Most of the pixels from the ending image should fail the stencil test. On successive frames, the stencil mask is updated so that fewer and fewer of the pixels in the starting image pass the test. As the frames progress, fewer and fewer of the pixels in the ending image fail the test. In this manner, your application can perform a dissolve using any arbitrary dissolve pattern.
+
+
+Direct3D applications use a similar technique for swipes. For example, when an application performs a left-to-right swipe, the ending image appears to slide gradually on top of the starting image from left to right. As in a dissolve, you must define a series of stencil masks that are loaded into the stencil buffer on successive frames, or successively modify the starting stencil mask. The stencil masks are used to disable the writing of pixels from the starting image and to enable the writing of pixels from the ending image.
+
+A swipe is somewhat more complex than a dissolve in that your application must read pixels from the ending image in the reverse order of the swipe. That is, if the swipe is moving from left to right, your application must read pixels from the ending image from right to left. -->
+
+
+силуэты,
+<!--
+You can use the stencil buffer for more abstract effects, such as outlining and silhouetting.
+
+If your application applies a stencil mask to the image of a primitive that is the same shape but slightly smaller, the resulting image contains only the primitive's outline. The application can then fill the stencil-masked area of the image with a solid color, giving the primitive an embossed look.
+
+If the stencil mask is the same size and shape as the primitive you are rendering, the resulting image contains a hole where the primitive should be. Your application can then fill the hole with black to produce a silhouette of the primitive.
+-->
+
+
+рисование контуров или выделение пересечений в соединениях простых геометрических элементов - <a href="https://en.wikipedia.org/wiki/Geometric_primitive" target="_blank">примитивов</a>),
+хотя зачастую они требуют несколько проходов отрисовки и поэтому представляют большую нагрузку для видеокарты.<br><br>
 Наиболее типичным применением является добавление теней в 3D приложениях. Также используется для двумерных отражений.<br><br>
 Другие методы визуализации, такие как <a href="https://en.wikipedia.org/wiki/Portal_rendering" target="_blank">портальная передача</a>, используют буфер трафарета по-другому; например, можно использовать поиск области экрана, скрытой порталом, и повторно отобразить эти пиксели правильно.
 Other rendering techniques, such as portal rendering, use the stencil buffer in other ways; for example, it can be used to find the area of the screen obscured by a portal and re-render those pixels correctly.<br><br>
@@ -60,10 +108,13 @@ Other rendering techniques, such as portal rendering, use the stencil buffer in 
 <div class=blockindent><br>
 <pre id="1.1autoClear"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear - автоматическая очистка')" onmouseout="hide()">.autoClear</a></span></pre>
 Свойство определяет, будет ли визуализатор (рендерер) автоматически очищать свой выход перед визуализацией (рендерингом).<br><br>
+
 <pre id="1.1autoClearColor"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear color - автоматическая очистка (буфера) цвета')" onmouseout="hide()">.autoClearColor</a></span></pre>
 Свойство определяет, должен ли визуализатор (рендерер) очищать буфер цвета, если значение свойства <tt><a href="#1.1autoClear" onmouseover="show('WebGLRenderer.autoClear')" onmouseout="hide()">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
+
 <pre id="1.1autoClearDepth"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear depth - автоматическая очистка глубины')" onmouseout="hide()">.autoClearDepth</a></span></pre>
 Свойство определяет, должен ли визуализатор (рендерер) очищать буфер глубины, если значение свойства <tt><a href="#1.1autoClear" onmouseover="show('WebGLRenderer.autoClear')" onmouseout="hide()">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
+
 <pre id="1.1autoClearStencil"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto clear stencil - автоматическая очистка (буфера) трафарета')" onmouseout="hide()">.autoClearStencil</a></span></pre>
 Свойство определяет, должен ли визуализатор (рендерер) очищать буфер трафарета, если значение свойства <tt><a href="#1.1autoClear" onmouseover="show('WebGLRenderer.autoClear')" onmouseout="hide()">autoClear</a></tt> установлено как <tt>true</tt>. Значением по умолчанию является <tt>true</tt>.<br><br>
 
@@ -301,7 +352,7 @@ Reads the pixel data from the renderTarget into the buffer you pass in. Buffer s
 Метод устанавливает прозрачный цвет и непрозрачность (opacity). Sets the clear color and opacity.<br><br>
 
 <pre id="1.1setPixelRatio"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set pixel ratio - установить пиксельный диапазон')" onmouseout="hide()">.setPixelRatio</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
-Метод устанавливает пиксельный диапазон устройства. Обычно он используется для HiDPI устройства для предотвращения размытия выходного canvas.
+Метод устанавливает пиксельный диапазон устройства. Обычно он используется для <span class="lnk" onmouseover="show('Мониторы с HiDPI (от англ. слов High Dots Per Inch<br>- высокое разрешение в точках на дюйм), также<br>известные под торговым названием &quot;Retina Display&quot;<br>от компании Apple, это мониторы с экранами высокого<br>разрешения в относительно небольшом формате.<br>В основном они используются в ноутбуках и планшетах<br>высокого класса.<br>В режиме с высоким разрешением не всякое программное<br>обеспечение ведет себя правильно.')" onmouseout="hide()">HiDPI</span> устройства для предотвращения размытия выходного canvas.
 Sets device pixel ratio. This is usually used for HiDPI device to prevent bluring output canvas.<br><br>
 
 <pre id="1.setRenderTarget"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set render target - установить целевой (буфер) визуализации')" onmouseout="hide()">.setRenderTarget</a></span>( <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()">renderTarget</a> )</pre>
@@ -312,29 +363,22 @@ Sets device pixel ratio. This is usually used for HiDPI device to prevent blurin
 Устанавливает область обрезки из <tt>(x, y)</tt> до <tt>(x + width, y + height)</tt><br><br>
 
 <pre id="1.1setScissorTest"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set scissor test - ')" onmouseout="hide()">.setScissorTest</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('boolean - логический, булев')" onmouseout="hide()">boolean</a></span> )</pre>
-Включает или отключает проверку обрезки. Когда она включена, в дальнейших действиях визуализатора будут затронуты только пиксели в определенной области обрезки.
-Enable or disable the scissor test. When this is enabled, only the pixels within the defined scissor area will be affected by further renderer actions.<br><br>
-
-<pre id="1.1supportsVertexTextures"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('supports vertex textures - поддерживать текстуры вершин')" onmouseout="hide()">.supportsVertexTextures</a></span>( )</pre>
-Возвращает логическое значение <tt>true</tt>, если контекст поддерживает текстуры вершин. Этот метод устарел и заменяется на <tt><a href="#1.1capabilities" onmouseover="show('WebGLRenderer.capabilities')" onmouseout="hide()">capabilities.vertexTexures</a></tt>.<br><br>
+Включает или отключает проверку обрезки. Когда она включена, дальнейшие действия визуализатора будут затрагивать только пиксели внутри области, определяемой обрезкой.<br><br>
 
 <pre id="1.1setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update style - обновить стиль')" onmouseout="hide()">updateStyle</a></span> )</pre>
-Изменяет размеры выходного холста (canvas) к <tt>(width, height)</tt>
-Resizes the output canvas to (width, height) with device pixel ratio taken into account, а также устанавливает область просмотра (viewport) в соответствии с этим размером, начиная с <tt>(0, 0)</tt>.
-Установка параметра <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update style - обновить стиль')" onmouseout="hide()">updateStyle</a></span></tt> как <tt>true</tt> добавляет adds explicit pixel units to the output canvas style.<br><br>
+Изменяет размеры выходного холста (canvas) на <tt>(width, height)</tt> с учетом соотношения пикселей устройства, а также устанавливает область просмотра (viewport) в соответствии с этим размером, начиная с <tt>(0, 0)</tt>.
+Установка параметра <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update style - обновить стиль')" onmouseout="hide()">updateStyle</a></span></tt> как <tt>false</tt> препятствует любым изменениям стиля выходного холста (canvas).<br><br>
 
 <pre id="1.1setTexture2D"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture 2D - установить двумерную текстуру')" onmouseout="hide()">.setTexture2D</a></span>( <a href="textures.htm#6" onmouseover="show('Texture.<br>texture - текстура')" onmouseout="hide()">texture</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('slot - щель, прорезь, интервал')" onmouseout="hide()">slot</a></span> )</pre>
 <div class=list><tt><a href="textures.htm#6" onmouseover="show('Texture.<br>texture - текстура')" onmouseout="hide()">texture</a></tt> -- текстура, которую нужно установить.</div>
 <div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('slot - щель, прорезь, интервал')" onmouseout="hide()">slot</a></span></tt> -- число, показывающее с каким интервалом должна использоваться текстура.</div>
-
-This method sets the correct texture to the correct slot for the WebGL shader. The slot number can be found as a value of the uniform of the sampler.
+Данный метод устанавливает правильную текстуру с правильным интервалом для шейдера WebGL. Размер интервала можно найти как значение униформа выборки.
 <div class=note><b>Примечание:</b> Этот метод заменяет устаревший метод <tt><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture - установить текстуру')" onmouseout="hide()">.setTexture</a></span></tt>.</div><br>
 
 <pre id="1.1setTextureCube"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture cube - установить текстуру куба')" onmouseout="hide()">.setTextureCube</a></span>( <a href="textures.htm#3" onmouseover="show('CubeTexture')" onmouseout="hide()">cubeTexture</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('slot - щель, прорезь, интервал')" onmouseout="hide()">slot</a></span> )</pre>
-<div class=list><tt><a href="textures.htm#3" onmouseover="show('CubeTexture')" onmouseout="hide()">cubeTexture</a></tt> -- The cubeTexture that needs to be set.</div>
+<div class=list><tt><a href="textures.htm#3" onmouseover="show('CubeTexture')" onmouseout="hide()">cubeTexture</a></tt> -- устанавливаемая кубическая текстура.</div>
 <div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('slot - щель, прорезь, интервал')" onmouseout="hide()">slot</a></span></tt> -- число, показывающее с каким интервалом должна использоваться текстура.</div>
-Этот метод устанавливает правильную текстуру с правильным интервалом для шейдера WebGL. Размер интервала можно найти как значение
-This method sets the correct texture to the correct slot for the WebGL shader. The slot number can be found as a value of the uniform of the sampler.<br><br>
+Этот метод устанавливает правильную текстуру с правильным интервалом для шейдера WebGL. Размер интервала можно найти как значение униформа выборки.<br><br>
 
 <pre id="1.1setViewport"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set viewport - установить область (окно) просмотра')" onmouseout="hide()">.setViewport</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
 Метод устанавливает область просмотра (viewport) визуализации от <tt>(x, y)</tt> до <tt>(x + width, y + height)</tt>.</div><br>
@@ -377,26 +421,26 @@ This method sets the correct texture to the correct slot for the WebGL shader. T
 - дополнительный, необязательный объект, который содержит параметры текстуры для автоматической генерации целевой текстуры и логические значения буферов глубины/трафаретов (<tt>depthBuffer</tt>/<tt>stencilBuffer</tt>).
 Пояснения к параметрам текстуры смотрите в статье <a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.</div>
 <div class=blockindent>Возможны следующие опции:
-<ul><li><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrap S - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">wrapS</a></span></tt>
-- константа, значением по умолчанию является <tt><a href="constants.htm#7.2" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a></tt>.</li>
-<li><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrap T - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">wrapT</a></span></tt>
-- константа, значением по умолчанию является <tt><a href="constants.htm#7.2" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a></tt>.</li>
-<li><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от magnification filter - фильтр увеличения')" onmouseout="hide()">magFilter</a></span></tt>
-- константа, значением по умолчанию является <tt><a href="constants.htm#7.3" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt>.</li>
-<li><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minification filter - фильтр уменьшения')" onmouseout="hide()">minFilter</a></span></tt>
-- константа, значением по умолчанию является <tt><a href="constants.htm#7.4" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt>.</li>
-<li><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span></tt>
-- константа, значением по умолчанию является <tt><a href="constants.htm#7.6" onmouseover="show('RGBA format - формат передачи цвета<br>(сокращ. по первым буквам) - красный (red),<br>зеленый (green), синий (blue), альфа-канал<br>(прозрачность)')" onmouseout="hide()">THREE.RGBAFormat</a></tt>.</li>
-<li><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span></tt>
-- константа, значением по умолчанию является <tt><a href="constants.htm#7.5" onmouseover="show('unsigned byte type - беззнаковый тип байтов')" onmouseout="hide()">THREE.UnsignedByteType</a></tt>.</li>
-<li><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия, т.е. неравномерность<br>свойств среды по разным направлениям')" onmouseout="hide()">anisotropy</a></span></tt>
-— значением по умолчанию является <tt>1</tt>. Смотрите описание свойства <tt><a href="textures.htm#6anisotropy" onmouseover="show('Texture.anisotropy')" onmouseout="hide()">Texture.anisotropy</a></tt>.</li>
-<li><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('encoding - кодировка')" onmouseout="hide()">encoding</a></span></tt>
-- константа, значением по умолчанию является <tt><a href="constants.htm#7.10" onmouseover="show('linear encoding - линейное кодирование')" onmouseout="hide()">THREE.LinearEncoding</a></tt>.</li>
-<li><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth buffer - буфер глубины')" onmouseout="hide()">depthBuffer</a></span></tt>
-— логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер глубины не нужен.</li>
-<li><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil buffer - буфер трафарета')" onmouseout="hide()">stencilBuffer</a></span></tt>
-— логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер трафарета не нужен.</li></ul></div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrap S - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">wrapS</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.2" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrap T - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">wrapT</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.2" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от magnification filter - фильтр увеличения')" onmouseout="hide()">magFilter</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.3" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minification filter - фильтр уменьшения')" onmouseout="hide()">minFilter</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.4" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.6" onmouseover="show('RGBA format - формат передачи цвета<br>(сокращ. по первым буквам) - красный (red),<br>зеленый (green), синий (blue), альфа-канал<br>(прозрачность)')" onmouseout="hide()">THREE.RGBAFormat</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.5" onmouseover="show('unsigned byte type - беззнаковый тип байтов')" onmouseout="hide()">THREE.UnsignedByteType</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия, т.е. неравномерность<br>свойств среды по разным направлениям')" onmouseout="hide()">anisotropy</a></span></tt>
+— значением по умолчанию является <tt>1</tt>. Смотрите описание свойства <tt><a href="textures.htm#6anisotropy" onmouseover="show('Texture.anisotropy')" onmouseout="hide()">Texture.anisotropy</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('encoding - кодировка')" onmouseout="hide()">encoding</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="constants.htm#7.10" onmouseover="show('linear encoding - линейное кодирование')" onmouseout="hide()">THREE.LinearEncoding</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth buffer - буфер глубины')" onmouseout="hide()">depthBuffer</a></span></tt>
+— логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер глубины не нужен.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil buffer - буфер трафарета')" onmouseout="hide()">stencilBuffer</a></span></tt>
+— логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер трафарета не нужен.</div></div>
 Создает новый буфер целевой визуализации (<tt>WebGLRenderTarget</tt>) с определенными шириной и высотой.<br><br>
 
 <h4>Свойства</h4>
@@ -492,7 +536,7 @@ This method sets the correct texture to the correct slot for the WebGL shader. T
 Для ознакомления с унаследованными свойствами смотрите <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.
 <div class=blockindent><br>
 <pre id="1.3activeCubeFace"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('active cube face - активная грань куба')" onmouseout="hide()">.activeCubeFace</a></span></pre>
-Свойство <tt>activeCubeFace</tt> соответствует стороне куба <tt><span class="lnk" onmouseover="show('здесь буквами X, Y и Z соответствуют осям координат,<br>а P и N обозначают positive - положительный и<br>negative - отрицательный')" onmouseout="hide()">(PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5)</span></tt>, устанавливается и используется внутри <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.</div><br>
+Свойство <tt>activeCubeFace</tt> соответствует стороне куба <span class="lnk1" onmouseover="show('здесь буквами X, Y и Z соответствуют осям координат,<br>а P и N обозначают positive - положительный и<br>negative - отрицательный')" onmouseout="hide()">(<tt>PX 0</tt>, <tt>NX 1</tt>, <tt>PY 2</tt>, <tt>NY 3</tt>, <tt>PZ 4</tt>, <tt>NZ 5</tt>)</span>, устанавливается и используется внутри <tt><a href="cameras.htm#2" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.</div><br>
 
 <h4>Методы</h4>
 Для ознакомления с унаследованными методами смотрите <a href="#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.<br><br>

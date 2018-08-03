@@ -144,26 +144,33 @@
 равно <tt>true</tt>, если <tt>maxVertexTextures</tt> больше <tt>0</tt> (то есть, можно использовать текстуры вершин).</div><br>
 
 <pre id="1.1clippingPlanes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clipping planes - плоскости отсечения')" onmouseout="hide()">.clippingPlanes</a></span></pre>
-User-defined clipping planes specified as THREE.Plane objects in world space. These planes apply globally. Points in space whose dot product with the plane is negative are cut away. Значением по умолчанию является <tt>[]</tt>.<br><br>
+Создаваемые пользователем плоскости отсечения, определяемые в мировом пространстве как объекты THREE.Plane. Эти плоскости применяются глобально.
+Точки в пространстве, чье <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank">скалярное произведение</a> (<a href="https://en.wikipedia.org/wiki/Dot_product" target="_blank">dot product</a>) с плоскостью является отрицательным, отсекаются.
+Значением по умолчанию является <tt>[]</tt>.<br><br>
 
 <pre id="1.1context"><span onclick="showClick('WebGLRenderingContext')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('context - контекст')" onmouseout="hide()">.context</a></span></pre>
-The renderer obtains a RenderingContext context from its domElementdomElement by default, using HTMLCanvasElement.getContext().<br>
-
-You can create this manually, however it must correspond to the domElement in order to render to the screen.<br><br>
+Визуализатор (рендерер) по умолчанию получает контекст <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext" target="_blank">RenderingContext</a> из своего <tt>domElement</tt>,
+при помощи <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext" target="_blank">HTMLCanvasElement.getContext()</a>.
+Вот описание <a href="https://developer.mozilla.org/ru/docs/Web/API/WebGLRenderingContext" target="_blank">RenderingContext</a> и <a href="https://developer.mozilla.org/ru/docs/Web/API/HTMLCanvasElement/getContext" target="_blank">HTMLCanvasElement.getContext()</a> на русском языке.<br>
+Контекст может быть создан вручную, однако он должен соответствовать свойству <tt>domElement</tt> для отображения на экране.<br><br>
 
 <pre id="1.1domElement"><span onclick="showClick('DOMElement')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dom element - элемент DOM (Document Object Model<br>— «объектная модель документа»)')" onmouseout="hide()">.domElement</a></span></pre>
-Элемент <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank">canvas</a> - холст, на котором рендерер (визуализатор) рисует свой where the renderer draws its output.<br>
+Элемент <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank">canvas</a> - холст, на котором рендерер (визуализатор) рисует результат своей работы.<br>
 Он автоматически создается визуализатором (рендерером) в конструкторе (если уже не предоставлен); нужно просто добавить его на страницу, вот так:
 <pre>document.body.appendChild( renderer.domElement );</pre><br>
 
 <pre id="1.1extensions"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extensions - расширения')" onmouseout="hide()">.extensions</a></span></pre>
 Оболочка для метода <tt><a href="#1.1extensions.get" onmouseover="show('WebGLRenderer.extensions.get')" onmouseout="hide()">extensions.get</a></tt>, используется для проверки поддержки различных расширений WebGL.<br><br>
+
 <pre id="1.1gammaFactor"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - гамма-множитель')" onmouseout="hide()">.gammaFactor</a></span></pre>
-<a href="https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D0%BC%D0%BC%D0%B0-%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank">Гамма-коррекция</a>, т.е. коррекция яркости или цветовых компонентов цифрового изображения или видео. Значение по умолчанию равно <tt>2</tt>.<br><br>
+<a href="https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D0%BC%D0%BC%D0%B0-%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank">Гамма-коррекция</a>, т.е. коррекция яркости или цветовых компонентов цифрового изображения или видео. Значение по умолчанию равно&nbsp;<tt>2</tt>.<br><br>
+
 <pre id="1.1gammaInput"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma input - гамма-вход')" onmouseout="hide()">.gammaInput</a></span></pre>
-Если свойство установлено, то предполагается, что все текстуры и цвета предварительно перемножены на значение <tt>gammaFactor</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
+Если свойство установлено, то предполагается, что все текстуры и цвета предварительно перемножены на значение <tt>gammaFactor</tt>. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
 <pre id="1.1gammaOutput"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma output - гамма-выход')" onmouseout="hide()">.gammaOutput</a></span></pre>
-Если свойство установлено то предполагается, что все текстуры и цвета должны выводиться предварительно перемноженными на значение <tt>gammaFactor</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
+Если свойство установлено то предполагается, что все текстуры и цвета должны выводиться предварительно перемноженными на значение <tt>gammaFactor</tt>. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
 <pre id="1.1info"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова information - информация, сведения')" onmouseout="hide()">.info</a></span></pre>
 Объект с рядом статических сведений о памяти видеокарты и процессе визуализации. Полезно при отладке или просто из любопытства. Объект содержит следующие поля:
 <div class=blockindent><tt>memory</tt> (память):
@@ -176,18 +183,18 @@ You can create this manually, however it must correspond to the domElement in or
 <tt>points</tt> (точки)</div></div>
 <div class=blockindent><tt>programs</tt> (программы)</div><br>
 
-<pre id="1.1localClippingEnabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('local clipping enabled - ')" onmouseout="hide()">.localClippingEnabled</a></span></pre>
-Свойство определяет, соблюдает ли рендерер (визуализатор) плоскости отсечения на уровне объекта. Defines whether the renderer respects object-level clipping planes. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="1.1localClippingEnabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('local clipping enabled - локальное отсечение включено')" onmouseout="hide()">.localClippingEnabled</a></span></pre>
+Свойство определяет, соблюдает ли рендерер (визуализатор) плоскости отсечения на объектном уровне. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="1.1maxMorphNormals"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max morph normals - ')" onmouseout="hide()">.maxMorphNormals</a></span></pre>
-Значение по умолчанию равно <tt>4</tt>. Максимальное число MorphNormals допускаемых в шейдере. Имейте ввиду, что для стандартных материалов разрешается только 4 MorphNormals.<br><br>
+Значение по умолчанию равно&nbsp;<tt>4</tt>. Максимальное число MorphNormals допускаемых в шейдере. Имейте ввиду, что для стандартных материалов разрешается только 4 MorphNormals.<br><br>
 
 <pre id="1.1maxMorphTargets"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max morph targets - максимум целей морфинга')" onmouseout="hide()">.maxMorphTargets</a></span></pre>
 Значение по умолчанию равно <tt>8</tt>. Максимальное число целей морфинга (MorphTargets), допускаемых в шейдере. Имейте ввиду, что стандартные материалы допускают только 8 целей морфинга.
 Default is 8. The maximum number of MorphTargets allowed in a shader. Keep in mind that the standard materials only allow 8 MorphTargets.<br><br>
 
 <pre id="1.1physicallyCorrectLights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('physically correct lights - физически правильное освещение')" onmouseout="hide()">.physicallyCorrectLights</a></span></pre>
-Свойство определяет, использовать ли режим освещения, правильный с точки зрения физики. Значением по умолчанию является <tt>false</tt>. Смотрите пример <tt><a href="https://threejs.org/examples/webgl_lights_physical" target="_blank">lights / physical</a></tt>.<br><br>
+Свойство определяет, использовать ли режим освещения, правильный с точки зрения физики. Значением по умолчанию является&nbsp;<tt>false</tt>. Смотрите пример <tt><a href="https://threejs.org/examples/webgl_lights_physical" target="_blank">lights / physical</a></tt>.<br><br>
 
 <pre id="1.1properties"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('properties - свойства')" onmouseout="hide()">.properties</a></span></pre>
 Used internally by the renderer to keep track of various sub object properties.<br><br>

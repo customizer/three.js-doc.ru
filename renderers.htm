@@ -190,40 +190,39 @@
 Значение по умолчанию равно&nbsp;<tt>4</tt>. Максимальное число MorphNormals допускаемых в шейдере. Имейте ввиду, что для стандартных материалов разрешается только 4 MorphNormals.<br><br>
 
 <pre id="1.1maxMorphTargets"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max morph targets - максимум целей морфинга')" onmouseout="hide()">.maxMorphTargets</a></span></pre>
-Значение по умолчанию равно <tt>8</tt>. Максимальное число целей морфинга (MorphTargets), допускаемых в шейдере. Имейте ввиду, что стандартные материалы допускают только 8 целей морфинга.
-Default is 8. The maximum number of MorphTargets allowed in a shader. Keep in mind that the standard materials only allow 8 MorphTargets.<br><br>
+Значение по умолчанию равно&nbsp;<tt>8</tt>. Максимальное число целей морфинга (MorphTargets), допускаемых в шейдере. Имейте ввиду, что стандартные материалы допускают только 8 целей морфинга.<br><br>
 
 <pre id="1.1physicallyCorrectLights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('physically correct lights - физически правильное освещение')" onmouseout="hide()">.physicallyCorrectLights</a></span></pre>
 Свойство определяет, использовать ли режим освещения, правильный с точки зрения физики. Значением по умолчанию является&nbsp;<tt>false</tt>. Смотрите пример <tt><a href="https://threejs.org/examples/webgl_lights_physical" target="_blank">lights / physical</a></tt>.<br><br>
 
 <pre id="1.1properties"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('properties - свойства')" onmouseout="hide()">.properties</a></span></pre>
-Used internally by the renderer to keep track of various sub object properties.<br><br>
+Свойство предназначено для внутреннего использования визуализатором, чтобы отслеживать различные свойства вложенных объектов.<br><br>
 
 <pre id="1.1renderLists"><a href="#" target="_blank" onmouseover="show('WebGLRenderLists<br>render lists - списки визуализации')" onmouseout="hide()">.renderLists</a></pre>
-Used internally to handle ordering of scene object rendering.<br><br>
+Свойство предназначено для внутреннего использования визуализатором, чтобы обрабатывать порядок отображения объектов на сцене.<br><br>
 
 <pre id="1.1shadowMap"><a href="#" target="_blank" onmouseover="show('WebGLShadowMap<br>shadow map - теневая карта')" onmouseout="hide()">.shadowMap</a></pre>
-This contains the reference to the shadow map, if used.<br><br>
+Свойство содержит ссылки на теневую карту, если таковая используется.<br><br>
 
 <pre id="1.1shadowMap.enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shadowMap.enabled - включить теневую карту')" onmouseout="hide()">.shadowMap.enabled</a></span></pre>
-Если свойство установлено, на сцене используются теневые карты. Значением по умолчанию является <tt>false</tt>.<br><br>
+Если свойство установлено, на сцене используются теневые карты. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="1.1shadowMap.autoUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shadowMap.autoUpdate - автоматическое обновление теневой карты')" onmouseout="hide()">.shadowMap.autoUpdate</a></span></pre>
-Enables automatic updates to the shadows in the scene. Значением по умолчанию является <tt>true</tt>.<br>
-If you do not require dynamic lighting / shadows, you may set this to false when the renderer is instantiated.<br><br>
+Свойство включает автоматическое обновление теней на сцене. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+Если динамическое освещение/затенение не требуется, можно установить в данном свойстве значение&nbsp;<tt>false</tt>, при создании экземпляра визуализатора (рендерера).<br><br>
 
 <pre id="1.1shadowMap.needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shadowMap.needsUpdate - требуется обновление теневой карты')" onmouseout="hide()">.shadowMap.needsUpdate</a></span></pre>
-When set to true, shadow maps in the scene will be updated in the next render call. Значением по умолчанию является <tt>false</tt>.<br>
-If you have disabled automatic updates to shadow maps (shadowMap.autoUpdate = false), you will need to set this to true and then make a render call to update the shadows in your scene.<br><br>
+Если свойству задано значение&nbsp;<tt>true</tt>, теневые карты сцены будут обновлены при следующем вызове визуализации. Значением по умолчанию является&nbsp;<tt>false</tt>.<br>
+Если автоматическое обновление теневых карт отключено (т.е. <tt>shadowMap.autoUpdate = false</tt>), необходимо установить в данном свойстве значение&nbsp;<tt>true</tt>, а затем выполнить вызов визуализации для обновления теней на сцене.<br><br>
 
 <pre id="1.1shadowMap.type"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shadowMap.type - тип теневой карты')" onmouseout="hide()">.shadowMap.type</a></span></pre>
-Defines shadow map type (unfiltered, percentage close filtering, percentage close filtering with bilinear filtering in shader)<br>
-Options are THREE.BasicShadowMap, THREE.PCFShadowMap (default), THREE.PCFSoftShadowMap. See WebGLRenderer constants for details.<br><br>
+Свойство определяет тип теневой карты (без фильтра, с фильтром процентного приближения, с фильтром процентного приближения с билинейной фильтрацией в шейдере).<br>
+Возможные варианты: THREE.BasicShadowMap, THREE.PCFShadowMap (значение по умолчанию), THREE.PCFSoftShadowMap. Подробнее смотрите в описании <a href="constants.htm#6.3" onmouseover="show('Типы тени (shadow types)')" onmouseout="hide()">констант WebGLRenderer'а</a>.<br><br>
 
 <pre id="1.1sortObjects"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sort objects - сортировка объектов')" onmouseout="hide()">.sortObjects</a></span></pre>
-Свойство определяет, будет ли рендерер (визуализатор) сортировать объекты. Значением по умолчанию является <tt>true</tt>.
-
-<div class=note><b>Примечание:</b> Sorting is used to attempt to properly render objects that have some degree of transparency. By definition, sorting objects may not work in all cases. Depending on the needs of application, it may be neccessary to turn off sorting and use other methods to deal with transparency rendering e.g. manually determining each object's rendering order.</div><br>
+Свойство определяет, будет ли рендерер (визуализатор) сортировать объекты. Значением по умолчанию является&nbsp;<tt>true</tt>.
+<div class=note><b>Примечание:</b> Сортировка применяется чтобы попробовать правильно отобразить объекты с некоторым уровнем прозрачности. По определению, сортировка объектов может работать не во всех случаях.
+В зависимости от потребностей приложения, может появиться необходимость отключения сортировки и использования других методов работы с отображением прозрачности, например, вручную определяя порядок отображения каждого объекта.</div><br>
 
 <pre id="1.1state"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('state - состояние')" onmouseout="hide()">.state</a></span></pre>
 Объект содержит функции для установки разных свойств состояния <a href="#1.1context" onmouseover="show('WebGLRenderer.context')" onmouseout="hide()">WebGLRenderer.context</a>.<br><br>
@@ -231,11 +230,12 @@ Options are THREE.BasicShadowMap, THREE.PCFShadowMap (default), THREE.PCFSoftSha
 Значением по умолчанию является <a href="constants.htm#6.4" onmouseover="show('linear tone mapping - линейное отображение тонов')" onmouseout="hide()">LinearToneMapping</a>.
 Другие варианты смотрите в описании <a href="constants.htm#6.4" onmouseover="show('отображение тонов (tone mapping)')" onmouseout="hide()">констант WebGLRenderer'а</a>.<br><br>
 
-<pre id="1.1toneMappingExposure"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tone mapping exposure - ')" onmouseout="hide()">.toneMappingExposure</a></span></pre>
-Уровень экспозиции отображения тонов. Значение по умолчанию равно <tt>1</tt>.<br><br>
+<pre id="1.1toneMappingExposure"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tone mapping exposure - экспозиция отображения тонов')" onmouseout="hide()">.toneMappingExposure</a></span></pre>
+Уровень <a href="https://ru.wikipedia.org/wiki/%D0%AD%D0%BA%D1%81%D0%BF%D0%BE%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank">экспозиции</a> отображения тонов. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
 
 <pre id="1.1toneMappingWhitePoint"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tone mapping white point - белая точка отображения тонов')" onmouseout="hide()">.toneMappingWhitePoint</a></span></pre>
-Tone mapping white point. Значение по умолчанию равно <tt>1</tt>.</div><br>
+<!-- определяет значение, после которого информация в светлых тонах обрезается. Все пиксели со значениями выше этого будут белым -->
+Tone mapping white point. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>

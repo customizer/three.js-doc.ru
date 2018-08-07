@@ -247,20 +247,21 @@ scene.add( lod );</pre>
 Метод добавляет полигональную сетку (mesh), которая будет отображаться с определенного расстояния и дальше. Как правило, чем дальше находится объект от камеры, тем меньше уровень детализации полигональной сетки.<br><br>
 
 <pre id="6clone"><a href="#6" onmouseover="show('LOD.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
-Возвращает клон LOD данного объекта и связанные с ним расстояния до определенных объектов.<br><br>
+Возвращает клон уровня детализации (LOD) данного объекта и связанные с ним расстояния до определенных объектов.<br><br>
 
 <pre id="6getObjectForDistance"><a href="core.htm#14" onmouseover="show('Object3D.<br>get object for distance - получить объект для расстояния')" onmouseout="hide()">.getObjectForDistance</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span> )</pre>
-Get a reference to the first [page:Object3D] (mesh) that is greater than supplied distance.<br><br>
+Метод получает ссылку на первый <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">объект</a> (mesh), который находится дальше расстояния, указанного в аргументе <tt>distance</tt>.<br><br>
 
 <pre id="6raycast"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ray cast - бросок луча')" onmouseout="hide()">.raycast</a></span>( <a href="core.htm#15" onmouseover="show('Raycaster.<br>raycaster - &#34;бросатель&#34; луча, излучатель')" onmouseout="hide()">raycaster</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects - пересечения')" onmouseout="hide()">intersects</a></span> )</pre>
 Получает пересечения между брошенным <a href="math.htm#14" onmouseover="show('Ray')" onmouseout="hide()">лучом</a> и данным LOD.
 Этот метод будет вызываться методом <tt><a href="core.htm#15intersectObject" onmouseover="show('Raycaster.intersectObject')" onmouseout="hide()">Raycaster.intersectObject</a></tt>.<br><br>
 
 <pre id="6toJSON"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в формат JSON, где JSON это<br>сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными,<br>основанный на JavaScript.')" onmouseout="hide()">.toJSON</a></span>( meta )</pre>
-Создает структуру JSON с описанием данного LOD объекта.<br><br>
+Создает структуру JSON с описанием данного уровня детализации (LOD) объекта.<br><br>
 
 <pre id="6update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">.update</a></span>( <a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
-Set the visibility of each level's object based on distance from the camera. This needs to be called in the render loop for levels of detail to be updated dynamically.</div><br>
+Метод устанавливает видимость каждого из <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">объектов</a> <a href="#6levels" onmouseover="show('LOD.levels')" onmouseout="hide()">уровней</a> по расстоянию от <a href="cameras.htm#1" onmouseover="show('Camera')" onmouseout="hide()">камеры</a>.
+Метод должен вызываться в цикле визуализации для динамического обновления уровней детализации.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/LOD.js" target="_blank">LOD.js на github.com</a></div><br><br>
@@ -279,10 +280,9 @@ scene.add( mesh );</pre><br>
 
 <h4>Конструктор</h4>
 <pre>Mesh( <a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
-<div class=list><tt><a href="core.htm#7" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a></tt>
-— экземпляр <a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> или <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.
+<div class=list><tt>geometry</tt> — экземпляр <a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> или <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.
 Дополнительный, необязательный аргумент, по умолчанию это новая <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.</div>
-<div class=list><tt><a href="materials.htm#3" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a></tt> — <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">Material</a> для сетки.
+<div class=list><tt>material</tt> — <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">Material</a> для сетки.
 Дополнительный, необязательный аргумент, по умолчанию это новый <a href="materials.htm#4" onmouseover="show('MeshBasicMaterial')" onmouseout="hide()">MeshBasicMaterial</a> с цветом, выбранным в случайном порядке.</div><br>
 
 <h4>Свойства</h4>
@@ -306,12 +306,11 @@ scene.add( mesh );</pre><br>
 Значением по умолчанию является <a href="materials.htm#4" onmouseover="show('MeshBasicMaterial')" onmouseout="hide()">MeshBasicMaterial</a> с цветом, выбранным в случайном порядке.<br><br>
 
 <pre id="7morphTargetInfluences"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target influences - воздействие на цель морфинга')" onmouseout="hide()">.morphTargetInfluences</a></span></pre>
-Массив значений весов (обычно в диапазоне <tt>0 - 1</tt>), которые определяют степень применения морфинга.
+Массив значений весов (обычно в диапазоне&nbsp;<tt>0 - 1</tt>), которые определяют степень применения морфинга.
 По умолчанию он неопределен, но методом <tt><a href="#7updateMorphTargets" onmouseover="show('Mesh.updateMorphTargets')" onmouseout="hide()">updateMorphTargets</a></tt> сбрасывается в пустой массив.<br><br>
 
-<pre id="7morphTargetDictionary"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target dictionary - словарь цели морфинга')" onmouseout="hide()">.morphTargetDictionary</a></span></pre>
-Словарь целей морфинга на основе свойства morphTarget.name.
-A dictionary of morphTargets based on the morphTarget.name property.
+<pre id="7morphTargetDictionary"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target dictionary - словарь цели морфинга')" onmouseout="hide()">.morphTargetDictionary</a></span></pre>
+Словарь целей морфинга на основе свойства <tt>morphTarget.name</tt>.
 По умолчанию он неопределен, но восстанавливается <tt><a href="#7updateMorphTargets" onmouseover="show('Mesh.updateMorphTargets')" onmouseout="hide()">updateMorphTargets</a></tt>.</div><br>
 
 <h4>Методы</h4>
@@ -328,8 +327,7 @@ A dictionary of morphTargets based on the morphTarget.name property.
 Этот метод будет вызываться методом <tt><a href="core.htm#15intersectObject" onmouseover="show('Raycaster.intersectObject')" onmouseout="hide()">Raycaster.intersectObject</a></tt>.<br><br>
 
 <pre id="7updateMorphTargets"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update morph targets - обновление целей морфинга')" onmouseout="hide()">.updateMorphTargets</a></span>( )</pre>
-Updates the morphTargets to have no influence on the object. Resets the morphTargetInfluences and morphTargetDictionary properties
-</div><br>
+Обновляет <tt>morphTargets</tt> - цели морфинга не воздействуя на объект. Сбрасывает свойства <tt><a href="#7morphTargetInfluences" onmouseover="show('Mesh.morphTargetInfluences')" onmouseout="hide()">morphTargetInfluences</a></tt> и <tt><a href="#7morphTargetDictionary" onmouseover="show('Mesh.morphTargetDictionary')" onmouseout="hide()">morphTargetDictionary</a></tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Mesh.js" target="_blank">Mesh.js на github.com</a></div><br><br>
@@ -526,16 +524,13 @@ This is called automatically in the constructor, and the skeleton is created fro
 Метод нормализует векторы <a href="core.htm#7skinWeights" onmouseover="show('Geometry.skinWeights')" onmouseout="hide()">Geometry.skinWeights</a>. Не работает с <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.<br><br>
 
 <pre id="10pose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pose - поза')" onmouseout="hide()">.pose</a></span>( )</pre>
-Данный метод устанавливает полигональную сетку в исходную позу (сбрасывает позицию).
-This method sets the skinned mesh in the rest pose (resets the pose).<br><br>
+Данный метод устанавливает полигональную сетку в исходную позу (сбрасывает позицию).<br><br>
 
 <pre id="10updateMatrixWorld"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update matrix world - обновление матрицы мира')" onmouseout="hide()">.updateMatrixWorld</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force - принудительно')" onmouseout="hide()">force</a></span> )</pre>
 Метод обновляет <a href="math.htm#11" onmouseover="show('Matrix4')" onmouseout="hide()">MatrixWorld</a>.<br><br>
 
-<pre id="10initBones"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('in it bones - здесь кости')" onmouseout="hide()">.initBones</a></span>( )</pre>
-Создает массив из иерархических объектов костей из внутренней геометрии.
-Creates an array of hierarchical bones objects from the internal geometry.
-</div><br>
+<pre id="10initBones"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов initialize bones - инициализация костей')" onmouseout="hide()">.initBones</a></span>( )</pre>
+Создает массив иерархических объектов-<a href="#1" onmouseover="show('Bone')" onmouseout="hide()">костей</a> из внутренней геометрии.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/SkinnedMesh.js" target="_blank">SkinnedMesh.js на github.com</a></div><br><br>
@@ -569,8 +564,8 @@ scene.add( sprite );</pre>
 Значением по умолчанию является белый <a href="materials.htm#16" onmouseover="show('SpriteMaterial')" onmouseout="hide()">SpriteMaterial</a>.<br><br>
 
 <pre id="11center"><a href="math.htm#18" onmouseover="show('Vector2.<br>center - центр')" onmouseout="hide()">.center</a></pre>
-Опорная точка спрайта и точка, вокруг которой вращается спрайт. Значение <tt>(0.5, 0.5)</tt> соответствует средней (центральной) точке спрайта.
-Значение <tt>(0, 0)</tt> соответствует нижнему левому углу спрайта. Значение по умолчанию равно <tt>(0.5, 0.5)</tt>.</div><br>
+Опорная точка спрайта и точка, вокруг которой вращается спрайт. Значение&nbsp;<tt>(0.5, 0.5)</tt> соответствует средней (центральной) точке спрайта.
+Значение&nbsp;<tt>(0, 0)</tt> соответствует нижнему левому углу спрайта. Значение по умолчанию равно&nbsp;<tt>(0.5, 0.5)</tt>.</div><br>
 
 <h4>Методы</h4>
 Общие методы смотрите в описании базового класса <a href="core.htm#14" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.

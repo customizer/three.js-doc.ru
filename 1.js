@@ -21,7 +21,7 @@ else {
 function spoiler1(a) {
     if (a.parentNode.getElementsByTagName("div")[0].style.display != "") {
     a.parentNode.getElementsByTagName("div")[0].style.display = "";
-    a.innerText = "       скрыть";
+    a.innerText = " . . . скрыть";
     }
 else {
     a.parentNode.getElementsByTagName("div")[0].style.display = "none";

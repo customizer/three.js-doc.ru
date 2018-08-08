@@ -10,6 +10,10 @@
 <div class=below>Здесь даются примеры реализации различных подсобных объектов и функций.<br><br>
 <table width=100%>
 <tr><td width=50% valign=top>
+<div class=blockindent><a href="#0">Анимации</a>
+<div class=list><a href="#0.1">CCDIKSolver</a> - решатель для инверсной кинематики с алгоритмом&nbsp;CCD</div>
+<div class=list><a href="#0.2">MMDAnimationHelper</a> - вспомогательный элемент для анимации с ресурсами в формате&nbsp;MMD</div>
+<div class=list><a href="#0.3">MMDPhysics</a> - обработка физических свойств для ресурсов&nbsp;MMD</div></div>
 <div class=blockindent><a href="#1">Контролы (элементы управления)</a>
 <div class=list><a href="#1.1">OrbitControls</a> - элемент управления, позволяющий камере вращаться вокруг цели.</div></div>
 <div class=blockindent><a href="#2">Геометрические элементы</a>
@@ -29,12 +33,12 @@
 <div class=list><a href="#3.10">TGALoader</a> - загрузка в формате <tt>tga</tt></div>
 <div class=list><a href="#3.11">PRWMLoader</a> - загрузка в формате <tt>prwm</tt></div>
 <div class=list><a href="#3.12">MMDLoader</a> - загрузка в формате <tt>mmd</tt></div></div>
+</td>
+<td width=50% valign=top>
 <div class=blockindent><a href="#4">Объекты</a>
 <div class=list><a href="#4.1">LensFlare</a> -  имитация блика объектива камеры</div></div>
 <div class=blockindent><a href="#5">Экспортеры</a>
 <div class=list><a href="#5.1">GLTFExporter</a> - экспорт ресурсов в формате  glTF 2.0</div></div>
-</td>
-<td width=50% valign=top>
 <div class=blockindent><a href="#6">Плагины</a>
 <div class=list><a href="#6.1">LookupTable</a> - таблица поиска для карт цвета</div>
 <div class=list><a href="#6.2">SpriteCanvasMaterial</a> - материал для спрайтов на двумерном <tt>canvas</tt></div></div>
@@ -52,12 +56,250 @@
 <div class=blockindent><a href="#9">Подсобные функции (утилиты)</a>
 <div class=list><a href="#9.1">BufferGeometryUtils</a> - вспомогательные функции для экземпляров BufferGeometry</div>
 <div class=list><a href="#9.2">SceneUtils</a> - полезные функции для работы со сценой</div></div>
-<div class=blockindent><a href="#10">Анимации</a>
-<div class=list><a href="#10.1">CCDIKSolver</a> - решатель для инверсной кинематики с алгоритмом&nbsp;CCD</div>
-<div class=list><a href="#10.2">MMDAnimationHelper</a> - вспомогательный элемент для анимации с ресурсами в формате&nbsp;MMD</div>
-<div class=list><a href="#10.3">MMDPhysics</a> - обработка физических свойств для ресурсов&nbsp;MMD</div></div>
 </td></tr></table>
 </div>
+
+<h2 id="0">Анимация</h2>
+
+<h3 id="0.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CCDIKSolver</h3>
+Решающее устройство (<span class=lnk onmouseover="show('Решатель — (англ. solver)  программное обеспечение,<br>предназначенное для решения рассматриваемой<br>математической задачи. На вход решателю поступает<br>описание задачи в некоторой заданной форме, а на<br>выходе он выдает решение задачи.')" onmouseout="hide()">решатель</span>)
+для <a href="https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D0%BD%D0%B0%D1%8F_%D0%BA%D0%B8%D0%BD%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0" target="_blank" onmouseover="show('Инверсная кинематика (инверсная кинематическая анимация,<br>англ. inverse kinematics, IK) — процесс определения<br>параметров связанных гибких объектов (например,<br>кинематическая пара или кинематическая цепь) для достижения<br>необходимой позиции, ориентации и расположения этих<br>объектов. Инверсная кинематика является типом планирования<br>движения (англ.). Инверсная кинематика активно используется<br>в робототехнике, трёхмерной компьютерной анимации и в<br>разработке компьютерных игр. Она используется в основном<br>в тех ситуациях, когда необходимо точное позиционирование<br>гибких сочленений одного объекта относительно других<br>объектов окружающей среды.<br>Инверсная кинематика использует принцип, диаметрально<br>противоположный принципу прямой кинематики — перемещение<br>компонентов-потомков приводит к изменению положения<br>компонентов-предков, то есть алгоритм рассчитывает<br>положение и ориентацию компонентов-предков, исходя из<br>положения и ориентации компонентов-потомков.')" onmouseout="hide()">инверсной кинематики</a>
+с <a href="https://sites.google.com/site/auraliusproject/ccd-algorithm" target="_blank" onmouseover="show('CCD - сокращ. англ. слов cyclic coordinate descent<br>- циклический покоординатный спуск')" onmouseout="hide()">алгоритмом CCD</a>.<br>
+Статья <a href="https://en.wikipedia.org/wiki/Coordinate_descent" target="_blank">о покоординатном спуске</a> в англоязычной Википедии
+и пара (<a href="http://school-sector.relarn.ru/dckt/projects/optim/pocspusc.htm" target="_blank">вот</a> и <a href="http://4exam.info/book_48_glava_26_4.1._Metod_%D1%81iklicheskogo_pokoordinatnogo_spuska.html" target="_blank">вот</a>) русскоязычных ссылок.<br>
+CCDIKSolver решает задачу инверсной кинематики с помощью алгоритма CCD.
+CCDIKSolver предназначен для работы с <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, загруженной с помощью MMDLoader,
+но также может использоваться для стандартной <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var ikSolver;<br>
+// Load MMD resources and instantiate CCDIKSolver
+// загрузка ресурсов MMD и создание экземпляра CCDIKSolver
+new THREE.MMDLoader().load(
+  'models/mmd/miku.pmd',
+  function ( mesh ) {
+    ikSolver = new CCDIKSolver( mesh, mesh.geometry.iks );
+    scene.add( mesh );
+  }
+);<br>
+function render() {
+  animate(); // update bones (обновление костей)
+  if ( ikSolver !== undefined ) ikSolver.update();
+  renderer.render( scene, camera );
+}</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_pose" target="_blank">webgl_loader_mmd_pose</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>CCDIKSolver( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iks - сокращ. англ. слов inverse kinematics<br>- (элементы) инверсной кинематики')" onmouseout="hide()">iks</a></span> )</pre>
+<div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> для которой CCDIKSolver решает задачу инверсной кинематики.</div>
+<div class=list><tt>iks</tt> — An array of Object specifying IK parameter. target, effector, and link-index are index integers in .skeleton.bones. The bones relation should be "links[ n ], links[ n - 1 ], ..., links[ 0 ], effector" in order from parent to child.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('target - цель')" onmouseout="hide()">target</a></span></tt> — целевая (target) кость.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('effector - эффектор, исполнительный элемент, рабочий орган')" onmouseout="hide()">effector</a></span></tt> — эффекторная кость.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('links - связки, соединения')" onmouseout="hide()">links</a></span></tt>
+— An array of [page: Object] specifying link bones.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt> — Link bone.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>limitation</tt> — (optional) Rotation axis. Default is undefined.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>rotationMin</tt> — (optional) Rotation minimum limit. Default is undefined.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>rotationMax</tt> — (optional) Rotation maximum limit. Default is undefined.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span></tt>
+— значением по умолчанию является <tt>true</tt>. Дополнительный, необязательный параметр.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iteration - итерация, повтор, перебор')" onmouseout="hide()">iteration</a></span></tt>
+— количество расчетных итераций (шагов).Чем меньше, тем быстрее, но ниже точность. Значение по умолчанию равно&nbsp;<tt>1</tt>. Дополнительный, необязательный параметр.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min angle - минимальный угол')" onmouseout="hide()">minAngle</a></span></tt>
+— минимальный угол поворота за один шаг. Значением по умолчанию является <tt>undefined</tt>, т.е. значение неопределено. Дополнительный, необязательный параметр.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max angle - максимальный угол')" onmouseout="hide()">maxAngle</a></span></tt>
+— максимальный угол поворота за один шаг. Значением по умолчанию является <tt>undefined</tt>, т.е. значение неопределено. Дополнительный, необязательный параметр.</div>
+Создает новый CCDIKSolver.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="0.1iks"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iks - сокращ. англ. слов inverse kinematics<br>- (элементы) инверсной кинематики')" onmouseout="hide()">.iks</a></span></pre>
+Массив параметров инверсной кинематики, переданный конструктору.<br><br>
+
+<pre id="0.1mesh"><a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">.mesh</a></pre>
+<a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, переданный конструктору.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="0.1createHelper"><span onclick="showClick('CCDIKHelper')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('create helper - создать вспомогательный элемент')" onmouseout="hide()">.createHelper( )</a></span></pre>
+Метод возвращает <span class=lnk onmouseover="show('CCDIKHelper - сокращ. англ. слов cyclic coordinate descent<br>inverse kinematic helper - вспомогательный элемент инверсной<br>кинематики циклического покоординатного спуска')" onmouseout="hide()">CCDIKHelper</span>. Можно визуализировать кости инверсной кинематики, добавив на сцену вспомогательный элемент.<br><br>
+
+<pre id="0.1update"><a href="#10.1" onmouseover="show('CCDIKSolver.<br>update - обновить')" onmouseout="hide()">.update</a>( )</pre>
+Метод обновляет кватернион костей с помощью алгоритма CCD.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/CCDIKSolver.js" target="_blank">CCDIKSolver.js на github.com</a></div><br><br>
+
+<h3 id="0.2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDAnimationHelper</h3>
+A animation helper for MMD resources.<br>
+MMDAnimationHelper handles animation of MMD assets loaded by MMDLoader with MMD special features as IK, Grant, and Physics. It uses CCDIKSolver and MMDPhysics inside.<br><br>
+
+<h4>Пример</h4>
+<pre>// Instantiate a helper
+var helper = new THREE.MMDAnimationHelper();<br>
+// Load MMD resources and add to helper
+new THREE.MMDLoader().loadWithAnimation(
+  'models/mmd/miku.pmd',
+  'models/mmd/dance.vmd',
+  function ( mmd ) {
+    helper.add( mmd.mesh, {
+      animation: mmd.animation,
+      physics: true
+    } );<br>
+    scene.add( mmd.mesh );<br>
+    new THREE.AudioLoader().load(
+      'audios/mmd/song.mp3',
+      function ( buffer ) {
+      var listener = new THREE.AudioListener();
+      var audio = new THREE.Audio( listener )
+        .setBuffer( buffer );
+      listener.position.z = 1;<br>
+        scene.add( audio );
+        scene.add( listener );
+      }
+    );
+  }
+);<br>
+function render() {
+  helper.update( clock.getDelta() );
+  renderer.render( scene, camera );
+}</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_pose" target="_blank">webgl_loader_mmd_pose</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>MMDAnimationHelper( params : Object )</pre>
+<div class=list><tt>params</tt> — (optional)<br>
+&nbsp; &#9679; &nbsp; <tt>sync</tt> - Whether animation durations of added objects are synched. Default is true.<br>
+&nbsp; &#9679; &nbsp; <tt>afterglow</tt> - Default is 0.0.<br>
+&nbsp; &#9679; &nbsp; <tt>resetPhysicsOnLoop</tt> - Default is true.</div>
+Создает новый MMDAnimationHelper.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="0.2audio">.audio : Audio</pre>
+An Audio added to helper.<br><br>
+
+<pre id="0.2camera">.camera : Camera</pre>
+An Camera added to helper.<br><br>
+
+<pre id="0.2meshes">.meshes : Array</pre>
+An array of SkinnedMesh added to helper.<br><br>
+
+<pre id="0.2objects">.objects : WeakMap</pre>
+A WeakMap which holds animation stuffs used in helper for objects added to helper. For example, you can access AnimationMixer for an added SkinnedMesh with "helper.objects.get( mesh ).mixer"<br><br>
+
+<pre id="0.2onBeforePhysics">.onBeforePhysics : function</pre>
+An optional callback that is executed immediately before the physicis calculation for an SkinnedMesh. This function is called with the SkinnedMesh.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="0.2add">.add ( object : Object3D, params : Object ) : MMDAnimationHelper</pre>
+<div class=list><tt>object</tt> — SkinnedMesh, Camera, or Audio</div>
+<div class=list><tt>params</tt> — (optional)<br>
+&nbsp; &#9679; &nbsp; <tt>animation</tt> - an AnimationClip or an array of AnimationClip set to object. Only for SkinnedMesh and Camera. Default is undefined.<br>
+&nbsp; &#9679; &nbsp; <tt>physics</tt> - Only for SkinnedMesh. A flag whether turn on physics. Default is true.<br>
+&nbsp; &#9679; &nbsp; <tt>warmup</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 60.<br>
+&nbsp; &#9679; &nbsp; <tt>unitStep</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 1 / 65.<br>
+&nbsp; &#9679; &nbsp; <tt>maxStepNum</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 3.<br>
+&nbsp; &#9679; &nbsp; <tt>gravity</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is ( 0, - 9.8 * 10, 0 ).<br>
+&nbsp; &#9679; &nbsp; <tt>delayTime</tt> - Only for Audio. Default is 0.0.</div>
+Add an SkinnedMesh, Camera, or Audio to helper and setup animation. The anmation durations of added objects are synched. If camera/audio has already been added, it'll be replaced with a new one.<br><br>
+
+<pre id="0.2enable">.enable ( key : string, enabled : Boolean ) : MMDAnimationHelper</pre>
+<div class=list><tt>key</tt> — Allowed strings are 'animation', 'ik', 'grant', 'physics', and 'cameraAnimation'.</div>
+<div class=list><tt>enabled</tt> — true is enable, false is disable</div>
+Enable/Disable an animation feature<br><br>
+
+<pre id="0.2pose">.pose ( mesh : SkinnedMesh, vpd : Object, params : Object ) : MMDAnimationHelper</pre>
+<div class=list><tt>mesh</tt> — SkinnedMesh which changes the posing. It doesn't need to be added to helper.</div>
+<div class=list><tt>vpd</tt> — VPD content obtained by MMDLoader.loadVPD</div>
+<div class=list><tt>params</tt> — (optional)<br>
+&nbsp; &#9679; &nbsp; <tt>resetPose</tt> - значением по умолчанию является <tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>ik</tt> - значением по умолчанию является <tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>grant</tt> - значением по умолчанию является <tt>true</tt>.</div>
+Changes the posing of SkinnedMesh as VPD content specifies.<br><br>
+
+<pre id="0.2remove">.remove ( object : Object3D ) : MMDAnimationHelper</pre>
+<div class=list><tt>object</tt> — SkinnedMesh, Camera, or Audio</div>
+Remove an SkinnedMesh, Camera, or Audio from helper.<br><br>
+
+<pre id="0.2update">.update ( delta : Nummber ) : MMDAnimationHelper</pre>
+<div class=list><tt>delta</tt> — number in second</div>
+Advance mixer time and update the animations of objects added to helper </div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDAnimationHelper.js" target="_blank">MMDAnimationHelper.js на github.com</a></div><br><br>
+
+<h3 id="0.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDPhysics</h3>
+A Physics handler for MMD resources.<br>
+MMDPhysics calculates Physics for model loaded by MMDLoader with ammo.js (Bullet-based JavaScript Physics engine).<br><br>
+
+<h4>Пример</h4>
+<pre>var physics;<br>
+// Load MMD resources and instantiate MMDPhysics
+// Load MMD resources and instantiate MMDPhysics
+new THREE.MMDLoader().load(
+  'models/mmd/miku.pmd',
+  function ( mesh ) {
+    physics = new THREE.MMDPhysics( mesh )
+    scene.add( mesh );
+  }
+);<br>
+function render() {
+  var delta = clock.getDelta();
+  animate( delta );  // update bones
+  if ( physics !== undefined ) physics.update( delta );
+  renderer.render( scene, camera );
+}</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>MMDPhysics( mesh : SkinnedMesh, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rigid body params - ')" onmouseout="hide()">rigidBodyParams</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constraint params - ')" onmouseout="hide()">constraintParams</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>mesh</tt> — SkinnedMesh for which MMDPhysics calculates Physics.</div>
+<div class=list><tt>rigidBodyParams</tt> — An array of Object specifying Rigid Body parameters.</div>
+<div class=list><tt>constraintParams</tt> — (optional) An array of Object specifying Constraint parameters.</div>
+<div class=list><tt>params</tt> — (optional)<br>
+&nbsp; &#9679; &nbsp; <tt>unitStep</tt> - Default is 1 / 65.<br>
+&nbsp; &#9679; &nbsp; <tt>maxStepNum</tt> - Default is 3.<br>
+&nbsp; &#9679; &nbsp; <tt>gravity</tt> - Default is ( 0, - 9.8 * 10, 0 )</div>
+Создает новый MMDPhysics.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="0.3mesh">.mesh : Array</pre>
+SkinnedMesh passed to the constructor.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="0.3createHelper">.createHelper () : MMDPhysicsHelper</pre>
+Return MMDPhysicsHelper. You can visualize Rigid bodies by adding the helper to scene.<br><br>
+
+<pre id="0.3reset">.reset () : CCDIKSolver</pre>
+Resets Rigid bodies transorm to current bone's.<br><br>
+
+<pre id="0.3setGravity">.setGravity ( gravity : Vector3 ) : CCDIKSolver</pre>
+<div class=list><tt>gravity</tt> — Direction and volume of gravity.</div>
+Set gravity.<br><br>
+
+<pre id="0.3update">.update ( delta : Number ) : CCDIKSolver</pre>
+<div class=list><tt>delta</tt> — время в секундах.</div>
+Advance Physics calculation and updates bones.<br><br>
+
+<pre id="0.3warmup">.warmup ( cycles : Integer ) : CCDIKSolver</pre>
+<div class=list><tt>delta</tt> — время в секундах.</div>
+Warm up Rigid bodies. Calculates cycles steps. </div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDPhysics.js" target="_blank">MMDPhysics.js на github.com</a></div><br><br>
+
 
 <h2 id="1">Контролы</h2>
 <h3 id="1.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OrbitControls</h3>
@@ -2168,249 +2410,6 @@ SVG elements can be styled via CSS. And they have good accessibility since it's 
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/utils/SceneUtils.js" target="_blank">SceneUtils.js на github.com</a></div><br><br>
-
-
-<h2 id="10">Анимация</h2>
-
-
-<h3 id="10.1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CCDIKSolver</h3>
-Решающее устройство (<span class=lnk onmouseover="show('Решатель — (англ. solver)  программное обеспечение,<br>предназначенное для решения рассматриваемой<br>математической задачи. На вход решателю поступает<br>описание задачи в некоторой заданной форме, а на<br>выходе он выдает решение задачи.')" onmouseout="hide()">решатель</span>)
-для <a href="https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D0%BD%D0%B0%D1%8F_%D0%BA%D0%B8%D0%BD%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0" target="_blank" onmouseover="show('Инверсная кинематика (инверсная кинематическая анимация,<br>англ. inverse kinematics, IK) — процесс определения<br>параметров связанных гибких объектов (например,<br>кинематическая пара или кинематическая цепь) для достижения<br>необходимой позиции, ориентации и расположения этих<br>объектов. Инверсная кинематика является типом планирования<br>движения (англ.). Инверсная кинематика активно используется<br>в робототехнике, трёхмерной компьютерной анимации и в<br>разработке компьютерных игр. Она используется в основном<br>в тех ситуациях, когда необходимо точное позиционирование<br>гибких сочленений одного объекта относительно других<br>объектов окружающей среды.<br>Инверсная кинематика использует принцип, диаметрально<br>противоположный принципу прямой кинематики — перемещение<br>компонентов-потомков приводит к изменению положения<br>компонентов-предков, то есть алгоритм рассчитывает<br>положение и ориентацию компонентов-предков, исходя из<br>положения и ориентации компонентов-потомков.')" onmouseout="hide()">инверсной кинематики</a>
-с <a href="https://sites.google.com/site/auraliusproject/ccd-algorithm" target="_blank" onmouseover="show('CCD - сокращ. англ. слов cyclic coordinate descent<br>- циклический покоординатный спуск')" onmouseout="hide()">алгоритмом CCD</a>.<br>
-Статья <a href="https://en.wikipedia.org/wiki/Coordinate_descent" target="_blank">о покоординатном спуске</a> в англоязычной Википедии
-и пара (<a href="http://school-sector.relarn.ru/dckt/projects/optim/pocspusc.htm" target="_blank">вот</a> и <a href="http://4exam.info/book_48_glava_26_4.1._Metod_%D1%81iklicheskogo_pokoordinatnogo_spuska.html" target="_blank">вот</a>) русскоязычных ссылок.<br>
-CCDIKSolver решает задачу инверсной кинематики с помощью алгоритма CCD.
-CCDIKSolver предназначен для работы с <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, загруженной с помощью MMDLoader,
-но также может использоваться для стандартной <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.<br><br>
-
-<h4>Пример</h4>
-<pre>var ikSolver;<br>
-// Load MMD resources and instantiate CCDIKSolver
-// загрузка ресурсов MMD и создание экземпляра CCDIKSolver
-new THREE.MMDLoader().load(
-  'models/mmd/miku.pmd',
-  function ( mesh ) {
-    ikSolver = new CCDIKSolver( mesh, mesh.geometry.iks );
-    scene.add( mesh );
-  }
-);<br>
-function render() {
-  animate(); // update bones (обновление костей)
-  if ( ikSolver !== undefined ) ikSolver.update();
-  renderer.render( scene, camera );
-}</pre>
-<h5>Другие примеры</h5>
-<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
-<a href="https://threejs.org/examples/#webgl_loader_mmd_pose" target="_blank">webgl_loader_mmd_pose</a>
-<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
-
-<h4>Конструктор</h4>
-<pre>CCDIKSolver( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iks - сокращ. англ. слов inverse kinematics<br>- (элементы) инверсной кинематики')" onmouseout="hide()">iks</a></span> )</pre>
-<div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> для которой CCDIKSolver решает задачу инверсной кинематики.</div>
-<div class=list><tt>iks</tt> — An array of Object specifying IK parameter. target, effector, and link-index are index integers in .skeleton.bones. The bones relation should be "links[ n ], links[ n - 1 ], ..., links[ 0 ], effector" in order from parent to child.<br>
-&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('target - цель')" onmouseout="hide()">target</a></span></tt> — целевая (target) кость.<br>
-&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('effector - эффектор, исполнительный элемент, рабочий орган')" onmouseout="hide()">effector</a></span></tt> — эффекторная кость.<br>
-&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('links - связки, соединения')" onmouseout="hide()">links</a></span></tt>
-— An array of [page: Object] specifying link bones.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt> — Link bone.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>limitation</tt> — (optional) Rotation axis. Default is undefined.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>rotationMin</tt> — (optional) Rotation minimum limit. Default is undefined.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>rotationMax</tt> — (optional) Rotation maximum limit. Default is undefined.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span></tt>
-— значением по умолчанию является <tt>true</tt>. Дополнительный, необязательный параметр.<br>
-&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iteration - итерация, повтор, перебор')" onmouseout="hide()">iteration</a></span></tt>
-— количество расчетных итераций (шагов).Чем меньше, тем быстрее, но ниже точность. Значение по умолчанию равно&nbsp;<tt>1</tt>. Дополнительный, необязательный параметр.<br>
-&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min angle - минимальный угол')" onmouseout="hide()">minAngle</a></span></tt>
-— минимальный угол поворота за один шаг. Значением по умолчанию является <tt>undefined</tt>, т.е. значение неопределено. Дополнительный, необязательный параметр.<br>
-&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max angle - максимальный угол')" onmouseout="hide()">maxAngle</a></span></tt>
-— максимальный угол поворота за один шаг. Значением по умолчанию является <tt>undefined</tt>, т.е. значение неопределено. Дополнительный, необязательный параметр.</div>
-Создает новый CCDIKSolver.<br><br>
-
-<h4>Свойства</h4>
-<div class=blockindent><br>
-<pre id="10.1iks"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iks - сокращ. англ. слов inverse kinematics<br>- (элементы) инверсной кинематики')" onmouseout="hide()">.iks</a></span></pre>
-Массив параметров инверсной кинематики, переданный конструктору.<br><br>
-
-<pre id="10.1mesh"><a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">.mesh</a></pre>
-<a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, переданный конструктору.</div><br>
-
-<h4>Методы</h4>
-<div class=blockindent><br>
-<pre id="10.1createHelper"><span onclick="showClick('CCDIKHelper')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('create helper - создать вспомогательный элемент')" onmouseout="hide()">.createHelper( )</a></span></pre>
-Метод возвращает <span class=lnk onmouseover="show('CCDIKHelper - сокращ. англ. слов cyclic coordinate descent<br>inverse kinematic helper - вспомогательный элемент инверсной<br>кинематики циклического покоординатного спуска')" onmouseout="hide()">CCDIKHelper</span>. Можно визуализировать кости инверсной кинематики, добавив на сцену вспомогательный элемент.<br><br>
-
-<pre id="10.1update"><a href="#10.1" onmouseover="show('CCDIKSolver.<br>update - обновить')" onmouseout="hide()">.update</a>( )</pre>
-Метод обновляет кватернион костей с помощью алгоритма CCD.</div><br>
-
-<h4>Исходники</h4>
-<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/CCDIKSolver.js" target="_blank">CCDIKSolver.js на github.com</a></div><br><br>
-
-<h3 id="10.2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDAnimationHelper</h3>
-A animation helper for MMD resources.<br>
-MMDAnimationHelper handles animation of MMD assets loaded by MMDLoader with MMD special features as IK, Grant, and Physics. It uses CCDIKSolver and MMDPhysics inside.<br><br>
-
-<h4>Пример</h4>
-<pre>// Instantiate a helper
-var helper = new THREE.MMDAnimationHelper();<br>
-// Load MMD resources and add to helper
-new THREE.MMDLoader().loadWithAnimation(
-  'models/mmd/miku.pmd',
-  'models/mmd/dance.vmd',
-  function ( mmd ) {
-    helper.add( mmd.mesh, {
-      animation: mmd.animation,
-      physics: true
-    } );<br>
-    scene.add( mmd.mesh );<br>
-    new THREE.AudioLoader().load(
-      'audios/mmd/song.mp3',
-      function ( buffer ) {
-      var listener = new THREE.AudioListener();
-      var audio = new THREE.Audio( listener )
-        .setBuffer( buffer );
-      listener.position.z = 1;<br>
-        scene.add( audio );
-        scene.add( listener );
-      }
-    );
-  }
-);<br>
-function render() {
-  helper.update( clock.getDelta() );
-  renderer.render( scene, camera );
-}</pre>
-<h5>Другие примеры</h5>
-<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
-<a href="https://threejs.org/examples/#webgl_loader_mmd_pose" target="_blank">webgl_loader_mmd_pose</a>
-<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
-
-<h4>Конструктор</h4>
-<pre>MMDAnimationHelper( params : Object )</pre>
-<div class=list><tt>params</tt> — (optional)<br>
-&nbsp; &#9679; &nbsp; <tt>sync</tt> - Whether animation durations of added objects are synched. Default is true.<br>
-&nbsp; &#9679; &nbsp; <tt>afterglow</tt> - Default is 0.0.<br>
-&nbsp; &#9679; &nbsp; <tt>resetPhysicsOnLoop</tt> - Default is true.</div>
-Создает новый MMDAnimationHelper.<br><br>
-
-<h4>Свойства</h4>
-<div class=blockindent><br>
-<pre id="10.2audio">.audio : Audio</pre>
-An Audio added to helper.<br><br>
-
-<pre id="10.2camera">.camera : Camera</pre>
-An Camera added to helper.<br><br>
-
-<pre id="10.2meshes">.meshes : Array</pre>
-An array of SkinnedMesh added to helper.<br><br>
-
-<pre id="10.2objects">.objects : WeakMap</pre>
-A WeakMap which holds animation stuffs used in helper for objects added to helper. For example, you can access AnimationMixer for an added SkinnedMesh with "helper.objects.get( mesh ).mixer"<br><br>
-
-<pre id="10.2onBeforePhysics">.onBeforePhysics : function</pre>
-An optional callback that is executed immediately before the physicis calculation for an SkinnedMesh. This function is called with the SkinnedMesh.</div><br>
-
-<h4>Методы</h4>
-<div class=blockindent><br>
-<pre id="10.2add">.add ( object : Object3D, params : Object ) : MMDAnimationHelper</pre>
-<div class=list><tt>object</tt> — SkinnedMesh, Camera, or Audio</div>
-<div class=list><tt>params</tt> — (optional)<br>
-&nbsp; &#9679; &nbsp; <tt>animation</tt> - an AnimationClip or an array of AnimationClip set to object. Only for SkinnedMesh and Camera. Default is undefined.<br>
-&nbsp; &#9679; &nbsp; <tt>physics</tt> - Only for SkinnedMesh. A flag whether turn on physics. Default is true.<br>
-&nbsp; &#9679; &nbsp; <tt>warmup</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 60.<br>
-&nbsp; &#9679; &nbsp; <tt>unitStep</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 1 / 65.<br>
-&nbsp; &#9679; &nbsp; <tt>maxStepNum</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 3.<br>
-&nbsp; &#9679; &nbsp; <tt>gravity</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is ( 0, - 9.8 * 10, 0 ).<br>
-&nbsp; &#9679; &nbsp; <tt>delayTime</tt> - Only for Audio. Default is 0.0.</div>
-Add an SkinnedMesh, Camera, or Audio to helper and setup animation. The anmation durations of added objects are synched. If camera/audio has already been added, it'll be replaced with a new one.<br><br>
-
-<pre id="10.2enable">.enable ( key : string, enabled : Boolean ) : MMDAnimationHelper</pre>
-<div class=list><tt>key</tt> — Allowed strings are 'animation', 'ik', 'grant', 'physics', and 'cameraAnimation'.</div>
-<div class=list><tt>enabled</tt> — true is enable, false is disable</div>
-Enable/Disable an animation feature<br><br>
-
-<pre id="10.2pose">.pose ( mesh : SkinnedMesh, vpd : Object, params : Object ) : MMDAnimationHelper</pre>
-<div class=list><tt>mesh</tt> — SkinnedMesh which changes the posing. It doesn't need to be added to helper.</div>
-<div class=list><tt>vpd</tt> — VPD content obtained by MMDLoader.loadVPD</div>
-<div class=list><tt>params</tt> — (optional)<br>
-&nbsp; &#9679; &nbsp; <tt>resetPose</tt> - значением по умолчанию является <tt>true</tt>.<br>
-&nbsp; &#9679; &nbsp; <tt>ik</tt> - значением по умолчанию является <tt>true</tt>.<br>
-&nbsp; &#9679; &nbsp; <tt>grant</tt> - значением по умолчанию является <tt>true</tt>.</div>
-Changes the posing of SkinnedMesh as VPD content specifies.<br><br>
-
-<pre id="10.2remove">.remove ( object : Object3D ) : MMDAnimationHelper</pre>
-<div class=list><tt>object</tt> — SkinnedMesh, Camera, or Audio</div>
-Remove an SkinnedMesh, Camera, or Audio from helper.<br><br>
-
-<pre id="10.2update">.update ( delta : Nummber ) : MMDAnimationHelper</pre>
-<div class=list><tt>delta</tt> — number in second</div>
-Advance mixer time and update the animations of objects added to helper </div><br>
-
-<h4>Исходники</h4>
-<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDAnimationHelper.js" target="_blank">MMDAnimationHelper.js на github.com</a></div><br><br>
-
-<h3 id="10.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDPhysics</h3>
-A Physics handler for MMD resources.<br>
-MMDPhysics calculates Physics for model loaded by MMDLoader with ammo.js (Bullet-based JavaScript Physics engine).<br><br>
-
-<h4>Пример</h4>
-<pre>var physics;<br>
-// Load MMD resources and instantiate MMDPhysics
-// Load MMD resources and instantiate MMDPhysics
-new THREE.MMDLoader().load(
-  'models/mmd/miku.pmd',
-  function ( mesh ) {
-    physics = new THREE.MMDPhysics( mesh )
-    scene.add( mesh );
-  }
-);<br>
-function render() {
-  var delta = clock.getDelta();
-  animate( delta );  // update bones
-  if ( physics !== undefined ) physics.update( delta );
-  renderer.render( scene, camera );
-}</pre>
-<h5>Другие примеры</h5>
-<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
-<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
-
-<h4>Конструктор</h4>
-<pre>MMDPhysics( mesh : SkinnedMesh, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rigid body params - ')" onmouseout="hide()">rigidBodyParams</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constraint params - ')" onmouseout="hide()">constraintParams</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
-<div class=list><tt>mesh</tt> — SkinnedMesh for which MMDPhysics calculates Physics.</div>
-<div class=list><tt>rigidBodyParams</tt> — An array of Object specifying Rigid Body parameters.</div>
-<div class=list><tt>constraintParams</tt> — (optional) An array of Object specifying Constraint parameters.</div>
-<div class=list><tt>params</tt> — (optional)<br>
-&nbsp; &#9679; &nbsp; <tt>unitStep</tt> - Default is 1 / 65.<br>
-&nbsp; &#9679; &nbsp; <tt>maxStepNum</tt> - Default is 3.<br>
-&nbsp; &#9679; &nbsp; <tt>gravity</tt> - Default is ( 0, - 9.8 * 10, 0 )</div>
-Создает новый MMDPhysics.<br><br>
-
-<h4>Свойства</h4>
-<div class=blockindent><br>
-<pre id="10.3mesh">.mesh : Array</pre>
-SkinnedMesh passed to the constructor.</div><br>
-
-<h4>Методы</h4>
-<div class=blockindent><br>
-<pre id="10.3createHelper">.createHelper () : MMDPhysicsHelper</pre>
-Return MMDPhysicsHelper. You can visualize Rigid bodies by adding the helper to scene.<br><br>
-
-<pre id="10.3reset">.reset () : CCDIKSolver</pre>
-Resets Rigid bodies transorm to current bone's.<br><br>
-
-<pre id="10.3setGravity">.setGravity ( gravity : Vector3 ) : CCDIKSolver</pre>
-<div class=list><tt>gravity</tt> — Direction and volume of gravity.</div>
-Set gravity.<br><br>
-
-<pre id="10.3update">.update ( delta : Number ) : CCDIKSolver</pre>
-<div class=list><tt>delta</tt> — время в секундах.</div>
-Advance Physics calculation and updates bones.<br><br>
-
-<pre id="10.3warmup">.warmup ( cycles : Integer ) : CCDIKSolver</pre>
-<div class=list><tt>delta</tt> — время в секундах.</div>
-Warm up Rigid bodies. Calculates cycles steps. </div><br>
-
-<h4>Исходники</h4>
-<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDPhysics.js" target="_blank">MMDPhysics.js на github.com</a></div><br><br>
   
 <br><br>
 </body></html>

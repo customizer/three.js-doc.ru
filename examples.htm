@@ -95,17 +95,18 @@ function render() {
 <h4>Конструктор</h4>
 <pre>CCDIKSolver( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iks - сокращ. англ. слов inverse kinematics<br>- (элементы) инверсной кинематики')" onmouseout="hide()">iks</a></span> )</pre>
 <div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> для которой CCDIKSolver решает задачу инверсной кинематики.</div>
-<div class=list><tt>iks</tt> — An array of Object specifying IK parameter. target, effector, and link-index are index integers in .skeleton.bones. The bones relation should be "links[ n ], links[ n - 1 ], ..., links[ 0 ], effector" in order from parent to child.<br>
+<div class=list><tt>iks</tt> — массив объектов, определяющих параметр IK. parameter. <tt>target</tt>, <tt>effector</tt> и <tt>link-index</tt> - это целочисленные индексы в <tt><span class="lnk" onmouseover="show('skeleton.bones - костях скелета')" onmouseout="hide()">.skeleton.bones</span></tt>.
+Кости должны быть увязаны как "<tt>links[ n ]</tt>, <tt>links[ n - 1 ]</tt>, <tt>...</tt>, <tt>links[ 0 ]</tt>, <tt>effector</tt>", по порядку от родительского объекта к дочернему.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('target - цель')" onmouseout="hide()">target</a></span></tt> — целевая (target) кость.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('effector - эффектор, исполнительный элемент, рабочий орган')" onmouseout="hide()">effector</a></span></tt> — эффекторная кость.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('links - связки, соединения')" onmouseout="hide()">links</a></span></tt>
 — An array of [page: Object] specifying link bones.<br>
 &nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt> — Link bone.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>limitation</tt> — (optional) Rotation axis. Default is undefined.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>rotationMin</tt> — (optional) Rotation minimum limit. Default is undefined.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt>rotationMax</tt> — (optional) Rotation maximum limit. Default is undefined.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>limitation - ограничение')" onmouseout="hide()">limitation</a></tt> — Rotation axis. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>rotation min - минимум вращения')" onmouseout="hide()">rotationMin</a></tt> — ограничение вращения по минимуму. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>rotation max - максимум вращения')" onmouseout="hide()">rotationMax</a></tt> — ограничение вращения по максимуму. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
 &nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span></tt>
-— значением по умолчанию является <tt>true</tt>. Дополнительный, необязательный параметр.<br>
+— значением по умолчанию является&nbsp;<tt>true</tt>. Дополнительный, необязательный параметр.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iteration - итерация, повтор, перебор')" onmouseout="hide()">iteration</a></span></tt>
 — количество расчетных итераций (шагов).Чем меньше, тем быстрее, но ниже точность. Значение по умолчанию равно&nbsp;<tt>1</tt>. Дополнительный, необязательный параметр.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min angle - минимальный угол')" onmouseout="hide()">minAngle</a></span></tt>
@@ -133,14 +134,16 @@ function render() {
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/CCDIKSolver.js" target="_blank">CCDIKSolver.js на github.com</a></div><br><br>
 
+
 <h3 id="0.2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDAnimationHelper</h3>
 A animation helper for MMD resources.<br>
 MMDAnimationHelper handles animation of MMD assets loaded by MMDLoader with MMD special features as IK, Grant, and Physics. It uses CCDIKSolver and MMDPhysics inside.<br><br>
 
 <h4>Пример</h4>
-<pre>// Instantiate a helper
+<pre>// Instantiate a helper (создаем вспомогательный элемент)
 var helper = new THREE.MMDAnimationHelper();<br>
 // Load MMD resources and add to helper
+// Загрузка MMD ресурсов и добавление вспомогательного элемента
 new THREE.MMDLoader().loadWithAnimation(
   'models/mmd/miku.pmd',
   'models/mmd/dance.vmd',
@@ -173,42 +176,45 @@ function render() {
 <a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>MMDAnimationHelper( params : Object )</pre>
-<div class=list><tt>params</tt> — (optional)<br>
-&nbsp; &#9679; &nbsp; <tt>sync</tt> - Whether animation durations of added objects are synched. Default is true.<br>
-&nbsp; &#9679; &nbsp; <tt>afterglow</tt> - Default is 0.0.<br>
-&nbsp; &#9679; &nbsp; <tt>resetPhysicsOnLoop</tt> - Default is true.</div>
+<pre>MMDAnimationHelper( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sync')" onmouseout="hide()">sync</a></span></tt> - определяет, будет ли синхронизированы длительности анимации добавленных объектов. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('afterglow - послесвечение')" onmouseout="hide()">afterglow</a></span></tt> - Значение по умолчанию равно&nbsp;<tt>0.0</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset physics on loop - сброс физики (т.е. физических параметров) в цикле')" onmouseout="hide()">resetPhysicsOnLoop</a></span></tt> - Значением по умолчанию является&nbsp;<tt>true</tt>.</div>
 Создает новый MMDAnimationHelper.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="0.2audio">.audio : Audio</pre>
-An Audio added to helper.<br><br>
+<pre id="0.2audio"><a href="audio.htm#1" onmouseover="show('Audio.<br>audio - аудио, звук, звуковой')" onmouseout="hide()">.audio</a></pre>
+К вспомогательному элементу добавляется объект <a href="audio.htm#1" onmouseover="show('Audio')" onmouseout="hide()">Audio</a>.<br><br>
 
-<pre id="0.2camera">.camera : Camera</pre>
-An Camera added to helper.<br><br>
+<pre id="0.2camera"><a href="cameras.htm#1" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">.camera</a></pre>
+К вспомогательному элементу добавляется объект <a href="cameras.htm#1" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>.<br><br>
 
-<pre id="0.2meshes">.meshes : Array</pre>
-An array of SkinnedMesh added to helper.<br><br>
+<pre id="0.2meshes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('meshes - сетки')" onmouseout="hide()">.meshes</a></span></pre>
+К вспомогательному элементу добавляется массив <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.<br><br>
 
-<pre id="0.2objects">.objects : WeakMap</pre>
-A WeakMap which holds animation stuffs used in helper for objects added to helper. For example, you can access AnimationMixer for an added SkinnedMesh with "helper.objects.get( mesh ).mixer"<br><br>
+<pre id="0.2objects"><span onclick="showClick('WeakMap - карта со &quot;слабыми&quot; ссылками')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('objects - объекты')" onmouseout="hide()">.objects</a></span></pre>
+Значением свойства является <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/WeakMap" target="_blank" onmouseover="show('weak map - &quot;слабая&quot; карта, т.е. карта со &quot;слабыми&quot;<br>ссылками.<br>Объект WeakMap — коллекция пар ключ-значение.<br>В качестве ключей могут быть использованы только<br>объекты, а значения могут быть произвольных<br>типов.')" onmouseout="hide()">WeakMap</a>,
+которая хранит элементы анимации, используемые в помощь объектам, добавленным к вспомогательному элементу.
+Например, можно получить доступ к <a href="animation.htm#3" onmouseover="show('AnimationMixer')" onmouseout="hide()">AnimationMixer</a> для добавленной <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> при помощи "<tt>helper.objects.get( mesh ).mixer</tt>"<br><br>
 
-<pre id="0.2onBeforePhysics">.onBeforePhysics : function</pre>
-An optional callback that is executed immediately before the physicis calculation for an SkinnedMesh. This function is called with the SkinnedMesh.</div><br>
+<pre id="0.2onBeforePhysics"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on before physics - на (событие) перед<br>(расчетом) физических (параметров)')" onmouseout="hide()">.onBeforePhysics</a></span></pre>
+Дополнительная, необязательная функция обратного вызова, которая исполняется непосредственно перед расчетом физических параметров <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.
+Эта функция вызывается вместе с <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="0.2add">.add ( object : Object3D, params : Object ) : MMDAnimationHelper</pre>
-<div class=list><tt>object</tt> — SkinnedMesh, Camera, or Audio</div>
-<div class=list><tt>params</tt> — (optional)<br>
-&nbsp; &#9679; &nbsp; <tt>animation</tt> - an AnimationClip or an array of AnimationClip set to object. Only for SkinnedMesh and Camera. Default is undefined.<br>
-&nbsp; &#9679; &nbsp; <tt>physics</tt> - Only for SkinnedMesh. A flag whether turn on physics. Default is true.<br>
-&nbsp; &#9679; &nbsp; <tt>warmup</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 60.<br>
+<pre id="0.2add"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>add - добавить')" onmouseout="hide()">.add</a> ( <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>object</tt> — может быть <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, <a href="cameras.htm#1" onmouseover="show('Camera')" onmouseout="hide()">Camera</a> или <a href="audio.htm#1" onmouseover="show('Audio')" onmouseout="hide()">Audio</a>.</div>
+<div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
+&nbsp; &#9679; &nbsp; <tt>animation</tt> - an AnimationClip or an array of AnimationClip set to object. Только для SkinnedMesh и Camera. Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br>
+&nbsp; &#9679; &nbsp; <tt>physics</tt> - только для SkinnedMesh. A flag whether turn on physics. Значением по умолчанию является <tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>warmup</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Значение по умолчанию равно&nbsp;<tt>60</tt>.<br>
 &nbsp; &#9679; &nbsp; <tt>unitStep</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 1 / 65.<br>
-&nbsp; &#9679; &nbsp; <tt>maxStepNum</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is 3.<br>
+&nbsp; &#9679; &nbsp; <tt>maxStepNum</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Значение по умолчанию равно&nbsp;<tt>3</tt>.<br>
 &nbsp; &#9679; &nbsp; <tt>gravity</tt> - Only for SkinnedMesh and physics is true. Physics parameter. Default is ( 0, - 9.8 * 10, 0 ).<br>
-&nbsp; &#9679; &nbsp; <tt>delayTime</tt> - Only for Audio. Default is 0.0.</div>
+&nbsp; &#9679; &nbsp; <tt>delayTime</tt> - Only for Audio. Значение по умолчанию равно&nbsp;<tt>0.0</tt>.</div>
 Add an SkinnedMesh, Camera, or Audio to helper and setup animation. The anmation durations of added objects are synched. If camera/audio has already been added, it'll be replaced with a new one.<br><br>
 
 <pre id="0.2enable">.enable ( key : string, enabled : Boolean ) : MMDAnimationHelper</pre>

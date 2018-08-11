@@ -234,22 +234,27 @@ function render() {
 или <a href="audio.htm#1" onmouseover="show('Audio')" onmouseout="hide()">Audio</a> и устанавливает анимацию.
 Длительность анимации добавленных объектов синхронизируется. Если объекты камера и/или аудио уже были добавлены, они будут заменены на новые.<br><br>
 
-<pre id="0.2enable">.enable ( key : string, enabled : Boolean ) : MMDAnimationHelper</pre>
-<div class=list><tt>key</tt> — Allowed strings are 'animation', 'ik', 'grant', 'physics', and 'cameraAnimation'.</div>
-<div class=list><tt>enabled</tt> — true is enable, false is disable</div>
-Enable/Disable an animation feature<br><br>
+<pre id="0.2enable"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>enable - включить, разрешить')" onmouseout="hide()">.enable</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('key - ключ')" onmouseout="hide()">key</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включен, разрешен')" onmouseout="hide()">enabled</a></span> )</pre>
+<div class=list><tt>key</tt> — разрешены строковые значения '<tt><span class="lnk" onmouseover="show('animation - анимация')" onmouseout="hide()">animation</span></tt>',
+'<tt><span class="lnk" onmouseover="show('ik - сокращ. от англ. слов inverse kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">ik</span></tt>',
+'<tt><span class="lnk" onmouseover="show('grant')" onmouseout="hide()">grant</span></tt>',
+'<tt><span class="lnk" onmouseover="show('physics - физика, в данном случае - физические параметры')" onmouseout="hide()">physics</span></tt>',
+и '<tt><span class="lnk" onmouseover="show('camera animation - анимация камеры')" onmouseout="hide()">cameraAnimation</span></tt>'.</div>
+<div class=list><tt>enabled</tt> — установка <tt>true</tt> означает включение, <tt>false</tt> - отключение.</div>
+Метод включает/отключает функцию анимации.<br><br>
 
-<pre id="0.2pose">.pose ( mesh : SkinnedMesh, vpd : Object, params : Object ) : MMDAnimationHelper</pre>
-<div class=list><tt>mesh</tt> — SkinnedMesh which changes the posing. It doesn't need to be added to helper.</div>
-<div class=list><tt>vpd</tt> — VPD content obtained by MMDLoader.loadVPD</div>
-<div class=list><tt>params</tt> — (optional)<br>
-&nbsp; &#9679; &nbsp; <tt>resetPose</tt> - значением по умолчанию является <tt>true</tt>.<br>
-&nbsp; &#9679; &nbsp; <tt>ik</tt> - значением по умолчанию является <tt>true</tt>.<br>
-&nbsp; &#9679; &nbsp; <tt>grant</tt> - значением по умолчанию является <tt>true</tt>.</div>
-Changes the posing of SkinnedMesh as VPD content specifies.<br><br>
+<pre id="0.2pose"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>pose - поза')" onmouseout="hide()">.pose</a>( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vpd - ')" onmouseout="hide()">vpd</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, которая изменяет позу. Её не нужно добавлять к вспомогательному элементу.</div>
+<div class=list><tt>vpd</tt> — содержимое VPD, полученное с помощью метода <tt><a href="#3.12" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader.loadVPD</a></tt>.</div>
+<div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset pose - сбросить позу')" onmouseout="hide()">resetPose</a></span></tt> - значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ik - сокращ. от англ. слов inverse kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">ik</a></span></tt> - значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('grant - ')" onmouseout="hide()">grant</a></span></tt> - значением по умолчанию является&nbsp;<tt>true</tt>.</div>
+Метод изменяет позу <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> так, как указано в содержимом VPD.<br><br>
 
-<pre id="0.2remove">.remove ( object : Object3D ) : MMDAnimationHelper</pre>
-<div class=list><tt>object</tt> — SkinnedMesh, Camera, or Audio</div>
+<pre id="0.2remove"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>remove - удалить')" onmouseout="hide()">.remove</a>( object : Object3D )</pre>
+<div class=list><tt>object</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, <a href="cameras.htm#1" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>,
+или <a href="audio.htm#1" onmouseover="show('Audio')" onmouseout="hide()">Audio</a></div>
 Remove an SkinnedMesh, Camera, or Audio from helper.<br><br>
 
 <pre id="0.2update">.update ( delta : Nummber ) : MMDAnimationHelper</pre>
@@ -260,13 +265,13 @@ Advance mixer time and update the animations of objects added to helper </div><b
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDAnimationHelper.js" target="_blank">MMDAnimationHelper.js на github.com</a></div><br><br>
 
 <h3 id="0.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDPhysics</h3>
-A Physics handler for MMD resources.<br>
+Обработчик физических параметров для ресурсов <a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank">MMD</a>.<br>
 MMDPhysics calculates Physics for model loaded by MMDLoader with ammo.js (Bullet-based JavaScript Physics engine).<br><br>
 
 <h4>Пример</h4>
 <pre>var physics;<br>
 // Load MMD resources and instantiate MMDPhysics
-// Load MMD resources and instantiate MMDPhysics
+// загрузка MMD ресурсов и создание экземпляра MMDPhysics
 new THREE.MMDLoader().load(
   'models/mmd/miku.pmd',
   function ( mesh ) {

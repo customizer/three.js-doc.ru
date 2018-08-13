@@ -243,7 +243,7 @@ function render() {
 <div class=list><tt>enabled</tt> — установка <tt>true</tt> означает включение, <tt>false</tt> - отключение.</div>
 Метод включает/отключает функцию анимации.<br><br>
 
-<pre id="0.2pose"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>pose - поза')" onmouseout="hide()">.pose</a>( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vpd - ')" onmouseout="hide()">vpd</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<pre id="0.2pose"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>pose - поза')" onmouseout="hide()">.pose</a>( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vpd - сокращ. от англ. слов vocaloid pose data file - файл<br>данных поз для Vocaloid (использовался в рекламе<br>звукосинтезатора Vocaloid от фирмы Yamaha.)<br>Бинарный файл 3D моделей, используемых<br>MikuMikuDance (MMD), синхронизирует партии танца и ритма;<br>сохраняет позиции костей модели персонажа, задающие его<br>позу; может использоваться в последовательности поз,<br>составляющих анимацию танца (VMD файл).')" onmouseout="hide()">vpd</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
 <div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, которая изменяет позу. Её не нужно добавлять к вспомогательному элементу.</div>
 <div class=list><tt>vpd</tt> — содержимое VPD, полученное с помощью метода <tt><a href="#3.12" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader.loadVPD</a></tt>.</div>
 <div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
@@ -255,18 +255,20 @@ function render() {
 <pre id="0.2remove"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>remove - удалить')" onmouseout="hide()">.remove</a>( object : Object3D )</pre>
 <div class=list><tt>object</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, <a href="cameras.htm#1" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>,
 или <a href="audio.htm#1" onmouseover="show('Audio')" onmouseout="hide()">Audio</a></div>
-Remove an SkinnedMesh, Camera, or Audio from helper.<br><br>
+Метод удаляет из вспомогательного элемента <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, <a href="cameras.htm#1" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>,
+или <a href="audio.htm#1" onmouseover="show('Audio')" onmouseout="hide()">Audio</a>.<br><br>
 
-<pre id="0.2update">.update ( delta : Nummber ) : MMDAnimationHelper</pre>
-<div class=list><tt>delta</tt> — number in second</div>
-Advance mixer time and update the animations of objects added to helper </div><br>
+<pre id="0.2update"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>update - обновить')" onmouseout="hide()">.update</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delta - ')" onmouseout="hide()">delta</a></span> )</pre>
+<div class=list><tt>delta</tt> — число секунд.</div>
+Передвигает вперед время микшера и обновляет анимации объектов, добавленных к вспомогательному элементу.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDAnimationHelper.js" target="_blank">MMDAnimationHelper.js на github.com</a></div><br><br>
 
+
 <h3 id="0.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDPhysics</h3>
 Обработчик физических параметров для ресурсов <a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank">MMD</a>.<br>
-MMDPhysics calculates Physics for model loaded by MMDLoader with ammo.js (Bullet-based JavaScript Physics engine).<br><br>
+MMDPhysics рассчитывает физические параметры для моделей, загруженных при помощи <a href="#3.12" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a> с <a href="https://github.com/kripken/ammo.js/" target="_blank">ammo.js</a> (Bullet-based JavaScript Physics engine).<br><br>
 
 <h4>Пример</h4>
 <pre>var physics;<br>
@@ -290,40 +292,41 @@ function render() {
 <a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>MMDPhysics( mesh : SkinnedMesh, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rigid body params - ')" onmouseout="hide()">rigidBodyParams</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constraint params - ')" onmouseout="hide()">constraintParams</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
-<div class=list><tt>mesh</tt> — SkinnedMesh for which MMDPhysics calculates Physics.</div>
-<div class=list><tt>rigidBodyParams</tt> — An array of Object specifying Rigid Body parameters.</div>
-<div class=list><tt>constraintParams</tt> — (optional) An array of Object specifying Constraint parameters.</div>
-<div class=list><tt>params</tt> — (optional)<br>
-&nbsp; &#9679; &nbsp; <tt>unitStep</tt> - Default is 1 / 65.<br>
-&nbsp; &#9679; &nbsp; <tt>maxStepNum</tt> - Default is 3.<br>
-&nbsp; &#9679; &nbsp; <tt>gravity</tt> - Default is ( 0, - 9.8 * 10, 0 )</div>
+<pre>MMDPhysics( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rigid body param(eter)s - параметры твердого тела')" onmouseout="hide()">rigidBodyParams</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constraint param(eter)s - параметры ограничения')" onmouseout="hide()">constraintParams</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, для которой MMDPhysics рассчитывает физические параметры.</div>
+<div class=list><tt>rigidBodyParams</tt> — массив объектов, определяющий параметры твердого тела.</div>
+<div class=list><tt>constraintParams</tt> — массив объектов, определяющий параметры ограничений. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unit step - единичный шаг')" onmouseout="hide()">unitStep</a></span></tt> - значение по умолчанию равно&nbsp;<tt>1/65</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max step num - сокращ. англ. слов maximum<br>step number - максимальное число шагов')" onmouseout="hide()">maxStepNum</a></span></tt> - значение по умолчанию равно&nbsp;<tt>3</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>gravity - гравитация, сила тяжести')" onmouseout="hide()">gravity</a></tt> - значением по умолчанию является&nbsp;<tt>( 0, - 9.8 * 10, 0 )</tt></div>
 Создает новый MMDPhysics.<br><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
-<pre id="0.3mesh">.mesh : Array</pre>
-SkinnedMesh passed to the constructor.</div><br>
+<pre id="0.3mesh"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mesh - сетка')" onmouseout="hide()">.mesh</a></span></pre>
+<a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, переданная в конструкторе.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="0.3createHelper">.createHelper () : MMDPhysicsHelper</pre>
-Return MMDPhysicsHelper. You can visualize Rigid bodies by adding the helper to scene.<br><br>
+<pre id="0.3createHelper"><a href="#0.3" onmouseover="show('MMDPhysics.<br>create helper - создать вспомогательный элемент')" onmouseout="hide()">.createHelper</a>( )</pre>
+Возвращает MMDPhysicsHelper. Можно показать твердые тела, добавлением вспомогательного элемента на сцену.<br><br>
 
-<pre id="0.3reset">.reset () : CCDIKSolver</pre>
-Resets Rigid bodies transorm to current bone's.<br><br>
+<pre id="0.3reset"><a href="#0.1" onmouseover="show('CCDIKSolver.<br>reset - сбросить')" onmouseout="hide()">.reset</a>( )</pre>
+Метод сбрасывает изменение твердых тел в текущей кости.
+Resets Rigid bodies transform to current bone's.<br><br>
 
-<pre id="0.3setGravity">.setGravity ( gravity : Vector3 ) : CCDIKSolver</pre>
-<div class=list><tt>gravity</tt> — Direction and volume of gravity.</div>
-Set gravity.<br><br>
+<pre id="0.3setGravity"><a href="#0.1" onmouseover="show('CCDIKSolver.<br>set gravity - установить гравитацию')" onmouseout="hide()">.setGravity</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>gravity - гравитация, сила тяжести')" onmouseout="hide()">gravity</a> )</pre>
+<div class=list><tt>gravity</tt> — направление и уровень гравитации.</div>
+Метод устанавливает гравитацию (силу тяжести).<br><br>
 
-<pre id="0.3update">.update ( delta : Number ) : CCDIKSolver</pre>
+<pre id="0.3update"><a href="#0.1" onmouseover="show('CCDIKSolver.<br>update - обновить')" onmouseout="hide()">.update</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delta - ')" onmouseout="hide()">delta</a></span> )</pre>
 <div class=list><tt>delta</tt> — время в секундах.</div>
-Advance Physics calculation and updates bones.<br><br>
+Метод производит предварительный расчет физических параметров и обновление костей.<br><br>
 
-<pre id="0.3warmup">.warmup ( cycles : Integer ) : CCDIKSolver</pre>
+<pre id="0.3warmup"><a href="#0.1" onmouseover="show('CCDIKSolver.<br>warmup - разогрев, разминка')" onmouseout="hide()">.warmup</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cycles - циклы')" onmouseout="hide()">cycles</a></span> )</pre>
 <div class=list><tt>delta</tt> — время в секундах.</div>
-Warm up Rigid bodies. Calculates cycles steps. </div><br>
+Warm up Rigid bodies. Calculates cycles steps.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDPhysics.js" target="_blank">MMDPhysics.js на github.com</a></div><br><br>
@@ -1571,9 +1574,16 @@ Parse a prwm file passed as an ArrayBuffer and directly return an instance of Bu
 
 <span class="right_side"><a href="loaders.htm#12" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
 <h3 id="3.12">MMDLoader</h3>
-Загрузчик для ресурсов в формате <em>MMD</em>.<br>
-MMDLoader creates Three.js Objects from MMD resources as PMD, PMX, VMD, and VPD files. See MMDAnimationHelper for MMD animation handling as IK, Grant, and Physics.<br>
-If you want raw content of MMD resources, use .loadPMD/PMX/VMD/VPD methods.<br><br>
+Загрузчик для ресурсов в формате <em><a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank" onmouseover="show('MMD - сокращ. от англ. слов Miku Miku Dance - ресурсы для<br>бесплатной программы компьютерной анимации, которая<br>позволяет пользователям создавать 3D-анимированные<br>видеоролики, изначально созданная для персонажа Vocaloid<br>Мику Хацунэ. Программа была написана Ю Хигути (HiguchiM).')" onmouseout="hide()">MMD</a></em>. Статья Википедии о <a href="https://ru.wikipedia.org/wiki/MikuMikuDance" target="_blank">MMD - MikuMikuDance</a> на русском языке.<br>
+MMDLoader создает объекты three.js из MMD ресурсов, таких как <span class="lnk" onmouseover="show('Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой анимации танцев, изначально созданной в Японии;<br>содержит 3D сетку для фигуры танцора, которая может быть<br>текстурирована и анимирована с помощью инструментов программы<br>MikuMikuDance; используется для хранения различных моделей<br>фигур танцоров.')" onmouseout="hide()">PMD</span>,
+<span class="lnk" onmouseover="show('Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой анимации танцев, изначально созданной в Японии;<br>содержит 3D сетку для модели, фигур танцоров, персонажей и<br>других сопутствующих деталей, которые могут быть текстуризованы<br>и анимированы с помощью инструментов программы MikuMikuDance;<br>используется для хранения различных моделей фигур танцоров.<br>'
++'PMX файлы имеют морфы (объекты изменения), которые могут<br>изменять различные аспекты внешнего вида модели, такие как<br>цвет компонентов, позиционирование костей модели и прозрачности<br>модели. Морфы в файле PMX являются более продвинутыми, чем<br>в файлах PMD.')" onmouseout="hide()">PMX</span>,
+<span class="lnk" onmouseover="show('vmd - сокращ. от англ. слов vocaloid motion data file - файл<br>данных движения для Vocaloid<br>Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой создания роликов танцевальной анимации; в нем<br>хранятся параметры движений тела танцевальных режимов; могут<br>применяться для одной или более фигур танцоров в трехмерной<br>анимации.<br>Изначально MikuMikuDance (MMD) был разработан в Японии. Он<br>используется в качестве рекламного продукта для звукосинтезатора<br>Vocaloid от фирмы Yamaha.')" onmouseout="hide()">VMD</span>
+и <span class="lnk" onmouseover="show('vpd - сокращ. от англ. слов vocaloid pose data file - файл<br>данных поз для Vocaloid<br>Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>синхронизирует партии танца и ритма; сохраняет позиции<br>костей модели персонажа, задающие его позу; может<br>использоваться в последовательности поз, составляющих<br>анимацию танца (VMD файл).')" onmouseout="hide()">VPD</span> файлы.
+Посмотрите описание MMD-анимации в <a href="#0.2" onmouseover="show('MMDAnimationHelper')" onmouseout="hide()">MMDAnimationHelper</a> с обработкой
+<span class="lnk" onmouseover="show('сокращ. от англ. слов Inverse Kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">IK</span>, Grant,
+и <span class="lnk" onmouseover="show('Physics - физика, т.е. физические параметры')" onmouseout="hide()">Physics</span>.<br>
+Если требуются необработанное содержимое MMD ресурсов, воспользуйтесь методами <tt>.loadPMD/PMX/VMD/VPD</tt>.<br><br>
 <h4>Пример</h4>
 <pre>// Instantiate a loader (создание экземпляра загрузчика)
 var loader = new THREE.MMDLoader();<br>

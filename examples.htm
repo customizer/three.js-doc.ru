@@ -38,7 +38,8 @@
 <div class=blockindent><a href="#4">Объекты</a>
 <div class=list><a href="#4.1">LensFlare</a> -  имитация блика объектива камеры</div></div>
 <div class=blockindent><a href="#5">Экспортеры</a>
-<div class=list><a href="#5.1">GLTFExporter</a> - экспорт ресурсов в формате  glTF 2.0</div></div>
+<div class=list><a href="#5.1">GLTFExporter</a> - экспорт ресурсов в формате  glTF 2.0</div>
+<div class=list><a href="#5.2">PLYExporter</a> - экспорт ресурсов в формате  PLY</div></div>
 <div class=blockindent><a href="#6">Плагины</a>
 <div class=list><a href="#6.1">LookupTable</a> - таблица поиска для карт цвета</div>
 <div class=list><a href="#6.2">SpriteCanvasMaterial</a> - материал для спрайтов на двумерном <tt>canvas</tt></div></div>
@@ -267,8 +268,8 @@ function render() {
 
 
 <h3 id="0.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDPhysics</h3>
-Обработчик физических параметров для ресурсов <a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank">MMD</a>.<br>
-MMDPhysics рассчитывает физические параметры для моделей, загруженных при помощи <a href="#3.12" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a> с <a href="https://github.com/kripken/ammo.js/" target="_blank">ammo.js</a> (Bullet-based JavaScript Physics engine).<br><br>
+Обработчик физических параметров для ресурсов <em><a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank">MMD</a></em>.<br>
+MMDPhysics рассчитывает физические параметры для моделей, загруженных при помощи <a href="#3.12" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a> с <a href="https://github.com/kripken/ammo.js/" target="_blank">ammo.js</a> (физический движок JavaScript на основе <a href="https://pybullet.org/wordpress/" target="_blank" onmouseover="show('Bullet Physics - профессиональное обнаружение столкновений<br>с открытым исходным кодом, библиотека динамики жестких<br>и гибких тел, написанная на портативном C++. Библиотека<br>предназначена в основном для использования в играх,<br>визуальных эффектах и роботизированном моделировании.')" onmouseout="hide()">Bullet</a>).<br><br>
 
 <h4>Пример</h4>
 <pre>var physics;<br>
@@ -294,7 +295,7 @@ function render() {
 <h4>Конструктор</h4>
 <pre>MMDPhysics( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rigid body param(eter)s - параметры твердого тела')" onmouseout="hide()">rigidBodyParams</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constraint param(eter)s - параметры ограничения')" onmouseout="hide()">constraintParams</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
 <div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, для которой MMDPhysics рассчитывает физические параметры.</div>
-<div class=list><tt>rigidBodyParams</tt> — массив объектов, определяющий параметры твердого тела.</div>
+<div class=list><tt>rigidBodyParams</tt> — массив объектов, определяющий параметры жесткого тела.</div>
 <div class=list><tt>constraintParams</tt> — массив объектов, определяющий параметры ограничений. Дополнительный, необязательный аргумент.</div>
 <div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unit step - единичный шаг')" onmouseout="hide()">unitStep</a></span></tt> - значение по умолчанию равно&nbsp;<tt>1/65</tt>.<br>
@@ -310,11 +311,10 @@ function render() {
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="0.3createHelper"><a href="#0.3" onmouseover="show('MMDPhysics.<br>create helper - создать вспомогательный элемент')" onmouseout="hide()">.createHelper</a>( )</pre>
-Возвращает MMDPhysicsHelper. Можно показать твердые тела, добавлением вспомогательного элемента на сцену.<br><br>
+Возвращает MMDPhysicsHelper. Можно показать жесткие тела, добавлением вспомогательного элемента на сцену.<br><br>
 
 <pre id="0.3reset"><a href="#0.1" onmouseover="show('CCDIKSolver.<br>reset - сбросить')" onmouseout="hide()">.reset</a>( )</pre>
-Метод сбрасывает изменение твердых тел в текущей кости.
-Resets Rigid bodies transform to current bone's.<br><br>
+Метод сбрасывает изменение жестких тел в текущей кости.<br><br>
 
 <pre id="0.3setGravity"><a href="#0.1" onmouseover="show('CCDIKSolver.<br>set gravity - установить гравитацию')" onmouseout="hide()">.setGravity</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>gravity - гравитация, сила тяжести')" onmouseout="hide()">gravity</a> )</pre>
 <div class=list><tt>gravity</tt> — направление и уровень гравитации.</div>
@@ -1765,6 +1765,40 @@ Generates a .gltf (JSON) or .glb (binary) output from the input (Scene or Object
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/exporters/GLTFExporter.js" target="_blank">GLTFExporter.js на github.com</a></div><br><br>
+
+
+<h3 id="5.2">PLYExporter</h3>
+Экспортер данных в формате <em>PLY</em>.<br>
+<a href="https://ru.wikipedia.org/wiki/PLY" target="_blank">PLY</a> (известный также как Polygon File Format и Stanford Triangle Format) - это формат файлов для эффективной передачи и загрузки простых статичных трехмерных данных в уплотненном формате, например 3D сканеров.
+Формат хранения данных поддерживает относительно простое описание одиночного объекта как списка условно плоских полигонов.
+Поддерживаются оба варианта формата: как ASCII, так и бинарная версия. Файл PLY может хранить позиции вершин, цвета, нормали и UV координаты. Текстуры и ссылки на текстуры не сохраняются.<br><br>
+
+<h4>Пример</h4>
+<pre>// Instantiate an exporter (создание экземпляра экспортера)
+var exporter = new THREE.PLYExporter();<br>
+// Parse the input and generate the ply output
+// анализ входных данных и генерация выходных данных в формате ply
+var data = exporter.parse( scene, options );
+downloadFile(data);</pre><br>
+
+<h4>Конструктор</h4>
+<pre>PLYExporter()</pre>
+Создает новый PLYExporter.<br><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="5.2parse">.parse ( input : Object3D, onDone : Function, options : Object ) : null</pre>
+
+<div class=list><tt>input</tt> — Object3D</div>
+<div class=list><tt>onCompleted</tt> — Will be called when the export completes. The argument will be the generated ply ascii or binary ArrayBuffer.</div>
+<div class=list><tt>options</tt> — Export options<br>
+&nbsp; &#9679; &nbsp; <tt>excludeAttributes</tt> - array. Which properties to explicitly exclude from the exported PLY file. Valid values are 'color', 'normal', 'uv', and 'index'. If triangle indices are excluded, then a point cloud is exported. Значением по умолчанию является пустой массив.<br>
+&nbsp; &#9679; &nbsp; <tt>binary</tt> - bool. Export in binary format, returning an ArrayBuffer. Значением по умолчанию является&nbsp;<tt>false</tt>.</div>
+
+Generates ply file data as string or ArrayBuffer (ascii or binary) output from the input object. The data that is returned is the same that is passed into the "onCompleted" function. If the object is composed of multiple children and geometry, they are merged into a single mesh in the file.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/exporters/PLYExporter.js" target="_blank">PLYExporter.js на github.com</a></div><br><br>
 
 
 <h2 id="6">Плагины</h2><br>

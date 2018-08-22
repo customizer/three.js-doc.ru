@@ -104,9 +104,9 @@ function render() {
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('target - цель')" onmouseout="hide()">target</a></span></tt> — целевая (target) кость.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('effector - эффектор, исполнительный элемент, рабочий орган')" onmouseout="hide()">effector</a></span></tt> — эффекторная кость.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('links - связки, соединения')" onmouseout="hide()">links</a></span></tt>
-— массив [page: Object] specifying link bones.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt> — Link bone.<br>
-&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>limitation - ограничение')" onmouseout="hide()">limitation</a></tt> — Rotation axis. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
+— массив объектов, определяющий кости-связки.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt> — Связывающая кость (кость-связка).<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>limitation - ограничение')" onmouseout="hide()">limitation</a></tt> — ось вращения. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
 &nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>rotation min - минимум вращения')" onmouseout="hide()">rotationMin</a></tt> — ограничение вращения по минимуму. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
 &nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="math.htm#19" onmouseover="show('Vector3.<br>rotation max - максимум вращения')" onmouseout="hide()">rotationMax</a></tt> — ограничение вращения по максимуму. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
 &nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span></tt>
@@ -293,7 +293,7 @@ function render() {
 <a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>MMDPhysics( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rigid body param(eter)s - параметры твердого тела')" onmouseout="hide()">rigidBodyParams</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constraint param(eter)s - параметры ограничения')" onmouseout="hide()">constraintParams</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<pre>MMDPhysics( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rigid body param(eter)s - параметры жесткого тела')" onmouseout="hide()">rigidBodyParams</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constraint param(eter)s - параметры ограничения')" onmouseout="hide()">constraintParams</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
 <div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, для которой MMDPhysics рассчитывает физические параметры.</div>
 <div class=list><tt>rigidBodyParams</tt> — массив объектов, определяющий параметры жесткого тела.</div>
 <div class=list><tt>constraintParams</tt> — массив объектов, определяющий параметры ограничений. Дополнительный, необязательный аргумент.</div>
@@ -391,7 +391,7 @@ DOM элемент HTML, используется для прослушиван�
 
 <pre id="1enableDamping"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable damping - включить затухание')" onmouseout="hide()">.enableDamping</a></span></pre>
 Установите значение этого свойства как <tt>true</tt> для включения затухания (инерции), которое может быть использовано чтобы придать ощущение веса элементам управления. Значением по умолчанию является <tt>false</tt>.<br>
-Обратите внимание, если данное свойство включено (т.е. <tt>true</tt>), в каждом цикле анимации требуется вызывать <a href="#1update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update( )</a>.<br><br>
+Обратите внимание, если данное свойство включено (т.е. <tt>true</tt>), в каждом цикле анимации требуется вызывать <tt><a href="#1update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update( )</a></tt>.<br><br>
 
 <pre id="1enableKeys"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable keys - включить клавиши<br>(в смысле - отслеживать нажатия<br>клавиш клавиатуры)')" onmouseout="hide()">.enableKeys</a></span></pre>
 Включает или отключает использование управления от клавиатуры.<br><br>
@@ -414,40 +414,42 @@ DOM элемент HTML, используется для прослушиван�
 <pre id="1keys"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('keys - ключи, клавиши, кнопки')" onmouseout="hide()">.keys</a></span></pre>
 Этот объект содержит ссылки на коды клавиш, используемых для управления панорамированием камеры.
 <pre>controls.keys = {
-  LEFT: 37, // left arrow (стрелка влево)
-  UP: 38, // up arrow (стрелка вверх)
+  LEFT: 37,  // left arrow (стрелка влево)
+  UP: 38,    // up arrow (стрелка вверх)
   RIGHT: 39, // right arrow (стрелка вправо)
   BOTTOM: 40 // down arrow (стрелка вниз)
 }</pre>
 Вот <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode" target="_blank">полный список кодов нажатий клавиш клавиатуры</a>.<br><br>
 
 <pre id="1maxAzimuthAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max azimuth angle - максимальный азимутальный угол')" onmouseout="hide()">.maxAzimuthAngle</a></span></pre>
-Свойство определяет, насколько велика может быть орбита по горизонтали, верхний предел. Возможный диапазон от <tt>- Math.PI</tt> до <tt>Math.PI</tt> (или <tt>Infinity</tt> для снятия ограничений). Значением по умолчанию является <tt>Infinity</tt>.<br><br>
+Свойство определяет, насколько велика может быть орбита по горизонтали, верхний предел. Возможный диапазон от <tt>-Math.PI</tt> до <tt>Math.PI</tt> (или <tt>Infinity</tt> при отсутствии ограничений). Значением по умолчанию является <tt>Infinity</tt> (бесконечность).<br><br>
 
 <pre id="1maxDistance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max distance - максимальное расстояние')" onmouseout="hide()">.maxDistance</a></span></pre>
 Свойство определяет, насколько далеко может отъехать камера (только для <a href="cameras.htm#4" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камеры с перспективной проекцией</a>).
 Значением по умолчанию является <tt>Infinity</tt> (бесконечность).<br><br>
 
 <pre id="1maxPolarAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max polar angle - максимальный полярный угол')" onmouseout="hide()">.maxPolarAngle</a></span></pre>
-Свойство определяет, насколько велика может быть орбита по вертикали, верхний предел. Возможный диапазон от <tt>0</tt> до <tt>Math.PI</tt>, в радианах.
+Свойство определяет, насколько велика может быть орбита по вертикали, верхний предел. Возможный диапазон от&nbsp;<tt>0</tt> до&nbsp;<tt>Math.PI</tt>, в радианах.
 Значением по умолчанию является <tt>Math.PI</tt>.<br><br>
 
 <pre id="1maxZoom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max zoom - максимальное увеличение')" onmouseout="hide()">.maxZoom</a></span></pre>
-How far you can zoom out (только для <a href="cameras.htm#3" onmouseover="show('OrthographicCamera')" onmouseout="hide()">камеры с ортографической проекцией</a>).
-Значением по умолчанию является <tt>Infinity</tt> (бесконечность).<br><br>
+Свойство определяет, насколько можно уменьшить масштаб (только для <a href="cameras.htm#3" onmouseover="show('OrthographicCamera')" onmouseout="hide()">камеры с ортографической проекцией</a>).
+Значением по умолчанию является&nbsp;<tt>Infinity</tt> (бесконечность).<br><br>
 
 <pre id="1minAzimuthAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min azimuth angle - минимальный азимутальный угол')" onmouseout="hide()">.minAzimuthAngle</a></span></pre>
-How far you can orbit horizontally, lower limit. Range is - Math.PI to Math.PI ( or - Infinity for no limit ) and default is - Infinity;<br><br>
+Свойство определяет нижний предел ограничения орбиты по горизонтали (т.е. минимальный угол поворота по горизонтали).
+Диапазон значений от&nbsp;<tt>-Math.PI</tt> до&nbsp;<tt>Math.PI</tt> (или <tt>-Infinity</tt> при отсутствии ограничений). Значением по умолчанию является&nbsp;<tt>-Infinity</tt> (минус бесконечность).<br><br>
 
 <pre id="1minDistance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min distance - минимальное расстояние')" onmouseout="hide()">.minDistance</a></span></pre>
-How far you can dolly in (только для <a href="cameras.htm#4" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камеры с перспективной проекцией</a>). Значение по умолчанию равно <tt>0</tt>.<br><br>
+Свойство определяет, как близко может наехать камера (только для <a href="cameras.htm#4" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камеры с перспективной проекцией</a>). Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
 
 <pre id="1minPolarAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min polar angle - минимальный полярный угол')" onmouseout="hide()">.minPolarAngle</a></span></pre>
-How far you can orbit vertically, lower limit. Range is 0 to Math.PI radians.
-Значение по умолчанию равно <tt>0</tt>.<br><br>
+Свойство определяет нижний предел ограничения орбиты по вертикали (т.е. минимальный угол поворота по вертикали).
+Диапазон значений в радианах от&nbsp;<tt>0</tt> до&nbsp;<tt>Math.PI</tt>. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
 
 <pre id="1minZoom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min zoom - минимальное увеличение')" onmouseout="hide()">.minZoom</a></span></pre>
-How far you can zoom in (только для <a href="cameras.htm#3" onmouseover="show('OrthographicCamera')" onmouseout="hide()">камеры с ортографической проекцией</a>). Значение по умолчанию равно <tt>0</tt>.<br><br>
+Свойство определяет, насколько можно увеличить масштаб (только для <a href="cameras.htm#3" onmouseover="show('OrthographicCamera')" onmouseout="hide()">камеры с ортографической проекцией</a>).
+Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
 
 <pre id="1mouseButtons"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mouse buttons - кнопки мышки')" onmouseout="hide()">.mouseButtons</a></span></pre>
 Этот объект содержит ссылки на кнопки мышки, используемые для управления камерой.
@@ -460,25 +462,24 @@ How far you can zoom in (только для <a href="cameras.htm#3" onmouseover
 <pre id="1object"><a href="cameras.htm#1" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">.object</a></pre>
 Камера, которой управляет контрол.<br><br>
 
-<pre id="1panningMode"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('panning mode - режим панорамирования')" onmouseout="hide()">.panningMode</a></span></pre>
-Режим панорамирования. Определяет, как изменяется позиция камеры при панорамировании.
-Возможными вариантами является THREE.ScreenSpacePanning, при котором камера панорамирует в экранном пространстве,
-и THREE.HorizontalPanning, при котором камера панорамирует в плоскости, ортогональной (перпендикулярной) направлению вверх камеры.
-Значением по умолчанию является THREE.ScreenSpacePanning.<br><br>
-
 <pre id="1panSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pan speed - скорость панорамирования')" onmouseout="hide()">.panSpeed</a></span></pre>
-Скорость панорамирования. Значение по умолчанию равно <tt>1</tt>.<br><br>
+Скорость панорамирования. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
 
 <pre id="1position0"><a href="math.htm#19" onmouseover="show('Vector3.<br>position 0 - позиция 0')" onmouseout="hide()">.position0</a></pre>
 Данное свойство используется внутри контрола методами <tt><a href="#1saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>
-и <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>reset.<br><br>
+и <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>.<br><br>
 
 <pre id="1rotateSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotate speed - скорость поворота')" onmouseout="hide()">.rotateSpeed</a></span></pre>
-Скорость поворота. Значение по умолчанию равно <tt>1</tt>.<br><br>
+Скорость поворота. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="1screenSpacePanning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('screen space panning - панорамирование пространства экрана')" onmouseout="hide()">.screenSpacePanning</a></span></pre>
+Свойство определяет, как позиция камеры изменяется при панорамировании.
+Если установлено значение&nbsp;<tt>true</tt>, панорамирование происходит в пространстве экрана. В противном случае, камера поворачивается в плоскости ортогональной (перпендикулярной) к направлению камеры вверх.
+Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="1target0"><a href="math.htm#19" onmouseover="show('Vector3.<br>target 0 - цель 0')" onmouseout="hide()">.target0</a></pre>
 Данное свойство используется внутри контрола методами <tt><a href="#1saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>
-и <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>reset.<br><br>
+и <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>.<br><br>
 
 <pre id="1target"><a href="math.htm#19" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">.target</a></pre>
 Точка фокуса элемента управления, вокруг которой вращается <a href="#1object" onmouseover="show('OrbitControls.object')" onmouseout="hide()">камера</a>.
@@ -486,10 +487,10 @@ How far you can zoom in (только для <a href="cameras.htm#3" onmouseover
 
 <pre id="1zoom0"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom 0 - масштабирование 0')" onmouseout="hide()">.zoom0</a></span></pre>
 Данное свойство используется внутри контрола методами <tt><a href="#1saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>
-и <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>reset.<br><br>
+и <tt><a href="#1reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>.<br><br>
 
 <pre id="1zoomSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom speed - скорость масштабирования')" onmouseout="hide()">.zoomSpeed</a></span></pre>
-Скорость масштабирования / наезда - отъезда камеры. Значение по умолчанию равно <tt>1</tt>.</div><br>
+Скорость масштабирования / наезда - отъезда камеры. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
@@ -565,8 +566,7 @@ scene.add( mesh );</pre><br>
 
 <span class="right_side"><a href="core.htm#2" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
 <h3 id="2.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DecalGeometry</h3>
-DecalGeometry можно использовать для создания сетки (mesh) с <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%B0%D0%BB%D1%8C" target="_blank">декалью</a>, которая служит различным видам целей, например добавление уникальных элементов к моделям, выполнение динамически видимых изменений окружающей среды или облицовка стыков.
-performing dynamic visual environmental changes or covering seams.<br><br>
+DecalGeometry можно использовать для создания сетки (mesh) с <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%B0%D0%BB%D1%8C" target="_blank">декалью</a>, которая служит различным видам целей, например добавление уникальных элементов к моделям, выполнение динамически видимых изменений окружающей среды или облицовка стыков.<br><br>
 
 <h4>Пример</h4>
 <pre>var geometry =  new THREE.DecalGeometry( mesh, position, orientation, size );
@@ -579,9 +579,9 @@ scene.add( mesh );</pre>
 <h4>Конструктор</h4>
 <pre>DecalGeometry( <a href="objects.htm#7" onmouseover="show('Mesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>position - позиция')" onmouseout="hide()">position</a>, <a href="math.htm#5" onmouseover="show('Euler.<br>orientation - ориентация, направление')" onmouseout="hide()">orientation</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>size - размер')" onmouseout="hide()">size</a> )</pre>
 <div class=list><tt>mesh</tt> — любой объект сетка (mesh).</div>
-<div class=list><tt>position</tt> — позиция Position of the decal projector.</div>
-<div class=list><tt>orientation</tt> — ориентация Orientation of the decal projector.</div>
-<div class=list><tt>size</tt> — размер Size of the decal projector.</div><br>
+<div class=list><tt>position</tt> — позиция проекора декали.</div>
+<div class=list><tt>orientation</tt> — ориентация проекора декали.</div>
+<div class=list><tt>size</tt> — размер проекора декали.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/DecalGeometry.js" target="_blank">DecalGeometry.js на github.com</a></div><br><br>
@@ -706,6 +706,16 @@ GLTFLoader полагается на <a href="https://developer.mozilla.org/ru/d
 Для использования загрузчика в IE11, нужно подключить полифилл предоставляющий подмену Promise (обещания).<br>
 Вот <a href="https://learn.javascript.ru/promise" target="_blank">описание Promise на javascript.ru</a>.<br><br>
 
+<h4>Нестандартные расширения</h4>
+Метаданные из неизвестных расширений сохраняются в экземплярах Object3D, Scene и Material как “<tt>.userData.gltfExtensions</tt>” или прилагаются к ответу объекта “<tt>gltf</tt>”. Вот пример:
+<pre>loader.load('foo.gltf', function ( gltf ) {
+  var scene = gltf.scene;
+  var mesh = scene.children[ 3 ];
+  var fooExtension = mesh.userData.gltfExtensions.EXT_foo;<br>
+  gltf.parser.getDependency( 'bufferView', fooExtension.bufferView )
+		.then( function ( fooBuffer ) { ... } );
+} );</pre><br>
+
 <h4>Конструктор</h4>
 <pre>GLTFLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
 <div class=list><tt><a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a></tt>
@@ -745,7 +755,8 @@ GLTFLoader полагается на <a href="https://developer.mozilla.org/ru/d
 <div class=list><tt>path</tt> — базовый путь, по которому находятся последующие glTF-ресурсы, такие как текстуры и файлы двоичных данных (<tt>.bin</tt>).</div>
 <div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершению синтаксического анализа.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки во время синтаксического анализа (парсинга), дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
-Parse a glTF-based ArrayBuffer or JSON String and fire onLoad callback when complete. The argument to onLoad will be an object that contains loaded parts: .scene, .scenes, .cameras, and .animations.</div><br>
+Метод проводит анализ ArrayBuffer на основе glTF или строки в формате JSON и по завершении вызывает функцию обратного вызова, переданную в аргументе <tt>onLoad</tt>.
+Аргументом для этой функции будет объект, который содержит загруженные части: <tt>scene</tt>, <tt>scenes</tt>, <tt>cameras</tt> и <tt>animations</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/GLTFLoader.js" target="_blank">GLTFLoader.js на github.com</a></div><br><br>
@@ -1787,13 +1798,15 @@ downloadFile(data);</pre><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="5.2parse">.parse ( input : Object3D, onDone : Function, options : Object ) : null</pre>
+<pre id="5.2parse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( input : Object3D, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on done - ')" onmouseout="hide()">onDone</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - ')" onmouseout="hide()">options</a></span> )</pre>
 
 <div class=list><tt>input</tt> — Object3D</div>
 <div class=list><tt>onCompleted</tt> — Will be called when the export completes. The argument will be the generated ply ascii or binary ArrayBuffer.</div>
-<div class=list><tt>options</tt> — Export options<br>
-&nbsp; &#9679; &nbsp; <tt>excludeAttributes</tt> - array. Which properties to explicitly exclude from the exported PLY file. Valid values are 'color', 'normal', 'uv', and 'index'. If triangle indices are excluded, then a point cloud is exported. Значением по умолчанию является пустой массив.<br>
-&nbsp; &#9679; &nbsp; <tt>binary</tt> - bool. Export in binary format, returning an ArrayBuffer. Значением по умолчанию является&nbsp;<tt>false</tt>.</div>
+<div class=list><tt>options</tt> — параметры экспорта.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('exclude attributes - исключить атрибуты')" onmouseout="hide()">excludeAttributes</a></span></tt> - массив.
+Определяет, какие свойства следует явно исключить из экспортированного PLY-файла. Действующими значениями являются '<tt>color</tt>', '<tt>normal</tt>', '<tt>uv</tt>', и '<tt>index</tt>'.
+Если исключаются индексы треугольников, то экспортируется множество (облако) точек. Значением по умолчанию является пустой массив.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('binary - бинарный, двоичный')" onmouseout="hide()">binary</a></span></tt> - логическое значение. Определяет, экспортировать ли в бинарном формате, возвращая ArrayBuffer. Значением по умолчанию является&nbsp;<tt>false</tt>.</div>
 
 Generates ply file data as string or ArrayBuffer (ascii or binary) output from the input object. The data that is returned is the same that is passed into the "onCompleted" function. If the object is composed of multiple children and geometry, they are merged into a single mesh in the file.</div><br>
 

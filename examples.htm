@@ -763,8 +763,7 @@ GLTFLoader полагается на <a href="https://developer.mozilla.org/ru/d
 
 
 <h3 id="3.3">MTLLoader</h3>
-Загрузчик для загрузки ресурсов в формате <em>.mtl</em>, который используется загрузчиками
-<a href="#3.4" onmouseover="show('OBJLoader')" onmouseout="hide()">OBJLoader</a> и <a href="#" onmouseover="show('UTF8Loader')" onmouseout="hide()">UTF8Loader</a>.
+Загрузчик для загрузки ресурсов в формате <em>.mtl</em>, который используется загрузчиком <a href="#3.4" onmouseover="show('OBJLoader')" onmouseout="hide()">OBJLoader</a>.
 Формат MTL (Material Template Library, т.е. библиотека шаблонов материала) или файловый формат <tt>.MTL</tt> - это формат, сопутствующий файлам <a href="https://ru.wikipedia.org/wiki/Obj" target="_blank">формата <tt>.OBJ</tt></a>,
 который описывает свойства поверхности затенения (материала) объектов в одном или нескольких файлах <tt>.OBJ</tt>.<br><br>
 
@@ -908,33 +907,32 @@ var callbackOnLoad = function ( event ) {
 // синхронная загрузка ресурса из предоставленного URL-адреса
 loader.load( 'obj/female02/female02.obj', callbackOnLoad, null, null, null, false );</pre>
 <h5>Другие примеры:</h5>
-<pre><a href="https://threejs.org/examples/#webgl_loader_obj2" target="_blank">webgl / loader / obj2</a> - простой пример
-Example for multiple use-cases (parse, load and run with instructions (sync and async)
-<a href="https://threejs.org/examples/#webgl_loader_obj2_options" target="_blank">webgl / loader / obj2 / options</a>
-Advanced example using LoaderSupport.LoaderWorkerDirector for orchestration of multiple workers.
-<a href="https://threejs.org/examples/#webgl_loader_obj2_run_director" target="_blank">webgl / loader / obj2 / run / director</a></pre><br>
+<pre><a href="https://threejs.org/examples/#webgl_loader_obj2" target="_blank">webgl/loader/obj2</a> - простой пример
+<a href="https://threejs.org/examples/#webgl_loader_obj2_options" target="_blank">webgl/loader/obj2/options</a> - пример нескольких вариантов использования (разбор, загрузка
+                            и запуск с инструкциями (сихронно и асинхронно))
+<a href="https://threejs.org/examples/#webgl_loader_obj2_run_director" target="_blank">webgl/loader/obj2/run/director</a> - расширенный пример с использованием <a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector')" onmouseout="hide()">WorkerDirector</a>
+                                 для организации нескольких обработчиков</pre><br>
 
 <h4>Конструктор</h4>
 <pre>OBJLoader2( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a>, <a href="#3.6.5" onmouseover="show('LoaderSupport.WorkerDirector.<br>logger - регистратор, логгер, самописец')" onmouseout="hide()">logger</a> )</pre>
 <div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
 Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
 <div class=list><tt>logger</tt> - используемый регистратор.</div>
-
-Use OBJLoader2 to load OBJ data from files or to parse OBJ data from arraybuffer or text.<br><br>
+Используйте OBJLoader2 для загрузки данных в формате OBJ из файлов или для синтаксического анализа OBJ-данных из текста или буферного массива.<br><br>
 
 <h4>Свойства</h4>
 <br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="3.5parse">.parse ( {content : arraybuffer|content : String] ) : Object3D</pre>
-<div class=list>[content|content] OBJ data as Uint8Array or String</div>
-Parses OBJ data synchronously from arraybuffer or string and returns the loaderRoorNode.<br><br>
+<pre id="3.5parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( {<span onclick="showClick('тип значения - буферный массив Uint8Array,<br>из 8-разрядных целых чисел без знака')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('content - содержимое')" onmouseout="hide()">content</a></span>|<span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('content - содержимое')" onmouseout="hide()">content</a></span>] )</pre>
+<div class=list><tt>[content|content]</tt> - данные в формате OBJ в виде <span class="lnk" onmouseover="show('Uint8Array - массив из 8-разрядных целых чисел без знака')" onmouseout="hide()">Uint8Array</span> или <span class="lnk" onmouseover="show('String - строковое значение')" onmouseout="hide()">String</span>.</div>
+Метод проводит синхронный синтаксический анализ данных в формате OBJ из буферного массива или строкового значения и возвращает loaderRoorNode.<br><br>
 
-<pre id="3.5parseAsync">.parseAsync ( content : arraybuffer, onLoad : Function ) : Object3D</pre>
-<div class=list>content - OBJ data as Uint8Array</div>
-<div class=list>onLoad - Called after worker successfully completed loading</div>
-Parses OBJ content asynchronously from arraybuffer.<br><br>
+<pre id="3.5parseAsync"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse async(hronously) - асинхронный разбор,<br>асинхронный синтаксический анализ')" onmouseout="hide()">.parseAsync</a>( <span onclick="showClick('тип значения - буферный массив Uint8Array,<br>из 8-разрядных целых чисел без знака')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('content - содержимое')" onmouseout="hide()">content</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span> )</pre>
+<div class=list><tt>content</tt> - данные в формате OBJ в виде <span class="lnk" onmouseover="show('Uint8Array - массив из 8-разрядных целых чисел без знака')" onmouseout="hide()">Uint8Array</span></div>
+<div class=list><tt>onLoad</tt> - функция, которая будет вызвана после успешного завершения загрузки обработчиком.</div>
+Метод проводит асинхронный синтаксический анализ данных в формате OBJ из буферного массива.<br><br>
 
 <pre id="3.5load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on mesh alter - на изменение сетки (mesh)')" onmouseout="hide()">onMeshAlter</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use async - использовать асинхронную (загрузку)')" onmouseout="hide()">useAsync</a></span>  )</pre>
 <div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес загружаемого файла (обязательный аргумент).</div>
@@ -944,19 +942,20 @@ Parses OBJ content asynchronously from arraybuffer.<br><br>
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
-<div class=list><tt>onMeshAlter</tt> - (optional) A function to be called after a new mesh raw data becomes available for alteration.</div>
-<div class=list><tt>useAsync</tt> - (optional) If true, uses async loading with worker, if false loads data synchronously.</div>
+<div class=list><tt>onMeshAlter</tt> - функция, которая будет вызвана после того, как новые исходные данные сетки станут доступными для изменения. Дополнительный, необязательный параметр.</div>
+<div class=list><tt>useAsync</tt> - Если установить значение <tt>true</tt>, будет использоваться асинхронная загрузка с обработчиком (worker), если установить <tt>false</tt>, то загрузка данных будет синхронной.
+Дополнительный, необязательный параметр.</div>
 Use this convenient method to load a file at the given URL. By default the fileLoader uses an ArrayBuffer.<br><br>
 
-<pre id="3.5run">.run ( params : LoaderSupport.PrepData, workerSupportExternal : LoaderSupport.WorkerSupport ) : null</pre>
-<div class=list>params - prepData All parameters and resources required for execution</div>
-<div class=list>workerSupportExternal - Use pre-existing WorkerSupport</div>
-Run the loader according the provided instructions.<br><br>
+<pre id="3.5run"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('run - бежать, пускать')" onmouseout="hide()">.run</a></span>( <a href="#3.6.7" onmouseover="show('LoaderSupport.PrepData.<br>param(eter)s - параметры')" onmouseout="hide()">params</a>, <a href="#3.6.3" onmouseover="show('LoaderSupport.WorkerSupport')" onmouseout="hide()">workerSupportExternal</a> )</pre>
+<div class=list><tt>params</tt> - prepData All parameters and resources required for execution</div>
+<div class=list><tt>workerSupportExternal</tt> - Use pre-existing WorkerSupport</div>
+Метод запускает загрузчик в соответствии с предоставленными инструкциями.<br><br>
 
 <pre id="3.5setLogging"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set logging - установить ведение журнала (логирование)')" onmouseout="hide()">.setLogging</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('debug - отладка')" onmouseout="hide()">debug</a></span> )</pre>
-<div class=list><tt>enabled</tt> True or false.</div>
-<div class=list><tt>debug</tt> True or false.</div>
-Enable or disable logging in general (except warn and error), plus enable or disable debug logging.<br><br>
+<div class=list><tt>enabled</tt> - логическое значение (<tt>true</tt> или <tt>false</tt>).</div>
+<div class=list><tt>debug</tt> - логическое значение (<tt>true</tt> или <tt>false</tt>).</div>
+Метод включает или отключает логирование (ведение журнала) в целом (за исключением предупреждений и ошибок), а также включает или отключает ведение журнала отладки.<br><br>
 
 <pre id="3.5setModelName"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set model name - установить название модели')" onmouseout="hide()">.setModelName</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('model name - название модели')" onmouseout="hide()">modelName</a></span> )</pre>
 <div class=list><tt>modelName</tt></div>
@@ -964,17 +963,17 @@ Enable or disable logging in general (except warn and error), plus enable or dis
 
 <pre id="3.5setPath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set path - установить путь')" onmouseout="hide()">.setPath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь, контур')" onmouseout="hide()">path</a></span> )</pre>
 <div class=list><tt>path</tt> - URL-адрес.</div>
-The URL of the base path.<br><br>
+Метод устанавливает URL-адрес основного пути.<br><br>
 
-<pre id="3.5setStreamMeshesTo">.setStreamMeshesTo ( streamMeshesTo : Object3D ) : null</pre>
-<div class=list>streamMeshesTo - Object already attached to scenegraph where new meshes will be attached to</div>
-Set the node where the loaded objects will be attached directly.<br><br>
+<pre id="3.5setStreamMeshesTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set stream meshes to - установить поток сеток к')" onmouseout="hide()">.setStreamMeshesTo</a></span>( <a href="core.htm#14" onmouseover="show('Object3D.<br>stream meshes to - поток сеток к')" onmouseout="hide()">streamMeshesTo</a> )</pre>
+<div class=list><tt>streamMeshesTo</tt> - объект, уже закрепленный к сцене, к которому будут присоединяться новые сетки.</div>
+Метод устанавливает узел к которому непосредственно будут закреплены объекты.<br><br>
 
-<pre id="3.5setMaterials">.setMaterials ( Array of materials : Material ) : null</pre>
-<div class=list>Array of materials - Array of Materials</div>
+<pre id="3.5setMaterials"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set materials - установить материалы')" onmouseout="hide()">.setMaterials</a></span>( Array of materials : Material )</pre>
+<div class=list><tt>Array of materials</tt> - массив материалов.</div>
 Set materials loaded by MTLLoader or any other supplier of an Array of Materials.<br><br>
 
-<pre id="3.5setUseIndices">.setUseIndices ( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use indices - использовать индексы')" onmouseout="hide()">useIndices</a></span> ) : null</pre>
+<pre id="3.5setUseIndices"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set use indices - установить использование индексов')" onmouseout="hide()">.setUseIndices</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use indices - использовать индексы')" onmouseout="hide()">useIndices</a></span> )</pre>
 <div class=list><tt>useIndices</tt></div>
 Instructs loaders to create indexed BufferGeometry.<br><br>
 

@@ -325,7 +325,7 @@ function render() {
 Метод производит предварительный расчет физических параметров и обновление костей.<br><br>
 
 <pre id="0.3warmup"><a href="#0.1" onmouseover="show('CCDIKSolver.<br>warmup - разогрев, разминка')" onmouseout="hide()">.warmup</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cycles - циклы')" onmouseout="hide()">cycles</a></span> )</pre>
-<div class=list><tt>delta</tt> — время в секундах.</div>
+<div class=list><tt>cycles</tt> — число циклов.</div>
 Warm up Rigid bodies. Calculates cycles steps.</div><br>
 
 <h4>Исходники</h4>
@@ -945,11 +945,11 @@ loader.load( 'obj/female02/female02.obj', callbackOnLoad, null, null, null, fals
 <div class=list><tt>onMeshAlter</tt> - функция, которая будет вызвана после того, как новые исходные данные сетки станут доступными для изменения. Дополнительный, необязательный параметр.</div>
 <div class=list><tt>useAsync</tt> - Если установить значение <tt>true</tt>, будет использоваться асинхронная загрузка с обработчиком (worker), если установить <tt>false</tt>, то загрузка данных будет синхронной.
 Дополнительный, необязательный параметр.</div>
-Use this convenient method to load a file at the given URL. By default the fileLoader uses an ArrayBuffer.<br><br>
+Используйте этот удобный метод для загрузки файла по указанному URL-адресу. По умолчанию загрузчик файлов использует буферный массив.<br><br>
 
 <pre id="3.5run"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('run - бежать, пускать')" onmouseout="hide()">.run</a></span>( <a href="#3.6.7" onmouseover="show('LoaderSupport.PrepData.<br>param(eter)s - параметры')" onmouseout="hide()">params</a>, <a href="#3.6.3" onmouseover="show('LoaderSupport.WorkerSupport')" onmouseout="hide()">workerSupportExternal</a> )</pre>
-<div class=list><tt>params</tt> - prepData All parameters and resources required for execution</div>
-<div class=list><tt>workerSupportExternal</tt> - Use pre-existing WorkerSupport</div>
+<div class=list><tt>params</tt> - <a href="#3.6.7" onmouseover="show('LoaderSupport.PrepData')" onmouseout="hide()">prepData</a>. Все параметры и ресурсы, требующиеся для исполнения.</div>
+<div class=list><tt>workerSupportExternal</tt> - используется уже существующий <a href="#3.6.3" onmouseover="show('LoaderSupport.WorkerSupport')" onmouseout="hide()">WorkerSupport</a>.</div>
 Метод запускает загрузчик в соответствии с предоставленными инструкциями.<br><br>
 
 <pre id="3.5setLogging"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set logging - установить ведение журнала (логирование)')" onmouseout="hide()">.setLogging</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('debug - отладка')" onmouseout="hide()">debug</a></span> )</pre>
@@ -969,35 +969,35 @@ Use this convenient method to load a file at the given URL. By default the fileL
 <div class=list><tt>streamMeshesTo</tt> - объект, уже закрепленный к сцене, к которому будут присоединяться новые сетки.</div>
 Метод устанавливает узел к которому непосредственно будут закреплены объекты.<br><br>
 
-<pre id="3.5setMaterials"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set materials - установить материалы')" onmouseout="hide()">.setMaterials</a></span>( Array of materials : Material )</pre>
+<pre id="3.5setMaterials"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set materials - установить материалы')" onmouseout="hide()">.setMaterials</a></span>( <a href="materials.htm#3" onmouseover="show('Material.<br>array of materials - массив материалов')" onmouseout="hide()">Array of materials</a> )</pre>
 <div class=list><tt>Array of materials</tt> - массив материалов.</div>
-Set materials loaded by MTLLoader or any other supplier of an Array of Materials.<br><br>
+Устанавливает материалы, загруженные с помощью <a href="#3.3" onmouseover="show('MTLLoader')" onmouseout="hide()">MTLLoader</a> или любого другого поставщика массива материалов.<br><br>
 
 <pre id="3.5setUseIndices"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set use indices - установить использование индексов')" onmouseout="hide()">.setUseIndices</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use indices - использовать индексы')" onmouseout="hide()">useIndices</a></span> )</pre>
-<div class=list><tt>useIndices</tt></div>
-Instructs loaders to create indexed BufferGeometry.<br><br>
+<div class=list><tt>useIndices</tt> - логическое значение.</div>
+Метод поручает загрузчикам создавать индексированную <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.<br><br>
 
 <pre id="3.5setDisregardNormals"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set disregard normals - установить пренебрежение нормалями')" onmouseout="hide()">.setDisregardNormals</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('disregard normals - игнорировать нормали')" onmouseout="hide()">disregardNormals</a></span> )</pre>
-<div class=list><tt>disregardNormals</tt></div>
-Tells whether normals should be completely disregarded and regenerated.<br><br>
+<div class=list><tt>disregardNormals</tt> - логическое значение.</div>
+Метод указывает, следует ли полностью проигнорировать и восстановить нормали.<br><br>
 
 <pre id="3.5setMaterialPerSmoothingGroup"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set material per smoothing group - установить материал для каждой сглаживающей группы')" onmouseout="hide()">.setMaterialPerSmoothingGroup</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material per smoothing group - материал для каждой сглаживающей группы')" onmouseout="hide()">materialPerSmoothingGroup</a></span> )</pre>
 <div class=list><tt>materialPerSmoothingGroup</tt></div>
-Tells whether a material shall be created per smoothing group.<br><br>
+Метод указывает, должен ли для каждой сглаживающей группы создаваться материал.<br><br>
 
 <pre id="3.5onProgress"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">.onProgress</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('numerical value - числовое значение')" onmouseout="hide()">numericalValue</a></span> )</pre>
 <div class=list><tt>type</tt> - тип события.</div>
 <div class=list><tt>text</tt> - текстовое описание события.</div>
 <div class=list><tt>numericalValue</tt> - числовое значение, характеризующее ход процесса.</div>
-Announce feedback which is give to the registered <a href="#3.6.8" onmouseover="show('LoaderSupport.Callbacks')" onmouseout="hide()">LoaderSupport.Callbacks</a>.<br><br>
+Объявление обратной связи, которая задается зарегистрированной <a href="#3.6.8" onmouseover="show('LoaderSupport.Callbacks')" onmouseout="hide()">LoaderSupport.Callbacks</a>.<br><br>
 
 <pre id="3.5loadMtl"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load MTL - загрузить (файл в формате MTL)')" onmouseout="hide()">.loadMtl</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('content - содержимое')" onmouseout="hide()">content</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback on load - функция обратного<br>вызова (по окончании) загрузки')" onmouseout="hide()">callbackOnLoad</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">crossOrigin</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material options - параметры материала')" onmouseout="hide()">materialOptions</a></span> )</pre>
 <div class=list><tt>url</tt> - URL-адрес файла.</div>
-<div class=list><tt>content</tt> - содержимое файла в виде массив буфера (arraybuffer)или текста.</div>
+<div class=list><tt>content</tt> - содержимое файла в виде буферного массива (arraybuffer) или текста.</div>
 <div class=list><tt>callbackOnLoad</tt> - функция обратного вызова, которая будет вызвана после успешной загрузки.</div>
 <div class=list><tt>crossOrigin</tt> - значение <a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>. Дополнительный, необязательный аргумент.</div>
-<div class=list><tt>materialOptions</tt> - Set material loading options for MTLLoader. Дополнительный, необязательный аргумент.</div>
-Utility method for loading an mtl file according resource description. Provide url or content.</div><br>
+<div class=list><tt>materialOptions</tt> - устанавливает параметры загрузки материала для <a href="#3.3" onmouseover="show('MTLLoader')" onmouseout="hide()">MTLLoader</a>. Дополнительный, необязательный аргумент.</div>
+Вспомогательный метод для загрузки файла в формате <tt>mtl</tt> согласно описанию ресурса. Укажите <tt>url</tt> (URL-адрес) или <tt>content</tt> (содержимое файла).</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/OBJLoader2.js" target="_blank">OBJLoader2.js на github.com</a></div><br><br>
@@ -1054,10 +1054,10 @@ Utility method for loading an mtl file according resource description. Provide u
 Обновляет материалы с объектами, содержащими материал, (синхронно) или с инструкциями по изменению (асинхронно).<br><br>
 
 <pre id="3.6.1getMaterialsJSON"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get materials JSON - получить материалы в формате JSON')" onmouseout="hide()">.getMaterialsJSON</a></span>( )</pre>
-Returns the mapping object of material name and corresponding jsonified material.<br><br>
+Возвращает объект, сопоставленный с названием материала и соответствующий материал в формате JSON.<br><br>
 
 <pre id="3.6.1getMaterials"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get materials - получить материалы')" onmouseout="hide()">.getMaterials</a></span>( )</pre>
-Returns the mapping object of material name and corresponding material.</div><br>
+Возвращает объект, сопоставленный с названием материала и соответствующий материал.</div><br>
 
 
 <h3 id="3.6.2">LoadedMeshUserOverride</h3>
@@ -1334,8 +1334,7 @@ loader.load(
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
-Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с .
-Begin loading from url and call onLoad with the parsed response content.<br><br>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с проанализированным содержимым ответа.<br><br>
 
 <pre id="3.7parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick('Arraybuffer - значением является буферный массив')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('data - данные')" onmouseout="hide()">data</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - url-адрес')" onmouseout="hide()">url</a></span> )</pre>
 <div class=list><tt>data</tt> — двоичная структура для разбора (синтаксического анализа).</div>
@@ -1350,8 +1349,8 @@ Begin loading from url and call onLoad with the parsed response content.<br><br>
 
 <h3 id="3.8">PDBLoader</h3>
 Загрузчик для загрузки ресурсов в формате <em>.pdb</em>.<br>
-The <a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)">Protein Data Bank file format</a> is a textual file format describing the three-dimensional structures of molecules.
-The Protein Data Bank (pdb) file format is a textual file format describing the three-dimensional structures of molecules held in the <a href="https://en.wikipedia.org/wiki/Protein_Data_Bank" target="_blank">Protein Data Bank</a>.<br><br>
+<a href="http://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)" target="_blank">Формат файла <tt>pdb</tt> (Protein Data Bank)</a> - это файл в текстовом формате с описанием трехмерных структур молекул, сохраняющихся в <a href="https://en.wikipedia.org/wiki/Protein_Data_Bank" target="_blank">Protein Data Bank</a>.
+Вот описание <a href="https://ru.wikipedia.org/wiki/Protein_Data_Bank" target="_blank">Protein Data Bank</a> на русском языке.<br><br>
 
 <h4>Пример</h4>
 <pre>// instantiate a loader (создание экземпляра загрузчика)
@@ -1400,8 +1399,7 @@ loader.load(
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
-Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с .
-Begin loading from url and call onLoad with the parsed response content.<br><br>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с проанализированным содержимым ответа.<br><br>
 
 <pre id="3.8parse"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span> )</pre>
 <div class=list><tt>text</tt> — текстовая структура <tt>pdb</tt> для разбора (синтаксического анализа).</div>
@@ -1457,7 +1455,7 @@ loader.load(
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана при ошибках загрузки.</div>
-Begin loading from url and call onLoad with the response content.</div><br>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с проанализированным содержимым ответа.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/SVGLoader.js" target="_blank">SVGLoader.js на github.com</a></div><br><br>
@@ -1521,7 +1519,8 @@ var material = new THREE.MeshPhongMaterial( {
 <h3 id="3.11">PRWMLoader</h3>
 Загрузчик для загрузки ресурса в формате <em>.prwm</em>.<br>
 
-Packed Raw WebGL Model is an open-source binary file format for nD geometries specifically designed for JavaScript and WebGL with a strong focus on fast parsing (from 1ms to 0.1ms in Chrome 59 on a MBP Late 2013). The parsing of PRWM file is especially fast when the endianness of the file is the same as the endianness of the client platform. More information on this here.<br><br>
+Packed Raw WebGL Model is an open-source binary file format for nD geometries specifically designed for JavaScript and WebGL with a strong focus on fast parsing (from 1ms to 0.1ms in Chrome 59 on a MBP Late 2013). The parsing of PRWM file is especially fast when the endianness of the file is the same as the endianness of the client platform.
+Подробнее об этом смотрите <a href="https://github.com/kchapelier/PRWM" target="_blank">здесь</a>.<br><br>
 
 <h4>Пример</h4>
 <pre>// instantiate a loader (создание экземпляра загрузчика)

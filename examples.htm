@@ -1518,8 +1518,9 @@ var material = new THREE.MeshPhongMaterial( {
 
 <h3 id="3.11">PRWMLoader</h3>
 Загрузчик для загрузки ресурса в формате <em>.prwm</em>.<br>
-
-Packed Raw WebGL Model is an open-source binary file format for nD geometries specifically designed for JavaScript and WebGL with a strong focus on fast parsing (from 1ms to 0.1ms in Chrome 59 on a MBP Late 2013). The parsing of PRWM file is especially fast when the endianness of the file is the same as the endianness of the client platform.
+Формат prwm (Packed Raw WebGL Model - упакованная исходная WebGL модель) представляет собой формат двоичного файла с открытым исходным кодом для n-мерной геометрии,
+специально разработанный для JavaScript и WebGL с повышенным вниманием к скорости синтаксического анализа (от 1 мс до 0,1 мс в браузере Chrome 59 версии на ноутбуке Apple MacBook Pro Retina 13 Late 2013).
+Синтаксический анализ (разбор) PRWM-файла выполняется особенно быстро когда <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%80%D1%8F%D0%B4%D0%BE%D0%BA_%D0%B1%D0%B0%D0%B9%D1%82%D0%BE%D0%B2" target="_blank">порядок байтов</a> файла совпадает с порядком байтов клиентской платформы.
 Подробнее об этом смотрите <a href="https://github.com/kchapelier/PRWM" target="_blank">здесь</a>.<br><br>
 
 <h4>Пример</h4>
@@ -1558,22 +1559,21 @@ loader.load(
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="3.11load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
-<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>prwm</tt>-файла (обязательный аргумент). Any * character in the URL will be automatically replaced by le or be depending on the platform endianness.</div>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>prwm</tt>-файла (обязательный аргумент). Любой символ&nbsp;<tt>*</tt> в URL-адресе будет автоматически заменяться на <tt>le</tt> или <tt>be</tt>, в зависимости от порядка байтов платформы.</div>
 <div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
 В качестве аргумента, эта функция получает загруженный <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.</div>
 <div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
-Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с разобранным содержимым ответа.
-Begin loading from url and call onLoad with the parsed response content.<br><br>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с разобранным содержимым ответа.<br><br>
 
 <pre id="3.11parse"><a href="core.htm#2" onmouseover="show('BufferGeometry.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span class="lnk" onmouseover="show('array buffer - буферный массив')" onmouseout="hide()">arrayBuffer</span> )</pre>
-<div class=list><tt>arrayBuffer</tt> — ArrayBuffer containing the <tt>prwm</tt> data.</div>
-Parse a prwm file passed as an ArrayBuffer and directly return an instance of BufferGeometry.<br><br>
+<div class=list><tt>arrayBuffer</tt> — буферный массив, содержащий данные в <tt>prwm</tt> формате.</div>
+Метод выполняет синтаксический анализ <tt>prwm</tt>-файла, переданного в виде буферного массива, и тотчас возвращает экземпляр <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.<br><br>
 
-<pre id="3.11isBigEndianPlatform"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is big endian platform - ')" onmouseout="hide()">.isBigEndianPlatform</a></span>( )</pre>
-Возвращает значение <tt>true</tt>, if the endianness of the platform is Big Endian, в противном случае значение <tt>false</tt>.</div><br>
+<pre id="3.11isBigEndianPlatform"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is big endian platform - платформа с порядком<br>байтов от старшего к младшему')" onmouseout="hide()">.isBigEndianPlatform</a></span>( )</pre>
+Возвращает значение <tt>true</tt>, если порядок байтов платформы установлен как <span class="lnk" onmouseover="show('т.е. порядок от старшего к младшему<br>(англ. big-endian — большим концом)')" onmouseout="hide()">Big Endian</span>, в противном случае значение <tt>false</tt>.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PRWMLoader.js" target="_blank">PRWMLoader.js на github.com</a></div>

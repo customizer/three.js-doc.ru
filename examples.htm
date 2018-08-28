@@ -23,6 +23,7 @@
 <div class=blockindent><a href="#3">Загрузчики</a>
 <div class=list><a href="#3.1">BabylonLoader</a> - загрузка в формате <tt>babylon</tt></div>
 <div class=list><a href="#3.2">GLTFLoader</a> - загрузка в формате <tt>glTF 2.0</tt></div>
+<div class=list><a href="#3.mmd">MMDLoader</a> - загрузка в формате <tt>mmd</tt></div>
 <div class=list><a href="#3.3">MTLLoader</a> - загрузка в формате <tt>mtl</tt></div>
 <div class=list><a href="#3.4">OBJLoader</a> - загрузка в формате <tt>obj</tt></div>
 <div class=list><a href="#3.5">OBJLoader2</a> - загрузка в формате <tt>obj</tt></div>
@@ -31,8 +32,7 @@
 <div class=list><a href="#3.8">PDBLoader</a> - загрузка в формате <tt>pdb</tt></div>
 <div class=list><a href="#3.9">SVGLoader</a> - загрузка в формате <tt>svg</tt></div>
 <div class=list><a href="#3.10">TGALoader</a> - загрузка в формате <tt>tga</tt></div>
-<div class=list><a href="#3.11">PRWMLoader</a> - загрузка в формате <tt>prwm</tt></div>
-<div class=list><a href="#3.12">MMDLoader</a> - загрузка в формате <tt>mmd</tt></div></div>
+<div class=list><a href="#3.11">PRWMLoader</a> - загрузка в формате <tt>prwm</tt></div></div>
 </td>
 <td width=50% valign=top>
 <div class=blockindent><a href="#4">Объекты</a>
@@ -141,7 +141,7 @@ function render() {
 
 <h3 id="0.2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDAnimationHelper</h3>
 Вспомогательный элемент (helper - помощник) анимации для <a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank">MMD</a> ресурсов. <a href="http://hatsune-miku.ru/faq-for-mikumikudance-page" target="_blank">Здесь</a> на русском языке.<br>
-MMDAnimationHelper обрабатывает анимацию MMD-ресурсов, загруженных с помощью <a href="#3.12" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a>, со специальными свойствами MMD,
+MMDAnimationHelper обрабатывает анимацию MMD-ресурсов, загруженных с помощью <a href="#3.mmd" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a>, со специальными свойствами MMD,
 такими как <span class="lnk" onmouseover="show('сокращ. от англ. слов Inverse Kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">IK</span>, Grant,
 и <span class="lnk" onmouseover="show('Physics - физика, т.е. физические параметры')" onmouseout="hide()">Physics</span>.
 Внутри вспомогательного элемента MMDAnimationHelper используются <a href="#0.1" onmouseover="show('CCDIKSolver')" onmouseout="hide()">CCDIKSolver</a> и <a href="#0.3" onmouseover="show('MMDPhysics')" onmouseout="hide()">MMDPhysics</a>.<br><br>
@@ -246,7 +246,7 @@ function render() {
 
 <pre id="0.2pose"><a href="#0.2" onmouseover="show('MMDAnimationHelper.<br>pose - поза')" onmouseout="hide()">.pose</a>( <a href="objects.htm#10" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vpd - сокращ. от англ. слов vocaloid pose data file - файл<br>данных поз для Vocaloid (использовался в рекламе<br>звукосинтезатора Vocaloid от фирмы Yamaha.)<br>Бинарный файл 3D моделей, используемых<br>MikuMikuDance (MMD), синхронизирует партии танца и ритма;<br>сохраняет позиции костей модели персонажа, задающие его<br>позу; может использоваться в последовательности поз,<br>составляющих анимацию танца (VMD файл).')" onmouseout="hide()">vpd</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
 <div class=list><tt>mesh</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, которая изменяет позу. Её не нужно добавлять к вспомогательному элементу.</div>
-<div class=list><tt>vpd</tt> — содержимое VPD, полученное с помощью метода <tt><a href="#3.12" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader.loadVPD</a></tt>.</div>
+<div class=list><tt>vpd</tt> — содержимое VPD, полученное с помощью метода <tt><a href="#3.mmd" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader.loadVPD</a></tt>.</div>
 <div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset pose - сбросить позу')" onmouseout="hide()">resetPose</a></span></tt> - значением по умолчанию является&nbsp;<tt>true</tt>.<br>
 &nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ik - сокращ. от англ. слов inverse kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">ik</a></span></tt> - значением по умолчанию является&nbsp;<tt>true</tt>.<br>
@@ -269,7 +269,7 @@ function render() {
 
 <h3 id="0.3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDPhysics</h3>
 Обработчик физических параметров для ресурсов <em><a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank">MMD</a></em>.<br>
-MMDPhysics рассчитывает физические параметры для моделей, загруженных при помощи <a href="#3.12" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a> с <a href="https://github.com/kripken/ammo.js/" target="_blank">ammo.js</a> (физический движок JavaScript на основе <a href="https://pybullet.org/wordpress/" target="_blank" onmouseover="show('Bullet Physics - профессиональное обнаружение столкновений<br>с открытым исходным кодом, библиотека динамики жестких<br>и гибких тел, написанная на портативном C++. Библиотека<br>предназначена в основном для использования в играх,<br>визуальных эффектах и роботизированном моделировании.')" onmouseout="hide()">Bullet</a>).<br><br>
+MMDPhysics рассчитывает физические параметры для моделей, загруженных при помощи <a href="#3.mmd" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a> с <a href="https://github.com/kripken/ammo.js/" target="_blank">ammo.js</a> (физический движок JavaScript на основе <a href="https://pybullet.org/wordpress/" target="_blank" onmouseover="show('Bullet Physics - профессиональное обнаружение столкновений<br>с открытым исходным кодом, библиотека динамики жестких<br>и гибких тел, написанная на портативном C++. Библиотека<br>предназначена в основном для использования в играх,<br>визуальных эффектах и роботизированном моделировании.')" onmouseout="hide()">Bullet</a>).<br><br>
 
 <h4>Пример</h4>
 <pre>var physics;<br>
@@ -579,9 +579,9 @@ scene.add( mesh );</pre>
 <h4>Конструктор</h4>
 <pre>DecalGeometry( <a href="objects.htm#7" onmouseover="show('Mesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>position - позиция')" onmouseout="hide()">position</a>, <a href="math.htm#5" onmouseover="show('Euler.<br>orientation - ориентация, направление')" onmouseout="hide()">orientation</a>, <a href="math.htm#19" onmouseover="show('Vector3.<br>size - размер')" onmouseout="hide()">size</a> )</pre>
 <div class=list><tt>mesh</tt> — любой объект сетка (mesh).</div>
-<div class=list><tt>position</tt> — позиция проекора декали.</div>
-<div class=list><tt>orientation</tt> — ориентация проекора декали.</div>
-<div class=list><tt>size</tt> — размер проекора декали.</div><br>
+<div class=list><tt>position</tt> — позиция проектора декали.</div>
+<div class=list><tt>orientation</tt> — ориентация проектора декали.</div>
+<div class=list><tt>size</tt> — размер проектора декали.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/geometries/DecalGeometry.js" target="_blank">DecalGeometry.js на github.com</a></div><br><br>
@@ -612,7 +612,7 @@ loader.load(
   // Function called when download errors
   // функция, вызываемая при ошибках загрузки
   function ( xhr ) {
-    console.log( 'An error happened' );
+    console.log( 'Произошла ошибка' );
   }
 );</pre>
 <h5>Другие примеры:</h5>
@@ -695,7 +695,7 @@ loader.load(
   },
   // called when loading has errors (вызывается при ошибках в загрузке)
   function ( error ) {<br>
-    console.log( 'An error happened' );
+    console.log( 'Произошла ошибка' );
   }
 );</pre></div></div>
 <h5>Другие примеры:</h5>
@@ -760,6 +760,98 @@ GLTFLoader полагается на <a href="https://developer.mozilla.org/ru/d
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/GLTFLoader.js" target="_blank">GLTFLoader.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="loaders.htm#12" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
+<h3 id="3.mmd">MMDLoader</h3>
+Загрузчик для ресурсов в формате <em><a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank" onmouseover="show('MMD - сокращ. от англ. слов Miku Miku Dance - ресурсы для<br>бесплатной программы компьютерной анимации, которая<br>позволяет пользователям создавать 3D-анимированные<br>видеоролики, изначально созданная для персонажа Vocaloid<br>Мику Хацунэ. Программа была написана Ю Хигути (HiguchiM).')" onmouseout="hide()">MMD</a></em>. Статья Википедии о <a href="https://ru.wikipedia.org/wiki/MikuMikuDance" target="_blank">MMD - MikuMikuDance</a> на русском языке.<br>
+MMDLoader создает объекты three.js из MMD ресурсов, таких как <span class="lnk" onmouseover="show('Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой анимации танцев, изначально созданной в Японии;<br>содержит 3D сетку для фигуры танцора, которая может быть<br>текстурирована и анимирована с помощью инструментов программы<br>MikuMikuDance; используется для хранения различных моделей<br>фигур танцоров.')" onmouseout="hide()">PMD</span>,
+<span class="lnk" onmouseover="show('Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой анимации танцев, изначально созданной в Японии;<br>содержит 3D сетку для модели, фигур танцоров, персонажей и<br>других сопутствующих деталей, которые могут быть текстуризованы<br>и анимированы с помощью инструментов программы MikuMikuDance;<br>используется для хранения различных моделей фигур танцоров.<br>'
++'PMX файлы имеют морфы (объекты изменения), которые могут<br>изменять различные аспекты внешнего вида модели, такие как<br>цвет компонентов, позиционирование костей модели и прозрачности<br>модели. Морфы в файле PMX являются более продвинутыми, чем<br>в файлах PMD.')" onmouseout="hide()">PMX</span>,
+<span class="lnk" onmouseover="show('vmd - сокращ. от англ. слов vocaloid motion data file - файл<br>данных движения для Vocaloid<br>Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой создания роликов танцевальной анимации; в нем<br>хранятся параметры движений тела танцевальных режимов; могут<br>применяться для одной или более фигур танцоров в трехмерной<br>анимации.<br>Изначально MikuMikuDance (MMD) был разработан в Японии. Он<br>используется в качестве рекламного продукта для звукосинтезатора<br>Vocaloid от фирмы Yamaha.')" onmouseout="hide()">VMD</span>
+и <span class="lnk" onmouseover="show('vpd - сокращ. от англ. слов vocaloid pose data file - файл<br>данных поз для Vocaloid<br>Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>синхронизирует партии танца и ритма; сохраняет позиции<br>костей модели персонажа, задающие его позу; может<br>использоваться в последовательности поз, составляющих<br>анимацию танца (VMD файл).')" onmouseout="hide()">VPD</span> файлы.
+Посмотрите описание MMD-анимации в <a href="#0.2" onmouseover="show('MMDAnimationHelper')" onmouseout="hide()">MMDAnimationHelper</a> с обработкой
+<span class="lnk" onmouseover="show('сокращ. от англ. слов Inverse Kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">IK</span>, Grant,
+и <span class="lnk" onmouseover="show('Physics - физика, т.е. физические параметры')" onmouseout="hide()">Physics</span>.<br>
+Если требуются необработанное содержимое MMD ресурсов, воспользуйтесь методами <tt>.loadPMD/PMX/VMD/VPD</tt>.<br><br>
+<h4>Пример</h4>
+<pre>// Instantiate a loader (создание экземпляра загрузчика)
+var loader = new THREE.MMDLoader();<br>
+// Load a MMD model (загрузка MMD модели)
+loader.load(
+  // path to PMD/PMX file (путь к PMD/PMX файлу
+  'models/mmd/miku.pmd',<br>
+  // called when the resource is loaded (вызывается по окончании загрузки)
+  function ( mesh ) {
+    scene.add( mesh );
+  },<br>
+  // called when loading is in progresses (вызывается в процессе загрузки)
+  function ( xhr ) {
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+  },<br>
+  // called when loading has errors (вызывается при ошибках в загрузке)
+  function ( error ) {
+    console.log( 'Произошла ошибка' );
+  }
+);</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl / loader / mmd</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_pose" target="_blank">webgl / loader / mmd / pose</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl / loader / mmd / audio</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>MMDLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый MMDLoader.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.mmdload"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь или url-адрес к <tt>pmd</tt> или <tt>pmx</tt> файлу.</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки (дополнительный, необязательный параметр).
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке (дополнительный, необязательный параметр). Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку файла модели в формате <tt>PMD</tt>/<tt>PMX</tt> из местоположения, указанного в аргументе <tt>url</tt> и запускает функцию обратного вызова (аргумент <tt>onLoad</tt>)
+с разобранным <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, содержащим <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>
+и массив из <a href="materials.htm#11" onmouseover="show('MeshToonMaterial')" onmouseout="hide()">MeshToonMaterial</a>.<br><br>
+
+<pre id="3.mmdloadAnimation"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load animation - загрузить анимацию')" onmouseout="hide()">.loadAnimation</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка или массив строк, содержащая(ий) путь или url-адрес к <tt><span class="lnk" onmouseover="show('vmd - сокращ. от англ. слов vocaloid motion data file - файл<br>данных движения для Vocaloid<br>Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой создания роликов танцевальной анимации; в нем<br>хранятся параметры движений тела танцевальных режимов; могут<br>применяться для одной или более фигур танцоров в трехмерной<br>анимации.<br>Изначально MikuMikuDance (MMD) был разработан в Японии. Он<br>используется в качестве рекламного продукта для звукосинтезатора<br>Vocaloid от фирмы Yamaha.')" onmouseout="hide()">vmd</span></tt> файлу(ам). Если указаны два или более файлов, они будут объединены.</div>
+<div class=list><tt>object</tt> — <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> или <a href="cameras.htm#1" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>. Клип и его элементы будут соответствовать данному объекту.</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки (дополнительный, необязательный параметр).
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке (дополнительный, необязательный параметр). Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку файла(ов) движений <span class="lnk" onmouseover="show('vmd - сокращ. от англ. слов vocaloid motion data file - файл<br>данных движения для Vocaloid<br>Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой создания роликов танцевальной анимации; в нем<br>хранятся параметры движений тела танцевальных режимов; могут<br>применяться для одной или более фигур танцоров в трехмерной<br>анимации.<br>Изначально MikuMikuDance (MMD) был разработан в Японии. Он<br>используется в качестве рекламного продукта для звукосинтезатора<br>Vocaloid от фирмы Yamaha.')" onmouseout="hide()">VMD</span>
+из указанного url-адреса(ов) и запускает функцию обратного вызова с разобранным <a href="animation.htm#2" onmouseover="show('AnimatioinClip')" onmouseout="hide()">AnimatioinClip</a>.<br><br>
+
+<pre id="3.mmdloadWithAnimation"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load with animation - загрузить с анимацией')" onmouseout="hide()">.loadWithAnimation</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('model url - url-адрес модели')" onmouseout="hide()">modelUrl</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vmd url - url-адрес vmd-файла')" onmouseout="hide()">vmdUrl</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+
+<div class=list><tt>modelUrl</tt> — строка, содержащая путь или url-адрес к <tt>pmd</tt> или <tt>pmx</tt> файлу.</div>
+<div class=list><tt>vmdUrl</tt> — строка или массив строк, содержащая(ий) путь или url-адрес к <tt>vmd</tt> файлу(ам).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки (дополнительный, необязательный параметр).
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке (дополнительный, необязательный параметр). Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку файла модели в формате PMD/PMX и файла(ов) движения VMD с указанных url-адресов и запускает функцию обратного вызова с объектов, содержащим разобранный SkinnedMesh и AnimationClip'ом подходящим к SkinnedMesh.
+Begin loading PMD/PMX model file and VMD motion file(s) from urls and fire the callback function with an Object containing parsed SkinnedMesh and AnimationClip fitting to the SkinnedMesh.<br><br>
+
+<pre id="3.mmdsetCrossOrigin"><a href="#3.mmd" onmouseover="show('MMDLoader.<br>set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('crossOrigin - перекрестный источник')" onmouseout="hide()">crossOrigin</a></span> )</pre>
+<div class=list><tt>crossOrigin</tt> — строковое значение для реализации
+<a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>
+для загрузки url-адреса с другого домена, который предоставляет CORS.</div></div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/MMDLoader.js" target="_blank">MMDLoader.js на github.com</a></div><br><br>
 
 
 <h3 id="3.3">MTLLoader</h3>
@@ -1579,100 +1671,6 @@ loader.load(
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PRWMLoader.js" target="_blank">PRWMLoader.js на github.com</a></div>
 <h4>Дополнительные замечания</h4>
 Данный загрузчик также доступен на <tt>npm</tt> как <tt>three-prwm-loader</tt>.<br><br>
-
-
-<span class="right_side"><a href="loaders.htm#12" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
-<h3 id="3.12">MMDLoader</h3>
-Загрузчик для ресурсов в формате <em><a href="http://www.geocities.jp/higuchuu4/index_e.htm" target="_blank" onmouseover="show('MMD - сокращ. от англ. слов Miku Miku Dance - ресурсы для<br>бесплатной программы компьютерной анимации, которая<br>позволяет пользователям создавать 3D-анимированные<br>видеоролики, изначально созданная для персонажа Vocaloid<br>Мику Хацунэ. Программа была написана Ю Хигути (HiguchiM).')" onmouseout="hide()">MMD</a></em>. Статья Википедии о <a href="https://ru.wikipedia.org/wiki/MikuMikuDance" target="_blank">MMD - MikuMikuDance</a> на русском языке.<br>
-MMDLoader создает объекты three.js из MMD ресурсов, таких как <span class="lnk" onmouseover="show('Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой анимации танцев, изначально созданной в Японии;<br>содержит 3D сетку для фигуры танцора, которая может быть<br>текстурирована и анимирована с помощью инструментов программы<br>MikuMikuDance; используется для хранения различных моделей<br>фигур танцоров.')" onmouseout="hide()">PMD</span>,
-<span class="lnk" onmouseover="show('Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой анимации танцев, изначально созданной в Японии;<br>содержит 3D сетку для модели, фигур танцоров, персонажей и<br>других сопутствующих деталей, которые могут быть текстуризованы<br>и анимированы с помощью инструментов программы MikuMikuDance;<br>используется для хранения различных моделей фигур танцоров.<br>'
-+'PMX файлы имеют морфы (объекты изменения), которые могут<br>изменять различные аспекты внешнего вида модели, такие как<br>цвет компонентов, позиционирование костей модели и прозрачности<br>модели. Морфы в файле PMX являются более продвинутыми, чем<br>в файлах PMD.')" onmouseout="hide()">PMX</span>,
-<span class="lnk" onmouseover="show('vmd - сокращ. от англ. слов vocaloid motion data file - файл<br>данных движения для Vocaloid<br>Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>программой создания роликов танцевальной анимации; в нем<br>хранятся параметры движений тела танцевальных режимов; могут<br>применяться для одной или более фигур танцоров в трехмерной<br>анимации.<br>Изначально MikuMikuDance (MMD) был разработан в Японии. Он<br>используется в качестве рекламного продукта для звукосинтезатора<br>Vocaloid от фирмы Yamaha.')" onmouseout="hide()">VMD</span>
-и <span class="lnk" onmouseover="show('vpd - сокращ. от англ. слов vocaloid pose data file - файл<br>данных поз для Vocaloid<br>Бинарный файл 3D моделей, используемых MikuMikuDance (MMD),<br>синхронизирует партии танца и ритма; сохраняет позиции<br>костей модели персонажа, задающие его позу; может<br>использоваться в последовательности поз, составляющих<br>анимацию танца (VMD файл).')" onmouseout="hide()">VPD</span> файлы.
-Посмотрите описание MMD-анимации в <a href="#0.2" onmouseover="show('MMDAnimationHelper')" onmouseout="hide()">MMDAnimationHelper</a> с обработкой
-<span class="lnk" onmouseover="show('сокращ. от англ. слов Inverse Kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">IK</span>, Grant,
-и <span class="lnk" onmouseover="show('Physics - физика, т.е. физические параметры')" onmouseout="hide()">Physics</span>.<br>
-Если требуются необработанное содержимое MMD ресурсов, воспользуйтесь методами <tt>.loadPMD/PMX/VMD/VPD</tt>.<br><br>
-<h4>Пример</h4>
-<pre>// Instantiate a loader (создание экземпляра загрузчика)
-var loader = new THREE.MMDLoader();<br>
-// Load a MMD model (загрузка MMD модели)
-loader.load(
-  // path to PMD/PMX file (путь к PMD/PMX файлу
-  'models/mmd/miku.pmd',<br>
-  // called when the resource is loaded (вызывается по окончании загрузки)
-  function ( mesh ) {
-    scene.add( mesh );
-  },<br>
-  // called when loading is in progresses (вызывается в процессе загрузки)
-  function ( xhr ) {
-    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-  },<br>
-  // called when loading has errors (вызывается при ошибках в загрузке)
-  function ( error ) {
-    console.log( 'Произошла ошибка' );
-  }
-);</pre>
-<h5>Другие примеры:</h5>
-<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl / loader / mmd</a>
-<a href="https://threejs.org/examples/#webgl_loader_mmd_pose" target="_blank">webgl / loader / mmd / pose</a>
-<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl / loader / mmd / audio</a></pre><br>
-
-<h4>Конструктор</h4>
-<pre>MMDLoader( <a href="loaders.htm#16.2" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
-<div class=list><tt>manager</tt> — <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
-Значением по умолчанию является <a href="loaders.htm#16.2" onmouseover="show('LoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
-Создает новый MMDLoader.<br><br>
-
-<h4>Свойства</h4>
-<div class=blockindent><br>
-</div><br>
-
-<h4>Методы</h4>
-<div class=blockindent><br>
-<pre id="3.12load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
-
-<div class=list><tt>url</tt> — строка, содержащая путь или url-адрес к <tt>pmd</tt> или <tt>pmx</tt> файлу.</div>
-<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.</div>
-<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки (дополнительный, необязательный параметр).
-Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
-и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
-<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке (дополнительный, необязательный параметр). Функция принимает ошибку в качестве аргумента.</div>
-Начинает загрузку файла модели в формате <tt>PMD</tt>/<tt>PMX</tt> из местоположения, указанного в аргументе <tt>url</tt> и запускает функцию обратного вызова (аргумент <tt>onLoad</tt>)
-с разобранным <a href="objects.htm#10" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, содержащим <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>
-и массив из <a href="materials.htm#11" onmouseover="show('MeshToonMaterial')" onmouseout="hide()">MeshToonMaterial</a>.<br><br>
-
-<pre id="3.12loadAnimation"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load animation - загрузить анимацию')" onmouseout="hide()">.loadAnimation</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <a href="core.htm#14" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
-<div class=list><tt>url</tt> — строка или массив строк, содержащая(ий) путь или url-адрес к <tt>vmd</tt> файлу(ам). Если указаны два или более файлов, они будут объединены.</div>
-<div class=list><tt>object</tt> — SkinnedMesh or Camera. Clip and its tacks will be fitting to this object.</div>
-
-<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.</div>
-<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки (дополнительный, необязательный параметр).
-Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
-и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
-<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке (дополнительный, необязательный параметр). Функция принимает ошибку в качестве аргумента.</div>
-
-Begin loading VMD motion file(s) from url(s) and fire the callback function with the parsed AnimatioinClip.<br><br>
-
-<pre id="3.12loadWithAnimation"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load with animation - загрузить с анимацией')" onmouseout="hide()">.loadWithAnimation</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('model url - url-адрес модели')" onmouseout="hide()">modelUrl</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vmd url - url-адрес vmd-файла')" onmouseout="hide()">vmdUrl</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
-
-<div class=list><tt>modelUrl</tt> — строка, содержащая путь или url-адрес к <tt>pmd</tt> или <tt>pmx</tt> файлу.</div>
-<div class=list><tt>vmdUrl</tt> — строка или массив строк, содержащая(ий) путь или url-адрес к <tt>vmd</tt> файлу(ам).</div>
-<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.</div>
-<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки (дополнительный, необязательный параметр).
-Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
-и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
-<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке (дополнительный, необязательный параметр). Функция принимает ошибку в качестве аргумента.</div>
-
-Begin loading PMD/PMX model file and VMD motion file(s) from urls and fire the callback function with an Object containing parsed SkinnedMesh and AnimationClip fitting to the SkinnedMesh.<br><br>
-
-<pre id="3.12setCrossOrigin"><a href="#3.12" onmouseover="show('MMDLoader.<br>set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('crossOrigin - перекрестный источник')" onmouseout="hide()">crossOrigin</a></span> )</pre>
-<div class=list><tt>crossOrigin</tt> — строковое значение для реализации
-<a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>
-для загрузки url-адреса с другого домена, который предоставляет CORS.</div></div><br>
-
-<h4>Исходники</h4>
-<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/MMDLoader.js" target="_blank">MMDLoader.js на github.com</a></div><br><br>
 
 
 <h2 id="4">Объекты</h2><br>

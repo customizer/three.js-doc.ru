@@ -2046,13 +2046,13 @@ Each half-edge bounds a single face and thus has a reference to that face.
 <h4>Свойства</h4>
 <div class=blockindent><br>
 <pre id="7.3tolerance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tolerance - допустимое отклонение')" onmouseout="hide()">.tolerance</a></span></pre>
-The epsilon value that is used for internal comparative operations. Вычисление этого значения зависит от размера геометрического элемента. Значение по умолчанию равно <tt>-1</tt>.<br><br>
+The epsilon value that is used for internal comparative operations. Вычисление этого значения зависит от размера геометрического элемента. Значение по умолчанию равно&nbsp;<tt>-1</tt>.<br><br>
 
 <pre id="7.3faces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('faces - грани')" onmouseout="hide()">.faces</a></span></pre>
-The generated faces of the convex hull. Значением по умолчанию является пустой массив.<br><br>
+Созданные грани выпуклой оболочки. Значением по умолчанию является пустой массив.<br><br>
 
 <pre id="7.3newFaces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('new faces - новые грани')" onmouseout="hide()">.newFaces</a></span></pre>
-This array holds the faces that are generated within a single iteration. Значением по умолчанию является пустой массив.<br><br>
+Данный массив содержит грани, созданные в течение одной итерации. Значением по умолчанию является пустой массив.<br><br>
 
 <pre id="7.3assigned"><a href="#7.5" onmouseover="show('VertexList.<br>assigned - присвоить, назначить')" onmouseout="hide()">.assigned</a></pre>
 Данный <a href="#7.5" onmouseover="show('VertexList')" onmouseout="hide()">список вершин</a> содержит все вершины, назначенные грани. Значением по умолчанию является пустой список вершин.<br><br>
@@ -2079,11 +2079,12 @@ This array holds the faces that are generated within a single iteration. Зна�
 <pre id="7.3addVertexToFace"><a href="#7.3" onmouseover="show('QuickHull.<br>add vertex to face - добавить вершину к грани')" onmouseout="hide()">.addVertexToFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
 <div class=list><tt>vertex</tt> - добавляемая вершина.</div>
 <div class=list><tt>face</tt> - целевая грань.</div>
-Adds a vertex to the 'assigned' list of vertices and assigns it to the given face.<br><br>
+Метод добавляет вершину к списку 'назначенных' вершин и присваивает её заданной грани.<br><br>
 
 <pre id="7.3removeVertexFromFace"><a href="#7.3" onmouseover="show('QuickHull.<br>remove vertex from face - удалить вершину грани')" onmouseout="hide()">.removeVertexFromFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
 <div class=list><tt>vertex</tt> - удаляемая вершина.</div>
 <div class=list><tt>face</tt> - целевая грань.</div>
+Метод удаляет вершину из списка 'назначенных' вершин и от заданной грани.
 Removes a vertex from the 'assigned' list of vertices and from the given face. It also makes sure that the link from 'face' to the first vertex it sees in 'assigned' is linked correctly after the removal.<br><br>
 
 <pre id="7.3removeAllVerticesFromFace"><a href="#7.4" onmouseover="show('VertexNode.<br>remove all vertices from face - удалить все вершины грани')" onmouseout="hide()">.removeAllVerticesFromFace</a>( <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
@@ -2091,16 +2092,16 @@ Removes a vertex from the 'assigned' list of vertices and from the given face. I
 Removes all the visible vertices that a given face is able to see which are stored in the 'assigned' vertext list.<br><br>
 
 <pre id="7.3deleteFaceVertices"><a href="#7.3" onmouseover="show('QuickHull.<br>delete face vertices - удалить вершины грани')" onmouseout="hide()">.deleteFaceVertices</a>( <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a>, <a href="#7.2" onmouseover="show('Face.<br>absorbing face - поглощающая грань')" onmouseout="hide()">absorbingFace</a> )</pre>
-<div class=list><tt>face</tt> - The given face.</div>
-<div class=list><tt>absorbingFace</tt> - An optional face that tries to absorb the vertices of the first face.</div>
+<div class=list><tt>face</tt> - задаваемая грань.</div>
+<div class=list><tt>absorbingFace</tt> - дополнительная грань, которая пытается поглотить все вершины первой грани.</div>
 Removes all the visible vertices that 'face' is able to see.<br>
-&nbsp; &#9679; &nbsp; If 'absorbingFace' doesn't exist, then all the removed vertices will be added to the 'unassigned' vertex list.<br>
-&nbsp; &#9679; &nbsp; If 'absorbingFace' exists, then this method will assign all the vertices of 'face' that can see 'absorbingFace'.<br>
-&nbsp; &#9679; &nbsp; If a vertex cannot see 'absorbingFace', it's added to the 'unassigned' vertex list.<br><br>
+&nbsp; &#9679; &nbsp; Если аргумент '<tt>absorbingFace</tt>' не указан, то все удаленные вершины будут добавлены  в список 'неназначенных' вершин.<br>
+&nbsp; &#9679; &nbsp; Если аргумент '<tt>absorbingFace</tt>' существует, тогда данный метод назначит все вершины грани <tt>'face'</tt>, которые может видеть грань <tt>'absorbingFace'</tt>.<br>
+&nbsp; &#9679; &nbsp; Если вершину не видит <tt>'absorbingFace'</tt>, она добавляется в список 'неназначенных' ('unassigned') вершин.<br><br>
 
 <pre id="7.3resolveUnassignedPoints"><a href="#7.3" onmouseover="show('QuickHull.<br>resolve unassigned points - разрешить неназначенные точки')" onmouseout="hide()">.resolveUnassignedPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('new faces - новые грани')" onmouseout="hide()">newFaces</a></span> )</pre>
 <div class=list><tt>newFaces</tt> - массив новых граней.</div>
-Reassigns as many vertices as possible from the unassigned list to the new faces.<br><br>
+Метод переназначает как можно больше вершин из списка 'неназначенных' вершин новым граням.<br><br>
 
 <pre id="7.3computeExtremes"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute extremes - вычислить экстремумы')" onmouseout="hide()">.computeExtremes</a></span>( )</pre>
 Метод вычисляет экстремальные значения (минимальный и максимальный векторы), которые будут использованы для расчета начальной оболочки.<br><br>
@@ -2112,17 +2113,18 @@ Computes the initial simplex assigning to its faces all the points that are cand
 Удаляет неактивные (то есть, удаленные) грани из внутреннего списка граней.<br><br>
 
 <pre id="7.3nextVertexToAdd"><a href="#7.4" onmouseover="show('VertexNode.<br>next vertex to add - следующая добавляемая вершина')" onmouseout="hide()">.nextVertexToAdd</a>( )</pre>
-Finds the next vertex to create faces with the current hull.<br>
-&nbsp; &#9679; &nbsp; Let the initial face be the first face existing in the 'assigned' vertex list.<br>
-&nbsp; &#9679; &nbsp; If a face doesn't exist then return since there're no vertices left.<br>
-&nbsp; &#9679; &nbsp; Otherwise for each vertex that face sees find the one furthest away from it.<br><br>
+Метод выполняет поиск следующей вершины для создания грани с текущей оболочкой.<br>
+&nbsp; &#9679; &nbsp; Пусть начальная грань будет первой гранью, существующей в списке 'назначенных' вершин.<br>
+&nbsp; &#9679; &nbsp; Если грань не существует, то происходит возврат, поскольку больше вершин нет.<br>
+&nbsp; &#9679; &nbsp; В противном случае, для каждой вершины, которую видит грань, находим наиболее удаленную от нее вершину.<br><br>
 
-<pre id="7.3computeHorizon"><a href="#7.3" onmouseover="show('QuickHull.<br>compute horizon - вычислить горизонт')" onmouseout="hide()">.computeHorizon</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>eye point - ')" onmouseout="hide()">eyePoint</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>cross edge - ')" onmouseout="hide()">crossEdge</a>, <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('horizon - горизонт')" onmouseout="hide()">horizon</a></span> )</pre>
+<pre id="7.3computeHorizon"><a href="#7.3" onmouseover="show('QuickHull.<br>compute horizon - вычислить горизонт')" onmouseout="hide()">.computeHorizon</a>( <a href="math.htm#19" onmouseover="show('Vector3.<br>eye point - точка зрения')" onmouseout="hide()">eyePoint</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>cross edge - ')" onmouseout="hide()">crossEdge</a>, <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('horizon - горизонт')" onmouseout="hide()">horizon</a></span> )</pre>
 <div class=list><tt>eyePoint</tt> - координаты точки в трехмерном пространстве.</div>
-<div class=list><tt>crossEdge</tt> - The edge used to jump to the current face.</div>
-<div class=list><tt>face</tt> - The current face being tested.</div>
-<div class=list><tt>horizon</tt> - The edges that form part of the horizon in CCW order.</div>
-Computes a chain of half edges in CCW order called the 'horizon'. For an edge to be part of the horizon it must join a face that can see 'eyePoint' and a face that cannot see 'eyePoint'.<br><br>
+<div class=list><tt>crossEdge</tt> - ребро, используемое для перехода к текущей грани.</div>
+<div class=list><tt>face</tt> - текущая проверяемая грань.</div>
+<div class=list><tt>horizon</tt> - ребра, составляющие часть горизонта, в направлении против часовой стрелки.</div>
+Метод вычисляет цепь полуребер в направлении против часовой стрелки называемую горизонтом ('horizon').
+For an edge to be part of the horizon it must join a face that can see 'eyePoint' and a face that cannot see 'eyePoint'.<br><br>
 
 <pre id="7.3addAdjoiningFace"><a href="#7.2" onmouseover="show('HalfEdge.<br>add adjoining face - добавить прилегающую грань')" onmouseout="hide()">.addAdjoiningFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина')" onmouseout="hide()">eyeVertex</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>horizon edge - край (ребро) горизонта')" onmouseout="hide()">horizonEdge</a> )</pre>
 <div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>

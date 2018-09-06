@@ -1,0 +1,1035 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>DirkGregorius_ImplementingQuickHull</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="1.css">
+<script type="text/javascript" src="1.js"></script>
+</head>
+<body>
+<a href="https://www.gamedev.net/profile/30524-dirk-gregorius/?tab=activity"><img src="img/Dirk_Gregorius.png" width=150 border=0 align="left" alt="Dirk Gregorius" style="margin-top:-20px;"></a>
+<div style="color:#000080; margin-left:220px;">Dirk Gregorius</div></a>
+
+<h1 style="margin-top:20px; margin-left:200px; margin-bottom:40px;">Реализация быстрого алгоритма выпуклой оболочки<br>
+<span style="font-size:70%; margin-left:20px;">Implementing&nbsp;QuickHull</span></h1><br><br>
+Добрый день! Меня зовут Дирк, и я инженер-программист в Valve.<br><br>
+Некоторые из вас возможно заметили, что я изменил заголовок своей лекции на: "Реализация алгоритма выпуклой оболочки".<br>
+Когда я пересказывал эту лекция в Valve, одним из вопросов был: "Почему презентация о выпуклой оболочке? Разве это не хорошо понимаемый алгоритм?"<br>
+
+На мой взгляд это отчасти верно. Можно найти несколько презентаций об основах теории выпуклой оболочки и аналитических статей некоторой сложности, но вряд ли
+это все имело отношение к реализации данного алгоритма.
+Особенно в производственной среде, где приходится иметь дело со всеми видами недостаточно определенной входной геометрией!
+Так что, эта лекция будет охватывать, конечно же, основную теорию Quickhull, но также потратим много времени на изучение проблем, с которыми вы можете столкнуться при реализации Quickhull, и способах их решения.<br><br>
+
+
+<h2>План лекции</h2>
+Вначале хотелось бы быстро изложить план лекции:
+<div class=blockindent>&nbsp; &#9679; &nbsp; После короткого вступления сначала будет разговор о выпуклой оболочке (Quickhull) в двумерном пространстве.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Затем продолжим описание с геометрическими постоянными (инвариантами), которые нужно поддерживать при построении оболочки, во избежание вычислительных проблем. Then we continue with geometrical invariants which we need to maintain while constructing the hull to avoid numerical problems</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; После знакомства с двумерным вариантом, тут же погружаемся в трехмерную версию быстрой оболочки.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Затем исследуем геометрические и топологические инварианты при построении оболочки в трехмерном пространстве и
+We then investigate geometrical and topological invariants while constructing the hull in 3D and close with some implementation details.</div><br>
+
+<h3>Выпуклость</h3>
+Прежде чем начать, давайте выясним, что такое выпуклая оболочка и рассмотрим пример:
+<div class=blockindent>&nbsp; &#9679; &nbsp; Фигура называется выпуклой, если для любых двух точек, которые находятся <b>внутри</b> фигуры, линия между этими двумя точками также находится внутри.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Если посмотреть на случай с вогнутой фигурой, то легко можно найти внутри фигуры две точки, линия между которыми выходит за контур фигуры и затем снова входит в неё.</div>
+<table width=90%><tr><td width=50%><div class="caption"><img src="img/1a.png" width=250><br>Выпуклая фигура (convex)</div></td>
+<td width=50%><div class="caption"><img src="img/1b.png" width=250><br>Вогнутая фигура (concave)</div></td></tr></table><br><br>
+
+<h3>Выпуклые оболочки</h3>
+Что такое выпуклая оболочка (convex hull)?<br>
+Задав набор из N входный точек можно определить, что можно называть выпуклой оболочкой:
+<div class=blockindent>&nbsp; &#9679; &nbsp; Официально: выпуклая оболочка это наименьший выпуклый набор, содержащий все входные точки.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; По простому: Если все точки представить в виде гвоздей, вбитых в деревянную дощечку, то выпуклая оболочка будет резинкой, обернутой вокруг внешних гвоздей.</div>
+<div class="caption"><img src="img/2.png" width=250><br>Набор точек в двумерном пространстве и его выпуклая оболочка</div><br>
+<b>Это означает, что в двумерном пространстве оболочкой является многоугольник (полигон), определяемый вершинами и ребрами!</b><br><br>
+
+Также хочется показать трехмерную выпуклую оболочку вокруг хорошо известного объекта - чайника Юта (Utah Teapot).
+<div class=blockindent>&nbsp; &#9679; &nbsp; В двумерном пространстве для получения некоего понимания о выпуклой оболочке в качестве аналога использовалось кольцо резинки.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; В трехмерном пространстве можно задуматься об усадочной упаковке объекта. In 3D you can think of shrink wrapping the object</div>
+<div class="caption"><img src="img/3.png" width=600></div><br>
+<b>В трехмерном пространстве оболочкой является многогранник, определяемый вершинами, ребрами и многоугольными (полигональными) гранями! Обратите внимание, что мы не собираемся ограничиваться только треугольными гранями!</b><br><br>
+
+<h4>Использование выпуклых оболочек для обнаружения столкновений</h4>
+Почему следует использовать выпуклые оболочки для обнаружения столкновений в играх?
+Why should we use convex hulls for collision detection in games?
+<div class=blockindent>&nbsp; &#9679; &nbsp; Динамические объекты в играх используют приближение к простым формам для обнаружения столкновений поскольку использование отображения геометрии <b>не будет</b> эффективным.
+Dynamic game objects are usually approximated by simpler shapes for collision detection since  using the render geometry would NOT be efficient</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Выпуклые оболочки - хороший кандидат поскольку он могут достаточно хорошо соответствовать даже сложному геометрическому элементу.
+Convex hulls are a good candidate since they can approximate even complex geometry quite well</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Кроме того, обнаружение столкновений для выпуклых многогранников хорошо и надежно определяется. Вспомните о <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%93%D0%B8%D0%BB%D0%B1%D0%B5%D1%80%D1%82%D0%B0_%E2%80%94_%D0%94%D0%B6%D0%BE%D0%BD%D1%81%D0%BE%D0%BD%D0%B0_%E2%80%94_%D0%9A%D1%91%D1%80%D1%82%D0%B8" onmouseover="show('GJK - сокращ. от англ. слов Gilbert—Johnson—Keerthi algorithm<br>(алгоритм Гилберта—Джонсона—Кёрти) — алгоритм для<br>определения минимального расстояния между двумя<br>выпуклыми множествами (объектами)')" onmouseout="hide()">GJK</a> и
+<a href="https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B5%D0%BC%D0%B0_%D0%BE%D0%B1_%D0%BE%D0%BF%D0%BE%D1%80%D0%BD%D0%BE%D0%B9_%D0%B3%D0%B8%D0%BF%D0%B5%D1%80%D0%BF%D0%BB%D0%BE%D1%81%D0%BA%D0%BE%D1%81%D1%82%D0%B8" onmouseover="show('SAT - сокращ. от англ. слов Separating Axis Theorem<br>(теорема разделяющей оси) для двух выпуклых объектов<br>можно сформулировать так: два выпуклых объекта<br>пересекаются тогда и только тогда, когда существует<br>плоскость (для двумерного случая - прямая), такая,<br>что одна геометрия лежит по одну её сторону, а другая<br>- по другую')" onmouseout="hide()">SAT</a>, которые мы обсуждали уже здесь в предыдущих руководствах.
+<!-- http://www.dyn4j.org/2010/01/sat/ --></div><br>
+
+<h4>Использование выпуклых оболочек в игре</h4>
+<div class="caption"><img src="img/4.png" width=600></div><br>
+Прежде чем начать, хочется показать два видеоролика, чтобы было представление о том, как выпуклые оболочки используются в играх:
+<div class=blockindent>&nbsp; &#9679; &nbsp; Показать видеоролик о выпуклых оболочках в игре.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Показать, как физический движок рассматривает игру.</div>
+
+Sergiy will show you how to implement awesome physics visualization right after this talk!<br><br>
+
+I hope the videos gave you an idea about the problem we are trying to solve here today.<br><br>
+
+
+
+When I started looking in convex hulls I quickly came across an algorithm called Quickhull:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Quickhull was published by Barber and Dobkin in 1995</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; It is essentially an iterative algorithm that adds individual points one point at a time to an intermediate hull.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; When implementing an algorithm to build convex hulls you have to deal with input geometry that pushes the limit of floating point precision.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Quickhull uses so called fat planes and face merging to address these problems</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; The output is then a set of ‘fat’ faces that encloses the exact convex hull</div>
+
+In the remainder of the talk will try to explain what this means in detail!<br><br>
+
+
+----------------------- Page 9-----------------------
+
+I will start outlining the algorithm in 2D first
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; I like to mention, that this is not the ‘real’ 2D Quickhull algorithm (which actually exists). You should think of it as an introduction of the 3D version we will investigate later in the talk</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Personally I find it often helpful to think about things in 2D first, to get a good understanding of the problem and to familiarize myself with the basic ideas</div>
+
+
+----------------------- Page 10-----------------------
+<h3>Quickhull 2D: Инициализация оболочки</h3>
+Предположим, что задан набор точек, и нужно построить выпуклую оболочку с использованием алгоритма Quickhull:
+<div class=blockindent>&nbsp; &#9679; &nbsp; Первое, что нужно сделать в Quickhull, - это построить исходную оболочку, из которой можно начать пошагово добавлять точки итеративно.</div>
+<div class="caption"><img src="img/5.png" width=500></div>
+Поиск этой исходной оболочки начнем с определения крайних точек по каждой из осей координат.
+<div class=blockindent>&nbsp; &#9679; &nbsp; Если по простому, то это означает, что нужно найти точки с наибольшими и наименьшими значениями координат&nbsp;<tt>x</tt>&nbsp;и&nbsp;<tt>y</tt>.</div>
+<div class="caption"><img src="img/6.png" width=700></div>
+Из этих четырех точек выбираем пару, в которой точки находятся на самом большом расстоянии друг от друга.
+<div class=blockindent>&nbsp; &#9679; &nbsp; В данном примере это будут самая левая и самая правая точки.</div>
+<div class="caption"><img src="img/7.png" width=500></div>
+Наконец, мы ищем самую дальнюю точку от линии, проведенной через эти две крайние точки
+<div class="caption"><img src="img/8.png" width=500></div>
+Эти три точки и дадут нашу первоначальную оболочку.
+<div class=blockindent>&nbsp; &#9679; &nbsp; Первоначальная оболочка в двумерном пространстве - это просто треугольник.</div>
+<div class="caption"><img src="img/9.png" width=500></div><br>
+
+<h3>Quickhull 2D: Разделение точек</h3>
+Прежде чем начать добавлять новые точки к исходной оболочке, нужно сделать некоторые бухгалтерские работы:
+Before we start adding new points to the initial hull we have to do some book-keeping work:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Следующим шагом будет разделение оставшихся точек и присвоение каждой точки ближайшей к ней грани.
+The next step is to partition the remaining points and assign each point to its closest face</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Также можно удалить точки внутри исходной оболочки, поскольку они не могут быть на финальном варианте оболочки.</div>
+<div class="caption"><img src="img/10.png" width=800><br>
+Пояснение к коду на картинке: <tt>CL</tt> - сокращ. англ. слов conflict list - список конфликтов, а <tt>CL(e1)={p1, p2, p3}</tt> означает, что список конфликтов грани <tt>e1</tt> содержит точки <tt>p1</tt>, <tt>p2</tt> и <tt>p3</tt>.</div><br>
+
+Это означает, что каждая грань ведет список точек, которые находятся вне плоскости грани. Эти списки называются «списками конфликтов», поскольку точки могут «видеть» эту грань и следовательно, возможно находятся на финальном варианте оболочки.
+Это грамотный способ управления вершинами, поскольку при добавлении к оболочке новой вершины не нужно перебирать все вершины.
+Поэтому <a href="https://ru.wikipedia.org/wiki/%D0%92%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B0" target="_blank">временна&#769;я сложность алгоритма</a>
+Quickhull обычно равна <span class="lnk" onmouseover="show('линейно-логарифмическое время,<br>максимально быстрая сортировка<br>сравнением')" onmouseout="hide()"><tt>O(n log n)</tt></span> как в двумерном, так и в трехмерном вариантах!
+<div class=warning><b>Предупреждение:</b> Пожалуйста не запутайтесь здесь. Так как представлены в двух и трехмерном вариантах и некоторая терминология совпадает, будем использовать термины «Edge» (ребро, край) и «Face» (грань) взаимозаменяемые! Это поможет, когда позже в этой лекции перейдем к трехмерному варианту алгоритма!
+
+Please don’t get confused here. Since I am presenting in 2D and 3D and some terminology overlaps I will use the terms ‘Edge’ and ‘Face’ interchangeable! This will usually help when we go to 3D later in the talk!</div><br>
+
+
+<h3>Quickhull 2D: Поиск следующей вершины</h3>
+Следующим шагом будет добавление новой точки к нашему промежуточному варианту оболочки. Перебираем наши списки конфликтов и находим точку <b>p</b> с наибольшим расстоянием от этой оболочки.
+<div class=blockindent>&nbsp; &#9679; &nbsp; Давайте назовем эту точку точкой просмотра или обзора.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Добавление этой новой точки потребует несколько дополнительных шагов.</div>
+<div class="caption"><img src="img/11.png" width=500></div>
+
+<h3>Quickhull 2D: Поиск горизонта</h3>
+<div class="caption"><img src="img/12.png" width=700></div>
+Сначала нам нужно определить все грани, которые видны из недавно добавленной точки, поскольку эти грани могут быть не на оболочке:
+First we need to identify all faces that are visible from the newly added point since these faces cannot be on the hull:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Грань является видимой, если эта новая точка находится перед плоскостью грани. A face is visible if the new point is in front of the face plane.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Можно воспользоваться простыми проверками плоскости чтобы причислить эту новую точку по отношению к каждой грани!
+We can use simple plane tests to classify the new point against each face!</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Следующий шаг состоит в том, чтобы найти две вершины, соединяющие видимую грань с невидимой.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Эти две вершины (<tt>H1</tt> и <tt>H2</tt>) называются горизонтом.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Фактически, горизонт является границей между видимой и невидимой частями текущей оболочки, как оно видится из новой точки просмотра.</div><br>
+
+<h3>Quickhull 2D: Добавление точки к оболочке</h3>
+
+Once we identified the two horizon vertices we then create two new faces for each horizon vertex to connect the new vertex to hull
+<div class="caption"><img src="img/13.png" width=500></div><br>
+
+----------------------- Page 19-----------------------
+<h3>Quickhull 2D: Partition orphans</h3>
+<div class="caption"><img src="img/14.png" width=800><br></div>
+После построения новых граней некоторые старые грани стали устаревшими.
+After building  the new faces some old faces became obsolete
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Прежде чем удалить эти грани, нужно обработать их списки конфликтов, поскольку эти конфликтные точки могут остаться на финальном варианте оболочки.
+Before we can delete these faces we need to handle their conflict lists since these conflict points can still be on the final hull</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; We handle this by simply partitioning these orphaned vertices to the new faces</div>
+
+
+----------------------- Page 20-----------------------
+<h3>Quickhull 2D: Добавление точки к оболочке</h3>
+<div class="caption"><img src="img/15.png" width=500><br>
+</div>
+Finally we can now remove all old faces which were visible from the new point and therefore cannot be on the hull anymore
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; This closes the iteration and we repeat those steps until all conflict list are empty</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; In our example we continue and grab the next eye point and add it to hull as we just learned</div>
+
+
+----------------------- Page 21-----------------------
+<div class="caption"><img src="img/16.png" width=500><br>
+</div>
+And we do it one more time to find our final hull…
+И делаем это ещё раз, чтобы найти нашу последнюю оболочку...
+
+----------------------- Page 22-----------------------
+<h3>Quickhull 2D:</h3>
+<div class="caption"><img src="img/17.png" width=500><br>
+</div>
+When there are no more vertices (which means all conflict lists are empty) we are done!<br><br>
+
+
+----------------------- Page 23-----------------------
+
+As you can see the basic ideas should be pretty easy to understand
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; In 3D the major implementation difficulties actually arise from managing the lists of vertices, edges, faces and conflicts</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; The other difficulty is dealing with numerical imprecision when classifying  points using plane tests.</div>
+
+
+----------------------- Page 24-----------------------
+
+So far we pretended that our mathematical operations are exact
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Of course this is *not* true in floating point arithmetic.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Let’s investigate how we can deal with those problems.</div>
+
+
+----------------------- Page 25-----------------------
+<h3>Quickhull 2D: Инварианты Invariants</h3>
+<div class="caption"><img src="img/18.png" width=600><br>
+</div>
+When building a convex hull we must maintain geometric invariants during construction:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; In 2D we must guarantee that every vertex is convex</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; This should be obvious since otherwise it would be simple to find a line between two points inside the hull that would leave and enter as shown in the slide at the beginning of the talk</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; I tried to hint this with the dotted line between the outside pointing normals on the slide</div>
+
+
+----------------------- Page 26-----------------------
+<h3>Quickhull 2D: Тест на выпуклость Convexity test</h3>
+<div class="caption"><img src="img/19.png" width=600><br>
+</div>
+Next we need to define what a convex vertex is and how we can test a vertex for convexity:<br>
+
+Для каждой вершины:
+<div class=blockindent>&nbsp; &#9679; &nbsp; First test if right vertex is below the left face</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Then test if left vertex if it is below the right face</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; If both tests are true the vertex is convex, otherwise it must be concave or coplanar</div>
+
+
+----------------------- Page 27-----------------------
+<h3>Quickhull 2D: Надежность вычислений Numerical robustness</h3>
+<div class="caption"><img src="img/20.png" width=600><br>
+coplanar - копланарный, т.е. находящийся в одной плоскости, concave - вогнутый, convex - выпуклый</div>
+Let’s now look at an example where non-convex vertices might become an issue:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Whenever we add a point which is collinear with an existing face things can become fuzzy</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; A small variation of point P will define whether the vertex V will remain on the hull or not</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Ideally we would like to have more stability such that for very small  variations within some tolerance we would get the same result</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Note that the point P is not actually moving, but can end up on either side of the plane *just* due  to numerical imprecision</div>
+
+
+----------------------- Page 28-----------------------
+<h3>Quickhull 2D: Толщина плоскостей Fat planes</h3>
+<div class="caption"><img src="img/21.png" width=600><br>
+in front of plane - перед плоскостью, behind plane - за плоскостью, on plane - на плоскости</div>
+A common approach to deal with these kinds of numerical problems is to use so called *fat* planes
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Instead of comparing directly against zero we now compare against some epsilon value</div>
+
+
+We still can classify points when using fat planes as before:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; A point is in front of the plane if its distance is larger than epsilon</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; A point is behind the plane if the distance is less than negative epsilon</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Otherwise the point must on the plane.</div>
+
+<b>We can now define a vertex to be convex if its distance is larger than epsilon. All other points are either concave or coplanar and should be handled specially!</b><br><br>
+
+
+----------------------- Page 29-----------------------
+<h3>Quickhull 2D: Объединение граней Face merging</h3>
+<div class="caption"><img src="img/22.png" width=500><br>non-convex - невыпуклая, merged - объединенные</div>
+So what do we do when we encounter a non-convex vertex?
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; The rule is essentially that we want every vertex of our hull to be clearly convex</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; We can enforce this rule by simply merging the left and right face across the non-convex vertex into a new face.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; As you can see on the slide his will remove the concavity and correct the geometrical defect.</div>
+
+
+----------------------- Page 30-----------------------
+<h3>Quickhull 2D: Epsilon</h3>
+<div class="caption"><img src="img/23.png" width=500></div>
+The final question is what epsilon we should choose for our fat planes:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; The CRT defines a floating point epsilon but this does NOT take our input set into account.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; We like to define a relative tolerance which takes the size of the input object into account</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; So one possible solution it to choose an epsilon relative to the sum of maximum absolute coordinates</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Note that when using FLT_EPSILON without scaling we would fail big time e.g. very small models (where FLT_EPSILON is much bigger than the entire model itself)</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Or for very large models where the epsilon is too small to make any difference at all</div><br><br>
+
+
+<!-- Page 31 -->
+На этом знакомство с двумерным вариантом алгоритма Quickhull заканчивается:
+This closes the introduction of Quickhull in 2D:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Надеюсь, что у вас появилось первое представление о работе алгоритма.
+I hope you now have some first idea how the algorithm operates</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Для двумерного пространства уже имеются хорошие алгоритмы построения выпуклых оболочек, которые легко и просто реализовать.
+In 2D there already exist good algorithms to build convex hulls which are easy and straight forward to implement.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Так что, если ваша игра двумерна, рекомендую один из них.
+So if your game is 2D I recommend using one of those.</div><br>
+
+В оставшейся части обсуждения рассмотрим, как создаются выпуклые оболочки в 3D пространстве.
+In the remainder of the talk we will discuss how we build convex hulls in 3D
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Алгоритм Quickhull в 3D очень похож на версию, которая только что показана в 2D.
+Quickhull in 3D is very similar to the version I just showed you in 2D</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Наиболее заметным отличием является построение горизонта и мы должны иметь дело с числовой неточностью более тщательно
+The most notable difference is the construction of the horizon and we  have to deal with numerical imprecision more carefully</div><br><br>
+
+<!-- Page 32 -->
+<img src="img/24.png" width=250 align=right>
+<h3>Quickhull 3D: Начальная оболочка</h3>
+Также как и в двумерном варианте, сперва нужно построить начальную, исходную оболочку.
+<div class=blockindent>&nbsp; &#9679; &nbsp; Также как это делалось в 2D, вначале нужно найти исходный треугольник <tt>(v1, v2, v3)</tt>.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Затем, точно также добавим самую дальнюю точку от треугольной плоскости (здесь это <tt>v4</tt>).</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; В 3D пространстве исходная оболочка теперь представляет собой тетраэдр.</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; После построения исходной оболочки, далее разделим оставшиеся точки в списках конфликтов граней нашей исходной оболочки.</div><br><br>
+
+
+<!-- Page 33 -->
+<h3>Quickhull 3D: Горизонт</h3>
+<div class="caption"><img src="img/25.png" width=600></div>
+We then start iteratively adding new points to the hull and grab the point with the largest distance from our conflict lists:
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; This will give us the next eye point</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; As in 2D we need to find the horizon again</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; In 3D the horizon is a list of edges that connect visible with non-visible faces.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; And again the horizon is the boundary between the visible and non–visible part of the current hull as seen from the current eye point</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Finding the horizon is a bit more involved in 3D and we will look at it in more detail in just a second</div>
+
+
+<!-- Page 34 -->
+<h3>Quickhull 3D: Добавление точки к оболочке</h3>
+<div class="caption"><img src="img/26.png" width=600></div>
+We then proceed with the iteration and create a new face for each horizon edge with the new eye-point
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; This essentially connects the new vertex to the current hull</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Finally we partition the orphaned vertices to the new faces (F1 –  F3)</div>
+
+
+<!-- Page 35 -->
+<h3>Quickhull 3D: Поиск горизонта</h3>
+<div class="caption"><img src="img/27.png" width=500></div>
+Найти горизонт в трехмерном пространстве не так просто, как это было при поиске двух вершин в 2D пространстве.
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Для нахождения горизонта по существу выполняется <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA_%D0%B2_%D0%B3%D0%BB%D1%83%D0%B1%D0%B8%D0%BD%D1%83" onmouseover="show('DFS - сокращ. англ. слов depth-first search - поиск<br>в глубину, один из методов обхода графа')" onmouseout="hide()">DFS</a>, начиная с
+For finding the horizon we essentially perform a DFS starting from the conflict face S</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; При каждом шаге мы пересекаем одно ребро и переходим на соседнюю, смежную грань.</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; If the face is visible, we cross another edge until we find a face that is not visible from the current eye point</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; We store the offending edge as part of the horizon and continue the search in the previous face</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; On termination we have a list of all edges defining the horizon in a closed CCW loop</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; On the slide we start at the face labeled with S and follow the arrows and on our way back we collect the horizon edges</div>
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Since this is an essential operation of the hull construction let’s look at this step in a bit more detail</div>
+<b>Explain arrows in slide!</b><br><br>
+
+
+<!-- Page 36 -->
+<div class="caption"><img src="img/28.png" width=500></div>
+I prepared a small animation which hopefully will help to understand the horizon construction:<br>
+
+<!-- Page 37 -->
+<div class="caption"><img src="img/29.png" width=500></div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; We test the visibility of the next face (and we assume here it is visible from the eye point)</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; Since it is visible we continue our search and cross the next edge</div>
+
+<!-- Page 38 -->
+<div class="caption"><img src="img/30.png" width=500></div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; We test the next face and since it is visible as well we continue and cross the next edge</div>
+
+<!-- Page 39 -->
+<div class="caption"><img src="img/31.png" width=500></div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; We continue these tests until we cross an edge to an invisible face</div>
+
+<!-- Page 40 -->
+<div class="caption"><img src="img/32.png" width=500></div>
+We would now cross an edge to a face we have already visited
+
+<div class=blockindent>&nbsp; &#9679; &nbsp; Whenever we visit a face we will mark them as processed</div>
+<div class=blockindent>&nbsp; &#9679; &nbsp; This allows to simply test if a face was already processed and can be skipped</div>
+
+<!-- Page 41 -->
+Продолжаем пересекать ребра...<br>
+<div class="caption"><img src="img/33.png" width=500><br>
+<img src="img/34.png" width=500><br>
+<img src="img/35.png" width=500><br>
+<img src="img/36.png" width=500></div>
+<!-- Page 45 -->
+<div class="caption"><img src="img/37.png" width=500></div>
+Again we already visited this face so we don’t cross this edge as well
+
+<!-- Page 46 -->
+<div class="caption"><img src="img/38.png" width=500><br>
+<img src="img/39.png" width=500><br>
+<img src="img/40.png" width=500></div>
+<!-- Page 49 -->
+<div class="caption"><img src="img/41.png" width=500></div>
+The next face was already visited so no need to cross here too
+----------------------- Page 50-----------------------
+<div class="caption"><img src="img/42.png" width=500></div>
+Finally we would cross the first edge that connects a visible and a non-visible face
+<div class=blockindent>&nbsp; &#9679; &nbsp; We add the edge to the horizon list and return to the previous face</div>
+----------------------- Page 51-----------------------
+<div class="caption"><img src="img/43.png" width=500></div>
+We then continue with the next edge and return to the previous face
+----------------------- Page 52-----------------------
+<div class="caption"><img src="img/44.png" width=500></div>
+Again we cross an edge that connects a visible and invisible face
+<div class=blockindent>&nbsp; &#9679; &nbsp; We save that edge and add it to our horizon and return to the previous face</div>
+
+----------------------- Page 53-----------------------
+<div class="caption"><img src="img/45.png" width=500></div>
+The procedure continues and collects the horizon edges until we made our way back to the start face
+----------------------- Page 54-----------------------
+<div class="caption"><img src="img/46.png" width=500></div>
+----------------------- Page 55-----------------------
+<div class="caption"><img src="img/47.png" width=500></div>
+----------------------- Page 56-----------------------
+<div class="caption"><img src="img/48.png" width=500></div>
+----------------------- Page 57-----------------------
+<div class="caption"><img src="img/49.png" width=500></div>
+----------------------- Page 58-----------------------
+<div class="caption"><img src="img/50.png" width=500></div>
+----------------------- Page 59-----------------------
+<div class="caption"><img src="img/51.png" width=500></div>
+----------------------- Page 60-----------------------
+<div class="caption"><img src="img/52.png" width=500></div>
+----------------------- Page 61-----------------------
+<div class="caption"><img src="img/53.png" width=500></div>
+----------------------- Page 62-----------------------
+<div class="caption"><img src="img/54.png" width=500></div>
+----------------------- Page 63-----------------------
+<div class="caption"><img src="img/55.png" width=500></div>
+----------------------- Page 64-----------------------
+<div class="caption"><img src="img/56.png" width=500></div>
+----------------------- Page 65-----------------------
+<div class="caption"><img src="img/57.png" width=500></div>
+----------------------- Page 66-----------------------
+<div class="caption"><img src="img/58.png" width=500></div>
+----------------------- Page 67-----------------------
+<div class="caption"><img src="img/59.png" width=500></div>
+----------------------- Page 68-----------------------
+<div class="caption"><img src="img/60.png" width=500></div>
+----------------------- Page 69-----------------------
+<div class="caption"><img src="img/61.png" width=500></div>
+----------------------- Page 70-----------------------
+<div class="caption"><img src="img/62.png" width=500></div>
+----------------------- Page 71-----------------------
+<div class="caption"><img src="img/63.png" width=500></div>
+----------------------- Page 72-----------------------
+<div class="caption"><img src="img/64.png" width=500></div>
+This is edge we started with and we are done!
+
+
+
+----------------------- Page 73-----------------------
+
+On termination we have a list of all horizon edges in CCW order
+
+-   We can now simply create a new triangle face for each horizon edge in our list
+
+-   This essentially connects the new vertex to the current hull
+
+
+
+----------------------- Page 74-----------------------
+
+This closes the introduction of the 3D Quickhull algorithm and we continue looking into invariants
+
+
+
+----------------------- Page 75-----------------------
+
+As in 2D we must maintain geometric invariants while constructing the hull:
+
+-  In 3D we must now guarantee that every edge  is convex
+
+-  And the argumentation here is basically the same as it was earlier in 2D
+
+
+----------------------- Page 76-----------------------
+
+We now need to define what a convex edge  is and how we can test an edge for convexity:
+
+For each edge:
+
+-   First we test if the center of the right face is below the left face plane
+
+-   The we test if the center of the left face is below the right face plane
+
+-   If both tests are true the edge is convex, otherwise it must be concave or coplanar
+
+-   This is very similar to the 2D test, but we now use the center point of the face
+
+-   The face center is simply the average of the face vertices
+
+
+----------------------- Page 77-----------------------
+
+As in 2D we need an epsilon to define the thickness of flat planes and we just expand our formula to 3D!
+
+
+----------------------- Page 78-----------------------
+
+So when we detect a non-convex edge we now merge the two adjacent faces
+
+-   This adds another step to our iterative loop
+
+-   Let’s assume face1 and face2 were non-convex in our previous example
+
+-   We would now merge face1 and face2 into a new polygonal face replacing the original faces F1 and F2
+
+-   As mentioned in the beginning we are not restricting ourselves to triangle faces
+
+
+----------------------- Page 79-----------------------
+
+Let’s now investigate the example from the original Quickhull  paper:
+
+-   The message of the next slides is really to show what will happened if you DON’T merge faces and how you can run into a bunch of geometrical and topological problems!
+
+-   All you need to get here right now is that face merging is really a critical operation !
+
+
+The situation presents itself like this: Faces F1 and F3 are visible from the new point 𝐏while face F2 s not!
+
+-   Basically you can think of a simple tetrahedron here
+
+-   The front face is in the screen plane and was  not  merged into one big triangle face,
+
+    but is essentially a fan of three faces
+
+-   It appears to us as if faces F1 –  F3 are coplanar
+
+-   But the bad news is that coplanar only exists in an ideal world, but not in the world of limited precision numbers!
+
+
+----------------------- Page 80-----------------------
+
+What really happens is (and I am exaggerating the situation here a little bit) is that:
+
+-   The two center points are actually moved inside
+
+-   And the edges between F1 and F2 and also F2 and F3 are concave
+
+
+
+----------------------- Page 81-----------------------
+
+Now let’s rotate the tetrahedron and assume we are now looking from behind point P and at the bottom :
+
+-   You can hopefully see the new point and the bottom edges of the three faces
+
+-   Due to the non-convexity the new point gets kind of locked behind the three planes that leads to this weird situation
+
+
+
+----------------------- Page 82-----------------------
+
+We continue and build now the horizon as we learned earlier using the DFS
+
+-  The results in five horizon edges a, b, c, d, and e as sketched on the slide
+
+
+
+----------------------- Page 83-----------------------
+
+Next we  replace 𝐹  and 𝐹   with 5  new faces for each edge a−e
+
+                    1       3
+
+- Since the outcome of the operation is  pretty interesting let’s look at each of the new faces individually
+
+
+----------------------- Page 84-----------------------
+
+We build a face for edge a
+
+-  Note how this face partially overlaps face2 which is still on the hull
+
+
+----------------------- Page 85-----------------------
+
+We build a face for edge b
+
+-  Note that this face has flipped (CW) orientation and also shares and edge with FA
+
+
+----------------------- Page 86-----------------------
+
+We build a face for edge c
+
+-   Hooray, nothing wrong here
+
+
+----------------------- Page 87-----------------------
+
+We build a face for edge d
+
+-  Note that this face has flipped (CW) orientation again and also shares an edge with FA and FB
+
+
+----------------------- Page 88-----------------------
+
+We build a face for edge e
+
+-  We now have four faces sharing the same edge and also partially overlapping each other
+
+
+----------------------- Page 89-----------------------
+<div class="caption"><img src="img/80.png" width=500></div>
+-  Due to numerical imprecision face2 was still identified as visible from P and will remain on the hull
+
+
+----------------------- Page 90-----------------------
+
+What happened here is that we introduced a couple of severe errors because our hull was not in an healthy state when we started adding the new point.
+
+As a result the new faces are violating a bunch geometrical and topological invariants:
+
+-   Two faces are flipped upside down (that means the  normals are pointing inside)
+
+-   Four faces share the same edge (which make them partially and fully overlapping each other)
+
+
+
+As you can imagine repairing those errors would become pretty involved.
+
+The good news are that I haven’t run into any of the described issues when properly merging faces during the hull construction.
+
+So hopefully you can see that it essential for a robust implementation to maintain a healthy hull during construction.
+
+
+
+----------------------- Page 91-----------------------
+<h3>Half-Edge mesh</h3>
+<div class="caption"><img src="img/81.png" width=500></div>
+We haven’t talked about a data structure for convex  polyhedra yet. So before we start looking into face merging in more detail, let’s talk about a possible data structure first:
+
+-   Obviously there are many ways to describe a convex polyhedron
+
+-   A common data structure is the so called Half-Edge data structure which is an edge centric mesh representation
+
+-   The half edge data structure makes it easy to iterate edges of a face and to access neighboring faces
+
+
+
+For each face we store:
+
+-   A half-edge that defines the entry into a circular list around the face
+
+
+For each edge we store:
+
+-   The previous and next edge that build the circular list around the face
+
+-   A twin edge to cross over to the adjacent face
+
+-   And the tail vertex of the edge
+
+-   Note that we don’t need to store the head vertex since it is simple the tail vertex of the twin edge
+
+
+----------------------- Page 92-----------------------
+
+We learned that face merging is the essential operation to maintain a healthy hull.
+
+-  Here is an example how to merge two faces using the half-edge data structure.
+
+-  The situation is that we are about to merge the left into the right face
+
+-  This means that edge e and its twin will go away and also the left face
+
+
+
+----------------------- Page 93-----------------------
+
+First we make sure that the absorbing right face does not reference the edge we are about to delete (e.g. we use edge->prev here)
+
+
+
+----------------------- Page 94-----------------------
+
+Next we must make sure that all edges of the absorbed left face will now reference the right face as their owner
+
+
+----------------------- Page 95-----------------------
+
+Finally we need to connect the incoming and outgoing edges
+
+-   Also note that we can access all necessary data for the merge operation just from the shared edge between the two adjacent faces we are about to merge
+
+
+
+----------------------- Page 96-----------------------
+
+The result of two of merged faces is a polygonal face with its vertices  not quite coplanar
+
+-   Remember that we are in the world of limited precision numbers
+
+-   The Newell algorithm builds a best fit plane in the least square sense which minimizes the distance of the vertices
+
+
+----------------------- Page 97-----------------------
+
+I added some formulas for completeness and convenience, but going into detail here would get us off topic.
+
+-   Both Gino’s and Christer’s books cover Newell planes and I also added some additional links in the references
+
+
+----------------------- Page 98-----------------------
+
+Now let’s look at one important topological invariant of a convex hull.
+
+-   The most important one for us is that each vertex must have at least three adjacent faces
+
+-   We call a vertex redundant if it does not satisfy this invariant
+
+
+
+Of course there are other topological invariants, like:
+
+-   Each face must have at least three neighbors
+
+-   Each edge is shared exactly between two faces
+
+-   Each face of a convex polyhedron must be a convex polygon
+
+-   But as is turns out we don’t need to deal with those directly
+
+
+----------------------- Page 99-----------------------
+
+When merging faces we might violate topological invariants and need to fix those:
+
+
+
+Consider the merge sequence in the above picture and how it can lead to topological errors:
+
+-   We merge face1 into face3
+
+This creates a couple of problems:
+
+-   Vertex v has now only two adjacent faces and has become redundant
+
+-   Face2 has only two neighbors
+
+-   Face13 is not convex
+
+
+----------------------- Page 100-----------------------
+
+We detect this error by checking the adjacent faces of the in- and outgoing edges ->
+
+Both edges point to face2
+
+-   Since face2 is a triangle we will not connect the in- and outgoing edge, but use the non-shared edge instead
+
+-   Note that face2 is redundant as well since all vertices are contained in face13 and can be deleted
+
+-   Vertex v has also become obsolete and will be deleted as well
+
+The trick here is that when we merge two faces we check for this error and fix it immediately!
+
+
+
+----------------------- Page 101-----------------------
+
+Let’s look at the previous example again.
+
+Consider now the slightly different merge sequence:
+
+-   We now merge face2 into face1
+
+Again:
+
+-   Vertex v has now only two adjacent faces and has become redundant
+
+-   Besides this I don’t notice any other problem in this case
+
+
+----------------------- Page 102-----------------------
+
+We detect this error again by checking the adjacent faces of the in- and outgoing
+
+edges -> Both edges point to face3 here
+
+-   Since face3 has now more than three vertices we cannot apply the same fixing strategy as before
+
+-   Instead we simply extend the incoming edge to the next vertex and delete the outgoing edge
+
+-   Again vertex v has become obsolete and should be deleted as well
+
+Again when we merge faces we check for this error and fix it immediately!
+
+
+----------------------- Page 103-----------------------
+
+Another problem you will encounter when merging faces is that you might a large number of new faces that should be all merged:
+
+-   Let’s call this a merge cycle
+
+Imagine we are building the convex of hull of a cylinder and we are about to add the final vertex of the top face:
+
+-   This vertex of course presents itself as in the same plane as the other vertices.
+
+-   In this situation we create many new faces which are roughly coplanar and need to be merged
+
+-   Ideally we would like to merge all new faces into one face as shown on the right hand side
+
+
+----------------------- Page 104-----------------------
+
+The problem is now that we practically merge one face after the other:
+
+-   Whenever we merge two faces we rebuild the face plane.
+
+-   Rebuilding the face can jiggle the plane and an edge between two faces can become temporarily convex and prevent us from merging the whole cycle
+
+-   In the worst case this can introduce concave faces which are now NOT merged properly
+
+
+
+Here are some ideas how to address this:
+
+-   The faces with the largest area should be the most stable w.r.t. the orientation of the face plane. So merging into the largest faces first reduces jiggle. Think of merging the little sister into the big daddy
+
+-   You can also introduce an absolute tolerance to increase your merge radius and make your merge cycle less sensitive for these situations.
+
+-   This is basically how I handle this problem at the moment since for physics we want as large faces as possible for stability reasons and do not aim for the tightest hull.
+
+-   If you are working with collision margins it is probably a good idea to make this absolute tolerance a small percentage of that margin
+
+
+----------------------- Page 105-----------------------
+
+Another idea to deal with this problem is to NOT rebuild the face planes at all when merging to faces:
+
+-   For both faces you have your best fit plane and the vertices (which I tried to sketch on the slide)
+
+-   We can now compute the absolute distance of the right face’s vertices to the left face’s plane and vice versa
+
+-   Then we simply keep the face plane that minimizes the distance instead of rebuilding it
+
+----------------------- Page 106-----------------------
+
+Let’s close this part how we could use face merging to deal with defect hulls:
+
+-  At each iteration the basic assumption is to start with a healthy hull
+
+-   When adding the vertex we need to inspect all new faces for possible defects at their edges between each other and at the horizon
+
+-   These are the weak spots where might have introduced new errors
+
+-  An easy strategy is to iterate all new faces and repair each edge one by one
+
+
+----------------------- Page 107-----------------------
+
+This closes the theory and in the remainder of this talk I like to share some quick tips about a possible implementation
+
+
+
+----------------------- Page 108-----------------------
+
+The major performance pitfall is bad memory management of the half-edge data structure:
+
+-  The convex hull for N vertices is bounded
+
+-  Worst case is that all input vertices are on the hull:
+
+- The number of vertices is then at most V = N
+
+- The number of edges is then at most E = 3N – 6
+
+- The number of faces is then at most F = 2N – 4
+
+- Test with Euler’s formula: V –  E + F = 2
+
+
+
+In our implementation we can pre-allocate one buffer for vertices, half-edges, and faces and manage this buffer in a free list
+
+-   Ideally we will just have one big allocation per hull construction!
+
+-   This becomes especially important if you plan to compute convex hulls at runtime (e.g. for destruction)
+
+
+
+Here are some practical details:
+
+-  Don’t forget that you need to allocate half-edges (which is twice the number of edges)
+
+- We also need to account for temporary allocations (e.g. horizon faces)
+
+-   In practice I just double the buffer size
+
+
+----------------------- Page 109-----------------------
+
+Let’s start with the vertex structure.
+
+-    I am using an intrusive list to store the vertices
+
+-   The vertices are either on the hull or in a conflict list
+
+-    So obviously we have to include the list pointers here.
+
+-   We can optionally also store an edge leaving the vertex.
+
+-   This is not needed for constructing the hull, but it can be useful for post-processing if you like e.g. to iterate all adjacent faces of the vertex
+
+-    Of course we also to need store the position of a vertex
+
+----------------------- Page 110-----------------------
+
+Now let’s have a quick look how we can potentially implement a half-edge:
+
+-   As we would expect this definition maps pretty directly to a possible data structure
+
+-   We store a pointer to the tail vertex of the edge
+
+-   The half-edges build a circular list around the face so we also need to store the list pointers here
+
+-   And of course we also store the twin edge to cross over to the adjacent face
+
+-    Finally we also keep a reference to the parent face of the edge
+
+
+----------------------- Page 111-----------------------
+
+Finally the face structure:
+
+-    I am also using an intrusive list here, so we have to include the list pointers again
+
+-    And of course there is a pointer to the first edge starting the circular list around the face
+
+-    Finally it is possibly a good idea to store our conflict list here as well
+
+
+----------------------- Page 112-----------------------
+
+Finally some high-level code examples to give you an idea of a possible
+
+implementation:
+
+-   Assume we have some qhConvex class to store the hull after construction
+
+-   This snippet shows the top level construction function
+
+
+
+Explain a bit…
+
+
+----------------------- Page 113-----------------------
+
+The code snippets shows the iterative AddVertex() function
+
+-   We add new points until our conflict lists are empty
+
+Explain a bit…
+
+
+----------------------- Page 114-----------------------
+
+So you want to implement Qhull yourself and I talked now for nearly an hour and
+
+there is no code!
+
+-    Luckily there is a beautiful open-source implementation in JAVA which you can use
+
+    to start
+
+-    I also recommend looking at the original Qhull implementation which is not only a great implementation, but also full of gems of computational geometry!!!
+
+This closes the talk and hopefully my presentation will help you to understand and implement a robust convex hull builder!
+
+Thank you!
+
+
+----------------------- Page 115-----------------------
+
+Before I close I like to thank a bunch of people!
+
+-   Thanks to Valve for giving me permission to present to you today
+
+-   Thanks to Paul, Steve, Jeff and Anoush for spending time and rehearse this presentation with me
+
+-   Thanks to Randy for reading the presentation several times at an early stage and providing valuable feedback
+
+-   Special thanks to Bruce Dawson for helping with the numerical problems in Quickhull and also providing all kinds of other valuable feedback
+
+-   Special thanks to John Lloyd for sharing his beautiful JAVA Quickhull implementation and making it open source
+
+
+----------------------- Page 116-----------------------
+
+
+----------------------- Page 117-----------------------
+
+If you liked this talk and if you want to see more cool Valve presentations please visit out website!
+
+
+
+<br><br>
+</body></html>

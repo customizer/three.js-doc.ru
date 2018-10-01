@@ -1926,7 +1926,9 @@ Sets the labels of the legend of this Lut.<br><br>
 <h2 id="7">QuickHull</h2>
 Алгоритм быстрой оболочки (QuickHull) — алгоритм построения <a href="https://ru.wikipedia.org/wiki/%D0%92%D1%8B%D0%BF%D1%83%D0%BA%D0%BB%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BE%D0%BB%D0%BE%D1%87%D0%BA%D0%B0" target="_blank">выпуклой оболочки</a> на плоскости. Использует идею <a href="https://ru.wikipedia.org/wiki/%D0%91%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F_%D1%81%D0%BE%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0" target="_blank">быстрой сортировки Хоара</a>.<br>
 Статья русскоязычной Википедии <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BE%D0%BB%D0%BE%D1%87%D0%BA%D0%B8" target="_blank">"Алгоритм быстрой оболочки"</a>.<br>
-Статья англоязычной Википедии <a href="https://en.wikipedia.org/wiki/Quickhull" target="_blank">"QuickHull"</a>.<br><br>
+Статья англоязычной Википедии <a href="https://en.wikipedia.org/wiki/Quickhull" target="_blank">"QuickHull"</a>.<br>
+Общие сведения об алгоритме Quickhull: Dirk Gregorius. March 2014, Game Developers Conference: <a href="http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf" target="_blank">Implementing QuickHull</a> (Реализация алгоритма QuickHull). Вот <a href="https://archive.org/details/GDC2014Gregorius" target="_blank">видеоролик</a> с этой презентацией.
+Перевод этой статьи на русский язык <a href="https://customizer.github.io/DirkGregorius_QuickHull.ru/DirkGregorius_ImplementingQuickHull.htm" target="_blank">здесь</a>.<br>
 
 <h3 id="7.1">Face</h3>
 Представляет секцию, ограниченную определенным числом полуребер. Текущая реализация предполагает, что грань всегда состоит из трех ребер.<br><br>
@@ -1994,8 +1996,7 @@ Sets the labels of the legend of this Lut.<br><br>
 <h4>Свойства</h4>
 <div class=blockindent><br>
 <pre id="7.2vertex"><a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">.vertex</a></pre>
-Ссылка на целевую вершину. Исходная вершина может быть получена при помощи запроса назначения своего двойника или предыдущего полуребра.
-Reference to the destination vertex. The origin vertex can be obtained by querying the destination of its twin, or of the previous half-edge.
+Ссылка на целевую вершину. Исходная вершина может быть получена при помощи запроса целевой вершины своего полуребра-двойника или целевой вершины предыдущего полуребра.
 Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
 
 <pre id="7.2prev"><a href="#7.2" onmouseover="show('HalfEdge.<br>prev - сокращ. англ. слова previous - предыдущий')" onmouseout="hide()">.prev</a></pre>
@@ -2005,13 +2006,10 @@ Reference to the destination vertex. The origin vertex can be obtained by queryi
 Ссылка на следующее полуребро той же самой грани. Значением по умолчанию является <tt>null</tt>.<br><br>
 
 <pre id="7.2twin"><a href="#7.2" onmouseover="show('HalfEdge.<br>twin - двойной')" onmouseout="hide()">.twin</a></pre>
-Ссылка на парное полуребро (полуребро-близнец) для достижения противоположной грани.
-Reference to the twin half-edge to reach the opposite face. Значением по умолчанию является <tt>null</tt>.<br><br>
+Ссылка на парное полуребро (полуребро-близнец) для перехода на противоположную грань. Значением по умолчанию является <tt>null</tt>.<br><br>
 
 <pre id="7.2face"><a href="#7.1" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">.face</a></pre>
-Каждое полуребро ограничивает отдельную грань и поэтому имеет ссылку на эту грань.
-Each half-edge bounds a single face and thus has a reference to that face.
-Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
+Каждое полуребро ограничивает отдельную грань и соответственно имеет ссылку на эту грань. Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
@@ -2038,7 +2036,8 @@ Each half-edge bounds a single face and thus has a reference to that face.
 
 
 <h3 id="7.3">QuickHull</h3>
-Общие сведения об алгоритме Quickhull: Dirk Gregorius. March 2014, Game Developers Conference: <a href="http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf" target="_blank">Implementing QuickHull</a> (Реализация алгоритма QuickHull).
+Общие сведения об алгоритме Quickhull: <span class="lnk" onmouseover="show('лекция Дирк Григориус на конференции<br>разработчиков игр в марте 2014 года')" onmouseout="hide()">Dirk Gregorius. March 2014, Game Developers Conference</span>: <a href="http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf" target="_blank">Implementing QuickHull</a> (Реализация алгоритма QuickHull).<br>
+Вот <a href="https://archive.org/details/GDC2014Gregorius" target="_blank">видеоролик</a> с этой презентацией.
 Перевод этой статьи на русский язык <a href="https://customizer.github.io/DirkGregorius_QuickHull.ru/DirkGregorius_ImplementingQuickHull.htm" target="_blank">здесь</a>.
 <br><br>
 
@@ -2048,7 +2047,8 @@ Each half-edge bounds a single face and thus has a reference to that face.
 <h4>Свойства</h4>
 <div class=blockindent><br>
 <pre id="7.3tolerance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tolerance - допустимое отклонение')" onmouseout="hide()">.tolerance</a></span></pre>
-The epsilon value that is used for internal comparative operations. Вычисление этого значения зависит от размера геометрического элемента. Значение по умолчанию равно&nbsp;<tt>-1</tt>.<br><br>
+Значение эпсилон (epsilon), используемое для внутренних операций сравнения.
+Вычисление этого значения зависит от размера геометрического элемента. Значение по умолчанию равно&nbsp;<tt>-1</tt>.<br><br>
 
 <pre id="7.3faces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('faces - грани')" onmouseout="hide()">.faces</a></span></pre>
 Созданные грани выпуклой оболочки. Значением по умолчанию является пустой массив.<br><br>
@@ -2086,17 +2086,16 @@ The epsilon value that is used for internal comparative operations. Вычисл
 <pre id="7.3removeVertexFromFace"><a href="#7.3" onmouseover="show('QuickHull.<br>remove vertex from face - удалить вершину грани')" onmouseout="hide()">.removeVertexFromFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
 <div class=list><tt>vertex</tt> - удаляемая вершина.</div>
 <div class=list><tt>face</tt> - целевая грань.</div>
-Метод удаляет вершину из списка 'назначенных' вершин и от заданной грани.
-Removes a vertex from the 'assigned' list of vertices and from the given face. It also makes sure that the link from 'face' to the first vertex it sees in 'assigned' is linked correctly after the removal.<br><br>
+Метод удаляет вершину от указанной грани <tt>face</tt> и из списка 'назначенных' вершин. Также он гарантирует, что привязка от грани <tt>face</tt> к первой вершине из списка 'назначенных' вершин, которую она видит, после удаления сделана правильно.<br><br>
 
 <pre id="7.3removeAllVerticesFromFace"><a href="#7.4" onmouseover="show('VertexNode.<br>remove all vertices from face - удалить все вершины грани')" onmouseout="hide()">.removeAllVerticesFromFace</a>( <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
-<div class=list><tt>face</tt> - The given face.</div>
-Removes all the visible vertices that a given face is able to see which are stored in the 'assigned' vertext list.<br><br>
+<div class=list><tt>face</tt> - задаваемая грань.</div>
+Метод удаляет все видимые вершины из списка 'назначенных' вершин, которые заданная грань в состоянии видеть.<br><br>
 
 <pre id="7.3deleteFaceVertices"><a href="#7.3" onmouseover="show('QuickHull.<br>delete face vertices - удалить вершины грани')" onmouseout="hide()">.deleteFaceVertices</a>( <a href="#7.2" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a>, <a href="#7.2" onmouseover="show('Face.<br>absorbing face - поглощающая грань')" onmouseout="hide()">absorbingFace</a> )</pre>
 <div class=list><tt>face</tt> - задаваемая грань.</div>
 <div class=list><tt>absorbingFace</tt> - дополнительная грань, которая пытается поглотить все вершины первой грани.</div>
-Removes all the visible vertices that 'face' is able to see.<br>
+Метод удаляет все видимые вершины, которые грань <tt>face</tt> может видеть.<br>
 &nbsp; &#9679; &nbsp; Если аргумент '<tt>absorbingFace</tt>' не указан, то все удаленные вершины будут добавлены  в список 'неназначенных' вершин.<br>
 &nbsp; &#9679; &nbsp; Если аргумент '<tt>absorbingFace</tt>' существует, тогда данный метод назначит все вершины грани <tt>'face'</tt>, которые может видеть грань <tt>'absorbingFace'</tt>.<br>
 &nbsp; &#9679; &nbsp; Если вершину не видит <tt>'absorbingFace'</tt>, она добавляется в список 'неназначенных' ('unassigned') вершин.<br><br>
@@ -2109,7 +2108,7 @@ Removes all the visible vertices that 'face' is able to see.<br>
 Метод вычисляет экстремальные значения (минимальный и максимальный векторы), которые будут использованы для расчета начальной оболочки.<br><br>
 
 <pre id="7.3computeInitialHull"><a href="#7.3" onmouseover="show('QuickHull.<br>compute initial hull - вычислить начальную оболочку')" onmouseout="hide()">.computeInitialHull</a>( )</pre>
-Computes the initial simplex assigning to its faces all the points that are candidates to form part of the hull.<br><br>
+Метод вычисляет начальную простейшую выпуклую оболочку, назначая её граням все точки, являющиеся кандидатами на формирование части оболочки.<br><br>
 
 <pre id="7.3reindexFaces"><a href="#7.3" onmouseover="show('QuickHull.<br>reindex faces - переиндексация граней')" onmouseout="hide()">.reindexFaces</a>()</pre>
 Удаляет неактивные (то есть, удаленные) грани из внутреннего списка граней.<br><br>
@@ -2125,30 +2124,30 @@ Computes the initial simplex assigning to its faces all the points that are cand
 <div class=list><tt>crossEdge</tt> - ребро, используемое для перехода к текущей грани.</div>
 <div class=list><tt>face</tt> - текущая проверяемая грань.</div>
 <div class=list><tt>horizon</tt> - ребра, составляющие часть горизонта, в направлении против часовой стрелки.</div>
-Метод вычисляет цепь полуребер в направлении против часовой стрелки называемую горизонтом ('horizon').
-For an edge to be part of the horizon it must join a face that can see 'eyePoint' and a face that cannot see 'eyePoint'.<br><br>
+Метод вычисляет цепь полуребер, называемую горизонтом ('horizon'), в направлении против часовой стрелки.
+Чтобы ребро стало частью горизонта, оно должно соединять грань, видимую из точки просмотра ('eyeVertex'), и грань, которую нельзя увидеть из точки просмотра ('eyeVertex').<br><br>
 
-<pre id="7.3addAdjoiningFace"><a href="#7.2" onmouseover="show('HalfEdge.<br>add adjoining face - добавить прилегающую грань')" onmouseout="hide()">.addAdjoiningFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина')" onmouseout="hide()">eyeVertex</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>horizon edge - край (ребро) горизонта')" onmouseout="hide()">horizonEdge</a> )</pre>
+<pre id="7.3addAdjoiningFace"><a href="#7.2" onmouseover="show('HalfEdge.<br>add adjoining face - добавить прилегающую грань')" onmouseout="hide()">.addAdjoiningFace</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина просмотра,<br>т.е. вершина, которая является<br>точкой просмотра')" onmouseout="hide()">eyeVertex</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>horizon edge - край (ребро) горизонта')" onmouseout="hide()">horizonEdge</a> )</pre>
 <div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
 <div class=list><tt>horizonEdge</tt> - один край горизонта.</div>
-Creates a face with the vertices 'eyeVertex.point', 'horizonEdge.tail' and 'horizonEdge.head' in CCW order.<br>
-All the half edges are created in CCW order thus the face is always pointing outside the hull<br><br>
+Создает грань с вершинами '<span class="lnk" onmouseover="show('eyeVertex.point - вершина, которая<br>является точкой просмотра')" onmouseout="hide()">eyeVertex.point</span>', '<span class="lnk" onmouseover="show('horizonEdge.tail - хвостовая вершина<br>ребра, являющегося частью горизонта')" onmouseout="hide()">horizonEdge.tail</span>' и '<span class="lnk" onmouseover="show('horizonEdge.head - головная вершина<br>ребра, являющегося частью горизонта')" onmouseout="hide()">horizonEdge.head</span>' в направлении против часовой стрелки.<br>
+Все полуребра создаются в направлении против часовой стрелки, поэтому грань всегда указывает за пределы оболочки.<br><br>
 
-<pre id="7.3addNewFaces"><a href="#7.3" onmouseover="show('QuickHull.<br>add new faces - добавить новые грани')" onmouseout="hide()">.addNewFaces</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина')" onmouseout="hide()">eyeVertex</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>horizon - горизонт')" onmouseout="hide()">horizon</a> )</pre>
+<pre id="7.3addNewFaces"><a href="#7.3" onmouseover="show('QuickHull.<br>add new faces - добавить новые грани')" onmouseout="hide()">.addNewFaces</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина просмотра,<br>т.е. вершина, которая является<br>точкой просмотра')" onmouseout="hide()">eyeVertex</a>, <a href="#7.2" onmouseover="show('HalfEdge.<br>horizon - горизонт')" onmouseout="hide()">horizon</a> )</pre>
 <div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
 <div class=list><tt>horizon</tt> - массив полуребер, формирующий горизонт.</div>
-Adds 'horizon.length' faces to the hull, each face will be linked with the horizon opposite face and the face on the left/right.<br><br>
+Метод добавляет к оболочке грани протяженности горизонта ('horizon.length'), каждая грань будет связана с противоположной гранью горизонта и гранями слева/справа.<br><br>
 
-<pre id="7.3addVertexToHull"><a href="#7.3" onmouseover="show('QuickHull.<br>add vertex to hull - добавить вершину к оболочке')" onmouseout="hide()">.addVertexToHull</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина')" onmouseout="hide()">eyeVertex</a> )</pre>
+<pre id="7.3addVertexToHull"><a href="#7.3" onmouseover="show('QuickHull.<br>add vertex to hull - добавить вершину к оболочке')" onmouseout="hide()">.addVertexToHull</a>( <a href="#7.4" onmouseover="show('VertexNode.<br>eye vertex - вершина просмотра,<br>т.е. вершина, которая является<br>точкой просмотра')" onmouseout="hide()">eyeVertex</a> )</pre>
 <div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
 Метод добавляет вершину к оболочке по следующему алгоритму:<br>
-&nbsp; &#9679; &nbsp; Compute the 'horizon' which is a chain of half edges. For an edge to belong to this group it must be the edge connecting a face that can see 'eyeVertex' and a face which cannot see 'eyeVertex'.<br>
-&nbsp; &#9679; &nbsp; All the faces that can see 'eyeVertex' have its visible vertices removed from the assigned vertex list.<br>
-&nbsp; &#9679; &nbsp; A new set of faces is created with each edge of the 'horizon' and 'eyeVertex'. Each face is connected with the opposite horizon face and the face on the left/right.<br>
-&nbsp; &#9679; &nbsp; The vertices removed from all the visible faces are assigned to the new faces if possible.<br><br>
+&nbsp; &#9679; &nbsp; Вычисляется цепь полуребер, называемая горизонтом ('horizon'). Чтобы ребро стало частью горизонта, оно должно соединять грань, видимую из точки просмотра ('eyeVertex'), и грань, которую нельзя увидеть из точки просмотра ('eyeVertex').<br>
+&nbsp; &#9679; &nbsp; Все грани, которые могут быть видны из точки просмотра ('eyeVertex') имеют свои видимые вершины, удаляемые из списка назначенных вершин.<br>
+&nbsp; &#9679; &nbsp; С добавлением каждой точки просмотра ('eyeVertex') и каждого ребра горизонта ('horizon') создается новый набор граней. Каждая грань связана с противоположной гранью горизонта и гранями слева/справа.<br>
+&nbsp; &#9679; &nbsp; Вершины, удаленные со всех видимых граней, по возможности назначаются новым граням.<br><br>
 
 <pre id="7.3cleanup"><a href="#7.3" onmouseover="show('QuickHull.<br>clean up - очистить')" onmouseout="hide()">.cleanup</a>( )</pre>
-Cleans up internal properties after computing the convex hull.<br><br>
+Метод удаляет внутренние свойства, после вычисления выпуклой оболочки.<br><br>
 
 <pre id="7.3compute"><a href="#7.3" onmouseover="show('QuickHull.<br>compute - вычислить')" onmouseout="hide()">.compute</a>( )</pre>
 Запускает выполнение алгоритма построения выпуклой оболочки (QuickHull).</div><br>

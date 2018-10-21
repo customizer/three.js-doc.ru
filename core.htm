@@ -1552,82 +1552,59 @@ Raycaster делегирует методу <tt><a href="#14raycast" onmouseover
 
 
 <h3 id="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Uniform</h3>
-Uniform'ы являются глобальными переменными <a href="https://www.opengl.org/documentation/glsl/" target="_blank">GLSL</a>. Они передаются в шейдерные программы.
-<!-- https://www.khronos.org/opengl/wiki/Uniform_(GLSL)
-A uniform is a global GLSL variable declared with the "uniform" storage qualifier. These act as parameters that the user of a shader program can pass to that program. They are stored in a program object.
+<span class="lnk" onmouseover="show('от англ. слова uniform - единообразный, однородный')" onmouseout="hide()">Униформы</span> - это глобальные переменные <a href="https://www.opengl.org/documentation/glsl/" target="_blank">GLSL</a>, передаваемые в шейдерные программы (т.е. в вершинный и фрагментный шейдеры), в качестве параметров.<br>
+Называются они так потому, что имеют единообразное значение для всех вершин; освещение, туман и карты тени - вот примеры данных, которые будут храниться в униформах. Обращаться к униформам можно как с помощью вершинного шейдера, так и с помощью шейдера фрагментов.<br>
+Обратите внимание, что внутри собственно самого шейдера, униформы действуют как константы, т.е. их значения не изменяются от одного выполнения шейдерной программы до следующего, в рамках конкретного вызова визуализации (рендеринга);
+изменять их значения можно только передачей различных значений в буферы из JavaScript кода.
+Этим они отличаются от входных и выходных данных шейдерной шагов, которые часто различаются при каждом вызове шага программы.<br><br>
 
-Uniforms are so named because they do not change from one execution of a shader program to the next within a particular rendering call. This makes them unlike shader stage inputs and outputs, which are often different for each invocation of a program stage.-->
 <h4>Пример</h4>
 При объявлении uniform из <a href="materials.htm#14">ShaderMaterial</a>, он объявляется по значению или по объекту.
 <pre>uniforms: {
 	time: { value: 1.0 },
 	resolution: new THREE.Uniform(new THREE.Vector2())
-}</pre>
+}</pre><br>
 
-<h4>Типы Uniform</h4>
-Каждый uniform должен иметь свойство <tt>value</tt>. Тип этого <tt>value</tt> должен соответствовать типу переменной uniform в коде GLSL, как указано для примитивных типов GLSL в таблице ниже.
-The type of the value must correspond to the type of the uniform variable in the GLSL code as specified for the primitive GLSL types in the table below.
-Поддерживаются также структуры и массивы uniform. Массивы примитивных типов GLSL должны либо указываться как массивы соответствующих объектов THREE, либо как двумерный массив, содержащий данные всех объектов.
-
-Uniform structures and arrays are also supported. GLSL arrays of primitive type must either be specified as an array of the corresponding THREE objects or as a flat array containing the data of all the objects.
-Другими словами; примитивы GLSL в массивах не должны быть представлены массивами. Это правило не применяется транзитивно.
-<!-- Транзитивность
-    (от лат. transitivus — переходный)
-            одно из свойств логического отношения величин. Отношение а * b называется транзитивным, если из а * b и b * c вытекает, что а * c. Например, отношение равенства (а = b) транзитивно, так как из а = b и b = с вытекает а = с. Аналогично, транзитивным является отношение <<a больше b>> (а > b). Отношение же <<a не равно b>> (a ? b) не транзитивно, так как из a ? b и b ? c ещё не вытекает a ? c. В геометрии транзитивным является отношение параллельности между двумя прямыми (если ? параллельна ?, а ? параллельна ?, то и ? параллельна ?), отношение же перпендикулярности прямых не транзитивно.
-http://dic.academic.ru/dic.nsf/bse/140735/%D0%A2%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C
-https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C -->
-In other words; GLSL primitives in arrays must not be represented by arrays. This rule does not apply transitively.
-Массив из массивов vec2, каждый из которых длиной в пять векторов, должен быть массивом массивов либо из пяти объектов Vector2, либо из десяти чисел.
-An array of vec2 arrays, each with a length of five vectors, must be an array of arrays, of either five Vector2 objects or ten numbers. <br>
+<h4>Типы униформ</h4>
+Каждый униформ должен иметь свойство <tt>value</tt>. Тип этого <tt>value</tt> должен соответствовать типу переменной униформ в коде GLSL, как указано для примитивных типов GLSL в таблице ниже.
+Поддерживаются также структуры и массивы униформ. Массивы примитивных типов GLSL должны либо указываться как массивы соответствующих THREE-объектов, либо как двумерный массив, содержащий данные всех объектов.
+Другими словами; примитивы GLSL в массивах не должны быть представлены массивами. Это правило не применяется <a href="http://dic.academic.ru/dic.nsf/bse/140735/%D0%A2%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C" onmouseover="show('Транзитивность (от лат. transitivus — переходный, &#171;переходность&#187;)<br>- одно из свойств логического отношения величин.<br>Отношение <tt>а*b</tt> называется транзитивным, если из <tt>а*b</tt> и <tt>b*c</tt><br>вытекает, что <tt>а*c</tt>. Здесь звездочкой (*) обозначено какое-либо действие.<br>Например, отношение равенства (<tt>а = b</tt>) транзитивно, так как из <tt>а = b</tt><br>и <tt>b = с</tt> вытекает <tt>а = с</tt>. Аналогично, транзитивным является отношение<br>&#171;a больше b&#187; (а > b). Отношение же &#171;<tt>a</tt> не равно <tt>b</tt>&#187; (<tt>a &#8800; b</tt>) не транзитивно,<br>так как из <tt>a &#8800; b</tt> и <tt>b &#8800; c</tt> ещё не вытекает <tt>a &#8800; c</tt>.<br>В геометрии транзитивным является отношение параллельности между<br>двумя прямыми (если <tt>&#945;</tt> параллельна <tt>&#946;</tt>, а <tt>&#946;</tt> параллельна <tt>&#947;</tt>, то и<br><tt>&#945;</tt> параллельна <tt>&#947;</tt>), отношение же перпендикулярности прямых не транзитивно.')" onmouseout="hide()">транзитивно</a>.
+(<a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D0%B7%D0%B8%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C" target="_blank">Статья Википедии о транзитивности</a>.)
+Массив из массивов <tt>vec2</tt>, каждый из которых длиной в пять векторов, должен быть массивом массивов либо из пяти объектов <a href="math.htm#18" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>, либо из десяти чисел.<br>
 <span class="caption_top">Типы Uniform</span>
 <table class="tbl_1" border="1" cellpadding="5" width="90%">
-<tr class="head"><td>Типы GLSL</td><td>Типы JavaScript</td></tr>
-<tr valign="top"><td><tt>int</tt></td><td><span class="lnk" onmouseover="show('number - число')" onmouseout="hide()">Number</span></td></tr>
-<tr valign="top"><td><tt>float</tt></td><td><span class="lnk" onmouseover="show('number - число')" onmouseout="hide()">Number</span></td></tr>
-<tr valign="top"><td><tt>bool</tt></td><td><span class="lnk" onmouseover="show('boolean - логическое (булево) значение<br>т.е. либо true, либо false')" onmouseout="hide()">Boolean</span></td></tr>
-<tr valign="top"><td><tt>bool</tt></td><td><span class="lnk" onmouseover="show('number - число')" onmouseout="hide()">Number</span></td></tr>
-<tr valign="top"><td><tt>vec2</tt></td><td><a href="math.htm#18" onmouseover="show('Vector2<br>двумерный вектор')" onmouseout="hide()">THREE.Vector2</a></td></tr>
-<tr valign="top"><td><tt>vec2</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>vec2</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>vec3</tt></td><td><a href="math.htm#19" onmouseover="show('Vector3<br>трехмерный вектор')" onmouseout="hide()">THREE.Vector3</a></td></tr>
-<tr valign="top"><td><tt>vec3</tt></td><td><a href="math.htm#3" onmouseover="show('Color<br>color - цвет')" onmouseout="hide()">THREE.Color</a></td></tr>
-<tr valign="top"><td><tt>vec3</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>vec3</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>vec4</tt></td><td><a href="math.htm#20" onmouseover="show('Vector4<br>четырехмерный вектор')" onmouseout="hide()">THREE.Vector4</a></td></tr>
-<tr valign="top"><td><tt>vec4</tt></td><td><a href="math.htm#13" onmouseover="show('Quaternion<br>кватернион')" onmouseout="hide()">THREE.Quaternion</a></td></tr>
-<tr valign="top"><td><tt>vec4</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>vec4</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>mat2</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>mat2</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>mat3</tt></td><td><a href="math.htm#10" onmouseover="show('Matrix3<br>матрица 3&#215;3')" onmouseout="hide()">THREE.Matrix3</a></td></tr>
-<tr valign="top"><td><tt>mat3</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>mat3</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>mat4</tt></td><td><a href="math.htm#11" onmouseover="show('Matrix4<br>матрица 4&#215;4')" onmouseout="hide()">THREE.Matrix4</a></td></tr>
-<tr valign="top"><td><tt>mat4</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>mat4</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>ivec2</tt>, <tt>bvec2</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>ivec2</tt>, <tt>bvec2</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>ivec3</tt>, <tt>bvec3</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных целых чисел')" onmouseout="hide()">Int32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>ivec3</tt>, <tt>bvec3</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>ivec4</tt>, <tt>bvec4</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных целых чисел')" onmouseout="hide()">Int32Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>ivec4</tt>, <tt>bvec4</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
-<tr valign="top"><td><tt>sampler2D</tt></td><td><a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">THREE.Texture</a></td></tr>
-<tr valign="top"><td><tt>samplerCube</tt></td><td><a href="textures.htm#3" onmouseover="show('CubeTexture')" onmouseout="hide()">THREE.CubeTexture</a></tr></table>
-<span class="caption">(*) Same for an (innermost) array (dimension) of the same GLSL type, содержащего компоненты всех векторов или матриц в массиве.</span><br><br>
+<tr class="head"><td>Типы GLSL</td><td>Типы JavaScript</td><td width="1"></td><td>Типы GLSL</td><td>Типы JavaScript</td></tr>
+<tr valign="top"><td><tt>int</tt></td><td><span class="lnk" onmouseover="show('number - число')" onmouseout="hide()">Number</span></td><td width="1"></td><td><tt>float</tt></td><td><span class="lnk" onmouseover="show('number - число')" onmouseout="hide()">Number</span></td></tr>
+<tr valign="top"><td><tt>bool</tt></td><td><span class="lnk" onmouseover="show('boolean - логическое (булево) значение<br>т.е. либо true, либо false')" onmouseout="hide()">Boolean</span></td><td width="1"></td><td><tt>bool</tt></td><td><span class="lnk" onmouseover="show('number - число')" onmouseout="hide()">Number</span></td></tr>
+<tr valign="top"><td><tt>vec2</tt></td><td><a href="math.htm#18" onmouseover="show('Vector2<br>двумерный вектор')" onmouseout="hide()">THREE.Vector2</a></td><td width="1"></td><td><tt>vec2</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>vec2</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td><td width="1"></td><td><tt>vec3</tt></td><td><a href="math.htm#19" onmouseover="show('Vector3<br>трехмерный вектор')" onmouseout="hide()">THREE.Vector3</a></td></tr>
+<tr valign="top"><td><tt>vec3</tt></td><td><a href="math.htm#3" onmouseover="show('Color<br>color - цвет')" onmouseout="hide()">THREE.Color</a></td><td width="1"></td><td><tt>vec3</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>vec3</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td><td width="1"></td><td><tt>vec4</tt></td><td><a href="math.htm#20" onmouseover="show('Vector4<br>четырехмерный вектор')" onmouseout="hide()">THREE.Vector4</a></td></tr>
+<tr valign="top"><td><tt>vec4</tt></td><td><a href="math.htm#13" onmouseover="show('Quaternion<br>кватернион')" onmouseout="hide()">THREE.Quaternion</a></td><td width="1"></td><td><tt>vec4</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>vec4</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td><td width="1"></td><td><tt>mat2</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>mat2</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td><td width="1"></td><td><tt>mat3</tt></td><td><a href="math.htm#10" onmouseover="show('Matrix3<br>матрица 3&#215;3')" onmouseout="hide()">THREE.Matrix3</a></td></tr>
+<tr valign="top"><td><tt>mat3</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td><td width="1"></td><td><tt>mat3</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>mat4</tt></td><td><a href="math.htm#11" onmouseover="show('Matrix4<br>матрица 4&#215;4')" onmouseout="hide()">THREE.Matrix4</a></td><td width="1"></td><td><tt>mat4</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>mat4</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td><td width="1"></td><td><tt>ivec2</tt>, <tt>bvec2</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных чисел с плавающей запятой')" onmouseout="hide()">Float32Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>ivec2</tt>, <tt>bvec2</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td><td width="1"></td><td><tt>ivec3</tt>, <tt>bvec3</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных целых чисел')" onmouseout="hide()">Int32Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>ivec3</tt>, <tt>bvec3</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td><td width="1"></td><td><tt>ivec4</tt>, <tt>bvec4</tt></td><td><span class="lnk" onmouseover="show('массив из 32-разрядных целых чисел')" onmouseout="hide()">Int32Array</span> (*)</td></tr>
+<tr valign="top"><td><tt>ivec4</tt>, <tt>bvec4</tt></td><td><span class="lnk" onmouseover="show('array - массив')" onmouseout="hide()">Array</span> (*)</td><td width="1"></td><td><tt>sampler2D</tt></td><td><a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">THREE.Texture</a></td></tr>
+<tr valign="top"><td><tt>samplerCube</tt></td><td><a href="textures.htm#3" onmouseover="show('CubeTexture')" onmouseout="hide()">THREE.CubeTexture</a><td width="1"></td><td></td></tr></table>
+<span class="caption">(*) То же самое для (внутреннего) массива (размерности) того же типа GLSL, содержащего компоненты всех векторов или матриц в массиве.</span><br><br>
 
 <h4>Конструктор</h4><br>
 <pre>Uniform( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова value - значение')" onmouseout="hide()">value</a></span> )</pre>
-<div class=list><tt>value</tt> -- Объект, содержащий значение для установки в uniform. Его тип должен быть одним из типов Uniform описанных выше.</div><br>
+<div class=list><tt>value</tt> -- объект, содержащий значение для установки в униформ. Его тип должен быть одним из типов Uniform описанных выше.</div><br>
 
 <h4>Свойства</h4>
 <div class=blockindent><br>
 <pre id="16value"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова value - значение')" onmouseout="hide()">.value</a></span></pre>
-Текущее значение uniform.</div><br>
+Текущее значение униформа.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="16clone"><a href="#16" onmouseover="show('Uniform.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
-Возвращает клона данного uniform. Если свойство <tt>value</tt> uniform является объектом с методом <tt>clone()</tt>, то это используется, в противном случае, значение копируется по назначению. Значения массива являются общими для клонов Uniform.<br>
+Возвращает клона данного униформа. Если свойство <tt>value</tt> униформа является объектом с методом <tt>clone()</tt>, то это используется, в противном случае, значение копируется по назначению. Значения массива являются общими для клонов Uniform.<br>
 В качестве примера использования данного метода посмотрите <a href="https://threejs.org/examples/#webgldeferred_animation" target="_blank">WebGL deferred animation</a>.</div><br>
 
 <h4>Исходники</h4>

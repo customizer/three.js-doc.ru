@@ -7,6 +7,17 @@
 </head>
 <body>
 <h2 class=head1>Анимация</h2>
+<div class=below>
+<div class=list><a href="#1">AnimationAction</a></div>
+<div class=list><a href="#2">AnimationClip</a></div>
+<div class=list><a href="#3">AnimationMixer</a></div>
+<div class=list><a href="#4">AnimationObjectGroup</a></div>
+<div class=list><a href="#5">AnimationUtils</a></div>
+<div class=list><a href="#6">KeyframeTrack</a></div>
+<div class=list><a href="#7">PropertyBinding</a></div>
+<div class=list><a href="#8">PropertyMixer</a></div>
+</div><br>
+
 <h3 id="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AnimationAction</h3>
 AnimationActions планирует (составляет расписание, по которому происходит) выполнение анимаций, которые хранятся в <a href="#2" onmouseover="show('AnimationClip');" onmouseout="hide()">AnimationClips</a>.
 <div class=note><b>Примечание:</b> Большинство методов AnimationAction могут быть объединены в цепочки.</div>
@@ -14,9 +25,9 @@ AnimationActions планирует (составляет расписание, 
 
 <h4 id="constructor1">Конструктор</h4><br>
 <pre>AnimationAction( <a href="#3" onmouseover="show('AnimationMixer.<br>mixer - микшер, смеситель');" onmouseout="hide()">mixer</a>, <a href="#2" onmouseover="show('AnimationClip. clip - клип, обрезать');" onmouseout="hide()">clip</a>, <a href="core.htm#14" onmouseover="show('Object3D. local root - локальный корень');" onmouseout="hide()">localRoot</a> )</pre>
-<div class=list><tt><a href="#3" onmouseover="show('AnimationMixer.<br>mixer - микшер, смеситель');" onmouseout="hide()">mixer</a></tt> - <tt>AnimationMixer</tt>, который управляется данным действием.</div>
-<div class=list><tt><a href="#2" onmouseover="show('AnimationClip. clip - клип, обрезать');" onmouseout="hide()">clip</a></tt> - <tt>AnimationClip</tt>, что содержит данные анимации для этого действия.</div>
-<div class=list><tt><a href="core.htm#14" onmouseover="show('Object3D. local root - локальный корень');" onmouseout="hide()">localRoot</a></tt> - корневой объект, в котором выполняется данное действие.</div>
+<div class=list><tt>mixer</tt> - <tt>AnimationMixer</tt>, который управляется данным действием.</div>
+<div class=list><tt>clip</tt> - <tt>AnimationClip</tt>, что содержит данные анимации для этого действия.</div>
+<div class=list><tt>localRoot</tt> - корневой объект, в котором выполняется данное действие.</div>
 <div class=note><b>Примечание:</b> Вместо непосредственного вызова этого конструктора следует создавать экземпляр <tt>AnimationAction</tt> при помощи метода
 <tt><a href="#3clipAction" onmouseover="show('AnimationMixer.clipAction');" onmouseout="hide()">AnimationMixer.clipAction</a></tt>, поскольку для улучшения производительности он предоставляет кэширование.</div><br>
 
@@ -26,16 +37,16 @@ AnimationActions планирует (составляет расписание, 
 Если <tt>clampWhenFinished</tt> установлен как <tt>true</tt>, анимация автоматически будет <a href="#1paused" onmouseover="show('свойство AnimationAction.paused');" onmouseout="hide()">приостановлена</a> на своем последнем кадре.<br>
 Если <tt>clampWhenFinished</tt> установлен как <tt>false</tt>, то когда закончится последний цикл действия, свойство <tt><a href="#1enabled" onmouseover="show('свойство AnimationAction.enabled');" onmouseout="hide()">enabled</a></tt>
 будет автоматически переключено в <tt>false</tt>, так что дальше это действие не будет оказывать никакого влияния.<br>
-Значением по умолчанию является <tt>false</tt>.
+Значением по умолчанию является&nbsp;<tt>false</tt>.
 <div class=note><b>Примечание:</b> <tt>clampWhenFinished</tt> не оказывает влияния, если действие прервано (свойство работает только в случае, когда последний цикл действия реально завершился).</div><br>
 <pre id="1enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова enabled - включено');" onmouseout="hide()">.enabled</a></span></pre>
-Установка <tt>enabled</tt> как <tt>false</tt> отключает данное действие, так что оно не будет оказывать никакого влияния. Значением по умолчанию является <tt>true</tt>.<br>
-Если действие включено повторно, анимация продолжится с её текущего времени, т.е. от значения свойства <tt><a href="#1time" onmouseover="show('свойство AnimationAction.time');" onmouseout="hide()">time</a></tt> (установка <tt>enabled</tt> как <tt>false</tt> не сбрасывает действие).
-<div class=note><b>Примечание:</b> Установка <tt>enabled</tt> как <tt>true</tt> не делает автоматического перезапуска анимации.
+Установка <tt>enabled</tt> как <tt>false</tt> отключает данное действие, так что оно не будет оказывать никакого влияния. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+Если действие включено повторно, анимация продолжится с её текущего времени, т.е. от значения свойства <tt><a href="#1time" onmouseover="show('свойство AnimationAction.time');" onmouseout="hide()">time</a></tt> (установка <tt>enabled</tt> как&nbsp;<tt>false</tt> не сбрасывает действие).
+<div class=note><b>Примечание:</b> Установка <tt>enabled</tt> как&nbsp;<tt>true</tt> не делает автоматического перезапуска анимации.
 Установка <tt>enabled</tt> как <tt>true</tt> сразу же перезапустит анимацию, если выполняется следующее условие:
 свойство <tt><a href="#1paused" onmouseover="show('свойство AnimationAction.paused');" onmouseout="hide()">paused</a></tt> установлено как <tt>false</tt> и в то же время это действие не было отключено
 (выполнением команды <tt><a href="#1stop" onmouseover="show('метод AnimationAction.stop');" onmouseout="hide()">stop</a></tt> или <tt><a href="#1reset" onmouseover="show('метод AnimationAction.reset');" onmouseout="hide()">reset</a></tt>),
-а также ни <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">weight</a></tt>, ни <tt><a href="#1timeScale" onmouseover="show('свойство AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> не равны <tt>0</tt>.</div><br>
+а также ни <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">weight</a></tt>, ни <tt><a href="#1timeScale" onmouseover="show('свойство AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> не равны&nbsp;<tt>0</tt>.</div><br>
 
 <pre id="1loop"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова loop - цикл');" onmouseout="hide()">.loop</a></span></pre>
 Цикличный режим (может быть изменен с помощью метода <tt><a href="#1setLoop">setLoop</a></tt>). Значением по умолчанию является константа <tt><a href="constants.htm#1.1">THREE.LoopRepeat</a></tt> (с бесконечным числом повторений - свойство <tt><a href="#1repetitions">repetitions</a></tt>)<br>
@@ -45,7 +56,7 @@ AnimationActions планирует (составляет расписание, 
 <div class="list"><tt><a href="constants.htm#1.1">THREE.LoopPingPong</a></tt> - воспроизводит клип выбранное количество раз (указанное в параметре <tt>repetitions</tt>), проигрывая его поочередно вперед и назад.</div><br>
 
 <pre id="1paused"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова paused - приостановлено, сделана пауза');" onmouseout="hide()">.paused</a></span></pre>
-Установка значения <tt>paused</tt> как <tt>true</tt> приостанавливает выполнение данного действия, устанавливая шкалу эффективного времени в <tt>0</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
+Установка значения <tt>paused</tt> как <tt>true</tt> приостанавливает выполнение данного действия, устанавливая шкалу эффективного времени в&nbsp;<tt>0</tt>. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
 <pre id="1repetitions"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова repetitions - повторы');" onmouseout="hide()">.repetitions</a></span></pre>
 Число повторных выполнений <tt><a href="#2" onmouseover="show('AnimationClip');" onmouseout="hide()">AnimationClip</a></tt> в ходе данного действия.
@@ -54,47 +65,47 @@ AnimationActions планирует (составляет расписание, 
 Установка данного числа не имеет эффекта если <a href="#1loop" onmouseover="show('свойство AnimationAction.loop');" onmouseout="hide()">цикличный режим</a> установлен как <tt><a href="constants.htm#1.1">THREE.LoopOnce</a></tt>, т.е. однократное воспроизведение клипа.<br><br>
 
 <pre id="1time"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова time - время');" onmouseout="hide()">.time</a></span></pre>
-Локальное (частное) время данного действия (в секундах, начиная с <tt>0</tt>).<br>
-Значение получается "зажатым" или ограниченным в диапазоне <tt>0...clip.duration</tt> (в соответствии с состоянием цикла).
+Локальное (частное) время данного действия (в секундах, начиная с&nbsp;<tt>0</tt>).<br>
+Значение получается "зажатым" или ограниченным в диапазоне&nbsp;<tt>0...clip.duration</tt> (в соответствии с состоянием цикла).
 Его можно масштабировать относительно общего времени микшера, изменяя значение свойства <tt><a href="#1timeScale" onmouseover="show('свойство AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt>
 (применением метода <tt><a href="#1setEffectiveTimeScale" onmouseover="show('метод AnimationAction.setEffectiveTimeScale');" onmouseout="hide()">setEffectiveTimeScale</a></tt> или <tt><a href="#1setDuration" onmouseover="show('метод AnimationAction.setDuration');" onmouseout="hide()">setDuration</a></tt>).<br><br>
 
 <pre id="1timeScale"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова time scale - временная шкала');" onmouseout="hide()">.timeScale</a></span></pre>
-Коэффициент масштабирования для свойства <tt><a href="#1time" onmouseover="show('свойство AnimationAction.time');" onmouseout="hide()">time</a></tt>. Значение <tt>0</tt> приводит к приостановке анимации.
-Отрицательные значения вызывают воспроизведение анимации в обратном направлении. Значением по умолчанию является <tt>1</tt>.<br>
+Коэффициент масштабирования для свойства <tt><a href="#1time" onmouseover="show('свойство AnimationAction.time');" onmouseout="hide()">time</a></tt>. Значение&nbsp;<tt>0</tt> приводит к приостановке анимации.
+Отрицательные значения вызывают воспроизведение анимации в обратном направлении. Значением по умолчанию является&nbsp;<tt>1</tt>.<br>
 Свойства/методы связанные со свойством <tt>timeScale</tt> (и соответственно с <tt>time</tt>) следующие: <tt><a href="#1getEffectiveTimeScale" onmouseover="show('метод AnimationAction.getEffectiveTimeScale');" onmouseout="hide()">getEffectiveTimeScale</a></tt>,
 <tt><a href="#1halt" onmouseover="show('метод AnimationAction.halt');" onmouseout="hide()">halt</a></tt>, <tt><a href="#1paused" onmouseover="show('свойство AnimationAction.paused');" onmouseout="hide()">paused</a></tt>, <tt><a href="#1setDuration" onmouseover="show('метод AnimationAction.setDuration');" onmouseout="hide()">setDuration</a></tt>,
 <tt><a href="#1setEffectiveTimeScale" onmouseover="show('метод AnimationAction.setEffectiveTimeScale');" onmouseout="hide()">setEffectiveTimeScale</a></tt>, <tt><a href="#1stopWarping" onmouseover="show('метод AnimationAction.stopWarping');" onmouseout="hide()">stopWarping</a></tt>,
 <tt><a href="#1syncWith" onmouseover="show('метод AnimationAction.syncWith');" onmouseout="hide()">syncWith</a></tt>, <tt><a href="#1warp" onmouseover="show('метод AnimationAction.warp');" onmouseout="hide()">warp</a></tt>.<br><br>
 
 <pre id="1weight"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова weight - вес');" onmouseout="hide()">.weight</a></span></pre>
-Степень влияния данного действия (в интервале <tt>[0, 1]</tt>). Значения между <tt>0</tt> (нет влияния) и <tt>1</tt> (полноценное воздействие) могут использоваться для смешивания нескольких действий. Значением по умолчанию является <tt>1</tt>.<br><br>
+Степень влияния данного действия (в интервале&nbsp;<tt>[0, 1]</tt>). Значения между&nbsp;<tt>0</tt> (нет влияния) и&nbsp;<tt>1</tt> (полноценное воздействие) могут использоваться для смешивания нескольких действий. Значением по умолчанию является&nbsp;<tt>1</tt>.<br><br>
 Свойства/методы связанные со свойством <tt>weight</tt> следующие: <tt><a href="#1crossFadeFrom" onmouseover="show('метод AnimationAction.crossFadeFrom');" onmouseout="hide()">crossFadeFrom</a></tt>, <tt><a href="#1crossFadeTo" onmouseover="show('метод AnimationAction.crossFadeTo');" onmouseout="hide()">crossFadeTo</a></tt>,
 <tt><a href="#1enabled" onmouseover="show('свойство AnimationAction.enabled');" onmouseout="hide()">enabled</a></tt>, <tt><a href="#1fadeIn" onmouseover="show('метод AnimationAction.fadeIn');" onmouseout="hide()">fadeIn</a></tt>, <tt><a href="#1fadeOut" onmouseover="show('метод AnimationAction.fadeOut');" onmouseout="hide()">fadeOut</a></tt>,
 <tt><a href="#1getEffectiveWeight" onmouseover="show('метод AnimationAction.getEffectiveWeight');" onmouseout="hide()">getEffectiveWeight</a></tt>, <tt><a href="#1setEffectiveWeight" onmouseover="show('метод AnimationAction.setEffectiveWeight');" onmouseout="hide()">setEffectiveWeight</a></tt>, <tt><a href="#1stopFading" onmouseover="show('метод AnimationAction.stopFading');" onmouseout="hide()">stopFading</a></tt>.<br><br>
 
 <pre id="1zeroSlopeAtEnd"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова zero slope at end - нулевой наклон в конце');" onmouseout="hide()">.zeroSlopeAtEnd</a></span></pre>
-Включает гладкую интерполяцию без разделения клипов в начале, в цикле и в конце. Значением по умолчанию является <tt>true</tt>.<br><br>
+Включает гладкую интерполяцию без разделения клипов в начале, в цикле и в конце. Значением по умолчанию является&nbsp;<tt>true</tt>.<br><br>
 
 <pre id="1zeroSlopeAtStart"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов zero slope at start - нулевой наклон в начале');" onmouseout="hide()">.zeroSlopeAtStart</a></span></pre>
-Включает гладкую интерполяцию без разделения клипов в начале, в цикле и в конце. Значением по умолчанию является <tt>true</tt>.</div><br>
+Включает гладкую интерполяцию без разделения клипов в начале, в цикле и в конце. Значением по умолчанию является&nbsp;<tt>true</tt>.</div><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
 <pre id="1crossFadeFrom"><a href="#1" onmouseover="show('AnimationAction.<br>cross fade from - перекрестное затухание из');" onmouseout="hide()">.crossFadeFrom</a>( <a href="#1" onmouseover="show('AnimationAction.<br>fade out action - затухающее действие');" onmouseout="hide()">fadeOutAction</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов duration in seconds - продолжительность в секундах');" onmouseout="hide()">durationInSeconds</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов warping - деформация и boolean - логический');" onmouseout="hide()">warpBoolean</a></span> )</pre>
 Метод вызывает <a href="#1fadeIn" onmouseover="show('метод AnimationAction.fadeIn');" onmouseout="hide()">постепенное нарастание</a> данного действия и одновременное затухание другого действия, за время заданного (параметр <tt>durationInSeconds</tt>) интервала времени.
 Этот метод может быть включен в цепочку.<br>
-Если <tt>warpBoolean</tt> установлен как <tt>true</tt>, будут применено дополнительное <a href="#1warp" onmouseover="show('метод AnimationAction.warp');" onmouseout="hide()">деформирование</a> (плавные изменения временны&#769;х масштабов).
-<div class=note><b>Примечание:</b> Как и у <tt>fadeIn</tt>/<tt>fadeOut</tt>, затухание начинается/завершается с весом (т.е. свойством <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">weight</a></tt>) равным 1.</div><br>
+Если <tt>warpBoolean</tt> установлен как&nbsp;<tt>true</tt>, будут применено дополнительное <a href="#1warp" onmouseover="show('метод AnimationAction.warp');" onmouseout="hide()">деформирование</a> (плавные изменения временны&#769;х масштабов).
+<div class=note><b>Примечание:</b> Как и у <tt>fadeIn</tt>/<tt>fadeOut</tt>, затухание начинается/завершается с весом (т.е. свойством <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">weight</a></tt>) равным&nbsp;<tt>1</tt>.</div><br>
 <pre id="1crossFadeTo"><a href="#1" onmouseover="show('AnimationAction.<br>cross fade to - перекрестное затухание в');" onmouseout="hide()">.crossFadeTo</a>( <a href="#1" onmouseover="show('AnimationAction.<br>fade in action - появляющееся действие');" onmouseout="hide()">fadeInAction</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов duration in seconds - продолжительность в секундах');" onmouseout="hide()">durationInSeconds</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов warping - деформация и boolean - логический');" onmouseout="hide()">warpBoolean</a></span> )</pre>
 Метод вызывает <a href="#1fadeIn" onmouseover="show('метод AnimationAction.fadeIn');" onmouseout="hide()">постепенное затухание</a> данного действия и одновременное нарастание другого действия, за время заданного (параметр <tt>durationInSeconds</tt>) интервала времени.
 Этот метод может быть включен в цепочку.<br>
-Если <tt>warpBoolean</tt> установлен как <tt>true</tt>, будут применено дополнительное <a href="#1warp" onmouseover="show('метод AnimationAction.warp');" onmouseout="hide()">деформирование</a> (плавные изменения временны&#769;х масштабов).
-<div class=note><b>Примечание:</b> Как и у <tt>fadeIn</tt>/<tt>fadeOut</tt>, затухание начинается/завершается с весом (т.е. свойством <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">weight</a></tt>) равным <tt>1</tt>.</div><br>
+Если <tt>warpBoolean</tt> установлен как&nbsp;<tt>true</tt>, будут применено дополнительное <a href="#1warp" onmouseover="show('метод AnimationAction.warp');" onmouseout="hide()">деформирование</a> (плавные изменения временны&#769;х масштабов).
+<div class=note><b>Примечание:</b> Как и у <tt>fadeIn</tt>/<tt>fadeOut</tt>, затухание начинается/завершается с весом (т.е. свойством <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">weight</a></tt>) равным&nbsp;<tt>1</tt>.</div><br>
 <pre id="1fadeIn"><a href="#1" onmouseover="show('AnimationAction. fade in - постепенное появление');" onmouseout="hide()">.fadeIn</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов duration in seconds - продолжительность в секундах');" onmouseout="hide()">durationInSeconds</a></span> )</pre>
-Метод постепенно увеличивает <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">вес</a></tt> данного действия от <tt>0</tt> до <tt>1</tt>, за указанный интервал времени. Этот метод может быть включен в цепочку.<br><br>
+Метод постепенно увеличивает <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">вес</a></tt> данного действия от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>, за указанный интервал времени. Этот метод может быть включен в цепочку.<br><br>
 <pre id="1fadeOut"><a href="#1" onmouseover="show('AnimationAction.<br>fade out - постепенное исчезновение, затухание');" onmouseout="hide()">.fadeOut</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов duration in seconds - продолжительность в секундах');" onmouseout="hide()">durationInSeconds</a></span> )</pre>
-Метод постепенно уменьшает <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">вес</a></tt> данного действия от <tt>0</tt> до <tt>1</tt>, за указанный интервал времени. Этот метод может быть включен в цепочку.<br><br>
+Метод постепенно уменьшает <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">вес</a></tt> данного действия от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>, за указанный интервал времени. Этот метод может быть включен в цепочку.<br><br>
 
 <pre id="1getEffectiveTimeScale"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов get effective time scale -<br>получить масштаб действующего времени');" onmouseout="hide()">.getEffectiveTimeScale</a></span>()</pre>
 Метод возвращает действующий масштаб времени (с учетом текущих состояний деформации и <a href="#1paused" onmouseover="show('свойство AnimationAction.paused');" onmouseout="hide()">приостановки</a>.<br><br>
@@ -109,12 +120,12 @@ AnimationActions планирует (составляет расписание, 
 <pre id="1getRoot"><a href="core.htm#14" onmouseover="show('Object3D.<br>get root - получить корень');" onmouseout="hide()">.getRoot</a>()</pre>
 Возвращает корневой объект, на котором выполняется данное действие.<br><br>
 <pre id="1halt"><a href="#1" onmouseover="show('AnimationAction.<br>halt - остановка');" onmouseout="hide()">.halt</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов duration in seconds - продолжительность в секундах');" onmouseout="hide()">.durationInSeconds</a></span> )</pre>
-Снижает скорость данной анимации до <tt>0</tt>, постепенным уменьшением значения <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> (начиная с его текущего значения), в течение заданного интервала времени (<tt>durationInSeconds</tt>). Этот метод может быть включен в цепочку.<br><br>
+Снижает скорость данной анимации до&nbsp;<tt>0</tt>, постепенным уменьшением значения <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> (начиная с его текущего значения), в течение заданного интервала времени (<tt>durationInSeconds</tt>). Этот метод может быть включен в цепочку.<br><br>
 <pre id="1isRunning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is running - является запущенным');" onmouseout="hide()">.isRunning</a></span>()</pre>
 Возвращает значение <tt>true</tt>, если отсчет времени действия (свойство <tt><a href="#1time" onmouseover="show('AnimationAction.time');" onmouseout="hide()">time</a></tt>) в настоящий момент уже запущен.<br>
 Кроме того, для выполнения активации в микшере (смотрите <tt><a href="#1isScheduled" onmouseover="show('AnimationAction.isScheduled');" onmouseout="hide()">isScheduled</a></tt>) должны быть выполнены следующие условия:
-свойство <tt><a href="#1paused" onmouseover="show('AnimationAction.paused');" onmouseout="hide()">paused</a></tt> должно быть установлено как <tt>false</tt>, <tt><a href="#1enabled" onmouseover="show('AnimationAction.enabled');" onmouseout="hide()">enabled</a></tt> должно быть <tt>true</tt>,
-значение <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> должно быть отличным от <tt>0</tt> и не должно быть запланировано отложенного запуска (<tt><a href="#1startAt" onmouseover="show('AnimationAction.startAt');" onmouseout="hide()">startAt</a></tt>).
+свойство <tt><a href="#1paused" onmouseover="show('AnimationAction.paused');" onmouseout="hide()">paused</a></tt> должно быть установлено как <tt>false</tt>, <tt><a href="#1enabled" onmouseover="show('AnimationAction.enabled');" onmouseout="hide()">enabled</a></tt> должно быть&nbsp;<tt>true</tt>,
+значение <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> должно быть отличным от&nbsp;<tt>0</tt> и не должно быть запланировано отложенного запуска (<tt><a href="#1startAt" onmouseover="show('AnimationAction.startAt');" onmouseout="hide()">startAt</a></tt>).
 <div class=note><b>Примечание:</b> Значение <tt>true</tt> у <tt>isRunning</tt> не обязательно означает, что анимацию на самом деле будет видно.
 Это будет только в случае, если у свойства <tt><a href="#1weight" onmouseover="show('свойство AnimationAction.weight');" onmouseout="hide()">weight</a></tt> установлено ненулевое значение.</div><br>
 <pre id="1isScheduled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is scheduled - является запланированным');" onmouseout="hide()">.isScheduled</a></span>()</pre>
@@ -123,7 +134,7 @@ AnimationActions планирует (составляет расписание, 
 
 <pre id="1play"><a href="#1" onmouseover="show('AnimationAction.<br>play - играть');" onmouseout="hide()">.play</a>()</pre>
 Указывает микшеру активировать действие. Этот метод может быть включен в цепочку.
-<div class=note><b>Примечание:</b> Активация данного действия не обязательно означает, что анимация начнется тотчас же: Activating this action doesn’t necessarily mean that the animation starts immediately:
+<div class=note><b>Примечание:</b> Активация данного действия не обязательно означает, что анимация начнется тотчас же:
 If the action had already finished before (by reaching the end of its last loop), or if a time for a delayed start has been set (via [page:.startAt startAt</a>), a [page:.reset reset</a> must be executed first.
 Some other settings ([page:.paused paused</a>=true, [page:.enabled enabled</a>=false, [page:.weight weight</a>=0, [page:.timeScale timeScale</a>=0) can prevent the animation from playing, too.</div><br>
 

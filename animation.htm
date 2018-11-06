@@ -135,8 +135,12 @@ AnimationActions планирует (составляет расписание, 
 <pre id="1play"><a href="#1" onmouseover="show('AnimationAction.<br>play - играть');" onmouseout="hide()">.play</a>()</pre>
 Указывает микшеру активировать действие. Этот метод может быть включен в цепочку.
 <div class=note><b>Примечание:</b> Активация данного действия не обязательно означает, что анимация начнется тотчас же:
-If the action had already finished before (by reaching the end of its last loop), or if a time for a delayed start has been set (via [page:.startAt startAt</a>), a [page:.reset reset</a> must be executed first.
-Some other settings ([page:.paused paused</a>=true, [page:.enabled enabled</a>=false, [page:.weight weight</a>=0, [page:.timeScale timeScale</a>=0) can prevent the animation from playing, too.</div><br>
+Если действие перед этим уже закончилось (дойдя до конца своего последнего цикла), или если было установлено время отложенного запуска (с помощью метода <tt><a href="#1startAt" onmouseover="show('AnimationAction.startAt')" onmouseout="hide()">startAt</a></tt>),
+вначале должен быть выполнен <tt><a href="#1reset" onmouseover="show('AnimationAction.reset')" onmouseout="hide()">сброс</a></tt>.
+Некоторые другие параметры (<tt><a href="#1paused" onmouseover="show('AnimationAction.paused')" onmouseout="hide()">paused</a> = true</tt>,
+<tt><a href="#1enabled" onmouseover="show('AnimationAction.enabled')" onmouseout="hide()">enabled</a> = false</tt>,
+<tt><a href="#1weight" onmouseover="show('AnimationAction.weight')" onmouseout="hide()">weight</a> = 0</tt>,
+<tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale')" onmouseout="hide()">timeScale</a> = 0</tt>) также могут предотвратить воспроизведение анимации.</div><br>
 
 <pre id="1reset"><a href="#1" onmouseover="show('AnimationAction.<br>reset - сбросить');" onmouseout="hide()">.reset</a>()</pre>
 Сбрасывает действие. Этот метод может быть включен в цепочку.<br>
@@ -144,23 +148,26 @@ Some other settings ([page:.paused paused</a>=true, [page:.enabled enabled</a>=f
 <tt><a href="#1time" onmouseover="show('AnimationAction.time');" onmouseout="hide()">time</a></tt> сбрасывается в <tt>0</tt>, прерывает любое запланированное затухание и деформирование, удаляет внутренний счетчик цикла и планирование отложенного запуска.
 <div class=note><b>Примечание:</b> Метод <tt>reset</tt> всегда вызывается при вызове метода <tt><a href="#1stop" onmouseover="show('AnimationAction.stop');" onmouseout="hide()">stop</a></tt>, но собственно сам <tt>reset</tt> не вызывает <tt>stop</tt>.
 Это означает, если нужно вызвать оба метода, сброса и остановки, не вызывайте <tt>reset</tt>; вместо него вызывайте <tt>stop</tt>.</div><br>
-<pre id="1setDuration"><a href="#1" onmouseover="show('AnimationAction. set duration - установить продолжительность');" onmouseout="hide()">.setDuration</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('duration in seconds - продолжительность в секундах');" onmouseout="hide()">durationInSeconds</a></span> )</pre>
-Устанавливает продолжительность отдельного цикла данного действия (путем настройки <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> и останавливает любую запланированную деформацию - <tt><a href="#1warp" onmouseover="show('AnimationAction.warp');" onmouseout="hide()">warp</a></tt>).
-Этот метод может быть включен в цепочку.<br><br>
-<pre id="1setEffectiveTimeScale"><a href="#1" onmouseover="show('AnimationAction.<br>set effective time scale - установить<br>действующий масштаб времени');" onmouseout="hide()">.setEffectiveTimeScale</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('time scale - масштаб времени');" onmouseout="hide()">timeScale</a></span> )</pre>
-Метод устанавливает <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> и останавливает любую запланированную деформацию (<tt><a href="#1warp" onmouseover="show('AnimationAction.warp');" onmouseout="hide()">warp</a></tt>). Этот метод может быть включен в цепочку.<br>
 
-Если <tt><a href="#1paused" onmouseover="show('AnimationAction.paused');" onmouseout="hide()">paused</a></tt> установлено как <tt>false</tt>, действующий масштаб времени (внутреннее свойство) также будет установлен в это же значение; в противном случае действующий масштаб времени (непосредственно влияющий на анимацию в данный момент) будет установлен в 0.
- the effective time scale (an internal property) will also be set to this value; otherwise the effective time scale (directly affecting the animation at this moment) will be set to 0.
-<div class=note><b>Примечание:</b> .*paused* will not be switched to *true* automatically, if .*timeScale* is set to 0 by this method.</div><br>
+<pre id="1setDuration"><a href="#1" onmouseover="show('AnimationAction. set duration - установить продолжительность');" onmouseout="hide()">.setDuration</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('duration in seconds - продолжительность в секундах');" onmouseout="hide()">durationInSeconds</a></span> )</pre>
+Устанавливает продолжительность отдельного цикла данного действия (путем настройки <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt>
+и останавливает любую запланированную деформацию - <tt><a href="#1warp" onmouseover="show('AnimationAction.warp');" onmouseout="hide()">warp</a></tt>).
+Этот метод может быть включен в цепочку.<br><br>
+
+<pre id="1setEffectiveTimeScale"><a href="#1" onmouseover="show('AnimationAction.<br>set effective time scale - установить<br>действующий масштаб времени');" onmouseout="hide()">.setEffectiveTimeScale</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('time scale - масштаб времени');" onmouseout="hide()">timeScale</a></span> )</pre>
+Метод устанавливает <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> и останавливает любую запланированную деформацию
+(<tt><a href="#1warp" onmouseover="show('AnimationAction.warp');" onmouseout="hide()">warp</a></tt>). Этот метод может быть включен в цепочку.<br>
+Если <tt><a href="#1paused" onmouseover="show('AnimationAction.paused');" onmouseout="hide()">paused</a></tt> установлено как&nbsp;<tt>false</tt>, действующий масштаб времени (внутреннее свойство)
+также будет установлен в это же значение; в противном случае действующий масштаб времени (непосредственно влияющий на анимацию в данный момент) будет установлен как&nbsp;<tt>0</tt>.
+<div class=note><b>Примечание:</b> Если этим методом свойство <tt><a href="#1timeScale" onmouseover="show('AnimationAction.timeScale');" onmouseout="hide()">timeScale</a></tt> установлено как&nbsp;<tt>0</tt>,
+то свойство <tt><a href="#1paused" onmouseover="show('AnimationAction.paused');" onmouseout="hide()">paused</a></tt> не будет автоматически переключено в&nbsp;<tt>true</tt>.</div><br>
 
 <pre id="1setEffectiveWeight"><a href="#1" onmouseover="show('AnimationAction.<br>set effective weight - установить действующий вес');" onmouseout="hide()">.setEffectiveWeight</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('weight - вес');" onmouseout="hide()">weight</a></span> )</pre>
-Устанавливает <tt><a href="#1weight" onmouseover="show('AnimationAction.weight');" onmouseout="hide()">weight</a></tt> и останавливает любое запланированное затухание.
-Sets the [page:.weight weight</a> and stops any scheduled fading. Этот метод может быть включен в цепочку.<br>
-Если свойство <tt><a href="#1enabled" onmouseover="show('AnimationAction.enabled');" onmouseout="hide()">enabled</a></tt> установлено как <tt>true</tt>
-If [page:.enabled enabled</a> is true, the effective weight (an internal property) will also be set to this value; otherwise the effective weight (directly affecting the animation at this moment) will be set to 0.
-
-<div class=note><b>Примечание:</b> .*enabled* will not be switched to *false* automatically, if .*weight* is set to 0 by this method.</div><br>
+Устанавливает <tt><a href="#1weight" onmouseover="show('AnimationAction.weight');" onmouseout="hide()">weight</a></tt> и останавливает любое запланированное затухание. Этот метод может быть включен в цепочку.<br>
+Если свойство <tt><a href="#1enabled" onmouseover="show('AnimationAction.enabled');" onmouseout="hide()">enabled</a></tt> установлено как&nbsp;<tt>true</tt>, действующий вес (внутреннее свойство)
+также будет установлен в это же значение; в противном случае действующий вес (непосредственно влияющий на анимацию в данный момент) будет установлен как&nbsp;<tt>0</tt>.
+<div class=note><b>Примечание:</b> Если этим методом свойство <tt><a href="#1weight" onmouseover="show('AnimationAction.weight');" onmouseout="hide()">weight</a></tt> установлено как&nbsp;<tt>0</tt>,
+то свойство <tt><a href="#1enabled" onmouseover="show('AnimationAction.enabled');" onmouseout="hide()">enabled</a></tt> не будет автоматически переключено в&nbsp;<tt>false</tt>.</div><br>
 
 <pre id="1setLoop"><a href="#1" onmouseover="show('AnimationAction.<br>set loop - установка цикла');" onmouseout="hide()">.setLoop</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loop mode - режим цикла');" onmouseout="hide()">loopMode</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('repetitions - повторения');" onmouseout="hide()">repetitions</a></span> )</pre>
 Метод устанавливает <a href="#1loop" onmouseover="show('AnimationAction.loop');" onmouseout="hide()"> режим цикла</a> и количество <a href="#1repetitions" onmouseover="show('AnimationAction.repetitions');" onmouseout="hide()">повторений</a>. Этот метод может быть включен в цепочку.
@@ -244,22 +251,21 @@ Optimizes each track by removing equivalent sequential keys (which are common in
 <h4>Статические методы</h4>
 <div class=blockindent><br>
 <pre id="2CreateClipsFromMorphTargetSequences"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('create clips from morph target sequence -<br>создать клипы из последовательности целей морфинга');" onmouseout="hide()">.CreateClipsFromMorphTargetSequences</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">name</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target sequence - последовательность целей морфинга');" onmouseout="hide()">morphTargetSequence</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов frames per second - кадры в секунду');" onmouseout="hide()">fps</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no loop - нет цикла');" onmouseout="hide()">noLoop</a></span> )</pre>
-
+Метод возвращает массив новых AnimationClip'ов, созданного из <a href="core.htm#7morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">массива целей морфинга</a> геометрического элемента
 Returns an array of new AnimationClips created from the [page:Geometry.morphTargets morph target sequences</a> of a geometry, trying to sort morph target names into animation-group-based
 			patterns like "Walk_001, Walk_002, Run_001, Run_002 ..."<br>
-
-This method is called by the [page:JSONLoader</a> internally, and it uses [page:.CreateFromMorphTargetSequence CreateFromMorphTargetSequence</a>.<br><br>
+Данный метод вызывается внутренне загрузчиком <a href="loaders.htm#12" onmouseover="show('JSONLoader')" onmouseout="hide()">JSONLoader</a> и при этом используется метод <a href="#2CreateFromMorphTargetSequence" onmouseover="show('AnimationClip.CreateFromMorphTargetSequence')" onmouseout="hide()">CreateFromMorphTargetSequence</a>.<br><br>
 
 <pre id="2CreateFromMorphTargetSequence"><a href="#2" onmouseover="show('AnimationClip.<br>create from morph target sequence - создать<br>из последовательности целей морфинга');" onmouseout="hide()">.CreateFromMorphTargetSequence</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">name</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target sequence - последовательность целей морфинга');" onmouseout="hide()">morphTargetSequence</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов frames per second - кадры в секунду');" onmouseout="hide()">fps</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no loop - нет цикла');" onmouseout="hide()">noLoop</a></span> )</pre>
-
-Returns a new AnimationClip from the passed [page:Geometry.morphTargets morph targets array</a> of a geometry, taking a name and the number of frames per second.
-
+Возвращает новый <a href="#2" onmouseover="show('AnimationClip');" onmouseout="hide()">AnimationClip</a> исходя из переданного
+<a href="core.htm#7morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">массива целей морфинга</a> геометрического элемента, принимая в качестве аргументов название и количество кадров в секунду.
 <div class=note><b>Примечание:</b> Параметр <tt>fps</tt> обязателен, но скорость анимации в <tt>AnimationAction</tt> может быть переопределена методом <tt><a href="#1setDuration" onmouseover="show('AnimationAction.setDuration');" onmouseout="hide()">animationAction.setDuration</a></tt>.</div><br>
 
 <pre id="2findByName"><a href="#2" onmouseover="show('AnimationClip.<br>find by name - найти по имени');" onmouseout="hide()">.findByName</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('object or clip array - массив объектов или клипов');" onmouseout="hide()">objectOrClipArray</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">name</a></span> )</pre>
 Метод разыскивает <tt>AnimationClip</tt> по названию, принимая в качестве своего первого параметра либо массив анимационных клипов, либо сетку (Mesh), либо геометрию (Geometry), которые содержат массив, поименованный как "<tt>animations</tt>".<br><br>
 
 <pre id="2parse"><a href="#2" onmouseover="show('AnimationClip.<br>parse - разбор, синтаксический анализ, парсинг');" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('json - здесь объект в формате JSON');" onmouseout="hide()">json</a></span> )</pre>
+Метод производит разбор представления клипа в формате JSON и возвращает <a href="#2" onmouseover="show('AnimationClip');" onmouseout="hide()">AnimationClip</a>.
 Parses a JSON representation of a clip and returns an AnimationClip.<br><br>
 
 <pre id="2parseAnimation"><a href="#2" onmouseover="show('AnimationClip.<br>parse animation - разобрать (т.е. сделать анализ) анимацию');" onmouseout="hide()">.parseAnimation</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('animation - анимация');" onmouseout="hide()">animation</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bones - кости');" onmouseout="hide()">bones</a></span> )</pre>
@@ -268,15 +274,19 @@ Parses the animation.hierarchy format and returns an AnimationClip.<br><br>
 
 <pre id="2toJSON"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в формат JSON');" onmouseout="hide()">.toJSON</a></span>( <a href="#2" onmouseover="show('AnimationClip.<br>clip - клип, обрезать');" onmouseout="hide()">clip</a> )</pre>
 Метод принимает <tt>AnimationClip</tt> и возвращает JSON-объект.</div><br>
+
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/animation/AnimationClip.js" target="_blank">AnimationClip.js на github.com</a></div><br><br>
+
 
 <h3 id="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AnimationMixer</h3>
 AnimationMixer - это проигрыватель для анимации конкретного объекта на сцене. Если на сцене независимо анимируется множество объектов, для всех объектов может использоваться один <tt>AnimationMixer</tt>.<br>
 Обзор различных элементов системы анимации <em>three.js</em> можно найти в статье <a href="next-steps.htm#3">"Системы анимации"</a> раздела <a href="next-steps.htm">"Следующие шаги"</a> данного руководства.<br><br>
+
 <h4>Конструктор</h4><br>
 <pre>AnimationMixer( <a href="core.htm#14" onmouseover="show('Object3D.<br>root object - корневой объект');" onmouseout="hide()">rootObject</a> )</pre>
 <div class=list><a href="core.htm#14" onmouseover="show('Object3D.<br>root object - корневой объект');" onmouseout="hide()"><tt>rootObject</tt></a> - объект, анимация которого должна воспроизводиться этим микшером.</div><br>
+
 <h4>Свойства</h4>
 <div class=blockindent><br>
 <pre id="3time"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('time - время');" onmouseout="hide()">.time</a></span></pre>

@@ -447,8 +447,12 @@ texture.repeat.set( 4, 4 );</pre><br>
 В этом классе доступны методы <tt><a href="core.htm#5" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a></tt>.
 <div class=blockindent><br>
 <pre id="6clone"><a href="#6" onmouseover="show('Texture.<br>clone - клонировать')" onmouseout="hide()">.clone</a> ( <a href="#6" onmouseover="show('Texture.<br>texture - текстура')" onmouseout="hide()">texture</a> )</pre>
-Метод делает копию текстуры. Обратите внимание, что это не
-Note this is not a "deep copy", the image is shared.<br><br>
+Метод делает копию текстуры. Обратите внимание, что это не полная копия (<a href="https://en.wikipedia.org/wiki/Object_copying#Deep_copy" target="_blank">"deep copy"</a>), изображение (картинка) остается в общем пользовании.
+<div class=note_trans><b>Примечание переводчика:</b> Копирование объектов в JavaScript может происходить в нескольких вариантах:<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'> "deep copy" - дословно "глубокое" копирование, т.е. полное копирование объекта, всей его иерархической структуры
+и "shallow" copy - поверхностное копирование, когда из исходных объектов в целевой объект копируются только перечисляемые и собственные свойства.<br>
+Полное копирование также можно делать разными способами, один из самых старых - превратить объект в его строковое представление в формате JSON и затем конвертировать его обратно в объект.<br>
+Вот пара ссылок по теме: <a href="https://learn.javascript.ru/object-reference" target="_blank">Объекты: передача по ссылке</a> и <a href="https://howtorecover.me/glubokoe-kopirovanie-v-javascript" target="_blank">Глубокое копирование в JavaScript</a></div></div><br>
 
 <pre id="6dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - выбросить, ликвидировать, избавиться')" onmouseout="hide()">.dispose</a></span>( )</pre>
 Вызывает метод <tt><a href="core.htm#5dispatchEvent" onmouseover="show('EventDispatcher.dispatchEvent')" onmouseout="hide()">EventDispatcher.dispatchEvent</a></tt> с типом события <tt>dispose</tt>.<br><br>

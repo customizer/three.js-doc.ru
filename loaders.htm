@@ -17,18 +17,17 @@
 <div class=list><a href="#9">FontLoader</a> - класс для загрузки шрифта в JSON-формате</div>
 <div class=list><a href="#11">ImageLoader</a> - класс для загрузки изображений.</div>
 <div class=list><a href="#13">Loader</a> - базовый класс для реализации загрузчиков.</div>
-<div class=list><a href="#15">MaterialLoader</a> - класс для загрузки материалов в формате JSON.</div>
-<div class=list><a href="#17">TextureLoader</a> - класс для загрузки текстуры.</div>
 </td>
 <td width=50% valign=top>
+<div class=list><a href="#15">MaterialLoader</a> - класс для загрузки материалов в формате JSON.</div>
+<div class=list><a href="#17">TextureLoader</a> - класс для загрузки текстуры.</div>
 <div class=list><a href="#2">AudioLoader</a> - класс для загрузки <a href="https://developer.mozilla.org/ru/docs/Web/API/AudioBuffer" target="_blank" onmouseover="show('audio buffer - буфер звука')" onmouseout="hide()">AudioBuffer</a>.</div>
 <div class=list><a href="#4">Cache</a> - система кэширования, используемая внутри <a href="#8">FileLoader</a>.</div>
 <div class=list><a href="#6">CubeTextureLoader</a> - класс для загрузки <a href="textures.htm#3" onmouseover="show('CubeTexture')" onmouseout="hide()">кубической текстуры</a>.</div>
 <div class=list><a href="#8">FileLoader</a> - низкоуровневый класс для загрузки ресурсов.</div>
-<div class=list><a href="#10">ImageBitmapLoader</a> - </div>
-<div class=list><a href="#12">JSONLoader</a> - загрузчик для загрузки объектов в JSON формате. </div>
+<div class=list><a href="#10">ImageBitmapLoader</a> - загрузчик для изображений в виде <a href="https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap" target="_blank">ImageBitmap</a>.</div>
 <div class=list><a href="#14">LoaderUtils</a> - некоторые вспомогательные загрузочные функции.</div>
-<div class=list><a href="#16">ObjectLoader</a> - </div>
+<div class=list><a href="#16">ObjectLoader</a> - загрузка ресурсов в формате JSON.</div>
 </td></tr></table><br>
 <table><tr><td><div class=list><a href="#18">Менеджеры загрузки</a></div>
 <div class=list>&nbsp; &nbsp; &nbsp; <a href="#18.1">DefaultLoadingManager</a> - менеджер загрузки, применяемый по умолчанию.</div>
@@ -738,72 +737,6 @@ loader.load(
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/ImageLoader.js" target="_blank">ImageLoader.js на github.com</a></div><br><br>
-
-
-<h3 id="12">JSONLoader</h3>
-Загрузчик для загрузки объектов в <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">JSON</a> формате. Для загрузки файлов, внутри класса используется <a href="#8" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br><br>
-
-<h4>Пример</h4>
-<pre>// instantiate a loader (создаем экземпляр загрузчика)
-var loader = new THREE.JSONLoader();<br>
-// load a resource (загрузка ресурса)
-loader.load(
-  // resource URL (URL-адрес ресурса)
-  'models/animated/monster/monster.js',<br>
-  // onLoad callback (функция обратного вызова, вызываемая по окончании загрузки)
-  function ( geometry, materials ) {
-    var material = materials[ 0 ];
-    var object = new THREE.Mesh( geometry, material );
-    scene.add( object );
-  },<br>
-  // onProgress callback (функция обратного вызова, вызываемая в процессе загрузки)
-  function ( xhr ) {
-    console.log( (xhr.loaded / xhr.total * 100) + '% загружено' );
-  },<br>
-  // onError callback (функция обратного вызова, вызываемая при ошибке)
-  function( err ) {
-    console.log( 'Произошла ошибка' );
-  }
-);</pre>
-<h5>Другие примеры</h5>
-<pre><a href="https://threejs.org/examples/#webgl_loader_json_blender" target="_blank">WebGL / loader / json / blender</a>
-<a href="https://threejs.org/examples/#webgl_loader_json_objconverter" target="_blank">WebGL / loader / json / objconverter</a></pre><br>
-
-<h4>Конструктор</h4>
-<pre>JSONLoader( <a href="#18.2" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
-<div class=list><tt>manager</tt> — <a href="#18.2" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
-Значением по умолчанию является <a href="#18.1" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
-Создает новый JSONLoader.<br><br>
-
-<h4>Свойства</h4>
-<div class=blockindent><br>
-<pre id="12manager"><a href="#18.2" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">.manager</a></pre>
-<a href="#18.2" onmouseover="show('LoadingManager')" onmouseout="hide()">Менеджер загрузки</a>, используемый загрузчиком.
-Значением по умолчанию является <a href="#18.1" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.<br><br>
-
-<pre id="12withCredentials"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('with credentials - с учетными данными')" onmouseout="hide()">.withCredentials</a></span></pre>
-Свойство определяет, использует ли XMLHttpRequest учетные данные. Значением по умолчанию является <tt>false</tt>.</div><br>
-
-<h4>Методы</h4>
-<div class=blockindent><br>
-<pre id="12load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
-<div class=list><tt>url</tt> — путь к файлу или URL-адрес файла. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
-<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
-<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженное изображение.</div>
-<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки. Аргументом будет загруженный объект JSON.</div>
-<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
-Метод начинает загрузку из источника (аргумент <tt>url</tt>) и передает объект <tt>JSON</tt> функции, указанной в аргументе <tt>onLoad</tt>.<br><br>
-
-<pre id="12setTexturePath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture path - установить путь к текстуре')" onmouseout="hide()">.setTexturePath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('texture path - путь к текстуре')" onmouseout="hide()">texturePath</a></span> )</pre>
-Метод устанавливает базовый путь или URL-адрес, с которого загружаются файлы. При загрузке множества файлов из одного и того же адреса, он может быть полезен.<br><br>
-
-<pre id="12parse"><a href="core.htm#14" onmouseover="show('Object3D.<br>parse - разбор, структурный анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick('объект JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('texture path - путь к текстуре')" onmouseout="hide()">texturePath</a></span> )</pre>
-<div class=list><tt>json</tt> — объект JSON для синтаксического анализа (обязательный аргумент).</div>
-<div class=list><tt>texturePath</tt> — базовый путь к текстурам.</div>
-Анализирует (разбирает) JSON-структуру и возвращает объект, содержащий разобранные <a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">геометрические элементы</a> и массив <a href="materials.htm#3" onmouseover="show('Material')" onmouseout="hide()">материалов</a>.</div><br>
-
-<h4>Исходники</h4>
-<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/JSONLoader.js" target="_blank">JSONLoader.js на github.com</a></div><br>
 
 
 <h3 id="13">Loader</h3>

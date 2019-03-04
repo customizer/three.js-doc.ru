@@ -1,3 +1,17 @@
+function show_txt(obj) {
+var x = obj.parentNode.getElementsByTagName("div")[0];
+if(x.style.display == "none") {x.style.display = "block";}
+else {x.style.display = "none"; obj.parentNode.scrollIntoView();
+// код ниже для совместимости с IE 7
+var scrollTop = document.documentElement.scrollTop || document.body && document.body.scrollTop || 0;
+scrollTop -= document.documentElement.clientTop;
+window.scrollTo(0, scrollTop);}}
+
+function no_js(event) {
+var event = event || window.event;
+if (event.stopPropagation) {event.stopPropagation()}
+  else event.cancelBubble = true;}
+
 function show(num) {
 var txt = document.getElementById("txt"+num);
 txt.style.display="block";

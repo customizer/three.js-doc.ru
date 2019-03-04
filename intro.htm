@@ -227,14 +227,14 @@ WebGL поддерживается следующими браузерами: Go
 <h2 id="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Обнаружение совместимости браузера с WebGL</h2>
 Несмотря на то, что проблема встречается все реже и реже, некоторые устройства или браузеры все ещё не могут работать с WebGL.<br>
 Описанный ниже метод проверяет, поддерживается ли WebGL и, если это не так, выводит сообщение пользователю.<br><br>
-Добавьте с своему javascript-коду <a href="https://github.com/mrdoob/three.js/blob/master/examples/js/Detector.js" target="_blank">Detector.js</a> и запускайте следующий код прежде чем пытаться что-либо отобразить.
-<pre>if (Detector.webgl) {
+Добавьте с своему javascript-коду <a href="https://github.com/mrdoob/three.js/blob/master/examples/js/WebGL.js" target="_blank">эту функцию</a> и прежде чем пытаться что-либо отобразить, запускайте следующий код.
+<pre>if ( WEBGL.isWebGLAvailable() ) {
   // Initiate function or other initializations here
   // Здесь располагается инициализация функции или другие инициализации
     animate();
 } else {
-    var warning = Detector.getWebGLErrorMessage();
-    document.getElementById('container').appendChild(warning);
+	var warning = WEBGL.getWebGLErrorMessage();
+	document.getElementById( 'container' ).appendChild( warning );
 }</pre><br><br>
 
 <h2 id="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Как все это запустить локально</h2>

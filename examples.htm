@@ -1722,14 +1722,316 @@ light.add( lensflare );</pre>
 Ресурс glTF может предоставлять одну или несколько сцен включая сетки, материалы, текстуры, скины, скелеты, цели морфинга, анимацию, освещение и/или камеры.<br>
 Статья Википедии о <a href="https://en.wikipedia.org/wiki/GlTF" target="_blank">GlTF</a>, на английском языке.<br><br>
 
+<h4>Расширения</h4>
+<div class=note_trans><b>Примечание переводчика:</b> Собственно, сокращение KHR в названии расширений означает <a href="https://www.khronos.org/" target="_blank">Khronos Group</a> - промышленный консорциум, целью которого является выработка открытых стандартов интерфейсов программирования (API) в области создания и воспроизведения динамической графики и звука на широком спектре платформ и устройств, с поддержкой аппаратного ускорения.</div>
+GLTFExporter поддерживает следующие <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/" target="_blank" onmouseover="show('Расширения glTF расширяют базовый формат glTF модели.<br>Расширения могут вводить новые свойства (включая свойства,<br>которые ссылаются на внешние данные, причем расширение может<br>определять формат этих данных), новую семантику параметров,<br>зарезервированные идентификаторы и новые форматы контейнеров.<br>Расширения пишутся для конкретной версии glTF и могут быть<br>введены в основу glTF более поздних версий.')" onmouseout="hide()">расширения glTF 2.0</a>:
+<div class=list><a class='link' onclick='javascript:show_txt(this)' onmouseover="show('lights punctual - точечные источники света')" onmouseout="hide()">KHR_lights_punctual</a>
+<div style='display:none;' onclick='javascript:show_txt(this)'>Данное расширение определяет набор источников света для использования с glTF 2.0. Освещение сцены определяется источниками света в ней.<br><br>
+Многие 3D инструменты и движки поддерживают встроенные реализации типов освещения. С помощью данного расширения инструменты могут экспортировать, а движки - импортировать, эти источники освещения.<br><br>
+Это расширение определяет три типа "точечного" освещения: направленное (<tt>directional</tt>), точечное (<tt>point</tt>) и прожекторное (<tt>spot</tt>).
+Точечные источники света определяются как параметризованные, бесконечно малые точки, излучающие свет с определенной интенсивностью и в конкретных направлениях.<br><br>
+Эти источники света указываются по узлам и наследуют изменения этого узла.<br><br>
+Соответствующая реализация данного расширения должна иметь возможность загрузки данных источников освещения, определенных в ресурсе и должна представлять ресурс, использующий эти источники освещения.<br><br>
+
+<h5>Определение видов освещения</h5>
+Вид освещения задается внутри словарного свойства в файле описания glTF сцены, посредством добавления свойства <tt>extensions</tt> (расширения) к glTF объекту верхнего уровня
+и определяется свойством <tt>KHR_lights_punctual</tt>, в котором имеется массив свойств освещения.<br><br>
+Для каждого источника освещения задается обязательное свойство <tt>type</tt>, обозначающее тип освещения (направленное - <tt>directional</tt>, точечное - <tt>point</tt> или прожекторное - <tt>spot</tt>).
+В следующем примере определяется источник направленного освещения белого цвета.
+<pre>"extensions": {
+  "KHR_lights_punctual" : {
+    "lights": [
+      {
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "type": "directional"
+      }
+    ]
+  }
+}</pre><br>
+
+<h5>Добавление экземпляров освещения в узлы</h5>
+Источники света должны быть присоединены к узлу путем задания свойства <tt>extensions.KHR_lights_punctual</tt> и, внутри него, индекса в массиве источников света с помощью свойства <tt>light</tt>.
+<pre>"nodes" : [
+  {
+    "extensions" : {
+      "KHR_lights_punctual" : {
+        "light" : 0
+      }
+    }
+  }
+]</pre>
+Освещение будет наследовать изменения узла. Для типов освещения, которые имеют конкретное расположение (точечное и прожекторное), позиция источника света определяется как местоположение узла в "мире".
+Для типов освещения, имеющих направление (направленное и прожекторное), направление света определяется трехмерным вектором <tt>(0.0, 0.0, -1.0)</tt> и поворотом узла соответственно направлению света.
+То есть, освещение без преобразования узла направлено вдоль по оси&nbsp;<tt>-Z</tt>.
+Изменение освещения зависит от масштабирования узла в "мировых" координатах, но все свойства света (такие как расстояние отсечки - <tt>range</tt> и интенсивность - <tt>intensity</tt>) остаются неизменными.<br><br>
+
+<h5>Типы освещения</h5>
+Все типы освещения имеют общий набор свойств, перечисленный ниже.
+<div class="caption">Общие свойства освещения</div>
+<table class="tbl_1" border="1" cellpadding="5">
+<tr class="head"><td>Свойство<br>Property</td><td>Описание<br>Description</td><td>Является ли свойство обязательным<br>Required</td></tr>
+<tr><td align=center><tt><span class="lnk" onmouseover="show('name - имя, название')" onmouseout="hide()">name</span></tt></td><td>Название освещения.</td><td>Нет, значение по умолчанию: <tt>""</tt> (пустая строка).</td></tr>
+<tr><td align=center><tt><span class="lnk" onmouseover="show('color - цвет')" onmouseout="hide()">color</span></tt></td><td>RGB значение цвета освещения в линейном пространстве.</td><td>Нет, значение по умолчанию:&nbsp;<tt>[1.0, 1.0, 1.0]</tt> (белый).</td></tr>
+<tr><td align=center><tt><span class="lnk" onmouseover="show('intensity - интенсивность')" onmouseout="hide()">intensity</span></tt></td><td>Яркость света. Единицы измерения данного освещения определяются в зависимости от типа освещения.
+Для точечного (point) и прожекторного (spot) освещения интенсивность измеряется в канделах (люмен/стерадиан), в то время как направленное (directional) освещение использует освещенность в люксах (люмен/м<sup>2</sup>).</td><td>Нет, значение по умолчанию:&nbsp;<tt>1.0</tt>.</td></tr>
+<tr><td align=center><tt><span class="lnk" onmouseover="show('type - тип')" onmouseout="hide()">type</span></tt></td><td>Объявляет тип освещения.</td><td>✅ Да.</td></tr>
+<tr><td align=center><tt><span class="lnk" onmouseover="show('range - диапазон')" onmouseout="hide()">range</span></tt></td><td>Указание, определяющее расстояние отсечки, при котором интенсивность света можно считать равной нулю.
+Поддерживается только точечным (point) и прожекторным (spot) освещениями.
+Значение должно быть больше&nbsp;<tt>0</tt>. Когда значение свойства неопределено, расстояние отсечки предполагается бесконечным.</td><td>Нет.</td></tr></table>
+На свойства освещения не влияют изменения узла - например, расстояние отсечки (<tt>range</tt>) и интенсивность (<tt>intensity</tt>) освещения не изменяются при масштабировании (<tt>scale</tt>).<br><br>
+
+<h5>Свойство <tt>range</tt> (расстояние отсечки)</h5>
+Свойство <tt>range</tt> (возможно только для точечного (point) и прожекторного (spot) освещения) определяет расстояние отсечки, на котором интенсивность света становится равной нулю, т.е. свет больше не влияет на окружающее пространство.
+Это может пригодится для отбрасывания геометрических элементов, на которых освещение не оказывает видимого влияния, что может оказать значительное положительное влияние на производительность отрисовки.
+При этом требуется, при задании ненулевого значения, движки рендеринга игнорировали освещения за пределами этого расстояния отсечки.<br><br>
+В пределах освещения до расстояния отсечки, ослабление интенсивности должно как можно точнее быть обратно пропорциональным квадрату расстояния,
+хотя некоторые неквадратичные спады вблизи края расстояния отсечки можно использовать, чтобы избежать резкого обрыва освещенности.
+Если свойство <tt>range</tt> неопределено, расстояние отсечки предполагается равным бесконечности и освещение будет затухать обратно пропорционально квадрату расстояния.<br><br>
+Рекомендуемая реализация этого ослабления (<tt>attenuation</tt>) с расстоянием отсечки (<tt>range</tt>) выглядит следующим образом:
+<pre>attenuation = max( min( 1.0 - ( current_distance / range )<sup>4</sup>, 1 ), 0 ) / current_distance<sup>2</sup></pre><br>
+
+<h5>Направленное освещение (<tt>directional</tt>)</h5>
+Направленное освещение - это источники света, которые действуют как будто они находятся бесконечно далеко и излучают свет в направлении локальной оси&nbsp;<tt>-z</tt>.
+Данный тип освещения наследует ориентацию узла, которому он принадлежит; положение и масштаб игнорируются, за исключением их влияния на унаследованную ориентацию узла.
+Поскольку он находится на бесконечном расстоянии, освещенность не ослабляется. Его интенсивность измеряется в люменах на метр квадратный или в люксах (lm/m<sup>2</sup>).<br><br>
+
+<h5>Точечное освещение (<tt>point</tt>)</h5>
+Источники точечного освещения излучают свет во всех направлениях от своего положения в пространстве; поворот и масштаб игнорируются, за исключением их влияния на положение унаследованного узла.
+Яркость освещения уменьшается физически правильным образом, в зависимости от увеличения расстояния от позиции источника света (т.е. яркость обратно пропорциональна квадрату расстояния).
+Интенсивность точечного освещения измеряется в канделах, т.е. люменах на <span class="lnk" onmouseover="show('Стерадиан от др.греч. στέρεος - твёрдый, объёмный,<br>пространственный и лат. radius - луч) - единица<br>измерения телесных углов.<br>Телесный угол в <tt>1</tt> стерадиан с вершиной в центре<br>сферы радиусом <tt>r</tt> вырезает из этой сферы<br>поверхность площадью <tt>r<sup>2</sup></tt>.')" onmouseout="hide()">стерадиан</span> (lm/sr).<br><br>
+
+<h5>Прожекторное освещение (<tt>spot</tt>)</h5>
+Источники прожекторного освещения излучают свет в виде конуса в направлении локальной оси&nbsp;<tt>-z</tt>. Угол конуса и затухание света в нем определяется двумя числами: <tt>innerConeAngle</tt> и <tt>outerConeAngle</tt>.
+Как и в случае с точечным освещением, яркость прожекторного освещения уменьшается физически правильным образом, в зависимости от увеличения расстояния от позиции источника света (т.е. яркость обратно пропорциональна квадрату расстояния).
+Интенсивность прожекторного освещения относится к яркости внутри <tt>innerConeAngle</tt> (и в месте размещения источника света) и измеряется в канделах, которая равна люмену на стерадиан (lm/sr).
+Движки, не поддерживающие два угла прожекторного освещения должны использовать <tt>outerConeAngle</tt> в качестве угла конуса прожектора (косвенно оставляя <tt>innerConeAngle</tt> равным&nbsp;<tt>0</tt>).<br><br>
+Позиция и ориентация прожекторного освещения наследуется при изменении узла, к которому оно принадлежит. Наследуемый масштаб не влияет на форму конуса и игнорируется, за исключением его влияния на позицию и ориентацию.<br><br>
+Если тип освещения определен как прожекторный (spot), свойство <tt>spot</tt> у источника освещения является обязательным. Его же свойства (показаны ниже) являются дополнительными, необязательными.
+<table class="tbl_1" border="1" cellpadding="5">
+<tr class="head"><td>Свойство<br>Property</td><td>Описание<br>Description</td><td>Является ли свойство обязательным<br>Required</td></tr>
+<tr><td align=center><tt><span class="lnk" onmouseover="show('inner cone angle - угол внутреннего конуса')" onmouseout="hide()">innerConeAngle</span></tt></td>
+<td>Угол, в радианах, от центра луча прожектора до места, где начинается спад освещенности. Должен быть больше или равен&nbsp;<tt>0</tt> и меньше угла <tt>outerConeAngle</tt>.</td>
+<td>Нет, значение по умолчанию: <tt>0</tt></td></tr>
+<tr><td align=center><tt><span class="lnk" onmouseover="show('outer cone angle - угол внешнего конуса')" onmouseout="hide()">outerConeAngle</span></tt></td>
+<td>Угол, в радианах, от центра луча прожектора до места, где заканчивается спад освещенности. Должен быть больше угла <tt>innerConeAngle</tt> и меньше или равен&nbsp;<tt>PI/2.0</tt>.</td>
+<td>Нет, значение по умолчанию:&nbsp;<tt>PI/4.0</tt></td></tr></table>
+
+<pre>"extensions": {
+  "KHR_lights_punctual" : {
+    "lights": [
+      {
+        "spot": {
+          "innerConeAngle": 0.785398163397448,
+          "outerConeAngle": 1.57079632679,
+        },
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "type": "spot"
+      }
+    ]
+  }
+}</pre><br>
+
+<h5>Углы внутреннего и внешнего конусов</h5>
+Между углами <tt>innerConeAngle</tt> и <tt>outerConeAngle</tt> должно быть плавное ослабление яркости.
+В реальности это "угловое" затухание очень сложное, так как зависит от физического размера прожектора и формы его корпуса, в котором находится лампа.<br><br>
+Соответствующие реализации будут моделировать это угловое затухание по кривой, которая придерживается увеличенного снижения яркости перед выравниванием, при движении от внутреннего угла к внешнему.<br><br>
+Обычно это затухание моделируют путем интерполяции между косинусами каждого угла. Это эффективное приближение к реальности, которое выдает достойные результаты.<br><br>
+
+<b>Рекомендуемый код:</b>
+<pre>// These two values can be calculated on the CPU and passed into the shader
+// Эти два значения могут быть вычислены на процессоре и переданы в шейдер
+float lightAngleScale = 1.0f / max(0.001f, cos(innerConeAngle) - cos(outerConeAngle));
+float lightAngleOffset = -cos(outerConeAngle) * lightAngleScale;
+
+// Then, in the shader: (Далее, в шейдере:)
+float cd = dot(spotlightDir, normalizedLightVector);
+float angularAttenuation = saturate(cd * lightAngleScale + lightAngleOffset);
+angularAttenuation *= angularAttenuation;</pre><br><br></div></div>
+
+<div class=list><a class='link' onclick='javascript:show_txt(this)' onmouseover="show('materials unlit - неосвещенные материалы')" onmouseout="hide()">KHR_materials_unlit</a>
+<div style='display:none;' onclick='javascript:show_txt(this)'>Данное расширение определяет неосвещенную теневую модель для использования в glTF 2.0 материалах,
+в качестве альтернативы моделям затенения <a href="https://en.wikipedia.org/wiki/Physically_based_rendering" target="_blank" onclick='no_js(event)'>физически корректного отображения (Physical Based Rendering - PBR)</a>, предоставляемым базовой спецификацией.
+<div class=note_trans><b>Примечание переводчика:</b> Вот перевод некоторых статей на русский язык из книги по PBR <a href="https://www.allegorithmic.com/pbr-guide" target="_blank" onclick='no_js(event)'>The PBR guide - 2018 edition</a> на сайте <a href="http://3dyuriki.com" target="_blank" onclick='no_js(event)'>3dyuriki.com</a>:<br>
+&nbsp; &#9679; &nbsp; <a href="http://3dyuriki.com/2015/02/26/chto-takoe-pbr-fizicheski-korrektnyj-rendering-i-shejding/" target="_blank" onclick='no_js(event)'>Что такое PBR: физически корректный рендеринг и шейдинг</a><br>
+&nbsp; &#9679; &nbsp; <a href="http://3dyuriki.com/2015/02/26/chto-takoe-pbr-fizicheski-korrektnyj-rendering-i-shejding-2/" target="_blank" onclick='no_js(event)'>Что такое PBR: физически корректный рендеринг и шейдинг 2</a><br>
+&nbsp; &#9679; &nbsp; <a href="http://3dyuriki.com/2015/03/25/kak-sozdavat-pbr-tekstury-prakticheskij-kurs/" target="_blank" onclick='no_js(event)'>Как создавать PBR текстуры: практический курс. Часть 1</a><br>
+&nbsp; &#9679; &nbsp; <a href="http://3dyuriki.com/2017/08/17/urok-kak-sozdavat-pbr-tekstury-2/" target="_blank" onclick='no_js(event)'>Как создавать PBR текстуры: практический курс. Часть 2</a></div>
+Для подключения неосвещенных материалов имеются три побудительных причины:<br>
+&nbsp; &#9679; &nbsp; Мобильные устройства с ограниченными ресурсами, где неосвещенные материалы предлагают эффективную альтернативу высококачественным моделям затенения.<br>
+&nbsp; &#9679; &nbsp; <a href="https://ru.wikipedia.org/wiki/%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%8F" target="_blank" onmouseover="show('Фотограмметрия (от фото…, др.греч. γράμμα - запись, изображение<br>и … метрия) - научно-техническая дисциплина, занимающаяся<br>определением формы, размеров, положения и иных характеристик<br>объектов по их фотоизображениям.<br>Существует два основных направления в фотограмметрии: создание<br>карт и планов Земли (и других космических объектов) по снимкам<br>(фототопография), и решение прикладных задач в архитектуре,<br>строительстве, медицине, криминалистике и т. д. (наземная,<br>прикладная фотограмметрия).')" onmouseout="hide()" onclick='no_js(event)'>Фотограмметрия</a>, в которой информация об освещении уже присутствует и не нужно применять дополнительное освещение.<br>
+&nbsp; &#9679; &nbsp; Стилизованные материалы (такие как <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BD%D0%B8%D0%BC%D0%B5" target="_blank" onclick='no_js(event)'>«аниме»</a>
+или <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B8%D1%81%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F_%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D0%BF%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F" target="_blank" onclick='no_js(event)'>«рисованная мультипликация»</a>
+- <a href="https://en.wikipedia.org/wiki/Traditional_animation" target="_blank" onclick='no_js(event)'>hand-drawn</a>), в которых освещение нежелательно по эстетическим соображениям.<br><br>
+Эти варианты использования не являются взаимоисключающими: исполнители могут выбрать неосвещенный материал по соображениям производительности и принять эстетические решения в дополнение к этому выбору.
+В результате, пользовательские реализации, способные отображать PBR, не должны автоматически "обновляться" до полностью затененного PBR.
+Любые основные свойства PBR, указанные для неосвещенного материала (за исключением <tt>baseColor</tt>), предназначены для использования только в качестве резервных средств для клиентов, которые не поддерживают расширение KHR_materials_unlit.
+
+As a result, client implementations capable of rendering PBR should not automatically "upgrade" to fully-shaded PBR. Any core PBR properties specified on an unlit material (except baseColor) are meant only as fallbacks for clients that do not support the KHR_materials_unlit extension. The extension, whether required or optional within the asset, indicates preference for an unlit visual style.
+Расширение, независимо от того, является ли оно обязательным или дополнительным в ресурсе, указывает на предпочтение неосвещенного визуального стиля.<br><br>
+
+<h5>Extending Materials</h5>
+
+The common Unlit material is defined by adding the KHR_materials_unlit extension to any glTF material. When present, the extension indicates that a material should be unlit and use available baseColor values, alpha values, and vertex colors while ignoring all properties of the default PBR model related to lighting or color. Alpha coverage and doubleSided still apply to unlit materials.
+
+<pre>{
+  "materials": [
+    {
+      "name": "MyUnlitMaterial",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [ 0.5, 0.8, 0.0, 1.0 ]
+      },
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
+    }
+  ]
+}</pre>
+
+<h5>Определение Definition</h5>
+Модель материала Unlit описывает постоянно затененную поверхность, которая не зависит от освещения. Материал определяется только свойствами, уже представленными в спецификации материала glTF 2.0.
+Это расширение не добавляет никаких новых свойств - это фактически логический флаг, указывающий на использование неосвещенной модели затенения.
+Допускаются дополнительные свойства объекта расширения, но они могут привести к неопределенному поведению в соответствующих просмотрах.
+The Unlit material model describes a constantly shaded surface that is independent of lighting. The material is defined only by properties already present in the glTF 2.0 material specification. No new properties are added by this extension — it is effectively a boolean flag indicating use of an unlit shading model. Additional properties on the extension object are allowed, but may lead to undefined behaviour in conforming viewers.<br><br>
+
+Цвет (<tt>color</tt>) вычисляется как:
+<pre>color = &#60;baseColorTerm&#62;</pre>
+
+&#60;baseColorTerm&#62; is the product of baseColorFactor, baseColorTexture, and vertex color (if any), as defined by the core glTF material specification.<br><br>
+
+<h5>Пример</h5>
+В следующем примере определен неосвещенный материал неизменямого красного цвета.
+<pre>"materials": [
+  {
+    "name": "red_unlit_material",
+    "pbrMetallicRoughness": {
+      "baseColorFactor": [ 1.0, 0.0, 0.0, 1.0 ]
+    },
+    "extensions": {
+      "KHR_materials_unlit": {}
+    }
+  }
+]</pre><br>
+
+<h5>Совместимость расширения и резервирование материалов Extension compatibility and fallback materials</h5>
+По возможности средства разработки должны предоставлять запасное определение материала и помечать расширение KHR_materials_unlit как дополнительное/необязательное.
+Модели, включающие данное расширение, дополнительно будут по-прежнему отображаться на всех клиентах, которые поддерживают базовую спецификацию glTF 2.0, отступая назад к  металлическому (metal)/ шероховатому (rough) материалу PBR.
+В клиентах, не поддерживающих расширение, будет применено непосредственное освещение и производительность может ухудшиться.
+When possible, authoring tools should provide a fallback material definition and mark the KHR_materials_unlit extension as optional. Models including the extension optionally will still render in all clients that support the core glTF 2.0 specification, falling back to a PBR metal/rough material. In clients that do not support the extension, direct lighting will be applied and performance may be degraded.<br><br>
+
+Defining a fallback to the default PBR shading model is achieved by setting appropriate parameters on the default material.
+
+<pre>"materials": [
+  {
+    "name": "unlit_with_fallback",
+    "pbrMetallicRoughness": {
+      "baseColorFactor": [ 1.0, 1.0, 1.0, 1.0 ],
+      "baseColorTexture": { "index": 0 },
+      "roughnessFactor": 0.9,
+      "metallicFactor": 0.0
+    },
+    "extensions": {
+      "KHR_materials_unlit": {}
+    }
+  }
+]</pre>
+<div class=note><b>Примечание по реализации:</b> For best fallback behavior in clients, которые не реализуют расширение KHR_materials_unlit, средства разработки могут использовать:<br>
+&nbsp; &#9679; &nbsp; <tt>metallicFactor</tt> установленный как&nbsp;<tt>0</tt>, а <tt>emissiveFactor</tt> равный&nbsp;<tt>[0, 0, 0]</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>roughnessFactor</tt> установленный больше чем&nbsp;<tt>0.5</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>metallicRoughnessTexture</tt>, <tt>occlusionTexture</tt>, <tt>emissiveTexture</tt> и <tt>normalTexture</tt> не указываются.</div>
+<div class=note><b>Примечание по реализации:</b> Если расширение KHR_materials_unlit включено с другим расширением, определяющим теневую модель того же материала, результат будет неопределенным.</div><br><br></div></div>
+
+<div class=list><a class='link' onclick='javascript:show_txt(this)' onmouseover="show('texture transform - трансформация (изменение) текстуры')" onmouseout="hide()">KHR_texture_transform</a>
+<div style='display:none;' onclick='javascript:show_txt(this)'>Для оптимизации ресурсов, применяемых в 3d сцене, можно использовать множество способов. Главным среди них является возможность минимизировать количество текстур, загружаемых в видеопроцессор (GPU).
+Чтобы добиться этого, большинство движков предлагают упаковывать несколько текстур объекта с низким разрешением в один большой текстурный атлас.
+Область, соответствующая каждому объекту, в получившемся атласе, затем определяется вертикальным и горизонтальным смещениями, а также шириной и высотой области.<br><br>
+Для поддержки такого варианта использования, данное расширение добавляет в структуры <tt>textureInfo</tt> свойства <tt>offset</tt> (смещение), <tt>rotation</tt> (поворот) и <tt>scale</tt> (масштаб).
+Эти свойства обычно реализуются как <a href="https://ru.wikipedia.org/wiki/%D0%90%D1%84%D1%84%D0%B8%D0%BD%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank" onclick='no_js(event)'>афинное преобразование</a> <tt>UV</tt> координат.
+В коде <a href="https://ru.wikipedia.org/wiki/OpenGL_Shading_Language" target="_blank" onmouseover="show('GLSL (Graphics Library Shader Language) — язык высокого<br>уровня для программирования шейдеров. Разработан для<br>выполнения математики, которая обычно требуется для<br>выполнения растеризации графики.')" onmouseout="hide()" onclick='no_js(event)'>GLSL</a>:
+<pre>varying in vec2 Uv;<br>
+uniform vec2 Offset, Scale;
+uniform float Rotation;<br>
+mat3 translation = mat3(1,0,0, 0,1,0, Offset.x, Offset.y, 1);
+mat3 rotation = mat3(
+  cos(Rotation), sin(Rotation), 0,
+ -sin(Rotation), cos(Rotation), 0,
+              0,             0, 1
+);
+mat3 scale = mat3(Scale.x,0,0, 0,Scale.y,0, 0,0,1);<br>
+mat3 matrix = translation * rotation * scale;
+vec2 uvTransformed = ( matrix * vec3(Uv.xy, 1) ).xy;</pre>
+Это равнозначно <tt>Material#SetTextureOffset</tt> и <tt>Material#SetTextureScale</tt> в <a href="https://unity3d.com/ru" target="_blank" onmouseover="show('Unity — межплатформенная среда разработки компьютерных игр.<br>Unity позволяет создавать приложения, работающие под более<br>чем 20 различными операционными системами, включающими<br>персональные компьютеры, игровые консоли, мобильные устройства,<br>интернет-приложения и другие. Выпуск Unity состоялся в 2005 году<br>и с того времени идёт постоянное развитие.<br>Основными преимуществами Unity являются наличие визуальной среды<br>разработки, межплатформенной поддержки и модульной системы<br>компонентов. К недостаткам относят появление сложностей при<br>работе с многокомпонентными схемами и затруднения при<br>подключении внешних библиотек.')" onmouseout="hide()" onclick='no_js(event)'>Unity</a> или <tt>Texture#offset</tt> и <tt>Texture#repeat</tt> в Three.js.
+На сегодняшний день, поворот UV-координат широко не поддерживается, но здесь включен заблаговременно для совместимости.<br><br>
+
+<h5>Обновления схемы glTF</h5>
+Расширение KHR_texture_transform может определяться в структурах <tt>textureInfo</tt> и содержать следующие свойства:
+<table class="tbl_1" border="1" cellpadding="5">
+<tr class="head"><td>Название<br>Name</td><td>Тип значения<br>Type</td><td>Значение<br>по умолчанию<br>Default</td><td>Описание<br>Description</td></tr>
+<tr align=center><td><tt><span class="lnk" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</span></tt></td><td><tt><span class="lnk" onmouseover="show('массив из двух значений')" onmouseout="hide()">array[2]</span></tt></td><td><tt>[0.0, 0.0]</tt></td><td align=left>Смещение начала <tt>UV</tt> координат как коэффициент размерности текстуры.</td></tr>
+<tr align=center><td><tt><span class="lnk" onmouseover="show('rotation - поворот')" onmouseout="hide()">rotation</span></tt></td><td><tt><span class="lnk" onmouseover="show('number - число')" onmouseout="hide()">number</span></tt></td><td><tt>0.0</tt></td>
+<td align=left>Поворот <tt>UV</tt> координат на указанное число радиан вокруг начала координат против часовой стрелки. Это равносильно аналогичному повороту изображения по часовой стрелке.</td></tr>
+<tr align=center><td><tt><span class="lnk" onmouseover="show('scale - масштаб')" onmouseout="hide()">scale</span></tt></td><td><tt><span class="lnk" onmouseover="show('массив из двух значений')" onmouseout="hide()">array[2]</span></tt></td><td><tt>[1.0, 1.0]</tt></td>
+<td align=left>Коэффициент масштабирования, применяемый к элементам <tt>UV</tt> координат.</td></tr>
+<tr align=center><td><tt><span class="lnk" onmouseover="show('texCoord')" onmouseout="hide()">texCoord</span></tt></td><td><tt><span class="lnk" onmouseover="show('integer - целое число')" onmouseout="hide()">integer</span></tt></td><td></td><td align=left>
+Переопределяет <tt>textureInfo</tt>, если представлено значение <tt>texCoord</tt> и поддерживается данное расширение.</td></tr></table>
+Несмотря на то, что значения данного расширения неограничены, они будут давать вменяемые результаты только в том случае, если режим укладки текстуры модели установлен как <tt>REPEAT</tt> (т.е. повторяющийся),
+или когда результат конечного преобразования UV-координат находятся в диапазоне <tt>[0, 1]</tt> (т.е. настройки масштаба (<tt>scale</tt>) отрицательны, а смещения (<tt>offset</tt>), соответственно, положительны).<br><br>
+<div class=note><b>Примечание по реализации:</b> Для максимальной совместимости рекомендуется, чтобы экспортеры генерировали наборы UV-координат как с применением преобразований, так и без них,
+использовали в поле текстуры <tt>texCoord</tt> набор после преобразования, затем набор перед преобразованием с данным расширением.
+Таким образом, модель по-прежнему будет корректно отображаться, даже если расширение не поддерживается используемым движком.
+Одновременное включение и того и другого увеличит размер модели, так что, если включение резервного набора UV-координат слишком обременительно,
+либо добавьте это расширение к обязательным расширениям (Required), либо используйте в обоих местах одно и то же значение <tt>texCoord</tt>.</div>
+<div class=note><b>Примечание по реализации:</b> Исходя из основной спецификации по glTF, начало&nbsp;<tt>UV</tt> координат&nbsp;<tt>(0, 0)</tt> соответствует верхнему левому углу изображения текстуры.</div><br>
+
+<h5>Схема JSON</h5>
+<a href="https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_texture_transform/schema/KHR_texture_transform.textureInfo.schema.json" target="_blank" onclick='no_js(event)'>KHR_texture_transform.textureInfo.schema.json</a><br><br>
+
+<h5>Пример в формате JSON</h5>
+В этом примере выполняется поворот на&nbsp;<tt>90&#176;</tt> по часовой стрелке только нижнего левого квадранта исходного изображения.
+<pre>{
+  "materials": [{
+    "emissiveTexture": {
+      "index": 0,
+      "extensions": {
+        "KHR_texture_transform": {
+          "offset": [0, 1],
+          "rotation": 1.57079632679,
+          "scale": [0.5, 0.5]
+        }
+      }
+    }
+  }]
+}</pre>
+В этом примере выполняется переворот по оси&nbsp;<tt>T</tt>, что позволяет фактически установить начало координат в нижний левый угол.
+<pre>{
+  "materials": [{
+    "emissiveTexture": {
+      "index": 0,
+      "extensions": {
+        "KHR_texture_transform": {
+          "offset": [0, 1],
+          "scale": [1, -1]
+        }
+      }
+    }
+  }]
+}</pre></div></div><br>
+
 <h4>Пример</h4>
 <pre>// Instantiate a exporter (создаем экземпляр экспортера)
-var exporter = new THREE.GLTFExporter( defaultOptions );<br>
+var exporter = new THREE.GLTFExporter();<br>
 // Parse the input and generate the glTF output
 // анализ входных данных и генерация выходных данных glTF
 exporter.parse( scene, function ( gltf ) {
-	console.log( gltf );
-	downloadJSON( gltf );
+  console.log( gltf );
+  downloadJSON( gltf );
 }, options );</pre>
 <h5>Другие примеры:</h5>
 <pre><a href="https://threejs.org/examples/#misc_exporter_gltf" target="_blank">misc / exporter / gltf</a></pre><br>

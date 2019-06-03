@@ -16,21 +16,21 @@ scene.add( object );</pre>
 var object2 = new THREE.Object3D;<br>
 object1.add( object2 );
 scene.add( object1 ); //object1 and object2 will automatically update their matrices
-//object1 и object2 будут автоматически обновлять свои матрицы</pre>
+                      //object1 и object2 будут автоматически обновлять свои матрицы</pre>
 Впрочем, если известно что объект будет статичным, можно запретить автоматическое обновление и обновлять матрицу трансформации вручную, когда потребуется.
-<pre>object.matrixAutoUpdate  = false;
+<pre>object.matrixAutoUpdate = false;
 object.updateMatrix();</pre><br>
 
-<h2>Geometries</h2>
+<h2>Геометрические элементы</h2>
 <div class=note_trans><b>Примечание переводчика:</b> Здесь рассматривается обновление геометрических параметров объекта, т.е. вершины, грани, их расположение, нормали, цвета и т.д.</div>
-<h3><a href="core.htm#2">BufferGeometry</a></h3>
-BufferGeometries сохраняют информацию (такую как положение вершин, индексы граней, нормали, цвета, текстурные координаты
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="core.htm#2">BufferGeometry</a></h3>
+Элементы <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a> сохраняют информацию (такую как положение вершин, индексы граней, нормали, цвета, текстурные координаты
 (<a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" onmouseover="show('соответствие между координатами на поверхности трёхмерного объекта (X, Y, Z)<br>и координатами на текстуре (U, V - эти буквы обозначают оси двумерной текстуры,<br>потому что «X», «Y» и «Z» уже используются для обозначения осей 3D-объекта<br>в пространстве модели). Значения U и V обычно изменяются от 0 до 1.');" onmouseout="hide()">UV</a>)
 и все атрибуты, установленные пользователем) в <a href="core.htm#2">буферах</a>, которые являются <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays" target="_blank">типизованными массивами</a> (<a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Typed_arrays" target="_blank">здесь</a> описание этих массивов на русском языке).
-Это делает работу BufferGeometries в общем-то быстрее, по сравнению с обычными Geometries за счет того, что с ними сложнее работать.<br><br>
-Что касается обновления BufferGeometries, то самое главное для понимания, не стоит изменять размер буферов (это очень затратно, по существу равнозначно созданию новой геометрии). Однако можно обновлять содержимое буферов.<br><br>
-Это значит, если известно, что какой-нибудь атрибут вашей BufferGeometry будет расти (например, количество вершин), то следует изначально выделить буфер, достаточно большой, для хранения любого числа новых вершин, которые могут быть созданы.
-Конечно, это также означает, что для вашей <tt>BufferGeometry</tt> существует максимальный размер - нет способа создать <tt>BufferGeometry</tt>, которую можно было бы успешно расширять до бесконечности.<br><br>
+Это делает работу элементов BufferGeometry в общем-то быстрее, по сравнению с обычными элементами <a href="core.htm#7" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> за счет того, что с ними сложнее работать.<br><br>
+Что касается обновления элементов BufferGeometry, то самое главное для понимания, не стоит изменять размер буферов (это очень затратно, по существу равнозначно созданию новой геометрии). Однако можно обновлять содержимое буферов.<br><br>
+Это значит, если известно, что какой-нибудь атрибут элемента BufferGeometry будет расти (например, количество вершин), то следует изначально выделить буфер, достаточно большой, для хранения любого числа новых вершин, которые могут быть созданы.
+Конечно, это также означает, что для элемента <tt>BufferGeometry</tt> существует максимальный размер - нет способа создать <tt>BufferGeometry</tt>, которую можно было бы успешно расширять до бесконечности.<br><br>
 В качестве примера попробуем нарисовать линию, которая увеличивается во время визуализации. Выделим место в буфере для 500 вершин, но сначала, при помощи метода <tt><a href="core.htm#2drawRange">BufferGeometry.drawRange</a></tt>, нарисуем только две.
 <pre>var MAX_POINTS = 500;<br>
 // geometry  (геометрия)
@@ -51,25 +51,25 @@ scene.add( line );</pre>
 var x, y, z, index;
 x = y = z = index = 0;<br>
 for ( var i = 0, l = MAX_POINTS; i &lt; l; i ++ ) {<br>
-    positions[ index ++ ] = x;
-    positions[ index ++ ] = y;
-    positions[ index ++ ] = z;<br>
-    x += ( Math.random() - 0.5 ) * 30;
-    y += ( Math.random() - 0.5 ) * 30;
-    z += ( Math.random() - 0.5 ) * 30;<br>
+  positions[ index ++ ] = x;
+  positions[ index ++ ] = y;
+  positions[ index ++ ] = z;<br>
+  x += ( Math.random() - 0.5 ) * 30;
+  y += ( Math.random() - 0.5 ) * 30;
+  z += ( Math.random() - 0.5 ) * 30;<br>
 }</pre>
 Если нужно изменить <em>количество точек</em>, отображаемых после первой визуализации, сделайте следующее:
 <pre>line.geometry.setDrawRange( 0, newValue );</pre>
 Если, после первой визуализации, нужно изменить значения данных положения, следует установить флаг <tt>needsUpdate</tt>, вот так:
 <pre>line.geometry.attributes.position.needsUpdate = true;
- // required after the first render (запрашивается после первой визуализации)</pre>
-<a href="http://jsfiddle.net/w67tzfhx/" target="_blank">Вот пУтанка</a>, представленная анимированной линией, которую можно приспособить под свои нужды.<br><br>
+  // required after the first render (запрашивается после первой визуализации)</pre>
+<a href="http://jsfiddle.net/w67tzfhx/" target="_blank">Вот &#171;пу&#769;танка&#187;</a>, представленная анимированной линией, которую можно приспособить под свои нужды.<br><br>
 
 <h4>Примеры:</h4>
-<pre><a href="https://threejs.org/examples/#webgl_custom_attributes" target="_blank">WebGL / custom / attributes</a>
-<a href="https://threejs.org/examples/#webgl_buffergeometry_custom_attributes_particles" target="_blank">WebGL / buffergeometry / custom / attributes / particles</a></pre><br>
+<pre><a href="https://threejs.org/examples/#webgl_custom_attributes" target="_blank">WebGL/custom/attributes</a>
+<a href="https://threejs.org/examples/#webgl_buffergeometry_custom_attributes_particles" target="_blank">WebGL/buffergeometry/custom/attributes/particles</a></pre><br>
 
-<h3><a href="core.htm#7">Geometry</a></h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="core.htm#7">Geometry</a></h3>
 Следующие флаги управляют обновлением различных атрибутов геометрии. Устанавливайте флаги только для атрибутов, требующих обновления, так как обновления - затратная вещь. После изменения буферов эти флаги автоматически сбрасываются обратно к значению <tt>false</tt>.
 Если требуется продолжать обновление буферов, нужно сохранить их как <tt>true</tt>. Обратите внимание, что это относится только к <a href="core.htm#7">Geometry</a>, а не к <a href="core.htm#2">BufferGeometry</a>.
 <pre>var geometry = new THREE.Geometry();
@@ -86,7 +86,7 @@ geometry.dynamic = true;</pre><br>
 <h4>Пример:</h4>
 <pre><a href="https://threejs.org/examples/#webgl_geometry_dynamic" target="_blank">WebGL / geometry / dynamic</a></pre><br>
 
-<h3>Материалы</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Материалы</h3>
 Все значения <span class="lnk" onmouseover="show('В шейдерах существует три типа переменных: униформы (uniforms), атрибуты<br>(attributes) и вариации (varyings):<br>'
 +'&nbsp; &nbsp; &nbsp; Униформы (uniforms) - это переменные, что имеют единообразное значение<br>для всех вершин; освещение, туман и карты тени - вот примеры данных, которые<br>будут храниться в униформах. Обращаться к униформам можно как с помощью<br>вершинного шейдера, так и с помощью шейдера фрагментов.<br>'
 +'&nbsp; &nbsp; &nbsp; Атрибуты (attributes) - это переменные, связанные с каждой вершиной -<br>например, положение вершины, нормаль к грани и цвет вершины - это все<br>примеры данных, которые будут хранится в атрибутах. Атрибуты могут быть<br>доступны только внутри вершинного шейдера.<br>'
@@ -140,7 +140,7 @@ http://steps3d.narod.ru/tutorials/shadow-map-tutorial.html -->
 <pre><a href="https://threejs.org/examples/#webgl_materials_cars" target="_blank">WebGL / materials / cars</a>
 <a href="https://threejs.org/examples/#webgl_postprocessing_dof" target="_blank">WebGL / webgl_postprocessing / dof</a></pre><br>
 
-<h3>Текстуры</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Текстуры</h3>
 Если текстуры изображения, элемента canvas, видео и данных были изменены, то у них должен быть установлен следующий флаг:
 <pre>texture.needsUpdate = true;</pre>
 Обновление целей визуализации произойдет автоматически.
@@ -148,7 +148,7 @@ http://steps3d.narod.ru/tutorials/shadow-map-tutorial.html -->
 <pre><a href="https://threejs.org/examples/webgl_materials_video" target="_blank">WebGL / materials / video</a>
 <a href="https://threejs.org/examples/webgl_rtt" target="_blank">WebGL / rtt</a></pre><br>
 
-<h3>Камеры</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Камеры</h3>
 Положение в пространстве и направление съемки камеры обновляются автоматически. Если нужно изменить параметры
 <ul><li><tt>fov</tt> (поле просмотра)</li>
 <li><tt>aspect</tt> (соотношение сторон)</li>
@@ -159,38 +159,42 @@ http://steps3d.narod.ru/tutorials/shadow-map-tutorial.html -->
 camera.updateProjectionMatrix();</pre><br><br>
 
 
-<h2 id="1.0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Как удалять объекты</h2>
+<h2 id="1.0">Как удалять объекты</h2>
 Одной из важных сторон повышения производительности и предотвращения утечек памяти в приложении является избавление от неиспользуемых библиотечных объектов.
 Всякий раз, при создании экземпляра объекта от библиотеки <em>three.js</em>, выделяется определенный объем памяти.
 Впрочем, <em>three.js</em> создает для определенных объектов, таких как геометрические элементы или материалы, связанные с WebGL объекты, такие как буферы или шейдерные программы, необходимые для визуализации (рендеринга).
 Важно подчеркнуть, что эти объекты не высвобождаются автоматически.
 Вместо этого, для высвобождения таких ресурсов, приложение должно использовать специальный API. Данное руководство представляет краткий обзор того, как этот API используется и какие объекты актуальны в этой ситуации.<br><br>
 
-<h3>Геометрические элементы</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Геометрические элементы</h3>
 Геометрический элемент обычно представляет сведения о вершинах, определяемые как набор атрибутов.
 <em>three.js</em> внутри, для каждого атрибута, создает объект типа <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLBuffer" target="_blank" onmouseover="show('Интерфейс WebGLBuffer является частью WebGL API и представляет<br>непрозрачный буферный объект, хранящий такие данные, как вершины<br>или цвета. Объект WebGLBuffer не определяет своих собственных<br>методов или свойств и его содержимое не доступно напрямую.')" onmouseout="hide()">WebGLBuffer</a>.
 Эти объекты удаляются только вызовом метода <tt><a href="core.htm#2dispose" onmouseover="show('BufferGeometry.dispose()')" onmouseout="hide()">BufferGeometry.dispose()</a></tt>.
 Если в приложении стал ненужным геометрический элемент, выполните данный метод, чтобы высвободить все, связанные с ним, ресурсы.<br><br>
 
-<h3>Материалы</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Материалы</h3>
 Материал определяет способ отображения объектов. <em>three.js</em> использует сведения из описания материала для создания шейдерной программы для визуализации (рендеринга).
 Шейдерные программы могут быть удалены только при удалении соответствующего материала. Из соображений производительности, <em>three.js</em> пытается по возможности повторно использовать существующие программы шейдеров.
 Поэтому шейдерная программа удаляется только в том случае, если удаляются все связанные с ней материалы. Можно затребовать удаление материала с помощью метода <tt><a href="materials.htm#3dispose" onmouseover="show('Material.dispose()')" onmouseout="hide()">Material.dispose()</a></tt>.<br><br>
 
-<h3>Текстуры</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Текстуры</h3>
 Удаление материала не влияет на текстуры. Они обрабатываются отдельно, поскольку одна и та же текстура может одновременно использоваться несколькими материалами.
 Всякий раз, при создании экземпляра <a href="textures.htm#6" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>,
 <em>three.js</em> внутри создает экземпляр <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLTexture" target="_blank" onmouseover="show('Интерфейс WebGLTexture является частью API WebGL и представляет<br>собой непрозрачный объект текстуры, обеспечивающий хранение и<br>строение операций текстурирования.<br>Объект WebGLTexture не определяет своих собственных методов или<br>свойств и его содержимое не доступно напрямую.')" onmouseout="hide()">WebGLTexture</a>.
 Подобно буферам, такой объект может быть удален только путем вызова метода <tt><a href="textures.htm#6dispose" onmouseover="show('Texture.dispose()')" onmouseout="hide()">Texture.dispose()</a></tt>.<br><br>
 
-<h3>Целевые буферы визуализации</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Целевые буферы визуализации</h3>
 Для реализации пользовательских назначений рендеринга, объекты типа <a href="renderers.htm#1.2" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()">WebGLRenderTarget</a>
 выделяют не только экземпляр <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLTexture" target="_blank" onmouseover="show('Интерфейс WebGLTexture является частью API WebGL и представляет<br>собой непрозрачный объект текстуры, обеспечивающий хранение и<br>строение операций текстурирования.<br>Объект WebGLTexture не определяет своих собственных методов или<br>свойств и его содержимое не доступно напрямую.')" onmouseout="hide()">WebGLTexture</a>,
 но также и буферы <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLFramebuffer" target="_blank" onmouseover="show('Интерфейс WebGLFramebuffer является частью API WebGL и представляет<br>собой набор буферов, которые служат в качестве места назначения<br>визуализации (рендеринга).<br>Объект WebGLFramebuffer не определяет своих собственных методов или<br>свойств и его содержимое не доступно напрямую.')" onmouseout="hide()">WebGLFramebuffer</a>
 и <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderbuffer" target="_blank" onmouseover="show('Интерфейс WebGLRenderbuffer является частью API WebGL и представляет<br>собой буфер, который может содержать изображение или может быть<br>источником или целью операции визуализации (рендеринга).<br>Объект WebGLRenderbuffer не определяет своих собственных методов или<br>свойств и его содержимое не доступно напрямую.')" onmouseout="hide()">WebGLRenderbuffer</a>.
 Эти объекты высвобождаются только при выполнении метода <tt><a href="renderers.htm#1.2dispose" onmouseover="show('WebGLRenderTarget.dispose()')" onmouseout="hide()">WebGLRenderTarget.dispose()</a></tt>.<br><br>
 
-<h3>Прочие объекты</h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Сцены</h3>
+Для сцен визуализатор (рендерер) поддерживает специальные структуры данных для сортировки и визуализации.
+Если, по каким-либо причинам, в приложении становится устаревшим объект сцены, то для высвобождения этих ресурсов вызывается метод <tt><a href="scenes.htm#3dispose" onmouseover="show('Scene.dispose')" onmouseout="hide()">Scene.dispose()</a></tt>.<br><br>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Прочие объекты</h3>
 Существуют и другие классы из каталого примеров, вроде элементов управления (контролов) или каналов постобработки, предоставляющих методы <tt>dispose()</tt> для удаления внутренних прослушивателей событий или целевых буферов визуализации.
 В общем, рекомендуется проверять API или документацию класса и отслеживать метод <tt>dispose()</tt>. Если он присутствует, следует использовать его при очистке.<br><br>
 

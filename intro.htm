@@ -104,10 +104,11 @@ render();</pre>
 <span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(картинка <a href='http://davidscottlyons.com/threejs/presentations/frontporch14/index.html#slide-16' target='_blank'>отсюда</a>)</em>&nbsp;&nbsp;&nbsp;</span><br></div></div>
 
 <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Анимация куба</h3>
-Если весь код, приведенный выше, вставлен в заранее созданный файл, вы должны увидеть зеленый куб. Давайте сделаем его чуть поинтереснее - покрутим его.<br><br>
+Если весь код, приведенный выше, вставлен в заранее созданный файл, вы должны увидеть зеленый куб. Давайте сделаем его чуть поинтереснее - покрутим его.<br>
+<img src="img/cube.gif" width="250" align="right"><br>
 Добавьте следующий код сразу перед вызовом <b>renderer.render</b> функции <b>render</b>:
-<pre>cube.rotation.x += 0.1;
-cube.rotation.y += 0.1;</pre>
+<pre>cube.rotation.x += 0.01;
+cube.rotation.y += 0.01;</pre>
 Этот код будет выполняться в каждом кадре (60 раз в секунду) и задаст кубу хорошую анимацию вращения. В принципе, все что нужно перемещать или изменять во время работы приложения, должно проходить через цикл рендеринга.
 Конечно, там можно вызвать и другие функции, но постарайтесь не делать функцию <b>render</b> в несколько сотен строк.
 
@@ -139,8 +140,8 @@ cube.rotation.y += 0.1;</pre>
       camera.position.z = 5;<br>
       var render = function () {
         requestAnimationFrame( render );<br>
-        cube.rotation.x += 0.1;
-        cube.rotation.y += 0.1;<br>
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;<br>
         renderer.render(scene, camera);
       };<br>
       render();
@@ -181,10 +182,14 @@ const scene = new Scene();
 Для решения этой проблемы идёт работа над тем, чтобы все примеры были представлены в виде модулей в каталоге <tt>examples/jsm</tt>. Если <em>three.js</em> был установлен через <tt>npm</tt>, можно импортировать их так:
 <pre>import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';</pre>
 Следующие файлы примеров доступны в виде модулей:
-<table width=100%>
-<tr><td width=50% valign=top>
-&#9679; <b>камеры</b>
-<div class=list><a href="https://threejs.org/examples/webgl_camera_cinematic.html" target="_blank" onmouseover="show('cinematic camera - кинематографическая камера')" onmouseout="hide()">CinematicCamera</a></div>
+<div style="height:400px; overflow-y:scroll;"><table width=90% align=center>
+<tr><td width=33% valign=top>
+&#9679; <b>анимация</b>
+<div class=list>AnimationClipCreator</div>
+<div class=list>CCDIKSolver</div>
+<div class=list>MMDAnimationHelper</div>
+<div class=list>MMDPhysics</div>
+<div class=list>TimelinerController</div>
 &#9679; <b>элементы управления (контролы)</b>
 <div class=list><a href="https://threejs.org/examples/misc_controls_deviceorientation.html" target="_blank" onmouseover="show('device orientation controls - устройство управления ориентацией')" onmouseout="hide()">DeviceOrientationControls</a></div>
 <div class=list><a href="https://threejs.org/examples/#webgl_interactive_draggablecubes" target="_blank" onmouseover="show('drag controls - управление перетаскиванием')" onmouseout="hide()">DragControls</a></div>
@@ -198,6 +203,7 @@ const scene = new Scene();
 <div class=list>TrackballControls</div>
 <div class=list>TransformControls</div>
 &#9679; <b>кривые линии</b>
+<div class=list>CurveExtras</div>
 <div class=list><a href="https://ru.wikipedia.org/wiki/NURBS" target="_blank" onmouseover="show('NURBS - сокращ. англ. слов non-uniform rational B-spline —<br>неоднородный рациональный B-сплайн, математическая<br>форма, применяемая в компьютерной графике для<br>генерации и представления кривых и поверхностей.')" onmouseout="hide()">NURBSCurve</a></div>
 <div class=list>NURBSSurface</div>
 <div class=list>NURBSUtils</div>
@@ -210,54 +216,107 @@ const scene = new Scene();
 <div class=list>StereoEffect</div>
 &#9679; <b>экспортеры</b>
 <div class=list>ColladaExporter</div>
+<div class=list>DRACOExporter</div>
 <div class=list>GLTFExporter</div>
 <div class=list>MMDExporter</div>
 <div class=list>OBJExporter</div>
 <div class=list>PLYExporter</div>
 <div class=list>STLExporter</div>
 <div class=list>TypedGeometryExporter</div>
-&#9679; <b>геометрические элементы</b>
-<div class=list>BoxLineGeometry</div>
-<div class=list>DecalGeometry</div>
-<div class=list>ParametricGeometries</div>
-<div class=list>TeapotBufferGeometry</div>
-&#9679; <b>загрузчики</b>
+&#9679; <b>загрузчики</b><br>
+<div class=list>ctm<br>
+CTMLoader</div>
+<div class=list>устаревшие<br>
+LegacyGLTFLoader<br>
+LegacyJSONLoader</div>
 <div class=list>3MFLoader</div>
 <div class=list>AMFLoader</div>
+<div class=list>AWDLoader</div>
 <div class=list>AssimpJSONLoader</div>
 <div class=list>AssimpLoader</div>
 <div class=list>BabylonLoader</div>
 <div class=list>BVHLoader</div>
 <div class=list>ColladaLoader</div>
 <div class=list>DDSLoader</div>
+<div class=list>DRACOLoader</div>
 <div class=list>EXRLoader</div>
+<div class=list>EquirectangularToCubeGenerator</div>
 <div class=list>FBXLoader</div>
 <div class=list>GCodeLoader</div>
 <div class=list>GLTFLoader</div>
+<div class=list>HDRCubeTextureLoader</div>
 <div class=list>KMZLoader</div>
 <div class=list>KTXLoader</div>
+<div class=list>LWOLoader</div>
+<div class=list>MD2Loader</div>
+<div class=list>MMDLoader</div>
 <div class=list>MTLLoader</div>
+<div class=list>NRRDLoader</div>
 <div class=list>OBJLoader</div>
 <div class=list>PCDLoader</div>
 <div class=list>PDBLoader</div>
 <div class=list>PlayCanvasLoader</div>
 <div class=list>PLYLoader</div>
+<div class=list>PRWMLoader</div>
+<div class=list>PVRLoader</div>
 <div class=list>RGBELoader</div>
 <div class=list>STLLoader</div>
 <div class=list>SVGLoader</div>
+<div class=list>TDSLoader</div>
 <div class=list>TGALoader</div>
+<div class=list>TTFLoader</div>
 <div class=list>VRMLLoader</div>
+<div class=list>VRMLoader</div>
+<div class=list>VTKLoader</div>
+<div class=list>XLoader</div>
+</td>
+<td width=33% valign=top>
+&#9679; <b>геометрические элементы</b>
+<div class=list>BoxLineGeometry</div>
+<div class=list>ConvexGeometry</div>
+<div class=list>DecalGeometry</div>
+<div class=list>ParametricGeometries</div>
+<div class=list>TeapotBufferGeometry</div>
+&#9679; <b>взаимодействие</b>
+<div class=list>SelectionBox</div>
+<div class=list>SelectionHelper</div>
+&#9679; <b>освещение</b>
+<div class=list>LightProbeGenerator</div>
+<div class=list>RectAreaLightUniformsLib</div>
+&#9679; <b>линии</b>
+<div class=list>Line2</div>
+<div class=list>LineGeometry</div>
+<div class=list>LineMaterial</div>
+<div class=list>LineSegments2</div>
+<div class=list>LineSegmentsGeometry</div>
+<div class=list>Wireframe</div>
+<div class=list>WireframeGeometry2</div>
 &#9679; <b>элементы математики</b>
 <div class=list>ColorConverter</div>
+<div class=list>ConvexHull</div>
 <div class=list>ImprovedNoise</div>
 <div class=list>Lut</div>
 <div class=list>SimplexNoise</div>
+&#9679; <b>разное</b>
+<div class=list>CarControls</div>
+<div class=list>ConvexObjectBreaker</div>
+<div class=list>GPUComputationRenderer</div>
+<div class=list>Gyroscope</div>
+<div class=list>MD2Character</div>
+<div class=list>MD2CharacterComplex</div>
+<div class=list>MorphAnimMesh</div>
+<div class=list>MorphBlendMesh</div>
+<div class=list>Ocean</div>
+<div class=list>RollerCoaster</div>
+<div class=list>Volume</div>
+<div class=list>VolumeSlice</div>
 &#9679; <b>модификаторы</b>
 <div class=list>ExplodeModifier</div>
 <div class=list>SimplifyModifier</div>
 <div class=list>SubdivisionModifier</div>
 <div class=list>TessellateModifier</div>
 &#9679; <b>объекты</b>
+<div class=list>Fire</div>
 <div class=list>Lensflare</div>
 <div class=list>Reflector</div>
 <div class=list>Refractor</div>
@@ -269,8 +328,6 @@ const scene = new Scene();
 &#9679; <b class="lnk" onmouseover="show('сокращ. от англ. слов Prefiltered Mipmaped Radiance Environment map -<br>карта среды с предварительно отфильтрованной светимостью')" onmouseout="hide()">pmrem</b>
 <div class=list>PMREMCubeUVPacker</div>
 <div class=list>PMREMGenerator</div>
-</td>
-<td width=50% valign=top>
 &#9679; <b>постобработка (постпроцессинг)</b>
 <div class=list><a href="https://threejs.org/examples/webgl_shaders_tonemapping.html" target="_blank">AdaptiveToneMappingPass</a></div>
 <div class=list>AfterimagePass</div>
@@ -295,6 +352,10 @@ const scene = new Scene();
 <div class=list>TAARenderPass</div>
 <div class=list>TexturePass</div>
 <div class=list><a href="https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html" target="_blank">UnrealBloomPass</a></div>
+</td>
+<td width=33% valign=top>
+&#9679; <b>камеры</b>
+<div class=list><a href="https://threejs.org/examples/webgl_camera_cinematic.html" target="_blank" onmouseover="show('cinematic camera - кинематографическая камера')" onmouseout="hide()">CinematicCamera</a></div>
 &#9679; <b>визуализаторы (рендереры)</b>
 <div class=list>CSS2DRenderer</div>
 <div class=list>CSS3DRenderer</div>
@@ -325,6 +386,7 @@ const scene = new Scene();
 <div class=list>FresnelShader</div>
 <div class=list>FXAAShader</div>
 <div class=list>GammaCorrectionShader</div>
+<div class=list>GodRaysShader</div>
 <div class=list>HalftoneShader</div>
 <div class=list>HorizontalBlurShader</div>
 <div class=list>HorizontalTiltShiftShader</div>
@@ -334,15 +396,18 @@ const scene = new Scene();
 <div class=list>LuminosityShader</div>
 <div class=list>MirrorShader</div>
 <div class=list>NormalMapShader</div>
+<div class=list>OceanShaders</div>
 <div class=list>ParallaxShader</div>
 <div class=list>PixelShader</div>
 <div class=list>RGBShiftShader</div>
 <div class=list>SAOShader</div>
 <div class=list>SepiaShader</div>
+<div class=list>SkinShader</div>
 <div class=list>SMAAShader</div>
 <div class=list>SobelOperatorShader</div>
 <div class=list>SSAOShader</div>
 <div class=list>TechnicolorShader</div>
+<div class=list>TerrainShader</div>
 <div class=list>ToneMapShader</div>
 <div class=list>ToonShader</div>
 <div class=list>TranslucentShader</div>
@@ -351,6 +416,7 @@ const scene = new Scene();
 <div class=list>VerticalBlurShader</div>
 <div class=list>VerticalTiltShiftShader</div>
 <div class=list>VignetteShader</div>
+<div class=list>VolumeShader</div>
 <div class=list>WaterRefractionShader</div>
 &#9679; <b>вспомогательные элементы</b>
 <div class=list>BufferGeometryUtils</div>
@@ -361,7 +427,13 @@ const scene = new Scene();
 <div class=list>SkeletonUtils</div>
 <div class=list>TypedArrayUtils</div>
 <div class=list><a href="https://threejs.org/examples/webgl_UVsDebug.html" target="_blank">UVsDebug</a></div>
-</td></tr></table>
+&#9679; <b>виртуальная реальность</b>
+<div class=list>устаревшие<br>
+DaydreamController<br>
+GearVRController</div>
+<div class=list>PaintViveController</div>
+<div class=list>ViveController</div>
+</td></tr></table></div>
 <div class=note><b>Примечание:</b> При использовании кода из каталога примеров важно, чтобы все файлы соответствовали версии основного файла <em>three.js</em>.
 Например, нельзя использовать GLTFLoader и OrbitControls версии R96 вместе с <em>three.js</em> версии R103.
 Можно запросто синхронизировать файлы с помощью модулей из каталога <tt>jsm</tt>. Если файл недоступен как модуль, все равно можно использовать сторонние <tt>npm</tt>-пакеты или преобразовать файл в модуль самостоятельно.
@@ -604,19 +676,20 @@ renderer.render(scene, camera);</pre>
 <h3>3. Создать модель текста в выбранной вами программе 3D-графики<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;и экспортировать её в <em>three.js</em></h3>
 Используйте этот способ, если предпочитаете работать со своей программой 3D-графики и вставьте эту модель в <em>three.js</em>.
 
-<h3>4. Procedural Text Geometry</h3>
-Если предпочитаете работать исключительно в <em>three.js</em> или создавать procedural и динамичные трехмерные (3D) текстовые геометрические элементы,
+<h3>4. Геометрические элементы <span class="lnk" onmouseover="show('процедурный текст - расписанная последовательность действий,<br>помогающая решить определенную задачу. Например: рецепт,<br>правила игры, инструкция по эксплуатации и т.д.')" onmouseout="hide()">процедурного текста</span></h3>
+Если предпочитаете работать исключительно в <em>three.js</em> или создавать процедурные и динамичные трехмерные (3D) текстовые геометрические элементы,
 можно создать сетку, геометрические элементы которой являются экземпляром THREE.TextGeometry:
 <pre>new THREE.TextGeometry( text, parameters );</pre>
-Для того, чтобы это сработало, для TextGeometry будет нужен экземпляр THREE.Font, установленный в качестве значения его параметра "font" - шрифт.
-Посмотрите страницу <a href="geometries.htm#34" onmouseover="show('TextGeometry')" onmouseout="hide()">TextGeometry</a> для получения дополнительных сведений о том, как это можно сделать с описанием каждого принимаемого параметра и списком <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank" onmouseover="show('сокращение от англ. слов JavaScript Object Notation<br>(обычно произносится как джейсэн) — текстовый формат<br>обмена данными, основанный на JavaScript.<br>Как и многие другие текстовые форматы, JSON легко<br>читается людьми. Формат JSON был разработан<br>Дугласом Крокфордом.')" onmouseout="hide()">JSON</a>-шрифтов, поставляемых в составе самого THREE.js.
+Для того, чтобы это сработало, для TextGeometry будет нужен экземпляр THREE.Font, установленный в качестве значения его параметра "<tt>font</tt>" - шрифт.
+Посмотрите страницу <a href="geometries.htm#34" onmouseover="show('TextGeometry')" onmouseout="hide()">TextGeometry</a> для получения дополнительных сведений о том, как это можно сделать с описанием каждого принимаемого параметра и списком
+<a href="https://ru.wikipedia.org/wiki/JSON" target="_blank" onmouseover="show('сокращение от англ. слов JavaScript Object Notation<br>(обычно произносится как джейсэн) — текстовый формат<br>обмена данными, основанный на JavaScript.<br>Как и многие другие текстовые форматы, JSON легко<br>читается людьми. Формат JSON был разработан<br>Дугласом Крокфордом.')" onmouseout="hide()">JSON</a>-шрифтов, поставляемых в составе самого <em>three.js</em>.
 
 <h4>Примеры</h4>
 <a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank"> WebGL / geometry / text</a><br>
 <a href="https://threejs.org/examples/#canvas_geometry_text" target="_blank">canvas / geometry / text</a><br>
 <a href="https://threejs.org/examples/#webgl_shadowmap" target="_blank"> WebGL / shadowmap</a><br><br>
 Если шрифт не работает или нужно использовать шрифт, которого здесь нет, существует <a href="http://www.jaanga.com/2012/03/blender-to-threejs-create-3d-text-with.html" target="_blank">руководство со скриптом на языке Python</a> для
-<a href="https://www.blender.org/" target="_blank" onmouseover="show('свободный, профессиональный пакет для создания<br>трёхмерной компьютерной графики, включающий в себя<br>средства моделирования, анимации, рендеринга,<br>постобработки и монтажа видео со звуком')" onmouseout="hide()">Blender'а</a>, который позволяет экспортировать текст в понятном для Three.js формате JSON.
+<a href="https://www.blender.org/" target="_blank" onmouseover="show('свободный, профессиональный пакет для создания<br>трёхмерной компьютерной графики, включающий в себя<br>средства моделирования, анимации, рендеринга,<br>постобработки и монтажа видео со звуком')" onmouseout="hide()">Blender'а</a>, который позволяет экспортировать текст в понятном для <em>three.js</em> формате JSON.
 
 <h3>5. Растровые шрифты (bitmap fonts)</h3>
 Растровые шрифты (bitmap fonts - BMFonts) позволяют группировать символы шрифта (глифы) в отдельный <a href="core.htm#2" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.

@@ -22,6 +22,8 @@
 <div class=list><a href="#2.3">DecalGeometry</a> -  создание сетки (mesh) с декалью</div></div>
 <div class=blockindent><a href="#3">Загрузчики</a>
 <div class=list><a href="#3.1">BabylonLoader</a> - загрузка в формате <tt>babylon</tt></div>
+<div class=list><a href="#3.1bt">BasisTextureLoader</a> - загрузка базовых текстур в формате <tt>.basis</tt></div>
+<div class=list><a href="#3.1draco">DRACOLoader</a> - загрузка геометрических элементов, сжатых с помощью библиотеки <a href="https://google.github.io/draco/" target="_blank" onmouseover="show('Draco - это библиотека с открытым исходным кодом для<br>сжатия и распаковки сеток трехмерных геометрических<br>элементов и облаков точек.')" onmouseout="hide()">Draco</a>.</div>
 <div class=list><a href="#3.2">GLTFLoader</a> - загрузка в формате <tt>glTF 2.0</tt></div>
 <div class=list><a href="#3.mmd">MMDLoader</a> - загрузка в формате <tt>mmd</tt></div>
 <div class=list><a href="#3.3">MTLLoader</a> - загрузка в формате <tt>mtl</tt></div>
@@ -36,7 +38,9 @@
 </td>
 <td width=50% valign=top>
 <div class=blockindent><a href="#4">Объекты</a>
-<div class=list><a href="#4.1">LensFlare</a> -  имитация блика объектива камеры</div></div>
+<div class=list><a href="#4.1">LensFlare</a> - имитация блика объектива камеры</div></div>
+<div class=blockindent><a href="#4a">Постобработка</a>
+<div class=list><a href="#4a.1">EffectComposer</a> - реализация эффектов пост-обработки, управляет цепочкой проходов постобработки для получения окончательного визуального результата</div></div>
 <div class=blockindent><a href="#5">Экспортеры</a>
 <div class=list><a href="#5.1">GLTFExporter</a> - экспорт ресурсов в формате  glTF 2.0</div>
 <div class=list><a href="#5.2">PLYExporter</a> - экспорт ресурсов в формате  PLY</div></div>
@@ -649,6 +653,174 @@ loader.load(
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BabylonLoader.js" target="_blank">BabylonLoader.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="loaders.htm#12" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
+<h3 id="3.1bt">BasisTextureLoader</h3>
+Загрузчик для кодека текстур видеокарты (GPU) <a href="https://www.opennet.ru/opennews/art.shtml?num=50732" target="_blank">Basis Universal</a>.<br>
+<a href="https://github.com/BinomialLLC/basis_universal/" target="_blank">Basis Universal</a> - система сжатия "<a href="http://gamma.cs.unc.edu/GST/gst.pdf" target="_blank">сверхсжатых</a>" текстур GPU и видеотекстур,
+которая выдает файл в промежуточном формате (<tt>.basis</tt>) с очень высокой степенью сжатия, который, в свою очередь, может быть быстро перекодирован в широкий спектр форматов сжатия текстур GPU.<br>
+Данный загрузчик распараллеливает процесс перекодировки среди настраиваемого числа веб-обработчиков (web worker) перед передачей перекодированной сжатой текстуры обратно в основной поток.
+Требуемый транскодер (перекодировщик) WASM и оболочка JS доступны в каталоге <tt>examples/js/libs/basis</tt>.<br>
+
+<h4>Пример</h4>
+<pre>var basisLoader = new THREE.BasisTextureLoader();
+basisLoader.setTranscoderPath( 'examples/js/libs/basis/' );
+basisLoader.detectSupport( renderer );
+basisLoader.load( 'diffuse.basis', function ( texture ) {
+  var material = new THREE.MeshStandardMaterial( { map: texture } );<br>
+}, function () {
+  console.log( 'onProgress' );<br>
+}, function ( e ) {
+  console.error( e );
+} );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_texture_basis" target="_blank">webgl/loader/texture_basis</a></pre><br>
+
+<h4>Совместимость с браузером</h4>
+
+BasisTextureLoader transcodes input textures in '.basis' format to an appropriate compressed texture format for the target device, where possible. This allows the same source texture to be served across desktop, Android, and iOS devices, and transcoded into DXT, ETC1, or PVRTC1. Other output formats may be supported in the future.<br>
+
+This loader relies on ES6 Promises and Web Assembly, which are not supported in IE11.<br><br>
+
+<h4>Конструктор</h4>
+<pre>BasisTextureLoader( manager : LoadingManager )</pre>
+<div class=list>
+manager — The LoadingManager for the loader to use. Значением по умолчанию является <tt>THREE.DefaultLoadingManager</tt>.</div>
+Создает новый BasisTextureLoader.<br><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="3.1btload">.load ( url : String, onLoad : Function, onProgress : Function, onError : Function ) : null</pre>
+<div class=list>url — A string containing the path/URL of the .basis file.</div>
+onLoad — A function to be called after the loading is successfully completed.
+onProgress — (optional) A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, that contains .total and .loaded bytes.
+onError — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.
+
+Load from url and call the onLoad function with the transcoded CompressedTexture.
+<pre id="3.1btdetectSupport">.detectSupport ( renderer : WebGLRenderer ) : this</pre>
+
+renderer — A renderer instance.
+
+Detects hardware support for available compressed texture formats, to determine the output format for the transcoder. Must be called before loading a texture.
+<pre id="3.1btsetCrossOrigin">.setCrossOrigin ( crossOrigin : String ) : this</pre>
+
+crossOrigin — Options are '', 'anonymous', or 'use-credentials'. Default is 'anonymous'.
+
+Sets options for CORS requests.
+<pre id="3.1btsetTranscoderPath">.setTranscoderPath ( path : String ) : this</pre>
+
+path — Path to folder containing the WASM transcoder and JS wrapper.
+
+The WASM transcoder and JS wrapper are available from the examples/js/libs/basis directory.
+<pre id="3.1btsetWorkerLimi">.setWorkerLimit ( limit : Number ) : this</pre>
+
+limit — Maximum number of workers. Default is '4'.
+
+Sets the maximum number of web workers to be allocated by this instance.
+<pre id="3.1btdispose">.dispose () : this</pre>
+
+Disposes the loader object, de-allocating any Web Workers created.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BasisTextureLoader.js" target="_blank">BasisTextureLoader.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="loaders.htm#12" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
+<h3 id="3.1draco">DRACOLoader</h3>
+
+A loader for geometry compressed with the Draco library.<br>
+
+Draco is an open source library for compressing and decompressing 3D meshes and point clouds. Compressed geometry can be significantly smaller, at the cost of additional decoding time on the client device.<br>
+
+Standalone Draco files have a .drc extension, and contain vertex positions, normals, colors, and other attributes. Draco files do not contain materials, textures, animation, or node hierarchies – to use these features, embed Draco geometry inside of a glTF file. A normal glTF file can be converted to a Draco-compressed glTF file using glTF-Pipeline. When using Draco with glTF, an instance of DRACOLoader will be used internally by GLTFLoader.<br><br>
+
+<h4>Пример</h4>
+<pre>// Instantiate a loader
+var loader = new THREE.DRACOLoader();
+
+// Specify path to a folder containing WASM/JS decoding libraries.
+THREE.DRACOLoader.setDecoderPath( '/examples/js/libs/draco' );
+
+// Optional: Pre-fetch Draco WASM/JS module.
+THREE.DRACOLoader.getDecoderModule();
+
+// Load a Draco geometry
+loader.load(
+	// resource URL
+	'model.drc',
+	// called when the resource is loaded
+	function ( geometry ) {
+
+		var material = new THREE.MeshStandardMaterial( { color: 0x606060 } );
+		var mesh = new THREE.Mesh( geometry, material );
+		scene.add( mesh );
+
+	},
+	// called as loading progresses
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);</pre>
+
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_draco" target="_blank">webgl/loader/draco</a></pre><br>
+
+
+<h4>Browser compatibility</h4>
+
+DRACOLoader relies on ES6 Promises, which are not supported in IE11. To use the loader in IE11, you must include a polyfill providing a Promise replacement. DRACOLoader will automatically use either the JS or the WASM decoding library, based on browser capabilities.
+
+<h4>Конструктор</h4>
+DRACOLoader( manager : LoadingManager )
+
+manager — The loadingManager for the loader to use. Default is THREE.DefaultLoadingManager.
+
+Creates a new DRACOLoader.
+
+<h4>Статические методы</h4>
+<div class=blockindent><br>
+.setDecoderPath ( value : String ) : null
+
+value — Path to folder containing the JS and WASM decoder libraries.
+.setDecoderConfig ( config : Object ) : null
+
+config.type - (Optional) "js" or "wasm".
+
+Provides configuration for the decoder libraries. Configuration cannot be changed after loading the decoders.
+.getDecoderModule () : Promise
+
+Requests the decoder libraries, if not already loaded.
+.releaseDecoderModule () : null
+
+Disposes of the decoder library and deallocates memory. The decoder cannot be reloaded afterward.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+.load ( url : String, onLoad : Function, onProgress : Function, onError : Function ) : null
+
+url — A string containing the path/URL of the .drc file.
+onLoad — A function to be called after the loading is successfully completed.
+onProgress — (optional) A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, that contains .total and .loaded bytes.
+onError — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.
+
+Begin loading from url and call the onLoad function with the decompressed geometry.
+.setPath ( path : String ) : DRACOLoader
+
+path — Base path.
+
+Set the base path for the .drc file.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/DRACOLoader.js" target="_blank">DRACOLoader.js на github.com</a></div><br><br>
 
 
 <span class="right_side"><a href="loaders.htm#12" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
@@ -1712,6 +1884,130 @@ light.add( lensflare );</pre>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/objects/Lensflare.js" target="_blank">LensFlare.js на github.com</a></div><br><br>
+
+
+<h2 id="4a">Постобработка</h2>
+<h3 id="4a.1">EffectComposer</h3>
+<div class=note_trans><b>Примечание переводчика:</b> EffectComposer в переводе на русский язык будет - составитель (компоновщик) эффектов.</div>
+Используется в <em>three.js</em> для реализации эффектов постобработки. Данный класс управляет цепочкой проходов постобработки для получения определенного окончательного результата визуализации.
+Проходы постобработки (пассы - от pass - проход, переход) выполняются в порядке их добавления / вставки (addition / insertion). Последний проход автоматически отображается на экране.
+<div class=note_trans><b>Примечание переводчика:</b> Более подробно <a href="https://threejsfundamentals.org/threejs/lessons/threejs-post-processing.html" target="_blank">о постобработке в <em>three.js</em></a> (правда на английском). Вот перевод части этой статьи <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Постобработка (постпроцессинг) обычно сводится к применению какого-либо эффекта или фильтра для двумерного изображения. В случае с <em>three.js</em> у нас уже имеется сцена с группой сеток (mesh) на ней.
+Эта сцена отображается как двумерное изображение.
+Обычно эта картинка визуализируется непосредственно на <tt>canvas</tt> и отображается в браузере, но здесь вместо этого можно передать её в целевой буфер визуализации и, прежде чем нарисовать на <tt>canvas</tt>,
+применить к ней несколько эффектов, уже после получения сцены-картинки, т.е. после обработки, но до показа её на экране.<br>
+Это и называется постобработка (или постпроцессинг), потому что происходит после (post - после) обработки основной сцены.<br>
+Примерами постобработки являются фильтры в Instagram, фильтры Photoshop и т.д...<br>
+В <em>three.js</em> имеется несколько примеров классов, помогающих установить конвейер постобработки. Вот как он работает, вначале создается <a href="#4a.1" onmouseover="show('EffectComposer')" onmouseout="hide()">EffectComposer</a> и к нему добавляется несколько объектов Pass.
+Затем вызывается метод <a href="#4a.1render" onmouseover="show('render - воспроизвести, отобразить')" onmouseout="hide()"><tt>EffectComposer.render</tt></a>,
+который передает нашу сцену в целевой буфер визуализации, а затем применяет к ней каждый Pass (проход).<br>
+Каждый проход может представлять собой некоторый эффект постобработки, такой как <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D0%BD%D1%8C%D0%B5%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">добавление виньетки</a> (vignette),
+размытие (blurring), применение эффекта <a href="https://ru.wikipedia.org/wiki/Bloom" target="_blank">свечение</a> (<a href="https://en.wikipedia.org/wiki/Bloom_(shader_effect)" target="_blank">bloom</a>),
+применение <a href="https://ru.wikipedia.org/wiki/%D0%97%D0%B5%D1%80%D0%BD%D0%B8%D1%81%D1%82%D0%BE%D1%81%D1%82%D1%8C_(%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F)" target="_blank">зернистости</a> (<a href="https://en.wikipedia.org/wiki/Film_grain" target="_blank">film grain</a>),
+регулировка оттенка (hue), насыщенности (saturation), контрастности (contrast) и т.д... и наконец, на холсте отображается результат.<br>
+Вот ещё важный кусочек для понимания функционирования EffectComposer'а.
+Он создает два буфера целевой визуализации. Давайте назовем их <tt class="lnk" onmouseover="show('<tt>rtA</tt> - сокращ. англ. слов render target A -<br>целевой буфер визуализации по имени A')" onmouseout="hide()">rtA</tt> и <tt class="lnk" onmouseover="show('<tt>rtB</tt> - сокращ. англ. слов render target B -<br>целевой буфер визуализации по имени B')" onmouseout="hide()">rtB</tt>.<br>
+Затем вызываем метод <a href="#4a.1addPass" onmouseover="show('add pass - добавить проход')" onmouseout="hide()"><tt>EffectComposer.addPass</tt></a> для добавления каждого прохода в том порядке, в котором нужно их применить. Затем проходы применяются примерно так:<br>
+<img src="img/postprocessing.png" width="600" style="margin:0% calc(50% - 300px);"><br>
+Вначале сцена, переданная в <tt>RenderPass</tt>, оказывается в <tt>rtA</tt>, затем <tt>rtA</tt> передается к следующему проходу, каким бы он не был.
+Этот проход использует <tt>rtA</tt> в качестве входных данных для выполнения каких-либо действий и записывает полученный результат в <tt>rtB</tt>.
+Далее, <tt>rtB</tt> передается следующему проходу, который использует <tt>rtB</tt> в качестве входных данных и записывает результат своих действий обратно в <tt>rtA</tt>.
+Все это продолжается до завершения всех проходов.<br>
+
+Каждый проход имеет четыре основные опции:
+<div class=list><tt class="lnk" onmouseover="show('enabled - включен')" onmouseout="hide()">enabled</tt> - будет использоваться данный проход или нет</div>
+<div class=list><tt class="lnk" onmouseover="show('needs swap - нужна замена')" onmouseout="hide()">needsSwap</tt> - будут ли меняться местами <tt>rtA</tt> и <tt>rtB</tt> по завершении данного прохода или нет</div>
+<div class=list><tt class="lnk" onmouseover="show('clear - очистка')" onmouseout="hide()">clear</tt> - будет ли выполняться очистка перед выполнением данного прохода или нет</div>
+<div class=list><tt class="lnk" onmouseover="show('render to screen - отобразить на экране')" onmouseout="hide()">renderToScreen</tt> - следует ли выдавать визуализацию сцены на <tt>canvas</tt> (а значит и на экран) вместо назначенного на данный момент целевого буфера визуализации.
+Обычно значение <tt>true</tt> устанавливается на последнем проходе, добавленном в EffectComposer.</div></div></div><br>
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/#webgl_postprocessing" target="_blank">postprocessing</a>
+<a href="https://threejs.org/examples/#webgl_postprocessing_advanced" target="_blank">postprocessing advanced</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_backgrounds.html" target="_blank">postprocessing backgrounds</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_crossfade.html" target="_blank">postprocessing crossfade</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_dof.html" target="_blank">postprocessing depth-of-field</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_dof2.html" target="_blank">postprocessing depth-of-field 2</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_fxaa.html" target="_blank">postprocessing fxaa</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_glitch.html" target="_blank">postprocessing glitch</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_godrays.html" target="_blank">postprocessing godrays</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_masking.html" target="_blank">postprocessing masking</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_nodes_pass.html" target="_blank">postprocessing node material</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_outline.html" target="_blank">postprocessing outline</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_pixel.html" target="_blank">postprocessing pixelate</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_procedural.html" target="_blank">postprocessing procedural</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_rgb_halftone.html" target="_blank">postprocessing rgb halftone</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_sao.html" target="_blank">postprocessing sao</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_smaa.html" target="_blank">postprocessing smaa</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_sobel.html" target="_blank">postprocessing sobel</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_ssaa.html" target="_blank">postprocessing ssaa</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_ssao.html" target="_blank">postprocessing ssao</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_taa.html" target="_blank">postprocessing taa</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html" target="_blank">postprocessing unreal bloom</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_unreal_bloom_selective.html" target="_blank">postprocessing unreal bloom selective</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>EffectComposer( <a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer<br>renderer - визуализатор (средство визуализации), рендерер')" onmouseout="hide()">renderer</a>, <a href="renderers.htm#1.2" onmouseover="show('WebGLRenderTarget<br>render target - целевой (буфер) визуализации')" onmouseout="hide()">renderTarget</a> )</pre>
+<div class=list><tt>renderer</tt> -- визуализатор (рендерер), используемый для отображения сцены.</div>
+<div class=list><tt>renderTarget</tt> -- предварительно задаваемый, целевой буфер визуализации, используемый EffectComposer внутренне. Дополнительный, необязательный параметр.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="4a.1passes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('passes - проходы')" onmouseout="hide()">.passes</a></span></pre>
+Массив, представляющий упорядоченную цепочку проходов постобработки.<br><br>
+
+<pre id="4a.1readBuffer"><a href="renderers.htm#1.2" onmouseover="show('WebGLRenderTarget<br>read buffer - буфер чтения')" onmouseout="hide()">.readBuffer</a></pre>
+Ссылка на внутренний буфер чтения. Как правило, проходы (<tt>passes</tt>) считывают из этого буфера результат предыдущей визуализации (рендеринга).<br><br>
+
+<pre id="4a.1renderer"><a href="renderers.htm#1.1" onmouseover="show('WebGLRenderer<br>renderer - визуализатор (средство визуализации), рендерер')" onmouseout="hide()">.renderer</a></pre>
+Ссылка на внутренний визуализатор (рендерер).<br><br>
+
+<pre id="4a.1renderToScreen"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render to screen - отображать на экране')" onmouseout="hide()">.renderToScreen</a></span></pre>
+Свойство определяет, будет ли отображаться на экране (буфер кадра (framebuffer) по умолчанию) последний проход постобработки или нет.<br><br>
+
+<pre id="4a.1writeBuffer"><a href="renderers.htm#1.2" onmouseover="show('WebGLRenderTarget<br>write buffer - буфер записи')" onmouseout="hide()">.writeBuffer</a></pre>
+Ссылка на внутренний буфер записи. Как правило, проходы (<tt>passes</tt>) записывают свой результат в этот буфер.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="4a.1addPass"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add pass - добавить проход')" onmouseout="hide()">.addPass</a></span>( <span onclick="showClick('значением должен быть Pass - проход постобработки')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pass - проход, переход')" onmouseout="hide()">pass</a></span> )</pre>
+<div class=list><tt>pass</tt> -- проход постобработки, добавляемый в цепочку проходов.</div>
+Метод добавляет заданный переход в цепочку проходов.<br><br>
+
+<pre id="4a.1insertPass"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('insert pass - вставить проход (постобработки)')" onmouseout="hide()">.insertPass</a></span>( <span onclick="showClick('значением должен быть Pass - проход постобработки')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pass - проход, переход')" onmouseout="hide()">pass</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, порядковый номер')" onmouseout="hide()">index</a></span> )</pre>
+<div class=list><tt>pass</tt> -- проход постобработки, вставляемый в цепочку проходов.</div>
+<div class=list><tt>index</tt> -- этот параметр определяет позицию в цепочке проходов, на которую должен быть вставлен указанный проход.</div>
+Метод вставляет заданный проход в цепочку проходов по заданному индексу.<br><br>
+
+<pre id="4a.1isLastEnabledPass"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is last enabled pass - является последним включенным проходом')" onmouseout="hide()">.isLastEnabledPass</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pass index - индекс прохода')" onmouseout="hide()">passIndex</a></span> )</pre>
+<div class=list><tt>passIndex</tt> -- проверяемый проход постобработки.</div>
+Метод возвращает значение <tt>true</tt>, если проход постобработки по указанному индексу является последним включенным проходом в цепочке проходов.
+Используется EffectComposer'ом для определения того, когда переход постобработки должен быть отображен на экране.<br><br>
+
+<pre id="4a.1render"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - воспроизвести, отобразить')" onmouseout="hide()">.render</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delta time - дельта времени')" onmouseout="hide()">deltaTime</a></span> )</pre>
+<div class=list><tt>deltaTime</tt> -- значение промежутка времени.</div>
+Метод выполняет все включенные проходы постобработки по порядку для получения конечного кадра.<br><br>
+
+<pre id="4a.1reset"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset - сбросить, обнулить')" onmouseout="hide()">.reset</a></span>( <a href="renderers.htm#1.2" onmouseover="show('WebGLRenderTarget<br>render target - целевой (буфер) визуализации')" onmouseout="hide()">renderTarget</a> )</pre>
+<div class=list><tt>renderTarget</tt> -- предварительно заданный, целевой буфер визуализации, используемый EffectComposer'ом внутренне. Дополнительный, необязательный параметр.</div>
+Сбрасывает внутреннее состояние EffectComposer'а.<br><br>
+
+<pre id="4a.1setPixelRatio"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set pixel ratio - установить соотношение пикселей')" onmouseout="hide()">.setPixelRatio</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pixel ratio - соотношение пикселей')" onmouseout="hide()">pixelRatio</a></span> )</pre>
+<div class=list><tt>pixelRatio</tt> -- соотношение пикселей устройства.</div>
+Метод устанавливает соотношение пикселей устройства. Обычно он используется для <span class="lnk" onmouseover="show('Мониторы с HiDPI (от англ. слов High Dots Per Inch<br>- высокое разрешение в точках на дюйм), также<br>известные под торговым названием &quot;Retina Display&quot;<br>от компании Apple, это мониторы с экранами высокого<br>разрешения в относительно небольшом формате.<br>В основном они используются в ноутбуках и планшетах<br>высокого класса.<br>В режиме с высоким разрешением не всякое программное<br>обеспечение ведет себя правильно.')" onmouseout="hide()">HiDPI</span> устройства для предотвращения размытия выводимого результата.
+Таким образом, семантика данного метода аналогична методу <a href="renderers.htm#1.1setPixelRatio" onmouseover="show('WebGLRenderer.setPixelRatio')" onmouseout="hide()">WebGLRenderer.setPixelRatio()</a>.<br><br>
+
+<pre id="4a.1setSize"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
+<div class=list><tt>width</tt> -- ширина EffectComposer'а.</div>
+<div class=list><tt>height</tt> -- высота EffectComposer'а.</div>
+Метод изменяет размеры внутренних буферов визуализации и проходов на указанные <tt>width</tt> и <tt>height</tt> с учетом соотношения пикселей устройства.
+Таким образом, семантика данного метода аналогична методу <a href="renderers.htm#1.1setSize" onmouseover="show('WebGLRenderer.setSize')" onmouseout="hide()">WebGLRenderer.setSize()</a>.<br><br>
+
+<pre id="4a.1swapBuffers"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('swap buffers - обмен буферов')" onmouseout="hide()">.swapBuffers()</a></span></pre>
+Метод меняет местами внутренние буферы чтения/записи.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/postprocessing/EffectComposer.js" target="_blank">EffectComposer.js на github.com</a></div><br><br>
 
 
 <h2 id="5">Экспортеры</h2>

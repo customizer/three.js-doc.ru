@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Импорт с помощью модулей</h2>
+Несмотря на то, что подключение <em>three.js</em> с помощью тега <tt>&lt;script&gt;</tt> отличный способ быстро получить и начать работать с библиотекой, у него имеется несколько недостатков для продолжительных проектов, например:
+<ul><li>Нужно вручную выбирать и подключать копию библиотеки как часть исходного кода проекта.</li>
+<li>Обновление версии библиотеки также "ручной" процесс.</li>
+<li>При проверке новой версии данной библиотеки управление различия в управлении версиями завалены множеством строк сборочного файла.</li></ul>
+Использование диспетчера зависимостей типа <tt>npm</tt> обходит эти условия позволяя просто скачивать и импортировать желаемую версию библиотеки на вашу машину.
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Установка при помощи <tt>npm</tt></h3>
+<div class=note_trans><b>Примечание переводчика:</b> npm - сокращ. от Node.js Package Manager — менеджер пакетов, входящий в состав <a href='https://ru.wikipedia.org/wiki/Node.js' target='_blank'>Node.js</a></div>
+<em>three.js</em> выпускается как модуль <a href="https://www.npmjs.com/package/three" target="_blank"><tt>npm</tt></a>.
+Это значит, что для включения <em>three.js</em> в проект, нужно просто запустить "<tt>npm install three</tt>".
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Импорт модуля</h3>
+Предположим, что вы объединяете файлы с помощью такого инструмента как <a href="https://webpack.github.io/" target="_blank">Webpack</a> или <a href="https://github.com/substack/node-browserify" target="_blank">Browserify</a>,
+которые позволяют "<tt class=lnk onmouseover="show('require(&quot;modules&quot;) - затребовать модули')" onmouseout="hide()">require('modules')</tt>" в браузере, объединив все свои зависимости.
+Теперь можно внести модуль в свои исходные файлы и продолжить использовать его в обычном режиме.
+<pre>var THREE = require('three');<br>
+var scene = new THREE.Scene();
+...</pre>
+Также есть возможность использования <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank">импорта синтаксиса ES6</a> (вот эта <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/import" target="_blank">статья на русском</a>):
+<pre>import * as THREE from 'three';<br>
+const scene = new THREE.Scene();
+...</pre>
+или, если нужно, можно импортировать только отдельные части библиотеки <em>three.js</em>, например <tt>Scene</tt>:
+<pre>import { Scene } from 'three';<br>
+const scene = new Scene();
+...</pre>
+
+<h3>Примеры с возможностью импорта</h3>
+Основные элементы <em>three.js</em> сфокусированы на наиболее важных компонентах 3D-движка. Множество других компонентов, таких как загрузчики или элементы управления (контролы), являются частью каталога примеров.
+<em>three.js</em> обеспечивает синхронизацию этих файлов с основными элементами библиотеки, но если они необходимы для проекта, пользователи должны импортировать их отдельно.
+Однако большинство этих файлов не являются модулями, что в некоторых случаях делает их использование неудобным.
+Для решения этой проблемы идёт работа над тем, чтобы все примеры были представлены в виде модулей
+В каталоге <tt><a href="https://github.com/mrdoob/three.js/tree/master/examples/jsm" target="_blank">examples/jsm</a></tt> можно найти ES6 версию модуля практически для всех файлов примеров.
+Если <em>three.js</em> был установлен через <tt>npm</tt>, можно импортировать их так:
+<pre>import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';</pre>
+<!-- Следующие файлы примеров доступны в виде модулей:
+<div class="limit_height"><table width=100%><tr><td width=33% valign=top>
+&#9679; <b><a href="https://github.com/mrdoob/three.js/tree/master/examples/jsm/animation/" target="_blank">анимация</a></b>
+<div class=list><span class="lnk" onmouseover="show('создает стандартную проверку AnimationClips / KeyframeTracks')" onmouseout="hide()">AnimationClipCreator</span></div>
+<div class=list>CCDIKSolver</div>
+<div class=list><span class="lnk" onmouseover="show('MMDAnimationHelper handles animation of MMD assets loaded by MMDLoader with MMD special features as IK, Grant, and Physics.')" onmouseout="hide()">MMDAnimationHelper</span></div>
+<div class=list>MMDPhysics</div>
+<div class=list>TimelinerController</div>
+&#9679; <b><a href="https://github.com/mrdoob/three.js/tree/master/examples/jsm/controls/" target="_blank">элементы управления (контролы)</a></b>
+<div class=list><a href="https://threejs.org/examples/misc_controls_deviceorientation.html" target="_blank" onmouseover="show('device orientation controls - устройство управления ориентацией')" onmouseout="hide()">DeviceOrientationControls</a></div>
+<div class=list><a href="https://threejs.org/examples/#webgl_interactive_draggablecubes" target="_blank" onmouseover="show('drag controls - управление перетаскиванием')" onmouseout="hide()">DragControls</a></div>
+<div class=list>EditorControls</div>
+<div class=list>FirstPersonControls</div>
+<div class=list>FlyControls</div>
+<div class=list>MapControls</div>
+<div class=list>OrbitControls</div>
+<div class=list>OrthographicTrackballControls</div>
+<div class=list>PointerLockControls</div>
+<div class=list>TrackballControls</div>
+<div class=list>TransformControls</div>
+&#9679; <b>кривые линии</b>
+<div class=list>CurveExtras</div>
+<div class=list><a href="https://ru.wikipedia.org/wiki/NURBS" target="_blank" onmouseover="show('NURBS - сокращ. англ. слов non-uniform rational B-spline —<br>неоднородный рациональный B-сплайн, математическая<br>форма, применяемая в компьютерной графике для<br>генерации и представления кривых и поверхностей.')" onmouseout="hide()">NURBSCurve</a></div>
+<div class=list>NURBSSurface</div>
+<div class=list>NURBSUtils</div>
+&#9679; <b>эффекты</b>
+<div class=list>AnaglyphEffect</div>
+<div class=list>AsciiEffect</div>
+<div class=list>OutlineEffect</div>
+<div class=list>ParallaxBarrierEffect</div>
+<div class=list>PeppersGhostEffect</div>
+<div class=list>StereoEffect</div>
+&#9679; <b>экспортеры</b>
+<div class=list>ColladaExporter</div>
+<div class=list>DRACOExporter</div>
+<div class=list>GLTFExporter</div>
+<div class=list>MMDExporter</div>
+<div class=list>OBJExporter</div>
+<div class=list>PLYExporter</div>
+<div class=list>STLExporter</div>
+<div class=list>TypedGeometryExporter</div>
+&#9679; <b>загрузчики</b><br>
+<div class=list>ctm<br>
+CTMLoader</div>
+<div class=list>устаревшие<br>
+LegacyGLTFLoader<br>
+LegacyJSONLoader</div>
+<div class=list>3MFLoader</div>
+<div class=list>AMFLoader</div>
+<div class=list>AWDLoader</div>
+<div class=list>AssimpJSONLoader</div>
+<div class=list>AssimpLoader</div>
+<div class=list>BabylonLoader</div>
+<div class=list>BVHLoader</div>
+<div class=list>ColladaLoader</div>
+<div class=list>DDSLoader</div>
+<div class=list>DRACOLoader</div>
+<div class=list>EXRLoader</div>
+<div class=list>EquirectangularToCubeGenerator</div>
+<div class=list>FBXLoader</div>
+<div class=list>GCodeLoader</div>
+<div class=list>GLTFLoader</div>
+<div class=list>HDRCubeTextureLoader</div>
+<div class=list>KMZLoader</div>
+<div class=list>KTXLoader</div>
+<div class=list>LWOLoader</div>
+<div class=list>MD2Loader</div>
+<div class=list>MMDLoader</div>
+<div class=list>MTLLoader</div>
+<div class=list>NRRDLoader</div>
+<div class=list>OBJLoader</div>
+<div class=list>PCDLoader</div>
+<div class=list>PDBLoader</div>
+<div class=list>PlayCanvasLoader</div>
+<div class=list>PLYLoader</div>
+<div class=list>PRWMLoader</div>
+<div class=list>PVRLoader</div>
+<div class=list>RGBELoader</div>
+<div class=list>STLLoader</div>
+<div class=list>SVGLoader</div>
+<div class=list>TDSLoader</div>
+<div class=list>TGALoader</div>
+<div class=list>TTFLoader</div>
+<div class=list>VRMLLoader</div>
+<div class=list>VRMLoader</div>
+<div class=list>VTKLoader</div>
+<div class=list>XLoader</div>
+</td>
+<td width=33% valign=top>
+&#9679; <b>геометрические элементы</b>
+<div class=list>BoxLineGeometry</div>
+<div class=list>ConvexGeometry</div>
+<div class=list>DecalGeometry</div>
+<div class=list>ParametricGeometries</div>
+<div class=list>TeapotBufferGeometry</div>
+&#9679; <b>взаимодействие</b>
+<div class=list>SelectionBox</div>
+<div class=list>SelectionHelper</div>
+&#9679; <b>освещение</b>
+<div class=list>LightProbeGenerator</div>
+<div class=list>RectAreaLightUniformsLib</div>
+&#9679; <b>линии</b>
+<div class=list>Line2</div>
+<div class=list>LineGeometry</div>
+<div class=list>LineMaterial</div>
+<div class=list>LineSegments2</div>
+<div class=list>LineSegmentsGeometry</div>
+<div class=list>Wireframe</div>
+<div class=list>WireframeGeometry2</div>
+&#9679; <b>элементы математики</b>
+<div class=list>ColorConverter</div>
+<div class=list>ConvexHull</div>
+<div class=list>ImprovedNoise</div>
+<div class=list>Lut</div>
+<div class=list>SimplexNoise</div>
+&#9679; <b>разное</b>
+<div class=list>CarControls</div>
+<div class=list>ConvexObjectBreaker</div>
+<div class=list>GPUComputationRenderer</div>
+<div class=list>Gyroscope</div>
+<div class=list>MD2Character</div>
+<div class=list>MD2CharacterComplex</div>
+<div class=list>MorphAnimMesh</div>
+<div class=list>MorphBlendMesh</div>
+<div class=list>Ocean</div>
+<div class=list>RollerCoaster</div>
+<div class=list>Volume</div>
+<div class=list>VolumeSlice</div>
+&#9679; <b>модификаторы</b>
+<div class=list>ExplodeModifier</div>
+<div class=list>SimplifyModifier</div>
+<div class=list>SubdivisionModifier</div>
+<div class=list>TessellateModifier</div>
+&#9679; <b>объекты</b>
+<div class=list>Fire</div>
+<div class=list>Lensflare</div>
+<div class=list>Reflector</div>
+<div class=list>Refractor</div>
+<div class=list>ReflectorRTT</div>
+<div class=list>ShadowMesh</div>
+<div class=list>Sky</div>
+<div class=list>Water</div>
+<div class=list>Water2</div>
+&#9679; <b class="lnk" onmouseover="show('сокращ. от англ. слов Prefiltered Mipmaped Radiance Environment map -<br>карта среды с предварительно отфильтрованной светимостью')" onmouseout="hide()">pmrem</b>
+<div class=list>PMREMCubeUVPacker</div>
+<div class=list>PMREMGenerator</div>
+&#9679; <b>постобработка (постпроцессинг)</b>
+<div class=list><a href="https://threejs.org/examples/webgl_shaders_tonemapping.html" target="_blank">AdaptiveToneMappingPass</a></div>
+<div class=list>AfterimagePass</div>
+<div class=list>BloomPass</div>
+<div class=list>BokehPass</div>
+<div class=list>ClearPass</div>
+<div class=list>CubeTexturePass</div>
+<div class=list>DotScreenPass</div>
+<div class=list>EffectComposer</div>
+<div class=list>FilmPass</div>
+<div class=list>GlitchPass</div>
+<div class=list>HalftonePass</div>
+<div class=list>MaskPass</div>
+<div class=list>OutlinePass</div>
+<div class=list>RenderPass</div>
+<div class=list>SAOPass</div>
+<div class=list>SavePass</div>
+<div class=list>ShaderPass</div>
+<div class=list>SMAAPass</div>
+<div class=list>SSAARenderPass</div>
+<div class=list>SSAOPass</div>
+<div class=list>TAARenderPass</div>
+<div class=list>TexturePass</div>
+<div class=list><a href="https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html" target="_blank">UnrealBloomPass</a></div>
+</td>
+<td width=33% valign=top>
+&#9679; <b>камеры</b>
+<div class=list><a href="https://threejs.org/examples/webgl_camera_cinematic.html" target="_blank" onmouseover="show('cinematic camera - кинематографическая камера')" onmouseout="hide()">CinematicCamera</a></div>
+&#9679; <b>визуализаторы (рендереры)</b>
+<div class=list>CSS2DRenderer</div>
+<div class=list>CSS3DRenderer</div>
+<div class=list>Projector</div>
+<div class=list>SoftwareRenderer</div>
+<div class=list>SVGRenderer</div>
+<div class=list>RaytracingRenderer</div>
+<div class=list>WebGLDeferredRenderer</div>
+&#9679; <b>шейдеры</b>
+<div class=list>AfterimageShader</div>
+<div class=list>BasicShader</div>
+<div class=list>BleachBypassShader</div>
+<div class=list>BlendShader</div>
+<div class=list>BokehShader</div>
+<div class=list>BokehShader2</div>
+<div class=list>BrightnessContrastShader</div>
+<div class=list>ColorCorrectionShader</div>
+<div class=list>ColorifyShader</div>
+<div class=list>ConvolutionShader</div>
+<div class=list>CopyShader</div>
+<div class=list>DepthLimitedBlurShader</div>
+<div class=list>DigitalGlitch</div>
+<div class=list>DOFMipMapShader</div>
+<div class=list>DotScreenShader</div>
+<div class=list>FilmShader</div>
+<div class=list>FocusShader</div>
+<div class=list>FreiChenShader</div>
+<div class=list>FresnelShader</div>
+<div class=list>FXAAShader</div>
+<div class=list>GammaCorrectionShader</div>
+<div class=list>GodRaysShader</div>
+<div class=list>HalftoneShader</div>
+<div class=list>HorizontalBlurShader</div>
+<div class=list>HorizontalTiltShiftShader</div>
+<div class=list>HueSaturationShader</div>
+<div class=list>KaleidoShader</div>
+<div class=list>LuminosityHighPassShader</div>
+<div class=list>LuminosityShader</div>
+<div class=list>MirrorShader</div>
+<div class=list>NormalMapShader</div>
+<div class=list>OceanShaders</div>
+<div class=list>ParallaxShader</div>
+<div class=list>PixelShader</div>
+<div class=list>RGBShiftShader</div>
+<div class=list>SAOShader</div>
+<div class=list>SepiaShader</div>
+<div class=list>SkinShader</div>
+<div class=list>SMAAShader</div>
+<div class=list>SobelOperatorShader</div>
+<div class=list>SSAOShader</div>
+<div class=list>TechnicolorShader</div>
+<div class=list>TerrainShader</div>
+<div class=list>ToneMapShader</div>
+<div class=list>ToonShader</div>
+<div class=list>TranslucentShader</div>
+<div class=list>TriangleBlurShader</div>
+<div class=list>UnpackDepthRGBAShader</div>
+<div class=list>VerticalBlurShader</div>
+<div class=list>VerticalTiltShiftShader</div>
+<div class=list>VignetteShader</div>
+<div class=list>VolumeShader</div>
+<div class=list>WaterRefractionShader</div>
+&#9679; <b>вспомогательные элементы</b>
+<div class=list>BufferGeometryUtils</div>
+<div class=list>GeometryUtils</div>
+<div class=list>MathUtils</div>
+<div class=list>SceneUtils</div>
+<div class=list><a href="https://threejs.org/examples/webgl_shadowmap_viewer.html" target="_blank">ShadowMapViewer</a></div>
+<div class=list>SkeletonUtils</div>
+<div class=list>TypedArrayUtils</div>
+<div class=list><a href="https://threejs.org/examples/webgl_UVsDebug.html" target="_blank">UVsDebug</a></div>
+&#9679; <b>виртуальная реальность</b>
+<div class=list>устаревшие<br>
+DaydreamController<br>
+GearVRController</div>
+<div class=list>PaintViveController</div>
+<div class=list>ViveController</div>
+</td></tr></table></div> -->
+<div class=note><b>Примечание:</b> При использовании кода из каталога примеров важно, чтобы все файлы соответствовали версии основного файла <em>three.js</em>.
+Например, нельзя использовать GLTFLoader и OrbitControls версии R96 вместе с <em>three.js</em> версии R103.
+Можно<!--  запросто синхронизировать файлы с помощью модулей из каталога <tt>jsm</tt>. Если файл недоступен как модуль, все равно можно использовать сторонние <tt>npm</tt>-пакеты или преобразовать файл в модуль самостоятельно.
+В обоих случаях следует убедится, что код совместим с вашим основным файлом <em>three.js</em>. -->
+</div><br>
+
+<br><br>
+</body></html>

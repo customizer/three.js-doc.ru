@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="light.htm" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="lnk" onmouseover="show('point light - точечное освещение');" onmouseout="hide()">PointLight</span></h3>
+Свет, который излучается из одной точки во всех направления. Обычный случай использования такого освещения это повторение освещения от простой лампочки (без светильника).<br>
+Это освещение может отбрасывать тени - подробности смотрите в описании <a href="lightShadow.htm" onmouseover="show('LightShadow');" onmouseout="hide()">LightShadow</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var light = new THREE.PointLight( 0xff0000, 1, 100 );
+light.position.set( 50, 50, 50 );
+scene.add( light );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#canvas_lights_pointlights" target="_blank">lights / pointlights</a>
+<a href="https://threejs.org/examples/#webgl_lights_pointlights" target="_blank">lights / pointlights</a>
+<a href="https://threejs.org/examples/#webgl_lights_pointlights2" target="_blank">lights / pointlights2</a>
+<a href="https://threejs.org/examples/#webgldeferred_animation" target="_blank">animation</a>
+<a href="https://threejs.org/examples/#webgl_effects_anaglyph" target="_blank">effects / anaglyph</a>
+<a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank">geometry / text</a>
+<a href="https://threejs.org/examples/#webgl_lensflares" target="_blank">lensflares</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>PointLight( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность, яркость');" onmouseout="hide()">intensity</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние');" onmouseout="hide()">distance</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decay - распад');" onmouseout="hide()">decay</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> — шестнадцатиричное значение цвета освещения, по умолчанию <tt>0xffffff</tt> (белый). Дополнительный, необязательный аргумент.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность, яркость');" onmouseout="hide()">intensity</a></span></tt> — числовое значение силы/интенсивности света. Значение по умолчанию равно <tt>1</tt>. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние');" onmouseout="hide()">distance</a></span></tt> - расстояние от источника света, при котором интенсивность света становится равной <tt>0</tt>.
+When set to 0, then the light never stops. Значение по умолчанию равно <tt>0</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decay - распад');" onmouseout="hide()">decay</a></span></tt> - значение, на которое уменьшается интенсивность света с увеличением расстояния от источника.</div>
+Создает новый PointLight.<br><br>
+
+<h4>Свойства</h4>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
+<div class=blockindent><br>
+<pre id="decay"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decay - распад');" onmouseout="hide()">.decay</a></span></pre>
+Значение, на которое уменьшается интенсивность света с увеличением расстояния от источника.<br>
+В режиме, <a href="../renderers/webGLRenderer.htm#physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights');" onmouseout="hide()">правильном с точки зрения физики</a>, <tt>decay = 2</tt> приводит к физически реалистичному уменьшению освещенности.
+Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="distance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние');" onmouseout="hide()">.distance</a></span></pre>
+При ненулевом значении свет будет уменьшаться линейно от максимальной интенсивности (в расположении источника света) до нуля (на расстоянии от источника света, задаваемым данным свойством).
+Значение по умолчанию равно <tt>0.0</tt>.<br><br>
+
+<pre id="isPointLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is point light - является точечным освещением');" onmouseout="hide()">.isPointLight</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классы точечным освещением (PointLight). Значением по умолчанию является <tt>true</tt>.<br>
+Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
+
+<pre id="power"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('power - сила, мощность');" onmouseout="hide()">.power</a></span></pre>
+Сила света. (По-русски это будет <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BF%D0%BE%D1%82%D0%BE%D0%BA" target="_blank">световой поток</a>.)<br>
+В режиме, <a href="../renderers/webGLRenderer.htm#physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights');" onmouseout="hide()">правильном с точки зрения физики</a>, световой поток измеряется в люменах. Значением по умолчанию является <tt>4Math.PI</tt>.<br>
+Он напрямую связан с интенсивностью (<tt><a href="lights.htm#intensity" onmouseover="show('PointLight.intensity.<br>Здесь свойство <tt>intensity</tt><br>наследуется от родительского объекта.');" onmouseout="hide()">intensity</a></tt>) соотношением
+<pre>power = intensity * 4<i>&#960;</i></pre>
+и его изменение также приведет к изменению интенсивности.<br><br>
+
+<pre id="shadow"><a href="lightShadow.htm" onmouseover="show('LightShadow.<br>shadow - тень');" onmouseout="hide()">.shadow</a></pre>
+Для вычисления теней при данном освещении используется класс <a href="lightShadow.htm" onmouseover="show('LightShadow');" onmouseout="hide()">LightShadow</a>.<br>
+<a href="lightShadow.htm#camera" onmouseover="show('LightShadow.camera');" onmouseout="hide()">Камерой LightShadow</a> устанавливается <a href="../cameras/perspectiveCamera.htm" onmouseover="show('PerspectiveCamera');" onmouseout="hide()">камера с перспективной проекцией</a> и параметрами:
+<tt><a href="../cameras/perspectiveCamera.htm#fov" onmouseover="show('PerspectiveCamera.fov');" onmouseout="hide()">fov</a></tt> равен <tt>90</tt> градусов,
+<tt><a href="../cameras/perspectiveCamera.htm#aspect" onmouseover="show('PerspectiveCamera.aspect');" onmouseout="hide()">aspect</a></tt> равен <tt>1</tt>, ближняя плоскость отсечения
+<tt><a href="../cameras/perspectiveCamera.htm#near" onmouseover="show('PerspectiveCamera.near');" onmouseout="hide()">near</a></tt> равна <tt>0.5</tt>
+и дальняя плоскость отсечения <tt><a href="../cameras/perspectiveCamera.htm#far" onmouseover="show('PerspectiveCamera.far');" onmouseout="hide()">far</a></tt> равна <tt>500</tt>.</div><br>
+
+<h4>Методы</h4>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.
+<div class=blockindent><br>
+<pre id="copy"><a href="#" onmouseover="show('PointLight.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('PointLight.<br>source - исходник');" onmouseout="hide()">source</a> )</pre>
+Метод копирует значения всех свойств из <tt><a href="#" onmouseover="show('PointLight.<br>source - исходник');" onmouseout="hide()">source</a></tt> в данный PointLight.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/PointLight.js" target="_blank">PointLight.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

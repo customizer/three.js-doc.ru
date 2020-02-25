@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Рисование линий</h2>
+Предположим, нужно нарисовать линию или круг, без каркасной <a href="../objects/mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">сетки</a>.
+Вначале нужно установить <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">рендерер (визуализатор)</a>, <a href="../scenes/scene.htm">сцену</a> и камеру (смотрите страницу <a href="creatingScene.htm">Создание сцены</a>).<br><br>
+Вот код, который для этого будет использоваться:
+<pre>var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);<br>
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+camera.position.set(0, 0, 100);
+camera.lookAt(new THREE.Vector3(0, 0, 0));<br>
+var scene = new THREE.Scene();</pre>
+Следующее, что нужно сделать, это определить материал. Для линий можно использовать <a href="../materials/lineBasicMaterial.htm">LineBasicMaterial</a> или <a href="../materials/lineDashedMaterial.htm">LineDashedMaterial</a>.
+<pre>//create a blue LineBasicMaterial (создадим синий LineBasicMaterial)
+var material = new THREE.LineBasicMaterial({ color: 0x0000ff });</pre>
+После определения материала нужно определиться с <a href="../core/geometry.htm">Geometry</a> или <a href="../core/bufferGeometry.htm">BufferGeometry</a> с некоторым количеством вершин
+(рекомендуется использовать BufferGeometry как более производительную, однако для упрощения здесь будет использована Geometry):
+<pre>var geometry = new THREE.Geometry();
+geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
+geometry.vertices.push(new THREE.Vector3(0, 10, 0));
+geometry.vertices.push(new THREE.Vector3(10, 0, 0));</pre>
+Обратите внимание, что линии проведены между каждой последующей парой вершин, но не между первой и последней (то есть, эта линия не замкнута).<br><br>
+Теперь, когда есть точки для двух линий и материал, можно сложить все вместе для формирования линии.
+<pre>var line = new THREE.Line(geometry, material);</pre>
+Все что осталось, вывести (добавить) её на сцену и вызвать <a href="../renderers/webGLRenderer.htm#render" onmouseover="show('WebGLRenderer.render')" onmouseout="hide()">рендерер</a>.
+<pre>scene.add(line);
+renderer.render(scene, camera);</pre>
+Теперь вы должны увидеть стрелку из двух синих линий, направленную вверх.<br><br>
+
+<br><br>
+</body></html>

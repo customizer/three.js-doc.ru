@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="loader.htm" title="Переход к родительскому классу: Loader"><tt>Loader &rarr;</tt></a></span>
+<h3>AudioLoader</h3>
+Класс для загрузки <a href="https://developer.mozilla.org/ru/docs/Web/API/AudioBuffer" target="_blank" onmouseover="show('audio buffer - буфер звука')" onmouseout="hide()">AudioBuffer</a>.
+Для загрузки файлов, внутри класса, используется <a href="fileLoader.htm" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// instantiate a listener (создаем экземпляр слушателя)
+var audioListener = new THREE.AudioListener();<br>
+// add the listener to the camera (добавляем слушателя к камере)
+camera.add( audioListener );<br>
+// instantiate audio object (создаем экземпляр аудиообъекта)
+var oceanAmbientSound = new THREE.Audio( audioListener );<br>
+// add the audio object to the scene (добавляем к сцене аудиообъект)
+scene.add( oceanAmbientSound );<br>
+// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.AudioLoader();<br>
+// load a resource (загружаем ресурс)
+loader.load(
+  // resource URL (адрес ресурса)
+  'audio/ambient_ocean.ogg',
+  // onLoad callback
+  // функция обратного вызова, вызываемая после загрузки ресурса
+  function ( audioBuffer ) {
+    // set the audio object buffer to the loaded object
+    // устанавливаем буфер аудиообъекта для загруженного объекта
+    oceanAmbientSound.setBuffer( audioBuffer );<br>
+    // play the audio - воспроизводим аудио
+    oceanAmbientSound.play();
+  },
+  // onProgress callback
+  // функция обратного вызова, вызываемая во время загрузки
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% загружено' );
+  },
+  // onError callback
+  // функция обратного вызова, вызываемая при ошибках загрузки
+  function ( xhr ) {
+    console.log( 'Произошла ошибка' );
+  }
+);</pre><br>
+
+<h4>Конструктор</h4>
+<pre>AudioLoader( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('context - контекст, ситуация, обстановка, фон')" onmouseout="hide()">context</a></span>, <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>context</tt> — <a href="https://developer.mozilla.org/ru/docs/Web/API/AudioContext" target="_blank">AudioContext</a>, используемый загрузчиком. По умолчанию это <tt>window.AudioContext</tt>.</div>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый AudioLoader.<br><br>
+
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как <tt>/ˌjuː ɑːr ˈel/</tt>) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — url-адрес ресурса, обязательный аргумент.</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызываться при завершении загрузки. Аргументом должен быть загруженный текст ответа.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Начинает загрузку из <tt>url</tt> и передает загруженный <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('audio buffer - буфер звука')" onmouseout="hide()">AudioBuffer</a></span> функции, указанной в <tt>onLoad</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/AudioLoader.js" target="_blank">AudioLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

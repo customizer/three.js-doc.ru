@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Как использовать постобработку</h2>
+Многие приложения <em>three.js</em> отображают свои 3D-объекты непосредственно на экране. Однако, иногда хочется применить один или несколько графических эффектов,
+таких как <a href="https://ru.wikipedia.org/wiki/%D0%93%D0%BB%D1%83%D0%B1%D0%B8%D0%BD%D0%B0_%D1%80%D0%B5%D0%B7%D0%BA%D0%BE_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B0%D0%B5%D0%BC%D0%BE%D0%B3%D0%BE_%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%B0" target="_blank">глубина резкости</a> (<a href="https://en.wikipedia.org/wiki/Depth_of_field" target="_blank">Depth-Of-Field</a>),
+<a href="https://ru.wikipedia.org/wiki/Bloom" target="_blank">свечение</a> (<a href="https://en.wikipedia.org/wiki/Bloom_(shader_effect)" target="_blank">Bloom</a>),
+<a href="https://ru.wikipedia.org/wiki/%D0%97%D0%B5%D1%80%D0%BD%D0%B8%D1%81%D1%82%D0%BE%D1%81%D1%82%D1%8C_(%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F)" target="_blank">зернистость</a> (<a href="https://en.wikipedia.org/wiki/Film_grain" target="_blank">Film Grain</a>)
+или различные типы <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B3%D0%BB%D0%B0%D0%B6%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">сглаживания</a> (<a href="https://en.wikipedia.org/wiki/Anti-aliasing_filter" target="_blank">антиалиасинга</a>).
+Для реализации таких эффектов широко используется постобработка. Сначала сцена визуализируется в целевом буфере визуализации (render target), который представляет собой буфер в памяти видеокарты.
+Далее, к этому буферу визуализации, до того как он будет отображен на экране, применяют фильтры и эффекты, за один или несколько проходов (pass) постобработки.<br>
+Для реализации подобного процесса <em>three.js</em> предоставляет законченное решение по постобработке с помощью <a href="../examples/postProcessing/effectComposer.htm" onmouseover="show('EffectComposer')" onmouseout="hide()">EffectComposer</a>'а.<br><br>
+
+<h3>Последовательность действий</h3>
+Первым шагом в этом процессе является импорт всех необходимых файлов из каталога примеров. В этом руководстве предполагается, что используется официальный <a href="https://www.npmjs.com/package/three" target="_blank">npm-пакет</a> из <em>three.js</em>.
+Для основной демонстрации в этом руководстве нужны следующие файлы:
+<pre>import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';</pre>
+После успешного импорта всех файлов, можно создать компоновщик эффектов (EffectComposer), передачей экземпляра <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>.
+<pre>var composer = new EffectComposer( renderer );</pre>
+При использовании компоновщика (EffectComposer) необходимо изменить цикл анимации приложения.
+Вместо вызова метода <a href="../renderers/webGLRenderer.htm#render" onmouseover="show('WebGLRenderer.render<br>render - представить, отобразить')" onmouseout="hide()"><tt>render</tt></a> от <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>, теперь используется <a href="../examples/postProcessing/effectComposer.htm#render" onmouseover="show('EffectComposer.render')" onmouseout="hide()">соответствующий аналог</a> из <a href="../examples/postProcessing/effectComposer.htm" onmouseover="show('EffectComposer')" onmouseout="hide()">EffectComposer</a>.<br>
+<pre>function animate() {
+  requestAnimationFrame( animate );
+  composer.render();
+}</pre>
+Теперь компоновщик готов, поэтому можно настроить цепочку проходов постобработки. Эти проходы отвечают за создание конечного видимого вывода приложения. Они обрабатываются в порядке их добавления / вставки.
+В нашем примере сначала выполняется экземпляр прохода <tt class="lnk" onmouseover="show('render pass - проход визуализации')" onmouseout="hide()">RenderPass</tt>,
+а затем экземпляр прохода <tt class="lnk" onmouseover="show('glitch pass - проход с эффектом &#171;сбой&#187;<br>glitch (глитч) - кратковременный сбой<br>в системе, импульсная помеха')" onmouseout="hide()">GlitchPass</tt>.
+Последний проход, включенный в цепочку, автоматически отображается на экране. Установка проходов выглядить вот так:
+<pre>var renderPass = new RenderPass( scene, camera );
+composer.addPass( renderPass );<br>
+var glitchPass = new GlitchPass();
+composer.addPass( glitchPass );</pre>
+<tt>RenderPass</tt> обычно размещается в начале цепочки, чтобы предоставить визуализируемую сцену в качестве входных данных для последующего шага постобработки.
+В данном случае, эти графические данные будет использовать <tt>GlitchPass</tt>, чтобы применить эффект "дикий" сбой (wild<a href="https://en.wikipedia.org/wiki/Glitch_art" target="_blank">glitch</a>).
+Сравните его с <a href="https://threejs.org/examples/webgl_postprocessing_glitch" target="_blank">имеющимся примером</a>, чтобы посмотреть его в действии.<br><br>
+
+<h3>Встроенные проходы постобработки</h3>
+Можно воспользоваться большим набором готовых проходов постобработки, предоставляемых движком. Они размещены на GitHub в каталоге <a href="https://github.com/mrdoob/three.js/tree/dev/examples/jsm/postprocessing" target="_blank">postprocessing</a>.<br><br>
+
+<h3>Нестандартные проходы постобработки</h3>
+Иногда нужно написать нестандартный шейдер постобработки и включить его в цепочку проходов постобработки. Для такого сценария можно воспользоваться <a href="https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/ShaderPass.js" target="_blank"><tt>ShaderPass</tt></a>.
+После импорта файла и нестандартного шейдера, для установки прохода можно использовать следующий код:<br>
+<pre>import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { LuminosityShader } from 'three/examples/jsm/shaders/LuminosityShader.js';<br>
+// later in your init routine (далее в процедуре инициализации)<br>
+var luminosityPass = new ShaderPass( LuminosityShader );
+composer.addPass( luminosityPass );</pre>
+Репозиторий предоставляет файл с названием <a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/shaders/CopyShader.js" target="_blank"><tt>CopyShader</tt></a>, который может стать хорошим начальным кодом для построения своего собственного нестандартного шейдера.
+<tt>CopyShader</tt> попросту копирует изображение из буфера чтения EffectComposer'а в его буфер записи без применения каких-либо эффектов.<br><br>
+
+<br><br>
+</body>
+</html>

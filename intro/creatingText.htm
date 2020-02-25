@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Создание текста</h2>
+Часто бывает так, что в приложении <em>three.js</em> нужно использовать текст - вот несколько способов, как можно это сделать.
+
+<h3>1. DOM + CSS</h3>
+Использование HTML - это наиболее простой и быстрый способ добавления текста. Этот метод используется для прилагаемых изображений к большинству примеров <em>three.js</em>.<br><br>
+Можно добавить содержимое в
+<pre>&lt;div id="info"&gt;Description&lt;/div&gt;</pre>
+и использовать CSS-разметку для размещения в абсолютно независимой позиции и поверх всего остального по z-индексу, особенно если приложение <em>three.js</em> работает в полноэкранном режиме.
+<pre>#info {
+	position: absolute;
+	top: 10px;
+	width: 100%;
+	text-align: center;
+	z-index: 100;
+	display:block;
+}</pre>
+
+<h3>2. Нарисовать текст на canvas и использовать его как <a href="../textures/texture.htm" onmouseover="show('Texture')" onmouseout="hide()">текстуру</a></h3>
+Используйте этот способ, если хочется просто нарисовать текст на плоскости, на своей <em>three.js</em>-сцене.
+
+<h3>3. Создать модель текста в выбранной вами программе 3D-графики<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;и экспортировать её в <em>three.js</em></h3>
+Используйте этот способ, если предпочитаете работать со своей программой 3D-графики и вставьте эту модель в <em>three.js</em>.
+
+<h3>4. Геометрические элементы <span class="lnk" onmouseover="show('процедурный текст - расписанная последовательность действий,<br>помогающая решить определенную задачу. Например: рецепт,<br>правила игры, инструкция по эксплуатации и т.д.')" onmouseout="hide()">процедурного текста</span></h3>
+Если предпочитаете работать исключительно в <em>three.js</em> или создавать процедурные и динамичные трехмерные (3D) текстовые геометрические элементы,
+можно создать сетку, геометрические элементы которой являются экземпляром THREE.TextGeometry:
+<pre>new THREE.TextGeometry( text, parameters );</pre>
+Для того, чтобы это сработало, для TextGeometry будет нужен экземпляр THREE.Font, установленный в качестве значения его параметра "<tt>font</tt>" - шрифт.
+Посмотрите страницу <a href="../geometries/textGeometry.htm" onmouseover="show('TextGeometry')" onmouseout="hide()">TextGeometry</a> для получения дополнительных сведений о том, как это можно сделать с описанием каждого принимаемого параметра и списком
+<a href="https://ru.wikipedia.org/wiki/JSON" target="_blank" onmouseover="show('сокращение от англ. слов JavaScript Object Notation<br>(обычно произносится как джейсэн) — текстовый формат<br>обмена данными, основанный на JavaScript.<br>Как и многие другие текстовые форматы, JSON легко<br>читается людьми. Формат JSON был разработан<br>Дугласом Крокфордом.')" onmouseout="hide()">JSON</a>-шрифтов, поставляемых в составе самого <em>three.js</em>.
+
+<h4>Примеры</h4>
+<a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank"> WebGL / geometry / text</a><br>
+<a href="https://threejs.org/examples/#canvas_geometry_text" target="_blank">canvas / geometry / text</a><br>
+<a href="https://threejs.org/examples/#webgl_shadowmap" target="_blank"> WebGL / shadowmap</a><br><br>
+Если шрифт не работает или нужно использовать шрифт, которого здесь нет, существует <a href="http://www.jaanga.com/2012/03/blender-to-threejs-create-3d-text-with.html" target="_blank">руководство со скриптом на языке Python</a> для
+<a href="https://www.blender.org/" target="_blank" onmouseover="show('свободный, профессиональный пакет для создания<br>трёхмерной компьютерной графики, включающий в себя<br>средства моделирования, анимации, рендеринга,<br>постобработки и монтажа видео со звуком')" onmouseout="hide()">Blender'а</a>, который позволяет экспортировать текст в понятном для <em>three.js</em> формате JSON.
+
+<h3>5. Растровые шрифты (bitmap fonts)</h3>
+Растровые шрифты (bitmap fonts - BMFonts) позволяют группировать символы шрифта (глифы) в отдельный <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.
+Визуализация растрового шрифта поддерживает перенос слов, межбуквенный интервал, <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%B5%D1%80%D0%BD%D0%B8%D0%BD%D0%B3" target="_blank" onmouseover="show('Кернинг — это уменьшение или увеличение расстояния<br>между буквами, из которых складывается слово.')" onmouseout="hide()">кернинг</a>,
+<span class="lnk" onmouseover="show('<img src=\'../img/sdf.png\'><br>поля расстояний со знаком (signed distance fields, SDF) —<br>это изображение из оттенков серого, сгенерированное из<br>контрастного черно-белого изображения, в котором уровень<br>серого цвета означает дистанцию до ближайшей<br>контрастной границы.')" onmouseout="hide()">поля расстояний со знаком и стандартными производными</span>,
+многоканальные поля расстояний со знаком, многотекстурные шрифты и многое другое.
+Смотрите <a href="https://github.com/Jam3/three-bmfont-text" target="_blank">three-bmfont-text</a>.
+<div class=note_trans><b>Примечание переводчика:</b> Более подробно с полями расстояний со знаком можно ознакомится в статьях <a href="https://habr.com/ru/post/438316/" target="_blank">Основы Signed Distance Field в 2D</a> и <a href="https://habr.com/ru/post/282191/" target="_blank">Рендеринг UTF-8 текста с помощью SDF шрифта</a></div>
+Стандартные шрифты доступны в таких проектах, как <a href="https://github.com/etiennepinchon/aframe-fonts" target="_blank">A-Frame Fonts</a>,
+или можно создать свой собственный шрифт из любого шрифта в формате <tt>.TTF</tt>, оптимизировав его включением только тех символов, которые необходимы для проекта.
+
+<h4>Некоторые полезные инструменты:</h4>
+<a href="https://msdf-bmfont.donmccurdy.com/" target="_blank">msdf-bmfont-web</a> (доступ через интернет)<br>
+<a href="https://github.com/soimy/msdf-bmfont-xml" target="_blank">msdf-bmfont-xml</a> (командная строка)<br>
+<a href="https://github.com/libgdx/libgdx/wiki/Hiero" target="_blank">hiero</a> (приложение для настольного компьютера)<br><br>
+
+<br><br>
+</body></html>

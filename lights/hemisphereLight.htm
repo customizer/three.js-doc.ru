@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="light.htm" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="lnk" onmouseover="show('hemisphere light это свет полусферы');" onmouseout="hide()">HemisphereLight</span></h3>
+Источник света, расположенный непосредственно над сценой, с затуханием цвета от цвета неба до цвета земли.<br>
+Это освещение не может использоваться для отбрасывания теней.<br><br>
+
+<h4>Пример</h4><br>
+<pre>var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+scene.add( light );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_lights_hemisphere" target="_blank">lights / hemisphere</a>
+<a href="https://threejs.org/examples/#misc_controls_pointerlock" target="_blank">controls / pointerlock</a>
+<a href="https://threejs.org/examples/#webgl_decals" target="_blank">decals</a>
+<a href="https://threejs.org/examples/#webgl_loader_collada_kinematics" target="_blank">loader / collada / kinematics</a>
+<a href="https://threejs.org/examples/#webgl_materials_lightmap" target="_blank">materials / lightmap</a>
+<a href="https://threejs.org/examples/#webgl_shaders_ocean" target="_blank">shaders / ocean</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>HemisphereLight( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sky color - цвет неба');" onmouseout="hide()">skyColor</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ground color - цвет земли');" onmouseout="hide()">groundColor</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sky color - цвет неба');" onmouseout="hide()">skyColor</a></span></tt> — шестнадцатиричное значение цвета неба, по умолчанию равно <tt>0xffffff</tt>. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ground color - цвет земли');" onmouseout="hide()">groundColor</a></span></tt> —  шестнадцатиричное значение цвета земли, по умолчанию равно <tt>0xffffff</tt>. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span></tt> —  числовое значение силы/интенсивности света, по умолчанию равно <tt>1</tt>. Дополнительный, необязательный аргумент.</div>
+Создает новый HemisphereLight.<br><br>
+
+<h4>Свойства</h4><br>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
+<div class=blockindent><br>
+<pre id="castShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cast shadow - бросить тень');" onmouseout="hide()">.castShadow</a></span></pre>
+Это свойство в конструкторе устанавливается как <tt>undefined</tt>, так как освещение полусферой не может отбрасывать тени.<br><br>
+
+<pre id="color"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">.color</a></span></pre>
+Цвет освещения неба, какой передан в конструктор. Значение по умолчанию для нового <a href="../math/color.htm" onmouseover="show('Color');" onmouseout="hide()">цвета</a> устанавливается как <tt>(0xffffff)</tt> - белый.<br><br>
+
+<pre id="groundColor"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ground color - цвет земли');" onmouseout="hide()">.groundColor</a></span></pre>
+Цвет освещения земли, какой передан в конструктор. Значение по умолчанию для нового <a href="../math/color.htm" onmouseover="show('Color');" onmouseout="hide()">цвета</a> устанавливается как <tt>(0xffffff)</tt> - белый.<br><br>
+
+<pre id="isHemisphereLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is hemisphere light - является светом полусферы');" onmouseout="hide()">.isHemisphereLight</a></span></pre>
+Свойство используется для проверки, является ли данный класс и все производные от него классы, освещением полусферы. Значением по умолчанию является <tt>true</tt>.<br>
+Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
+
+<pre id="position"><a href="../math/vector3.htm" onmouseover="show('Vector3.<br>position - позиция, положение');" onmouseout="hide()">.position</a></pre>
+Это свойство устанавливается равным <tt><a href="../core/object3D.htm#DefaultUp" onmouseover="show('Object3D.DefaultUp');" onmouseout="hide()">Object3D.DefaultUp</a> (0, 1, 0)</tt>, так что свет светит сверху вниз.</div><br>
+
+<h4>Методы</h4><br>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.
+<div class=blockindent><br>
+<pre id="copy"><a href="#" onmouseover="show('HemisphereLight.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('HemisphereLight.<br>source - источник');" onmouseout="hide()">source</a> )</pre>
+Копирует значение параметров <a href="#color" onmouseover="show('HemisphereLight.color');" onmouseout="hide()"><tt>color</tt></a>, <a href="light.htm#intensity" onmouseover="show('HemisphereLight.intensity.<br>Здесь свойство <tt>intensity</tt><br>наследуется от родительского объекта.');" onmouseout="hide()"><tt>intensity</tt></a> и <a href="#groundColor" onmouseover="show('HemisphereLight.groundColor');" onmouseout="hide()"><tt>groundColor</tt></a> из <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>source</tt></a> освещения в этот.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/HemisphereLight.js" target="_blank">HemisphereLight.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

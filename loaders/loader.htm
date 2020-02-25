@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Loader</h3>
+Основной класс для реализации загрузчиков.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Loader( <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый Loader. Он будет вызываться как базовый класс.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="crossOrigin"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">.crossOrigin</a></span></pre>
+Строковое значение <tt>crossOrigin</tt> для реализации
+<a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>
+для загрузки url-адреса с другого домена, который предоставляет CORS.<br>
+Значением по умолчанию является <tt>anonymous</tt>.<br><br>
+
+<pre id="manager"><a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">.manager</a></pre>
+<a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">Менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.<br><br>
+
+<pre id="path"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">.path</a></span></pre>
+Базовый путь, из которого будет загружаться основной ресурс. Значением по умолчанию является пустая строка.<br><br>
+
+<pre id="resourcePath"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('resource path - путь к ресурсу')" onmouseout="hide()">.resourcePath</a></span></pre>
+Базовый путь, из которого будут загружаться дополнительные ресурсы, например такие, как текстуры. Значением по умолчанию является пустая строка.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>()</pre>
+Этот метод должен реализовываться всеми конкретными загрузчиками. В нем содержится логика для загрузки основного ресурса из серверного интерфейса (бэкенда).
+<div class=note_trans><b>Примечание переводчика:</b> Бэкенд — все, что работает на сервере, то есть «не в браузере» или «на компьютере, подсоединенном к сети (обычно к Интернету), который отвечает на сообщения от других компьютеров».<br>
+Фронтенд — все, что браузер может читать, выводить на экран и / или запускать. То есть это HTML, CSS и JavaScript.</div><br>
+
+<pre id="parse"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>()</pre>
+Этот метод должен реализовываться всеми конкретными загрузчиками. В нем содержится логика для синтаксического разбора основного ресурса на объекты <em>three.js</em>.<br><br>
+
+<pre id="setCrossOrigin"><a href="#" onmouseover="show('Loader<br>set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">crossOrigin</a></span> )</pre>
+<div class=list><tt>crossOrigin</tt> - строковое значение <tt>crossOrigin</tt> для реализации
+<a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>
+для загрузки url-адреса с другого домена, который предоставляет CORS.</div>
+Устанавливает атрибут <tt><a href="#crossOrigin" onmouseover="show('Loader.crossOrigin')" onmouseout="hide()">crossOrigin</a></tt>.<br><br>
+
+<pre id="setPath"><a href="#" onmouseover="show('Loader<br>set path - установить путь')" onmouseout="hide()">.setPath</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span> )</pre>
+<div class=list><tt>path</tt> — базовый путь, из которого будет загружаться основной ресурс. Значением по умолчанию является пустая строка.</div>
+Метод устанавливает базовый путь к основному ресурсу.<br><br>
+
+<pre id="setResourcePath"><a href="#" onmouseover="show('Loader<br>set resource path - установить путь к ресурсу')" onmouseout="hide()">.setResourcePath</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('resource path - путь к ресурсу')" onmouseout="hide()">resourcePath</a></span> )</pre>
+<div class=list><tt>resourcePath</tt> — базовый путь, из которого будут загружаться дополнительные ресурсы, например такие, как текстуры. Значением по умолчанию является пустая строка.</div>
+Метод устанавливает базовый путь к дополнительному ресурсу, такому как текстуры.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/Loader.js" target="_blank">Loader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

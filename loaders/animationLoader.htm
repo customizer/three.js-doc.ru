@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="loader.htm" title="Переход к родительскому классу: Loader"><tt>Loader &rarr;</tt></a></span>
+<h3>AnimationLoader</h3>
+Класс для загрузки <a href="../animation/animationClip.htm" onmouseover="show('AnimationClip')" onmouseout="hide()">клипов анимации</a> в формате
+<a href="https://ru.wikipedia.org/wiki/JSON" target="_blank" onmouseover="show('JSON (сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən) —<br>текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">JSON</a>.
+Для загрузки файлов, внутри класса, используется <a href="fileLoader.htm" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.AnimationLoader();<br>
+// load a resource (загрузка ресурса)
+loader.load(
+  // resource URL(URL-адрес ресурса)
+  'animations/animation.js',<br>
+  // onLoad callback (функция обратного вызова, вызываемая после загрузки)
+  function ( animations ) {
+    // animations is an array of AnimationClips
+    // анимация - это массив AnimationClips
+  },<br>
+  // onProgress callback (функция обратного вызова, вызываемая в процессе загрузки)
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% загружено' );
+  },<br>
+  // onError callback (функция обратного вызова, вызываемая при ошибке)
+  function ( err ) {
+    console.log( 'Произошла ошибка' );
+  }
+);</pre><br>
+
+<h4>Конструктор</h4>
+<pre>AnimationLoader( <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый AnimationLoader.<br><br>
+
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь или URL к файлу. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженная <a href="../animation/animation.htm" onmouseover="show('Animation')" onmouseout="hide()">анимация</a>.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Начинает загрузку с URL-адреса и передает загруженную анимацию функции, указанной в <tt>onLoad</tt>.<br><br>
+
+<pre id="parse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, структурный анализ')" onmouseout="hide()">.parse</a></span>( <span onclick="showClick('объект JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation<br>(обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span> )</pre>
+<div class=list><tt>json</tt> — обязателен</div>
+<div class=list><tt>onLoad</tt> — функция, вызываемая по завершении разбора (парсинга) JSON объекта.</div>
+Анализирует (разбирает) объект JSON и передает результаты функции, приведенной в аргументе <tt>onLoad</tt>.
+Отдельные клипы объекта будут обработаны с помощью метода <tt><a href="../animation/animationClip.htm#parse" onmouseover="show('AnimationClip.parse')" onmouseout="hide()">AnimationClip.parse</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/AnimationLoader.js" target="_blank">AnimationLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

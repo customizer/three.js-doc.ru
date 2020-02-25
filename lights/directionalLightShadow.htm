@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="lightShadow.htm" title="Переход к родительскому классу: LightShadow"><tt>LightShadow &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp; <span class="lnk" onmouseover="show('directional light shadow это тень от направленного света');" onmouseout="hide()">DirectionalLightShadow</span></h3>
+Этот класс используется внутри для расчета теней от <tt><a href="directionalLight.htm" onmouseover="show('DirectionalLight');" onmouseout="hide()">DirectionalLight</a></tt>.
+В отличие от других классов тени, данный класс для вычисления теней использует <tt><a href="../cameras/orthographicCamera.htm" onmouseover="show('OrthographicCamera');" onmouseout="hide()">OrthographicCamera</a></tt>, а не <tt><a href="../cameras/perspectiveCamera.htm" onmouseover="show('PerspectiveCamera');" onmouseout="hide()">PerspectiveCamera</a></tt>.
+Это делается потому, что лучи света от <tt><a href="directionalLight.htm" onmouseover="show('DirectionalLight');" onmouseout="hide()">DirectionalLight</a></tt> параллельны.<br><br>
+<h4>Пример</h4>
+<pre>// Create a WebGLRenderer and turn on shadows in the renderer
+// создаем WebGLRenderer и включаем тени в визуализаторе
+var renderer = new THREE.WebGLRenderer();
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+                                                  // (по умолчанию THREE.PCFShadowMap)<br>
+// Create a DirectionalLight and turn on shadows for the light
+// создаем DirectionalLight и включаем тени от него
+var light = new THREE.DirectionalLight( 0xffffff, 1, 100 );
+light.position.set( 0, 1, 0 ); // default; light shining from top
+                               // (по умолчанию; свет светит сверху)
+light.castShadow = true;       // default false (по умолчанию - false)
+scene.add( light );<br>
+// Set up shadow properties for the light
+// установка свойств тени для этого освещения
+light.shadow.mapSize.width = 512;  // default (значение по умолчанию)
+light.shadow.mapSize.height = 512; // default (значение по умолчанию)
+light.shadow.camera.near = 0.5;    // default (значение по умолчанию)
+light.shadow.camera.far = 500      // default (значение по умолчанию)<br>
+// Create a sphere that cast shadows (but does not receive them)
+// создаем сферу, отбрасывающую тени (но не принимающую их)
+var sphereGeometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
+var sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
+var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+sphere.castShadow = true;     // default is false (по умолчанию - false)
+sphere.receiveShadow = false; // default (значение по умолчанию)
+scene.add( sphere );<br>
+// Create a plane that receives shadows (but does not cast them)
+// Создаем плоскость, принимающую тени (но не отбрасывающую их)
+var planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
+var planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
+var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.receiveShadow = true;
+scene.add( plane );<br>
+// Create a helper for the shadow camera (optional)
+// создаем вспомогательный элемент для камеры теней (необязательно)
+var helper = new THREE.CameraHelper( light.shadow.camera );
+scene.add( helper );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>DirectionalLightShadow( )</pre>
+Создает новый <tt>DirectionalLightShadow</tt>. Конструктор не предназначен для непосредственного вызова - он вызывается внутри <em>three.js</em>, посредством <tt><a href="directionalLight.htm" onmouseover="show('DirectionalLight');" onmouseout="hide()">DirectionalLight</a></tt>.<br><br>
+
+<h4>Свойства</h4><br>
+Смотрите базовый класс <tt><a href="lightShadow.htm" onmouseover="show('LightShadow');" onmouseout="hide()">LightShadow</a></tt> для общих свойств.
+<div class=blockindent><br>
+<pre id="camera"><a href="../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера');" onmouseout="hide()">.camera</a></pre>
+Свойство представляет освещенную область виртуального мира. Она используется для создания карты глубины сцены; объекты, находящиеся позади других объектов, с точки зрения освещения будут в тени.<br>
+По умолчанию это <tt><a href="../cameras/orthographicCamera.htm" onmouseover="show('OrthographicCamera');" onmouseout="hide()">OrthographicCamera</a></tt> с параметрами
+<tt><a href="../cameras/orthographicCamera.htm#left" onmouseover="show('OrthographicCamera.left');" onmouseout="hide()">left</a></tt> и <tt><a href="../cameras/orthographicCamera.htm#bottom" onmouseover="show('OrthographicCamera.bottom');" onmouseout="hide()">bottom</a></tt> установленными как <tt>-5</tt>,
+<tt><a href="../cameras/orthographicCamera.htm#right" onmouseover="show('OrthographicCamera.right');" onmouseout="hide()">right</a></tt> и <tt><a href="../cameras/orthographicCamera.htm#top" onmouseover="show('OrthographicCamera.top');" onmouseout="hide()">top</a></tt> установленными как <tt>5</tt>,
+параметр <tt><a href="../cameras/orthographicCamera.htm#near" onmouseover="show('OrthographicCamera.near');" onmouseout="hide()">near</a></tt> (ближняя плоскость отсечения) установлен как <tt>0.5</tt>,
+а параметр <tt><a href="../cameras/orthographicCamera.htm#far" onmouseover="show('OrthographicCamera.far');" onmouseout="hide()">far</a></tt> (дальняя плоскость отсечения) установлен как <tt>500</tt>.</div><br>
+<h4>Методы</h4><br>
+Смотрите базовый класс <a href="lightShadow.htm" onmouseover="show('LightShadow');" onmouseout="hide()"><tt>LightShadow</tt></a> для общих методов.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLightShadow.js" target="_blank">DirectionalLightShadow.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

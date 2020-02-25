@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Система анимации</h2>
+<h3>Обзор</h3>
+В рамках анимационной системы <em>three.js</em> можно анимировать различные свойства модели:
+кости (bone) <a href="../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">skinned and rigged model</a>, <a href="../core/geometry.htm#morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">цели морфинга (morph targets)</a>,
+различные свойства материала (цвета, непрозрачность, логику), видимость и преобразования.
+Свойствами анимации могут быть постепенное появление (faded in), постепенное исчезновение (faded out), плавное появление на фоне плавного исчезновения (crossfaded) и деформация (warped).
+&#171;Веса&#769;&#187; (weight) и временны&#769;е масштабы (time scales) различных одновременных анимаций как на одном и том же объекте, так и на разных объектах, могут быть изменены независимо друг от друга. Можно синхронизировать различные анимации как на одном и том же объекте, так и на разных объектах.<br><br>
+Чтобы достичь всего этого в единственной однородной системе, система анимации three.js <a href="https://github.com/mrdoob/three.js/issues/6881" target="_blank">полностью изменилась в 2015 году</a> (помните об устаревшей информации!), и теперь его архитектура, походит на Unity/Unreal Engine 4.
+На этой странице дается краткий обзор основных компонентов этой системы и способов их совместной работы.<br>
+<img src="../img/animation.png" width="600"><br><br>
+
+<h3>Анимационные клипы Animation Clips</h3>
+Если имеется успешно импортированный анимированный 3D объект (неважно имеются ли в нем кости или цели морфинга, или и то и другое) - например, экспортированный из Blender'а с помощью
+<a href="https://github.com/KhronosGroup/glTF-Blender-IO" target="_blank">Blender exporter</a> и загруженный на сцену <em>three.js</em> загрузчиком <a href="../examples/loaders/GLTFLoader.htm">GLTFLoader</a>, -
+то одним из свойств геометрии загружаемой сетки (mesh) должен быть массив, поименованный как "animations", содержащий <a href="../animation/animationClip.htm">AnimationClip</a>'ы для данной модели (смотрите ниже список возможных загрузчиков).<br>
+Каждый &#171;AnimationClip&#187; обычно содержит данные для определенной активности объекта. Если сеткой, например является персонаж, то для цикла ходьбы может быть один AnimationClip, для прыжка - второй, третий для уклонения в сторону и так далее.
+
+<h3>Треки ключевых кадров (Keyframe Tracks)</h3>
+Внутри такого &#171;AnimationClip&#187; данные для каждого свойства анимации хранятся в отдельном <a href="../animation/keyframeTrack.htm" onmouseover="show('от англ. слов key frame track - трек ключевого кадра')" onmouseout="hide()">KeyframeTrack</a>.
+Допустим, персонифицированный объект имеет <a href="../objects/skeleton.htm">скелет</a> и один трек ключевого кадра может хранить данные изменений положения кости предплечья во времени, другой трек - данные изменения поворота этой же самой кости,
+а третий отслеживать положение, поворот или изменение масштаба другой кости и так далее. Понятно, что AnimationClip может состоять из множества подобных треков.<br>
+Предположим, что у модели имеются <a href="../core/geometry.htm#morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">цели морфинга</a> (например, одна цель морфинга показывает приветливое лицо, а другая - сердитое),
+каждый трек хранит сведения о том, как <a href="../objects/mesh.htm#morphTargetInfluences" onmouseover="show('Mesh.morphTargetInfluences')" onmouseout="hide()">воздействие (influence)</a> некоторой цели морфинга изменяется во время выполнения клипа.
+
+<h3>Микшер анимации (Animation Mixer)</h3>
+Сохраненные данные формируют только основу анимации - фактическое воспроизведение контролируется <a href="../animation/animationMixer.htm" onmouseover="show('AnimationMixer')" onmouseout="hide()">AnimationMixer</a>. Можно представить это не только как игрока для анимации, но и как симуляцию аппаратного обеспечения, например, реальной микшерной консоли, которая может одновременно управлять несколькими анимациями, смешивая и объединяя их.
+
+<h3>Действия анимации (Animation Actions)</h3>
+Собственно сам &#171;AnimationMixer&#187; имеет совсем немного (общих) свойств и методов, потому что им можно управлять с помощью <a href="../animation/animationAction.htm" onmouseover="show('AnimationAction')" onmouseout="hide()">AnimationActions</a>.
+Настройкой &#171;AnimationAction&#187; можно определять когда конкретный &#171;AnimationClip&#187; будет воспроизводиться, устанавливаться в паузу или быть остановленным на одном из микшеров, будет ли он повторяться и если будет,
+как часто, должен ли он выполняться с затуханием или масштабироваться по времени, и другими дополнительными особенностями вроде <span class="lnk" onmouseover="show('кроссфейдинг - мягкий переход между действиями,<br>когда одно плавно затухает, а второе - проявляется')" onmouseout="hide()">кроссфейдинга</span> (crossfading) или синхронизации.
+
+<h3>Анимация групп объектов</h3>
+Если нужно чтобы группа объектов приобрела совместно используемое состояние анимации, можно использовать <a href="../animation/animationObjectGroup.htm" onmouseover="show('AnimationObjectGroup')" onmouseout="hide()">AnimationObjectGroup</a>.
+
+<h3>Поддерживаемые форматы и загрузчики</h3>
+Обратите внимание, не все форматы моделей включают анимацию (в частности OBJ не включает), и что только некоторые <em>three.js</em> загрузчики поддерживают последовательности <a href="../animation/animationClip.htm" onmouseover="show('AnimationClip')" onmouseout="hide()">AnimationClip</a>.
+Вот некоторые из них, что <i>поддерживают</i> данный тип анимации:
+<li><a href="../loaders/objectLoader.htm" onmouseover="show('ObjectLoader')" onmouseout="hide()">THREE.ObjectLoader</a></li>
+<li>THREE.BVHLoader</li>
+<li>THREE.ColladaLoader</li>
+<li>THREE.FBXLoader</li>
+<li><a href="../examples/loaders/GLTFLoader.htm" onmouseover="show('GLTFLoader')" onmouseout="hide()">THREE.GLTFLoader</a></li>
+<li><a href="../examples/loaders/MMDLoader.htm" onmouseover="show('GLTFLoader')" onmouseout="hide()">THREE.MMDLoader</a></li>
+<li>THREE.SEA3DLoader</li></ul>
+Обратите внимание, что в настоящее время 3ds max и Maya не могут экспортировать несколько анимаций (то есть, анимаций, которые не находятся на одном и том же временном промежутке) непосредственно в один файл.
+<h4>Пример</h4>
+<pre>var mesh;<br>
+// Create an AnimationMixer, and get the list of AnimationClip instances
+// Создаем AnimationMixer и получаем список экземпляров AnimationClip
+var mixer = new THREE.AnimationMixer( mesh );
+var clips = mesh.animations;<br>
+// Update the mixer on each frame (обновляем микшер в каждом кадре)
+function update () {
+	mixer.update( deltaSeconds );
+}<br>
+// Play a specific animation (проигрываем конкретную анимацию)
+var clip = THREE.AnimationClip.findByName( clips, 'dance' );
+var action = mixer.clipAction( clip );
+action.play();<br>
+// Play all animations (проигрываем все анимации)
+clips.forEach( function ( clip ) {
+	mixer.clipAction( clip ).play();
+} );</pre>
+
+<br><br>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Матричные преобразования</h2>
+В <em>three.js</em> для кодирования 3-мерных преобразований - перемещения (изменения положения), вращения и масштабирования используются <b>матрицы</b>.
+Каждый экземпляр <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> имеет свойство <a href="../core/object3D.htm#matrix" onmouseover="show('Object3D.matrix')" onmouseout="hide()">matrix</a>, в котором хранится положение, угол поворота и масштаб этого объекта.
+На этой странице описывается как обновлять преобразование (трансформацию) объекта.<br><br>
+
+<h4>Преимущества свойств и <tt>matrixAutoUpdate</tt></h4>
+Существует два способа обновления преобразования объекта:
+<ol><li>Изменить свойства объекта <tt>position</tt>, <tt>quaternion</tt> и <tt>scale</tt>, и позволить Three.js пересчитать матрицу объекта с этими свойствами:
+<pre>object.position.copy(start_position);
+    object.quaternion.copy(quaternion);</pre>
+По умолчанию, свойство <tt>matrixAutoUpdate</tt> устанавливается равным <tt>true</tt>, так что матрица будет пересчитана автоматически.
+Если объект статичен или нужно вручную определять когда будет происходить пересчет матрицы, наилучшую производительность можно получить установкой этого свойства как <tt>false</tt>:
+<pre>object.matrixAutoUpdate = false;</pre>
+И после изменения каких-либо свойств, вручную обновить матрицу:
+<pre>object.updateMatrix();</pre></li>
+<li>Непосредственно изменить матрицу объекта. Класс <a href="../math/matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">Matrix4</a> имеет различные методы для изменения матрицы:
+<pre>object.matrix.setRotationFromQuaternion(quaternion);
+    object.matrix.setPosition(start_position);
+    object.matrixAutoUpdate = false;</pre>
+Обратите внимание, что в этом случае свойство <tt>matrixAutoUpdate</tt> <b>должно</b> быть установлено как <tt>false</tt>, при этом следует убедиться, что <b>не</b> было вызова <tt>updateMatrix</tt>.
+Вызов <tt>updateMatrix</tt> перебьет изменения матрицы, сделанные вручную, пересчитав матрицу для <tt>position</tt>, <tt>scale</tt> и так далее.</li></ol><br>
+
+<h4>Матрицы объекта и "мира"</h4>
+<a href="../core/object3D.htm#matrix" onmouseover="show('Object3D.matrix')" onmouseout="hide()">Матрица объекта</a> хранит изменения объекта <em>относительно</em> родительского объекта; для получения изменеия объекта в <em>"мировых"</em> координатах, следует обращаться к <tt><a href="../core/object3D.htm#matrixWorld" onmouseover="show('Object3D.matrixWorld')" onmouseout="hide()">matrixWorld</a></tt> объекта.<br>
+При изменениях в преобразовании родительского или дочернего объекта можно запросить обновление свойства <tt><a href="../core/object3D.htm#matrixWorld" onmouseover="show('Object3D.matrixWorld')" onmouseout="hide()">matrixWorld</a></tt> дочернего объекта
+вызовом метода <tt><a href="../core/object3D.htm#updateMatrixWorld" onmouseover="show('Object3D.updateMatrixWorld')" onmouseout="hide()">updateMatrixWorld</a></tt>.<br><br>
+
+<h4>Вращение и кватернионы</h4>
+<div class=note_trans><b>Примечание переводчика:</b> Кватернионы (от лат. quaterni, по четыре) — система гиперкомплексных чисел, образующая векторное пространство размерностью четыре над полем вещественных чисел. Предложены Уильямом Гамильтоном в 1843 году.<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Кватернионы удобны для описания изометрий трёх- и четырёхмерного евклидовых пространств, и поэтому получили широкое распространение в механике. Также их используют в вычислительной математике, например, при создании трёхмерной графики.<br>
+Кватернионы предоставляют удобное математическое обозначение положения и вращения объектов в пространстве. В сравнении с углами Эйлера, кватернионы позволяют проще комбинировать вращения, а также избежать проблемы, связанной с невозможностью поворота вокруг оси, независимо от совершённого вращения по другим осям (на иллюстрации). В сравнении с матрицами они обладают большей вычислительной устойчивостью и могут быть более эффективными. Кватернионы нашли своё применение в компьютерной графике, робототехнике, навигации, молекулярной динамике.<br>
+Проще говоря, кватернион это четырехмерный вектор, т.е. три вектора&nbsp;<tt>x</tt>,&nbsp;<tt>y</tt>,&nbsp;<tt>z</tt> - это положение объекта в трехмерном пространстве, а четвертый вектор (в случае с <em>three.js</em> он обозначается буквой&nbsp;<tt>w</tt>) определяет вращение объекта вокруг какой-либо оси пространства.</div></div>
+<em>three.js</em> предоставляет два способа представления трехмерных вращений: <a href="../math/euler.htm" onmouseover="show('Euler')" onmouseout="hide()">углы Эйлера</a> и <a href="../math/quaternion.htm" onmouseover="show('Quaternion')" onmouseout="hide()">кватернионы</a>, а также методы конвертирования между ними.
+При расчетах с углами Эйлера возникает проблема, называемая <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%BB%D0%B0%D0%B4%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D1%80%D0%B0%D0%BC%D0%BE%D0%BA" target="_blank">«шарнирный замок»</a>, когда при определенной конфигурации теряется одна степень свободы (препятствуя повороту объекта вокруг одной оси).
+По этой причине, вращение объекта <b>всегда</b> сохраняется в его свойстве <tt><a href="../core/object3D.htm#quaternion" onmouseover="show('Object3D.quaternion')" onmouseout="hide()">quaternion</a></tt>.<br>
+Предыдущие версии библиотеки включали в себя свойство <tt>useQuaternion</tt>, которое, будучи установленное как <tt>false</tt>, приводило к расчету <a href="../core/object3D.htm#matrix" onmouseover="show('Object3D.matrix')" onmouseout="hide()">матрицы</a> объекта из углов Эйлера.
+Эта практика устарела - взамен следует использовать метод <tt><a href="../core/object3D.htm#setRotationFromEuler" onmouseover="show('Object3D.setRotationFromEuler')" onmouseout="hide()">setRotationFromEuler</a></tt>, который обновит кватернион.<br><br>
+
+<br><br>
+</body>
+</html>

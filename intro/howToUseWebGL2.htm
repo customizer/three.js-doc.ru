@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Как использовать WebGL2</h2>
+Начиная с версии <tt>R95</tt>, движок <em>three.js</em> поддерживает визуализацию (рендеринг) с помощью WebGL 2. По умолчанию, при создании экземпляра WebGLRenderer всегда используется контекст WebGL 1.
+Если требуется использовать контекст WebGL 2, ознакомьтесь со следующей последовательностью действий.<br><br>
+
+<h4>Последовательность выполняемых действий</h4>
+Поскольку WebGL 2 поддерживается не всеми устройствами, поддерживающими WebGL 1, важно проверить соответствующую возможность. Для этого необходимо включить в проект <a href="https://github.com/mrdoob/three.js/blob/master/examples/js/WebGL.js" target="_blank">WebGL.js</a>.
+<pre>&lt;script src="/path/to/WebGL.js"&gt;&lt;/script&gt;</pre>
+Затем, для выполнения проверки на доступность WebGL 2, используйте следующий код:
+<pre>if ( WEBGL.isWebGL2Available() === false ) {
+  document.body.appendChild( WEBGL.getWebGL2ErrorMessage() );
+}</pre>
+Теперь пришло время создать визуализатор (рендерер), применяя элемент HTML5 <tt>canvas</tt> и соответствующий контекст WebGL 2 в конструкторе WebGLRenderer.
+В итоге, <em>three.js</em> внутри себя будет использовать для визуализации данный контекст и автоматически сконвертирует шейдерный код встраиваемого материала в код GLSL&nbsp;ES&nbsp;3.00.<br>
+Поскольку контекст визуализации WebGL 2 создается вручную, также требуется передать все необходимые атрибуты контекста.
+<div class=note><b>Примечание:</b> После создания контекста эти атрибуты невозможно изменить, поэтому передача их в WebGLRenderer не будет иметь какого-либо эффекта.</div>
+<pre>var canvas = document.createElement( 'canvas' );
+  var context = canvas.getContext( 'webgl2', { alpha: false } );
+var renderer = new THREE.WebGLRenderer( { canvas: canvas, context: context } );</pre>
+Иногда требуется написать собственный код шейдера. В качестве основы для своей собственной реализации используйте следующий шаблон кода. Во-первых, код GLSL&nbsp;ES&nbsp;3.00.
+<pre>&lt;script id="vs" type="x-shader/x-vertex">
+#version 300 es<br>
+void main() {
+  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+}
+&lt;/script>
+&lt;script id="fs" type="x-shader/x-fragment">
+#version 300 es<br>
+precision highp float;
+precision highp int;
+out vec4 out_FragColor;<br>
+void main() {
+  out_FragColor = vec4( 1.0 );
+}
+&lt;/script></pre>
+А во-вторых, код создания соответствующего материала на JavaScript.
+<pre>var material = new THREE.ShaderMaterial( {
+	vertexShader: document.getElementById( 'vs' ).textContent.trim(),
+	fragmentShader: document.getElementById( 'fs' ).textContent.trim()
+} );</pre><br>
+
+<h4>Дальнейшие действия</h4>
+Посмотрите на один из официальных примеров, чтобы увидеть в действии функции WebGL 2.
+<pre><a href="https://threejs.org/examples/#webgl2_materials_texture3d" target="_blank">WebGL2 / materials / texture3d</a>
+<a href="https://threejs.org/examples/#webgl2_materials_texture3d_volume" target="_blank">WebGL2 / materials / texture3d / volume</a>
+<a href="https://threejs.org/examples/#webgl2_multisampled_renderbuffers" target="_blank">WebGL2 / multisampled renderbuffers</a></pre><br>
+
+<h4>Поддерживаемые функции</h4>
+В настоящий момент движок поддерживает только часть всех существующих функций WebGL 2. В списке ниже представлен обзор того, что уже доступно в последней версии <em>three.js</em>.
+<ul><li>3D Textures (трехмерные текстуры)</li>
+<li>Multisampled Renderbuffers (буфер визуализации с возможностью мультивыборки)</li></ul>
+<br><br>
+
+<br><br>
+</body></html>

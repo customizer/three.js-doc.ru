@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Поддержка браузерами</h2>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Обзор</h3>
+<em>three.js</em> может использовать WebGL для визуализации (рендеринга) сцен во всех современных браузерах.
+Для старых браузеров, особенно Internet Explorer 10 и ниже, может потребоваться откат к одному из оставшихся <a href="https://github.com/mrdoob/three.js/tree/master/examples/js/renderers" target="_blank">визуализаторов (рендереров)</a> (CSS2DRenderer, CSS3DRenderer, SVGRenderer, CanvasRenderer).
+Кроме того, может потребоваться включение некоторых полифиллов, особенно при использовании файлов из каталога <a href="https://github.com/mrdoob/three.js/tree/master/examples" target="_blank"><tt>/examples</tt></a>.
+<div class=note_trans>«Полифилл» (англ. «polyfill» - poly - много, fill - наполнять, заполнять) <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'> — это библиотека, которая добавляет в старые браузеры поддержку возможностей, которые в современных браузерах являются встроенными.
+Или, если говорить о современных браузерах, то они тоже не все идут «в ногу», всегда какие-то современные возможности реализуются сначала в одном, потом в другом.
+Так вот, первая часть слова говорит о привлечении любого числа технологий, то есть с поставленной задачей можно справиться не только посредством JavaScript, а вторая часть подразумевает заполнение той «дыры» браузера, в которой и должна находиться реализуемая таким образом технология.<br><br>
+Полифиллы позволяют исправлять ошибки в конкретном API или добавлять в веб-браузер функционал, который по умолчанию частично или полностью им не поддерживается. Полифиллы не создают лишних зависимостей и могут быть легко удалены, когда они больше не нужны.<br>
+Обычно полифилл состоит из двух частей:
+<div class=blockindent>проверка, есть ли встроенная возможность<br>эмуляция, если возможности нет.</div>
+По мнению <span class="lnk" onmouseover="show('Термин был придуман Реми Шарпом (англ. Remy Sharp) в 2009 году<br>во время работы над книгой «Введение в HTML5»')" onmouseout="hide()">автора термина</span>,
+ассоциация с заделыванием трещин и дыр в стенах вполне подходит для представления того, как в веб-программировании полифиллы «ремонтируют» браузер.</div></div>
+<div class=note><b>Примечание:</b> если поддержка устаревших браузеров не требуется, то не рекомендуется использовать другие визуализаторы-рендереры, отличные от WebGLRenderer, так как они работают медленнее и поддерживают меньшее количество функций.</div>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Браузеры, поддерживающие WebGL</h3>
+WebGL поддерживается следующими браузерами: Google Chrome 9+, Firefox 4+, Opera 15+, Safari 5.1+, Internet Explorer 11 и Microsoft Edge.
+Узнать, какие браузеры поддерживают WebGL можно на <a href="https://caniuse.com/#feat=webgl" target="_blank" onmouseover="show('название сайта переводится как<br>&#171;могу ли я пользоваться WebGL&#187;');" onmouseout="hide()">Can I use WebGL</a>.
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Используемые в three.js функции на языке JavaScript или Web API</h3>
+Вот несколько функций, используемых в <em>three.js</em>. Для некоторых из них может потребоваться дополнение полифиллами.
+<table class="tbl_1" border="1" cellpadding="5" width="90%">
+<tr class="head"><td>функции<br>Feature</td><td>область&nbsp;применения<br>Use Scope</td><td>модули<br>Modules</td></tr>
+<tr valign="top"><td>Typed Arrays </td><td>Исходник</td><td>BufferAttribute, BufferGeometry и т.д.</td></tr>
+<tr valign="top"><td>Web Audio API</td><td>Исходник</td><td>Audio, AudioContext, AudioListener и т.д.</td></tr>
+<tr valign="top"><td>WebXR&nbsp;Device&nbsp;API</td><td>Исходник</td><td>WebXRManager</td></tr>
+<tr valign="top"><td>Blob</td><td>Исходник</td><td>FileLoader, etc.</td></tr>
+<tr valign="top"><td>Promise</td><td>Примеры</td><td>GLTFLoader, DRACOLoader, BasisTextureLoader, GLTFExporter, VRButton, ARButton и т.д.</td></tr>
+<tr valign="top"><td>Fetch</td><td>Примеры</td><td>ImageBitmapLoader и т.д.</td></tr>
+<tr valign="top"><td>File API</td><td>Примеры</td><td>GLTFExporter и т.д.</td></tr>
+<tr valign="top"><td>URL API</td><td>Примеры</td><td>GLTFLoader и т.д.</td></tr>
+<tr valign="top"><td>Pointer Lock API </td><td>Примеры</td><td>PointerLockControls</td></tr></table><br>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Полифиллы</h3>
+Просто импортируйте полифиллы, исходя из своих требований. Если в качестве примера взять IE9, то потребуются полифиллы как минимум к этим функциям:
+<ul><li>Typed Arrays</li>
+<li>Blob</li></ul>
+Рекомендуемые полифиллы
+<ul><li><a href="https://github.com/zloirock/core-js" target="_blank">core-js</a></li>
+<li><a href="https://github.com/inexorabletash/polyfill/blob/master/typedarray.js" target="_blank">typedarray.js</a></li>
+<li><a href="https://github.com/stefanpenner/es6-promise/" target="_blank">ES6-Promise</a></li>
+<li><a href="https://github.com/eligrey/Blob.js" target="_blank">Blob.js</a></li>
+<li><a href="https://github.com/github/fetch" target="_blank">fetch</a></li></ul><br><br>
+
+<br><br>
+</body></html>

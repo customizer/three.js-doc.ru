@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="loader.htm" title="Переход к родительскому классу: Loader"><tt>Loader &rarr;</tt></a></span>
+<h3>ObjectLoader</h3>
+Загрузчик для загрузки <span class="lnk" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">JSON</span>-ресурсов в формате <a href="https://github.com/mrdoob/three.js/wiki/JSON-Object-Scene-format-4" target="_blank">JSON Object/Scene</a>.<br>
+Внутри себя для загрузки файлов он использует <a href="fileLoader.htm" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var loader = new THREE.ObjectLoader();<br>
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  "models/json/example.json",<br>
+  // onLoad callback (функция обратного вызова на окончание загрузки)
+  // Here the loaded data is assumed to be an object 
+  // здесь предполагается, что загруженные данные являются объектом
+  function ( obj ) {
+    // Add the loaded object to the scene (добавляем загруженный объект на сцену)
+    scene.add( obj );
+  },<br>
+  // onProgress callback (функция обратного вызова в процессе загрузки)
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% загружено' );
+  },<br>
+  // onError callback (функция обратного вызова при ошибках загрузки)
+  function ( err ) {
+    console.error( 'Произошла ошибка' );
+  }
+);<br><br>
+// Alternatively, to parse a previously loaded JSON structure
+// Также можно проанализировать ранее загруженную JSON-структуру
+var object = loader.parse( a_json_object );<br>
+scene.add( object );</pre>
+
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_json_claraio" target="_blank">WebGL / loader / json / claraio</a>
+<a href="https://threejs.org/examples/#webgl_materials_lightmap" target="_blank">WebGL / materials / lightmap</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>ObjectLoader( <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загручиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый ObjectLoader.<br><br>
+
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь или URL-адрес к файлу. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<div class=list><tt>onLoad</tt> — функция, вызываемая по завершению загрузки. Её аргументом будет загруженный <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">объект</a>.</div>
+<div class=list><tt>onProgress</tt> — функция, вызываемая во время процесса загрузки. Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, вызываемая при ошибках загрузки.</div>
+Метод начинает загрузку с указанного url-адреса (аргумент <tt>url</tt>) и вызывает функцию, переданную в <tt>onLoad</tt>, с разобранным содержимым ответа.<br><br>
+
+<pre id="parse"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span> )</pre>
+<div class=list><tt>json</tt> — исходник JSON для синтаксического анализа (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, вызываемая после завершения синтаксического анализа (разбора). Её аргументом будет разобранный объект.</div>
+Метод производит синтаксический анализ содержимого <tt>json</tt> и возвращает объект <em>threejs</em>.
+Он используется внутри метода <tt><a href="#load" onmouseover="show('ObjectLoader.load')" onmouseout="hide()">load</a></tt>, но также может использоваться напрямую для синтаксического анализа ранее загруженной JSON-структуры.<br><br>
+
+<pre id="parseGeometries"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>parse geometries - разбор, синтаксический<br>анализ геометрических элементов')" onmouseout="hide()">.parseGeometries</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — исходник JSON для синтаксического анализа (обязательный аргумент).</div>
+Данный метод использует метод <tt><a href="#parse" onmouseover="show('ObjectLoader.parse')" onmouseout="hide()">parse</a></tt> для разбора любых <a href="../core/geometry.htm" onmouseover="show('Geometry')" onmouseout="hide()">геометрических элементов</a>
+или <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">буферных геометрических элементов</a> в виде JSON-структуры.<br><br>
+
+<pre id="parseMaterials"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>parse materials - разбор, синтаксический<br>анализ материалов')" onmouseout="hide()">.parseMaterials</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — исходник JSON для синтаксического анализа (обязательный аргумент).</div>
+Данный метод использует метод <tt><a href="#parse" onmouseover="show('ObjectLoader.parse')" onmouseout="hide()">parse</a></tt> для разбора любых материалов в виде JSON-структуры, с помощью <a href="materialLoader.htm" onmouseover="show('MaterialLoader')" onmouseout="hide()">MaterialLoader</a>.<br><br>
+
+<pre id="parseAnimations"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>parse animations - разбор, синтаксический<br>анализ анимаций')" onmouseout="hide()">.parseAnimations</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — исходник JSON для синтаксического анализа (обязательный аргумент).</div>
+Данный метод использует метод <tt><a href="#parse" onmouseover="show('ObjectLoader.parse')" onmouseout="hide()">parse</a></tt> для разбора любых анимаций в виде JSON-структуры, с помощью <tt><a href="../animation/animationClip.htm#parse" onmouseover="show('AnimationClip.parse')" onmouseout="hide()">AnimationClip.parse</a></tt>.<br><br>
+
+<pre id="parseImages"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>parse images - разбор, синтаксический<br>анализ изображений')" onmouseout="hide()">.parseImages</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — исходник JSON для синтаксического анализа (обязательный аргумент).</div>
+Данный метод использует метод <tt><a href="#parse" onmouseover="show('ObjectLoader.parse')" onmouseout="hide()">parse</a></tt> для разбора любых объектов в виде JSON-структуры, с помощью <a href="imageLoader.htm" onmouseover="show('ImageLoader')" onmouseout="hide()">ImageLoader</a>.<br><br>
+
+<pre id="parseTextures"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>parse textures - разбор, синтаксический<br>анализ текстур')" onmouseout="hide()">.parseTextures</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — исходник JSON для синтаксического анализа (обязательный аргумент).</div>
+Данный метод использует метод <tt><a href="#parse" onmouseover="show('ObjectLoader.parse')" onmouseout="hide()">parse</a></tt> для разбора любых текстур в виде JSON-структуры.<br><br>
+
+<pre id="parseObject"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>parse object - разбор, синтаксический<br>анализ объекта')" onmouseout="hide()">.parseObject</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — исходник JSON для синтаксического анализа (обязательный аргумент).</div>
+Данный метод использует метод <tt><a href="#parse" onmouseover="show('ObjectLoader.parse')" onmouseout="hide()">parse</a></tt> для разбора любых объектов в виде JSON-структуры. Объекты могут быть следующих типов:
+<div class=blockindent><div class=list><a href="../scenes/scene.htm">Scene</a></div>
+<div class=list><a href="../cameras/perspectiveCamera.htm">PerspectiveCamera</a></div>
+<div class=list><a href="../cameras/orthographicCamera.htm">OrthographicCamera</a></div>
+<div class=list><a href="../lights/ambientLight.htm">AmbientLight</a></div>
+<div class=list><a href="../lights/directionalLight.htm">DirectionalLight</a></div>
+<div class=list><a href="../lights/pointLight.htm">PointLight</a></div>
+<div class=list><a href="../lights/spotLight.htm">SpotLight</a></div>
+<div class=list><a href="../lights/hemisphereLight.htm">HemisphereLight</a></div>
+<div class=list><a href="../objects/mesh.htm">Mesh</a></div>
+<div class=list><a href="../objects/lod.htm">LOD</a></div>
+<div class=list><a href="../objects/line.htm">Line</a></div>
+<div class=list><a href="../objects/lineSegments.htm">LineSegments</a></div>
+<div class=list><a href="../objects/points.htm">Points</a></div>
+<div class=list><a href="../objects/sprite.htm">Sprite</a></div>
+<div class=list><a href="../objects/group.htm">Group</a></div>
+<div class=list><a href="../core/object3D.htm">Object3D</a></div></div><br>
+
+<pre id="setCrossOrigin"><a href="#" onmouseover="show('ObjectLoader.<br>set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt>value</tt> — строковое значение <tt>crossOrigin</tt> для реализации
+<a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>
+для загрузки url-адреса с другого домена, который предоставляет CORS.</div><br>
+
+<pre id="setTexturePath"><a href="#" onmouseover="show('ObjectLoader.<br>set texture path - установить путь к текстуре')" onmouseout="hide()">.setTexturePath</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt>value</tt> — базовый путь или URL-адрес, с которого будут загружаться текстуры.</div></div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/ObjectLoader.js" target="_blank">ObjectLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

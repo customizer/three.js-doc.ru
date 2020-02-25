@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp; LightShadow</h3>
+Этот класс используется для расчета теней внутри <tt><a href="pointLight.htm" onmouseover="show('PointLight');" onmouseout="hide()">PointLight</a></tt>, а также служит базовым классом для других классов теней.<br><br>
+
+<h4>Пример</h4>
+<pre>// Create a WebGLRenderer and turn on shadows in the renderer
+// Создаем WebGLRenderer и включаем в нем тени
+var renderer = new THREE.WebGLRenderer();
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+                                                  // по умолчанию THREE.PCFShadowMap<br>
+// Create a PointLight and turn on shadows for the light
+// Создаем PointLight и включаем тени от него
+var light = new THREE.PointLight( 0xffffff, 1, 100 );
+light.position.set( 0, 10, 0 );
+light.castShadow = true;           // default false (значение по умолчанию false )
+scene.add( light );<br>
+// Set up shadow properties for the light
+// Устанавливаем свойства тени
+light.shadow.mapSize.width = 512;  // default (по умолчанию)
+light.shadow.mapSize.height = 512; // default (по умолчанию)
+light.shadow.camera.near = 0.5;    // default (по умолчанию)
+light.shadow.camera.far = 500      // default (по умолчанию)<br>
+// Create a sphere that cast shadows (but does not receive them)
+// Создаем сферу, отбрасывающую тени (но не принимающую их)
+var sphereGeometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
+var sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
+var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+sphere.castShadow = true;     // default is false (по умолчанию равно false)
+sphere.receiveShadow = false; // default (по умолчанию)
+scene.add( sphere );<br>
+// Create a plane that receives shadows (but does not cast them)
+// Создаем плоскость, которая принимает тени (но не отбрасывает их)
+var planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
+var planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
+var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.receiveShadow = true;
+scene.add( plane );<br>
+// Create a helper for the shadow camera (optional)
+// Создаем вспомогательный элемент для теневой камеры (необязательно)
+var helper = new THREE.CameraHelper( light.shadow.camera );
+scene.add( helper );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>LightShadow( <a href="../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера');" onmouseout="hide()">camera</a> )</pre>
+<div class=list><tt><a href="../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера');" onmouseout="hide()">camera</a></tt> — The shadow's view of the world.</div>
+Конструктор создает новый LightShadow. Он не предназначен для вызова непосредственно - конструктор вызывается внутри <a href="pointLight.htm" onmouseover="show('PointLight');" onmouseout="hide()">PointLight</a> или используется в качестве базового класса при построении теней от других источников света.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="camera"><a href="../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера');" onmouseout="hide()">.camera</a></pre>
+The shadow's view of the world.<br><br>
+
+<pre id="bias"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bias - смещение, наклон');" onmouseout="hide()">.bias</a></span></pre>
+Отклонение от теневой карты, сколько можно добавить или отнять от нормализованной глубины при определении находится ли поверхность в тени.<br>
+Значение по умолчанию равно&nbsp;<tt>0</tt>. Самые маленькие подстройки значения данного свойства (порядка&nbsp;<tt>0.0001</tt>) могут помочь уменьшить артефакты в тенях.<br><br>
+
+<pre id="map"><a href="../renderers/webGLRenderTarget.htm" onmouseover="show('WebGLRenderTarget.<br>map - карта');" onmouseout="hide()">.map</a></pre>
+Карта глубины создается при помощи внутренней камеры; расположение вне пределов пиксельной глубины находится в тени.
+The depth map generated using the internal camera; a location beyond a pixel's depth is in shadow. Вычисляется внутри класса, во время визуализации (рендеринга).<br><br>
+
+<pre id="mapSize"><a href="../math/vector2.htm" onmouseover="show('Vector2.<br>map size - размер карты');" onmouseout="hide()">.mapSize</a></pre>
+<a href="../math/vector2.htm" onmouseover="show('Vector2');" onmouseout="hide()">Vector2</a> определяющий ширину и высоту теневой карты.<br>
+Более высокие значения дают более качественные тени за счет увеличения времени вычисления.
+Значения должны быть степенями двойки, вплоть до значения свойства <a href="../renderers/webGLRenderer.htm#capabilities" onmouseover="show('WebGLRenderer.capabilities.maxTextureSize');" onmouseout="hide()">WebGLRenderer.capabilities.maxTextureSize</a> данного устройства,
+причем ширина и высота могут быть неодинаковыми (так например, <tt>(512, 1024)</tt> вполне допустимо). Значением по умолчанию является <tt>( 512, 512 )</tt>.<br><br>
+
+<pre id="matrix"><a href="../math/matrix4.htm" onmouseover="show('Matrix4.<br>matrix - матрица');" onmouseout="hide()">.matrix</a></pre>
+Модель пространства теневой камеры, для расчета местоположения и глубины в теневой карте.
+Хранится в <a href="../math/matrix4.htm" onmouseover="show('Matrix4');" onmouseout="hide()">Matrix4</a>. Значение свойства вычисляется внутренне в процессе визуализации (рендеринга).<br><br>
+
+<pre id="radius"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус');" onmouseout="hide()">.radius</a></span></pre>
+Установка значения больше&nbsp;<tt>1</tt> вызовет размытие краев тени.
+Более высокие значения будут вызывать нежелательный эффект полосатости в тенях - большие значения свойства <tt><a href="#mapSize" onmouseover="show('LightShadow.mapSize');" onmouseout="hide()">mapSize</a></tt> позволят использовать высокие значения данного свойства, прежде чем этот эффект станет видимым.<br>
+Обратите внимание, что это свойство не оказывает никакого влияния, если свойство <tt><a href="../renderers/webGLRenderer.htm#shadowMap.type" onmouseover="show('WebGLRenderer.shadowMap.type');" onmouseout="hide()">WebGLRenderer.shadowMap.type</a></tt> установлено как <tt><a href="../constants/renderer.htm#shadowTypes" onmouseover="show('константа визуализатора (рендерера) WebGL');" onmouseout="hide()">BasicShadowMap</a></tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="copy"><a href="#" onmouseover="show('LightShadow.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('LightShadow.<br>source - исходник');" onmouseout="hide()">source</a> )</pre>
+Метод копирует значения всех свойств из <tt><a href="#" onmouseover="show('LightShadow.<br>source - исходник');" onmouseout="hide()">source</a></tt> в данный SpotLight.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('LightShadow.<br>clone - клонировать');" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новый LightShadow с теми же свойствами что и у данного.<br><br>
+
+<pre id="toJSON"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - (привести) к формату JSON');" onmouseout="hide()">.toJSON</a></span>( )</pre>
+<span class="lnk" onmouseover="show('т.е. переводит объект в строку, в данном случае в формате JSON');" onmouseout="hide()">Сериализует</span> данный LightShadow.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/LightShadow.js" target="_blank">LightShadow.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

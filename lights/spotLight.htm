@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="light.htm" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="lnk" onmouseover="show('spot light это прожектор (дословно - пятно света)');" onmouseout="hide()">SpotLight</span></h3>
+Данный свет излучается из одной точки в одном направлении, вдоль конуса, расширяемого по мере удаления от источника света.
+Это освещение может отбрасывать тени - подробности смотрите в описании <a href="spotLightShadow.htm" onmouseover="show('SpotLightShadow')" onmouseout="hide()"><tt>SpotLightShadow</tt></a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// white spotlight shining from the side, casting shadow
+// белый прожектор светит со стороны, отбрасывает тень<br>
+var spotLight = new THREE.SpotLight( 0xffffff );
+spotLight.position.set( 100, 1000, 100 );<br>
+spotLight.castShadow = true;<br>
+spotLight.shadow.mapSize.width = 1024;
+spotLight.shadow.mapSize.height = 1024;<br>
+spotLight.shadow.camera.near = 500;
+spotLight.shadow.camera.far = 4000;
+spotLight.shadow.camera.fov = 30;<br>
+scene.add( spotLight );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_lights_spotlight" target="_blank">lights / spotlights</a>
+<a href="https://threejs.org/examples/#webgl_interactive_cubes_gpu" target="_blank">interactive / cubes / gpu</a>
+<a href="https://threejs.org/examples/#webgl_interactive_draggablecubes" target="_blank">interactive / draggablecubes</a>
+<a href="https://threejs.org/examples/#webgl_materials_bumpmap_skin" target="_blank">materials / bumpmap / skin</a>
+<a href="https://threejs.org/examples/#webgl_materials_cubemap_dynamic" target="_blank">materials / cubemap / dynamic</a>
+<a href="https://threejs.org/examples/#webgl_loader_md2" target="_blank">loader / md2</a>
+<a href="https://threejs.org/examples/#webgl_shading_physical" target="_blank">shading / physical</a>
+<a href="https://threejs.org/examples/#webgl_shadowmap" target="_blank">shadowmap</a>
+<a href="https://threejs.org/examples/#webgl_shadowmap_performance" target="_blank">shadowmap / performance</a>
+<a href="https://threejs.org/examples/#webgl_shadowmap_viewer" target="_blank">shadowmap / viewer</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>SpotLight( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность, яркость');" onmouseout="hide()">intensity</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние');" onmouseout="hide()">distance</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('angle - угол');" onmouseout="hide()">angle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('penumbra - полутень');" onmouseout="hide()">penumbra</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decay - распад');" onmouseout="hide()">decay</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> — шестнадцатиричное значение цвета освещения, по умолчанию <tt>0xffffff</tt> (белый). Дополнительный, необязательный аргумент.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность, яркость');" onmouseout="hide()">intensity</a></span></tt> — числовое значение силы/интенсивности света. Значение по умолчанию равно <tt>1</tt>. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние');" onmouseout="hide()">distance</a></span></tt> - максимальное расстояние от источника, где свет будет светить с интенсивностью, которая будет линейно уменьшаться по мере удаления от источника.</div>
+<div class=list><tt><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('angle - угол');" onmouseout="hide()">angle</a></span></tt> - максимальный угол рассеяния света по его направлению, верхней границей которого является угол <tt>Math.PI/2</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('penumbra - полутень');" onmouseout="hide()">penumbra</a></span></tt> - процент от конуса света прожектора, в котором интенсивность света ослабляется из-за полутени.
+Принимает значения от нуля до единицы. Значение по умолчанию равно нулю.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decay - распад');" onmouseout="hide()">decay</a></span></tt> - значение, на которое уменьшается интенсивность света с увеличением расстояния от источника.</div>
+Создает новый SpotLight.<br><br>
+
+<h4>Свойства</h4>
+Смотрите базовый класс <a href="../core/object3D.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
+<div class=blockindent><br>
+<pre id="angle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('angle - угол');" onmouseout="hide()">.angle</a></span></pre>
+Maximum extent of the spotlight, in radians, from its direction. Should be no more than <tt>Math.PI/2</tt>. Значением по умолчанию является <tt>Math.PI/3</tt>.<br><br>
+
+<pre id="castShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cast shadow - бросать тень');" onmouseout="hide()">.castShadow</a></span></pre>
+Если задано значение <tt>true</tt>, то свет будет отбрасывать динамические тени.
+<div class=warning><b>Предупреждение:</b> Это затратно по ресурсам и для правильного отображения теней требуется подстройка.</div>
+Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="decay"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decay - распад');" onmouseout="hide()">.decay</a></span></pre>
+Значение, на которое уменьшается интенсивность света с увеличением расстояния от источника.<br>
+В режиме, <a href="../renderers/webGLRenderer.htm#physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights');" onmouseout="hide()">правильном с точки зрения физики</a>, <tt>decay = 2</tt> приводит к физически реалистичному уменьшению освещенности.
+Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="distance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние');" onmouseout="hide()">.distance</a></span></pre>
+При ненулевом значении свет будет уменьшаться линейно от максимальной интенсивности (в расположении источника света) до нуля (на расстоянии от источника света, задаваемым данным свойством).
+Значение по умолчанию равно <tt>0.0</tt>.<br><br>
+
+<pre id="isSpotLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is spot light - является прожекторным освещением');" onmouseout="hide()">.isSpotLight</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классы прожекторным освещением. Значением по умолчанию является <tt>true</tt>.<br>
+Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
+
+<pre id="penumbra"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('penumbra - полутень');" onmouseout="hide()">.penumbra</a></span></pre>
+Процент от конуса света прожектора, в котором интенсивность света ослабляется из-за полутени. Принимает значения от <tt>0</tt> до <tt>1</tt>. Значение по умолчанию равно <tt>0.0</tt>.<br><br>
+
+<pre id="position"><a href="../math/vector3.htm" onmouseover="show('Vector3.<br>position - положение, позиция');" onmouseout="hide()">.position</a></pre>
+Значение свойства устанавливается равным <a href="../core/object3D.htm#DefaultUp" onmouseover="show('Object3D.DefaultUp');" onmouseout="hide()">Object3D.DefaultUp</a> <tt>(0, 1, 0)</tt>, так что свет светит сверху вниз.<br><br>
+
+<pre id="power"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('power - сила, мощность');" onmouseout="hide()">.power</a></span></pre>
+Сила света. (По-русски это будет <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%BE%D0%B9_%D0%BF%D0%BE%D1%82%D0%BE%D0%BA" target="_blank">световой поток</a>.)<br>
+В режиме, <a href="../renderers/webGLRenderer.htm#physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights');" onmouseout="hide()">правильном с точки зрения физики</a>, световой поток измеряется в люменах. Значением по умолчанию является <tt>4Math.PI</tt>.<br>
+Он напрямую связан с интенсивностью (<tt><a href="light.htm#intensity" onmouseover="show('SpotLight.intensity.<br>Здесь свойство <tt>intensity</tt><br>наследуется от родительского объекта.');" onmouseout="hide()">intensity</a></tt>) соотношением
+<pre>power = intensity * <i>&#960;</i></pre>
+и его изменение также приведет к изменению интенсивности.<br><br>
+
+<pre id="shadow"><a href="spotLightShadow.htm" onmouseover="show('SpotLightShadow.<br>shadow - тень');" onmouseout="hide()">.shadow</a></pre>
+Для вычисления теней при данном освещении используется класс <a href="spotLightShadow.htm" onmouseover="show('SpotLightShadow');" onmouseout="hide()">SpotLightShadow</a>.<br><br>
+
+<pre id="target"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>target - цель, мишень, назначение');" onmouseout="hide()">.target</a></pre>
+Со своей <a href="#position" onmouseover="show('Spotlight.position');" onmouseout="hide()">позиции</a> Spotlight направлен на позицию объекта-цели (target.position), которую и определяет данное свойство. Позицией цели по умолчанию является <tt>(0, 0, 0)</tt>.
+<div class=note><b>Примечание:</b> Чтобы изменить позицию объекта-цели на что-либо другое, кроме значения по умолчанию, он должен быть добавлен на <a href="../scenes/scene.htm" onmouseover="show('Scene');" onmouseout="hide()">сцену</a> при помощи
+<pre>scene.add( light.target );</pre>
+Так что <tt><a href="../core/object3D.htm#matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt> цели станет автоматически обновляться с каждым кадром.<br>
+Также возможно установить в качестве цели другой объект на сцене (что-нибудь со свойством <tt><a href="../core/object3D.htm#position" onmouseover="show('Object3D.position');" onmouseout="hide()">position</a></tt>), вот так:
+<pre>var targetObject = new THREE.Object3D();
+  scene.add(targetObject);<br>
+  light.target = targetObject;</pre>
+Теперь <tt>Spotlight</tt> будет отслеживать целевой объект.</div></div><br>
+
+<h4>Методы</h4>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.
+<div class=blockindent><br>
+<pre id="copy"><a href="#" onmouseover="show('SpotLight.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('SpotLight.<br>source - исходник');" onmouseout="hide()">source</a> )</pre>
+Метод копирует значения всех свойств из <tt><a href="#" onmouseover="show('SpotLight.<br>source - исходник');" onmouseout="hide()">source</a></tt> в данный SpotLight.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/SpotLight.js" target="_blank">SpotLight.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

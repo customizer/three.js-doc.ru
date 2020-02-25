@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="loader.htm" title="Переход к родительскому классу: Loader"><tt>Loader &rarr;</tt></a></span>
+<h3>FileLoader</h3>
+Низкоуровневый класс для загрузки ресурсов с помощью XmlHttpRequest, используемый большинством загрузчиков.<br><br>
+
+<h4>Пример</h4>
+<pre>var loader = new THREE.FileLoader();<br>
+// load a text file and output the result to the console
+// загружаем текстовый файл и выводим результат в консоли
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  'example.txt',<br>
+  // onLoad callback (функция обратного вызова, вызываемая по окончании загрузки)
+  function ( data ) {
+    // output the text to the console (вывод результата в консоль)
+    console.log( data )
+  },<br>
+  // onProgress callback (функция обратного вызова, вызываемая в процессе загрузки)
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% загружено' );
+  },<br>
+  // onError callback (функция обратного вызова, вызываемая при ошибке)
+  function ( err ) {
+    console.error( 'Произошла ошибка' );
+  }
+);</pre>
+<div class=note><b>Примечание:</b> кэш должен быть включен с помощью
+<pre>THREE.Cache.enabled = true;</pre>
+Это глобальное свойство и задается только один раз для использования всеми загрузчиками, которые внутри себя применяют FileLoader. <a href="cache.htm" onmouseover="show('Cache')" onmouseout="hide()">Кэш</a> это кэширующий модуль, который удерживает ответ от каждого запроса, сделанного через данный загрузчик, так что каждый файл запрашивается только однажды.</div><br>
+
+<h4>Конструктор</h4>
+<pre>FileLoader( <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый FileLoader.<br><br>
+
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="mimeType"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mimetype - тип MIME (/maɪm/, англ. Multipurpose<br>Internet Mail Extensions — многоцелевые расширения<br>интернет-почты) — стандарт, описывающий передачу<br>различных типов данных по электронной почте,<br>а также, в общем случае, спецификация для<br>кодирования информации и форматирования сообщений<br>таким образом, чтобы их можно было пересылать<br>по Интернету.')" onmouseout="hide()">.mimeType</a></span></pre>
+Предполагаемый <tt><a href="https://ru.wikipedia.org/wiki/MIME" target="_blank">mimeType</a></tt>.
+Смотрите описание метода <tt><a href="#setMimeType" onmouseover="show('FileLoader.setMimeType')" onmouseout="hide()">setMimeType</a></tt>. Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
+
+<pre id="requestHeader"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('request header - заголовок запроса')" onmouseout="hide()">.requestHeader</a></span></pre>
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/Request_header" target="_blank">Заголовок запроса</a>, используемый в запросе HTTP. Смотрите описание метода <tt><a href="#setRequestHeader" onmouseover="show('FileLoader.setRequestHeader')" onmouseout="hide()">setRequestHeader</a></tt>.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
+
+<pre id="responseType"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('response type - тип ответа')" onmouseout="hide()">.responseType</a></span></pre>
+Предполагаемый тип ответа. Смотрите описание метода <tt><a href="#setResponseType" onmouseover="show('FileLoader.setResponseType')" onmouseout="hide()">setResponseType</a></tt>.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
+
+<pre id="withCredentials"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('with credentials - с учетными данными')" onmouseout="hide()">.withCredentials</a></span></pre>
+Свойство определяет, использует ли XMLHttpRequest учетные данные. Смотрите описание метода <tt><a href="#setWithCredentials" onmouseover="show('FileLoader.setWithCredentials')" onmouseout="hide()">setWithCredentials</a></tt>.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь к файлу или URL-адрес файла. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженный ответ.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Метод начинает загрузку из источника (аргумент <tt>url</tt>) и передает загруженный ответ в функцию, определенную в аргументе <tt>onLoad</tt>.<br><br>
+
+<pre id="setMimeType"><a href="#" onmouseover="show('FileLoader.<br>set mimetype - установить тип MIME')" onmouseout="hide()">.setMimeType</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mimetype - тип MIME (/maɪm/, англ. Multipurpose<br>Internet Mail Extensions — многоцелевые расширения<br>интернет-почты) — стандарт, описывающий передачу<br>различных типов данных по электронной почте,<br>а также, в общем случае, спецификация для<br>кодирования информации и форматирования сообщений<br>таким образом, чтобы их можно было пересылать<br>по Интернету.')" onmouseout="hide()">mimeType</a></span> )</pre>
+Метод устанавливает предполагаемый тип <a href="https://ru.wikipedia.org/wiki/MIME" target="_blank">MIME</a> загружаемого файла.
+Обратите внимание, что во многих случаях он будет определяться автоматически, поэтому значением по умолчанию является <tt>undefined</tt>, т.е. не определено.<br><br>
+
+<pre id="setRequestHeader"><a href="#" onmouseover="show('FileLoader.<br>set request header - установить заголовок запроса')" onmouseout="hide()">.setRequestHeader</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('request header - заголовок запроса')" onmouseout="hide()">requestHeader</a></span> )</pre>
+<div class=list><tt>requestHeader</tt> - состоит из двух частей<br>
+&nbsp; <tt>key</tt> (ключ): имя заголовка, значение которого нужно установить.<br>
+&nbsp; <tt>value</tt> (значение): значение, устанавливаемое в качестве тела заголовка.</div>
+Метод устанавливает <a href="https://developer.mozilla.org/en-US/docs/Glossary/Request_header" target="_blank">заголовок запроса</a>, используемый в HTTP запросе.<br>
+Вот статья Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP" target="_blank">HTTP заголовках</a>.<br><br>
+
+<pre id="setResponseType"><a href="#" onmouseover="show('FileLoader.<br>set response type - установить тип ответа')" onmouseout="hide()">.setResponseType</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('response type - тип ответа')" onmouseout="hide()">responseType</a></span> )</pre>
+Метод изменяет тип ответа. Допустимые значения:
+<div class=list><tt><span class="lnk" onmouseover="show(type_string+'<br><br>text - текст')" onmouseout="hide()">text</span></tt> или пустая строка (значение по умолчанию) - возвращает данные как строковое значение.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_string+'<br><br>array buffer - массив из буфера')" onmouseout="hide()">arraybuffer</span></tt> - загружает данные в <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank">ArrayBuffer</a> и возвращает его.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_string+'<br><br>blob - сокращ. англ. слов binary large object<br>- большой двоичный объект, объект BLOB')" onmouseout="hide()">blob</span></tt> - возвращает данные в виде <a href="https://developer.mozilla.org/ru/docs/Web/API/Blob" target="_blank">Blob</a>.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_string+'<br><br>document - документ')" onmouseout="hide()">document</span></tt> - разбирает (делает синтаксический анализ) файл при помощи метода <a href="https://developer.mozilla.org/ru/docs/Web/API/DOMParser" target="_blank">DOMParser</a>.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_string+'<br><br>json - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как <tt>/ˈdʒeɪsən/ JAY-sən</tt>)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</span></tt>
+- разбирает (делает синтаксический анализ) файл при помощи метода <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse" target="_blank">JSON.parse</a>.</div><br>
+
+<pre id="setWithCredentials"><a href="#" onmouseover="show('FileLoader.<br>set with credentials - установить с учетными данными')" onmouseout="hide()">.setWithCredentials</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+Метод устанавливает, будет ли <a href="https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest" target="_blank">XMLHttpRequest</a> использовать учетные данные, такие как куки, заголовки авторизации или <a href="https://ru.wikipedia.org/wiki/TLS" target="_blank">клиентские сертификаты TLS</a>.
+Смотрите описание <tt><a href="https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest/withCredentials" target="_blank">XMLHttpRequest.withCredentials</a></tt>.<br>
+Обратите внимание, что метод не действует, если файлы загружаются локально или из одного и того же домена.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/FileLoader.js" target="_blank">FileLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

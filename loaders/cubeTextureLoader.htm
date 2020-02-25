@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="loader.htm" title="Переход к родительскому классу: Loader"><tt>Loader &rarr;</tt></a></span>
+<h3>CubeTextureLoader</h3>
+Класс для загрузки <a href="../textures/cubeTexture.htm" onmouseover="show('CubeTexture')" onmouseout="hide()">кубической текстуры</a>.
+Для загрузки файлов, внутри класса, используется <a href="imageLoader.htm" onmouseover="show('ImageLoader')" onmouseout="hide()">ImageLoader</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var scene = new THREE.Scene();
+scene.background = new THREE.CubeTextureLoader()
+  .setPath( 'textures/cubeMaps/' )
+  .load( [
+    'px.png',
+    'nx.png',
+    'py.png',
+    'ny.png',
+    'pz.png',
+    'nz.png'
+  ] );</pre>
+
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_materials_cubemap" target="_blank">WebGL / materials / cubemap</a>
+<a href="https://threejs.org/examples/#webgl_materials_cubemap_balls_reflection" target="_blank">WebGL / materials / cubemap / balls / reflection</a>
+<a href="https://threejs.org/examples/#webgl_materials_cubemap_balls_refraction" target="_blank">WebGL / materials / cubemap / balls / refraction</a>
+<a href="https://threejs.org/examples/#webgl_materials_cubemap_dynamic" target="_blank">WebGL / materials / cubemap / dynamic</a>
+<a href="https://threejs.org/examples/#webgl_materials_cubemap_refraction" target="_blank">WebGL / materials / cubemap / refraction</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>CubeTextureLoader( <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый CubeTextureLoader.<br><br>
+
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.<br>urls - множественное число от url, т.е. url-адреса')" onmouseout="hide()">urls</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>urls</tt> — массив из шести url-адресов к изображениям, по одному на каждую из сторон CubeTexture. URL-адреса должны указываться в следующем порядке:
+<span class="lnk" onmouseover="show('pos-x - сокращ. англ. слов positive-x<br>- положительное значение по оси<br>координат x')" onmouseout="hide()">pos-x</span>,
+<span class="lnk" onmouseover="show('neg-x - сокращ. англ. слов negative-x<br>- отрицательное значение по оси<br>координат x')" onmouseout="hide()">neg-x</span>,
+<span class="lnk" onmouseover="show('pos-y - сокращ. англ. слов positive-y<br>- положительное значение по оси<br>координат y')" onmouseout="hide()">pos-y</span>,
+<span class="lnk" onmouseover="show('neg-y - сокращ. англ. слов negative-y<br>- отрицательное значение по оси<br>координат y')" onmouseout="hide()">neg-y</span>,
+<span class="lnk" onmouseover="show('pos-z - сокращ. англ. слов positive-z<br>- положительное значение по оси<br>координат z')" onmouseout="hide()">pos-z</span>,
+<span class="lnk" onmouseover="show('neg-z - сокращ. англ. слов negative-z<br>- отрицательное значение по оси<br>координат z')" onmouseout="hide()">neg-z</span>.
+Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.<br>
+Обратите внимание что по соглашению, карты кубической текстуры задаются по системе координат, в которой положительное значение по оси <tt>x</tt> находится справа, если смотреть со стороны положительной оси <tt>z</tt>, - другими словами, используется левосторонняя система координат.
+Поскольку <em>three.js</em> использует правостороннюю систему координат, карты окружения, используемые в <em>three.js</em>, поменяют местами положительную и отрицательную оси координат <tt>x</tt>.</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженная <a href="../textures/texture.htm" onmouseover="show('Texture')" onmouseout="hide()">текстура</a>.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Метод начинает загрузку из источника (аргумент <tt>urls</tt>) и передает загруженную <a href="../textures/texture.htm" onmouseover="show('Texture')" onmouseout="hide()">текстуру</a> в функцию, определенную в аргументе <tt>onLoad</tt>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/CubeTextureLoader.js" target="_blank">CubeTextureLoader.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

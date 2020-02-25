@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>MaterialLoader</h3>
+Загрузчик для загрузки <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a> в формате <span class="lnk" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">JSON</span>. Внутри себя для загрузки файлов он использует <a href="fileLoader.htm" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.MaterialLoader();<br>
+// load a resource (загружаем ресурс)
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  'путь/к/material.json',<br>
+  // onLoad callback (функция обратного вызова на окончание загрузки)
+  function ( material ) {
+    object.material = material;
+  },<br>
+  // onProgress callback (функция обратного вызова в процессе загрузки)
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% загружено' );
+  },<br>
+  // onError callback (функция обратного вызова на ошибки загрузки)
+  function ( err ) {
+    console.log( 'Произошла ошибка' );
+  }
+);</pre><br>
+
+<h4>Конструктор</h4>
+<pre>MaterialLoader( <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый MaterialLoader.<br><br>
+
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="textures"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('textures - текстуры')" onmouseout="hide()">.textures</a></span></pre>
+Объект, содержащий любые текстуры, используемые материалом. Смотрите описание метода <tt><a href="#setTextures" onmouseover="show('MaterialLoader.setTextures')" onmouseout="hide()">setTextures</a></tt>.</div><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь или URL-адрес к файлу. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<div class=list><tt>onLoad</tt> — функция, вызываемая по завершению загрузки. Её аргументом будет загруженный <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.</div>
+<div class=list><tt>onProgress</tt> — функция, вызываемая во время процесса загрузки.</div>
+<div class=list><tt>onError</tt> — функция, вызываемая при ошибках загрузки.</div>
+Метод начинает загрузку с указанного url-адреса (аргумент <tt>url</tt>) и возвращает объект <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>, содержащий данные.<br><br>
+
+<pre id="parse"><a href="../materials/material.htm" onmouseover="show('Material.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — объект в формате JSON, содержащий параметры <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">материала</a>.</div>
+Метод проводит синтаксический анализ (разбор) JSON-структуры и создает новый <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">материал</a> of the type [page:String json.type] с параметрами, определенными в объекте JSON.<br><br>
+
+<pre id="setTextures"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set textures - установить текстуры')" onmouseout="hide()">.setTextures</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('textures - текстуры')" onmouseout="hide()">textures</a></span> )</pre>
+<div class=list><tt>textures</tt> — объект, содержащий любые текстуры, используемые материалом.</div></div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/MaterialLoader.js" target="_blank">MaterialLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

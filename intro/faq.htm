@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ЧАсто задаваемые ВОпросы</h2>
+<h3>Какой формат импорта/экспорта 3D моделей лучше всего поддерживается?</h3>
+Рекомендуемым форматом для импорта и экспорта ресурсов является glTF (GL Transmission Format). Потому как этот формат ориентирован на доставку ресурса во время выполнения кода, он компактен для передачи и быстр для загрузки.<br>
+Библиотека <em>three.js</em> также предоставляет загрузчики для множества других, популярных форматов, вроде FBX, Collada или OBJ.
+Тем не менее, следует в проектах всегда вначале попытаться установить рабочий процесс на основе формата glTF. Более подробную информацию смотрите в описании <a href="loading3dModels.htm">загрузки 3D моделей</a>.
+<br><br>
+
+<h3>Почему в примерах присутствуют теги meta для окна просмотра (viewport)?</h3>
+<pre>&lt;meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"&gt;</pre>
+Эти тэги управляют размерами окна просмотра (viewport) и масштабом для браузеров мобильных телефонов (где содержимое страницы может отображаться в другом размере, чем видимое окно просмотра).<br>
+<a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html" target="_blank">Safari: Using the Viewport</a><br>
+<a href="https://developer.mozilla.org/en/Mobile/Viewport_meta_tag" target="_blank">MDN: Using the viewport meta tag (англ.)</a><br>
+<a href="https://developer.mozilla.org/ru/docs/Mozilla/Mobile/Viewport_meta_tag" target="_blank">MDN: Использование мета тега viewport (рус.)</a>
+
+<h3>Как можно сохранить масштаб сцены при изменении размера?</h3>
+Хочется чтобы все объекты, независимо от их расстояния до камеры, выглядели одинаково, даже при изменении размера окна.
+Ключевое уравнение для решения этой задачи - это формула для видимой высоты (visible_height) на заданном расстоянии от камеры (distance_from_camera):
+<pre>visible_height = 2 * Math.tan( ( Math.PI / 180 ) * camera.fov / 2 ) * distance_from_camera;</pre>
+Если увеличивается высота окна на определенный процент, то и видимая высота на всех расстояниях также увеличивалась на тот же самый процент.
+Этого нельзя сделать изменением положения камеры. Вместо этого следует изменять поле просмотра камеры (параметр <tt>fov</tt> - field-of-view).
+<a href="http://jsfiddle.net/Q4Jpu/" target="_blank">Пример</a>.
+
+<h3>Почему часть моего объекта невидима?</h3>
+Это может происходить из-за выбора грани. У граней имеется ориентир, который определяет какая сторона является передней и видимой, а какая - задней и невидимой.
+И в обычных условиях при выборе удаляется задняя, невидимая сторона. Если проблема в этом, измените сторону материала на THREE.DoubleSide.
+<pre>material.side = THREE.DoubleSide</pre><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="loader.htm" title="Переход к родительскому классу: Loader"><tt>Loader &rarr;</tt></a></span>
+<h3>DataTextureLoader</h3>
+Абстрактный базовый класс для загрузки типовых двоичных форматов текстур (<a href="https://en.wikipedia.org/wiki/RGBE_image_format" target="_blank" onmouseover="show('RGBE format - формат компонентов<br>цвета RGB (на каждый цвет отводится<br>по одному байту) и канала показателя<br>степени (exponent) - также один байт')" onmouseout="hide()">rgbe</a>,
+<a href="https://ru.wikipedia.org/wiki/High_Dynamic_Range_Imaging" target="_blank" onmouseover="show('HDR (High Dynamic Range) — технология<br>широкодиапазонного представления цвета.')" onmouseout="hide()">hdr</a>, ...).
+Для загрузки файлов, внутри класса используется <a href="fileLoader.htm" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a> и создается новый объект <a href="../textures/dataTexture.htm" onmouseover="show('DataTexture')" onmouseout="hide()">DataTexture</a>.<br><br>
+
+<h4>Примеры</h4>
+Пример производного класса смотрите в <a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/RGBELoader.js" target="_blank">RGBELoader</a>.<br><br>
+
+<h4>Конструктор</h4>
+<pre>DataTextureLoader( <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создание нового DataTextureLoader.<br><br>
+
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь к файлу или URL-адрес файла. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженная текстура.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Метод начинает загрузку из источника (аргумент <tt>url</tt>) и передает загруженную текстуру в функцию, определенную в аргументе <tt>onLoad</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/DataTextureLoader.js" target="_blank">DataTextureLoader.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

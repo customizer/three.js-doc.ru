@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="lightShadow.htm" title="Переход к родительскому классу: LightShadow"><tt>LightShadow &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp; SpotLightShadow</h3>
+Данный класс используется для расчета теней внутри класса <a href="spotLight.htm" onmouseover="show('SpotLight');" onmouseout="hide()">SpotLight</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// Create a WebGLRenderer and turn on shadows in the renderer
+// создаем WebGLRenderer и включаем тени в визуализаторе
+var renderer = new THREE.WebGLRenderer();
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+                                                  // (по умолчанию THREE.PCFShadowMap)<br>
+// Create a SpotLight and turn on shadows for the light
+// создаем SpotLight и включаем тени от него
+var light = new THREE.SpotLight( 0xffffff );
+light.castShadow = true;            // default false (по умолчанию - false)
+scene.add( light );<br>
+// Set up shadow properties for the light
+// установка свойств тени для этого освещения
+light.shadow.mapSize.width = 512;  // default (значение по умолчанию)
+light.shadow.mapSize.height = 512; // default (значение по умолчанию)
+light.shadow.camera.near = 0.5;    // default (значение по умолчанию)
+light.shadow.camera.far = 500      // default (значение по умолчанию)<br>
+// Create a sphere that cast shadows (but does not receive them)
+// создаем сферу, отбрасывающую тени (но не принимающую их)
+var sphereGeometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
+var sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
+var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+sphere.castShadow = true;     // default is false (по умолчанию - false)
+sphere.receiveShadow = false; // default (значение по умолчанию)
+scene.add( sphere );<br>
+// Create a plane that receives shadows (but does not cast them)
+// Создаем плоскость, принимающую тени (но не отбрасывающую их)
+var planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
+var planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
+var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.receiveShadow = true;
+scene.add( plane );<br>
+// Create a helper for the shadow camera (optional)
+// создаем вспомогательный элемент для камеры теней (необязательно)
+var helper = new THREE.CameraHelper( light.shadow.camera );
+scene.add( helper );</pre><br>
+
+<h4>Конструктор</h4>
+Конструктор создает <a href="../cameras/perspectiveCamera.htm" onmouseover="show('PerspectiveCamera');" onmouseout="hide()">PerspectiveCamera</a> для управления отображением теней в представляемом мире.<br><br>
+
+<h4>Свойства</h4>
+Смотрите базовый класс <a href="lightShadow.htm" onmouseover="show('LightShadow');" onmouseout="hide()"><tt>LightShadow</tt></a> для общих свойств.
+<div class=blockindent><br>
+<pre id="camera"><a href="../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера');" onmouseout="hide()">.camera</a></pre>
+Представление освещения в мире. Свойство используется для построения карты глубины сцены; объекты позади других объектов исходя из распространения света будут находиться в тени.<br>
+По умолчанию это <a href="../cameras/perspectiveCamera.htm" onmouseover="show('PerspectiveCamera');" onmouseout="hide()">камера с перспективной проекцией</a> с ближней плоскостью отсечения <tt><a href="../cameras/perspectiveCamera.htm#near" onmouseover="show('PerspectiveCamera.near');" onmouseout="hide()">near</a></tt> равной <tt>0.5</tt>.
+Свойство <tt><a href="../cameras/perspectiveCamera.htm#fov" onmouseover="show('PerspectiveCamera.fov');" onmouseout="hide()">fov</a></tt> будет отслеживать свойство <tt><a href="spotLight.htm#angle" onmouseover="show('SpotLight.angle');" onmouseout="hide()">angle</a></tt>
+имеющегося <a href="spotLight.htm" onmouseover="show('SpotLight');" onmouseout="hide()">SpotLight</a> с помощью метода <tt><a href="spotLightShadow.htm#update" onmouseover="show('SpotLightShadow.update');" onmouseout="hide()">update</a></tt>.
+Аналогично, свойство <tt><a href="../cameras/perspectiveCamera.htm#aspect" onmouseover="show('PerspectiveCamera.aspect');" onmouseout="hide()">aspect</a></tt> будет отслеживать размеры сторон из <tt><a href="lightShadow.htm#mapSize" onmouseover="show('LightShadow.mapSize');" onmouseout="hide()">mapSize</a></tt>.
+Если установлено свойство <tt><a href="spotLight.htm#distance" onmouseover="show('SpotLight.distance');" onmouseout="hide()">distance</a></tt> освещения,
+дальняя плоскость отсечения <tt><a href="../cameras/perspectiveCamera.htm#far" onmouseover="show('PerspectiveCamera.far');" onmouseout="hide()">far</a></tt> будет отслеживать его, в противном случае она по умолчанию будет установлена как <tt>500</tt>.<br><br>
+
+<pre id="isSpotLightShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is spot light shadow - является тенью от прожектора');" onmouseout="hide()">.isSpotLightShadow</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классы тенью от прожекторного освещения. Значением по умолчанию является <tt>true</tt>.<br>
+Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.</div><br>
+
+<h4>Методы</h4>
+Смотрите базовый класс <a href="lightShadow.htm" onmouseover="show('LightShadow');" onmouseout="hide()"><tt>LightShadow</tt></a> для общих методов.
+<div class=blockindent><br>
+<pre id="update"><a href="#" onmouseover="show('SpotLightShadow.<br>update - обновление');" onmouseout="hide()">.update</a>( <a href="#" onmouseover="show('SpotLight');" onmouseout="hide()">light</a> )</pre>
+Метод обновляет внутреннюю <a href="#camera" onmouseover="show('SpotLightShadow.camera');" onmouseout="hide()">камеру с перспективной проекцией</a> исходя из параметров освещения, переданного в <tt>light</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/SpotLightShadow.js" target="_blank">SpotLightShadow.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

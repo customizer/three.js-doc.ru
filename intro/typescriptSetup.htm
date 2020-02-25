@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Установка TypeScript</h2>
+<em>three.js</em> - это библиотека на основе JavaScript. Тем не менее, имеется возможность использовать её в проектах TypeScript, так как библиотека предоставляет <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html" target="_blank" onmouseover="show('Declaration Files')" onmouseout="hide()">файлы декларации</a> (файлы с расширением <tt class="lnk" onmouseover="show('Для установки связи с внешними файлами скриптов JavaScript в TypeScript<br>служат декларативные или заголовочные файлы с расширением .d.ts.<br>Они описывают синтаксис и структуру функций и свойств, которые могут<br>использоваться в программе, не предоставляя при этом конкретной<br>реализации.<br>Они выполняют своего рода роль оберток над библиотеками JavaScript.')" onmouseout="hide()">d.ts</tt>).<br><br>
+Чтобы обнаружить типы <em>three.js</em>, компилятору TypeScript требуется минимальная конфигурация.<br>
+Понадобится установка для параметра <tt><a href="https://www.typescriptlang.org/docs/handbook/module-resolution.html" target="_blank" onmouseover="show('module resolution - разрешение модуля')" onmouseout="hide()">moduleResolution</a></tt> значение <tt>"node"</tt>,
+а для параметра <tt><a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank" onmouseover="show('target - цель, мишень, задание')" onmouseout="hide()">target</a></tt>
+- значение <a href="https://ru.wikipedia.org/wiki/ECMAScript" target="_blank" onmouseover="show('ECMAScript — это встраиваемый, расширяемый, не имеющий средств<br>ввода-вывода язык программирования, используемый в качестве<br>основы для построения других скриптовых языков.<br>Расширения языка: JavaScript, JScript и ActionScript.')" onmouseout="hide()"><tt>"es6"</tt> или новее</a>.
+<pre>// Example of minimal `tsconfig.json` file
+// Пример минимального файла `tsconfig.json`
+{
+  "compilerOptions": {
+    "target": "es6",
+    "moduleResolution": "node",
+  },
+  "include": [ "./src/**/*.ts" ],
+}</pre>
+
+<div class=note><b>Примечание:</b> На сегодняшний день пока невозможно использовать типизацию <em>three.js</em> без этих двух опций.</div>
+
+<div class=note><b>Примечание:</b> Бывает, что некоторые декларации неверны и/или отсутствуют. Содействие по декларационным файлам реально приносит пользу сообществу, делая типизацию <em>three.js</em> лучше и точнее.</div>
+
+<br><br>
+</body></html>

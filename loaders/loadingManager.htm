@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>LoadingManager</h3>
+Обрабатывает и отслеживает загружаемые и ожидающие загрузки данные.
+Если он не предоставлен вручную, то глобальный экземпляр данного класса создается и используется загрузчиками по умолчанию - смотрите <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">DefaultLoadingManager</a>.<br>
+В принципе его должно быть достаточно, однако бывают случаи, когда полезно иметь раздельные загрузчики,- например если требуется показать отдельные индикаторы загрузки для объектов и текстур.<br><br>
+
+<h4>Пример</h4>
+Этот пример показывает способ использования LoadingManager'а для отслеживания процесса работы загрузчика <a href="../examples/loaders/OBJLoader.htm" onmouseover="show('OBJLoader')" onmouseout="hide()">OBJLoader</a>.
+<pre>var manager = new THREE.LoadingManager();
+manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+  console.log( 'Начата загрузка файлов: '+url+'.\nЗагружено '+itemsLoaded+' из '+itemsTotal+' файлов.' );
+};<br>
+manager.onLoad = function ( ) {
+  console.log( 'Загрузка завершена!');
+};<br>
+manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+  console.log( 'Загрузка файлов: '+url+'.\nЗагружено '+itemsLoaded+' из '+itemsTotal+' файлов.' );
+};<br>
+manager.onError = function ( url ) {
+  console.log( 'Произошла ошибка при загрузке '+url );
+};<br>
+var loader = new THREE.OBJLoader( manager );
+loader.load( 'file.obj', function ( object ) {
+  //
+} );</pre>
+В дополнение к наблюдению за ходом процесса, LoadingManager можно использовать для переопределения во время загрузки URL-адресов ресурсов. Это может быть полезно для элементов, поступающих из событий перетаскивания, WebSockets, WebRTC или других API.<br>
+Вот пример, показывающий как загрузить модель в память используя URL-адрес <a href="https://developer.mozilla.org/ru/docs/Web/API/Blob" target="_blank" onmouseover="show('blob - сокращ. англ. слов binary large object — двоичный большой объект')" onmouseout="hide()">объекта Blob</a>.
+<pre>// Blob or File objects created when dragging files into the webpage.
+// объекты Blob или File созданные при перетаскивании файлов на веб-страницу.
+var blobs = {'fish.gltf': blob1, 'diffuse.png': blob2, 'normal.png': blob3};<br>
+var manager = new THREE.LoadingManager();<br>
+// Initialize loading manager with URL callback.
+// инициализация менеджера загрузки с функцией обратного вызова для URL-адреса.
+var objectURLs = [];
+manager.setURLModifier( ( url ) => {
+  url = URL.createObjectURL( blobs[ url ] );
+  objectURLs.push( url );
+  return url;
+} );<br>
+// Load as usual, then revoke the blob URLs.
+// загружаем как обычно, затем отменяем URL-адреса blob.
+var loader = new THREE.GLTFLoader( manager );
+loader.load( 'fish.gltf', (gltf) => {
+  scene.add( gltf.scene );
+  objectURLs.forEach( ( url ) => URL.revokeObjectURL( url ) );
+});</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_babylon" target="_blank">WebGL / loader / babylon</a>
+<a href="https://threejs.org/examples/#webgl_loader_fbx" target="_blank">WebGL / loader / fbx</a>
+<a href="https://threejs.org/examples/#webgl_loader_obj" target="_blank">WebGL / loader / obj</a>
+<a href="https://threejs.org/examples/#webgl_materials_reflectivity" target="_blank">WebGL / materials / reflectivity</a>
+<a href="https://threejs.org/examples/#webgl_postprocessing_outline" target="_blank">WebGL / postprocesing / outline</a>
+<a href="https://threejs.org/examples/#webgl_terrain_dynamic" target="_blank">WebGL / terrain / dynamic</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>LoadingManager( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>onLoad</tt> — эта функция будет вызываться по окончании работы всех загрузчиков. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>onProgress</tt> — эта функция будет вызываться по завершении работы каждого отдельного элемента загрузки. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>onError</tt> — эта функция будет вызываться при ошибках загрузчика. Дополнительный, необязательный аргумент.</div>
+Создает новый LoadingManager.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="onStart"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on start - на начало')" onmouseout="hide()">.onStart</a></span></pre>
+Данная функция будет вызвана при запуске загрузки.<br>
+Аргументами являются:
+<div class=list><tt><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span></tt> — url-адрес загружаемого элемента.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('items loaded - загруженные элементы')" onmouseout="hide()">itemsLoaded</a></span></tt> — число элементов, уже загруженных в настоящее время.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('items total - всего элементов')" onmouseout="hide()">itemsTotal</a></span></tt> — полное число загружаемых элементов.</div>
+По умолчанию она не определена, т.е. <tt>undefined</tt>.<br><br>
+
+<pre id="onLoad"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">.onLoad</a></span></pre>
+Данная функция будет вызвана по завершении всех загрузок. По умолчанию она не определена (т.е. <tt>undefined</tt>), если не передается в конструкторе.<br><br>
+
+<pre id="onProgress"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">.onProgress</a></span></pre>
+Данная функция будет вызвана по завершении загрузки элемента.<br>
+Аргументами являются:
+<div class=list><tt><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span></tt> — url-адрес загруженного элемента.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('items loaded - загруженные элементы')" onmouseout="hide()">itemsLoaded</a></span></tt> — число элементов, уже загруженных в настоящее время.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('items total - всего элементов')" onmouseout="hide()">itemsTotal</a></span></tt> — полное число загружаемых элементов.</div>
+По умолчанию она не определена (т.е. <tt>undefined</tt>), если не передается в конструкторе.<br><br>
+
+<pre id="onError"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">.onError</a></span></pre>
+Данная функция будет вызвана при ошибках с любым элементом. Аргументом функции является:
+<div class=list><tt><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span></tt> — url-адрес элемента с ошибкой.</div>
+По умолчанию она не определена (т.е. <tt>undefined</tt>), если не передается в конструкторе.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="addHandler"><a href="#" onmouseover="show('LoadingManager.<br>add handler - добавить обработчик')" onmouseout="hide()">.addHandler</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('regex - сокращ. от англ. слов<br>regular expression - регулярное выражение')" onmouseout="hide()">regex</a></span>, <a href="loader.htm" onmouseover="show('Loader.<br>loader - загрузчик')" onmouseout="hide()">loader</a> )</pre>
+<div class=list><tt>regex</tt> — регулярное выражение.</div>
+<div class=list><tt>loader</tt> — загрузчик.</div>
+
+Registers a loader with the given regular expression. Can be used to define what loader should be used in order to load specific files. A typical use case is to overwrite the default loader for textures.
+<pre>// add handler for TGA textures (добавить обработчик для текстур в формате TGA)
+manager.addHandler( /\.tga$/i, new TGALoader() );</pre><br>
+
+<pre id="getHandler"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get handler - получить обработчик')" onmouseout="hide()">.getHandler</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('file - файл')" onmouseout="hide()">file</a></span> )</pre>
+<div class=list><tt>file</tt> — путь к файлу.</div>
+
+Can be used to retrieve the registered loader for the given file path.<br><br>
+
+<pre id="removeHandler"><a href="#" onmouseover="show('LoadingManager.<br>remove handler - удалить обработчик')" onmouseout="hide()">.removeHandler</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('regex - сокращ. от англ. слов<br>regular expression - регулярное выражение')" onmouseout="hide()">regex</a></span> ) : LoadingManager</pre>
+<div class=list><tt>regex</tt> — регулярное выражение.</div>
+
+Removes the loader for the given regular expression.<br><br>
+
+<pre id="resolveURL"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('resolve URL - урегулировать url-адрес')" onmouseout="hide()">.resolveURL</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span> )</pre>
+<div class=list><tt>url</tt> — url-адрес загрузки.</div>
+Метод задает url-адрес с использованием функции обратного вызова модификатора URL-адреса (если таковая имеется) и возвращает урегулированный url-адрес. Если модификатор url-адреса не установлен, возвращается исходный url-адрес.<br><br>
+
+<pre id="setURLModifier"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set URL modifier - установить URL-модификатор')" onmouseout="hide()">.setURLModifier</a></span>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback - обратный (повторный) вызов')" onmouseout="hide()">callback</a></span> )</pre>
+<div class=list><tt>callback</tt> — функция обратного вызова модификатора url-адреса. Вызывается с url-адресом в качестве аргумента и должна возвращать урегулированный url-адрес.</div>
+Если аргумент предоставляется, то перед отправкой запроса функция обратного вызова будет переправлять каждый url-адрес ресурса.
+Функция обратного вызова может возврашать либо исходный, либо новый url-адрес для переопределения поведения загрузки.
+Такое поведение можно использовать для загрузки ресурсов из ZIP-файлов, при перетаскивании с применением API и <a href="https://ru.wikipedia.org/wiki/Data:_URL" target="_blank">Data URI</a>.<br><br>
+
+<div class=note><b>Примечание:</b> Следующие методы предназначены для внутреннего вызова загрузчиками, напрямую вызывать их нельзя.</div><br>
+
+<pre id="itemStart"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item start - старт элемента')" onmouseout="hide()">.itemStart</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span> )</pre>
+<div class=list><tt>url</tt> — url-адрес загрузки.</div>
+Данный метод будет вызываться любым загрузчиком, которого использует менеджер, при старте загрузки с url-адреса.<br><br>
+
+<pre id="itemEnd"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item end - окончание элемента')" onmouseout="hide()">.itemEnd</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span> )</pre>
+<div class=list><tt>url</tt> — url-адрес загрузки.</div>
+Данный метод будет вызываться любым загрузчиком, которого использует менеджер, по завершении загрузки с url-адреса.<br><br>
+
+<pre id="itemError"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item error - ошибка элемента')" onmouseout="hide()">.itemError</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span> )</pre>
+<div class=list><tt>url</tt> — url-адрес загрузки.</div>
+Данный метод будет вызываться любым загрузчиком, которого использует менеджер, когда происходит ошибка при загрузке с url-адреса.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/LoadingManager.js" target="_blank">LoadingManager.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

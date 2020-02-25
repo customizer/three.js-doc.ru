@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Light</h3>
+Абстрактный базовый класс освещения - все другие типы освещения наследуют описанные здесь свойства и методы.<br><br>
+
+<h4>Конструктор</h4><br>
+<pre>Light( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span></tt> — шестнадцатиричное значение цвета освещения (дополнительный, необязательный параметр). Значением по умолчанию является <tt>0xffffff</tt> (белый).</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span></tt> — числовое значение силы/интенсивности света (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+Создает новый <tt>Light</tt>. Обратите внимание, что конструктор не предназначен для вызова напрямую (взамен используйте один из производных от него классов).<br><br>
+
+<h4>Свойства</h4><br>
+Смотрите базовый класс <a href="../core/object3D.htm" onmouseover="show('Object3D');" onmouseout="hide()"><tt>Object3D</tt></a> для общих свойств.
+<div class=blockindent><br>
+<pre id="color"><span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('Color.<br>color - цвет');" onmouseout="hide()">.color</a></span></pre>
+Цвет освещения. По умолчанию, если это не передается в конструкторе, новый <tt>Color</tt> устанавливается белым (<tt>0xffffff</tt>).<br><br>
+
+<pre id="intensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интесивность');" onmouseout="hide()">.intensity</a></span></pre>
+<a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B8%D0%BB%D0%B0_%D1%81%D0%B2%D0%B5%D1%82%D0%B0" target="_blank">Интенсивность (сила) света</a>.<br>
+В режиме, <a href="../renderers/webGLRenderer.htm#physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights');" onmouseout="hide()">правильном с точки зрения физики</a>, произведение <tt><a href="#color" onmouseover="show('Light.color');" onmouseout="hide()">color</a></tt> * <tt>intensity</tt> интерпретируется как интенсивность (сила) света, измеряемая в канделах (candela).<br>
+Значение по умолчанию равно&nbsp;<tt>1.0</tt>.<br><br>
+<pre id="isLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is light - является светом');" onmouseout="hide()">.isLight</a></span></pre>
+Свойство используется для проверки, является ли данный класс и все производные от него классы, освещением. Значением по умолчанию является <tt>true</tt>.<br>
+Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.</div><br>
+
+<h4>Методы</h4><br>
+Смотрите базовый класс <a href="../core/object3D.htm" onmouseover="show('Object3D');" onmouseout="hide()"><tt>Object3D</tt></a> для общих методов.
+<div class=blockindent><br>
+<pre id="copy"><a href="#" onmouseover="show('Light.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Light.<br>source - исходник');" onmouseout="hide()">source</a> )</pre>
+Метод копирует значение из <tt>source</tt> в данный объект <tt>Light</tt>.<br><br>
+
+<pre id="toJSON"><span onclick="showClick('JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в формат JSON');" onmouseout="hide()">.toJSON</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('meta - сокращ. от metadata - метаданные. Вообще-то meta (с латыни)<br>это цель, конечный пункт, предел, а метаданные - информация о другой<br>информации, или данные, относящиеся к дополнительной информации о<br>содержимом или объекте. Метаданные раскрывают сведения о признаках<br>и свойствах, характеризующих какие-либо сущности, которые позволяют<br>автоматически искать и управлять ими в больших информационных<br>потоках.');" onmouseout="hide()">meta</a></span> )</pre>
+Возвращает данные <tt>Light</tt> в JSON-формате.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/Light.js" target="_blank">Light.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

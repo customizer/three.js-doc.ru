@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>PointLightShadow</h3>
+
+This is used internally by PointLights for calculating shadows
+
+<h4>Пример</h4>
+<pre>//Create a WebGLRenderer and turn on shadows in the renderer
+var renderer = new THREE.WebGLRenderer();
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+
+//Create a PointLight and turn on shadows for the light
+var light = new THREE.PointLight( 0xffffff, 1, 100 );
+light.position.set( 0, 10, 0 );
+light.castShadow = true;           // default false
+scene.add( light );
+
+//Set up shadow properties for the light
+light.shadow.mapSize.width = 512;  // default (значение по умолчанию)
+light.shadow.mapSize.height = 512; // default (значение по умолчанию)
+light.shadow.camera.near = 0.5;    // default (значение по умолчанию)
+light.shadow.camera.far = 500      // default (значение по умолчанию)
+
+//Create a sphere that cast shadows (but does not receive them)
+var sphereGeometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
+var sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
+var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+sphere.castShadow = true; //default is false
+sphere.receiveShadow = false;      // default (значение по умолчанию)
+scene.add( sphere );
+
+//Create a plane that receives shadows (but does not cast them)
+var planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
+var planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
+var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.receiveShadow = true;
+scene.add( plane );
+
+//Create a helper for the shadow camera (optional)
+var helper = new THREE.CameraHelper( light.shadow.camera );
+scene.add( helper );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>PointLightShadow( )</pre>
+
+Creates a new PointLightShadow. This is not intended to be called directly - it is called internally by PointLight.<br><br>
+
+<h4>Свойства</h4>
+Смотрите базовый класс <tt><a href="lightShadow.htm" onmouseover="show('LightShadow');" onmouseout="hide()">LightShadow</a></tt> для общих свойств.<br><br>
+
+<h4>Методы</h4>
+Смотрите базовый класс <a href="lightShadow.htm" onmouseover="show('LightShadow');" onmouseout="hide()"><tt>LightShadow</tt></a> для общих методов.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/PointLightShadow.js" target="_blank">PointLightShadow.js на github.com</a></div>
+
+<br><br>
+</body></html>

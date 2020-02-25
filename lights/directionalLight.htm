@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="light.htm" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="lnk" onmouseover="show('directional light это направленный свет');" onmouseout="hide()">DirectionalLight</span></h3>
+Свет, который испускается в определенном направлении. Этот свет будет вести себя так, как будто он бесконечно удален, и лучи, полученные из него, все параллельны.
+Общий пример использования - имитация дневного света; солнце достаточно далеко, так что расстояние до него можно считать бесконечным, а все лучи света, исходящие от него, параллельными.<br><br>
+Это освещение может отбрасывать тени - подробности смотрите в статье <tt><a href="directionalLightShadow.htm" onmouseover="show('DirectionalLightShadow');" onmouseout="hide()">DirectionalLightShadow</a></tt><br><br>
+<h4>Примечание относительно положения, цели и вращения</h4>
+Общим местом недопонимания с направленным освещением является то, что настройки поворота не оказывают влияния. Это происходит из-за того, что <tt>DirectionalLight</tt> в <em>three.js</em> равнозначен тому, что в других приложениях зачастую называется <tt>Target Direct Light</tt> - целенаправленный (адресно направленный) свет.<br>
+Это означает, что его направление вычисляется как вектор от места расположения источника освещения к месту, где находится цель (в отличие от <tt>Free Direct Light</tt>, у которого имеется только компонент вращения).
+<div class=note_trans><b>Примечание переводчика:</b> То есть, если направление <tt>Free Direct Light</tt> определяется углом в трехмерном пространстве, то <tt>DirectionalLight</tt> направлен на конкретный объект - цель.</div>
+Это сделано для того, чтобы у данного освещения была возможность отбрасывать тени - теневой камере требуется позиция, от которой рассчитываются тени.<br>
+Смотрите ниже описание свойства <tt><a href="#target" onmouseover="show('DirectionalLight.target');" onmouseout="hide()">target</a></tt> для подробностей по обновлению цели.<br><br>
+
+<h4>Пример</h4><br>
+<pre>// White directional light at half intensity shining from the top.
+// Направленное освещение белого цвета половинной интенсивности, светящее сверху.<br>
+var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+directionalLight.position.set( 0, 1, 0 );
+scene.add( directionalLight );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#canvas_morphtargets_horse" target="_blank">morphtargets / horse</a>
+<a href="https://threejs.org/examples/#misc_controls_fly" target="_blank">controls / fly</a>
+<a href="https://threejs.org/examples/#misc_lights_test" target="_blank">lights / test</a>
+<a href="https://threejs.org/examples/#webvr_cubes" target="_blank">cubes</a>
+<a href="https://threejs.org/examples/#webgl_effects_parallaxbarrier" target="_blank">effects / parallaxbarrier</a>
+<a href="https://threejs.org/examples/#webgl_effects_stereo" target="_blank">effects / stereo</a>
+<a href="https://threejs.org/examples/#webgl_geometry_extrude_splines" target="_blank">geometry / extrude / splines</a>
+<a href="https://threejs.org/examples/#webgl_materials_bumpmap" target="_blank">materials / bumpmap</a>
+<a href="https://threejs.org/examples/#webgl_materials_cubemap_balls_reflection" target="_blank">materials / cubemap / balls / reflection</a></pre><br>
+
+
+<h4>Конструктор</h4><br>
+<pre>DirectionalLight( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal - шестнадцатиричный');" onmouseout="hide()">hex</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal - шестнадцатиричный');" onmouseout="hide()">hex</a></span></tt> — шестнадцатиричное значение цвета освещения (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>0xffffff</tt> (белый).</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span></tt> — числовое значение силы/интенсивности освещения (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+Создает новый <tt>DirectionalLight</tt><br><br>
+
+<h4>Свойства</h4><br>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
+<div class=blockindent><br>
+<pre id="castShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cast shadow - бросить тень');" onmouseout="hide()">.castShadow</a></span></pre>
+Если установлено значение <tt>true</tt>, освещение будет отбрасывать динамические (движущиеся при перемещении объекта-цели) тени.
+<div class=warning><b>Предупреждение:</b> Это довольно затратно и требует настройки для получения правильного отображения теней. Подробнее смотрите в описании <tt><a href="directionalLightShadow.htm" onmouseover="show('DirectionalLightShadow');" onmouseout="hide()">DirectionalLightShadow</a></tt>.</div>
+Значением по умолчанию является	<tt>false</tt>.<br><br>
+<pre id="isDirectionalLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is directional light - является направленным светом');" onmouseout="hide()">.isDirectionalLight</a></span></pre>
+Свойство используется для проверки, является ли данный класс и все производные от него классы, направленным освещением. Значением по умолчанию является <tt>true</tt>.<br>
+Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
+
+<pre id="position"><a href="../math/vector3.htm" onmouseover="show('Vector3.<br>position - положение, позиция');" onmouseout="hide()">.position</a></pre>
+Это свойство устанавливается равным <tt><a href="../core/object3D.htm#DefaultUp" onmouseover="show('Object3D.DefaultUp');" onmouseout="hide()">Object3D.DefaultUp</a> (0, 1, 0)</tt>, так что свет светит сверху вниз.<br><br>
+
+<pre id="shadow"><a href="directionalLightShadow.htm" onmouseover="show('DirectionalLightShadow.<br>shadow - тень');" onmouseout="hide()">.shadow</a></pre>
+Свойство используется в <tt><a href="directionalLightShadow.htm" onmouseover="show('DirectionalLightShadow');" onmouseout="hide()">DirectionalLightShadow</a></tt> для расчета теней от данного освещения.<br><br>
+
+<pre id="target"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>target - цель, мишень, назначение');" onmouseout="hide()">.target</a></pre>
+Со своей <a href="#position" onmouseover="show('DirectionalLight.position');" onmouseout="hide()">позиции</a> DirectionalLight направлен на позицию объекта-цели (target.position), которую и определяет данное свойство. Позицией цели по умолчанию является <tt>(0, 0, 0)</tt>.
+<div class=note><b>Примечание:</b> Чтобы изменить позицию объекта-цели на что-либо другое, кроме значения по умолчанию, он должен быть добавлен на <a href="../scenes/scene.htm" onmouseover="show('Scene');" onmouseout="hide()">сцену</a> при помощи
+<pre>scene.add( light.target );</pre>
+Так что <tt><a href="../core/object3D.htm#matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt> цели станет автоматически обновляться с каждым кадром.<br>
+Также возможно установить в качестве цели другой объект на сцене (что-нибудь со свойством <tt><a href="../core/object3D.htm#position" onmouseover="show('Object3D.position');" onmouseout="hide()">position</a></tt>), вот так:
+<pre>var targetObject = new THREE.Object3D();
+  scene.add(targetObject);<br>
+  light.target = targetObject;</pre>
+Теперь <tt>directionalLight</tt> будет отслеживать целевой объект.</div></div><br>
+
+<h4>Методы</h4>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.
+<div class=blockindent><br>
+<pre id="copy"><a href="#" onmouseover="show('DirectionalLight.<br>copy - копировать');" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('DirectionalLight.<br>source - источник');" onmouseout="hide()">source</a> )</pre>
+Копирует значение всех свойств из <tt>source</tt> в данный объект DirectionalLight.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLight.js" target="_blank">DirectionalLight.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

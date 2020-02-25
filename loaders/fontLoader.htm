@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="loader.htm" title="Переход к родительскому классу: Loader"><tt>Loader &rarr;</tt></a></span>
+<h3>FontLoader</h3>
+Класс для загрузки шрифта в JSON-формате. Возвращает <a href="../extras/core/font.htm" onmouseover="show('Font')" onmouseout="hide()">Font</a>, являющийся массивом <a href="../extras/core/shape.htm" onmouseover="show('Shape')" onmouseout="hide()">форм</a>, представляющих шрифт.
+Для загрузки файлов, внутри класса используется <a href="fileLoader.htm" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>.<br>
+Конвертировать шрифты можно онлайн при помощи <a href="https://gero3.github.io/facetype.js/" target="_blank">facetype.js</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var loader = new THREE.FontLoader();
+var font = loader.load(
+  // resource URL (URL-адрес ресурса)
+  'fonts/helvetiker_bold.typeface.json'<br>
+  // onLoad callback (функция обратного вызова, вызываемая по окончании загрузки)
+  function ( font ) {
+    // do something with the font (здесь делаем что-либо с шрифтом)
+    scene.add( font );
+  },<br>
+  // onProgress callback (функция обратного вызова, вызываемая в процессе загрузки)
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% загружено' );
+  },<br>
+  // onError callback (функция обратного вызова, вызываемая при ошибке)
+  function ( err ) {
+    console.log( 'Произошла ошибка' );
+  }
+);</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_text_shapes" target="_blank">WebGL / geometry / text / shapes</a>
+<a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank">WebGL / geometry / text</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>FontLoader( <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый FontLoader.<br><br>
+		
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь к файлу или URL-адрес файла. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженный шрифт.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Метод начинает загрузку из источника (аргумент <tt>url</tt>) и передает загруженный шрифт в функцию, определенную в аргументе <tt>onLoad</tt>.<br><br>
+
+<pre id="parse"><a href="../extras/core/font.htm" onmouseover="show('Font.<br>parse - разбор, структурный анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick('объект JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('JSON - сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как <tt>/ˈdʒeɪsən/ JAY-sən</tt>)<br>— текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+<div class=list><tt>json</tt> — разбираемая структура в формате <tt>JSON</tt>.</div>
+Метод разбирает (анализирует) структуру <tt>JSON</tt> и возвращает <a href="../extras/core/font.htm" onmouseover="show('Font.<br>font - шрифт')" onmouseout="hide()">Font</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/FontLoader.js" target="_blank">FontLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

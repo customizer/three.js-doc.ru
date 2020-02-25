@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="loader.htm" title="Переход к родительскому классу: Loader"><tt>Loader &rarr;</tt></a></span>
+<h3>ImageBitmapLoader</h3>
+Загрузчик для загрузки изображения как <a href="https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap" target="_blank">ImageBitmap</a>. ImageBitmap предоставляет асинхронный и эффективный, с точки зрения ресурсов, путь к подготовке текстур для отображения в WebGL.<br>
+В отличие от <a href="fileLoader.htm" onmouseover="show('FileLoader')" onmouseout="hide()">FileLoader</a>, ImageBitmapLoader does not avoid multiple concurrent requests to the same URL.<br>
+Обратите внимание, что с ImageBitmap игнорируются <tt><a href="../textures/texture.htm#flipY" onmouseover="show('Texture.flipY')" onmouseout="hide()">Texture.flipY</a></tt> и <tt><a href="../textures/texture.htm#premultiplyAlpha" onmouseover="show('Texture.premultiplyAlpha')" onmouseout="hide()">Texture.premultiplyAlpha</a></tt>.
+В отличие от обычных изображений, <a href="https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap" target="_blank">ImageBitmap</a> эти настройки нужны при создании растрового изображения, когда они загружаются в графический процессор.
+Вот вышеуказанная <a href="https://developer.mozilla.org/ru/docs/Web/API/ImageBitmap" target="_blank" onmouseover="show('Интерфейс ImageBitmap представляет собой битовое изображение,<br>которое может быть нарисовано на <tt>canvas</tt> без чрезмерной задержки.<br>Создать его можно из различных исходных объектов с помощью<br>метода createImageBitmap(). ImageBitmap предоставляет асинхронный<br>и ресурсоэффективный метод подготовки текстур для визуализации<br>в WebGL.')" onmouseout="hide()">статья о ImageBitmap</a> на русском языке.
+Вместо них следует установить эквивалентные параметры с помощью <tt><a href="#setOptions" onmouseover="show('ImageBitmapLoader.setOptions')" onmouseout="hide()">ImageBitmapLoader.setOptions</a></tt>.
+Подробнее смотрите в <a href="https://www.khronos.org/registry/webgl/specs/latest/1.0/#6.10" target="_blank">спецификации WebGL</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создаем экземпляр загрузчика)
+var loader = new THREE.ImageBitmapLoader();<br>
+// load a image resource (загрузка ресурса)
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  'textures/skyboxsun25degtest.png',<br>
+  // onLoad callback (функция обратного вызова, вызываемая по окончании загрузки)
+  function ( imageBitmap ) {
+    var texture = new THREE.CanvasTexture( imageBitmap );
+    var material = new THREE.MeshBasicMaterial( { map: texture } );
+  },<br>
+  // onProgress callback currently not supported
+  // функция обратного вызова, вызываемая в процессе загрузки, в настоящий момент не поддерживается
+  undefined,<br>
+  // onError callback (функция обратного вызова, вызываемая при ошибке)
+  function ( err ) {
+    console.log( 'Произошла ошибка' );
+  }
+);</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_imagebitmap" target="_blank">WebGL / loader / imagebitmap</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>ImageBitmapLoader( <a href="loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - управляющий, администратор, менеджер')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый загрузчиком.
+Значением по умолчанию является <a href="defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый ImageBitmapLoader.<br><br>
+
+<h4>Свойства</h4>
+Смотрите общие свойства в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="options"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции, параметры, возможности')" onmouseout="hide()">.options</a></span></pre>
+Дополнительный, необязательный объект, который устанавливает опции для метода <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/createImageBitmap" target="_blank">createImageBitmap</a></tt>, используемого внутри класса.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
+
+<h4>Методы</h4>
+Смотрите общие методы в описании базового класса <a href="loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - грузить, загружать')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>(читается как /ˌjuː ɑːr ˈel/) —<br>единообразный локатор (определитель местонахождения)<br>ресурса или единый указатель ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — путь к файлу или URL-адрес файла. Также это может быть <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank">Data URI</a>.</div>
+<!--https://ru.wikipedia.org/wiki/URI https://ru.wikipedia.org/wiki/Data:_URL-->
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана по завершении загрузки. Аргументом будет загруженное изображение.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет событие в ходе процесса загрузки.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке.</div>
+Метод начинает загрузку из источника (аргумент <tt>url</tt>) и возвращает объект <a href="https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap" target="_blank">ImageBitmap</a>, который будет содержать данные.<br><br>
+
+<pre id="setOptions"><a href="#" onmouseover="show('ImageBitmapLoader.<br>set options - установить опции')" onmouseout="hide()">.setOptions</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции, параметры, возможности')" onmouseout="hide()">options</a></span> )</pre>
+Устанавливает объект <tt>options</tt> для метода <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/createImageBitmap" target="_blank">createImageBitmap</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/ImageBitmapLoader.js" target="_blank">ImageBitmapLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

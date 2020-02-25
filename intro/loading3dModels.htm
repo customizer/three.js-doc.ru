@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Загрузка трехмерных моделей</h2>
+3D-модели доступны в сотнях форматов файлов, каждый из которых имеет разное назначение, разнообразные функции и различную сложность.
+Хотя <em>three.js</em> <a href="https://github.com/mrdoob/three.js/tree/dev/examples/js/loaders" target="_blank">предоставляет множество загрузчиков</a>, выбор правильного формата и рабочего процесса позволит сохранить время и избежать разочарования в дальнейшем.
+С некоторыми форматами сложно работать из-за неэффективной работы в реальном времени или  из-за того, что нет полной поддержки в настоящее время.<br>
+Данное руководство предоставляет рекомендуемый рабочий процесс, подходящий большинству пользователей, и предложения о том, что нужно делать, если все идет не так, как ожидалось.<br><br>
+
+<h3>Прежде чем начать</h3>
+Если вы плохо знакомы с управлением локального сервера, для начала ознакомьтесь со статьей <a href="howToRunThingsLocally.htm">&#171;Как все это запустить локально&#187;</a>. Большинство распространенных ошибок, связанных с просмотром 3D-моделей, можно избежать правильным размещением файлов.<br><br>
+
+<h3>Рекомендуемый рабочий процесс</h3>
+Там, где это возможно, рекомендуется использовать формат glTF (GL Transmission Format).
+Поддерживаются оба варианта формата и GLB, и GLTF. Поскольку этот формат ориентирован на доставку ресурса во время выполнения кода, он компактен для передачи и быстр для загрузки.
+Возможности формата включают в себя сетки (mesh), материалы, текстуры, скины (skin), скелеты (skeleton), цели морфинга (morph target), анимации, виды освещения и камеры.<br>
+Общедоступные glTF-файлы имеются на таких сайтах, как <a href="https://sketchfab.com/models?features=downloadable&sort_by=-likeCount&type=models" target="_blank">Sketchfab</a>, или в различных инструментах включен экспорт glTF:
+<ul><li><a href="https://github.com/KhronosGroup/glTF-Blender-Exporter" target="_blank">glTF-Blender-Exporter</a> от Khronos Group</li>
+<li><a href="https://github.com/KhronosGroup/COLLADA2GLTF" target="_blank">COLLADA2GLTF</a> от Khronos Group</li>
+<li><a href="https://github.com/facebookincubator/FBX2glTF" target="_blank">FBX2GLTF</a> от Facebook</li>
+<li><a href="https://github.com/AnalyticalGraphicsInc/obj2gltf" target="_blank">OBJ2GLTF</a> от Analytical Graphics Inc</li>
+<li><a href="https://www.allegorithmic.com/products/substance-painter" target="_blank">Substance Painter</a> от Allegorithmic</li>
+<li><a href="https://www.foundry.com/products/modo" target="_blank">Modo</a> от Foundry</li>
+<li><a href="https://www.marmoset.co/toolbag/" target="_blank">Toolbag</a> от Marmoset</li>
+<li><a href="https://www.sidefx.com/products/houdini/" target="_blank">Houdini</a> от SideFX</li>
+<li><a href="https://labs.maxon.net/?p=3360" target="_blank">Cinema 4D</a> от MAXON</li>
+<li>и <a href="https://github.com/khronosgroup/gltf#gltf-tools" target="_blank">многое другое</a> ...</li></ul>
+Если все же предпочитаемые инструменты не поддерживают glTF, можно запросить экспорт glTF у авторов или разместить сообщение о нем в <a href="https://github.com/KhronosGroup/glTF/issues/1051" target="_blank">ветке дорожной карты glTF</a>.<br>
+Когда glTF - это не вариант, то доступны и правильно поддерживаются такие популярные форматы, как FBX, OBJ или COLLADA.<br><br>
+
+<h3>Загрузка</h3>
+Только несколько загрузчиков (например, <a href="../loaders/objectLoader.htm" onmouseover="show('ObjectLoader')" onmouseout="hide()">ObjectLoader</a>) включены в <em>three.js</em> по умолчанию - остальные должны добавляться на страницу отдельно.
+В зависимости от предпочтений и удобства пользования инструментами сборки, выберите один из следующих вариантов:
+<pre>// global script (глобальный скрипт)
+&#60;script src="GLTFLoader.js"&#62;&#60;/script&#62;<br>
+// commonjs (обычный js-код )
+var THREE = window.THREE = require('three');
+require('three/examples/js/loaders/GLTFLoader');</pre>
+В настоящее время примеры <em>three.js</em> недоступны в качестве модулей ES (<tt>import ... from '...'</tt>). Несколько обходных путей обсуждаются в <a href="https://github.com/mrdoob/three.js/issues/9562" target="_blank">#9562</a>.<br>
+После импорта загрузчика, можно добавить модель на сцену. Для разных загрузчиков синтаксис различается - при работе с другим форматом проверьте документацию и примеры использования для загрузчика этого формата.
+Для glTF основным примером использования будет:
+<pre>var loader = new THREE.GLTFLoader();
+loader.load( 'path/to/model.glb', function ( gltf ) {
+  scene.add( gltf.scene );
+}, undefined, function ( error ) {
+  console.error( error );
+} );</pre>
+Чтобы узнать подробнее, посмотрите <a href="../examples/loaders/GLTFLoader.htm" onmouseover="show('GLTFLoader')" onmouseout="hide()">документацию GLTFLoader</a>.<br><br>
+
+<h3>Поиск и устранение неисправностей</h3>
+Затратив часы на моделирование своего рукотворного шедевра, запускаете его загрузку на веб-страницу и бац, - не работает! Он искажен, обесцвечен или вообще отсутствует. Начните поиск и устранение неисправностей со следующих шагов:
+<ol><li>Проверьте консоль JavaScript на ошибки и убедитесь, что используется функция обратного вызова на событие <tt class=lnk onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</tt>
+при вызове метода <tt class=lnk onmouseover="show('load - загрузка')" onmouseout="hide()">load</tt> для записи результата.</li>
+<li>Посмотрите модель в другом приложении. Для glTF, программы просмотра с перетаскиванием доступны на <a href="https://gltf-viewer.donmccurdy.com/" target="_blank">three.js</a> и <a href="http://sandbox.babylonjs.com/" target="_blank">babylon.js</a>.
+Если модель отображается правильно в одном или нескольких приложениях, <a href="https://github.com/mrdoob/three.js/issues/new" target="_blank">отправьте сообщение об ошибке в файле <em>three.js</em></a>.
+Если модель не отображается ни в одном из приложений, настоятельно рекомендуется увязать ошибку с приложением, используемом для создания данной модели.</li>
+<li>Попробуйте масштабировать модель, уменьшив или увеличив её в 1000 раз. Множество моделей масштабируются по-разному, и крупные модели могут не отображаться, если камера окажется внутри модели.</li>
+<li>Присмотритесь нет ли неудачных запросов текстуры в сетевых закладках, вроде <tt>C:\\Path\To\Model\texture.jpg</tt>.
+Вместо них используйте пути относительно своей модели, такие как <tt>images/texture.jpg</tt> - при этом может понадобиться изменение файла модели в текстовом редакторе.</li></ol>
+
+<h3>Обратитесь за помощью</h3>
+Если процесс поиска неисправностей, указанный выше, пройден, а модель так и не работает, правильно будет обратиться за помощью, что ускорит решение проблемы.
+Задайте вопрос на <a href="https://discourse.threejs.org/" target="_blank">форуме <em>three.js</em></a> и, если возможно,
+включите свою модель (или какую-либо наиболее простую модель с той же самой проблемой) в любом доступном формате.
+Включите достаточно сведений для того, чтобы кто-то другой быстро воспроизвел проблему - в идеале, демонстрационный пример &#171;вживую&#187;.<br><br>
+
+<br><br>
+</body></html>

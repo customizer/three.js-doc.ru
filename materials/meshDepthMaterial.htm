@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3>MeshDepthMaterial</h3>
+Материал для рисования геометрических элементов фигуры в глубину. Глубина зависит от ближней и дальней плоскостей отсечения камеры. Чем белее цвет, тем ближе находится элемент фигуры, чем темнее - тем дальше.
+<div class="caption"><img src="../img/MeshDepthMaterial.png" width=700><br>
+MeshDepthMaterial плоский (flat) и каркасный (wireframe).</div><br>
+
+<h4>Конструктор</h4>
+<pre>MeshDepthMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<script>document.write(note_0);</script><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
+<div class=blockindent><br>
+<pre id="alphaMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>alpha map - карта альфа-канала')" onmouseout="hide()">.alphaMap</a></pre>
+Карта значений альфа-канала (карта прозрачности) - это текстура оттенков серого, которая управляет непрозрачностью всей поверхности (черный цвет: полная прозрачность; белый цвет: полная непрозрачность).
+Значением по умолчанию является <tt>null</tt>.<br>
+Используется только цвет текстуры, если существует альфа-канал, то он игнорируется.
+Для текстур в формате RGB и RGBA, при выборке этой текстуры <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">визуализатор WebGL</a> будет использовать канал зеленого цвета из-за дополнительного бита точности,
+предоставляемого для зеленого цвета в сжатом <a href="../constants/textures.htm#dds" onmouseover="show('форматы сжатия текстур DDS / ST3C')" onmouseout="hide()">DXT формате</a> и упаковке в <a href="../constants/textures.htm#types" onmouseover="show('типы упаковки')" onmouseout="hide()">формате RGB 565</a>.
+Форматы текстур только <a href="../constants/textures.htm#formats" onmouseover="show('форматы')" onmouseout="hide()">яркости и яркости+альфа-канала</a> также будут работать должным образом.<br><br>
+
+<pre id="depthPacking"><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth packing - упаковка (значений) глубины')" onmouseout="hide()">.depthPacking</a></span></pre>
+Кодирование для упаковки значений глубины. Значением по умолчанию является <tt><a href="../constants/textures.htm#encoding" onmouseover="show('Константы текстур.<br>BasicDepthPacking')" onmouseout="hide()">BasicDepthPacking</a></tt>.<br><br>
+
+<pre id="displacementMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>displacement map - карта сдвига')" onmouseout="hide()">.displacementMap</a></pre>
+Карта сдвига влияет на положение вершин сетки (mesh).
+В отличие от других карт, влияющих только на свет и тень материала, сдвиг вершин может отбрасывать тени, блокировать другие объекты, а то и действовать как реальные геометрические элементы.
+Текстура сдвига - это изображение, на котором значение каждого пиксела (белый будет самым высоким) сопоставляется с вершинами сетки (mesh) и перемещает их.<br><br>
+
+<pre id="displacementScale"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('displacement scale - масштаб сдвига')" onmouseout="hide()">.displacementScale</a></span></pre>
+Значение свойства определяет как сильно карта сдвига влияет на сетку (где черный цвет, там нет сдвига, а где белый - сдвиг максимален). Без установки карты сдвига данное значение не применяется.
+Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="displacementBias"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('displacement bias - смещение сдвига')" onmouseout="hide()">.displacementBias</a></span></pre>
+Смещение значений карты сдвига на вершинах сетки (mesh). Без установки карты сдвига данное значение не применяется. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="fog"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fog - туман')" onmouseout="hide()">.fog</a></span></pre>
+Свойство определяет, будет ли материал подвержен влиянию тумана. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="isMeshDepthMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is mesh depth material -<br>является материалом сетки<br>с прорисовкой глубины')" onmouseout="hide()">.isMeshDepthMaterial</a></span></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалами сетки с прорисовкой глубины. По умолчанию значение равно&nbsp;<tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="map"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>map - карта')" onmouseout="hide()">.map</a></pre>
+Карта цвета. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
+Свойство определяет, будет ли материал использовать <tt>morphTargets</tt>. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - ')" onmouseout="hide()">.skinning</a></span></pre>
+Свойство определяет, будет ли материал использовать skinning. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="wireframe"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe - каркас')" onmouseout="hide()">.wireframe</a></span></pre>
+Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и объект отображен плавно затушеванным).<br><br>
+
+<pre id="wireframeLinewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line width - толщина линии каркаса')" onmouseout="hide()">.wireframeLinewidth</a></span></pre>
+Управляет толщиной линии каркаса. Значение по умолчанию равно <tt>1</tt>.
+<script>document.write(note_3);</script></div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshDepthMaterial.js" target="_blank">MeshDepthMaterial.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

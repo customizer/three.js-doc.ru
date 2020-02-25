@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>MathUtils</h3>
+Объект с некоторыми вспомогательными математическими функциями.<br><br>
+
+<h4>Функции</h4>
+<div class=blockindent><br>
+<pre id="clamp"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clamp - зажимать')" onmouseout="hide()">.clamp</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minimum - минимум, минимальный')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от maximum - максимальный, максимум')" onmouseout="hide()">max</a></span> )</pre>
+<div class=list><tt>value</tt> — значение, которое нужно зафиксировать.</div>
+<div class=list><tt>min</tt> — минимальное значение.</div>
+<div class=list><tt>max</tt> — максимальное значение.</div>
+&#171;Зажимает&#187; (фиксирует) значение, указанное в параметре <tt>value</tt> в диапазоне значений, заданных в аргументах <tt>min</tt> и <tt>max</tt>.<br><br>
+
+<pre id="degToRad"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от degrees to radians - градусы в радианы')" onmouseout="hide()">.degToRad</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('degrees - градусы')" onmouseout="hide()">degrees</a></span> )</pre>
+Конвертирует градусы в радианы.<br><br>
+
+<pre id="euclideanModulo"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('euclidean modulo - модуль по Евклиду')" onmouseout="hide()">.euclideanModulo</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('n - ')" onmouseout="hide()">n</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('m - ')" onmouseout="hide()">m</a></span> )</pre>
+Вычисляет модуль (т.е. наибольший общий делитель - НОД) по алгоритму Евклида из <tt>m % n</tt>, то есть:
+<pre>( ( n % m ) + m ) % m</pre>
+<div class=note_trans><b>Примечание переводчика:</b> Символ&nbsp;<tt>%</tt> в JavaScript это оператор взятия остатка от деления.</div><br>
+
+<pre id="generateUUID"><span class="lnk" onmouseover="show('generate UUID - создать UUID (Universally Unique Identifier -<br>универсальный уникальный идентификатор) — это стандарт<br>идентификации, используемый в создании программного<br>обеспечения')" onmouseout="hide()">.generateUUID</span> ( )</pre>
+Метод создает <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">UUID (универсальный уникальный идентификатор)</a>.<br><br>
+
+<pre id="isPowerOfTwo"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is power of two - является степенью двойки')" onmouseout="hide()">.isPowerOfTwo</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('n - ')" onmouseout="hide()">n</a></span> )</pre>
+Возвращает значение <tt>true</tt>, если&nbsp;<tt>n</tt> является степенью числа&nbsp;<tt>2</tt>.<br><br>
+
+<pre id="lerp"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lerp - сокращ. англ. слов linear interpolation - линейная интерполяция')" onmouseout="hide()">lerp</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - ')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - ')" onmouseout="hide()">t</a></span> )</pre>
+<div class=list><tt>x</tt> -- начальная точка.</div>
+<div class=list><tt>y</tt> -- конечная точка.</div>
+<div class=list><tt>t</tt> -- коэффициент интерполяции в заданном интервале <tt>[0, 1]</tt>.</div>
+Возвращает <a href="https://en.wikipedia.org/wiki/Linear_interpolation" target="_blank">линейно интерполированное</a> значение для двух известных точек&nbsp;(<tt>x</tt> и&nbsp;<tt>y</tt>), основываясь на заданном интервале (<tt>t</tt>) - при <tt>t = 0</tt> будет возвращен&nbsp;<tt>x</tt>, а при <tt>t = 1</tt> будет возвращен&nbsp;<tt>y</tt>.<br>
+Статья из русскоязычной Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BF%D0%BE%D0%BB%D1%8F%D1%86%D0%B8%D1%8F" target="_blank">линейной интерполяции</a>.<br><br>
+
+<pre id="mapLinear"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('map linear - ')" onmouseout="hide()">.mapLinear</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a1 - ')" onmouseout="hide()">a1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a2 - ')" onmouseout="hide()">a2</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('b1 - ')" onmouseout="hide()">b1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('b2 - ')" onmouseout="hide()">b2</a></span> )</pre>
+<div class=list><tt>x</tt> — значение для отображения.</div>
+<div class=list><tt>a1</tt> — минимальное значение для диапазона A.</div>
+<div class=list><tt>a2</tt> — максимальное значение для диапазона A.</div>
+<div class=list><tt>b1</tt> — минимальное значение для диапазона B.</div>
+<div class=list><tt>b2</tt> — максимальное значение для диапазона B.</div>
+<a href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D0%BE%D0%B5_%D0%BE%D1%82%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank">Линейное отображение</a> <tt>x</tt> из диапазона <tt>[a1, a2]</tt> в диапазон <tt>[b1, b2]</tt>.<br>
+А вот статья из англоязычной Википедии о <a href="https://en.wikipedia.org/wiki/Linear_map" target="_blank">Linear mapping</a>.<br><br>
+
+<pre id="nearestPowerOfTwo"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('nearest power of two - ближайшая степень двойки')" onmouseout="hide()">.nearestPowerOfTwo</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('n - ')" onmouseout="hide()">n</a></span> )</pre>
+Возвращает ближайшую степень числа&nbsp;<tt>2</tt> для заданного числа&nbsp;<tt>n</tt>.<br><br>
+
+<pre id="nextPowerOfTwo"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('next power of two - следующая степень двойки')" onmouseout="hide()">.nextPowerOfTwo</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('n - ')" onmouseout="hide()">n</a></span> )</pre>
+Возвращает ближайшую степень числа&nbsp;<tt>2</tt> для заданного числа&nbsp;<tt>n</tt>, но которая больше числа <tt>n</tt>.<br><br>
+
+<pre id="radToDeg"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов radians<br>to degrees - радианы в градусы')" onmouseout="hide()">.radToDeg</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radians - радианы')" onmouseout="hide()">radians</a></span> )</pre>
+Конвертирует радианы в градусы.<br><br>
+
+<pre id="randFloat"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов random float -<br>случайное число с плавающей запятой')" onmouseout="hide()">.randFloat</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('low - низ')" onmouseout="hide()">low</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('high - верх')" onmouseout="hide()">high</a></span> )</pre>
+Возвращает случайное число с плавающей запятой в интервале чисел от <tt>low</tt> (нижняя граница) до <tt>high</tt> (верхняя граница интервала).<br><br>
+
+<pre id="randFloatSpread"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов random float spread<br>- случайное число с плавающей запятой')" onmouseout="hide()">.randFloatSpread</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('range - диапазон, ряд, пределы')" onmouseout="hide()">range</a></span> )</pre>
+Возвращает случайное число с плавающей запятой в интервале чисел от <tt>-range/2</tt> до <tt>range/2</tt>.<br><br>
+
+<pre id="randInt"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов random<br>integer - случайное целое число')" onmouseout="hide()">.randInt</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('low - низ')" onmouseout="hide()">low</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('high - верх')" onmouseout="hide()">high</a></span> )</pre>
+Возвращает случайное целое число в интервале от <tt>low</tt> (нижняя граница) до <tt>high</tt> (верхняя граница интервала).<br><br>
+
+<pre id="smoothstep"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('smooth step - ')" onmouseout="hide()">.smoothstep</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minimum - минимум, минимальный')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от maximum - максимальный, максимум')" onmouseout="hide()">max</a></span> )</pre>
+<div class=list><tt>x</tt> -- значение для вычисления, в зависимости от его позиции между значениями <tt>min</tt> и <tt>max</tt>.</div>
+<div class=list><tt>min</tt> -- любое значение&nbsp;<tt>x</tt> меньше значения <tt>min</tt> будет равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>max</tt> -- любое значение&nbsp;<tt>x</tt> больше значения <tt>max</tt> будет равно&nbsp;<tt>1</tt>.</div>
+Возвращает значение в диапазоне между <tt>0</tt> и <tt>1</tt>, представляющее процентное соотношение отрезков, на которые делит точка <tt>x</tt> перемещаясь между <tt>min</tt> и <tt>max</tt>, но все более сглаженное или замедленное при приближении <tt>x</tt> к <tt>min</tt> и <tt>max</tt>.<br>
+Подробности смотрите в статье Википедии <a href="http://en.wikipedia.org/wiki/Smoothstep" target="_blank">Smoothstep</a><br><br>
+
+<pre id="smootherstep"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('smoother step - ')" onmouseout="hide()">.smootherstep</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minimum - минимум, минимальный')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от maximum - максимальный, максимум')" onmouseout="hide()">max</a></span> )</pre>
+<div class=list><tt>x</tt> -- значение для вычисления, в зависимости от его позиции между значениями <tt>min</tt> и <tt>max</tt>.</div>
+<div class=list><tt>min</tt> -- любое значение <tt>x</tt> меньше значения <tt>min</tt> будет равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>max</tt> --  любое значение <tt>x</tt> больше значения <tt>max</tt> будет равно&nbsp;<tt>1</tt>.</div>
+Возвращает значение в диапазоне от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. Функция работает также как <tt>smoothstep</tt>, но ещё более плавно.
+Эта функция - вариант функции <tt>smoothstep</tt>, имеющий нулевые производные первого и второго порядка при&nbsp;<tt>x=0</tt> и&nbsp;<tt>x=1</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/MathUtils.js" target="_blank">MathUtils.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

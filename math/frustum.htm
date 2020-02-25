@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Frustum</h3>
+<a href="http://en.wikipedia.org/wiki/Frustum" target="_blank" onmouseover="show('frustum - усеченная пирамида')" onmouseout="hide()">Frustum</a>'ы используются для определения того, что находится в поле просмотра камеры. Они помогают ускорить процесс визуализации (рендеринга)
+- объект, находящийся вне области просмотра камеры (в виде усеченной пирамиды), вполне можно благополучно исключить из визуализации.<br>
+Статья о <a href="https://ru.wikipedia.org/wiki/%D0%A3%D1%81%D0%B5%D1%87%D1%91%D0%BD%D0%BD%D0%B0%D1%8F_%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%B0" target="_blank">усеченной пирамиде</a> в русскоязычной Википедии.<br>
+Этот класс в основном предназначен для внутреннего использования визуализатором (рендерером) для расчета областей просмотра (в виде усеченных пирамид) <a href="../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">камеры</a> и <a href="../lights/lightShadow.htm#camera" onmouseover="show('LightShadow.camera')" onmouseout="hide()">теневой камеры</a>.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Frustum( <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p0</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p1</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p2</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p3</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p4</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p5</a> )</pre>
+<div class=list><tt>p0</tt> -- дополнительный, необязательный параметр. Значением по умолчанию является новая <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскость</a>.</div>
+<div class=list><tt>p1</tt> -- дополнительный, необязательный параметр. Значением по умолчанию является новая <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскость</a>.</div>
+<div class=list><tt>p2</tt> -- дополнительный, необязательный параметр. Значением по умолчанию является новая <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскость</a>.</div>
+<div class=list><tt>p3</tt> -- дополнительный, необязательный параметр. Значением по умолчанию является новая <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскость</a>.</div>
+<div class=list><tt>p4</tt> -- дополнительный, необязательный параметр. Значением по умолчанию является новая <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскость</a>.</div>
+<div class=list><tt>p5</tt> -- дополнительный, необязательный параметр. Значением по умолчанию является новая <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскость</a>.</div>
+Создает новый Frustum.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="planes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('planes - плоскости')" onmouseout="hide()">.planes</a></span></pre>
+Массив из 6 <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскостей</a>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="clone"><a href="#" onmouseover="show('Frustum.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новый Frustum с точно такими же параметрами, что и у данной.<br><br>
+
+<pre id="containsPoint"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('contains point - содержит точку')" onmouseout="hide()">.containsPoint</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - проверяемый трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>).</div>
+Метод проверяет, находится ли точка (параметр <tt>point</tt>) в усеченной пирамиде области просмотра камеры (Frustum).<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Frustum.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Frustum.<br>frustum - усеченная пирамида')" onmouseout="hide()">frustum</a> )</pre>
+<div class=list><tt>frustum</tt> - копируемая усеченная пирамида (frustum).</div>
+Копирует свойства переданной <tt>frustum</tt> в данную.<br><br>
+
+<pre id="intersectsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects box - пересечение с параллелепипедом')" onmouseout="hide()">.intersectsBox</a></span>( <a href="box3.htm" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - <a href="box3.htm" onmouseover="show('Box3')" onmouseout="hide()">Box3</a> для проверки на пересечение.</div>
+Метод возвращает значение <tt>true</tt>, если параллелепипед пересекается с данной усеченной пирамидой области просмотра.<br><br>
+
+<pre id="intersectsObject"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects object - пересечение объекта')" onmouseout="hide()">.intersectsObject</a></span>( <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
+Метод проверяет, не пересекается ли с данной усеченной пирамидой области просмотра (Frustum) <a href="../core/geometry.htm#boundingSphere" onmouseover="show('Geometry.boundingSphere')" onmouseout="hide()">ограничительная сфера</a> вокруг <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">объекта</a>.<br>
+Обратите внимание, объект должен иметь <a href="../core/geometry.htm" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> или <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>, чтобы можно было рассчитать ограничительную сферу.<br><br>
+
+<pre id="intersectsSphere"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects sphere - пересечение сферы')" onmouseout="hide()">.intersectsSphere</a></span>( <a href="sphere.htm" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a> )</pre>
+<div class=list><tt>sphere</tt> - <a href="sphere.htm" onmouseover="show('Sphere')" onmouseout="hide()">Sphere</a> для проверки на пересечение.</div>
+Метод возвращает значение <tt>true</tt>, если сфера, переданная в аргументе <tt><a href="sphere.htm" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a></tt>, пересекается с данной усеченной пирамидой области просмотра (Frustum).<br><br>
+
+<pre id="intersectsSprite"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects sprite - пересечение спрайта')" onmouseout="hide()">.intersectsSprite</a></span>( <a href="../objects/sprite.htm" onmouseover="show('Sprite.<br>sprite - спрайт')" onmouseout="hide()">sprite</a> )</pre>
+Метод проверяет, не пересекается ли <a href="../objects/sprite.htm" onmouseover="show('Sprite')" onmouseout="hide()">спрайт</a> с данной усеченной пирамидой области просмотра (Frustum).<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Frustum.<br>set - установить')" onmouseout="hide()">.set</a>( <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p0</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p1</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p2</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p3</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p4</a>, <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">p5</a> )</pre>
+Метод устанавливает текущую усеченную пирамиду области просмотра камеры (Frustum) из переданных плоскостей. Никакого упорядочения плоскостей не предполагается.<br><br>
+
+<pre id="setFromProjectionMatrix"><a href="#" onmouseover="show('Frustum.<br>set from projection matrix - установить из матрицы')" onmouseout="hide()">.setFromProjectionMatrix</a>( <a href="matrix4.htm" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
+<div class=list><tt>matrix</tt> - проекционная четырехмерная матрица, используемая для установки плоскостей отсечения области просмотра камеры.</div>
+Метод устанавливает усеченную пирамиду области просмотра камеры (Frustum) из проекционной матрицы.
+</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Frustum.js" target="_blank">Frustum.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

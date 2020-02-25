@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3>PointsMaterial</h3>
+Материал, по умолчанию используемый классом <a href="../objects/points.htm" onmouseover="show('Points')" onmouseout="hide()">Points</a>.<br><br>
+<h4>Пример</h4>
+<pre>// This will add a starfield to the background of a scene
+// Этот код добавит звездное поле на задний план сцены
+var starsGeometry = new THREE.Geometry();<br>
+for ( var i = 0; i &lt; 10000; i ++ ) {
+  var star = new THREE.Vector3();
+  star.x = THREE.Math.randFloatSpread( 2000 );
+  star.y = THREE.Math.randFloatSpread( 2000 );
+  star.z = THREE.Math.randFloatSpread( 2000 );<br>
+  starsGeometry.vertices.push( star );
+}<br>
+var starsMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
+var starField = new THREE.Points( starsGeometry, starsMaterial );<br>
+scene.add( starField );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/misc_controls_fly" target="_blank">misc / controls / fly</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_drawcalls" target="_blank">webgl / buffergeometry / drawcalls</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_points" target="_blank">webgl / BufferGeometry / points</a>
+<a href="https://threejs.org/examples/webgl_buffergeometry_points_interleaved" target="_blank">webgl / BufferGeometry / points / interleaved</a>
+<a href="https://threejs.org/examples/webgl_camera" target="_blank">webgl / camera</a>
+<a href="https://threejs.org/examples/webgl_geometry_convex" target="_blank">webgl / geometry / convex</a>
+<a href="https://threejs.org/examples/webgl_geometry_shapes" target="_blank">webgl / geometry / shapes</a>
+<a href="https://threejs.org/examples/webgl_interactive_raycasting_points" target="_blank">webgl / interactive / raycasting / points</a>
+<a href="https://threejs.org/examples/webgl_multiple_elements_text" target="_blank">webgl / multiple / elements / text</a>
+<a href="https://threejs.org/examples/webgl_points_billboards" target="_blank">webgl / points / billboards</a>
+<a href="https://threejs.org/examples/webgl_points_billboards_colors" target="_blank">webgl / points / billboards / colors</a>
+<a href="https://threejs.org/examples/webgl_points_dynamic" target="_blank">webgl / points / dynamic</a>
+<a href="https://threejs.org/examples/webgl_points_random" target="_blank">webgl / points / random</a>
+<a href="https://threejs.org/examples/webgl_points_sprites" target="_blank">webgl / points / sprites</a>
+<a href="https://threejs.org/examples/webgl_trails" target="_blank">webgl / trails</a></pre><br>
+<h4>Конструктор</h4>
+<pre>PointsMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<script>document.write(note_0, note_01);</script><br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
+<div class=blockindent><br>
+<pre id="color"><a href="../math/color.htm" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+<a href="../math/color.htm" onmouseover="show('Color')" onmouseout="hide()">Цвет</a> материала, по умолчанию устанавливается как белый (<tt>0xffffff</tt>).<br><br>
+
+<pre id="isPointsMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is points material - является материалом точек')" onmouseout="hide()">.isPointsMaterial</a></span></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалом точек. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="map"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>map - карта')" onmouseout="hide()">.map</a></pre>
+Свойство устанавливает цвет точек используя данные из <a href="../textures/texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.<br><br>
+
+<pre id="size"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер')" onmouseout="hide()">.size</a></span></pre>
+Свойство устанавливает размер точек. Значение по умолчанию равно <tt>1.0</tt>.<br><br>
+
+<pre id="sizeAttenuation"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size attenuation - затухание (уменьшение) размера')" onmouseout="hide()">.sizeAttenuation</a></span></pre>
+Свойство определяет, будет ли размер точек уменьшаться с расстоянием. Значением по умолчанию является <tt>true</tt>.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/PointsMaterial.js" target="_blank">PointsMaterial.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

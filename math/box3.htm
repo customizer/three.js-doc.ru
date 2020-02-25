@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Box3</h3>
+Представляет собой прямоугольный параллелепипед или куб в 3-мерном пространстве.
+Основное назначение данного класса - представление  <a href="https://ru.wikipedia.org/wiki/AABB" target="_blank">прямоугольного параллелепипеда со сторонами, параллельными осям координат</a> (в англоязычном варианте это <a href="https://en.wikipedia.org/wiki/Minimum_bounding_box" target="_blank">Minimum Bounding Boxes</a>), для ограничения некоторых геометрических объектов в пространстве.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Box3( <a href="vector3.htm" onmouseover="show('Vector3.<br>сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">min</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">max</a> )</pre>
+<div class=list><tt>min</tt> - <a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a>,
+представляющий нижний предел значений координат <tt>(x, y, z)</tt> параллелепипеда, дополнительный, необязательный параметр.
+Значением по умолчанию является <tt>( +Infinity, +Infinity, +Infinity )</tt>.</div>
+<div class=list><tt>max</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>),
+представляющий наименьший верхний предел значений координат <tt>(x, y, z)</tt> параллелепипеда, дополнительный, необязательный параметр.
+Значением по умолчанию является <tt>( -Infinity, -Infinity, -Infinity )</tt>.</div>
+Создает Box3, с границами по <tt>min</tt> и <tt>max</tt>.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="isBox3"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is Box 3 - является трехмерным параллелепипедом')" onmouseout="hide()">.isBox3</a></span></pre>
+Свойство используется для проверки, является ли данный и производные от него классы Box3-ами. Значением по умолчанию является <tt>true</tt>.<br>
+Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
+
+<pre id="min"><a href="vector3.htm" onmouseover="show('Vector3.<br>сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">.min</a></pre>
+Трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий нижнюю границу значений координат <tt>(x, y, z)</tt> Box3.
+Значением по умолчанию является <tt>( +Infinity, +Infinity, +Infinity )</tt>.<br><br>
+
+<pre id="max"><a href="vector3.htm" onmouseover="show('Vector3.<br>сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">.max</a></pre>
+Трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий наименьшую верхнюю границу значений координат <tt>(x, y, z)</tt> Box3.
+Значением по умолчанию является <tt>( -Infinity, -Infinity, -Infinity )</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="applyMatrix4"><a href="#" onmouseover="show('Box3.<br>apply matrix 4 - применить четырехмерную матрицу')" onmouseout="hide()">.applyMatrix4</a>( <a href="matrix4.htm" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
+<div class=list><tt>matrix</tt> - применяемая Matrix4.</div>
+Метод преобразует данный Box3 посредством прилагаемой матрицы.<br><br>
+
+<pre id="clampPoint"><a href="vector3.htm" onmouseover="show('Vector3.<br>clamp point - зажать (закрепить) точку')" onmouseout="hide()">.clampPoint</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>target - цель, назначение')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>point</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector2</a>), который нужно зафиксировать.</div>
+<div class=list><tt>target</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), в который будет скопирован результат.</div>
+Метод <a href="https://en.wikipedia.org/wiki/Clamping_(graphics)" target="_blank" onmouseover="show('clamping - зажим, фиксация')" onmouseout="hide()">зажимает</a> <a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">точку</a> внутри границ заданного прямоугольника.
+<div class=note_trans><b>Примечание переводчика:</b> Вот перевод вышеприведенной статьи из английской Википедии<br>
+В компьютерной графике, зажим (clamping) - это процесс ограничения (фиксации) местоположения в какой-либо области.
+В отличие от упаковки (<a href="https://en.wikipedia.org/wiki/Wrapping_(graphics)" target="_blank">wrapping</a>'а), зажим (clamping) просто перемещает точку к ближайшему доступному значению.<br>
+В общем случае, зажим (clamping) используется для ограничения значения в заданном диапазоне. Например, в OpenGL <tt>glClearColor</tt> принимает значение <tt>GLclampf</tt>, которым является число <tt>gl</tt> с плавающей запятой, &#171;зажатое&#187; в диапазоне <tt>[0,1]</tt>.<br>
+Одно из многих применений зажима (clamping'а) в компьютерной графике является размещение некоей детали в полигоне - например, отверстие от пули в стене. Также зажим может использоваться для создания различных эффектов.</div><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Box3.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новый <tt>Box3</tt> с теми же самыми значениями <tt><a href="#min" onmouseover="show('Box3.min')" onmouseout="hide()">min</a></tt> и <tt><a href="#max" onmouseover="show('Box3.max')" onmouseout="hide()">max</a></tt> как у этого.<br><br>
+
+<pre id="containsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('contains box - содержит прямоугольник')" onmouseout="hide()">.containsBox</a></span>( <a href="#" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - параллелепипед <tt><a href="#" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a></tt> для проверки на включение.</div>
+Возвращает значение <tt>true</tt>, если в данный параллелепипед включен целиком параллелепипед, указанный в параметре <tt>box</tt>. Если данный параллелепипед и указанный в параметре <tt>box</tt> одинаковы, эта функция также возвратит значение <tt>true</tt>.<br><br>
+
+<pre id="containsPoint"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('contains point - содержит точку')" onmouseout="hide()">.containsPoint</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) для проверки на включение.</div>
+Возвращает значение <tt>true</tt>, если точка, указанная в параметре <tt>point</tt>, лежит внутри или на границах данного параллелепипеда.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Box3.<br>copy - копировать')" onmouseout="hide()">.copy</a> ( <a href="#" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+Копирует значения <tt><a href="#min" onmouseover="show('Box3.min')" onmouseout="hide()">min</a></tt> и <tt><a href="#max" onmouseover="show('Box3.max')" onmouseout="hide()">max</a></tt> из параллелепипеда, указанного в <tt>box</tt>, в данный параллелепипед.<br><br>
+
+<pre id="distanceToPoint"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to point - расстояние до точки')" onmouseout="hide()">.distanceToPoint</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) до которого измеряется расстояние.</div>
+Метод возвращает расстояние от любого края данного параллелепипеда до указанной точки. Если точка (параметр <tt>point</tt>) лежит внутри данного параллелепипеда, то расстояние будет равно <tt>0</tt>.<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - параллелепипед для сравнения с данным параллелепипедом.</div>
+Возвращает значение <tt>true</tt>, если данный параллелепипед и параллелепипед <tt>box</tt> имеют одни и те же нижние и верхние границы.<br><br>
+
+<pre id="expandByObject"><a href="#" onmouseover="show('Box3.<br>expand by object - расширить по объекту')" onmouseout="hide()">.expandByObject</a>( <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
+<div class=list><tt>object</tt> - <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>, под который нужно расширить параллелепипед.</div>
+Расширяет границы данного параллелепипеда, чтобы включить объект с его дочерними объектами с учетом их глобальных преобразований.<br><br>
+
+<pre id="expandByPoint"><a href="#" onmouseover="show('Box3.<br>expand by point - расширить до точки')" onmouseout="hide()">.expandByPoint</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), который должен быть включен в этот параллелепипед.</div>
+Расширяет границы данного параллелепипеда для включения точки, указанной в <tt>point</tt>.<br><br>
+
+<pre id="expandByScalar"><a href="#" onmouseover="show('Box3.<br>expand by scalar - расширить<br>на скаляр(ное значение)')" onmouseout="hide()">.expandByScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scalar - скаляр')" onmouseout="hide()">scalar</a></span> )</pre>
+<div class=list><tt>scalar</tt> - расстояние, на которое будет расширен параллелепипед.</div>
+Метод увеличивает каждое измерение данного параллелепипеда на скалярное значение. Если оно отрицательное, размеры параллелепипеда будут уменьшены.<br><br>
+
+<pre id="expandByVector"><a href="#" onmouseover="show('Box3.<br>expand by vector - расширить на вектор')" onmouseout="hide()">.expandByVector</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>vector - вектор')" onmouseout="hide()">vector</a> )</pre>
+<div class=list><tt>vector</tt> - трехмерный вектор, на который будет расширен параллелепипед.</div>
+Метод равносторонне расширяет данный параллелепипед на вектор, указанный в <tt>vector</tt>. Ширина данного параллелепипеда будет расширена на значение компонента <tt>x</tt> вектора в обоих направлениях.
+Высота данного параллелепипеда будет расширена на значение компонента <tt>y</tt> вектора в обоих направлениях. Глубина данного параллелепипеда будет расширена на значение компонента <tt>z</tt> вектора в обоих направлениях.<br><br>
+
+<pre id="getBoundingSphere"><a href="sphere.htm" onmouseover="show('Sphere.<br>get bounding sphere - получить сферу,<br>ограниченную (параллелепипедом)')" onmouseout="hide()">.getBoundingSphere</a>( <a href="sphere.htm" onmouseover="show('Sphere.<br>target - цель, назначение')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> — <tt>Sphere</tt>, в которую будет скопирован результат, полученный методом.</div>
+Метод получает <a href="sphere.htm" onmouseover="show('Sphere')" onmouseout="hide()"></a>, ограниченную параллелепипедом.<br><br>
+
+<pre id="getCenter"><a href="vector3.htm" onmouseover="show('Vector3.<br>get center - получить центр')" onmouseout="hide()">.getCenter</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), в который будет скопирован результат.</div>
+Метод возвращает центральную точку параллелепипеда в виде трехмерного вектора Vector3.<br><br>
+
+<pre id="getParameter"><a href="vector3.htm" onmouseover="show('Vector3.<br>get parameter - получить параметр')" onmouseout="hide()">.getParameter</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>point</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>).</div>
+<div class=list><tt>target</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), в который будет скопирован результат.</div>
+Возвращает точку как соотношение ширины, высоты и глубины данного параллелепипеда.<br><br>
+
+<pre id="getSize"><a href="vector3.htm" onmouseover="show('Vector3.<br>get size - получить размер')" onmouseout="hide()">.getSize</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), в который будет скопирован результат.</div>
+Возвращает ширину, высоту и глубину данного параллелепипеда.<br><br>
+
+<pre id="intersect"><a href="#" onmouseover="show('Box3.<br>intersect - перекрывать, пересекать')" onmouseout="hide()">.intersect</a>( <a href="#" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - параллелепипед, проверяемый на перекрытие.</div>
+Возвращает перекрытие данного параллелепипеда с параллелепипедом, переданным в аргументе <tt>box</tt>, устанавливая верхнюю границу данного параллелепипеда наименьшей из верхних границ двух параллелепипедов,
+а нижнюю границу данного параллелепипеда наибольшей из нижних границ двух параллелепипедов.<br><br>
+
+<pre id="intersectsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects box - пересечение с параллелепипедом')" onmouseout="hide()">.intersectsBox</a></span>( <a href="#" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - параллелепипед, проверяемый на пересечение.</div>
+Метод определяет, пересекается ли данный параллелепипед с параллелепипедом, указанным в <tt>box</tt>.<br><br>
+
+<pre id="intersectsPlane"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects plane - пересечение плоскости')" onmouseout="hide()">.intersectsPlane</a></span>( <a href="plane.htm" onmouseover="show('Plane.<br>plane - плоскость')" onmouseout="hide()">plane</a> )</pre>
+<div class=list><tt>plane</tt> - плоскость, проверяемая на пересечение.</div>
+Метод определяет, пересекается ли данный параллелепипед с плоскостью, указанной в <tt>plane</tt>.<br><br>
+
+<pre id="intersectsSphere"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects sphere - пересечение сферы')" onmouseout="hide()">.intersectsSphere</a></span>( <a href="sphere.htm" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a> )</pre>
+<div class=list><tt>sphere</tt> - сфера, проверяемая на пересечение.</div>
+Метод определяет, пересекается ли данный параллелепипед со сферой, указанной в <tt>sphere</tt>.<br><br>
+
+<pre id="intersectsTriangle"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects triangle - пересечение треугольника')" onmouseout="hide()">.intersectsTriangle</a></span>( <a href="triangle.htm" onmouseover="show('Triangle.<br>triangle - треугольник')" onmouseout="hide()">triangle</a> )</pre>
+<div class=list><tt>triangle</tt> - треугольник, проверяемый на пересечение.</div>
+Метод определяет, пересекается ли данный параллелепипед с треугольником, указанным в <tt>triangle</tt>.<br><br>
+
+<pre id="isEmpty"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is empty - является пустым')" onmouseout="hide()">.isEmpty</a></span>( )</pre>
+Метод возвращает значение <tt>true</tt>, если данный параллелепипед содержит ноль точек внутри своих границ.<br>
+Обратите внимание, что прямоугольник с одинаковыми нижними и верхними границами все же включает одну точку, которая принадлежит одновременно обоим границам.<br><br>
+
+<pre id="makeEmpty"><a href="#" onmouseover="show('Box3.<br>make empty - сделать пустым')" onmouseout="hide()">.makeEmpty</a>( )</pre>
+Метод делает данный параллелепипед пустым.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Box3.<br>set - установить')" onmouseout="hide()">.set</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>min - минимум')" onmouseout="hide()">min</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>max - максимум')" onmouseout="hide()">max</a> )</pre>
+<div class=list><tt>min</tt> - <a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a>, представляющий нижнюю границу значений координат <tt>(x, y, z)</tt> этого Box3.</div>
+<div class=list><tt>max</tt> - <a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a>, представляющий наименьшую верхнюю границу значений координат <tt>(x, y, z)</tt> Box3.</div>
+Метод устанавливает нижние и верхние границы значений координат <tt>x</tt>, <tt>y</tt> и <tt>z</tt> данного параллелепипеда.<br><br>
+
+<pre id="setFromArray"><a href="#" onmouseover="show('Box3.<br>set from array -<br>установить из массива')" onmouseout="hide()">.setFromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span> )</pre>
+<div class=list><tt>array</tt> -- массив с данными положения, которые результирующий параллелепипед должен охватить.</div>
+Устанавливает верхние и нижние границы данного параллелепипеда, чтобы он включал в себя все данные из <tt>array</tt>.<br><br>
+
+<pre id="setFromBufferAttribute"><a href="#" onmouseover="show('Box3.<br>set from buffer attribute -<br>установить из буферного атрибута')" onmouseout="hide()">.setFromBufferAttribute</a>( <a href="../core/bufferAttribute.htm" onmouseover="show('BufferAttribute.<br>attribute - атрибут')" onmouseout="hide()">attribute</a> )</pre>
+<div class=list><tt>attribute</tt> - буферный атрибут с данными положения, которые результирующий параллелепипед должен охватить.</div>
+Устанавливает верхние и нижние границы данного параллелепипеда, чтобы он включал в себя все данные из <tt>attribute</tt>.<br><br>
+
+<pre id="setFromCenterAndSize"><a href="#" onmouseover="show('Box3.<br>set from center and size -<br>установить из центра и размера')" onmouseout="hide()">.setFromCenterAndSize</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>size - размер')" onmouseout="hide()">size</a> )</pre>
+<div class=list><tt>center</tt> - желаемое положение центра параллелепипеда.</div>
+<div class=list><tt>size</tt> - желаемые размеры <tt>x</tt>, <tt>y</tt> и <tt>z</tt> параллелепипеда.</div>
+Метод центрирует данный параллелепипед по значениям, указанным в <tt>center</tt>, и устанавливает его ширину, высоту и глубину по значениям из <tt>size</tt>.<br><br>
+
+<pre id="setFromObject"><a href="#" onmouseover="show('Box3.<br>set from object - установить из объекта')" onmouseout="hide()">.setFromObject</a>( <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
+<div class=list><tt>object</tt> - <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> для которого рассчитывается ограничительная рамка, в виде параллелепипеда.</div>
+Метод рассчитывает, выровненную по "мировым" осям, ограничительную рамку вокруг трехмерного объекта (включая его потомков), с учетом "мировых" изменений для объекта и его потомков.<br><br>
+
+<pre id="setFromPoints"><a href="#" onmouseover="show('Box3.<br>set from points - установить из точек')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> - массив из трехмерных векторов (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), которые будет содержать получающийся параллелепипед.</div>
+Устанавливает верхние и нижние границы данного параллелепипеда так, что в него будут входить все точки, указанные в <tt>points</tt>.<br><br>
+
+<pre id="translate"><a href="#" onmouseover="show('Box3.<br>translate - перевод, перенос')" onmouseout="hide()">.translate</a> ( <a href="vector3.htm" onmouseover="show('Vector3.<br>offset - смещение')" onmouseout="hide()">offset</a> )</pre>
+<div class=list><tt>offset</tt> - направление и расстояние смещения.</div>
+Добавляет смещение к обоим, верхней и нижней, границам данного параллелепипеда, фактически перемещая этот прямоугольник в трехмерном пространстве.<br><br>
+
+<pre id="union"><a href="#" onmouseover="show('Box3.<br>union - соединение')" onmouseout="hide()">.union</a>( <a href="#" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - прямоугольный параллелепипед, который будет объединен с данным прямоугольным параллелепипедом.</div>
+Метод объединяет данный параллелепипед с параллелепипедом, представленным в параметре <tt>box</tt>, устанавливая верхнюю границу данного параллелепипеда по наибольшей из верхних границ обоих параллелепипедов,
+а нижнюю границу этого параллелепипеда по наименьшей из нижних границ обоих параллелепипедов.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/src/math/Box3.js" target="_blank">Box3.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

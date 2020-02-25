@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Line3</h3>
+Отрезок геометрической линии, представленный начальной (start) и конечной (end) точками.
+<h4>Конструктор</h4>
+<pre>Line3( <a href="vector3.htm" onmouseover="show('Vector3.<br>start - начало, старт')" onmouseout="hide()">start</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>end - конец')" onmouseout="hide()">end</a> )</pre>
+<div class=list><tt>start</tt> -- начало отрезка линии. Значением по умолчанию является <tt>(0, 0, 0)</tt>.</div>
+<div class=list><tt>end</tt> -- конец отрезка линии. Значением по умолчанию является <tt>(0, 0, 0)</tt>.</div>
+Создает новую <tt>Line3</tt>.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="start"><a href="vector3.htm" onmouseover="show('Vector3.<br>start - начало, старт')" onmouseout="hide()">.start</a></pre>
+Трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий начальную точку линии.<br><br>
+<pre id="end"><a href="vector3.htm" onmouseover="show('Vector3.<br>end - конец')" onmouseout="hide()">.end</a></pre>
+Трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), представляющий конечную точку линии.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="applyMatrix4"><a href="#" onmouseover="show('Line3.<br>apply matrix4 - применить четырехмерную матрицу')" onmouseout="hide()">.applyMatrix4</a>( <a href="matrix4.htm" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
+Метод применяет матричное преобразование к отрезку линии.<br><br>
+
+<pre id="at"><a href="vector3.htm" onmouseover="show('Vector3.<br>at - предлог &#34;в&#34; или &#34;на&#34;')" onmouseout="hide()">.at</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - сокращ. англ. слова target - цель')" onmouseout="hide()">t</a></span>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>t</tt> - используйте значения в диапазоне от <tt>0</tt> до <tt>1</tt> для возврата позиции вдоль отрезка линии.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Метод возвращает вектор в определенной позиции вдоль линии. При <tt>t = 0</tt> возвращается начальный вектор, а при <tt>t = 1</tt> - конечный вектор.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Line3.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новую <tt><a href="#" onmouseover="show('Line3')" onmouseout="hide()">Line3</a></tt> с теми же самыми начальным (<tt><a href="#start" onmouseover="show('Line3.start')" onmouseout="hide()">start</a></tt>) и конечным (<tt><a href="#end" onmouseover="show('Line3.end')" onmouseout="hide()">end</a></tt>) векторами, что и у данного.<br><br>
+
+<pre id="closestPointToPoint"><a href="vector3.htm" onmouseover="show('Vector3.<br>closest point to point - ближайшая точка к точке')" onmouseout="hide()">.closestPointToPoint</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clamp to line - прижать к линии')" onmouseout="hide()">clampToLine</a></span>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>point</tt> - точка, для которой определяется ближайшая точка на линии.</div>
+<div class=list><tt>clampToLine</tt> - будет ли возвращаемое значение "прижато" к отрезку линии.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если данный аргумент указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Метод возвращает точку на линии, ближайшую к точке, указанной в аргументе <tt>point</tt>. Если аргумент <tt>clampToLine</tt> указан как <tt>true</tt>, то возвращаемое значение будет "прижато" к отрезку линии.<br><br>
+
+<pre id="closestPointToPointParameter"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closest point to point parameter -<br>ближайшая точка к параметру точки')" onmouseout="hide()">.closestPointToPointParameter</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clamp to line - прижать к линии')" onmouseout="hide()">clampToLine</a></span> )</pre>
+<div class=list><tt>point</tt> - точка, для которой возвращаются параметры. the point for which to return a point parameter.</div>
+<div class=list><tt>clampToLine</tt> - будет ли результат метода "зажат" в диапазоне <tt>[0, 1]</tt>.</div>
+Метод возвращает параметр точки исходя из ближайшей точки как проекции на отрезок линии.
+Returns a point parameter based on the closest point as projected on the line segement.
+Если <tt>clampToLine</tt> установлен как <tt>true</tt>, возвращаемое значение будет в диапазоне от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Line3.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Line3.<br>line - линия')" onmouseout="hide()">line</a> )</pre>
+Метод копирует начальный (<tt><a href="#start" onmouseover="show('Line3.start')" onmouseout="hide()">start</a></tt>) и конечный (<tt><a href="#end" onmouseover="show('Line3.end')" onmouseout="hide()">end</a></tt>) векторы линии, переданной в аргументе <tt><a href="#" onmouseover="show('Line3.<br>line - линия')" onmouseout="hide()">line</a></tt>, в данную линию.<br><br>
+
+<pre id="delta"><a href="vector3.htm" onmouseover="show('Vector3.<br>delta - название буквы греческого алфавита дельта,<br>обычно используется для обозначения промежутка<br>между какими-либо точками')" onmouseout="hide()">.delta</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если данный аргумент указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Метод возвращает дельта-вектор отрезка линии (т.е. конечный вектор - <tt><a href="#end" onmouseover="show('Line3.end')" onmouseout="hide()">end</a></tt> минус начальный вектор - <tt><a href="#start" onmouseover="show('Line3.start')" onmouseout="hide()">start</a></tt>).<br><br>
+
+<pre id="distance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">.distance</a></span>( )</pre>
+Метод возвращает <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">эвклидово расстояние</a> (расстояние по прямой)
+между начальной (<tt><a href="#start" onmouseover="show('Line3.start')" onmouseout="hide()">start</a></tt>) и конечной (<tt><a href="#end" onmouseover="show('Line3.end')" onmouseout="hide()">end</a></tt>) точками линии.<br>
+Вот статья русскоязычной Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">Эвклидовой метрике</a>.<br><br>
+
+<pre id="distanceSq"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов distance square - квадрат расстояния')" onmouseout="hide()">.distanceSq</a></span>( )</pre>
+Метод возвращает квадрат <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">эвклидова расстояния</a> (расстояние по прямой)
+между начальным (<tt><a href="#start" onmouseover="show('Line3.start')" onmouseout="hide()">start</a></tt>) и конечным (<tt><a href="#end" onmouseover="show('Line3.end')" onmouseout="hide()">end</a></tt>) векторами линии.<br>
+Вот статья русскоязычной Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">Эвклидовой метрике</a>.<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Line3.<br>line - линия')" onmouseout="hide()">line</a> )</pre>
+<div class=list><tt>line</tt> - линия (<a href="#" onmouseover="show('Line3')" onmouseout="hide()">Line3</a>), которая будет сравниваться с данной линией.</div>
+Метод возвращает значение <tt>true</tt>, если обе (и начальная - <tt><a href="#start" onmouseover="show('Line3.start')" onmouseout="hide()">start</a></tt>, и конечная - <tt><a href="#end" onmouseover="show('Line3.end')" onmouseout="hide()">end</a></tt>) точки равны.<br><br>
+
+<pre id="getCenter"><a href="vector3.htm" onmouseover="show('Vector3.<br>get center - получить центр')" onmouseout="hide()">.getCenter</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если данный аргумент указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Метод возвращает центр отрезка линии.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Line3.<br>set - установить')" onmouseout="hide()">.set</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>start - начало, старт')" onmouseout="hide()">start</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>end - конец')" onmouseout="hide()">end</a> )</pre>
+<div class=list><tt>start</tt> - вектор, который задает начальную (<tt><a href="#start" onmouseover="show('Line3.start')" onmouseout="hide()">start</a></tt>) точку линии.</div>
+<div class=list><tt>end</tt> - вектор, который задает конечную (<tt><a href="#end" onmouseover="show('Line3.end')" onmouseout="hide()">end</a></tt>) точку линии.</div>
+Метод устанавливает значения начальной и конечной точек линии, копируя их из представленных векторов.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Line3.js" target="_blank">Line3.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

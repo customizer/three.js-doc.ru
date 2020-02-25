@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Matrix4</h3>
+Класс, представляющий <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0_(%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)" target="_blank">матрицу</a> <tt>4</tt>&#215;<tt>4</tt> (англоязычный вариант <a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)" target="_blank">matrix</a>).<br>
+Наиболее распространенным использование матрицы <tt>4</tt>&#215;<tt>4</tt> в трехмерной компьютерной графике является  <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%BE%D0%B4%D0%B0" target="_blank">матрица перехода</a>
+(в англоязычном варианте <a href="https://en.wikipedia.org/wiki/Transformation_matrix" target="_blank">Transformation Matrix</a>).
+Чтобы иметь представление о матрицах перехода (матрицах трансформаций), используемых в WebGL, ознакомьтесь с <a href="http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/" target="_blank">этим руководством</a>.
+Вот эта же <a href="http://www.opengl-tutorial.org/ru/beginners-tutorials/tutorial-3-matrices/" target="_blank">статья на русском языке</a>.<br>
+При помощи перемножения с матрицей, становятся возможными преобразования трехмерного вектора, представляющего точку в трехмерном пространстве, такие как перенос, вращение, сдвиг, масштабирование, отражение, ортогональное или перспективное проецирование и так далее.
+Это называется применением матрицы к вектору.<br>
+Каждый <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">трехмерный объект (Object3D)</a> имеет три взаимосвязанных четырехмерных матрицы:
+<ul><li><a href="../core/object3D.htm#matrix" onmouseover="show('Object3D.matrix')" onmouseout="hide()">Object3D.matrix</a>: здесь хранится локальное изменение объекта.</li>
+<li><a href="../core/object3D.htm#matrixWorld" onmouseover="show('Object3D.matrixWorld')" onmouseout="hide()">Object3D.matrixWorld</a>: глобальное или "мировое" изменение объекта. Это преобразование объекта относительно его родителя. Если у объекта нет родителя, то здесь все идентично с локальным изменением.</li>
+<li><a href="../core/object3D.htm#modelViewMatrix" onmouseover="show('Object3D.modelViewMatrix')" onmouseout="hide()">Object3D.modelViewMatrix</a>: здесь представлено преобразование объекта относительно системы координат камеры. Матрица <tt>modelViewMatrix</tt> объекта - это матрица <tt>matrixWorld</tt> предварительно перемноженная с матрицей <tt>matrixWorldInverse</tt> камеры.</li></ul>
+<a href="../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Камеры</a> имеют две дополнительные матрицы Matrix4:
+<ul><li><a href="../cameras/camera.htm#matrixWorldInverse" onmouseover="show('Camera.matrixWorldInverse')" onmouseout="hide()">Camera.matrixWorldInverse</a>: матрица просмотра - инверсия матрицы "мира" (<tt>matrixWorld</tt>) камеры.</li>
+<li><a href="../cameras/camera.htm#projectionMatrix" onmouseover="show('Camera.projectionMatrix')" onmouseout="hide()">Camera.projectionMatrix</a>: представляет сведения о том, как проецировать сцену на пространство клипа.</li></ul>
+<div class=note><b>Примечание:</b> <a href="../core/object3D.htm#normalMatrix" onmouseover="show('Object3D.normalMatrix')" onmouseout="hide()">Object3D.normalMatrix</a> является не Matrix4, а <a href="matrix3.htm" onmouseover="show('Matrix3')" onmouseout="hide()">Matrix3</a>.</div>
+
+<h5>Примечание о упорядочивании по рядам и колонкам</h5>
+Метод <tt><a href="#set" onmouseover="show('Matrix4.set')" onmouseout="hide()">set()</a></tt> принимает аргументы, <a href="https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order" target="_blank">упорядоченные по рядам</a>, в то время как внутри они хранятся в массиве <a href="#elements" onmouseover="show('Matrix4.elements')" onmouseout="hide()">элементов</a>, упорядоченном по колонкам.<br>
+Это значит, что вызов
+<pre>var m = new Matrix4();<br>
+m.set( 11, 12, 13, 14,
+       21, 22, 23, 24,
+       31, 32, 33, 34,
+       41, 42, 43, 44 );</pre>
+приведет к массиву элементов, содержащему:
+<pre>m.elements = [ 11, 21, 31, 41,
+               12, 22, 32, 42,
+               13, 23, 33, 43,
+               14, 24, 34, 44 ];</pre>
+и внутри все вычисления выполняются  с использованием упорядочивания по колонкам.
+Однако, поскольку фактически порядок размещения элементов в матрице, с точки зрения математики, не имеет никакого значения, а большинство людей привыкли представлять матрицы упорядоченными по строкам, то в документации <em>three.js</em> матрицы также показываются упорядоченными по строкам.
+Просто имейте ввиду, чтобы понять смысл расчетов, при чтении исходного кода нужно переставлять
+(<a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">транспонировать</a>,
+в англоязычном варианте - <a href="https://en.wikipedia.org/wiki/Transpose" target="_blank">transpose</a>) любые матрицы, представленные здесь.
+То есть, нужно каждую строчку исходной матрицы записать в виде столбца в том же порядке.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Matrix4()</pre>
+Создает и инициализирует Matrix4 как <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">единичную матрицу</a> <tt>4</tt>&#215;<tt>4</tt>
+(в англоязычном варианте это <a href="https://en.wikipedia.org/wiki/Identity_matrix" target="_blank">identity matrix</a>).<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="elements"><span onclick="showClick(type_float32array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('elements - элементы, компоненты, составные части')" onmouseout="hide()">.elements</a></span></pre>
+Список значений матрицы, <a href="https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order" target="_blank">упорядоченный по колонкам</a>.<br><br>
+
+<pre id="isMatrix4"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is matrix 4 - является матрицей <tt>4</tt>&#215;<tt>4</tt>')" onmouseout="hide()">.isMatrix4</a></span></pre>
+Свойство используется для проверки, является ли данный и производные от него классы матрицами <tt>4</tt>&#215;<tt>4</tt>. Значением по умолчанию является <tt>true</tt>.<br>
+Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="applyToBufferAttribute"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('apply to buffer attribute -<br>применить к буферному атрибуту')" onmouseout="hide()">.applyToBufferAttribute</a></span>( <a href="../core/bufferAttribute.htm" onmouseover="show('BufferAttribute')" onmouseout="hide()">attribute</a> )</pre>
+<div class=list><tt>attribute</tt> - атрибут из чисел с плавающей запятой, представляющий трехмерные векторы.</div>
+Умножает (применяет) данную матрицу на каждый трехмерный вектор, переданный в <tt><a href="../core/bufferAttribute.htm" onmouseover="show('BufferAttribute')" onmouseout="hide()">attribute</a></tt>.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Matrix4.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Создает новую матрицу Matrix4 с точно такими же <a href="#elements" onmouseover="show('Matrix4.elements')" onmouseout="hide()">элементами</a> как в данной.<br><br>
+
+<pre id="compose"><a href="#" onmouseover="show('Matrix4.<br>compose - составить')" onmouseout="hide()">.compose</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>position - позиция, положение, место')" onmouseout="hide()">position</a>, <a href="quaternion.htm" onmouseover="show('Quaternion')" onmouseout="hide()">quaternion</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>scale - масштаб, шкала')" onmouseout="hide()">scale</a> )</pre>
+Метод устанавливает в данную матрицу изменения, составленные из положения (параметр <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>position - позиция, положение, место')" onmouseout="hide()">position</a></tt>), кватерниона (параметр <tt><a href="quaternion.htm" onmouseover="show('Quaternion')" onmouseout="hide()">quaternion</a></tt>) и масштаба (параметр <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>scale - масштаб, шкала')" onmouseout="hide()">scale</a></tt>).
+При этом внутри метода сначала вызывается метод <tt><a href="#makeRotationFromQuaternion" onmouseover="show('Matrix4.makeRotationFromQuaternion')" onmouseout="hide()">makeRotationFromQuaternion</a>( <a href="quaternion.htm" onmouseover="show('Quaternion')" onmouseout="hide()">quaternion</a> )</tt>,
+затем метод <tt><a href="#scale" onmouseover="show('Matrix4.scale')" onmouseout="hide()">scale</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>scale - масштаб, шкала')" onmouseout="hide()">scale</a> )</tt>
+и наконец метод <tt><a href="#setPosition" onmouseover="show('Matrix4.setPosition')" onmouseout="hide()">setPosition</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>position - позиция, положение, место')" onmouseout="hide()">position</a> )</tt>.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Matrix4.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Метод копирует <a href="#elements" onmouseover="show('Matrix4.elements')" onmouseout="hide()">элементы</a> матрицы, указанной в параметре <tt><a href="#" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt>, в данную матрицу.<br><br>
+
+<pre id="copyPosition"><a href="#" onmouseover="show('Matrix4.<br>copy position - копировать положение')" onmouseout="hide()">.copyPosition</a>( <a href="#" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Копирует компонент перемещения (трансляции) из матрицы, переданной в параметре <tt>m</tt>, в компонент перемещения данной матрицы.<br><br>
+
+<pre id="decompose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decompose - разложить на составные части')" onmouseout="hide()">.decompose</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>position - позиция, положение, место')" onmouseout="hide()">position</a>, <a href="quaternion.htm" onmouseover="show('Quaternion')" onmouseout="hide()">quaternion</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>scale - масштаб, шкала')" onmouseout="hide()">scale</a> )</pre>
+Метод разлагает данную матрицу на составные части - положение (<tt><a href="vector3.htm" onmouseover="show('Vector3.<br>position - позиция, положение, место')" onmouseout="hide()">position</a></tt>), кватернион (<tt><a href="quaternion.htm" onmouseover="show('Quaternion')" onmouseout="hide()">quaternion</a></tt>) и масштаб (<tt><a href="vector3.htm" onmouseover="show('Vector3.<br>scale - масштаб, шкала')" onmouseout="hide()">scale</a></tt>).<br><br>
+
+<pre id="determinant"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('determinant - определитель, детерминант')" onmouseout="hide()">.determinant</a></span>( )</pre>
+Метод вычисляет и возвращает <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C" target="_blank">определитель</a> (<a href="https://en.wikipedia.org/wiki/Determinant" target="_blank">determinant</a>) данной матрицы.<br>
+Выполняется на основе метода, изложенного <a href="http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm" target="_blank">здесь</a>.<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равнять')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Возвращает значение <tt>true</tt>, если данная матрица и матрица, указанная в параметре <tt>m</tt>, равны.<br><br>
+
+<pre id="extractBasis"><a href="#" onmouseover="show('Matrix4.<br>extract basis - извлечь базис,<br>т.е. основные (элементы)')" onmouseout="hide()">.extractBasis</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>x axis - ось x')" onmouseout="hide()">xAxis</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>y axis - ось y')" onmouseout="hide()">yAxis</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>z axis - ось z')" onmouseout="hide()">zAxis</a> )</pre>
+Метод извлекает <a href="https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D0%B7%D0%B8%D1%81" target="_blank">базис</a> (<a href="https://en.wikipedia.org/wiki/Basis_(linear_algebra)" target="_blank">basis</a>),
+т.е. основные элементы матрицы, по трем представленным осевым векторам. Если задана такая матрица:
+<pre>a, b, c, d,
+e, f, g, h,
+i, j, k, l,
+m, n, o, p</pre>
+то <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>x axis - ось x')" onmouseout="hide()">xAxis</a></tt>, <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>y axis - ось y')" onmouseout="hide()">yAxis</a></tt>, <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>z axis - ось z')" onmouseout="hide()">zAxis</a></tt> будут установлены как:
+<pre>xAxis = (a, e, i)
+yAxis = (b, f, j)
+zAxis = (c, g, k)</pre><br>
+
+<pre id="extractRotation"><a href="#" onmouseover="show('Matrix4.<br>extract rotation - извлечь (элемент) вращения')" onmouseout="hide()">.extractRotation</a>( <a href="#" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Метод извлекает из предоставленной матрицы <tt><a href="#" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt> компонент вращения и устанавливает его как компонент вращения данной матрицы.<br><br>
+
+<pre id="fromArray"><a href="#" onmouseover="show('Matrix4.<br>from array - из массива')" onmouseout="hide()">.fromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - массив, из которого считываются элементы.</div>
+<div class=list><tt>offset</tt> - смещение в массиве (дополнительный, необязательный аргумент). Значением по умолчанию является <tt>0</tt>.</div>
+Устанавливает элементы данной матрицы на основе массива (параметр <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span></tt>),
+<a href="https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order" target="_blank">упорядоченного по колонкам</a>.<br><br>
+
+<pre id="getInverse"><a href="#" onmouseover="show('Matrix4.<br>get inverse - получить инверсию')" onmouseout="hide()">.getInverse</a>( <a href="#" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('throw on degenerate - выбросить при вырождении')" onmouseout="hide()">throwOnDegenerate</a></span> )</pre>
+<div class=list><tt>m</tt> - матрица, которая берется для инвертирования.</div>
+<div class=list><tt>throwOnDegenerate</tt> - если установлено значение <tt>true</tt>, то при вырожденной матрице (необратимой) будет выброшено сообщение об ошибке. Дополнительный, необязательный аргумент.</div>
+Метод устанавливает данную матрицу <a href="https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%B2%D1%8B%D1%80%D0%BE%D0%B6%D0%B4%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">обратной</a> (<a href="https://en.wikipedia.org/wiki/Invertible_matrix" target="_blank">inverse</a>) по отношению к матрице, переданной в параметре <tt><a href="#" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a></tt>,
+при помощи способа, <a href="http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm" target="_blank">описанного здесь</a>.
+Если аргумент <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('throw on degenerate - выбросить при вырождении')" onmouseout="hide()">throwOnDegenerate</a></span></tt> не установлен,
+а матрица необратима (т.е. <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%80%D0%B0%D1%82%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">обратной матрицы</a> не существует),
+то данная матрица устанавливается как <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">единичная матрица</a>&nbsp;<tt>4</tt>&#215;<tt>4</tt>.<br><br>
+
+<pre id="getMaxScaleOnAxis"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get max scale on axis - получить<br>максимальный масштаб по осям')" onmouseout="hide()">.getMaxScaleOnAxis</a></span>( )</pre>
+Метод получает максимальное значение масштаба по трем осям.<br><br>
+
+<pre id="identity"><a href="#" onmouseover="show('Matrix4.<br>identity - идентичный, единичный')" onmouseout="hide()">.identity</a>( )</pre>
+Метод сбрасывает данную матрицу в <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">единичную матрицу</a>
+(англоязычный вариант - <a href="https://en.wikipedia.org/wiki/Identity_matrix" target="_blank">identity matrix</a>).<br><br>
+
+<pre id="lookAt"><a href="#" onmouseover="show('Matrix4.<br>look at - смотреть на')" onmouseout="hide()">.lookAt</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>eye - глаз')" onmouseout="hide()">eye</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>up - вверх')" onmouseout="hide()">up</a> )</pre>
+Метод создает матрицу вращения, наблюдающую из позиции, переданной в параметре <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>eye - глаз')" onmouseout="hide()">eye</a></tt>, в направлении координат,
+переданных в параметре <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a></tt>, ориентируясь по вектору, переданному в&nbsp;<tt><a href="vector3.htm" onmouseover="show('Vector3.<br>up - вверх')" onmouseout="hide()">up</a></tt>.<br><br>
+
+<pre id="makeRotationAxis"><a href="#" onmouseover="show('Matrix4.<br>make rotation axis - сделать оси вращения')" onmouseout="hide()">.makeRotationAxis</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>axis - оси')" onmouseout="hide()">axis</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - буква греческого алфавита тэта')" onmouseout="hide()">theta</a></span> )</pre>
+<div class=list><tt>axis</tt> — оси вращения, должны быть нормализованы.</div>
+<div class=list><tt>theta</tt> — угол поворота в радианах.</div>
+Метод устанавливает данную матрицу как изменение вращения вокруг <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>axis - оси')" onmouseout="hide()">axis</a></tt> на угол
+<tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - буква греческого алфавита тэта')" onmouseout="hide()">theta</a></span></tt> в радианах.
+Это немного спорная, но математически верная альтернатива вращению посредством кватернионов (<a href="quaternion.htm" onmouseover="show('Quaternion')" onmouseout="hide()">Quaternion</a>).
+Посмотрите обсуждение этой темы <a href="https://www.gamedev.net/articles/programming/math-and-physics/do-we-really-need-quaternions-r1199/" target="_blank">здесь</a>.<br><br>
+
+<pre id="makeBasis"><a href="#" onmouseover="show('Matrix4.<br>make basis - сделать основные (элементы)')" onmouseout="hide()">.makeBasis</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>x axis - ось x')" onmouseout="hide()">xAxis</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>y axis - ось y')" onmouseout="hide()">yAxis</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>z axis - ось z')" onmouseout="hide()">zAxis</a> )</pre>
+Метод устанавливает данную матрицу как <a href="https://en.wikipedia.org/wiki/Basis_(linear_algebra)" target="_blank">базовую</a>, состоящую из трех предоставленных базовых векторов:
+<pre>xAxis.x, yAxis.x, zAxis.x, 0,
+xAxis.y, yAxis.y, zAxis.y, 0,
+xAxis.z, yAxis.z, zAxis.z, 0,
+   0,       0,       0,    1</pre><br>
+
+<pre id="makePerspective"><a href="#" onmouseover="show('Matrix4.<br>make perspective - сделать перспективную (проекцию)')" onmouseout="hide()">.makePerspective</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('left - левая')" onmouseout="hide()">left</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('right - правая')" onmouseout="hide()">right</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('top - верхняя')" onmouseout="hide()">top</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bottom - нижняя')" onmouseout="hide()">bottom</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near - ближняя')" onmouseout="hide()">near</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far - дальняя')" onmouseout="hide()">far</a></span> )</pre>
+Метод создает матрицу <a href="https://en.wikipedia.org/wiki/3D_projection#Perspective_projection" target="_blank">перспективной проекции</a>.
+Она используется внутри <em>three.js</em> методом <a href="../cameras/perspectiveCamera.htm#updateProjectionMatrix" onmouseover="show('PerspectiveCamera.updateProjectionMatrix')" onmouseout="hide()">PerspectiveCamera.updateProjectionMatrix</a>.<br><br>
+
+<pre id="makeOrthographic"><a href="#" onmouseover="show('Matrix4.<br>make orthographic - сделать ортогональную (проекцию)')" onmouseout="hide()">.makeOrthographic</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('left - левая')" onmouseout="hide()">left</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('right - правая')" onmouseout="hide()">right</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('top - верхняя')" onmouseout="hide()">top</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bottom - нижняя')" onmouseout="hide()">bottom</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near - ближняя')" onmouseout="hide()">near</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far - дальняя')" onmouseout="hide()">far</a></span> )</pre>
+Метод создает матрицу <a href="https://en.wikipedia.org/wiki/Orthographic_projection" target="_blank">ортогональной проекции</a>.
+Она используется внутри <em>three.js</em> методом <a href="../cameras/orthographicCamera.htm#updateProjectionMatrix" onmouseover="show('OrthographicCamera.updateProjectionMatrix')" onmouseout="hide()">OrthographicCamera.updateProjectionMatrix</a>.<br><br>
+
+<pre id="makeRotationFromEuler"><a href="#" onmouseover="show('Matrix4.<br>make rotation from Euler -<br>сделать (компонент) вращения<br>по (углам) Эйлера')" onmouseout="hide()">.makeRotationFromEuler</a>( <a href="euler.htm" onmouseover="show('Euler')" onmouseout="hide()">euler</a> )</pre>
+Устанавливает компонент вращения (левую верхнюю матрицу <tt>3&#215;3</tt>) данной матрицы как поворот, определенный представленными <a href="euler.htm" onmouseover="show('Euler')" onmouseout="hide()">углами Эйлера</a> (параметр <tt><a href="euler.htm" onmouseover="show('Euler')" onmouseout="hide()">euler</a></tt>).
+Оставшаяся часть матрицы устанавливается как единичная. В зависимости от свойства <tt><a href="euler.htm#order" onmouseover="show('Euler.order')" onmouseout="hide()">order</a></tt> <a href="euler.htm" onmouseover="show('Euler')" onmouseout="hide()">угла Эйлера</a>, возможны шесть вариантов.
+Полный список смотрите на <a href="https://en.wikipedia.org/wiki/Euler_angles#Rotation_matrix" target="_blank">этой странице</a>.
+Вот <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0_%D0%BF%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D1%82%D0%B0" target="_blank">матрица поворота</a> на русском языке и отдельно <a href="https://en.wikipedia.org/wiki/Rotation_matrix" target="_blank">rotation matrix</a> на английском.<br><br>
+
+<pre id="makeRotationFromQuaternion"><a href="#" onmouseover="show('Matrix4.<br>make rotation from quaternion -<br>сделать (компонент) вращения по<br>кватерниону')" onmouseout="hide()">.makeRotationFromQuaternion</a>( <a href="quaternion.htm" onmouseover="show('Quaternion.<br>q - сокращ. англ. слова quaternion - кватернион')" onmouseout="hide()">q</a> )</pre>
+Устанавливает компонент вращения данной матрицы как поворот, определенный кватернионом (параметр <tt><a href="quaternion.htm" onmouseover="show('Quaternion.<br>q - сокращ. англ. слова quaternion - кватернион')" onmouseout="hide()">q</a></tt>), как описано <a href="https://en.wikipedia.org/wiki/Rotation_matrix#Quaternion" target="_blank">здесь</a>.
+Оставшаяся часть матрицы устанавливается как единичная. Так при заданном <tt>q = w + xi + yj + zk</tt>, результирующей матрицей будет:
+<pre>1-2y<sup>2</sup>-2z<sup>2</sup>    2xy-2zw    2xz+2yw    0
+2xy+2zw      1-2x<sup>2</sup>-2z<sup>2</sup>  2yz-2xw    0
+2xz-2yw      2yz+2xw    1-2x<sup>2</sup>-2y<sup>2</sup>  0
+0            0          0          1</pre><br>
+
+<pre id="makeRotationX"><a href="#" onmouseover="show('Matrix4.<br>make rotation X - сделать поворот (вокруг оси X)')" onmouseout="hide()">.makeRotationX</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span> )</pre>
+<div class=list><tt>theta</tt> — угол поворота в радианах.</div>
+Метод устанавливает данную матрицу как изменение поворота вокруг оси&nbsp;<tt>X</tt> на угол, указанный в параметре <tt>theta</tt> (&#952;), в радианах.
+В результате получится матрица:
+<pre>1    0        0      0
+0  cos(&#952;)  -sin(&#952;)   0
+0  sin(&#952;)   cos(&#952;)   0
+0    0        0      1</pre><br>
+
+<pre id="makeRotationY"><a href="#" onmouseover="show('Matrix4.<br>make rotation Y - сделать поворот (вокруг оси Y)')" onmouseout="hide()">.makeRotationY</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span> )</pre>
+<div class=list><tt>theta</tt> — угол поворота в радианах.</div>
+Метод устанавливает данную матрицу как изменение поворота вокруг оси&nbsp;<tt>Y</tt> на угол, указанный в параметре <tt>theta</tt> (&#952;), в радианах.
+В результате получится матрица:
+<pre> cos(&#952;)  0  sin(&#952;)  0
+   0     1    0     0
+-sin(&#952;)  0  cos(&#952;)  0
+   0     0    0     1</pre><br>
+
+<pre id="makeRotationZ"><a href="#" onmouseover="show('Matrix4.<br>make rotation Z - сделать поворот (вокруг оси Z)')" onmouseout="hide()">.makeRotationZ</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - название буквы греческого алфавита тэта')" onmouseout="hide()">theta</a></span> )</pre>
+<div class=list><tt>theta</tt> — угол поворота в радианах.</div>
+Метод устанавливает данную матрицу как изменение поворота вокруг оси&nbsp;<tt>Z</tt> на угол, указанный в параметре <tt>theta</tt> (&#952;), в радианах.
+В результате получится матрица:
+<pre>cos(&#952;) -sin(&#952;)  0   0
+sin(&#952;)  cos(&#952;)  0   0
+  0      0      1   0
+  0      0      0   1</pre><br>
+
+<pre id="makeScale"><a href="#" onmouseover="show('Matrix4.<br>make scale - сделать масштабирование')" onmouseout="hide()">.makeScale</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ось X')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - ось Y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - ось Z')" onmouseout="hide()">z</a></span> )</pre>
+<div class=list><tt>x</tt> - величина масштабирования по оси&nbsp;<tt>X</tt>.</div>
+<div class=list><tt>y</tt> - величина масштабирования по оси&nbsp;<tt>Y</tt>.</div>
+<div class=list><tt>z</tt> - величина масштабирования по оси&nbsp;<tt>Z</tt>.</div>
+Устанавливает данную матрицу в измененном масштабе:
+<pre>x, 0, 0, 0,
+0, y, 0, 0,
+0, 0, z, 0,
+0, 0, 0, 1</pre><br>
+
+<pre id="makeShear"><a href="#" onmouseover="show('Matrix4.<br>make shear - сделать сдвиг')" onmouseout="hide()">.makeShear</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - ось X')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - ось Y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - ось Z')" onmouseout="hide()">z</a></span> )</pre>
+<div class=list><tt>x</tt> - величина сдвига по оси&nbsp;<tt>X</tt>.</div>
+<div class=list><tt>y</tt> - величина сдвига по оси&nbsp;<tt>Y</tt>.</div>
+<div class=list><tt>z</tt> - величина сдвига по оси&nbsp;<tt>Z</tt>.</div>
+Устанавливает данную матрицу с изменением на величину сдвига:
+<pre>1, y, z, 0,
+x, 1, z, 0,
+x, y, 1, 0,
+0, 0, 0, 1</pre><br>
+
+<pre id="makeTranslation"><a href="#" onmouseover="show('Matrix4.<br>make translation - сделать перемещение')" onmouseout="hide()">.makeTranslation</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата z')" onmouseout="hide()">z</a></span> )</pre>
+<div class=list><tt>x</tt> - величина для переноса по оси&nbsp;<tt>X</tt>.</div>
+<div class=list><tt>y</tt> - величина для переноса по оси&nbsp;<tt>Y</tt>.</div>
+<div class=list><tt>z</tt> - величина для переноса по оси&nbsp;<tt>Z</tt>.</div>
+Устанавливает данную матрицу с изменением перемещения:
+<pre>1, 0, 0, x,
+0, 1, 0, y,
+0, 0, 1, z,
+0, 0, 0, 1</pre><br>
+
+<pre id="multiply"><a href="#" onmouseover="show('Matrix4.<br>multiply - умножать')" onmouseout="hide()">.multiply</a>( <a href="#" onmouseover="show('Matrix4.<br>сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Последующее перемножение данной матрицы на матрицу, указанную в аргументе&nbsp;<tt>m</tt>.<br><br>
+
+<pre id="multiplyMatrices"><a href="#" onmouseover="show('Matrix4.<br>multiply matrices - умножение матриц')" onmouseout="hide()">.multiplyMatrices</a>( <a href="#" onmouseover="show('Matrix4.<br>здесь буквой a обозначен первый сомножитель')" onmouseout="hide()">a</a>, <a href="#" onmouseover="show('Matrix4.<br>здесь буквой b обозначен второй сомножитель')" onmouseout="hide()">b</a> )</pre>
+Устанавливает данную матрицу как произведение&nbsp;<tt>a&#215;b</tt>.<br><br>
+
+<pre id="multiplyScalar"><a href="#" onmouseover="show('Matrix4.<br>multiply scalar - умножить (на) скаляр(ное значение)')" onmouseout="hide()">.multiplyScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
+Метод перемножает каждый компонент данной матрицы на скалярное значение,
+переданное в аргументе&nbsp;<tt>s</tt>.<br><br>
+
+<pre id="premultiply"><a href="#" onmouseover="show('Matrix4.<br>premultiply - предварительное умножение')" onmouseout="hide()">.premultiply</a>( <a href="#" onmouseover="show('Matrix4.<br>сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Предварительно умножает данную матрицу на матрицу, переданную в аргументе&nbsp;<tt>m</tt>.<br><br>
+
+<pre id="scale"><a href="#" onmouseover="show('Matrix4.<br>scale - масштаб')" onmouseout="hide()">.scale</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод умножает колонки данной матрицы на вектор&nbsp;<tt>v</tt>.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Matrix4.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n11</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n12</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n13</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n14</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n21</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n22</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n23</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n24</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n31</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n32</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n33</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n34</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n41</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n42</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n43</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()">n44</a></span> )</pre>
+Метод устанавливает <a href="#elements" onmouseover="show('Matrix4.elements')" onmouseout="hide()">элементы</a> данной матрицы для представления значений
+<tt>n11</tt>, <tt>n12</tt>, ... <tt>n44</tt>, упорядоченными по рядам.<br><br>
+
+<pre id="setPosition"><a href="#" onmouseover="show('Matrix4<br>set position - установить позицию, положение')" onmouseout="hide()">.setPosition</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Устанавливает компонент положения данной матрицы из вектора <tt>v</tt>,
+не затрагивая оставшуюся часть матрицы - то есть, если матрица в настоящий момент выглядит так:
+<pre>a, b, c, d,
+e, f, g, h,
+i, j, k, l,
+m, n, o, p</pre>
+то станет вот такой:
+<pre>a, b, c, v.x,
+e, f, g, v.y,
+i, j, k, v.z,
+m, n, o, p</pre><br>
+
+<pre id="toArray"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to array - в массив')" onmouseout="hide()">.toArray</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - массив для хранения результирующего вектора (дополнительный, необязательный аргумент).</div>
+<div class=list><tt>offset</tt> - смещение в массиве, где размещается результат (дополнительный, необязательный аргумент).</div>
+Записывает элементы данной матрицы в <a href="https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order" target="_blank">массив, упорядоченный по колонкам</a>.<br><br>
+
+<pre id="transpose"><a href="#" onmouseover="show('Matrix4<br>transpose - транспонировать')" onmouseout="hide()">.transpose</a>( )</pre>
+Метод <a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">транспонирует</a> данную матрицу (англоязычный вариант - <a href="https://en.wikipedia.org/wiki/Transpose" target="_blank">transpose</a>).</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Matrix4.js" target="_blank">Matrix4.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

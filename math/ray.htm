@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Ray</h3>
+Луч (ray), который испускается из источника в определенном направлении.
+Данный класс используется <a href="../core/raycaster.htm" onmouseover="show('Raycaster')" onmouseout="hide()">Raycaster'ом</a> для оказания помощи с <a href="https://en.wikipedia.org/wiki/Ray_casting" target="_blank">raycasting</a>.
+<a href="https://ru.wikipedia.org/wiki/Ray_casting" target="_blank">Вот описание рейкастинга</a> в Википедии на русском языке.
+Рейкастинг используется для выборки курсором мышки (вычисляет какие из объектов в трехмерном пространстве накрывает курсор мышки) среди других объектов.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Ray( <a href="vector3.htm" onmouseover="show('Vector3.<br>origin - источник')" onmouseout="hide()">origin</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>direction - направление')" onmouseout="hide()">direction</a> )</pre>
+<div class=list><tt>origin</tt> -- источник луча (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>).
+Дополнительный, необязательный параметр, значением по умолчанию является трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) с координатами <tt>(0, 0, 0)</tt>.</div>
+<div class=list><tt>direction</tt> -- направление луча (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>). Для правильной работы методов, этот вектор должен быть нормализован (с помощью метода <a href="vector3.htm#normalize" onmouseover="show('Vector3.normalize')" onmouseout="hide()">normalize</a>).
+значением по умолчанию является трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) с координатами <tt>(0, 0, 0)</tt>.</div>
+Создает новый <tt>Ray</tt>.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="origin"><a href="vector3.htm" onmouseover="show('Vector3.<br>origin - источник')" onmouseout="hide()">.origin</a></pre>
+Источник луча (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>). Значением по умолчанию является трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) с координатами <tt>(0, 0, 0)</tt>.<br><br>
+
+<pre id="direction"><a href="vector3.htm" onmouseover="show('Vector3.<br>direction - направление')" onmouseout="hide()">.direction</a></pre>
+Направление луча (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>). Для правильной работы методов, этот вектор должен быть нормализован (с помощью метода <a href="vector3.htm#normalize" onmouseover="show('Vector3.normalize')" onmouseout="hide()">normalize</a>).</div><br>
+
+ <h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="applyMatrix4"><a href="#" onmouseover="show('Ray.<br>apply Matrix4 - применить четырехмерную матрицу')" onmouseout="hide()">.applyMatrix4</a>( <a href="matrix4.htm" onmouseover="show('Matrix4.<br>matrix4 - четырехмерная матрица')" onmouseout="hide()">matrix4</a> )</pre>
+<div class=list><tt>matrix4</tt> -- <a href="matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">четырехмерная матрица</a> для изменения данного <a href="#" onmouseover="show('Ray')" onmouseout="hide()">луча</a>.</div>
+Метод изменяет данный <a href="#" onmouseover="show('Ray')" onmouseout="hide()">луч</a> с помощью <a href="matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">четырехмерной матрицы</a>.<br><br>
+
+<pre id="at"><a href="vector3.htm" onmouseover="show('Vector3.<br>at - предлог &#34;в&#34;')" onmouseout="hide()">.at</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - сокращ. англ. слова target - цель')" onmouseout="hide()">t</a></span>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>t</tt> - расстояние вдоль луча (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>) для получения позиции.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Метод получает трехмерный вектор (<tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>) с координатами точки на данном <a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a> на заданном расстоянии&nbsp;<tt>t</tt>.
+<pre id="clone"><a href="#" onmouseover="show('Ray.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Создает новый луч (Ray) со свойствами <tt><a href="#origin" onmouseover="show('Ray.origin')" onmouseout="hide()">origin</a></tt> и <tt><a href="#direction" onmouseover="show('Ray.direction')" onmouseout="hide()">direction</a></tt> идентичными свойствам данного луча.<br><br>
+
+<pre id="closestPointToPoint"><a href="vector3.htm" onmouseover="show('Vector3.<br>closest point to point - ближайшая точка к точке')" onmouseout="hide()">.closestPointToPoint</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>point</tt> - точка, для которой нужно получить ближайшее место на луче.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Метод получает точку на данном луче (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>), которая ближе всего находится к предоставленому трехмерному вектору (аргумент <tt>point</tt>).<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Ray.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Ray.<br>ray - луч')" onmouseout="hide()">ray</a> )</pre>
+Метод копирует свойства <tt><a href="#origin" onmouseover="show('Ray.origin')" onmouseout="hide()">origin</a></tt> и <tt><a href="#direction" onmouseover="show('Ray.direction')" onmouseout="hide()">direction</a></tt>
+переданного луча (аргумент <tt>ray</tt>) в данный луч.<br><br>
+
+<pre id="distanceSqToPoint"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов distance square to point - квадрат расстояния до точки')" onmouseout="hide()">.distanceSqToPoint</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - точка (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), до которой нужно вычислить расстояние.</div>
+Метод получает квадрат наименьшего расстояния между лучом (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>) и переданным Vector3 (аргумент <tt>point</tt>).<br><br>
+
+<pre id="distanceSqToSegment"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance sq(uare) to segment -<br>квадрат расстояния до сегмента')" onmouseout="hide()">.distanceSqToSegment</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>v0 - это сокращ. от англ.<br>слова vector с номером 0')" onmouseout="hide()">v0</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>v1 - это сокращ. от англ.<br>слова vector с номером 1')" onmouseout="hide()">v1</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional point on ray - дополнительная точка на луче')" onmouseout="hide()">optionalPointOnRay</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional point on segment - дополнительная точка на сегменте')" onmouseout="hide()">optionalPointOnSegment</a> )</pre>
+<div class=list><tt>v0</tt> - начальная точка отрезка линии.</div>
+<div class=list><tt>v1</tt> - конечная точка отрезка линии.</div>
+<div class=list><tt>optionalPointOnRay</tt> - если этот параметр представлен, он принимается как точка данного луча (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>), ближайшая к данному отрезку линии. Дополнительный, необязательный параметр.</div>
+<div class=list><tt>optionalPointOnSegment</tt> - если этот параметр представлен, он принимается как точка данного отрезка линии, ближайшая к данному лучу (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>). Дополнительный, необязательный параметр.</div>
+Метод получает квадрат расстояния между данным лучом (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>) и отрезком линии.<br><br>
+
+<pre id="distanceToPlane"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to plane - расстояние до плоскости')" onmouseout="hide()">.distanceToPlane</a></span>( <a href="plane.htm" onmouseover="show('Plane.<br>plane - плоскость')" onmouseout="hide()">plane</a> )</pre>
+<div class=list><tt>plane</tt> - плоскость, до которой нужно получить расстояние.</div>
+Получает расстояние от исходной точки луча (<tt><a href="#origin" onmouseover="show('Ray.origin')" onmouseout="hide()">origin</a></tt>) до <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскости</a>,
+или значение <tt>null</tt>, если данный <a href="#" onmouseover="show('Ray')" onmouseout="hide()">луч</a> не пересекается с данной <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">плоскостью</a>.<br><br>
+
+<pre id="distanceToPoint"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to point - расстояние до точки')" onmouseout="hide()">.distanceToPoint</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - точка (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>), до которой нужно вычислить расстояние.</div>
+Метод получает наименьшее расстояние между лучом (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>) и точкой (аргумент <tt><a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a></tt>).<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Ray.<br>ray - луч')" onmouseout="hide()">ray</a> )</pre>
+<div class=list><tt>ray</tt> - сравниваемый луч (Ray).</div>
+Возвращает значение <tt>true</tt>, если свойства <tt><a href="#origin" onmouseover="show('Ray.origin')" onmouseout="hide()">origin</a></tt>
+и <tt><a href="#direction" onmouseover="show('Ray.direction')" onmouseout="hide()">direction</a></tt> переданного луча (аргумент <tt>ray</tt>) и данного, равны.<br><br>
+
+<pre id="intersectBox"><a href="vector3.htm" onmouseover="show('Vector3 или значение null<br>intersect box - пересечение параллелепипеда')" onmouseout="hide()">.intersectBox</a>( <a href="box3.htm" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>box</tt> - <tt><a href="box3.htm" onmouseover="show('Box3')" onmouseout="hide()">Box3</a></tt>, с которым пересекается луч.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Пересечение данного луча (Ray) с параллелепипедом (Box3), возвращает точку пересечения или значение <tt>null</tt>, если пересечения нет.<br><br>
+
+<pre id="intersectPlane"><a href="vector3.htm" onmouseover="show('Vector3 или значение null<br>intersect plane - пересечение плоскости')" onmouseout="hide()">.intersectPlane</a>( <a href="plane.htm" onmouseover="show('Plane.<br>plane - плоскость')" onmouseout="hide()">plane</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>plane</tt> - плоскость (<a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">Plane</a>), с которой пересекается луч.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Пересечение данного луча (Ray) с плоскостью (Plane), возвращает точку пересечения или значение <tt>null</tt>, если пересечения нет.<br><br>
+
+<pre id="intersectSphere"><a href="vector3.htm" onmouseover="show('Vector3 или значение null<br>intersect sphere - пересечение сферы')" onmouseout="hide()">.intersectSphere</a>( <a href="sphere.htm" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>sphere</tt> - сфера (<a href="sphere.htm" onmouseover="show('Sphere')" onmouseout="hide()">Sphere</a>), с которой пересекается луч.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Пересечение данного луча (Ray) со сферой (Sphere), возвращает точку пересечения или значение <tt>null</tt>, если пересечения нет.<br><br>
+
+<pre id="intersectTriangle"><a href="vector3.htm" onmouseover="show('Vector3 или значение null<br>intersect triangle - пересечение треугольника')" onmouseout="hide()">.intersectTriangle</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>a - буква алфавита, в данном случае<br>обозначающая координаты точки')" onmouseout="hide()">a</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>b - буква алфавита, в данном случае<br>обозначающая координаты точки')" onmouseout="hide()">b</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>c - буква алфавита, в данном случае<br>обозначающая координаты точки')" onmouseout="hide()">c</a>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('backface culling - отбросить противоположную<br>(заднюю) сторону')" onmouseout="hide()">backfaceCulling</a></span>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>a</tt>, <tt>b</tt>, <tt>c</tt> - точки (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерные вектора</a>), образующие треугольник (т.е. это вершины треугольника).</div>
+<div class=list><tt>backfaceCulling</tt> - будет или нет отбрасываться оборотная (задняя) сторона.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Пересечение данного луча (Ray) с треугольником, возвращает точку пересечения или значение <tt>null</tt>, если пересечения нет.<br><br>
+
+<pre id="intersectsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects box - пересекается (ли) параллелепипед')" onmouseout="hide()">.intersectsBox</a></span>( <a href="box3.htm" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - <a href="box3.htm" onmouseover="show('Box3')" onmouseout="hide()">Box3</a>, для проверки на пересечение.</div>
+Метод возвращает значение <tt>true</tt>, если данный луч пересекается с данным Box3.<br><br>
+
+<pre id="intersectsPlane"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects plane - пересекается (ли) плоскость')" onmouseout="hide()">.intersectsPlane</a></span>( <a href="plane.htm" onmouseover="show('Plane.<br>plane - плоскость')" onmouseout="hide()">plane</a> )</pre>
+<div class=list><tt>plane</tt> - <a href="plane.htm" onmouseover="show('Plane')" onmouseout="hide()">Plane</a> для проверки на пересечение.</div>
+Метод возвращает значение <tt>true</tt>, если данный луч пересекается с данной Plane.<br><br>
+
+<pre id="intersectsSphere"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects sphere - пересекается (ли) сфера')" onmouseout="hide()">.intersectsSphere</a></span>( <a href="sphere.htm" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a> )</pre>
+<div class=list><tt>sphere</tt> - сфера для проверки на пересечение с лучом.</div>
+Метод возвращает значение <tt>true</tt>, если данный луч пересекается с данной Sphere.<br><br>
+
+<pre id="lookAt"><a href="#" onmouseover="show('Ray.<br>look at - смотреть на')" onmouseout="hide()">.lookAt</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+<div class=list><tt>v</tt> - Vector3 с координатами точки, на которую нужно "смотреть", т.е. направить луч.</div>
+Устанавливает направление луча на точку с "мировыми" координатами, переданными в векторе.<br><br>
+
+<pre id="recast"><a href="#" onmouseover="show('Ray.<br>recast - перебросить')" onmouseout="hide()">.recast</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t')" onmouseout="hide()">t</a></span> )</pre>
+<div class=list><tt>t</tt> - расстояние вдоль луча для интерполяции.</div>
+Сдвиг исходной точки данного луча по его направлению на заданное расстояние.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Ray.<br>set - установить')" onmouseout="hide()">.set</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>origin - источник')" onmouseout="hide()">origin</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>direction - направление')" onmouseout="hide()">direction</a> )</pre>
+<div class=list><tt>origin</tt> - точка, из которой испускается луч (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>).</div>
+<div class=list><tt>direction</tt> - направление луча (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>). Для правильной работы методов, этот вектор должен быть нормализован (с помощью метода <a href="vector3.htm#normalize" onmouseover="show('Vector3.normalize')" onmouseout="hide()">normalize</a>).</div>
+Метод копирует параметры свойств, переданных в аргументах <tt>origin</tt> и <tt>direction</tt>, в данный луч (<a href="#" onmouseover="show('Ray')" onmouseout="hide()">Ray</a>).</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Ray.js" target="_blank">Ray.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

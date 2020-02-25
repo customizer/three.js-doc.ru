@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Sphere</h3>
+Сфера, определяемая центром и радиусом.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Sphere( <a href="vector3.htm" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span> )</pre>
+<div class=list><tt>center</tt> -- центр сферы. Значением по умолчанию является <a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a> с координатами <tt>(0, 0, 0)</tt>.</div>
+<div class=list><tt>radius</tt> -- радиус сферы. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+Создает новую сферу.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="center"><a href="vector3.htm" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">.center</a></pre>
+<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Трехмерный вектор</a>, определяющий центр сферы. Значением по умолчанию является&nbsp;<tt>(0, 0, 0)</tt>.<br><br>
+
+<pre id="radius"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">.radius</a></span></pre>
+Радиус сферы. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="applyMatrix4"><a href="#" onmouseover="show('Sphere.<br>apply matrix 4 - применить четырехмерную матрицу')" onmouseout="hide()">.applyMatrix4</a>( <a href="matrix4.htm" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
+<div class=list><tt>matrix</tt> -- применяемая <a href="matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">четырехмерная матрица</a></div>
+Метод выполняет преобразование данной сферы с помощью предоставленной матрицы.<br><br>
+
+<pre id="clampPoint"><a href="vector3.htm" onmouseover="show('Vector3.<br>clamp point - прижать (закрепить) точку')" onmouseout="hide()">.clampPoint</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>point</tt> - закрепляемая точка.</div>
+<div class=list><tt>optionalTarget</tt> - дополнительный, необязательный аргумент.
+Если указан, то результат метода будет скопирован в предоставленный <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>, в противном случае будет создан новый <tt><a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a></tt>.</div>
+Фиксирует точку в пределах сферы. Если точка находится вне сферы (снаружи), она будет прикреплена к ближайшей точке на поверхности сферы. Точки, находящиеся внутри сферы, не будут затронуты.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Sphere.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новую сферу с точно такими же свойствами <tt><a href="#center" onmouseover="show('Sphere.center')" onmouseout="hide()">center</a></tt> и <tt><a href="#radius" onmouseover="show('Sphere.radius')" onmouseout="hide()">radius</a></tt> как у данной.<br><br>
+
+<pre id="containsPoint"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('contains point - содержит точку')" onmouseout="hide()">.containsPoint</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> -- проверяемая точка.</div>
+Метод проверяет, содержит ли сфера предоставленную точку, включая и поверхность сферы.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Sphere.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a> )</pre>
+<div class=list><tt>sphere</tt> -- копируемая сфера.</div>
+Копирует значения свойств <tt><a href="#center" onmouseover="show('Sphere.center')" onmouseout="hide()">center</a></tt> и <tt><a href="#radius" onmouseover="show('Sphere.radius')" onmouseout="hide()">radius</a></tt>, переданной сферы в данную сферу.<br><br>
+
+<pre id="distanceToPoint"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to point - расстояние до точки')" onmouseout="hide()">.distanceToPoint</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> -- точка (Vector3), до которой вычисляется расстояние.</div>
+Возвращает наикратчайшее расстояние от ограничительной сферы до точки. Если точка находится внутри сферы, расстояние будет отрицательным.<br><br>
+
+<pre id="empty"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('empty - пустой')" onmouseout="hide()">.empty</a></span>( )</pre>
+Проверяет, является ли сфера пустой (радиус установлен как&nbsp;<tt>0</tt>).<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a> )</pre>
+<div class=list><tt>sphere</tt> -- сфера, проверяемая на равность.</div>
+Метод проверяет, равны ли свойства <tt>center</tt> и <tt>radius</tt> двух сфер.<br><br>
+
+<pre id="getBoundingBox"><a href="box3.htm" onmouseover="show('Box3.<br>get bounding box - получить ограничительную рамку')" onmouseout="hide()">.getBoundingBox</a>( <a href="box3.htm" onmouseover="show('Box3.<br>optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a> )</pre>
+<div class=list><tt>optionalTarget</tt> - если аргумент указан, результат будет скопирован в приведенный Box3, в противном случае будет создан новый Box3. Дополнительный, необязательный аргумент.</div>
+Возвращает <a href="https://ru.wikipedia.org/wiki/AABB" target="_blank">минимальную ограничительную рамку</a> (<a href="https://en.wikipedia.org/wiki/Minimum_bounding_box" target="_blank">Minimum Bounding Box</a>) для данной сферы.<br><br>
+
+<pre id="intersectsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects box - пересечение параллелепипеда')" onmouseout="hide()">.intersectsBox</a></span>( <a href="box3.htm" onmouseover="show('Box3.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - Box3, проверяемый на пересечение с данной сферой.</div>
+Метод определяет, пересекается или нет данная сфера с параллелепипедом, предоставленным в аргументе <tt>box</tt>.<br><br>
+
+<pre id="intersectsPlane"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects plane - пересечение плоскости')" onmouseout="hide()">.intersectsPlane</a></span>( <a href="plane.htm" onmouseover="show('Plane.<br>plane - плоскость')" onmouseout="hide()">plane</a> )</pre>
+<div class=list><tt>plane</tt> - плоскость, проверяемая на пересечение с данной сферой.</div>
+Метод определяет, пересекается или нет данная сфера с плоскостью, предоставленной в аргументе <tt>plane</tt>.<br><br>
+
+<pre id="intersectsSphere"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects sphere - пересечение сферы')" onmouseout="hide()">.intersectsSphere</a></span>( <a href="#" onmouseover="show('Sphere.<br>sphere - сфера')" onmouseout="hide()">sphere</a> )</pre>
+<div class=list><tt>sphere</tt> -- <a href="#" onmouseover="show('Sphere')" onmouseout="hide()">сфера</a></div>
+Метод проверяет, не пересекаются ли две сферы.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Sphere.<br>set - установить')" onmouseout="hide()">.set</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>center - центр')" onmouseout="hide()">center</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span> )</pre>
+<div class=list><tt>center</tt> -- центр сферы.</div>
+<div class=list><tt>radius</tt> -- радиус сферы.</div>
+Метод устанавливает свойства <tt><a href="#center" onmouseover="show('Sphere.center')" onmouseout="hide()">center</a></tt> и <tt><a href="#radius" onmouseover="show('Sphere.radius')" onmouseout="hide()">radius</a></tt> для этой сферы.<br><br>
+
+<pre id="setFromPoints"><a href="#" onmouseover="show('Sphere.<br>set from points - установить')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span>, <a href="vector3.htm" onmouseover="show('Vector3.<br>optional center - дополнительный (необязательный) центр')" onmouseout="hide()">optionalCenter</a> )</pre>
+<div class=list><tt>points</tt> -- массив позиций трехмерных векторов (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>).</div>
+<div class=list><tt>optionalCenter</tt> -- дополнительная позиция (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) центра сферы.</div>
+Метод вычисляет минимальную ограничивающую сферу для массива точек (переданного в параметре <tt>points</tt>).
+Если параметр <tt>optionalCenter</tt> задан, то он будет использоваться в качестве центра сферы.
+В противном случае, вычисляется центр ограничивающей рамки, выровненной по осям и охватывающей весь массив точек (<tt>points</tt>).<br><br>
+
+<pre id="translate"><a href="#" onmouseover="show('Sphere.<br>translate - перевести, перенести')" onmouseout="hide()">.translate</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>offset - смещение')" onmouseout="hide()">offset</a> )</pre>
+Метод переносит центр сферы на представленный вектор смещения (параметр <tt>offset</tt>).</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Sphere.js" target="_blank">Sphere.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

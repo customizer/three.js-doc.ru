@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> &nbsp; &nbsp; <a href="mesh.htm" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
+<h3>SkinnedMesh</h3>
+Полигональная сетка (mesh), имеющая в составе "<a href="skeleton.htm" onmouseover="show('Skeleton')" onmouseout="hide()">скелет</a>" с "<a href="bone.htm" onmouseover="show('Bone')" onmouseout="hide()">костями</a>", которую теперь можно использовать для анимации вершин геометрии.<br><br>
+
+<h4>Пример</h4>
+<div><a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
+<div style='display:none;'>
+<pre>var geometry = new THREE.CylinderGeometry( 5, 5, 5, 5, 15, 5, 30 );<br>
+// Create the skin indices and skin weights
+// создадим индексы скина и веса скина
+for ( var i = 0; i &lt; geometry.vertices.length; i ++ ) {<br>
+  // Imaginary functions to calculate the indices and weights
+  // This part will need to be changed depending your skeleton and model
+  var skinIndex = calculateSkinIndex( geometry.vertices, i );
+  var skinWeight = calculateSkinWeight( geometry.vertices, i );<br>
+  // Ease between each bone (облегчаем между каждой костью)
+  geometry.skinIndices.push( new THREE.Vector4( skinIndex, skinIndex + 1, 0, 0 ) );
+  geometry.skinWeights.push( new THREE.Vector4( 1 - skinWeight, skinWeight, 0, 0 ) );<br>
+}<br>
+var mesh = THREE.SkinnedMesh( geometry, material );<br>
+// See example from THREE.Skeleton for the armSkeleton
+// смотрите пример armSkeleton из описания THREE.Skeleton
+var rootBone = armSkeleton.bones[ 0 ];
+mesh.add( rootBone );<br>
+// Bind the skeleton to the mesh
+// связываем скелет с сеткой
+mesh.bind( armSkeleton );<br>
+// Move the bones and manipulate the model
+// перемещаем кости и управляем моделью
+armSkeleton.bones[ 0 ].rotation.x = -0.1;
+armSkeleton.bones[ 1 ].rotation.x = 0.2;</pre></div></div><br>
+
+<h4>Конструктор</h4>
+<pre>SkinnedMesh( <a href="../core/geometry.htm" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
+<div class=list><tt><a href="../core/geometry.htm" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a></tt>
+— экземпляр <a href="../core/geometry.htm" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> или <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a> (рекомендуется).
+Его свойства <tt><a href="../core/geometry.htm#skinIndices" onmouseover="show('Geometry.skinIndices')" onmouseout="hide()">skinIndices</a></tt>
+и <tt><a href="../core/geometry.htm#skinWeights" onmouseover="show('Geometry.skinWeights')" onmouseout="hide()">skinWeights</a></tt> должны быть установлены как <tt>true</tt>.</div>
+<div class=list><tt><a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a></tt> — экземпляр <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>'а.
+Дополнительный, необязательный аргумент, по умолчанию это новый <a href="../materials/meshBasicMaterial.htm" onmouseover="show('MeshBasicMaterial')" onmouseout="hide()">MeshBasicMaterial</a>.</div><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">Mesh</a>.
+<div class=blockindent><br>
+<pre id="bindMode"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bind mode - bind mode')" onmouseout="hide()">.bindMode</a></span></pre>
+Значением может быть либо <span class="lnk" onmouseover="show('attached - прикрепленный, привязанный')" onmouseout="hide()">"<tt>attached</tt>"</span> либо <span class="lnk" onmouseover="show('detached - отдельный, несвязанный')" onmouseout="hide()">"<tt>detached</tt>"</span>.
+Значение "<tt>attached</tt>" используется свойством <tt><a href="../core/object3D.htm#matrixWorld" onmouseover="show('SkinnedMesh.matrixWorld<br>наследуется от Object3D')" onmouseout="hide()">SkinnedMesh.matrixWorld</a></tt> для основных изменений матрицы костей.
+Значение "<tt>detached</tt>" используется <tt><a href="#bindMatrix" onmouseover="show('SkinnedMesh.bindMatrix')" onmouseout="hide()">SkinnedMesh.bindMatrix</a></tt>. Значением по умолчанию является "<tt>attached</tt>".<br><br>
+
+<pre id="bindMatrix"><a href="../math/matrix4.htm" onmouseover="show('Matrix4.<br>bind matrix - матрица привязки')" onmouseout="hide()">.bindMatrix</a></pre>
+Основная матрица, используемая для связанных трансформаций кости.<br><br>
+
+<pre id="bindMatrixInverse"><a href="../math/matrix4.htm" onmouseover="show('Matrix4.<br>bind matrix inverse - инверсия матрицы привязки')" onmouseout="hide()">.bindMatrixInverse</a></pre>
+Основная матрица, используемая для сброса связанных трансформаций кости.<br><br>
+
+<pre id="isSkinnedMesh"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is skinned mesh - является')" onmouseout="hide()">.isSkinnedMesh</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу SkinnedMesh. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="skeleton"><a href="skeleton.htm" onmouseover="show('Skeleton.<br>skeleton - скелет')" onmouseout="hide()">.skeleton</a></pre>
+<a href="skeleton.htm" onmouseover="show('Skeleton')" onmouseout="hide()">Скелет</a>, созданный из <a href="bone.htm" onmouseover="show('Bone')" onmouseout="hide()">костей</a> - <a href="../core/geometry.htm" onmouseover="show('Geometry')" onmouseout="hide()">геометрических элементов</a> и переданный в конструктор.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">Mesh</a>.
+<div class=blockindent><br>
+<pre id="bind"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bind - привязка')" onmouseout="hide()">.bind</a></span>( <a href="skeleton.htm" onmouseover="show('Skeleton.<br>skeleton - скелет')" onmouseout="hide()">skeleton</a>, <a href="../math/matrix4.htm" onmouseover="show('Matrix4.<br>bind matrix - матрица привязки')" onmouseout="hide()">bindMatrix</a> )</pre>
+<div class=list><tt><a href="skeleton.htm" onmouseover="show('Skeleton.<br>skeleton - скелет')" onmouseout="hide()">skeleton</a></tt>
+- <a href="skeleton.htm" onmouseover="show('Skeleton')" onmouseout="hide()">скелет</a> созданный в виде древовидной структуры, собранной из <a href="bone.htm" onmouseover="show('Bone')" onmouseout="hide()">костей</a>.</div>
+<div class=list><tt><a href="../math/matrix4.htm" onmouseover="show('Matrix4.<br>bind matrix - матрица привязки')" onmouseout="hide()">bindMatrix</a></tt>
+- <a href="../math/matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">четырехмерная матрица</a>, представляющая базовую трансформацию скелета.</div>
+Увязывает скелет с полигональной сеткой, покрывающей скелет.
+The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
+Данный метод вызывается в конструкторе автоматически, а скелет создается из костей геометрии, переданных в конструктор.
+This is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('SkinnedMesh.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает клон данного объекта SkinnedMesh и всех его потомков.<br><br>
+
+<pre id="normalizeSkinWeights"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('normalize skin weights - нормализовать веса оболочки')" onmouseout="hide()">.normalizeSkinWeights</a></span>( )</pre>
+Метод нормализует векторы <a href="../core/geometry.htm#skinWeights" onmouseover="show('Geometry.skinWeights')" onmouseout="hide()">Geometry.skinWeights</a>. Не работает с <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.<br><br>
+
+<pre id="pose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pose - поза')" onmouseout="hide()">.pose</a></span>( )</pre>
+Данный метод устанавливает полигональную сетку в исходную позу (сбрасывает позицию).<br><br>
+
+<pre id="updateMatrixWorld"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update matrix world - обновление матрицы мира')" onmouseout="hide()">.updateMatrixWorld</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('force - принудительно')" onmouseout="hide()">force</a></span> )</pre>
+Метод обновляет <a href="../math/matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">MatrixWorld</a>.<br><br>
+
+<pre id="initBones"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов initialize bones - инициализация костей')" onmouseout="hide()">.initBones</a></span>( )</pre>
+Создает массив иерархических объектов-<a href="bone.htm" onmouseover="show('Bone')" onmouseout="hide()">костей</a> из внутренней геометрии.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/SkinnedMesh.js" target="_blank">SkinnedMesh.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

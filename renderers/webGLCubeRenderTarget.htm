@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="webGLRenderTarget.htm" title="Переход к родительскому классу"><tt>WebGLRenderTarget &rarr;</tt></a></span>
+<h3>WebGLCubeRenderTarget</h3>
+Данный буфер целевой визуализации используется <tt><a href="../cameras/cubeCamera.htm" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>'ой в качестве своего <a href="webGLRenderTarget.htm" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.<br><br>
+
+<h4>Примеры</h4>
+Примеры смотрите в описании <tt><a href="../cameras/cubeCamera.htm" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.<br><br>
+
+<h4>Конструктор</h4>
+<pre>WebGLCubeRenderTarget( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span></tt> -- ширина renderTarget.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span></tt> -- высота renderTarget.</div>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции')" onmouseout="hide()">options</a></span></tt>
+- дополнительный, необязательный объект, который содержит параметры текстуры для автоматической генерации целевой текстуры и логические значения буферов глубины/трафаретов (<tt>depthBuffer</tt>/<tt>stencilBuffer</tt>).
+Пояснения к параметрам текстуры смотрите в статье <a href="../textures/texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.</div>
+<div class="blockindent">Возможны следующие опции:
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrap S - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">wrapS</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="../constants/textures.htm#wrappingModes" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrap T - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">wrapT</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="../constants/textures.htm#wrappingModes" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от magnification filter - фильтр увеличения')" onmouseout="hide()">magFilter</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="../constants/textures.htm#magnificationFilters" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от minification filter - фильтр уменьшения')" onmouseout="hide()">minFilter</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="../constants/textures.htm#minificationFilters" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="../constants/textures.htm#formats" onmouseover="show('RGBA format - формат передачи цвета (сокращ. по первым буквам)<br>- красный, зеленый, синий, альфа-канал (прозрачность)')" onmouseout="hide()">THREE.RGBAFormat</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="../constants/textures.htm#types" onmouseover="show('unsigned byte type - беззнаковый тип байтов')" onmouseout="hide()">THREE.UnsignedByteType</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия, т.е. неравномерность<br>свойств среды по разным направлениям')" onmouseout="hide()">anisotropy</a></span></tt> — значением по умолчанию является&nbsp;<tt>1</tt>.
+Смотрите описание свойства <tt><a href="../textures/texture.htm#anisotropy" onmouseover="show('Texture.anisotropy')" onmouseout="hide()">Texture.anisotropy</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('encoding - кодировка')" onmouseout="hide()">encoding</a></span></tt>
+- константа, значением по умолчанию является <tt><a href="../constants/textures.htm#encoding" onmouseover="show('linear encoding - линейное кодирование')" onmouseout="hide()">THREE.LinearEncoding</a></tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth buffer - буфер глубины')" onmouseout="hide()">depthBuffer</a></span></tt>
+— логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер глубины не нужен.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil buffer - буфер трафарета')" onmouseout="hide()">stencilBuffer</a></span></tt>
+— логическое значение, по умолчанию равно <tt>true</tt>. Установите его как <tt>false</tt>, если буфер трафарета не нужен.</div></div>
+Создает новый WebGLRenderTargetCube.<br><br>
+
+<h4>Свойства</h4>
+Для ознакомления с унаследованными свойствами смотрите <a href="webGLRenderTarget.htm" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.
+<div class=blockindent><br>
+<pre id="activeCubeFace"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('active cube face - активная грань куба')" onmouseout="hide()">.activeCubeFace</a></span></pre>
+Свойство <tt>activeCubeFace</tt> соответствует стороне куба <span class="lnk1" onmouseover="show('здесь буквами X, Y и Z соответствуют осям координат,<br>а P и N обозначают positive - положительный и<br>negative - отрицательный')" onmouseout="hide()">(<tt>PX 0</tt>, <tt>NX 1</tt>, <tt>PY 2</tt>, <tt>NY 3</tt>, <tt>PZ 4</tt>, <tt>NZ 5</tt>)</span>, устанавливается и используется внутри <tt><a href="../cameras/cubeCamera.htm" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a></tt>.</div><br>
+
+<h4>Методы</h4>
+Для ознакомления с унаследованными методами смотрите <a href="webGLRenderTarget.htm" onmouseover="show('WebGLRenderTarget')" onmouseout="hide()"><tt>WebGLRenderTarget</tt></a>.<br><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLCubeRenderTarget.js" target="_blank">WebGLCubeRenderTarget.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

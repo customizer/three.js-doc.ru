@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3>Mesh</h3>
+Класс, представляющий объекты на основе треугольной <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%B8%D0%B3%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D1%81%D0%B5%D1%82%D0%BA%D0%B0" target="_blank">полигональной сетки</a> (<a href="https://en.wikipedia.org/wiki/Polygon_mesh" target="_blank">polygon mesh</a>).
+Также выступает в качестве основы для других классов, таких как <a href="skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.
+<div class=note_trans><b>Примечание переводчика:</b> Меш или сетка - этими терминами называют совокупность вершин, рёбер и полигонов, которые составляют один 3D объект. Слово меш походит от английского <tt>mesh</tt> - ячейка сети. А слово сетка - от английского <tt>wireframe</tt>, что переводится как каркас/проволочный каркас.</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>Mesh( <a href="../core/geometry.htm" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
+<div class=list><tt>geometry</tt> — экземпляр <a href="../core/geometry.htm" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> или <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.
+Дополнительный, необязательный аргумент, по умолчанию это новая <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.</div>
+<div class=list><tt>material</tt> — <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a> для сетки.
+Дополнительный, необязательный аргумент, по умолчанию это новый <a href="../materials/meshBasicMaterial.htm" onmouseover="show('MeshBasicMaterial')" onmouseout="hide()">MeshBasicMaterial</a> с цветом, выбранным в случайном порядке.</div><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<!-- <pre id="drawMode"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('draw mode - режим рисования')" onmouseout="hide()">.drawMode</a></span></pre>
+Свойство определяет способ построения треугольников полигональной сетки по координатам вершин.
+Все возможные значения смотрите в статье о константах <a href="constants.htm#4.1" onmouseover="show('Константы режима рисования')" onmouseout="hide()">режима рисования</a>.
+Значением по умолчанию является <tt><a href="constants.htm#4.1" onmouseover="show('Константы режима рисования')" onmouseout="hide()">THREE.TrianglesDrawMode</a></tt>.<br><br>
+
+<pre id="isMesh"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is mesh - является сеткой')" onmouseout="hide()">.isMesh</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу Mesh. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>   -->
+
+<pre id="geometry"><a href="../core/geometry.htm" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">.geometry</a></pre>
+Экземпляр <a href="../core/geometry.htm" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> или <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a> (или классы, производные от них), определяющий структуру объекта.<br>
+Если возможно, рекомендуется всегда использовать <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>, как лучшую по производительности.<br><br>
+
+<pre id="material"><a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">.material</a></pre>
+Экземпляр <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>'а, определяющий внешний вид объекта.
+Значением по умолчанию является <a href="../materials/meshBasicMaterial.htm" onmouseover="show('MeshBasicMaterial')" onmouseout="hide()">MeshBasicMaterial</a> с цветом, выбранным в случайном порядке.<br><br>
+
+<pre id="morphTargetInfluences"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target influences - воздействие на цель морфинга')" onmouseout="hide()">.morphTargetInfluences</a></span></pre>
+Массив значений весов (обычно в диапазоне&nbsp;<tt>0 - 1</tt>), которые определяют степень применения морфинга.
+По умолчанию он неопределен, но методом <tt><a href="#updateMorphTargets" onmouseover="show('Mesh.updateMorphTargets')" onmouseout="hide()">updateMorphTargets</a></tt> сбрасывается в пустой массив.<br><br>
+
+<pre id="morphTargetDictionary"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target dictionary - словарь цели морфинга')" onmouseout="hide()">.morphTargetDictionary</a></span></pre>
+Словарь целей морфинга на основе свойства <tt>morphTarget.name</tt>.
+По умолчанию он неопределен, но восстанавливается <tt><a href="#updateMorphTargets" onmouseover="show('Mesh.updateMorphTargets')" onmouseout="hide()">updateMorphTargets</a></tt>.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<!-- <pre id="setDrawMode"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set draw mode - установить режим рисования')" onmouseout="hide()">.setDrawMode</a></span>( )</pre>
+Метод устанавливает значение свойства <tt><a href="#drawMode" onmouseover="show('Mesh.drawMode')" onmouseout="hide()">drawMode</a></tt>.<br><br>   -->
+
+<pre id="clone"><a href="#" onmouseover="show('Mesh.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает клон данного объекта Mesh и всех его потомков.<br><br>
+
+<pre id="raycast"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ray cast - бросок луча')" onmouseout="hide()">.raycast</a></span>( <a href="../core/raycaster.htm" onmouseover="show('Raycaster.<br>raycaster - &#34;бросатель&#34; луча, излучатель')" onmouseout="hide()">raycaster</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects - пересечения')" onmouseout="hide()">intersects</a></span> )</pre>
+Получает пересечения между брошенным <a href="../math/ray.htm" onmouseover="show('Ray')" onmouseout="hide()">лучом</a> и данной сеткой.
+Этот метод будет вызываться методом <tt><a href="../core/raycaster.htm#intersectObject" onmouseover="show('Raycaster.intersectObject')" onmouseout="hide()">Raycaster.intersectObject</a></tt>.<br><br>
+
+<pre id="updateMorphTargets"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update morph targets - обновление целей морфинга')" onmouseout="hide()">.updateMorphTargets</a></span>( )</pre>
+Обновляет <tt>morphTargets</tt> - цели морфинга не воздействуя на объект. Сбрасывает свойства <tt><a href="#morphTargetInfluences" onmouseover="show('Mesh.morphTargetInfluences')" onmouseout="hide()">morphTargetInfluences</a></tt> и <tt><a href="#morphTargetDictionary" onmouseover="show('Mesh.morphTargetDictionary')" onmouseout="hide()">morphTargetDictionary</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Mesh.js" target="_blank">Mesh.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

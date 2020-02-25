@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Euler</h3>
+Класс, представляющий <a href="http://en.wikipedia.org/wiki/Euler_angles" target="_blank">углы Эйлера</a>. Вот статья про <a href="https://ru.wikipedia.org/wiki/%D0%A3%D0%B3%D0%BB%D1%8B_%D0%AD%D0%B9%D0%BB%D0%B5%D1%80%D0%B0" target="_blank">углы Эйлера</a> в русскоязычной Википедии.<br>
+Углы Эйлера описывают изменения при вращении объекта по его различным осям с определенными значениями для каждой оси и с указанной последовательностью вращения по осям.<br><br>
+
+<h4>Пример</h4>
+<pre>var a = new THREE.Euler( 0, 1, 1.57, 'XYZ' );
+var b = new THREE.Vector3( 1, 0, 1 );
+b.applyEuler(a);</pre>
+
+<h4>Конструктор</h4>
+<pre>Euler( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата z')" onmouseout="hide()">z</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">order</a></span> )</pre>
+<div class=list><tt>x</tt> -- угол по оси <tt>x</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>y</tt> -- угол по оси <tt>y</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>z</tt> -- угол по оси <tt>z</tt> в радианах. Дополнительный, необязательный параметр, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>order</tt> -- строковое значение, представляющее порядок применения вращения. Дополнительный, необязательный параметр, значением по умолчанию является <tt>XYZ</tt> (символы должны быть в верхнем регистре).</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="isEuler"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is Euler - является (классом) Euler')" onmouseout="hide()">.isEuler</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классом Euler. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="order"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">.order</a></span></pre>
+Порядок (последовательность) применения вращения по осям. Значением по умолчанию является <tt>XYZ</tt>, которое означает, что вначале объект будет поворачиваться вокруг своей оси <tt>X</tt>, затем вокруг своей оси <tt>Y</tt> и наконец, вокруг оси <tt>Z</tt>.
+Другие возможные значения: <tt>YZX</tt>, <tt>ZXY</tt>, <tt>XZY</tt>, <tt>YXZ</tt> и <tt>ZYX</tt>. Символы должны быть в верхнем регистре.<br>
+<em>three.js</em> использует собственные углы Тейта-Брайана. Это значит что вращения выполняются относительно локальной системы координат.
+То есть, для последовательности применения вращения <tt>XYZ</tt>, вращение вначале выполняется вокруг локальной оси <tt>X</tt> (которая является той же самой, что и "мировая" ось <tt>X</tt>),
+затем выполняется поворот вокруг локальной оси <tt>Y</tt> (которая теперь может отличаться от "мировой" оси <tt>Y</tt>) и потом вокруг локальной оси <tt>Z</tt> (которая также может отличаться от "мировой" оси <tt>Z</tt>).<br>
+Если <tt>order</tt> изменен, будет вызван метод <tt><a href="#onChangeCallback" onmouseover="show('Euler.onChangeCallback')" onmouseout="hide()">onChangeCallback</a></tt>.<br><br>
+
+<pre id="x"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - в данном случае это обозначение оси x<br>(горизонтальной) в трехмерной системе координат')" onmouseout="hide()">.x</a></span></pre>
+Текущее значение составляющей угла по оси <tt>x</tt>.<br>
+Если значение изменено, будет вызван метод <a href="#onChangeCallback" onmouseover="show('Euler.onChangeCallback')" onmouseout="hide()">onChangeCallback</a>.<br><br>
+
+<pre id="y"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - в данном случае это обозначение оси y<br>(вертикальной) в трехмерной системе координат')" onmouseout="hide()">.y</a></span></pre>
+Текущее значение составляющей угла по оси <tt>y</tt>.<br>
+Если значение изменено, будет вызван метод <a href="#onChangeCallback" onmouseover="show('Euler.onChangeCallback')" onmouseout="hide()">onChangeCallback</a>.<br><br>
+
+<pre id="z"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - в данном случае это обозначение оси z<br>(вперед - назад) в трехмерной системе координат')" onmouseout="hide()">.z</a></span></pre>
+Текущее значение составляющей угла по оси <tt>z</tt>.<br>
+Если значение изменено, будет вызван метод <a href="#onChangeCallback" onmouseover="show('Euler.onChangeCallback')" onmouseout="hide()">onChangeCallback</a>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="copy"><a href="#" onmouseover="show('Euler.<br>copy - копировать')" onmouseout="hide()">.copy</a> ( <a href="#" onmouseover="show('Euler')" onmouseout="hide()">euler</a> )</pre>
+Копирует значение, переданное в аргументе <tt>euler</tt> в данный Euler.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Euler.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новый <tt>Euler</tt> с теми же самыми параметрами, как у этого.<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Euler')" onmouseout="hide()">euler</a> )</pre>
+Метод проверяет на строгое равенство данного <tt>Euler</tt> и приведенного в аргументе <tt>euler</tt>.<br><br>
+
+<pre id="fromArray"><a href="#" onmouseover="show('Euler.<br>from array - из массива')" onmouseout="hide()">.fromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span> )</pre>
+Массив <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span></tt> длиной&nbsp;3 или&nbsp;4.
+Дополнительный, необязательный 4-ый аргумент соответствует <tt><a href="#order" onmouseover="show('Euler.order')" onmouseout="hide()">order</a></tt>.<br>
+Присваивает углу <tt><a href="#x" onmouseover="show('Euler.x')" onmouseout="hide()">x</a></tt> данного класса Euler значение <tt>array[0]</tt>.<br>
+Присваивает углу <tt><a href="#y" onmouseover="show('Euler.y')" onmouseout="hide()">y</a></tt> данного класса Euler значение <tt>array[1]</tt>.<br>
+Присваивает углу <tt><a href="#z" onmouseover="show('Euler.z')" onmouseout="hide()">z</a></tt> данного класса Euler значение <tt>array[2]</tt>.<br>
+Дополнительно может присваивать свойству <tt><a href="#order" onmouseover="show('Euler.order')" onmouseout="hide()">order</a></tt> данного класса Euler значение <tt>array[3]</tt>.<br><br>
+
+<pre id="onChange"><a href="#" onmouseover="show('Euler.<br>on change - на изменение')" onmouseout="hide()">.onChange</a>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on change callback - функция обратного вызова на (событие) изменения')" onmouseout="hide()">onChangeCallback</a></span> )</pre>
+<div class=list><tt>onChangeCallback</tt> - устанавливает значение функции <tt>onChangeCallback()</tt>.</div><br>
+
+<pre id="onChangeCallback"><a href="#" onmouseover="show('Euler.<br>on change callback - функция обратного вызова на (событие) изменения')" onmouseout="hide()">.onChangeCallback</a>( )</pre>
+По умолчанию это пустая функция, однако она может быть установлена через <tt><a href="#onChange" onmouseover="show('Euler.onChange')" onmouseout="hide()">onChange()</a></tt>.
+Она вызывается после изменения свойств <tt><a href="#x" onmouseover="show('Euler.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#y" onmouseover="show('Euler.y')" onmouseout="hide()">y</a></tt>,
+<tt><a href="#z" onmouseover="show('Euler.z')" onmouseout="hide()">z</a></tt> или <tt><a href="#order" onmouseover="show('Euler.order')" onmouseout="hide()">order</a></tt>,
+а также после вызова большинства устанавливающих функций (подробности смотрите в их описании).<br><br>
+
+<pre id="reorder"><a href="#" onmouseover="show('Euler.<br>reorder - переупорядочить')" onmouseout="hide()">.reorder</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('new order - новый порядок')" onmouseout="hide()">newOrder</a></span> )</pre>
+Метод сбрасывает угол Эйлера с новым порядком, создавая кватернион с данным углом Эйлера, и затем устанавливает данный угол Эйлера с кватернионом и новым порядком.
+<div class=warning><b>Предупреждение:</b> при этом методе отбрасывается информация о вращении.</div><br>
+
+<pre id="set"><a href="#" onmouseover="show('Euler.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата z')" onmouseout="hide()">z</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">order</a></span> )</pre>
+<div class=list><tt>x</tt> - значение составляющей угла по оси <tt>x</tt> в радианах.</div>
+<div class=list><tt>y</tt> - значение составляющей угла по оси <tt>y</tt> в радианах.</div>
+<div class=list><tt>z</tt> - значение составляющей угла по оси <tt>z</tt> в радианах.</div>
+<div class=list><tt>order</tt> - строка, представляющая последовательность применения вращения по разным осям. Дополнительный, необязательный параметр.</div>
+Метод устанавливает углы изменения данного Euler и дополнительно (но необязательно) порядок их применения (<tt><a href="#order" onmouseover="show('Euler.order')" onmouseout="hide()">order</a></tt>),
+а затем вызывает <tt><a href="#onChangeCallback" onmouseover="show('Euler.onChangeCallback')" onmouseout="hide()">onChangeCallback()</a></tt>.<br><br>
+
+<pre id="setFromRotationMatrix"><a href="#" onmouseover="show('Euler.<br>set from rotation matrix -<br>установить из матрицы вращения')" onmouseout="hide()">.setFromRotationMatrix</a>( <a href="matrix4.htm" onmouseover="show('Matrix4.<br>m - сокращ. англ. слова matrix - матрица')" onmouseout="hide()">m</a>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">order</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">update</a></span> )</pre>
+<div class=list><tt>m</tt> - <a href="matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">четырехмерная матрица</a>, в которой верхняя матрица <tt>3&#215;3</tt> является чистой матрицей вращения (то есть, немасштабированной).</div>
+<div class=list><tt>order</tt> - строка, представляющая последовательность применения вращения по разным осям. Дополнительный, необязательный параметр.</div>
+<div class=list><tt>update</tt> - будет ли вызываться <tt><a href="#onChangeCallback" onmouseover="show('Euler.onChangeCallback')" onmouseout="hide()">onChangeCallback()</a></tt> после применения матрицы. Дополнительный, необязательный параметр.</div>
+Метод устанавливает углы изменения данного Euler из чистой матрицы вращения исходя из ориентации, определяемой по аргументу <tt>order</tt>.<br><br>
+
+<pre id="setFromQuaternion"><a href="#" onmouseover="show('Euler.<br>set from quaternion - установить из кватерниона')" onmouseout="hide()">.setFromQuaternion</a>( <a href="quaternion.htm" onmouseover="show('Quaternion.<br>q - сокращ. англ. слова quaternion - кватернион')" onmouseout="hide()">q</a>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">order</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">update</a></span> )</pre>
+<div class=list><tt>q</tt> - нормализованный кватернион.</div>
+<div class=list><tt>order</tt> - строка, представляющая последовательность применения вращения по разным осям. Дополнительный, необязательный параметр.</div>
+<div class=list><tt>update</tt> - будет ли вызываться <tt><a href="#onChangeCallback" onmouseover="show('Euler.onChangeCallback')" onmouseout="hide()">onChangeCallback()</a></tt> после применения матрицы. Дополнительный, необязательный параметр.</div>
+Метод устанавливает углы изменения данного Euler из нормализованного кватерниона исходя из ориентации, определяемой по аргументу <tt>order</tt>.<br><br>
+
+<pre id="setFromVector3"><a href="#" onmouseover="show('Euler.<br>set from vector3 - установить из трехмерного вектора')" onmouseout="hide()">.setFromVector3</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>vector 3 - трехмерный вектор')" onmouseout="hide()">vector</a>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('order - порядок')" onmouseout="hide()">order</a></span> )</pre>
+<div class=list><tt>vector</tt> - трехмерный вектор (<a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>).</div>
+<div class=list><tt>order</tt> - строка, представляющая последовательность применения вращения по разным осям. Дополнительный, необязательный параметр.</div>
+Метод устанавливает свойства <tt><a href="#x" onmouseover="show('Euler.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#y" onmouseover="show('Euler.y')" onmouseout="hide()">y</a></tt> и <tt><a href="#z" onmouseover="show('Euler.z')" onmouseout="hide()">z</a></tt>
+и дополнительно обновляет <tt><a href="#order" onmouseover="show('Euler.order')" onmouseout="hide()">order</a></tt>. После внесения всех этих изменений вызывается <tt><a href="#onChangeCallback" onmouseover="show('Euler.onChangeCallback')" onmouseout="hide()">onChangeCallback()</a></tt>.<br><br>
+
+<pre id="toArray"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to array - в массив')" onmouseout="hide()">.toArray</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - массив для хранения угла Эйлера. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>offset</tt> - смещение в массиве. Дополнительный, необязательный аргумент.</div>
+Возвращает массив в виде <tt>[ <a href="#x" onmouseover="show('Euler.x')" onmouseout="hide()">x</a>, <a href="#y" onmouseover="show('Euler.y')" onmouseout="hide()">y</a>, <a href="#z" onmouseover="show('Euler.z')" onmouseout="hide()">z</a>, <a href="#order" onmouseover="show('Euler.order')" onmouseout="hide()">order</a> ]</tt>.<br><br>
+
+<pre id="toVector3"><a href="vector3.htm" onmouseover="show('Vector3.<br>to vector3 - в трехмерный вектор')" onmouseout="hide()">.toVector3</a>( )</pre>
+Возвращает свойства <tt><a href="#x" onmouseover="show('Euler.x')" onmouseout="hide()">x</a></tt>, <tt><a href="#y" onmouseover="show('Euler.y')" onmouseout="hide()">y</a></tt> и <tt><a href="#z" onmouseover="show('Euler.z')" onmouseout="hide()">z</a></tt> Euler'а в виде <a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерного вектора</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Euler.js" target="_blank">Euler.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

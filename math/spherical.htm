@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Spherical</h3>
+Координаты точки в <a href="https://en.wikipedia.org/wiki/Spherical_coordinate_system" target="_blank">сферической системе координат</a>.<br>
+<a href="https://ru.wikipedia.org/wiki/%D0%A1%D1%84%D0%B5%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D0%BA%D0%BE%D0%BE%D1%80%D0%B4%D0%B8%D0%BD%D0%B0%D1%82" target="_blank">Сферическая система координат</a> на русском языке.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Spherical( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('phi - фи (буква греческого алфавита)')" onmouseout="hide()">phi</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - тэта (буква греческого алфавита)')" onmouseout="hide()">theta</a></span> )</pre>
+<div class=list><tt>radius</tt> - радиус или <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">эвклидово расстояние</a> (расстояние по прямой) от точки до начала координат. Значение по умолчанию равно&nbsp;<tt>1.0</tt>.</div>
+<div class=list><tt>phi</tt> - полярный угол от оси <tt>y</tt> (верх). Значение по умолчанию равно&nbsp;<tt>0</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> в русском языке принято называть этот угол зенитным.</div></div>
+<div class=list><tt>theta</tt> - экваториальный угол вокруг оси <tt>y</tt> (верх). Значение по умолчанию равно&nbsp;<tt>0</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> в русском языке принято называть этот угол азимутальным.</div></div>
+Полюсы (<tt>phi</tt>) находятся на положительной и отрицательной сторонах оси <tt>y</tt>. Экватор (<tt>theta</tt>) начинается с положительной стороны оси <tt>z</tt>.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="radius"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">.radius</a></span></pre>
+<br><br>
+
+<pre id="phi"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('phi - фи (буква греческого алфавита)')" onmouseout="hide()">.phi</a></span></pre>
+<br><br>
+
+<pre id="theta"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - тэта (буква греческого алфавита)')" onmouseout="hide()">.theta</a></span></pre>
+</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="clone"><a href="#" onmouseover="show('Spherical<br>clone - клонировать')" onmouseout="hide()">.clone</a>()</pre>
+Метод возвращает новую плоскость с теми же свойствами <tt><a href="#radius" onmouseover="show('Spherical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#phi" onmouseover="show('Spherical.phi')" onmouseout="hide()">phi</a></tt> и <tt><a href="#theta" onmouseover="show('Spherical.theta')" onmouseout="hide()">theta</a></tt>, что и у данной.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Spherical<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Spherical<br>s - сокращ. англ. слова spherical - сферический')" onmouseout="hide()">s</a> )</pre>
+Копирует значения свойств <tt><a href="#radius" onmouseover="show('Spherical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#phi" onmouseover="show('Spherical.phi')" onmouseout="hide()">phi</a></tt> и <tt><a href="#theta" onmouseover="show('Spherical.theta')" onmouseout="hide()">theta</a></tt>
+Spherical, переданной в аргументе <tt>s</tt>, в данную Spherical.<br><br>
+
+<pre id="makeSafe"><a href="#" onmouseover="show('Spherical<br>make safe - сделать безопасным')" onmouseout="hide()">.makeSafe</a>( )</pre>
+Метод ограничивает полярный угол <tt><a href="#phi" onmouseover="show('Spherical.phi')" onmouseout="hide()">phi</a></tt> между <tt>0.000001</tt> и <tt>pi - 0.000001</tt>.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Spherical<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('phi - фи (буква греческого алфавита)')" onmouseout="hide()">phi</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta - тэта (буква греческого алфавита)')" onmouseout="hide()">theta</a></span> )</pre>
+Устанавливает значения свойств <tt><a href="#radius" onmouseover="show('Spherical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#phi" onmouseover="show('Spherical.phi')" onmouseout="hide()">phi</a></tt> и <tt><a href="#theta" onmouseover="show('Spherical.theta')" onmouseout="hide()">theta</a></tt> данной точки в сферических координатах.<br><br>
+
+<pre id="setFromVector3"><a href="#" onmouseover="show('Spherical<br>set from vector 3 - установить из трехмерного вектора')" onmouseout="hide()">.setFromVector3</a>( <a href="vector3.htm" onmouseover="show('Vector3<br>vec3 - сокращ. англ. слов vector 3 - трехмерный вектор')" onmouseout="hide()">vec3</a> )</pre>
+Метод устанавливает значения свойств <tt><a href="#radius" onmouseover="show('Spherical.radius')" onmouseout="hide()">radius</a></tt>, <tt><a href="#phi" onmouseover="show('Spherical.phi')" onmouseout="hide()">phi</a></tt> и <tt><a href="#theta" onmouseover="show('Spherical.theta')" onmouseout="hide()">theta</a></tt>
+данной точки в сферических координатах из <a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерного вектора</a>.<br>
+В качестве значения свойства <tt><a href="#radius" onmouseover="show('Spherical.radius')" onmouseout="hide()">radius</a></tt> устанавливается <a href="vector3.htm#length" onmouseover="show('Vector3.length')" onmouseout="hide()">длина вектора</a>,
+в то время как свойства <tt><a href="#phi" onmouseover="show('Spherical.phi')" onmouseout="hide()">phi</a></tt> и <tt><a href="#theta" onmouseover="show('Spherical.theta')" onmouseout="hide()">theta</a></tt> устанавливаются из его направления.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Spherical.js" target="_blank">Spherical.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Material</h3>
+Абстрактный, базовый класс для материалов.<br>
+Материалы описывают внешний вид <a href="#" onmouseover="show('Object')" onmouseout="hide()">объектов</a>. Они определены (в основном) независимыми от визуализатора (рендерера), так что не придется переписывать материалы, если вы решили использовать другой визуализатор.<br>
+Перечисленные ниже свойства и методы наследуются всеми другими типами материала (хотя и могут иметь разные значения по умолчанию).<br><br>
+
+<h4>Конструктор</h4>
+<pre>Material()</pre>
+Конструктор создает общий (универсальный) материал.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="alphaTest"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha test - проверка альфа(канала)')" onmouseout="hide()">.alphaTest</a></span></pre>
+Устанавливает значение альфа-канала (определяет прозрачность), которое будет использоваться при прохождении проверки состояния альфа-канала.
+Если непрозрачность (свойство <tt><a href="#opacity" onmouseover="show('Material.opacity')" onmouseout="hide()">opacity</a></tt>) будет меньше заданного здесь значения, материал не будет отображаться.<br>
+Значение по умолчанию&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="blendDst"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending<br>destination - целевое смешивание')" onmouseout="hide()">.blendDst</a></span></pre>
+Целевое смешивание. Значением по умолчанию является <tt><a href="../constants/customBlendingEquation.htm#destinationFactors" onmouseover="show('CustomBlendingEquation')" onmouseout="hide()">OneMinusSrcAlphaFactor</a></tt>. Все возможные значения смотрите в описании констант <a href="../constants/customBlendingEquation.htm#destinationFactors" onmouseover="show('CustomBlendingEquation')" onmouseout="hide()">целевых факторов смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#blending" onmouseover="show('Material.blending')" onmouseout="hide()">blending</a></tt> должно быть установлено как <tt><a href="../constants/materials.htm#blendingMode" onmouseover="show('CustomBlending')" onmouseout="hide()">CustomBlending</a></tt>.<br><br>
+
+<pre id="blendDstAlpha"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending destination<br>alpha - альфа(канал) целевого смешивания')" onmouseout="hide()">.blendDstAlpha</a></span></pre>
+Прозрачность для <tt><a href="#blendDst" onmouseover="show('Material.blendDst')" onmouseout="hide()">blendDst</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="blendEquation"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending equation<br>- уравнение смешивания')" onmouseout="hide()">.blendEquation</a></span></pre>
+Уравнение смешивания, используемое при применении смешивания. Значением по умолчанию является <tt><a href="../constants/customBlendingEquation.htm#blendingEquations" onmouseover="show('CustomBlendingEquation')" onmouseout="hide()">AddEquation</a></tt>. Все возможные значения смотрите в описании констант <a href="../constants/customBlendingEquation.htm#blendingEquations" onmouseover="show('Константы настраиваемых уравнений смешивания')" onmouseout="hide()">уравнений смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#blending" onmouseover="show('Material.blending')" onmouseout="hide()">blending</a></tt> должно быть установлено как <tt><a href="../constants/materials.htm#blendingMode" onmouseover="show('CustomBlending')" onmouseout="hide()">CustomBlending</a></tt>.<br><br>
+
+<pre id="blendEquationAlpha"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending equation alpha<br>- уравнение смешивания альфа(канала)')" onmouseout="hide()">.blendEquationAlpha</a></span></pre>
+Прозрачность для <tt><a href="#blendEquation" onmouseover="show('Material.blendEquation')" onmouseout="hide()">blendEquation</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="blending"><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('blending - смешивание')" onmouseout="hide()">.blending</a></span></pre>
+Свойство определяет какое смешивание будет использоваться при отображении объектов с этим материалом.
+При использовании настраиваемых свойств <tt><a href="#blendSrc" onmouseover="show('Material.blendSrc')" onmouseout="hide()">blendSrc</a></tt>,
+<tt><a href="#blendDst" onmouseover="show('Material.blendDst')" onmouseout="hide()">blendDst</a></tt> или <tt><a href="#blendEquation" onmouseover="show('Material.blendEquation')" onmouseout="hide()">blendEquation</a></tt>,
+оно должно быть установлено как <tt><a href="../constants/materials.htm#blendingMode" onmouseover="show('CustomBlending')" onmouseout="hide()">CustomBlending</a></tt>.<br>
+Все возможные значения смотрите в описании констант <a href="../constants/materials.htm#blendingMode" onmouseover="show('Константы материалов - режим смешивания')" onmouseout="hide()">режима смешивания</a>.
+Значением по умолчанию является <tt><a href="../constants/materials.htm#blendingMode" onmouseover="show('Константы материалов - режим смешивания')" onmouseout="hide()">NormalBlending</a></tt>.<br><br>
+
+<pre id="blendSrc"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending source - исходное смешивание')" onmouseout="hide()">.blendSrc</a></span></pre>
+Исходное смешивание. Значением по умолчанию является <tt><a href="../constants/customBlendingEquation.htm#sourceFactors" onmouseover="show('Константы настраиваемых уравнений<br>смешивания - исходные факторы')" onmouseout="hide()">SrcAlphaFactor</a></tt>.
+Все возможные значения смотрите в описании констант <a href="../constants/customBlendingEquation.htm#sourceFactors" onmouseover="show('Константы настраиваемых уравнений<br>смешивания - исходные факторы')" onmouseout="hide()">режима смешивания</a>.<br>
+Для того, чтобы это свойство как-то повлияло на внешний вид, свойство <tt><a href="#blending" onmouseover="show('Material.blending')" onmouseout="hide()">blending</a></tt> должно быть установлено как <tt><a href="../constants/materials.htm#blendingMode" onmouseover="show('CustomBlending')" onmouseout="hide()">CustomBlending</a></tt>.<br><br>
+
+<pre id="blendSrcAlpha"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов blending source alpha<br>- исходное смешивание альфа(канала)')" onmouseout="hide()">.blendSrcAlpha</a></span></pre>
+Прозрачность для <tt><a href="#blendSrc" onmouseover="show('Material.blendSrc')" onmouseout="hide()">blendSrc</a></tt>. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="clipIntersection"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clip intersection - обрезать пересечение')" onmouseout="hide()">.clipIntersection</a></span></pre>
+Изменяет поведение плоскостей отсечения так, что обрезается только их пересечение, а не их соединение. Значение по умолчанию&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="clippingPlanes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clipping planes - плоскости отсечения')" onmouseout="hide()">.clippingPlanes</a></span></pre>
+Плоскости отсечения, определенные пользователем, установленные в "мировом" пространстве как объекты THREE.Plane. Эти плоскости применяются к объектам, которым придан этот материал.
+Точки в пространстве, расстояние от которых до плоскости отрицательно, обрезаются (т.е. не отображаются).
+При этом требуется, чтобы свойство <tt><a href="../renderers/webGLRenderer.htm#localClippingEnabled" onmouseover="show('WebGLRenderer.localClippingEnabled')" onmouseout="hide()">WebGLRenderer.localClippingEnabled</a></tt> было установлено как <tt>true</tt>.
+Смотрите пример <a href="https://threejs.org/examples/webgl_clipping_intersection.html" target="_blank">WebGL / clipping /intersection</a>. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="clipShadows"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clip shadows - обрезать тени')" onmouseout="hide()">.clipShadows</a></span></pre>
+Свойство определяет, обрезать ли тени в соответствии с плоскостями отсечения, указанными для этого материала. Значение по умолчанию&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="colorWrite"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color write - показать цвет')" onmouseout="hide()">.colorWrite</a></span></pre>
+Будет ли отображаться цвет материала. Это свойство можно использовать в соединении со свойством сетки (mesh) <tt><a href="../core/object3D.htm#renderOrder" onmouseover="show('Object3D.renderOrder')" onmouseout="hide()">renderOrder</a></tt> для создания невидимых объектов, закрывающих другие объекты.
+Значение по умолчанию&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="customDepthMaterial"><a href="#" onmouseover="show('Material.<br>custom depth material -<br>настраиваемая глубина материала')" onmouseout="hide()">.customDepthMaterial</a></pre>
+Настраиваемая глубина материала, используемая данным материалом при отрисовке с картой глубины.
+Для правильного отображения теней при направленном (<a href="../lights/directionalLight.htm" onmouseover="show('DirectionalLight')" onmouseout="hide()">DirectionalLight</a>) или прожекторном (<a href="../lights/spotLight.htm" onmouseover="show('SpotLight')" onmouseout="hide()">SpotLight</a>) освещении, требуется указывать <tt>customDepthMaterial</tt>, если было:
+<ol style="list-style-type:lower-alpha;"><li>изменение позиций вершин в шейдере вершин,</li>
+<li>использование карты смещения,</li>
+<li>использование карты прозрачности (alpha map) с проверкой прозрачности (<tt><a href="#alphaTest" onmouseover="show('Material.alphaTest')" onmouseout="hide()">alphaTest</a></tt>), или</li>
+<li>использовалась прозрачная текстура с проверкой прозрачности (<tt><a href="#alphaTest" onmouseover="show('Material.alphaTest')" onmouseout="hide()">alphaTest</a></tt>).</li></ol>
+Значением по умолчанию является <tt>undefined</tt>.<br><br>
+
+<pre id="customDistanceMaterial"><a href="#" onmouseover="show('Material.<br>custom distance material -<br>настраиваемая отдаление материала')" onmouseout="hide()">.customDistanceMaterial</a></pre>
+Тоже самое, что и <tt>customDepthMaterial</tt>, но используется с точечным освещением (<a href="../lights/pointLight.htm" onmouseover="show('PointLight')" onmouseout="hide()">PointLight</a>). Значением по умолчанию является <tt>undefined</tt>.<br><br>
+
+<pre id="defines"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('defines - определения')" onmouseout="hide()">.defines</a></span></pre>
+Настраиваемые определения для введения в шейдер. Они передаются в виде объектного литерала, парами ключ/значение.
+<tt>{ MY_CUSTOM_DEFINE: '' , PI2: Math.PI * 2 }</tt>.
+Пары определяются как в вершинном шейдере, так и в шейдере фрагментов. Значением по умолчанию является <tt>undefined</tt>.<br><br>
+
+<pre id="depthFunc"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth func - сокращ. англ. слов<br>depth function - функция глубины')" onmouseout="hide()">.depthFunc</a></span></pre>
+Свойство определяет используемую функцию глубины, т.е. функцию, используемую материалом для сравнения значения входящего пиксела глубины (значения по оси&nbsp;<tt>Z</tt>) с текущим значением буфера глубины.
+Если результатом этого сравнения будет значение&nbsp;<tt>true</tt>, пиксель будет прорисован.
+Значением по умолчанию является <tt><a href="../constants/materials.htm#depthMode" onmouseover="show('less equal depth - глубина меньше или равна')" onmouseout="hide()">LessEqualDepth</a></tt>.
+Все возможные значения смотрите в <a href="../constants/materials.htm#depthMode" onmouseover="show('режим глубины - depth mode')" onmouseout="hide()">описании констант режима глубины</a>.<br><br>
+
+<pre id="depthTest"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth test - проверка глубины')" onmouseout="hide()">.depthTest</a></span></pre>
+Свойство определяет, включать ли проверку глубины при визуализации данного материала. Значение по умолчанию&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="depthWrite"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth write - записывать глубину')" onmouseout="hide()">.depthWrite</a></span></pre>
+Свойство определяет, будет ли отображение данного материала как-либо воздействовать на буфер глубины. Значение по умолчанию&nbsp;<tt>true</tt>.<br>
+При прорисовке двумерных наложений, возможно будет полезно отключить запись глубины, чтобы сложить (наслоить) вместе несколько объектов без создания артефактов z-индекса.<br><br>
+
+<pre id="dithering"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dithering - размывание')" onmouseout="hide()">.dithering</a></span></pre>
+Свойство определяет, применять ли размытие цвета для устранения появления полос на изображении. Значение по умолчанию&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="flatShading"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('flat shading - затенение по плоскостям')" onmouseout="hide()">.flatShading</a></span></pre>
+Свойство определяет, будет ли материал отображен с затенением по плоскостям. Значение по умолчанию&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="fog"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fog - туман')" onmouseout="hide()">.fog</a></span></pre>
+Свойство определяет, будет ли материал подвержен влиянию тумана. Значение по умолчанию&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
+Уникальное число-идентификатор для данного экземпляра материала.<br><br>
+
+<pre id="isMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is material - является материалом')" onmouseout="hide()">.isMaterial</a></span></pre>
+Используется для проверки, является ли данный объект, или производные от него, материалами. По умолчанию значение равно&nbsp;<tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
+Свойство определяет, будет ли освещение влиять на материал. Значение по умолчанию&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">.name</a></span></pre>
+Дополнительное, необязательное название объекта (необязательно быть уникальным). По умолчанию это пустая строка&nbsp;("").<br><br>
+
+<pre id="needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('needs update - требуется обновление')" onmouseout="hide()">.needsUpdate</a></span></pre>
+Указывает, что материал необходимо обновить на уровне WebGL. Установите значение <tt>true</tt>, если были внесены изменения, которые должны быть отображены в WebGL.<br>
+При создании экземпляра нового материала, данное свойство автоматически устанавливается как&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="opacity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('opacity - непрозрачность')" onmouseout="hide()">.opacity</a></span></pre>
+Число с плавающей запятой (float) в диапазоне <tt>0.0 - 1.0</tt>, показывающее насколько прозрачен материал. Значение&nbsp;<tt>0.0</tt> указывает на полную прозрачность, а&nbsp;<tt>1.0</tt> - на полную непрозрачность.
+Значение по умолчанию равно&nbsp;<tt>1.0</tt>.<br>
+Если свойство <tt><a href="#transparent" onmouseover="show('Material.transparent')" onmouseout="hide()">transparent</a></tt> материала не установлено как <tt>true</tt>, материал будет оставаться полностью непрозрачным и данное значение будет влиять только на его цвет.<br><br>
+
+<!-- <pre id="overdraw"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('overdraw - превышение')" onmouseout="hide()">.overdraw</a></span></pre>
+Величина расширения треугольника во время рисования.
+Это обходное решение для случаев когда при использовании <a href="../examples/canvasRenderer.htm" onmouseover="show('CanvasRenderer')" onmouseout="hide()">CanvasRenderer</a> между треугольников появляются зазоры.
+Среди браузеров хорошие результаты получаются при значении&nbsp;<tt>0.5</tt>. Значение по умолчанию&nbsp;<tt>0</tt>.<br><br> -->
+
+<pre id="polygonOffset"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('polygon offset - смещение полигона')" onmouseout="hide()">.polygonOffset</a></span></pre>
+Свойство устанавливает, будет ли использоваться смещение полигонов. Значение по умолчанию <tt>false</tt>. Это свойство соответствует свойству WebGL <tt>GL_POLYGON_OFFSET_FILL</tt>.
+<!--
+glPolygonOffset — set the scale and units used to calculate depth values
+
+Description
+
+When GL_POLYGON_OFFSET_FILL, GL_POLYGON_OFFSET_LINE, or GL_POLYGON_OFFSET_POINT is enabled, each fragment's depth value will be offset after it is interpolated from the depth values of the appropriate vertices. The value of the offset is factor?DZ+r?units
+, where DZ is a measurement of the change in depth relative to the screen area of the polygon, and r
+
+is the smallest value that is guaranteed to produce a resolvable offset for a given implementation. The offset is added before the depth test is performed and before the value is written into the depth buffer.
+
+glPolygonOffset is useful for rendering hidden-line images, for applying decals to surfaces, and for rendering solids with highlighted edges.
+https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glPolygonOffset.xhtml
+http://www.opengl-master.ru/function.php?id=42 -->
+
+
+<div class=note_trans>Для чего нужно свойство <tt>polygonOffset</tt>? Вот описание Z-конфликта из книги Коичи Мацуда, Роджер Ли &#171;WebGL: программирование трехмерной графики&#187;.<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Поддержка удаления скрытых поверхностей – сложная и мощная особенность системы WebGL, которая в большинстве действует безупречно.
+Однако иногда, когда две фигуры или два объекта располагаются слишком близко друг к другу, результат ее работы выглядит менее естественно.
+Этот феномен известен как Z-конфликт (Z-fighting) и показан на рис. 7.30. Здесь мы нарисовали два треугольника, имеющих одну и ту же координату Z.<br><br>
+<div class="caption"><img src="../img/Zfighting.png" width=700><br>
+Рис. 7.30. Визуальный эффект, обусловленный Z-конфликтом (слева)</div>
+Z-конфликт возникает из-за того, что вычисления с буфером глубины имеют ограниченную точность и иногда система оказывается неспособна определить, какой объект находится спереди, а какой сзади.
+Технически этого конфликта можно избежать, если уделить особое внимание значениям координаты Z на этапе создания модели; однако, реализация такого решения выглядит нереалистичной в ситуациях, когда воспроизводится анимация с участием нескольких объектов.<br><br>
+Чтобы помочь решить эту проблему, WebGL предоставляет функцию, которая называется добавление сдвига к глубине (polygon offset).
+Эта функция автоматически выполняет сдвиг координаты Z, на величину, которая является функцией наклона объекта по отношению к линии взгляда.
+<pre>gl.polygonOffset(factor, units)</pre>
+Определяет поправку к координате Z для каждой вершины, которая будет нарисована после вызова этого метода.
+Поправка вычисляется по формуле m * factor + r * units, где m представляет наклон треугольника относительно линии взгляда, а r – наименьшая разница между двумя значениями координаты Z, которые могут оказаться неразличимыми для WebGL.
+</div></div><br>
+
+
+<pre id="polygonOffsetFactor"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('polygon offset factor - коэффициент<br>масштабирования смещения полигонов')" onmouseout="hide()">.polygonOffsetFactor</a></span></pre>
+Устанавливает <span class="lnk" onmouseover="show('коэффициент масштабирования, который используется<br>для создания переменного смещения глубины<br>каждого полигона')" onmouseout="hide()">коэффициент масштабирования</span> смещения полигонов. Значение по умолчанию&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="polygonOffsetUnits"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('polygon offset units - блоки смещения полигонов')" onmouseout="hide()">.polygonOffsetUnits</a></span></pre>
+<!-- Is multiplied by an implementation - specific value to create a constant depth offset    -->
+Устанавливает блоки смещения полигонов. Значение по умолчанию&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="precision"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('precision - точность')" onmouseout="hide()">.precision</a></span></pre>
+Свойство переопределяет точность по умолчанию визуализатора для данного материала. Может быть <span class="lnk" onmouseover="show('сокращ. от англ. слов high precision - высокая точность')" onmouseout="hide()"><tt>highp</tt></span>,
+<span class="lnk" onmouseover="show('сокращ. от англ. слов medium precision - средняя точность')" onmouseout="hide()"><tt>mediump</tt></span> или <span class="lnk" onmouseover="show('сокращ. от англ. слов low precision - низкая точность')" onmouseout="hide()"><tt>lowp</tt></span>. Значение по умолчанию равно&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="premultipliedAlpha"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('premultiplied alpha - предварительное<br>умножение альфа(-канала)')" onmouseout="hide()">.premultipliedAlpha</a></span></pre>
+Свойство определяет, будет ли предварительное перемножение значения альфа-канала, определяющего прозрачность.
+Посмотрите отличия в примере <a href="https://threejs.org/examples/#webgl_materials_transparency" target="_blank">WebGL / Materials / Transparency</a>. Значение по умолчанию&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="shadowSide"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shadow side - теневая сторона')" onmouseout="hide()">.shadowSide</a></span></pre>
+Определяет которая из сторон граней отбрасывает тени. Может быть <tt><a href="../constants/materials.htm#side" onmouseover="show('Константы материала.<br>front side - передняя сторона')" onmouseout="hide()">THREE.FrontSide</a></tt>,
+<tt><a href="../constants/materials.htm#side" onmouseover="show('Константы материала.<br>back side - задняя сторона')" onmouseout="hide()">THREE.BackSide</a></tt>
+или <tt><a href="../constants/materials.htm#side" onmouseover="show('Константы материала.<br>double side - две стороны')" onmouseout="hide()">THREE.DoubleSide</a></tt>. Значение по умолчанию&nbsp;<tt>null</tt>.<br>
+Если установлено значение&nbsp;<tt>null</tt>, сторона отбрасывающая тень определяется следующим образом:
+<table rules="rows">
+<tr><td><a href="#side" onmouseover="show('Material.side')" onmouseout="hide()">Material.side</a></td><td width=20></td><td>Сторона, отбрасывающая тени</td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td>THREE.FrontSide</td><td></td><td>задняя сторона</td></tr>
+<tr><td>THREE.BackSide</td><td></td><td>передняя сторона</td></tr>
+<tr><td>THREE.DoubleSide</td><td></td><td>обе стороны</td></tr></table><br>
+ 
+<pre id="side"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('side - сторона')" onmouseout="hide()">.side</a></span></pre>
+Свойство определяет сторону грани, которая будет отображаться, - передняя, задняя или обе.
+Значение по умолчанию <tt><a href="../constants/materials.htm#side" onmouseover="show('Константы материала.<br>front side - передняя сторона')" onmouseout="hide()">THREE.FrontSide</a></tt>.
+Остальные варианты это <tt><a href="../constants/materials.htm#side" onmouseover="show('Константы материала.<br>back side - задняя сторона')" onmouseout="hide()">THREE.BackSide</a></tt>
+и <tt><a href="../constants/materials.htm#side" onmouseover="show('Константы материала.<br>double side - две стороны')" onmouseout="hide()">THREE.DoubleSide</a></tt>.<br><br>
+
+<pre id="stencilWrite"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil write - запись трафарета')" onmouseout="hide()">.stencilWrite</a></span></pre>
+Свойство определяет, будет ли визуализация данного материала как-то влиять на буфер трафарета. Значением по умолчанию является <tt>false</tt>.<br><br>
+
+<pre id="stencilFunc"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil function - функция трафарета')" onmouseout="hide()">.stencilFunc</a></span></pre>
+Используемая функция сопоставления трафарета.
+Значение по умолчанию <tt><a href="../constants/materials.htm#stencilFunctions" onmouseover="show('Константы материала - Функции трафарета<br>сокращение от always stencil functions -<br>функции трафарета (выполняются) всегда')" onmouseout="hide()">THREE.AlwaysStencilFunc</a></tt>.
+Все возможные значения смотрите в <a href="../constants/materials.htm#stencilFunctions" onmouseover="show('Константы материала - Функции трафарета')" onmouseout="hide()">константах функций трафарета</a>.<br><br>
+
+<pre id="stencilRef"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от stencil reference - эталон трафарета,<br>опорное (исходное) значение трафарета')" onmouseout="hide()">.stencilRef</a></span></pre>
+Значение, используемое при выполнении сравнений трафарета или операций трафарета. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="stencilMask"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil mask - маска трафарета')" onmouseout="hide()">.stencilMask</a></span></pre>
+Битовая маска, используемая при сравнении с буфером трафарета или записи в буфер трафарета. Значение по умолчанию равно&nbsp;<tt>0xFF</tt>.<br><br>
+
+<pre id="stencilFail"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil fail - ошибка трафарета')" onmouseout="hide()">.stencilFail</a></span></pre>
+Свойство определяет, какую из операций трафарета следует выполнить когда функция сравнения возвращает значение <tt>false</tt>.
+Значение по умолчанию <tt><a href="../constants/materials.htm#stencilOperations" onmouseover="show('Константы материала - Операции трафарета<br>сокращение от keep stencil operation<br>- операция сохранения трафарета')" onmouseout="hide()">THREE.KeepStencilOp</a></tt>.
+Все возможные значения смотрите в <a href="../constants/materials.htm#stencilOperations" onmouseover="show('Константы материала - Операции трафарета')" onmouseout="hide()">константах операций трафарета</a>.<br><br>
+
+<pre id="stencilZFail"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil Z fail - ошибка трафарета по оси Z, т.е. в глубину')" onmouseout="hide()">.stencilZFail</a></span></pre>
+Свойство определяет, какую из операций трафарета следует выполнить когда функция сравнения возвращает значение <tt>true</tt>, но проверка глубины завершается неудачей.
+Значение по умолчанию <tt><a href="../constants/materials.htm#stencilOperations" onmouseover="show('Константы материала - Операции трафарета<br>сокращение от keep stencil operation<br>- операция сохранения трафарета')" onmouseout="hide()">THREE.KeepStencilOp</a></tt>.
+Все возможные значения смотрите в <a href="../constants/materials.htm#stencilOperations" onmouseover="show('Константы материала - Операции трафарета')" onmouseout="hide()">константах операций трафарета</a>.<br><br>
+
+<pre id="stencilZPass"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil Z pass - передача трафарета по оси Z')" onmouseout="hide()">.stencilZPass</a></span></pre>
+Свойство определяет, какую из операций трафарета следует выполнить когда функция сравнения возвращает значение <tt>true</tt> и проверка глубины проходит удачно.
+Значение по умолчанию <tt><a href="../constants/materials.htm#stencilOperations" onmouseover="show('Константы материала - Операции трафарета<br>сокращение от keep stencil operation<br>- операция сохранения трафарета')" onmouseout="hide()">THREE.KeepStencilOp</a></tt>.
+Все возможные значения смотрите в <a href="../constants/materials.htm#stencilOperations" onmouseover="show('Константы материала - Операции трафарета')" onmouseout="hide()">константах операций трафарета</a>.<br><br>
+
+<pre id="transparent"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('transparent - прозрачность')" onmouseout="hide()">.transparent</a></span></pre>
+Определяет будет ли данный материал прозрачным или нет. Данное свойство влияет на процесс визуализации, так как прозрачные объекты нуждаются в специальной обработке и отображаются после непрозрачных объектов.<br>
+Если данное свойство установлено как&nbsp;<tt>true</tt>, степень прозрачности материала определяется настройкой значения свойства <tt><a href="#opacity" onmouseover="show('Material.opacity')" onmouseout="hide()">opacity</a></tt>.<br>
+Значение по умолчанию&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="type"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">.type</a></span></pre>
+Значением этого свойства является строка <tt>Material</tt>. Она не должна изменяться и может использоваться для поиска на сцене всех объектов данного типа.<br><br>
+
+<pre id="uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов universally unique<br>identifier - универсальный уникальный<br>идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" onmouseover="show('сокращ. англ. слов universally unique<br>identifier - универсальный уникальный<br>идентификатор')" onmouseout="hide()">UUID</a> данного экземпляра материала. Он присваивается автоматически и не должен быть изменен.<br>
+Вот <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">статья Википедии про UUID</a> на русском языке.<br><br>
+
+<pre id="vertexColors"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertex colors - цвета вершин')" onmouseout="hide()">.vertexColors</a></span></pre>
+Свойство определяет, как окрашиваются вершины, путем задания способа заполнения атрибута цвета.
+Возможными значениями являются <tt><a href="../constants/materials.htm#colors" onmouseover="show('Константы материалов.<br>no colors - не окрашено')" onmouseout="hide()">THREE.NoColors</a></tt>,
+<tt><a href="../constants/materials.htm#colors" onmouseover="show('Константы материалов.<br>face colors - цвета граней')" onmouseout="hide()">THREE.FaceColors</a></tt> и <tt><a href="../constants/materials.htm#colors" onmouseover="show('Константы материалов.<br>vertex colors - цвета вершин')" onmouseout="hide()">THREE.VertexColors</a></tt>.
+Значение по умолчанию <tt><a href="../constants/materials.htm#colors" onmouseover="show('Константы материалов.<br>no colors - не окрашено')" onmouseout="hide()">THREE.NoColors</a></tt>.<br><br>
+
+<pre id="visible"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('visible - видимый')" onmouseout="hide()">.visible</a></span></pre>
+Свойство определяет, будет ли данный материал видимым. Значение по умолчанию&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="userData"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('user data - пользовательские данные')" onmouseout="hide()">.userData</a></span></pre>
+Этот объект может использоваться для хранения пользовательских данных о материале. В нем нельзя хранить ссылки на функции, так как они не будут клонироваться.</div><br>
+
+<h4>Методы</h4>
+В этом классе доступны методы <tt><a href="../core/eventDispatcher.htm" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a></tt>.
+<div class=blockindent><br>
+<pre id="clone"><a href="#" onmouseover="show('Material.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новый материал с теми же параметрами как у данного материала.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Material.<br>copy- копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
+Метод копирует параметры из переданного материала (параметр <tt>material</tt>) в данный материал.<br><br>
+
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - выбросить, удалить')" onmouseout="hide()">.dispose</a></span>( )</pre>
+Этот метод удаляет материал. Текстуры материала не удаляются. Они должны удаляться с помощью <a href="../textures/texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.<br><br>
+
+<pre id="onBeforeCompile"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on before compile - ')" onmouseout="hide()">.onBeforeCompile</a></span>( shader : Shader, renderer : WebGLRenderer )</pre>
+
+An optional callback that is executed immediately before the shader program is compiled. This function is called with the shader source code as a parameter. Useful for the modification of built-in materials.<br>
+
+Unlike properties, the callback is not supported by .clone(), .copy() and .toJSON().<br><br>
+
+<pre id="setValues"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set values - установить значения')" onmouseout="hide()">.setValues</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('values - значения')" onmouseout="hide()">values</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('values - значения')" onmouseout="hide()">values</a></span></tt> -- контейнер с параметрами.</div>
+Метод устанавливает свойства на основе значений, переданных в аргументе.<br><br>
+
+<pre id="toJSON"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в (формат) JSON')" onmouseout="hide()">.toJSON</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова metadata -<br>метаданные, т.е. дополнительные<br>сведения, прилагаемые к данным')" onmouseout="hide()">meta</a></span> )</pre>
+<div class=list><tt>meta</tt> -- объект, содержащий <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5" target="_blank">метаданные</a> для материала, вроде текстур или изображений.</div>
+Конвертирует материал в формат <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">JSON</a> для <em>three.js</em>.<br><br>
+
+<pre id="update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">.update</a></span>( )</pre>
+Метод вызывает для материала <tt><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispatch event - отправить событие')" onmouseout="hide()">.dispatchEvent</a></span>( { type: '<span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">update</a></span>' })</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/Material.js" target="_blank">Material.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

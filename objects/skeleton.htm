@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Skeleton</h3>
+Объект Skeleton (скелет), созданный из массива костей (<a href="bone.htm" onmouseover="show('Bone')" onmouseout="hide()">Bone</a>),
+может использоваться <a href="skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> (полигональной сеткой, покрывающей скелет).
+Работает только в среде WebGL.
+
+<h4>Пример</h4>
+<pre>// Create a simple "arm" (создадим простейшую "руку")<br>
+var bones = [];<br>
+var shoulder = new THREE.Bone(); // shoulder - плечо
+var elbow = new THREE.Bone(); // elbow - локоть
+var hand = new THREE.Bone(); // hand - рука<br>
+shoulder.add( elbow );
+elbow.add( hand );<br>
+bones.push( shoulder );
+bones.push( elbow );
+bones.push( hand );<br>
+shoulder.position.y = -5;
+elbow.position.y = 0;
+hand.position.y = 5;<br>
+var armSkeleton = new THREE.Skeleton( bones );</pre>
+Пример использования со стандартной <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a> смотрите на странице с описанием <a href="skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Skeleton( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bones - кости')" onmouseout="hide()">bones</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bone inverses - инверсии костей (перевернутые кости)')" onmouseout="hide()">boneInverses</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bones - кости')" onmouseout="hide()">bones</a></span></tt>
+- массив <a href="bone.htm" onmouseover="show('Bone')" onmouseout="hide()">костей</a>. Значением по умолчанию является пустой массив.</div>
+<div class=list><tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bone inverses - инверсии костей (перевернутые кости)')" onmouseout="hide()">boneInverses</a></span></tt>
+- массив <a href="../math/matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">четырехмерных матриц</a>. Дополнительный, необязательный аргумент.</div>
+Создает новый объект Skeleton.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="bones"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bones - кости')" onmouseout="hide()">.bones</a></span></pre>
+Массив <a href="bone.htm" onmouseover="show('Bone')" onmouseout="hide()">костей</a>.
+Обратите внимание, что это копия исходного массива, а не ссылка на него, так что можно изменять исходный массив не оказывая влияния на данный.<br><br>
+
+<pre id="boneInverses"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bone inverses - инверсии костей (перевернутые кости)')" onmouseout="hide()">.boneInverses</a></span></pre>
+Массив <a href="../math/matrix4.htm" onmouseover="show('Matrix4')" onmouseout="hide()">четырехмерных матриц</a>,
+который представляет инверсию <tt><a href="../math/matrix4.htm#matrixWorld" onmouseover="show('Matrix4')" onmouseout="hide()">matrixWorld</a></tt> из отдельных костей.<br><br>
+
+<pre id="boneMatrices"><span onclick="showClick(type_float32array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bone matrices - матрицы костей')" onmouseout="hide()">.boneMatrices</a></span></pre>
+Буфер массива, содержащий данные костей при использовании текстуры вершин.<br><br>
+
+<pre id="boneTexture"><a href="../textures/dataTexture.htm" onmouseover="show('DataTexture.<br>bone texture - текстура кости')" onmouseout="hide()">.boneTexture</a></pre>
+<a href="../textures/dataTexture.htm" onmouseover="show('DataTexture')" onmouseout="hide()">DataTexture</a>, содержащая данные костей при использовании текстуры вершин.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="clone"><a href="#" onmouseover="show('Skeleton.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает клон данного объекта Skeleton.<br><br>
+
+<pre id="calculateInverses"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('calculate inverses - вычисление инверсий')" onmouseout="hide()">.calculateInverses</a></span>( )</pre>
+Генерирует массив <tt><a href="#boneInverses" onmouseover="show('Skeleton.boneInverses')" onmouseout="hide()">boneInverses</a></tt>, если он не предоставлен в конструкторе.<br><br>
+
+<pre id="pose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pose - поза')" onmouseout="hide()">.pose</a></span>( )</pre>
+Возвращает скелет в базовую позу.<br><br>
+
+<pre id="update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">.update</a></span>( )</pre>
+Метод обновляет <tt><a href="#boneMatrices" onmouseover="show('Skeleton.boneMatrices')" onmouseout="hide()">boneMatrices</a></tt>
+и <tt><a href="#boneTexture" onmouseover="show('Skeleton.boneTexture')" onmouseout="hide()">boneTexture</a></tt> после изменения костей.
+Если скелет используется со <a href="skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>,
+обновление вызывается автоматически <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>'ом.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Skeleton.js" target="_blank">Skeleton.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

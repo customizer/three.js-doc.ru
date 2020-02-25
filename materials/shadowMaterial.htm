@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a>&nbsp;&nbsp;<a href="shaderMaterial.htm" title="Переход к родительскому классу: ShaderMaterial"><tt>ShaderMaterial &rarr;</tt></a></span>
+<h3>ShadowMaterial</h3>
+Данный материал может принимать тени, но в остальном он полностью прозрачен (На русский язык shadow material можно перевести как теневой материал, или материал для тени).<br><br>
+
+<h4>Пример</h4>
+<pre>var planeGeometry = new THREE.PlaneGeometry( 2000, 2000 );
+planeGeometry.rotateX( - Math.PI / 2 );<br>
+var planeMaterial = new THREE.ShadowMaterial();
+planeMaterial.opacity = 0.2;<br>
+var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.position.y = -200;
+plane.receiveShadow = true;
+scene.add( plane );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_geometry_spline_editor" target="_blank">geometry / spline / editor</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>ShadowMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt>parameters</tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a> и <a href="shaderMaterial.htm" onmouseover="show('ShaderMaterial')" onmouseout="hide()">ShaderMaterial</a>).</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовые классы <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a> и <a href="shaderMaterial.htm" onmouseover="show('ShaderMaterial')" onmouseout="hide()">ShaderMaterial</a>.
+<div class=blockindent><br>
+<pre id="isShadowMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is shadow material - является теневым материалом')" onmouseout="hide()">.isShadowMaterial</a></span></pre>
+Используется для проверки, является ли данный объект, или производные от него, теневыми материалами. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
+Свойство устанавливает, будет или нет освещение влиять на материал. Значением по умолчанию является <tt>true</tt>.<br><br>
+
+<pre id="transparent"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('transparent - прозрачный')" onmouseout="hide()">.transparent</a></span></pre>
+Определяет будет ли данный материал прозрачным или нет. Значением по умолчанию является <tt>true</tt>.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовые классы <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a> и <a href="shaderMaterial.htm" onmouseover="show('ShaderMaterial')" onmouseout="hide()">ShaderMaterial</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/ShadowMaterial.js" target="_blank">ShadowMaterial.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

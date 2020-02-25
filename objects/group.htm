@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3>Group</h3>
+Данный объект (группа) практически идентичен <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>. Его назначение сделать работу с группой объектов синтаксически яснее.
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );<br>
+var cubeA = new THREE.Mesh( geometry, material );
+cubeA.position.set( 100, 100, 0 );<br>
+var cubeB = new THREE.Mesh( geometry, material );
+cubeA.position.set( -100, -100, 0 );<br>
+// create a group and add the two cubes
+// These cubes can now be rotated / scaled etc as a group
+// создаем группу и добавляем два куба
+// Эти кубы теперь можно вращать/масштабировать и т.д. как группу
+var group = new THREE.Group();
+group.add( cubeA );
+group.add( cubeB )<br>
+scene.add( group );</pre>
+
+<h4>Конструктор</h4>
+<pre>Group( )</pre>
+Создает новую группу объектов.<br><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="type"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">.type</a></span></pre>
+Строка 'Group'. Она не должна изменяться.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Group.js" target="_blank">Group.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

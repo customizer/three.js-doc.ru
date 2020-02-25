@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a>&nbsp;&nbsp;<a href="meshStandardMaterial.htm" title="Переход к родительскому классу: MeshStandardMaterial"><tt>MeshStandardMaterial &rarr;</tt></a></span>
+<h3>MeshPhysicalMaterial</h3>
+Расширение <a href="meshStandardMaterial.htm" onmouseover="show('MeshStandardMaterial')" onmouseout="hide()"><tt>MeshStandardMaterial</tt></a>, позволяющее увеличить регулировку способности к отражению.<br>
+Обратите внимание, что при использовании этого материала, для достижения наилучших результатов, всегда следует указывать <a href="meshStandardMaterial.htm#envMap" onmouseover="show('MeshStandardMaterial.envMap')" onmouseout="hide()">карту окружения</a>.<br><br>
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/webgl_materials_variations_physical" target="_blank">webgl / materials / variations / physical</a>
+<a href="https://threejs.org/examples/webgl_materials_physical_clearcoat" target="_blank">webgl / materials / physical / clearcoat</a>
+<a href="https://threejs.org/examples/webgl_materials_reflectivity" target="_blank">webgl / materials / reflectivity</a>
+<a href="https://threejs.org/examples/webgl_materials_physical_transparency" target="_blank">webgl / materials / physical / transparency</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>MeshPhysicalMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt>parameters</tt> - объект с одним или несколькими свойствами, определяющими внешний вид материала (дополнительный, необязательный параметр).
+Здесь можно передать любое свойство материала (включая любое свойство унаследованное от <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a> и <a href="meshStandardMaterial.htm" onmouseover="show('MeshStandardMaterial')" onmouseout="hide()">MeshStandardMaterial</a>).</div>
+<script>document.write(note_01);</script><br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовые классы <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a> и <a href="meshStandardMaterial.htm" onmouseover="show('MeshStandardMaterial')" onmouseout="hide()">MeshStandardMaterial</a>.
+<div class=blockindent><br>
+<pre id="clearCoat"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear coat - прозрачная оболочка')" onmouseout="hide()">.clearCoat</a></span></pre>
+Уровень прозрачной оболочки, диапазон значений от&nbsp;<tt>0.0</tt> до&nbsp;<tt>1.0</tt>. Значение по умолчанию равно&nbsp;<tt>0.0</tt>.<br><br>
+
+<pre id="clearCoatRoughness"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear coat roughness - шероховатость (неровность) прозрачной оболочки')" onmouseout="hide()">.clearCoatRoughness</a></span></pre>
+Свойство определяет, насколько велика шероховатость прозрачной оболочки, диапазон значений от&nbsp;<tt>0.0</tt> до&nbsp;<tt>1.0</tt>. Значение по умолчанию равно&nbsp;<tt>0.0</tt>.<br><br>
+
+<pre id="isMeshPhysicalMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is mesh physical material -<br>является физическим материалом сетки')" onmouseout="hide()">.isMeshPhysicalMaterial</a></span></pre>
+Используется для проверки, является ли данный объект, или производные от него, физическим материалом сетки. По умолчанию значение равно&nbsp;<tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="defines"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('defines - определить, установить')" onmouseout="hide()">.defines</a></span></pre>
+Объект в виде: <tt>{ 'PHYSICAL': '' };</tt>.
+Он используется <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>'ом для выбора шейдеров.<br><br>
+
+<pre id="reflectivity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reflectivity - отражательная способность (коэффициент отражения)')" onmouseout="hide()">.reflectivity</a></span></pre>
+Степень отражения, возможны значения от&nbsp;<tt>0.0</tt> до&nbsp;<tt>1.0</tt>. Значение по умолчанию равно&nbsp;<tt>0.5</tt>.<br>
+Свойство моделирует способность к отражению света неметаллических материалов. Оно не работает, если свойство <tt><a href="meshStandardMaterial.htm#metalness" onmouseover="show('MeshStandardMaterial.metalness')" onmouseout="hide()">metalness</a></tt> равно <tt>1.0</tt>.<br><br>
+
+<pre id="transparency"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('transparency - прозрачность')" onmouseout="hide()">.transparency</a></span></pre>
+Степень прозрачности, выбирается в диапазоне от&nbsp;<tt>0.0</tt> до&nbsp;<tt>1.0</tt>. Значение по умолчанию равно&nbsp;<tt>0.0</tt>.<br>
+Тонкие, прозрачные или полупрозрачные, пластиковые или стеклянные материалы в значительной степени остаются отражающими, даже если в основном они прозрачные.
+Свойство <tt>transparency</tt> можно использовать для моделирования таких материалов.<br>
+Когда <tt>transparency</tt> не нулевая, свойство <tt><a href="material.htm#opacity" onmouseover="show('Material.opacity')" onmouseout="hide()">Material.opacity</a></tt> должно быть установлено как&nbsp;<tt>1</tt>.
+</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовые классы <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a> и <a href="meshStandardMaterial.htm" onmouseover="show('MeshStandardMaterial')" onmouseout="hide()">MeshStandardMaterial</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshPhysicalMaterial.js" target="_blank">MeshPhysicalMaterial.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

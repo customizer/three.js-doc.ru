@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Color</h3>
+Класс представляющий цвет.<br><br>
+
+<h4>Пример</h4>
+Класс Color может быть инициализирован любым из следующих способов:
+<pre>// empty constructor - will default white
+// пустой конструктор - по умолчанию цвет будет белым
+var color = new THREE.Color();<br>
+// Hexadecimal color (recommended)
+// шестнадцатиричное значение цвета (рекомендуется)
+var color = new THREE.Color( 0xff0000 );<br>
+// RGB string
+// строковое RGB значение
+var color = new THREE.Color("rgb(255, 0, 0)");
+var color = new THREE.Color("rgb(100%, 0%, 0%)");<br>
+// X11 color name - all 140 color names are supported.
+// Note the lack of CamelCase in the name
+// название цвета X11 - поддерживаются все 140 названий цвета.
+// обратите внимание, в названии цвета отсутствует <a href="https://ru.wikipedia.org/wiki/CamelCase" target="_blank">CamelCase - верблюжий стиль</a>
+var color = new THREE.Color( 'skyblue' );<br>
+// HSL string
+// строковое значение HSL
+var color = new THREE.Color("hsl(0, 100%, 50%)");<br>
+// Separate RGB values between 0 and 1
+// отдельные значения RGB от 0 до 1
+var color = new THREE.Color( 1, 0, 0 );</pre><br>
+
+
+<h4 id="constructor">Конструктор</h4>
+<pre>Color( <span onclick="showClick('тип значения может быть Color - т.е. другой экземпляр класса Color,<br>hex - шестнадцатиричное значение или string - строковое значение')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова red - красный')" onmouseout="hide()">r</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова green - зеленый')" onmouseout="hide()">g</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова blue - синий')" onmouseout="hide()">b</a></span> )</pre>
+<div class=list><tt>r</tt> - (дополнительный, необязательный параметр) если указаны аргументы <tt>g</tt> и <tt>b</tt>, то данный аргумент определяет красный компонент цвета.
+Если их нет, это может быть либо шестнадцатиричное значение цвета (рекомендуется) (у автора здесь <a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank">hexadecimal triplet</a>), либо строковое значение цвета в стиле CSS, либо другой экземпляр <tt>Color</tt>.
+Вот <a href="https://ru.wikipedia.org/wiki/%D0%A6%D0%B2%D0%B5%D1%82%D0%B0_HTML" target="_blank">статья Википедии о цвете в HTML</a> на русском языке.</div>
+<div class=list><tt>g</tt> - (дополнительный, необязательный параметр), если указан, то определяет зеленый компонент цвета.</div>
+<div class=list><tt>b</tt> - (дополнительный, необязательный параметр), если указан, то определяет синий компонент цвета.</div>
+Цвет по умолчанию - белый (white).<br>
+Если указаны все аргументы, то <tt>r</tt> будет красным компонентом, <tt>g</tt> - зеленым, а <tt>b</tt> будет синим компонентом цвета.<br>
+Когда установлен только аргумент <tt>r</tt>, то:<br>
+<ul><li>это может быть шестнадцатиричное значение цвета (рекомендуется к применению).</li>
+<li>это может быть другой экземпляр цвета.</li>
+<li>это может быть строковое значение стиля CSS, например:
+<div class=blockindent><tt>'rgb(250, 0,0)'<br>
+'rgb(100%,0%,0%)'<br>
+'hsl(0, 100%, 50%)'<br>
+'#ff0000'<br>
+'#f00'<br>
+'red'</tt></div></li></ul><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="isColor"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is color - является цветом')" onmouseout="hide()">.isColor</a></span></pre>
+Свойство используется для проверки, является ли данный и производные от него классы цветом. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
+
+<pre id="r"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова red - красный')" onmouseout="hide()">.r</a></span></pre>
+Значение красного канала цвета, от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. По умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="g"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова green - зеленый')" onmouseout="hide()">.g</a></span></pre>
+Значение зеленого канала цвета, от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. По умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="b"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова blue - синий')" onmouseout="hide()">.b</a></span></pre>
+Значение синего канала цвета, от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. По умолчанию равно&nbsp;<tt>1</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="add"><a href="#" onmouseover="show('Color.<br>add - сложить, добавить')" onmouseout="hide()">.add</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
+Метод выполняет сложение RGB значений цвета, переданного в параметре <tt><a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></tt>, со RGB значениями данного цвета.<br><br>
+
+<pre id="addColors"><a href="#" onmouseover="show('Color.<br>add colors - сложить цвета')" onmouseout="hide()">.addColors</a>( <a href="#" onmouseover="show('Color.<br>color 1 - цвет номер один')" onmouseout="hide()">color1</a>, <a href="#" onmouseover="show('Color.<br>color 2 - цвет номер два')" onmouseout="hide()">color2</a> )</pre>
+Метод устанавливает RGB значения данного цвета как сумму RGB значений, переданный в <tt><a href="#" onmouseover="show('Color.<br>color 1 - цвет номер один')" onmouseout="hide()">color1</a></tt> и <tt><a href="#" onmouseover="show('Color.<br>color 2 - цвет номер два')" onmouseout="hide()">color2</a></tt>.<br><br>
+
+<pre id="addScalar"><a href="#" onmouseover="show('Color.<br>add scalar - прибавить скаляр(ное значение)')" onmouseout="hide()">.addScalar</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
+Метод прибавляет значение аргумента <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span></tt> к RGB значениям данного цвета.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Color.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Метод возвращает новый экземпляр класса Color с теми же самыми значениями <tt><a href="#r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>, <tt><a href="#g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt>
+и <tt><a href="#b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt> как у данного.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Color.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
+Метод копирует параметры <tt><a href="#r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>, <tt><a href="#g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt> цвета, переданного в аргументе <tt><a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></tt>, в данный цвет.<br><br>
+
+<pre id="convertGammaToLinear"><a href="#" onmouseover="show('Color.<br>convert gamma to linear -<br>конвертировать гамма в линейное')" onmouseout="hide()">.convertGammaToLinear</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
+<div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно&nbsp;<tt>2.0</tt>.</div>
+Метод конвертирует данный цвет из гамма-пространства в линейное, возводя значения компонентов цвета <tt><a href="#r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>,
+<tt><a href="#g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt> в степень, равную значению аргумента <tt>gammaFactor</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> чтобы иметь представление о линейном освещении и освещении с гамма-коррекцией посмотрите статью на
+<a href="https://docs.unity3d.com/Manual/LinearLighting.html" target="_blank">английском</a> и <a href="https://docs.unity3d.com/ru/current/Manual/LinearLighting.html" target="_blank">русском</a> языках.</div><br>
+
+<pre id="convertLinearToGamma"><a href="#" onmouseover="show('Color.<br>convert linear to gamma -<br>конвертировать линейное в гамма')" onmouseout="hide()">.convertLinearToGamma</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
+<div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно&nbsp;<tt>2.0</tt>.</div>
+Метод конвертирует данный цвет из линейного в гамма-пространство, возводя значения компонентов цвета <tt><a href="#r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>,
+<tt><a href="#g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt> в степень, равную <tt>1/gammaFactor</tt>.<br><br>
+
+<pre id="convertLinearToSRGB"><a href="#" onmouseover="show('Color.<br>convert linear to sRGB - конвертировать из линейного в sRGB')" onmouseout="hide()">.convertLinearToSRGB</a>( )</pre>
+Конвертирует данный цвет из линейного пространства в пространство цвета <a href="https://ru.wikipedia.org/wiki/SRGB" target="_blank" onmouseover="show('sRGB - сокращ. англ. слов standard Red Green Blue<br>- стандартные красный, зеленый, синий')" onmouseout="hide()">sRGB</a>.<br><br>
+
+<pre id="convertSRGBToLinear"><a href="#" onmouseover="show('Color.<br>convert sRGB to linear - конвертировать из sRGB в линейное')" onmouseout="hide()">.convertSRGBToLinear</a>( )</pre>
+Конвертирует данный цвет из пространства цвета <a href="https://ru.wikipedia.org/wiki/SRGB" target="_blank" onmouseover="show('sRGB - сокращ. англ. слов standard Red Green Blue<br>- стандартные красный, зеленый, синий')" onmouseout="hide()">sRGB</a> в линейное пространство цвета.<br><br>
+
+<pre id="copyGammaToLinear"><a href="#" onmouseover="show('Color.<br>copy gamma to linear - копировать<br>(с преобразованием из)<br>гамма-пространства в линейное')" onmouseout="hide()">.copyGammaToLinear</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
+<div class=list><tt>color</tt> — копируемый класс Color.</div>
+<div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно <tt>2.0</tt>.</div>
+Метод копирует цвет, переданный в аргументе <tt>color</tt>, в данный цвет, преобразовывая его из гамма-пространства в линейное,
+возводя значения компонентов цвета <tt>r</tt>, <tt>g</tt> и <tt>b</tt> в степень, равную значению аргумента <tt>gammaFactor</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> коэффициент гамма-коррекции нужен для корректировки цветового сигнала, так как глаз человека и объектив видеокамеры воспринимают изображение по-разному.<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Параметр телекамеры, характеризующий способность компенсировать степенную (квадратичную) зависимость яркости кинескопа в мониторе от величины сигнала, приводящую к уменьшению контрастности на темных участках изображения и к увеличению на ярких. Для компенсации обшей нелинейности всего тракта, в современной камере производится специальная корректировка сигнала с показателем степени 1/2.2, т.е. 0.45. Некоторые камеры предоставляют выбор коэффициента гамма-коррекции, например, вариант 0.61 приводит к повышению контрастности темных областей, что нередко производит впечатление более "четкой" картинки на пользователя оборудования.<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'>из статьи Википедии &#171;<a href='https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D0%BC%D0%BC%D0%B0-%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%86%D0%B8%D1%8F' target='_blank'>Гамма-коррекция</a>&#187;, а также статья &#171;<a href="http://www.cambridgeincolour.com/ru/tutorials-ru/gamma-correction.htm" target="_blank">Что такое коррекция гаммы</a>&#187;</span></div></div><br>
+
+<pre id="copyLinearToGamma"><a href="#" onmouseover="show('Color.<br>copy linear to gamma - копировать<br>(с преобразованием из) линейного<br>в гамма-пространство')" onmouseout="hide()">.copyLinearToGamma</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gamma factor - коэффициент гамма-коррекции')" onmouseout="hide()">gammaFactor</a></span> )</pre>
+<div class=list><tt>color</tt> — копируемый цвет.</div>
+<div class=list><tt>gammaFactor</tt> - коэффициент гамма-коррекции (дополнительный, необязательный аргумент). Значение по умолчанию равно <tt>2.0</tt>.</div>
+Метод копирует цвет, переданный в аргументе <tt>color</tt>, в данный цвет, преобразовывая его из линейного в гамма-пространство,
+возводя значения компонентов цвета <tt>r</tt>, <tt>g</tt> и <tt>b</tt> в степень, равную <tt>1/gammaFactor</tt>.<br><br>
+
+<pre id="copyLinearToSRGB"><a href="#" onmouseover="show('Color.<br>copy linear to sRGB - копировать цвет и затем<br>преобразовать его из линейного пространства в sRGB')" onmouseout="hide()">.copyLinearToSRGB</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
+<div class=list><tt>color</tt> — копируемый цвет.</div>
+Метод копирует цвет, заданный в аргументе <tt>color</tt>, в данный цвет и затем конвертирует данный цвет из линейного пространства цвета в
+<a href="https://ru.wikipedia.org/wiki/SRGB" target="_blank" onmouseover="show('sRGB - сокращ. англ. слов standard Red Green Blue<br>- стандартные красный, зеленый, синий')" onmouseout="hide()">sRGB</a>.<br><br>
+
+<pre id="copySRGBToLinear"><a href="#" onmouseover="show('Color.<br>copy sRGB to linear - копировать цвет и затем<br>преобразовать его из sRGB в линейное пространство')" onmouseout="hide()">.copySRGBToLinear</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
+<div class=list><tt>color</tt> — копируемый цвет.</div>
+Метод копирует цвет, заданный в аргументе <tt>color</tt>, в данный цвет и затем конвертирует данный цвет из пространства цвета sRGB в линейное пространство цвета.<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
+Метод сравнивает значения RGB, переданные в аргументе <tt><a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></tt> с такими же значениями данного объекта.
+Если они одинаковы, возвращается значение <tt>true</tt>, в противном случае возвращается значение <tt>false</tt>.<br><br>
+
+<pre id="fromArray"><a href="#" onmouseover="show('Color.<br>from array - из массива')" onmouseout="hide()">.fromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - массив чисел с плавающей запятой в форме <tt>[ <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова red - красный')" onmouseout="hide()">r</a></span>,
+<span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова green - зеленый')" onmouseout="hide()">g</a></span>,
+<span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова blue - синий')" onmouseout="hide()">b</a></span> ]</tt>.</div>
+<div class=list><tt>offset</tt> - дополнительное смещение в массиве.</div>
+Метод устанавливает компоненты данного цвета основываясь на массиве в формате <tt>[ <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова red - красный')" onmouseout="hide()">r</a></span>,
+<span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова green - зеленый')" onmouseout="hide()">g</a></span>,
+<span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова blue - синий')" onmouseout="hide()">b</a></span> ]</tt>.<br><br>
+
+<pre id="getHex"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов get hexadecimal -<br>получить шестнадцатиричное (значение)')" onmouseout="hide()">.getHex</a></span>( )</pre>
+Возвращает шестнадцатиричное значение данного цвета.<br><br>
+
+<pre id="getHexString"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get hex string - получить<br>шестнадцатиричное<br>(значение как) строку')" onmouseout="hide()">.getHexString</a></span>( )</pre>
+Метод возвращает шестнадцатиричное значение данного цвета в виде строки (например, <tt>'FFFFFF'</tt>).<br><br>
+
+<pre id="getHSL"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get HSL - получить в формате HSL.<br>HSL - сокращ. от англ. слов get hue,<br>saturation, lightness - тон, насыщенность,<br>светлота')" onmouseout="hide()">.getHSL</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('target - цель')" onmouseout="hide()">target</a></span> )</pre>
+<div class=list><tt>target</tt> - в этот объект копируется результат метода. К объекту добавляются ключи <tt>h</tt>, <tt>s</tt> и <tt>l</tt> (если они не предоставлены).</div>
+Конвертирует значения <tt><a href="#r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>, <tt><a href="#g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt>
+данного цвета в формат <a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">HSL</a> и возвращает объект в виде <tt>{ h:0, s:0, l:0 }</tt>.<br>
+Вот статья Википедии о <a href="https://ru.wikipedia.org/wiki/HSL" target="_blank">HSL</a> на русском языке<br><br>
+
+<pre id="getStyle"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get style - получить стиль')" onmouseout="hide()">.getStyle</a></span>( )</pre>
+Возвращает значение данного цвета в виде строки CSS стиля. Пример: <tt>'rgb(255,0,0)'</tt>.<br><br>
+
+<pre id="lerp"><a href="#" onmouseover="show('Color.<br>lerp - сокращ. англ. слов linearly<br>interpolate - линейная интерполяция')" onmouseout="hide()">.lerp</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span> )</pre>
+<div class=list><tt>color</tt> - цвет, с которым производится сближение.</div>
+<div class=list><tt>alpha</tt> - коэффициент интерполяции в закрытом интервале <tt>[0, 1]</tt>.</div>
+Метод выполняет операцию линейного интерполирования между значениями RGB данного цвета и RGB значениям цвета, переданного в аргументе <tt><a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></tt>.
+Аргумент <tt>alpha</tt> можно рассматривать как соотношение между двумя цветами, где <tt>0.0</tt> означает данный цвет, а <tt>1.0</tt> - цвет, переданный в первом аргументе.<br><br>
+
+<pre id="multiply"><a href="#" onmouseover="show('Color.<br>multiply - умножить')" onmouseout="hide()">.multiply</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
+Умножает значения RGB данного цвета на значения RGB цвета, переданного в аргументе <tt><a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></tt>.<br><br>
+
+<pre id="multiplyScalar"><a href="#" onmouseover="show('Color.<br>multiply scalar - умножить (на) скаляр')" onmouseout="hide()">.multiplyScalar</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
+Метод умножает значения RGB данного цвета на число, переданное в аргументе <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span></tt>.<br><br>
+
+<pre id="offsetHSL"><a href="#" onmouseover="show('Color.<br>offset H S L - возмещение (компенсация) значений hue - оттенок,<br>saturation - насыщенность и lightness - яркость, &#34;светлота&#34;')" onmouseout="hide()">.offsetHSL</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('h - сокращ. англ. слова hue - оттенок, цветовой тон')" onmouseout="hide()">h</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова saturation - насыщенность')" onmouseout="hide()">s</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('l - сокращ. англ. слова lightness - яркость, &#34;светлота&#34;')" onmouseout="hide()">l</a></span> )</pre>
+Метод добавляет значения <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('h - сокращ. англ. слова hue - оттенок, цветовой тон')" onmouseout="hide()">h</a></span></tt>,
+<tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова saturation - насыщенность')" onmouseout="hide()">s</a></span></tt>,
+и <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('l - сокращ. англ. слова lightness - яркость, &#34;светлота&#34;')" onmouseout="hide()">l</a></span></tt> к значениям данного цвета.
+Внутри же метода, вначале конвертируются значения <tt><a href="#r" onmouseover="show('Color.r')" onmouseout="hide()">r</a></tt>, <tt><a href="#g" onmouseover="show('Color.g')" onmouseout="hide()">g</a></tt> и <tt><a href="#b" onmouseover="show('Color.b')" onmouseout="hide()">b</a></tt> в HSL,
+добавляются значения <tt>h</tt>, <tt>s</tt>, и <tt>l</tt>, а затем цвет конвертируется обратно в RGB.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Color.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick('тип значения может быть Color -<br>т.е. другой экземпляр класса Color,<br>hex - шестнадцатиричное значение<br>или string - строковое значение')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt>value</tt> - значение для установки в данный цвет.</div>
+Более подробную информацию о том, какое значение может быть указано в аргументе <tt>value</tt>, см. в разделе <a href="#constructor" onmouseover="show('Конструктор')" onmouseout="hide()">Конструктор</a>. В зависимости от введенного типа, выполнение передается методам <tt><a href="#copy" onmouseover="show('Color.copy')" onmouseout="hide()">copy</a></tt>, <tt><a href="#setStyle" onmouseover="show('Color.setStyle')" onmouseout="hide()">setStyle</a></tt>, или <tt><a href="#setHex" onmouseover="show('Color.setHex')" onmouseout="hide()">setHex</a></tt>.<br><br>
+
+<pre id="setHex"><a href="#" onmouseover="show('Color.<br>set hex - сокращ. англ. слов set hexadecimal<br>- установить шестнадцатиричное (значение)')" onmouseout="hide()">.setHex</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal<br>- шестнадцатиричное')" onmouseout="hide()">hex</a></span> )</pre>
+<div class=list><tt>hex</tt> — значение цвета в шестнадцатиричном формате (у автора здесь <a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank">hexadecimal triplet</a>).
+Вот <a href="https://ru.wikipedia.org/wiki/%D0%A6%D0%B2%D0%B5%D1%82%D0%B0_HTML" target="_blank">статья Википедии о цвете в HTML</a> на русском языке.</div>
+Метод устанавливает значение данного цвета из шестнадцатиричного значения, переданного в параметре <tt>hex</tt>.<br><br>
+
+<pre id="setHSL"><a href="#" onmouseover="show('Color.<br>set HSL - установить (значения цвета в формате) HSL,<br>сокращ. англ. слов H - hue - оттенок, S -saturation<br>- насыщенность, L - lightness - яркость, &#34;светлота&#34;')" onmouseout="hide()">.setHSL</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('h - сокращ. англ. слова hue - оттенок, цветовой тон')" onmouseout="hide()">h</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова saturation - насыщенность')" onmouseout="hide()">s</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('l - сокращ. англ. слова lightness - яркость, &#34;светлота&#34;')" onmouseout="hide()">l</a></span> )</pre>
+<div class=list><tt>h</tt> — значение оттенка цвета в диапазоне от <tt>0.0</tt> до <tt>1.0</tt>.</div>
+<div class=list><tt>s</tt> — значение насыщенности цвета в диапазоне от <tt>0.0</tt> до <tt>1.0</tt>.</div>
+<div class=list><tt>l</tt> — значение яркости цвета в диапазоне от <tt>0.0</tt> до <tt>1.0</tt>.</div>
+Метод устанавливает данный цвет из значений HSL.<br><br>
+
+<pre id="setRGB"><a href="#" onmouseover="show('Color.<br>set R G B - установить (значения цвета)<br>R - красного G - зеленого B - синего')" onmouseout="hide()">.setRGB</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова red - красный')" onmouseout="hide()">r</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова green - зеленый')" onmouseout="hide()">g</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова blue - синий')" onmouseout="hide()">b</a></span> )</pre>
+<div class=list><tt>r</tt> — значение красного канала в диапазоне от <tt>0.0</tt> до <tt>1.0</tt>.</div>
+<div class=list><tt>g</tt> — значение зеленого канала в диапазоне от <tt>0.0</tt> до <tt>1.0</tt>.</div>
+<div class=list><tt>b</tt> — значение синего канала в диапазоне от <tt>0.0</tt> до <tt>1.0</tt>.</div>
+Метод устанавливает данный цвет из значений RGB.<br><br>
+
+<pre id="setScalar"><a href="#" onmouseover="show('Color.<br>set scalar - установить скаляр')" onmouseout="hide()">.setScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scalar - скаляр')" onmouseout="hide()">scalar</a></span> )</pre>
+<div class=list><tt>scalar</tt> — значение в диапазоне между <tt>0.0</tt> и <tt>1.0</tt>.</div>
+Метод устанавливает все три компонента цвета равными значению, переданному в параметре <tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scalar - скаляр')" onmouseout="hide()">scalar</a></span></tt>.<br><br>
+
+<pre id="setStyle"><a href="#" onmouseover="show('Color.<br>set style - установить стиль')" onmouseout="hide()">.setStyle</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('style - стиль')" onmouseout="hide()">style</a></span> )</pre>
+<div class=list><tt>style</tt> — строковое значение в стиле CSS в качестве значения цвета.</div>
+Метод устанавливает данный цвет из строкового значения в стиле CSS.
+Например, <tt>"rgb(250, 0,0)"</tt>, <tt>"rgb(100%, 0%, 0%)"</tt>, <tt>"hsl(0, 100%, 50%)"</tt>, <tt>"#ff0000"</tt>, <tt>"#f00"</tt> или <tt>"red"</tt>
+(или любое <a href="https://en.wikipedia.org/wiki/X11_color_names#Color_name_chart" target="_blank">название цвета из цветовой схемы X11</a> - поддерживаются все 140 названий цвета).
+Вот эта страничка Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2_%D0%B2_X11#%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2_%[2%]" target="_blank">цвете из схемы X11</a> на русском языке.<br>
+Также принимаются полупрозрачные цвета, такие как <tt>"rgba(255, 0, 0, 0.5)"</tt> и <tt>"hsla(0, 100%, 50%, 0.5)"</tt>, но значение альфа-канала (канал прозрачности) отбрасывается.<br>
+Обратите внимание, что названия цвета в схеме X11, состоящие из нескольких слов, вроде Dark Orange (темно-оранжевый), становятся строковым значением <tt>'darkorange'</tt> (все буквы строчные).<br><br>
+
+<pre id="sub"><a href="#" onmouseover="show('Color.<br>sub - сокращ. англ. слова subtract - вычитать')" onmouseout="hide()">.sub</a>( <a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a> )</pre>
+Метод вычитает из RGB компонентов данного цвета компоненты RGB цвета, переданного в параметре <tt><a href="#" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a></tt>.
+Если в результате получается отрицательное значение компонента, этот компонент устанавливается равным нулю.<br><br>
+
+<pre id="toArray"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to array - в массив')" onmouseout="hide()">.toArray</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - дополнительный массив для хранения значений цвета.</div>
+<div class=list><tt>offset</tt> - дополнительное смещение в массиве.</div>
+Метод возвращает массив в виде <tt>[ r, g, b ]</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/src/math/Color.js" target="_blank">Color.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

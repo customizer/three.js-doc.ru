@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3>MeshBasicMaterial</h3>
+Материал для рисования геометрических элементов в простом, затушеванном виде (плоском (flat) или каркасном (wireframe).<br>
+На этот материал не влияет освещение.<br>
+По умолчанию будет отображаться в виде плоских многоугольников. Чтобы нарисовать сетку в виде каркаса, установите свойство <tt><a href="#wireframe" onmouseover="show('MeshBasicMaterial.wireframe')" onmouseout="hide()">wireframe</a></tt> как <tt>true</tt>.
+<div class="caption"><img src="../img/MeshBasicMaterial.png" width=700><br>
+MeshBasicMaterial плоский (flat) и каркасный (wireframe).</div><br>
+
+<h4>Конструктор</h4>
+<pre>MeshBasicMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<script>document.write(note_0, note_01);</script><br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
+<div class=blockindent><br>
+<pre id="alphaMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>alpha map - карта альфа-канала')" onmouseout="hide()">.alphaMap</a></pre>
+Карта значений альфа-канала (карта прозрачности) - это текстура оттенков серого, которая управляет непрозрачностью всей поверхности (черный цвет: полная прозрачность; белый цвет: полная непрозрачность).
+Значением по умолчанию является&nbsp;<tt>null</tt>.<br>
+Используется только цвет текстуры, если существует альфа-канал, то он игнорируется.
+Для текстур в формате RGB и RGBA, при выборке этой текстуры <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">визуализатор WebGL</a> будет использовать канал зеленого цвета из-за дополнительного бита точности,
+предоставляемого для зеленого цвета в сжатом <a href="../constants/textures.htm#dds" onmouseover="show('форматы сжатия текстур DDS / ST3C')" onmouseout="hide()">DXT формате</a> и упаковке в <a href="../constants/textures.htm#types" onmouseover="show('типы упаковки')" onmouseout="hide()">формате RGB 565</a>.
+Форматы текстур только <a href="../constants/textures.htm#formats" onmouseover="show('форматы')" onmouseout="hide()">яркости (LuminanceFormat) и яркости+альфа-канала (LuminanceAlphaFormat)</a> также будут работать должным образом.<br><br>
+
+<pre id="aoMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>aoMap это сокращ. англ. слов ambient occlusion map -<br>карта перекрытия (затенения) при общем (фоновом)<br>освещении')" onmouseout="hide()">.aoMap</a></pre>
+Канал красного цвета используется в данной текстуре в качестве карты затенения при фоновом освещении (ambient occlusion map). Значением по умолчанию является&nbsp;<tt>null</tt>.
+Свойству <tt>aoMap</tt> требуется второй набор текстурных координат UV и поэтому будут игнорироваться свойства текстуры <tt><a href="../textures/texture.htm#repeat" onmouseover="show('Texture.repeat')" onmouseout="hide()">repeat</a></tt>
+и <tt><a href="../textures/texture.htm#offset" onmouseover="show('Texture.offset')" onmouseout="hide()">offset</a></tt>.<br>
+Статья в русской Википедии о <a href="https://ru.wikipedia.org/wiki/Ambient_occlusion" target="_blank">эффекте перекрытия</a> (модели затенения) при фоновом освещении. А <a href="https://en.wikipedia.org/wiki/Ambient_occlusion" target="_blank">вот</a> в английской.<br><br>
+
+<pre id="aoMapIntensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов ambient occlusion map intensity -<br>интенсивность затенения при общем (фоновом) освещении')" onmouseout="hide()">.aoMapIntensity</a></span></pre>
+Интенсивность затенения при общем (фоновом) освещении. Значение по умолчанию равно&nbsp;<tt>1</tt>. Нулевое значение означает отсутствие эффекта перекрытия (затенения).<br><br>
+
+<pre id="color"><a href="../math/color.htm" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+<a href="../math/color.htm" onmouseover="show('Color')" onmouseout="hide()">Цвет</a> материала, по умолчанию установлен как белый (<tt>0xffffff</tt> - <tt>white</tt>).<br><br>
+
+<pre id="combine"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('combine - комбинирование, совмещение')" onmouseout="hide()">.combine</a></span></pre>
+Свойство определяет, как совмещаются цвет поверхности с картой окружения, если таковая существует.<br>
+Возможными значениями являются <tt><a href="../constants/materials.htm#textureCombineOperations" onmouseover="show('Константы материалов.<br>multiply operation - операция умножения')" onmouseout="hide()">THREE.MultiplyOperation</a></tt> (значение по умолчанию),
+<tt><a href="../constants/materials.htm#textureCombineOperations" onmouseover="show('Константы материалов.<br>mix operation - операция смешивания')" onmouseout="hide()">THREE.MixOperation</a></tt>
+и <tt><a href="../constants/materials.htm#textureCombineOperations" onmouseover="show('Константы материалов.<br>add operation - операция сложения')" onmouseout="hide()">THREE.AddOperation</a></tt>.
+Если выбрано смешивание (<tt>THREE.MixOperation</tt>), то для смешивания двух цветов будет использовано свойство <tt><a href="#reflectivity" onmouseover="show('MeshBasicMaterial.reflectivity<br>reflectivity - коэффициент отражения,<br>способность к отражению')" onmouseout="hide()">reflectivity</a></tt>.<br><br>
+
+<pre id="isMeshBasicMaterial"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is mesh basic material -<br>является основным материалом<br>сетки')" onmouseout="hide()">.isMeshBasicMaterial</a></span></pre>
+Используется для проверки, является ли данный объект, или производные от него, основными материалами сетки. По умолчанию значение равно&nbsp;<tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="envMap"><a href="../textures/cubeTexture.htm" onmouseover="show('CubeTexture.<br>env map - сокращ. англ. слов<br>environment map - карта окружения')" onmouseout="hide()">.envMap</a></pre>
+Карта окружения. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="lightMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>light map - карта освещения')" onmouseout="hide()">.lightMap</a></pre>
+Карта освещения. Значением по умолчанию является <tt>null</tt>. Свойство <tt>lightMap</tt> требует второго набора <a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">UV координат</a> и, следовательно,
+будет игнорировать свойства <tt><a href="../textures/texture.htm#repeat" onmouseover="show('Texture.repeat<br>(repeat - повторение)')" onmouseout="hide()">repeat</a></tt>
+и <tt><a href="../textures/texture.htm#offset" onmouseover="show('Texture.offset<br>(offset - смещение)')" onmouseout="hide()">offset</a></tt> текстуры.<br><br>
+
+<pre id="lightMapIntensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('light map intensity - интенсивность карты освещения')" onmouseout="hide()">.lightMapIntensity</a></span></pre>
+Интенсивность "запеченного" освещения. Значение по умолчанию равно&nbsp;<tt>1</tt>.
+<script>document.write(note_4);</script>
+
+<pre id="lights"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lights - огни, освещение')" onmouseout="hide()">.lights</a></span></pre>
+Свойство определяет, будет ли материал зависеть от освещения. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="map"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>map - карта')" onmouseout="hide()">.map</a></pre>
+Карта цвета. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
+Свойство определяет, будет ли данный материал использовать цели морфинга (<tt>morphTargets</tt>). Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="reflectivity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reflectivity - коэффициент отражения')" onmouseout="hide()">.reflectivity</a></span></pre>
+Свойство определяет, насколько карта окружения влияет на поверхность; также смотрите свойство <tt><a href="#combine" onmouseover="show('MeshBasicMaterial.combine')" onmouseout="hide()">combine</a></tt>.
+Значение по умолчанию равно&nbsp;1, а допустимый диапазон значений находится между&nbsp;0 (нет отражений) и&nbsp;1&nbsp;(полное отражение).<br><br>
+
+<pre id="refractionRatio"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('refraction ratio - коэффициент преломления')" onmouseout="hide()">.refractionRatio</a></span></pre>
+<a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C_%D0%BF%D1%80%D0%B5%D0%BB%D0%BE%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F" target="_blank" onmouseover="show('в англоязычном варианте - index of refraction (IOR)')" onmouseout="hide()">Показатель преломления</a> воздуха (примерно равный&nbsp;<tt>1</tt>) разделенный на показатель преломления материала.
+Он используется с режимами картирования окружения <a href="../constants/textures.htm#mappingModes" onmouseover="show('Константы текстур, режимы картирования')" onmouseout="hide()">THREE.CubeRefractionMapping</a>
+и <a href="../constants/textures.htm#mappingModes" onmouseover="show('Константы текстур, режимы картирования')" onmouseout="hide()">THREE.EquirectangularRefractionMapping</a>.
+Коэффициент преломления не должен превышать&nbsp;<tt>1</tt>. Значение по умолчанию равно&nbsp;<tt>0.98</tt>.<br><br>
+
+<pre id="skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - скиннинг (операция обворачивания<br>3D-модели полигональной сеткой)')" onmouseout="hide()">.skinning</a></span></pre>
+Свойство определяет, будет ли использоватья <span class="lnk" onmouseover="show('(от английского слова skin - кожа,<br>skinning - процесс создания кожи<br>- операция обворачивания 3D-модели<br>полигональной сеткой.')" onmouseout="hide()">скиннинг (skinning)</span>. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="specularMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>specular map - карта отражения')" onmouseout="hide()">.specularMap</a></pre>
+Карта отражений используемая материалом. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="wireframe"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe - каркас')" onmouseout="hide()">.wireframe</a></span></pre>
+Свойство позволяет отобразить геометрическую фигуру в виде каркаса. Значением по умолчанию является <tt>false</tt> (т.е. каркас не виден и визуализация происходит при помощи плоских многоугольников).<br><br>
+
+<pre id="wireframeLinecap"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line cap - конец линии каркаса')" onmouseout="hide()">.wireframeLinecap</a></span></pre>
+Определяет внешний вид концов линии. Возможные значения: <tt>butt</tt> (торец), <tt>round</tt> (круглый) и <tt>square</tt> (квадратный). Значение по умолчанию <tt>round</tt> - круглый.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank"><tt>linecap</tt> в 2D Canvas</a> и игнорируется <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> визуализатором (рендерером).
+Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/linecap" target="_blank">статья о <tt>linecap</tt></a> на русском языке.<br><br>
+
+<pre id="wireframeLinejoin"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line join - соединение линий каркаса')" onmouseout="hide()">.wireframeLinejoin</a></span></pre>
+Определяет внешний вид соединений линии. Возможные значения: <tt>round</tt> - круглый, <tt>bevel</tt> (скос) и <tt>miter</tt>
+(<span class="lnk" onmouseover="show('<strong>митра</strong> - головной убор, часть богослужебного облачения<br>в ряде христианских церквей. В данном случае это<br>остроконечная католическая митра (в православии митра<br>округлая), что и определяет вид соединения линий.')" onmouseout="hide()">митра</span>).
+Значение по умолчанию <tt>round</tt> - круглый.<br>
+Данное свойство соответствует свойству <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank"><tt>lineJoin</tt> в 2D Canvas</a> и игнорируется <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGL</a> визуализатором (рендерером).
+Вот эта <a href="https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/lineJoin" target="_blank">статья о <tt>lineJoin</tt></a> на русском языке.<br><br>
+
+<pre id="wireframeLinewidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wireframe line width - толщина линии каркаса')" onmouseout="hide()">.wireframeLinewidth</a></span></pre>
+Управляет толщиной линии каркаса. Значение по умолчанию равно <tt>1</tt>.
+<script>document.write(note_3);</script></div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshBasicMaterial.js" target="_blank">MeshBasicMaterial.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3>Sprite</h3>
+Спрайт это плоскость на трехмерной сцене, которая всегда стоит перед камерой.<br>
+Спрайты не отбрасывают тени, так что установка <tt>castShadow = true</tt> не даст никакого эффекта.
+
+<h4>Пример</h4>
+<pre>var spriteMap = new THREE.TextureLoader().load( "sprite.png" );
+var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap, color: 0xffffff } );
+var sprite = new THREE.Sprite( spriteMaterial );
+scene.add( sprite );</pre>
+
+<h4>Конструктор</h4>
+<pre>Sprite( <a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">material</a> )</pre>
+<div class=blockindent><tt>material</tt> — экземпляр <tt><a href="../materials/material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a></tt> (дополнительный, необязательный аргумент).</div>
+Создает новый объект <tt>Sprite</tt> с указанным материалом <tt>material</tt>.<br><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="isSprite"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is sprite - является спрайтом')" onmouseout="hide()">.isSprite</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу Sprite. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="material"><a href="../materials/spriteMaterial.htm" onmouseover="show('SpriteMaterial.<br>material - материал')" onmouseout="hide()">.material</a></pre>
+Экземпляр <a href="../materials/spriteMaterial.htm" onmouseover="show('SpriteMaterial')" onmouseout="hide()">SpriteMaterial</a>'а, определяющий внешний вид объекта.
+Значением по умолчанию является белый <a href="../materials/spriteMaterial.htm" onmouseover="show('SpriteMaterial')" onmouseout="hide()">SpriteMaterial</a>.<br><br>
+
+<pre id="center"><a href="../math/vector2.htm" onmouseover="show('Vector2.<br>center - центр')" onmouseout="hide()">.center</a></pre>
+Опорная точка спрайта и точка, вокруг которой вращается спрайт. Значение&nbsp;<tt>(0.5, 0.5)</tt> соответствует средней (центральной) точке спрайта.
+Значение&nbsp;<tt>(0, 0)</tt> соответствует нижнему левому углу спрайта. Значение по умолчанию равно&nbsp;<tt>(0.5, 0.5)</tt>.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="clone"><a href="#" onmouseover="show('Sprite.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает клон данного объекта Sprite и всех его потомков.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Sprite.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Sprite.<br>sprite - спрайт')" onmouseout="hide()">sprite</a> )</pre>
+Метод копирует в данный спрайт свойства спрайта, переданного в аргументе <tt>sprite</tt>.<br><br>
+
+<pre id="raycast"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ray cast - бросок луча')" onmouseout="hide()">.raycast</a></span>( <a href="../core/raycaster.htm" onmouseover="show('Raycaster.<br>raycaster - &#34;бросатель&#34; луча, излучатель')" onmouseout="hide()">raycaster</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects - пересечения')" onmouseout="hide()">intersects</a></span> )</pre>
+Получает пересечения между брошенным <a href="../math/ray.htm" onmouseover="show('Ray')" onmouseout="hide()">лучом</a> и данным спрайтом.
+Этот метод будет вызываться методом <tt><a href="../core/raycaster.htm#intersectObject" onmouseover="show('Raycaster.intersectObject')" onmouseout="hide()">Raycaster.intersectObject</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Sprite.js" target="_blank">Sprite.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

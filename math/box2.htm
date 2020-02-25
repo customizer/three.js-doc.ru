@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Box2</h3>
+Представляет собой ограниченный прямоугольник в двумерном пространстве.<br><br>
+<h4>Конструктор</h4>
+<pre>Box2( <a href="vector2.htm" onmouseover="show('Vector2.<br>сокращ. от англ. слова minimum - минимум');" onmouseout="hide()">min</a>, <a href="vector2.htm" onmouseover="show('Vector2.<br>сокращ. от англ. слова maximum - максимум');" onmouseout="hide()">max</a> )</pre>
+<div class=list><tt>min</tt> - двумерный вектор (<a href="vector2.htm" onmouseover="show('Vector2');" onmouseout="hide()">Vector2</a>), представляющий нижний предел значений координат <tt>x</tt>, <tt>y</tt> прямоугольника, дополнительный, необязательный параметр. Значением по умолчанию является&nbsp;<tt>( +Infinity, +Infinity )</tt>.</div>
+<div class=list><tt>max</tt> - двумерный вектор (<a href="vector2.htm" onmouseover="show('Vector2');" onmouseout="hide()">Vector2</a>),
+представляющий наименьший верхний предел значений координат <tt>(x, y)</tt> прямоугольника, дополнительный, необязательный параметр. Значением по умолчанию является&nbsp;<tt>( -Infinity, -Infinity )</tt>.</div>
+Создает прямоугольник, ограниченный по значениям <tt>min</tt> и <tt>max</tt>.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="min"><a href="vector2.htm" onmouseover="show('Vector2.<br>сокращ. от англ. слова minimum - минимум');" onmouseout="hide()">.min</a></pre>
+<a href="vector2.htm" onmouseover="show('Vector2');" onmouseout="hide()">Двумерный вектор</a>, представляющий нижний предел значений координат <tt>x</tt>, <tt>y</tt> прямоугольника.
+Значением по умолчанию является&nbsp;<tt>( +Infinity, +Infinity )</tt>.<br><br>
+
+<pre id="max"><a href="vector2.htm" onmouseover="show('Vector2.<br>сокращ. от англ. слова maximum - максимум');" onmouseout="hide()">.max</a></pre>
+<a href="vector2.htm" onmouseover="show('Vector2');" onmouseout="hide()">Двумерный вектор</a>, представляющий наименьший верхний предел значений координат <tt>(x, y)</tt> прямоугольника.
+Значением по умолчанию является&nbsp;<tt>( -Infinity, -Infinity )</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="clampPoint"><a href="vector2.htm" onmouseover="show('Vector2.<br>clamp point - зажать (закрепить) точку');" onmouseout="hide()">.clampPoint</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>point - точка');" onmouseout="hide()">point</a>, <a href="vector2.htm" onmouseover="show('Vector2.<br>target - цель');" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>point</tt> - двумерный вектор (<a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), который нужно закрепить.</div>
+<div class=list><tt>target</tt> - двумерный вектор (<a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), в который будет скопирован результат.</div>
+Метод <a href="https://en.wikipedia.org/wiki/Clamping_(graphics)" target="_blank" onmouseover="show('clamping - зажим, фиксация')" onmouseout="hide()">зажимает</a> <a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">точку</a> внутри границ заданного прямоугольника.
+<div class=note_trans><b>Примечание переводчика:</b> Вот перевод вышеприведенной статьи из английской Википедии<br>
+В компьютерной графике, зажим (clamping) - это процесс ограничения (фиксации) местоположения в какой-либо области.
+В отличие от упаковки (<a href="https://en.wikipedia.org/wiki/Wrapping_(graphics)" target="_blank">wrapping</a>'а), зажим (clamping) просто перемещает точку к ближайшему доступному значению.<br>
+В общем случае, зажим (clamping) используется для ограничения значения в заданном диапазоне. Например, в OpenGL <tt>glClearColor</tt> принимает значение <tt>GLclampf</tt>, которым является число <tt>gl</tt> с плавающей запятой, &#171;зажатое&#187; в диапазоне <tt>[0,1]</tt>.<br>
+Одно из многих применений зажима (clamping'а) в компьютерной графике является размещение некоей детали в полигоне - например, отверстие от пули в стене. Также зажим может использоваться для создания различных эффектов.</div><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Box2.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новый <tt>Box2</tt> с теми же самыми значениями <tt>min</tt> и <tt>max</tt> как у этого.<br><br>
+
+<pre id="containsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('contains box - содержит прямоугольник')" onmouseout="hide()">.containsBox</a></span>( <a href="#" onmouseover="show('Box2.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - прямоугольник <tt><a href="#" onmouseover="show('Box2.<br>box - коробка, ящик, клетка')" onmouseout="hide()">Box2</a></tt> для проверки на включение.</div>
+Возвращает значение&nbsp;<tt>true</tt>, если в данный прямоугольник включен целиком прямоугольник, указанный в параметре <tt>box</tt>.
+Если данный прямоугольник и указанный в параметре <tt>box</tt> одинаковы, эта функция также возвратит значение&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="containsPoint"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('contains point - содержит точку')" onmouseout="hide()">.containsPoint</a></span>( <a href="vector2.htm" onmouseover="show('Vector2.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - <a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор</a>, проверяемый на включение в прямоугольник.</div>
+Возвращает значение <tt>true</tt>, если точка, указанная в параметре <tt>point</tt>, лежит внутри или на границах данного прямоугольника.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Box2.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Box2.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+Копирует значения <tt><a href="#min" onmouseover="show('Box2.min')" onmouseout="hide()">min</a></tt> и <tt><a href="#max" onmouseover="show('Box2.max')" onmouseout="hide()">max</a></tt> из прямоугольника указанного в <tt>box</tt> в данный прямоугольник.<br><br>
+
+<pre id="distanceToPoint"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to point - расстояние до точки')" onmouseout="hide()">.distanceToPoint</a></span>( <a href="vector2.htm" onmouseover="show('Vector2.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - <a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор</a>, до которого измеряется расстояние.</div>
+Метод возвращает расстояние от любого края данного прямоугольника до указанной точки.
+Если точка (<tt><a href="vector2.htm" onmouseover="show('Vector2.<br>point - точка')" onmouseout="hide()">point</a></tt>) лежит внутри данного прямоугольника, то расстояние будет равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Box2.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - прямоугольник для сравнения с данным прямоугольником.</div>
+Возвращает значение <tt>true</tt>, если данный прямоугольник и прямоугольник <tt>box</tt> имеют одни и теже нижние и верхние границы.<br><br>
+
+<pre id="expandByPoint"><a href="#" onmouseover="show('Box2.<br>expand by point - расширить до точки')" onmouseout="hide()">.expandByPoint</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - вектор (<a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), который должен быть включен в этот прямоугольник.</div>
+Расширяет границы данного прямоугольника для включения точки, указанной в <tt>point</tt>.<br><br>
+
+<pre id="expandByScalar"><a href="#" onmouseover="show('Box2.<br>expand by scalar - расширить на скаляр(ное значение)')" onmouseout="hide()">.expandByScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scalar - скаляр')" onmouseout="hide()">scalar</a></span> )</pre>
+<div class=list><tt>scalar</tt> - расстояние, на которое нужно расширить прямоугольник.</div>
+Метод расширяет каждую размерность данного прямоугльника на величину, указанную в аргументе <tt>scalar</tt>.
+Если его значение отрицательно, все размерности прямоугольника будут уменьшены, т.е. прямоугольник будет сокращен.<br><br>
+
+<pre id="expandByVector"><a href="#" onmouseover="show('Box2.<br>expand by vector - расширить на вектор(ное значение)')" onmouseout="hide()">.expandByVector</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>vector - вектор')" onmouseout="hide()">vector</a> )</pre>
+<div class=list><tt>vector</tt> - <a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор</a> для расширения данного прямоугольника.</div>
+Метод равносторонне расширяет данный прямоугольник согласно приведенному вектору. Ширина этого прямоугольника будет расширена на величину компонента&nbsp;<tt>x</tt> вектора в обоих направлениях.
+Высота этого прямоугольника будет расширена на величину компонента&nbsp;<tt>y</tt> вектора в обоих направлениях.<br><br>
+
+<pre id="getCenter"><a href="vector2.htm" onmouseover="show('Vector2.<br>get center - получить центр')" onmouseout="hide()">.getCenter</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> - двумерный вектор (<a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), в который будет скопирован результат.</div>
+Метод возвращает центральную точку прямоугольника в виде <tt><a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a></tt>.<br><br>
+
+<pre id="getParameter"><a href="vector2.htm" onmouseover="show('Vector2.<br>get parameter - получить параметр')" onmouseout="hide()">.getParameter</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>point - точка')" onmouseout="hide()">point</a>, <a href="vector2.htm" onmouseover="show('Vector2.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>point</tt> - <tt><a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор</a></tt>.</div>
+<div class=list><tt>target</tt> - двумерный вектор (<a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), в который будет скопирован результат.</div>
+Возвращает точку как соотношение ширины и высоты данного прямоугольника.<br><br>
+
+<pre id="getSize"><a href="vector2.htm" onmouseover="show('Vector2.<br>get size - получить размер')" onmouseout="hide()">.getSize</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> - двумерный вектор (<a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), в который будет скопирован результат.</div>
+Возвращает ширину и высоту данного прямоугольника.<br><br>
+
+<pre id="intersect"><a href="#" onmouseover="show('Box2.<br>intersect - пересекаться, перекрываться')" onmouseout="hide()">.intersect</a>( <a href="#" onmouseover="show('Box2.<br>box - box - прямоугольник, коробка, ящик')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - прямоугольник, который перекрывает данный прямоугольник.</div>
+Возвращает перекрытие данного прямоугольника с прямоугольником, переданным в аргументе <tt><a href="#" onmouseover="show('Box2.<br>box - box - прямоугольник, коробка, ящик')" onmouseout="hide()">box</a></tt>,
+устанавливая верхнюю границу данного прямоугольника наименьшей из верхних границ двух прямоугольников, а нижнюю границу данного прямоугольника наибольшей из нижних границ двух прямоугольников.<br><br>
+
+<pre id="intersectsBox"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects box - пересекать прямоугольник')" onmouseout="hide()">.intersectsBox</a></span>( <a href="#" onmouseover="show('Box2.<br>box - box - прямоугольник, коробка, ящик')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - прямоугольник для проверки на наличие пересечения.</div>
+Определяет, пересекается ли данный прямоугольник с прямоугольником, указанным в <tt>box</tt>.<br><br>
+
+<pre id="isEmpty"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is empty - является пустым')" onmouseout="hide()">.isEmpty</a></span>( )</pre>
+Метод возвращает значение <tt>true</tt>, если данный прямоугольник не содержит внутри своих границ.<br>
+Заметьте, что прямоугольник с одинаковыми нижними и верхними границами все же включает одну точку, которая принадлежит одновременно обоим границам.<br><br>
+
+<pre id="makeEmpty"><a href="#" onmouseover="show('Box2.<br>make empty - сделать пустым')" onmouseout="hide()">.makeEmpty</a>( )</pre>
+Метод делает данный прямоугольник пустым.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Box2.<br>set - установить')" onmouseout="hide()">.set</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>min - сокращ. англ. слова minimum - минимум')" onmouseout="hide()">min</a>, <a href="vector2.htm" onmouseover="show('Vector2.<br>max - сокращ. англ. слова maximum - максимум')" onmouseout="hide()">max</a> )</pre>
+<div class=list><tt>min</tt> - <a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор</a>, представляющий нижнюю границу значений координат <tt>x</tt>, <tt>y</tt> данного прямоугольника, обязательный аргумент.</div>
+<div class=list><tt>max</tt> - <a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор</a>,
+представляющий наименьший верхний предел значений координат (<tt>x</tt>, <tt>y</tt>) прямоугольника, обязательный аргумент.</div>
+Устанавливает нижние и верхние значения координат <tt>x</tt>, <tt>y</tt> данного прямоугольника.<br><br>
+
+<pre id="setFromCenterAndSize"><a href="#" onmouseover="show('Box2.<br>set from center and size - установить по центру и размеру')" onmouseout="hide()">.setFromCenterAndSize</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>center - центр')" onmouseout="hide()">center</a>, <a href="vector2.htm" onmouseover="show('Vector2.<br>size - размер')" onmouseout="hide()">size</a> )</pre>
+<div class=list><tt>center</tt> - желаемое положение центральной точки данного прямоугольника (Vector2).</div>
+<div class=list><tt>size</tt> - желаемые размеры по осям <tt>x</tt> и <tt>y</tt> данного прямоугольника (Vector2).</div>
+Метод устанавливает центр данного прямоугольника по месту, указанному в аргументе <tt>center</tt>, а также устанавливает его ширину и высоту равными значениям, указанным в аргументе <tt>size</tt>.<br><br>
+
+<pre id="setFromPoints"><a href="#" onmouseover="show('Box2.<br>set from points - установить из точек')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> - массив из двумерных векторов (<a href="vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), которые будет содержать получающийся прямоугольник.</div>
+Устанавливает верхние и нижние границы данного прямоугольника так, что в него будут входить все точки, указанные в <tt>points</tt>.<br><br>
+
+<pre id="translate"><a href="#" onmouseover="show('Box2.<br>translate - перевод, перенос')" onmouseout="hide()">.translate</a>( <a href="vector2.htm" onmouseover="show('Vector2.<br>offset - смещение')" onmouseout="hide()">offset</a> )</pre>
+<div class=list><tt>offset</tt> - направление и расстояние смещения.</div>
+Добавляет смещение к обоим (верхней и нижней) границам данного прямоугольника, фактически перемещая этот прямоугольник в двумерном пространстве.
+Adds offset to both the upper and lower bounds of this box, effectively moving this box offset units in 2D space.<br><br>
+
+<pre id="union"><a href="#" onmouseover="show('Box2.<br>union - соединение')" onmouseout="hide()">.union</a>( <a href="#" onmouseover="show('Box2.<br>box - коробка, ящик, клетка')" onmouseout="hide()">box</a> )</pre>
+<div class=list><tt>box</tt> - прямоугольник, который будет объединен с данным прямоугольником.</div>
+Метод объединяет данный прямоугольник с прямоугольником, представленным в параметре <tt>box</tt>, устанавливая верхнюю границу данного прямоугольника по наибольшей из верхних границ обоих прямоугольников,
+а нижнюю границу этого прямоугольника как наименьшую из нижних границ обоих прямоугольников.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Box2.js" target="_blank">Box2.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

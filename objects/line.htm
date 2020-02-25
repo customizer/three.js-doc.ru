@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3>Line</h3>
+Непрерывная линия.<br>
+Это почти то же самое, что и <a href="lineSegments.htm" onmouseover="show('LineSegments')" onmouseout="hide()">LineSegments</a>; единственное различие заключается в том,
+что оно отображается с помощью <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements" target="_blank" onmouseover="show('рисует прямую линию к следующей вершине')" onmouseout="hide()">gl.LINE_STRIP</a>,
+а не <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements" target="_blank" onmouseover="show('рисует линию между парой вершин')" onmouseout="hide()">gl.LINES</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var material = new THREE.LineBasicMaterial({
+	color: 0x0000ff
+});<br>
+var geometry = new THREE.Geometry();
+geometry.vertices.push(
+	new THREE.Vector3( -10, 0, 0 ),
+	new THREE.Vector3( 0, 10, 0 ),
+	new THREE.Vector3( 10, 0, 0 )
+);<br>
+var line = new THREE.Line( geometry, material );
+scene.add( line );</pre>
+
+<h4>Конструктор</h4>
+<pre>Line( <a href="../core/geometry.htm" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a> )</pre>
+<div class=list><tt><a href="../core/geometry.htm" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a></tt>
+— вершины, представляющие отрезок (отрезки) линии. По умолчанию используется новая <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.</div>
+<div class=list><tt><a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a></tt>
+— материал для линии. По умолчанию используется <a href="../materials/lineBasicMaterial.htm" onmouseover="show('LineBasicMaterial')" onmouseout="hide()">LineBasicMaterial</a> со случайно выбранным цветом.</div>
+Если материал не предоставлен, то для объекта будет создан и затем назначен линейный материал, выбранный в случайном порядке.<br><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="isLine"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is line - является линией')" onmouseout="hide()">.isLine</a></span></pre>
+Используется для проверки, принадлежит ли данный объект или производные от него, к классу Line. По умолчанию значение равно <tt>true</tt>.<br>
+Не нужно его изменять, так как внутри <em>three.js</em> оно используется для оптимизации.<br><br>
+
+<pre id="geometry"><a href="../core/geometry.htm" onmouseover="show('Geometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">.geometry</a></pre>
+Вершины, представляющие отрезок (отрезки) линии.<br><br>
+
+<pre id="material"><a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">.material</a></pre>
+Материал для линии.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="computeLineDistances"><a href="#" onmouseover="show('Line.<br>compute line distances - вычислить размеры линии')" onmouseout="hide()">.computeLineDistances</a>( )</pre>
+Метод вычисляет массив значений размеров, необходимых для <a href="../materials/lineDashedMaterial.htm" onmouseover="show('LineDashedMaterial')" onmouseout="hide()">LineDashedMaterial</a>.
+Для каждой вершины геометрического элемента метод рассчитывает совокупную длину от текущей точки до самого начала линии.<br><br>
+
+<pre id="raycast"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ray cast - бросок луча')" onmouseout="hide()">.raycast</a></span>( <a href="../core/raycaster.htm" onmouseover="show('Raycaster.<br>raycaster - &#34;бросатель&#34; луча, излучатель')" onmouseout="hide()">raycaster</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersects - пересечения')" onmouseout="hide()">intersects</a></span> )</pre>
+Метод получает точки пересечения между брошенным <a href="../math/ray.htm" onmouseover="show('Ray')" onmouseout="hide()">лучом</a> и данной линией.
+Данный метод будет вызываться методом <tt><a href="../core/raycaster.htm#intersectObject" onmouseover="show('Raycaster.intersectObject')" onmouseout="hide()">Raycaster.intersectObject</a></tt>.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Line.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Метод возвращает клон данного объекта Line и его потомков.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Line.js" target="_blank">Line.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

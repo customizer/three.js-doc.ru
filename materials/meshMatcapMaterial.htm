@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
+<h3>MeshMatcapMaterial</h3>
+
+
+MeshMatcapMaterial is defined by a MatCap (or Lit Sphere) texture, which encodes the material color and shading.<br><br>
+
+MeshMatcapMaterial does not respond to lights since the matcap image file encodes baked lighting. It will cast a shadow onto an object that receives shadows (and shadow clipping works), but it will not self-shadow or receive shadows.<br><br>
+
+<h4>Конструктор</h4>
+<pre>MeshMatcapMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<script>document.write(note_0), note_01;</script><br>
+The exception is the property color, which can be passed in as a hexadecimal string and is 0xffffff (white) by default. Color.set( color ) is called internally.<br><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
+<div class=blockindent><br>
+<pre id="alphaMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>alpha map - карта альфа-канала, т.е. канала прозрачности')" onmouseout="hide()">.alphaMap</a></pre>
+
+The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.<br>
+
+Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.<br><br>
+
+.bumpMap : Texture
+
+The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights. Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
+.bumpScale : Float
+
+How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
+.color : Color
+
+Color of the material, by default set to white (0xffffff).
+.displacementMap : Texture
+
+The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
+.displacementScale : Float
+
+How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied. Default is 1.
+.displacementBias : Float
+
+The offset of the displacement map's values on the mesh's vertices. Without a displacement map set, this value is not applied. Default is 0.
+.isMeshMatcapMaterial : Boolean
+
+Used to check whether this or derived classes are mesh Matcap materials. Default is true.
+
+You should not change this, as it used internally for optimisation.
+.map : Texture
+
+The color map. Default is null. The texture map color is modulated by the diffuse .color.
+.matcap : Texture
+
+The matcap map. Default is null.
+.morphNormals : boolean
+
+Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the Geometry	to the shader. Default is false.
+.morphTargets : Boolean
+
+Define whether the material uses morphTargets. Default is false.
+.normalMap : Texture
+
+The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.
+.normalMapType : Integer
+
+The type of normal map.
+
+Options are THREE.TangentSpaceNormalMap (default), and THREE.ObjectSpaceNormalMap.
+.normalScale : Vector2
+
+How much the normal map affects the material. Typical ranges are 0-1. Default is a Vector2 set to (1,1).
+.skinning : Boolean
+
+Define whether the material uses skinning. Default is false.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()"><tt>Material</tt></a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshMatcapMaterial.js" target="_blank">MeshMatcapMaterial.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

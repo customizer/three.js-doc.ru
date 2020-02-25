@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Vector2</h3>
+Класс, представляющий <a href="https://en.wikipedia.org/wiki/Vector_space" target="_blank">двумерный (2D) вектор</a>.
+(Вот <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%BE" target="_blank">статья Википедии о векторном пространстве</a> на русском языке.)
+Вектор 2D - это упорядоченная пара чисел (помеченных как&nbsp;<tt>x</tt> и&nbsp;<tt>y</tt>), которая может использоваться для представления ряда вещей, таких как:
+<ul><li>Точка в двумерном пространстве (т.е. позиция на плоскости).</li>
+<li>Направление и расстояние по плоскости. В <em>three.js</em> расстояние всегда будет <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">Эвклидовым расстоянием</a>
+(т.е. расстоянием по прямой линии) от точки начала координат <tt>(0, 0)</tt> до координат заданной точки <tt>(x, y)</tt>, направление также измеряется от&nbsp;<tt>(0, 0)</tt> к&nbsp;<tt>(x, y)</tt>.</li>
+<li>Любая произвольная упорядоченная пара чисел.</li></ul>
+Имеются и другие вещи, которые можно представить как 2D-вектор, однако это его наиболее распространенное использование в <em>three.js</em>.<br><br>
+
+<h4>Пример</h4>
+<pre>var a = new THREE.Vector2( 0, 1 );<br>
+// no arguments; will be initialised to (0, 0)
+// без аргументов вектор будет инициализирован как (0, 0)
+var b = new THREE.Vector2( );<br>
+var d = a.distanceTo( b );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>Vector2( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
+<div class=list><tt>x</tt> - значение&nbsp;<tt>x</tt> вектора, по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>y</tt> - значение&nbsp;<tt>y</tt> вектора, по умолчанию равно&nbsp;<tt>0</tt>.</div>
+Создает новый Vector2.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="isVector2"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is vector 2 - является двумерным вектором')" onmouseout="hide()">.isVector2</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классы двумерными векторами (Vector2). Значением по умолчанию является <tt>true</tt>.<br>
+Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="height"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">.height</a></span></pre>
+Псевдоним (алиас) для&nbsp;<tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt>.<br><br>
+
+<pre id="width"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">.width</a></span></pre>
+Псевдоним (алиас) для&nbsp;<tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt>.<br><br>
+
+<pre id="x"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span></pre>
+<br>
+
+<pre id="y"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span></pre></div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="add"><a href="#" onmouseover="show('Vector2.<br>add - добавить, сложить, прибавить')" onmouseout="hide()">.add</a>( <a href="#" onmouseover="show('Vector2.<br>сокращ. от англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод добавляет к данному вектору вектор&nbsp;<tt><a href="#" onmouseover="show('Vector2.<br>сокращ. от англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.<br><br>
+
+<pre id="addScalar"><a href="#" onmouseover="show('Vector2.<br>add scalar - прибавить скаляр(ное значение)')" onmouseout="hide()">.addScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова scalar - скаляр,<br>т.е. величина, полностью определяемая в<br>любой координатной системе одним числом,<br>которое не меняется при изменении<br>пространственной системы координат.')" onmouseout="hide()">s</a></span> )</pre>
+Метод добавляет скалярное значение&nbsp;<tt>s</tt> к значениям данного вектора&nbsp;<tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> и&nbsp;<tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt>.<br><br>
+
+<pre id="addScaledVector"><a href="#" onmouseover="show('Vector2.<br>add scaled vector - прибавить масштабированный вектор')" onmouseout="hide()">.addScaledVector</a>( <a href="#" onmouseover="show('Vector2.<br>сокращ. от англ. слова vector - вектор')" onmouseout="hide()">v</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова scalar - скаляр,<br>т.е. величина, полностью определяемая в<br>любой координатной системе одним числом,<br>которое не меняется при изменении<br>пространственной системы координат.')" onmouseout="hide()">s</a></span> )</pre>
+Добавляет к данному вектору множество из вектора&nbsp;<tt><a href="#" onmouseover="show('Vector2.<br>сокращ. от англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>
+и скаляра&nbsp;<tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span></tt>.<br><br>
+
+<pre id="addVectors"><a href="#" onmouseover="show('Vector2.<br>add vectors - сложить векторы')" onmouseout="hide()">.addVectors</a>( <a href="#" onmouseover="show('Vector2.<br>a - первое слагаемое')" onmouseout="hide()">a</a>, <a href="#" onmouseover="show('Vector2.<br>b - второе слагаемое')" onmouseout="hide()">b</a> )</pre>
+Устанавливает данный вектор как <tt><a href="#" onmouseover="show('Vector2.<br>a - первое слагаемое')" onmouseout="hide()">a</a> + <a href="#" onmouseover="show('Vector2.<br>b - второе слагаемое')" onmouseout="hide()">b</a></tt>.<br><br>
+
+<pre id="angle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('angle - угол')" onmouseout="hide()">.angle</a></span>( )</pre>
+Метод вычисляет угол (в радианах) данного вектора относительно положительной оси&nbsp;<tt>x</tt>.<br><br>
+
+<pre id="applyMatrix3"><a href="#" onmouseover="show('Vector2.<br>apply matrix 3 - применить матрицу <tt>3&#215;3</tt>')" onmouseout="hide()">.applyMatrix3</a>( <a href="matrix3.htm" onmouseover="show('Matrix3.<br>сокращ. от англ. слова matrix - матрица')" onmouseout="hide()">m</a> )</pre>
+Метод перемножает данный вектор (с подразумеваемым включением <tt>1</tt> в качестве третьего компонента) с матрицей&nbsp;<tt>m</tt>.<br><br>
+
+<pre id="ceil"><a href="#" onmouseover="show('Vector2.<br>ceil - потолок, перекрытие; в данном<br>случае означает округление вверх')" onmouseout="hide()">.ceil</a>( )</pre>
+Компоненты <tt>x</tt> и <tt>y</tt> данного вектора округляются вверх до ближайшего целого значения.<br><br>
+
+<pre id="clamp"><a href="#" onmouseover="show('Vector2.<br>clamp - зажать, в данном случае означает зафиксировать<br>значение в диапазоне, определенном минимальным и<br>максимальным значениями')" onmouseout="hide()">.clamp</a>( <a href="#" onmouseover="show('Vector2.<br>min - сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">min</a>, <a href="#" onmouseover="show('Vector2.<br>max - сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">max</a> )</pre>
+<div class=list><tt>min</tt> - минимальные значения <tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> и <tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt>.</div>
+<div class=list><tt>max</tt> - максимальные значения <tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> и <tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt>.</div>
+Если значение <tt>x</tt> или <tt>y</tt> данного вектора больше значения <tt>x</tt> или <tt>y</tt> вектора, указанного в параметре <tt>max</tt>, оно заменяется этим соответствующим значением.<br>
+Если значение <tt>x</tt> или <tt>y</tt> данного вектора меньше значения <tt>x</tt> или <tt>y</tt> вектора, указанного в параметре <tt>min</tt>, оно заменяется этим соответствующим значением.<br><br>
+
+<pre id="clampLength"><a href="#" onmouseover="show('Vector2.<br>clamp length - зажать длину')" onmouseout="hide()">.clampLength</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">max</a></span> )</pre>
+<div class=list><tt>min</tt> - минимальное значение длины, на котором она будет зафиксирована (зажата).</div>
+<div class=list><tt>max</tt> - максимальное значение длины, на котором она будет зафиксирована (зажата).</div>
+Если длина данного вектора больше значения, указанного в параметре <tt>max</tt>, она заменяется на значение <tt>max</tt>.<br>
+Если длина данного вектора меньше значения, указанного в параметре <tt>min</tt>, она заменяется на значение <tt>min</tt>.<br><br>
+
+<pre id="clampScalar"><a href="#" onmouseover="show('Vector2.<br>clamp scalar - зажать скалярное (значение)')" onmouseout="hide()">.clampScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова minimum - минимум')" onmouseout="hide()">min</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слова maximum - максимум')" onmouseout="hide()">max</a></span> )</pre>
+<div class=list><tt>min</tt> - минимальное значение компонентов, на котором они будут зафиксированы (зажаты).</div>
+<div class=list><tt>max</tt> - максимальное значение компонентов, на котором они будут зафиксированы (зажаты).</div>
+Если значение <tt>x</tt> или <tt>y</tt> данного вектора больше значения, указанного в параметре <tt>max</tt>, оно заменяется на значение <tt>max</tt>.<br>
+Если значение <tt>x</tt> или <tt>y</tt> данного вектора меньше значения, указанного в параметре <tt>min</tt>, оно заменяется на значение <tt>min</tt>.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Vector2.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Возвращает новый Vector2 с такими же значениями <tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> и <tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt>, что и у данного вектора.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Vector2.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Vector2.<br>сокращ. англ. слова vector')" onmouseout="hide()">v</a> )</pre>
+Копирует значения свойств <tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> и <tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt>
+из вектора (<a href="#" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), переданного в параметре <tt>v</tt>, в данный вектор (<a href="#" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>).<br><br>
+
+<pre id="cross"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cross - пересечение, крест')" onmouseout="hide()">.cross</a></span>( <a href="#" onmouseover="show('Vector2.<br>сокращ. англ. слова vector')" onmouseout="hide()">v</a> )</pre>
+Метод вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank">векторное произведение</a>
+(<a href="https://en.wikipedia.org/wiki/Cross_product" target="_blank">cross product</a>) данного вектора и вектора, указанного в аргументе <tt>v</tt>.
+Обратите внимание, что понятие "векторное произведение" в двумерном пространстве не совсем определенное. Данная функция вычисляет геометрическое векторное произведение, часто используемое в двумерной графике.
+<!-- вычисляется как this.x * v.y - this.y * v.x; --><br><br>
+
+<pre id="distanceTo"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to - расстояние до')" onmouseout="hide()">.distanceTo</a></span>( <a href="#" onmouseover="show('Vector2.<br>сокращ. англ. слова vector')" onmouseout="hide()">v</a> )</pre>
+Метод вычисляет расстояние от данного вектора до вектора, приведенного в аргументе <tt><a href="#" onmouseover="show('Vector2.<br>сокращ. англ. слова vector')" onmouseout="hide()">v</a></tt>.<br><br>
+
+<pre id="manhattanDistanceTo"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('manhattan distance to - манхэттенское расстояние до')" onmouseout="hide()">.manhattanDistanceTo</a></span>( <a href="#" onmouseover="show('Vector2.<br>v это сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B8%D1%85_%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B0%D0%BB%D0%BE%D0%B2" target="_blank">манхэттенское расстояние</a>
+(<a href="http://en.wikipedia.org/wiki/Taxicab_geometry" target="_blank">Manhattan length</a>) от данного вектора до вектора, указанного в параметре <tt><a href="#" onmouseover="show('Vector2.<br>v это сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.<br><br>
+
+<pre id="distanceToSquared"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to squared - расстояние до (чего-либо) в квадрате')" onmouseout="hide()">.distanceToSquared</a></span>( <a href="#" onmouseover="show('Vector2.<br>v это сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Вычисляет квадрат расстояния от данного вектора до вектора, указанного в параметре <tt><a href="#" onmouseover="show('Vector2.<br>v это сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a></tt>.
+Вместо простого сравнения одного расстояния с другим следует сравнивать именно квадраты расстояний, так как это вычисление несколько более эффективно.
+<div class=note_trans><b>Примечание переводчика:</b> Вычисление расстояния методом <tt><a href="#distanceTo" onmouseover="show('Vector2.distanceTo')" onmouseout="hide()">distanceTo</a></tt> это вычисление квадратного корня из результата, полученного методом <tt>distanceToSquared</tt>.</div><br>
+
+<pre id="divide"><a href="#" onmouseover="show('Vector2.<br>divide - делить')" onmouseout="hide()">.divide</a>( <a href="#" onmouseover="show('Vector2.<br>v это сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод делит данный вектор на вектор, указанный в параметре&nbsp;<tt>v</tt>.<br><br>
+
+<pre id="divideScalar"><a href="#" onmouseover="show('Vector2.<br>divide scalar - делить (на) скаляр')" onmouseout="hide()">.divideScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
+Делит данный вектор на скалярное значение&nbsp;<tt>s</tt>. Если значение скаляра равно нулю (<tt>s = 0</tt>), вектор устанавливается как&nbsp;<tt>(0, 0)</tt>.<br><br>
+
+<pre id="dot"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dot - точка (название метода скорее всего отражает тот факт,<br>что скалярное произведение принято обозначать точкой,<br>а векторное - знаком умножения, т.е. диагональным крестиком)')" onmouseout="hide()">.dot</a></span>( <a href="#" onmouseover="show('Vector2.<br>v это сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D0%BB%D1%8F%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank">скалярное произведение</a>
+(<a href="https://en.wikipedia.org/wiki/Dot_product" target="_blank">dot product</a>) данного вектора и вектора, переданного в параметре&nbsp;<tt>v</tt>.<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равняется')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('Vector2.<br>v это сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод проверяет точное равенство данного вектора и вектора, переданного в параметре&nbsp;<tt>v</tt>.<br><br>
+
+<pre id="floor"><a href="#" onmouseover="show('Vector2.<br>floor - пол, нижний уровень, здесь имеется<br>ввиду что производится округление вниз')" onmouseout="hide()">.floor</a>( )</pre>
+Этим методом компоненты вектора округляются вниз, до ближайшего целочисленного значения.<br><br>
+
+<pre id="fromArray"><a href="#" onmouseover="show('Vector2.<br>from array - из массива')" onmouseout="hide()">.fromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - исходный массив.</div>
+<div class=list><tt>offset</tt> - смещение массива (дополнительный, необязательный параметр). Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+Метод устанавливает для данного вектора значение <tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> как <tt>array[ offset ]</tt>, а значение <tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt> как <tt>array[ offset + 1 ]</tt>.<br><br>
+
+<pre id="fromBufferAttribute"><a href="#" onmouseover="show('Vector2.<br>from buffer attribute - из буферного атрибута')" onmouseout="hide()">.fromBufferAttribute</a>( <a href="../core/bufferAttribute.htm" onmouseover="show('BufferAttribute.<br>attribute - атрибут, признак, свойство')" onmouseout="hide()">attribute</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span> )</pre>
+<div class=list><tt>attribute</tt> - исходный атрибут.</div>
+<div class=list><tt>index</tt> - индекс в атрибуте.</div>
+Устанавливает значения <tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> и <tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt> данного вектора из атрибута, указанного в параметре <tt>attribute</tt>.<br><br>
+
+<pre id="getComponent"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get component - получить компонент')" onmouseout="hide()">.getComponent</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span> )</pre>
+<div class=list><tt>index</tt> -- целочисленное значение, может быть&nbsp;<tt>0</tt> или&nbsp;<tt>1</tt>.</div>
+Если индекс равен&nbsp;<tt>0</tt>, возвращается значение&nbsp;<tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt>.<br>
+Если индекс равен&nbsp;<tt>1</tt>, возвращается значение&nbsp;<tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt>.<br><br>
+
+<pre id="length"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина')" onmouseout="hide()">.length</a></span>( )</pre>
+Вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">евклидову длину</a> <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">(Euclidean length)</a>,
+т.е. расстояние по прямой линии, от точки начала координат&nbsp;<tt>(0, 0)</tt> до точки с заданными координатами&nbsp;<tt>(x, y)</tt>.<br><br>
+
+<pre id="manhattanLength"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('Manhattan length - манхэттенское расстояние')" onmouseout="hide()">.manhattanLength</a></span>( )</pre>
+Метод вычисляет <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B8%D1%85_%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B0%D0%BB%D0%BE%D0%B2" target="_blank">манхэттенское расстояние</a>
+(<a href="http://en.wikipedia.org/wiki/Taxicab_geometry" target="_blank">Manhattan length</a>) данного вектора.<br><br>
+
+<pre id="lengthSq"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов length square<br>- длина в квадрате или квадрат длины')" onmouseout="hide()">.lengthSq</a></span>( )</pre>
+Метод вычисляет квадрат <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">евклидовой длины</a> <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">(Euclidean length)</a>,
+т.е. квадрат расстояния по прямой линии, от точки начала координат&nbsp;<tt>(0, 0)</tt> до точки с заданными координатами&nbsp;<tt>(x, y)</tt>.
+Вместо сравнения длин векторов следует сравнивать их квадраты, так как для расчета это несколько более эффективно.
+<div class=note_trans><b>Примечание переводчика:</b> Вычисление длины вектора методом <tt><a href="#length" onmouseover="show('Vector2.length')" onmouseout="hide()">length</a></tt> это вычисление квадратного корня из результата, полученного методом <tt>lengthSq</tt>.</div><br>
+
+<pre id="lerp"><a href="#" onmouseover="show('Vector2.<br>lerp - сокращ. англ. слов linearly<br>interpolate - линейная интерполяция')" onmouseout="hide()">.lerp</a>( <a href="#" onmouseover="show('Vector2.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span> )</pre>
+<div class=list><tt>v</tt> - <a href="#" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор (Vector2)</a>, до которого будет проводится операция интерполирования.</div>
+<div class=list><tt>alpha</tt> - коэффициент интерполяции в закрытом интервале&nbsp;<tt>[0, 1]</tt>.</div>
+Метод выполняет операцию линейного интерполирования между данным вектором и вектором, переданным в параметре&nbsp;<tt>v</tt> с коэффициентом интерполяции <tt>alpha</tt>,
+причем <tt>alpha</tt> можно рассматривать как расстояние вдоль линии соединения этих двух векторов - при <tt>alpha = 0</tt>, он будет равен данному вектору, а при <tt>alpha = 1</tt> - вектору&nbsp;<tt>v</tt>.<br><br>
+
+<pre id="lerpVectors"><a href="#" onmouseover="show('Vector2.<br>lerp vectors - сокращ. англ. слов<br>linearly interpolate vectors -<br>линейная интерполяция векторов')" onmouseout="hide()">.lerpVectors</a>( <a href="#" onmouseover="show('Vector2.<br>сокращ. англ. слова vector - вектор,<br>в данном случае - первый вектор')" onmouseout="hide()">v1</a>, <a href="#" onmouseover="show('Vector2.<br>сокращ. англ. слова vector - вектор,<br>в данном случае - второй вектор')" onmouseout="hide()">v2</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span> )</pre>
+<div class=list><tt>v1</tt> - начальный <a href="#" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор (Vector2)</a>.</div>
+<div class=list><tt>v2</tt> - <a href="#" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор (Vector2)</a>, до которого будет проводится операция интерполирования.</div>
+<div class=list><tt>alpha</tt> - коэффициент интерполяции в закрытом интервале&nbsp;<tt>[0, 1]</tt>.</div>
+Метод устанавливает данный вектор как линейно интерполированный вектор между векторами <tt>v1</tt> и <tt>v2</tt>, и где <tt>alpha</tt> - это расстояние вдоль линии соединения этих двух векторов - при <tt>alpha = 0</tt>, он будет равен вектору&nbsp;<tt>v1</tt>, при <tt>alpha = 1</tt> - вектору&nbsp;<tt>v2</tt>.<br><br>
+
+<pre id="max"><a href="#" onmouseover="show('Vector2.<br>max - сокращ. англ. слова maximum - максимум')" onmouseout="hide()">.max</a>( <a href="#" onmouseover="show('Vector2.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Если значение&nbsp;<tt>x</tt> или&nbsp;<tt>y</tt> данного вектора меньше значения <tt>x</tt> или <tt>y</tt> вектора, переданного в параметре&nbsp;<tt>v</tt>, то оно заменяется соответствующим максимальным значением.<br><br>
+
+<pre id="min"><a href="#" onmouseover="show('Vector2.<br>min - сокращ. англ. слова minimum - минимум')" onmouseout="hide()">.min</a>( <a href="#" onmouseover="show('Vector2.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Если значение&nbsp;<tt>x</tt> или&nbsp;<tt>y</tt> данного вектора больше значения&nbsp;<tt>x</tt> или&nbsp;<tt>y</tt> вектора, переданного в параметре&nbsp;<tt>v</tt>, то оно заменяется соответствующим минимальным значением.<br><br>
+
+<pre id="multiply"><a href="#" onmouseover="show('Vector2.<br>multiply - умножить')" onmouseout="hide()">.multiply</a>( <a href="#" onmouseover="show('Vector2.<br>v - сокращ. англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод умножает данный вектор на вектор, указанный в параметре&nbsp;<tt>v</tt>.<br><br>
+
+<pre id="multiplyScalar"><a href="#" onmouseover="show('Vector2.<br>multiply scalar - умножить (на) скаляр')" onmouseout="hide()">.multiplyScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
+Метод умножает данный вектор на скаляр, переданный в параметре&nbsp;<tt>s</tt>.<br><br>
+
+<pre id="negate"><a href="#" onmouseover="show('Vector2.<br>negate - отрицать')" onmouseout="hide()">.negate</a>( )</pre>
+Метод инвертирует данный вектор, т.е. устанавливает <tt>x = -x</tt> и <tt>y = -y</tt>.<br><br>
+
+<pre id="normalize"><a href="#" onmouseover="show('Vector2.<br>normalize - нормализовать, упорядочивать')" onmouseout="hide()">.normalize</a>( )</pre>
+Метод преобразовывает данный вектор в <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80" target="_blank">единичный вектор</a> (<a href="https://en.wikipedia.org/wiki/Unit_vector" target="_blank">unit vector</a>)
+- то есть, направление его остается тем же самым, а длина вектора (<tt><a href="#length" onmouseover="show('Vector2.length')" onmouseout="hide()">length</a></tt>) устанавливается равной&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="rotateAround"><a href="#" onmouseover="show('Vector2.<br>rotate around - повернуть вокруг')" onmouseout="hide()">.rotateAround</a>( <a href="#" onmouseover="show('Vector2.<br>center - центр')" onmouseout="hide()">center</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('angle - угол')" onmouseout="hide()">angle</a></span> )</pre>
+<div class=list><tt>center</tt> - точка, вокруг которой производится поворот.</div>
+<div class=list><tt>angle</tt> - угол поворота, в радианах.</div>
+Метод поворачивает вектор вокруг центра (координаты центра вращения передаются в аргументе <tt>center</tt>) на угол, переданный в параметре <tt>angle</tt>.<br><br>
+
+<pre id="round"><a href="#" onmouseover="show('Vector2.<br>round - округлить')" onmouseout="hide()">.round</a>( )</pre>
+Метод округляет компоненты вектора до ближайшего целочисленного значения.<br><br>
+
+<pre id="roundToZero"><a href="#" onmouseover="show('Vector2.<br>round to zero - округлить к нулю')" onmouseout="hide()">.roundToZero</a>( )</pre>
+Метод округляет компоненты вектора к нулю (если значение отрицательно - происходит округление вверх, если положительное - вниз) до целочисленного значения.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('Vector2.<br>set - установить')" onmouseout="hide()">.set</a> ( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
+Устанавливает компоненты&nbsp;<tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> и&nbsp;<tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt> данного вектора.<br><br>
+
+<pre id="setComponent"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set component - установить компонент')" onmouseout="hide()">.setComponent</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt>index</tt> -- целочисленное значение, может быть&nbsp;<tt>0</tt> или&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>value</tt> -- число с плавающей запятой.</div>
+Если индекс равен&nbsp;<tt>0</tt>, устанавливается значение&nbsp;<tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt>.<br>
+Если индекс равен&nbsp;<tt>1</tt>, устанавливается значение&nbsp;<tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt>.<br><br>
+
+<pre id="setLength"><a href="#" onmouseover="show('Vector2.<br>set length - установить длину')" onmouseout="hide()">.setLength</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова length - длина')" onmouseout="hide()">l</a></span> )</pre>
+Метод устанавливает данный вектор как вектор с тем же самым направлением, но длиной (<tt><a href="#length" onmouseover="show('Vector2.length')" onmouseout="hide()">length</a></tt>) равной значению, указанному в&nbsp;<tt>l</tt>.<br><br>
+
+<pre id="setScalar"><a href="#" onmouseover="show('Vector2.<br>set scalar - установить скаляр')" onmouseout="hide()">.setScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scalar - скаляр')" onmouseout="hide()">scalar</a></span> )</pre>
+Устанавливает все значения&nbsp;<tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt>
+и&nbsp;<tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt> данного вектора равными скалярному значению, указанному в параметре <tt>scalar</tt>.<br><br>
+
+<pre id="setX"><a href="#x" onmouseover="show('Vector2.<br>set X - установить (координату) X')" onmouseout="hide()">.setX</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span> )</pre>
+Заменяет значение <tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt> данного вектора на значение, приведенное в аргументе&nbsp;<tt>x</tt>.<br><br>
+
+<pre id="setY"><a href="#y" onmouseover="show('Vector2.<br>set Y - установить (координату) Y')" onmouseout="hide()">.setY</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
+Заменяет значение&nbsp;<tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt> данного вектора на значение, приведенное в аргументе&nbsp;<tt>y</tt>.<br><br>
+
+<pre id="sub"><a href="#" onmouseover="show('Vector2.<br>сокращ. от англ. слова subtract - вычитать')" onmouseout="hide()">.sub</a>( <a href="#" onmouseover="show('Vector2.<br>v - сокращ. от англ. слова vector - вектор')" onmouseout="hide()">v</a> )</pre>
+Метод вычитает из данного вектора вектор, приведенный в аргументе&nbsp;<tt>v</tt>.<br><br>
+
+<pre id="subScalar"><a href="#" onmouseover="show('Vector2.<br>сокращ. от англ. слов subtract scalar - вычесть скаляр')" onmouseout="hide()">.subScalar</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('s - сокращ. от англ. слова scalar - скаляр')" onmouseout="hide()">s</a></span> )</pre>
+Вычитает скаляр, заданный в&nbsp;<tt>s</tt> из компонентов&nbsp;<tt><a href="#x" onmouseover="show('Vector2.x')" onmouseout="hide()">x</a></tt>
+и&nbsp;<tt><a href="#y" onmouseover="show('Vector2.y')" onmouseout="hide()">y</a></tt> данного вектора.<br><br>
+
+<pre id="subVectors"><a href="#" onmouseover="show('Vector2.<br>сокращ. от англ. слов subtract vectors - вычесть векторы')" onmouseout="hide()">.subVectors</a>( <a href="#" onmouseover="show('Vector2')" onmouseout="hide()">a</a>, <a href="#" onmouseover="show('Vector2')" onmouseout="hide()">b</a> )</pre>
+Устанавливает данный вектор как разность&nbsp;<tt>a - b</tt>.<br><br>
+
+<pre id="toArray"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to array - в массив')" onmouseout="hide()">.toArray</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - дополнительный, необязательный массив для хранения вектора. Если он не предоставлен, будет создан новый массив.</div>
+<div class=list><tt>offset</tt> - дополнительное, необязательное смещение в массиве.</div>
+Возвращает массив в виде <tt>[x, y]</tt> или копирует&nbsp;<tt>x</tt> и&nbsp;<tt>y</tt> в предоставленный (аргумент <tt>array</tt>) массив.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/math/Vector2.js" target="_blank">Vector2.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

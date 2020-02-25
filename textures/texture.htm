@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Texture</h3>
+Создает текстуру применяемую к поверхности объекта или в качестве карты отражения или преломления.<br><br>
+
+<h4>Пример</h4>
+<pre>// load a texture, set wrap mode to repeat
+// загрузка текстуры, установка режима стыковки для повторения
+var texture = new THREE.TextureLoader().load( "textures/water.jpg" );
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+texture.repeat.set( 4, 4 );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>Texture( <span onclick="showClick('значением может быть изображение или видео,<br>загруженное с помощью метода TextureLoader.load')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('image - изображение')" onmouseout="hide()">image</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mapping - картирование, т.е. укладка<br>изображения на поверхность объекта')" onmouseout="hide()">mapping</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapS - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">wrapS</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapT - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">wrapT</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('magFilter - сокращ. от англ. слов magnification filter<br>- фильтр по максимуму (по увеличению)')" onmouseout="hide()">magFilter</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minFilter - сокращ. от англ. слов minification filter<br>- фильтр по минимуму (уменьшению)')" onmouseout="hide()">minFilter</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия (от др.-греч. анизос — неравный<br>и тропос — направление), т.е. различие свойств среды<br>(например, физических: упругости, электропроводности,<br>теплопроводности, показателя преломления, скорости звука<br>или света и др.) в различных направлениях внутри этой среды;<br>в противоположность изотропии.')" onmouseout="hide()">anisotropy</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('encoding - кодировка')" onmouseout="hide()">encoding</a></span> )</pre>
+<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="anisotropy"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия (от др.-греч. анизос — неравный<br>и тропос — направление), т.е. различие свойств среды<br>(например, физических: упругости, электропроводности,<br>теплопроводности, показателя преломления, скорости звука<br>или света и др.) в различных направлениях внутри этой среды;<br>в противоположность изотропии.')" onmouseout="hide()">.anisotropy</a></span></pre>
+Число выборок, взятых через пиксель по оси с наибольшей плотностью текселей.
+По умолчанию, значение данного аргумента равно <tt>1</tt>. Более высокое значение дает менее размытый результат, чем базовая mip-карта, за счет большего количества используемых выборок текстуры.<br>
+Поиск максимально возможного значения анизотропии для <span class="lnk" onmouseover="show('GPU - сокращ. англ. слов graphics processing unit - блок<br>графической обработки, графический процессор или<br>попросту видеокарта')" onmouseout="hide()">GPU</span>
+делается с помощью <tt><a href="../renderers/webGLrenderer.htm#capabilities" onmouseover="show('WebGLrenderer.getMaxAnisotropy')" onmouseout="hide()">renderer.getMaxAnisotropy</a></tt>; это значение обычно является степенью <tt>2</tt>.<br><br>
+
+<pre id="center"><a href="../math/vector2.htm" onmouseover="show('Vector2.<br>center - центр')" onmouseout="hide()">.center</a></pre>
+Свойство показывает, где находится центр вращения. Для поворота вокруг центральной точки установите данное значение как <tt>(0.5, 0.5)</tt>. Значение по умолчанию равно <tt>(0.0, 0.0)</tt>.<br><br>
+
+<pre id="encoding"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('encoding - кодирование')" onmouseout="hide()">.encoding</a></span></pre>
+Значением по умолчанию является <a href="../constants/textures.htm#encoding" onmouseover="show('linear encoding - линейное кодирование')" onmouseout="hide()">THREE.LinearEncoding</a>.
+Другие возможные варианты смотрите в описании <a href="../constants/textures.htm#encoding" onmouseover="show('Texture =&#62; Encoding')" onmouseout="hide()">констант кодирования текстуры</a>.<br>
+Обратите внимание, что если данное значение изменяется на текстуре после использования материала, необходимо запустить <tt>Material.needsUpdate</tt> этого значения, чтобы выполнить обновление в шейдере.<br><br>
+
+<pre id="flipY"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('flip Y - перевернуть (отразить) по оси Y (по вертикали)')" onmouseout="hide()">.flipY</a></span></pre>
+Значение по умолчанию равно <tt>true</tt>. Переворачивает координатную ось Y объекта для соответствия пространству текстурных координат WebGL.<br><br>
+
+<pre id="format"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">.format</a></span></pre>
+Значением по умолчанию является <a href="../constants/textures.htm#formats" onmouseover="show('RGBAFormat - формат, в котором считываются<br>данные каналов цвета<br>&nbsp;&nbsp;&nbsp;R (red) - красный,<br>&nbsp;&nbsp;&nbsp;G (green) - зеленый,<br>&nbsp;&nbsp;&nbsp;B (blue) - синий<br>и канала прозрачности A (alfa) - альфа-канал')" onmouseout="hide()">THREE.RGBAFormat</a>,
+хотя для изображений в формате JPG <a href="../loaders/textureLoader.htm" onmouseover="show('TextureLoader')" onmouseout="hide()">TextureLoader</a> автоматически установит это свойство как
+<a href="../constants/textures.htm#formats" onmouseover="show('RGBAFormat - формат, в котором считываются<br>данные каналов цвета<br>&nbsp;&nbsp;&nbsp;R (red) - красный,<br>&nbsp;&nbsp;&nbsp;G (green) - зеленый и<br>&nbsp;&nbsp;&nbsp;B (blue) - синий')" onmouseout="hide()">THREE.RGBFormat</a>.<br>
+Другие возможные варианты смотрите в описании <a href="../constants/textures.htm#formats" onmouseover="show('Texture Constants')" onmouseout="hide()">констант формата текстуры</a>.<br><br>
+
+<pre id="generateMipmaps"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('generate mipmaps - генерировать mip-карты')" onmouseout="hide()">.generateMipmaps</a></span></pre>
+Свойство определяет, будут ли создаваться для текстуры mip-карты (если это возможно). Значением по умолчанию является <tt>true</tt>.<br><br>
+
+<pre id="id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('id - сокращ. от англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
+Уникальное число для данного экземпляра текстуры (только для чтения).<br><br>
+
+<pre id="image"><span onclick="showClick('значением может быть изображение или видео,<br>загруженное с помощью метода TextureLoader.load')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('image - изображение')" onmouseout="hide()">.image</a></span></pre>
+Объект изображение, обычно создаваемый с помощью метода <tt><a href="../loaders/textureLoader.htm#load" onmouseover="show('TextureLoader.load')" onmouseout="hide()">TextureLoader.load</a></tt>.
+Это может быть любой тип изображения (например, PNG, JPG, GIF, DDS) или видео (например, MP4, OGG/OGV), поддерживаемый <em>three.js</em>.<br>
+Чтобы использовать видео в качестве текстуры нужно иметь элемент HTML5, воспроизводящий видео, как ресурс для изображения текстуры и постоянно обновлять эту текстуру, до тех пор пока видео проигрывается - класс <a href="videoTexture.htm" onmouseover="show('VideoTexture')" onmouseout="hide()">VideoTexture</a> делает это автоматически.<br><br>
+
+<pre id="mapping"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mapping - картирование, т.е. укладка<br>изображения на поверхность объекта')" onmouseout="hide()">.mapping</a></span></pre>
+Свойство определяет способ применения изображения к объекту.
+По умолчанию типом объекта является <a href="../constants/textures.htm#mappingModes" onmouseover="show('текстура накладывается на поверхность объекта<br>в соответствии с координатами UV полигональной<br>сетки (mesh)')" onmouseout="hide()">THREE.UVMapping</a>, то есть при укладке используются U и V координаты.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#mappingModes" onmouseover="show('mapping modes')" onmouseout="hide()">константах режима картирования</a>.<br><br>
+
+<pre id="magFilter"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('magFilter - сокращ. от англ. слов magnification filter<br>- фильтр по максимуму (по увеличению)')" onmouseout="hide()">.magFilter</a></span></pre>
+Свойство определяет способ выборки текстуры, когда тексель занимает больше одного пикселя.
+Значением по умолчанию является <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('linear filter - линейный фильтр<br>средневзвешенное значение четырех текстурных элементов,<br>наиболее близких к указанным координатам текстуры')" onmouseout="hide()">THREE.LinearFilter</a>,
+при котором берутся четыре самых близких текселя и с помощью <a href="https://ru.wikipedia.org/wiki/%D0%91%D0%B8%D0%BB%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BF%D0%BE%D0%BB%D1%8F%D1%86%D0%B8%D1%8F" target="_blank">билинейной интерполяции</a> среди них получается новое значение.
+Другим возможным вариантом является <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('nearest filter - ближайший фильтр')" onmouseout="hide()">THREE.NearestFilter</a>, при котором используется значение ближайшего текселя.
+Более подробно смотрите в описании <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('magnification filters')" onmouseout="hide()">констант фильтров увеличения</a>.<br><br>
+
+<pre id="matrix"><a href="../math/matrix3.htm" onmouseover="show('Matrix3.<br>matrix - матрица')" onmouseout="hide()">.matrix</a></pre>
+Матрица изменения UV координат текстуры. Обновляется рендерером (визуализатором) из свойств текстуры <tt><a href="#offset" onmouseover="show('Texture.offset')" onmouseout="hide()">offset</a></tt>,
+<tt><a href="#repeat" onmouseover="show('Texture.repeat')" onmouseout="hide()">repeat</a></tt> и <tt><a href="#rotation" onmouseover="show('Texture.rotation')" onmouseout="hide()">rotation</a></tt>,
+когда значение свойства текстуры <tt><a href="#matrixAutoUpdate" onmouseover="show('Texture.matrixAutoUpdate')" onmouseout="hide()">matrixAutoUpdate</a></tt> установлено как <tt>true</tt>.
+Если значение <tt><a href="#matrixAutoUpdate" onmouseover="show('Texture.matrixAutoUpdate')" onmouseout="hide()">matrixAutoUpdate</a></tt> установлено как <tt>false</tt>, данную матрицу можно устанавливать вручную.
+Значением по умолчанию является <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B4%D0%B8%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D0%B0" target="_blank">единичная матрица</a>.<br><br>
+
+<pre id="matrixAutoUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы')" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+Значение этого свойства определяет, требуется ли обновление <a href="#matrix" onmouseover="show('Texture.matrix')" onmouseout="hide()">матрице изменения координат UV</a> исходя из настроек <tt><a href="#offset" onmouseover="show('Texture.offset')" onmouseout="hide()">offset</a></tt>,
+<tt><a href="#repeat" onmouseover="show('Texture.repeat')" onmouseout="hide()">repeat</a></tt> и <tt><a href="#rotation" onmouseover="show('Texture.rotation')" onmouseout="hide()">rotation</a></tt>.
+Значением по умолчанию является <tt>true</tt>. Если нужно напрямую установить матрицу изменения координат UV, установите значение <tt>false</tt>.<br><br>
+
+<pre id="minFilter"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minFilter - сокращ. от англ. слов minification filter<br>- фильтр по минимуму (уменьшению)')" onmouseout="hide()">.minFilter</a></span></pre>
+Свойство определяет способ выборки текстуры, когда тексель занимает меньше одного пикселя.
+Значением по умолчанию является <a href="../constants/textures.htm#minificationFilters" onmouseover="show('linear mipmap linear filter - линейная mip-карта с линейным фильтром<br>выбирает две mip-карты, которые наиболее точно соответствуют размеру<br>текстурируемого пиксела и использует критерий LinearFilter (линейного<br>фильтра) для получения значения текстуры из каждой mip-карты')" onmouseout="hide()">THREE.LinearMipMapLinearFilter</a>, при котором используется <a href="https://ru.wikipedia.org/wiki/MIP-%D1%82%D0%B5%D0%BA%D1%81%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">mip-картирование</a>
+и <a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B8%D0%BB%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D0%B0%D1%8F_%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F" target="_blank">трилинейный фильтр</a>.<br>
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#minificationFilters" onmouseover="show('minification filters')" onmouseout="hide()">константах фильтров минимизации</a>.<br><br>
+
+<pre id="mipmaps"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mipmaps - mip-карты')" onmouseout="hide()">.mipmaps</a></span></pre>
+Массив mip-карт, задаваемый пользователем (дополнительное, необязательное свойство).<br><br>
+
+<pre id="name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">.name</a></span></pre>
+Дополнительное имя объекта (ему необязательно быть уникальным). Значением по умолчанию является пустая строка.<br><br>
+
+<pre id="needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('needs update - нуждается в обновлении')" onmouseout="hide()">.needsUpdate</a></span></pre>
+Установите значение этого свойства как <tt>true</tt> для запуска обновления при следующем использовании текстуры. Особенно это важно для установки режима укладки текстуры.<br><br>
+
+<pre id="offset"><a href="../math/vector2.htm" onmouseover="show('Vector2.<br>offset - смещение')" onmouseout="hide()">.offset</a></pre>
+Свойство показывает насколько одно повторение текстуры смещено от начала, в каждом направлении U и V. Обычный диапазон значений от <tt>0.0</tt> до <tt>1.0</tt>.
+<div class=note><b>Примечание:</b> свойство <tt>offset</tt> является расчетным модификатором и влияет только на применение текстуры к первому набору координат UV модели.
+Если текстура используется как карта, требующая дополнительных наборов координат UV (например <tt>aoMap</tt> или <tt>lightMap</tt> большинства материалов ассортимента),
+то для достижения желаемого повторения эти координаты должны быть назначены вручную.</div><br>
+
+<pre id="onUpdate"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on update - на обновление')" onmouseout="hide()">.onUpdate</a></span></pre>
+Функция обратного вызова, вызываемая при обновлении текстуры (например когда свойство <tt><a href="#needsUpdate" onmouseover="show('Texture.needsUpdate')" onmouseout="hide()">needsUpdate</a></tt> установлено как <tt>true</tt> и затем данная текстура используется).<br><br>
+
+<pre id="premultiplyAlpha"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('premultiply alpha - предварительное умножение альфа(-канала)')" onmouseout="hide()">.premultiplyAlpha</a></span></pre>
+Значением по умолчанию равно <tt>false</tt>, что является нормой для изображений в формате PNG. Если значения RGB хранились предварительно перемноженными на значение альфа-канала (канал прозрачности), то установите значение <tt>true</tt>.<br><br>
+
+<pre id="repeat"><a href="../math/vector2.htm" onmouseover="show('Vector2.<br>repeat - повторение')" onmouseout="hide()">.repeat</a></pre>
+Свойство показывает сколько раз текстура повторяется по поверхности, в каждом направлении U и V.
+Если значение этого свойства установлено больше <tt>1</tt> в любом направлении, то соответствующий параметр укладки текстуры (<tt>wrapS</tt> или <tt>wrapT</tt>) также должен быть установлен как
+<a href="../constants/textures.htm#wrappingModes" onmouseover="show('repeat wrapping - повторить укладку.<br>укладка текстуры повторяется до бесконечности')" onmouseout="hide()">THREE.RepeatWrapping</a> или
+<a href="../constants/textures.htm#wrappingModes" onmouseover="show('mirrored repeat wrapping - зеркальное повторение укладки.<br>текстура будет повторяться бесконечно, зеркально отражаясь<br>при каждом повторе')" onmouseout="hide()">THREE.MirroredRepeatWrapping</a> для достижения желаемого эффекта мозаичной укладки.
+<div class=note><b>Примечание:</b> свойство <tt>repeat</tt> является расчетным модификатором и влияет только на применение текстуры к первому набору координат UV модели.
+Если текстура используется как карта, требующая дополнительных наборов координат UV (например <tt>aoMap</tt> или <tt>lightMap</tt> большинства материалов ассортимента),
+то для достижения желаемого повторения эти координаты должны быть назначены вручную.</div><br>
+
+<pre id="rotation"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotation - поворот, вращение')" onmouseout="hide()">.rotation</a></span></pre>
+Угол, на который текстура поворачивается вокруг центральной точки, в радианах. Положительным значениям соответствует поворот против часовой стрелки. Значение по умолчанию равно <tt>0</tt>.<br><br>
+
+<pre id="type"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">.type</a></span></pre>
+Значение данного свойства должно соответствовать значению свойства <tt><a href="#format" onmouseover="show('Texture.format')" onmouseout="hide()">format</a></tt>.
+Значением по умолчанию является <a href="../constants/textures.htm#types" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">THREE.UnsignedByteType</a>, который будет использоваться для большинства форматов текстур.<br>
+Другие возможные варианты смотрите в описании <a href="../constants/textures.htm#types" onmouseover="show('Texture Constants')" onmouseout="hide()">констант типа текстуры</a>.<br><br>
+
+<pre id="unpackAlignment"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unpack alignment - выравнивание распаковки')" onmouseout="hide()">.unpackAlignment</a></span></pre>
+Свойство определяет требования к выравниванию в памяти начала каждого ряда пикселов. Значение по умолчанию равно&nbsp;<tt>4</tt>.
+Допустимыми значениями являются <tt>1</tt>&nbsp;(выравнивание по байтам), <tt>2</tt>&nbsp;(ряды выравниваются по четным байтам), <tt>4</tt>&nbsp;(выравнивание по словам) и <tt>8</tt>&nbsp;(ряды начинаются на границах двойных слов).
+Подробнее смотрите в описании свойства <tt><a href="http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml" target="_blank" onmouseover="show('устанавливает режим хранения пикселей')" onmouseout="hide()">glPixelStorei</a></tt> на <tt>www.khronos.org</tt>.<br><br>
+
+<pre id="uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов universally<br>unique identifier - универсальный<br>уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" onmouseover="show('сокращ. от англ. слов universally<br>unique identifier - универсальный<br>уникальный идентификатор');" onmouseout="hide()">UUID</a> данного экземпляра объекта. Он присваивается автоматически и не должен быть изменен.<br>
+Вот <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">статья Википедии про UUID</a> на русском языке.<br><br>
+
+<pre id="version"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('version - версия')" onmouseout="hide()">.version</a></span></pre>
+Это свойство ведет подсчет (начиная с <tt>0</tt>) сколько раз свойство <tt><a href="#needsUpdate" onmouseover="show('Texture.needsUpdate')" onmouseout="hide()">needsUpdate</a></tt> было установлено как <tt>true</tt>.<br><br>
+
+<pre id="wrapS"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapS - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">.wrapS</a></span></pre>
+Свойство определяет укладку текстуры по горизонтали и соответствует координате U в картировании по координатам UV.
+Значением по умолчанию является <a href="../constants/textures.htm#wrappingModes" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки<br>последний пиксел текстуры растягивается до края<br>полигональной сетки (mesh)')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a>, при этом край прижимается к внешним текселям края.
+Другие возможные варианты - <a href="../constants/textures.htm#wrappingModes" onmouseover="show('repeat wrapping - повторить укладку.<br>укладка текстуры повторяется до бесконечности')" onmouseout="hide()">THREE.RepeatWrapping</a>
+и <a href="../constants/textures.htm#wrappingModes" onmouseover="show('mirrored repeat wrapping - зеркальное повторение укладки.<br>текстура будет повторяться бесконечно, зеркально отражаясь<br>при каждом повторе')" onmouseout="hide()">THREE.MirroredRepeatWrapping</a>.
+Подробности смотрите в описании <a href="../constants/textures.htm#wrappingModes" onmouseover="show('wrapping modes')" onmouseout="hide()">констант режима укладки текстур</a>.<br><br>
+
+<pre id="wrapT"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapT - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">.wrapT</a></span></pre>
+Свойство определяет укладку текстуры по вертикали и соответствует координате V в картировании по координатам UV. Значение по умолчанию и другие возможные варианты такие же как у свойства <tt><a href="#wrapS" onmouseover="show('Texture.wrapS')" onmouseout="hide()">wrapS</a></tt>.
+<div class="note"><b>Примечание:</b> мозаичное размещение изображений в текстурах работает только в том случае, если размеры изображения являются степенью двойки (2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, ...) в переводе на пиксели.
+Отдельные размеры не обязательно должны быть равными, но каждый из них должен быть степенью двойки. Это ограничение от WebGL, а не <em>three.js</em>.</div></div><br>
+
+<h4>Методы</h4>
+В этом классе доступны методы <tt><a href="../core/eventDispatcher.htm" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a></tt>.
+<div class=blockindent><br>
+<pre id="clone"><a href="#" onmouseover="show('Texture.<br>clone - клонировать')" onmouseout="hide()">.clone</a> ( <a href="#" onmouseover="show('Texture.<br>texture - текстура')" onmouseout="hide()">texture</a> )</pre>
+Метод делает копию текстуры. Обратите внимание, что это не полная копия (<a href="https://en.wikipedia.org/wiki/Object_copying#Deep_copy" target="_blank">"deep copy"</a>), изображение (картинка) остается в общем пользовании.
+<div class=note_trans><b>Примечание переводчика:</b> Копирование объектов в JavaScript может происходить в нескольких вариантах:<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'> "deep copy" - дословно "глубокое" копирование, т.е. полное копирование объекта, всей его иерархической структуры
+и "shallow" copy - поверхностное копирование, когда из исходных объектов в целевой объект копируются только перечисляемые и собственные свойства.<br>
+Полное копирование также можно делать разными способами, один из самых старых - превратить объект в его строковое представление в формате JSON и затем конвертировать его обратно в объект.<br>
+Вот пара ссылок по теме: <a href="https://learn.javascript.ru/object-reference" target="_blank">Объекты: передача по ссылке</a> и <a href="https://medium.com/@stasonmars/%D0%BA%D0%BE%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%BE%D0%B2-%D0%B2-javascript-d25c261a7aff" target="_blank">Копирование объектов в JavaScript</a></div></div><br>
+
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - выбросить, ликвидировать, избавиться')" onmouseout="hide()">.dispose</a></span>( )</pre>
+Вызывает метод <tt><a href="../core/eventDispatcher.htm#dispatchEvent" onmouseover="show('EventDispatcher.dispatchEvent')" onmouseout="hide()">EventDispatcher.dispatchEvent</a></tt> с типом события <tt>dispose</tt>.<br><br>
+
+<pre id="toJSON"><a href="#" onmouseover="show('Texture.<br>to JSON - в формат JSON, где JSON это<br>сокращ. англ. слов JavaScript Object Notation,<br>обычно произносится как /ˈdʒeɪsən/ JAY-sən)<br>— текстовый формат обмена данными,<br>основанный на JavaScript.')" onmouseout="hide()">.toJSON</a>( meta )</pre>
+<div class=list><tt>meta</tt> -- дополнительный, необязательный объект, содержащий метаданные.</div>
+Конвертирует материал в формат JSON
+Convert the material to three.js JSON format.<br><br>
+
+<pre id="transformUv"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('transformUv - преобразование (координат) UV')" onmouseout="hide()">.transformUv</a></span>( <a href="../math/vector2.htm" onmouseover="show('Vector2.<br>uv - координаты UV')" onmouseout="hide()">uv</a> )</pre>
+Метод изменяет координаты UV исходя из значений свойств <tt><a href="#repeat" onmouseover="show('Texture.repeat')" onmouseout="hide()">repeat</a></tt>, <tt><a href="#offset" onmouseover="show('Texture.offset')" onmouseout="hide()">offset</a></tt>,
+<tt><a href="#wrapS" onmouseover="show('Texture.wrapS')" onmouseout="hide()">wrapS</a></tt>, <tt><a href="#wrapT" onmouseover="show('Texture.wrapT')" onmouseout="hide()">wrapT</a></tt> и <tt><a href="#flipY" onmouseover="show('Texture.flipY')" onmouseout="hide()">flipY</a></tt> данной текстуры.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/textures/Texture.js" target="_blank">Texture.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

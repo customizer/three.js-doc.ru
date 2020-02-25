@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="texture.htm" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+<h3>DepthTexture</h3>
+Создает текстуру, используемую в качестве текстуры глубины. Требуется поддержка расширения <a href="https://www.khronos.org/registry/webgl/extensions/WEBGL_depth_texture/" target="_blank">WEBGL_depth_texture</a>.
+Согласно <a href="https://webglstats.com/" target="_blank">WebGLStats</a>, на февраль 2016 года это расширение поддерживает около 85% устройств с включенным WebGL.<br><br>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/webgl_depth_texture" target="_blank">WebGL / depth / texture</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>DepthTexture( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapS - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">wrapS</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapT - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">wrapT</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('magFilter - сокращ. от англ. слов magnification filter<br>- фильтр по максимуму (по увеличению)')" onmouseout="hide()">magFilter</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minFilter - сокращ. от англ. слов minification filter<br>- фильтр по минимуму (уменьшению)')" onmouseout="hide()">minFilter</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия (от др.-греч. анизос — неравный<br>и тропос — направление), т.е. различие свойств среды<br>(например, физических: упругости, электропроводности,<br>теплопроводности, показателя преломления, скорости звука<br>или света и др.) в различных направлениях внутри этой среды;<br>в противоположность изотропии.')" onmouseout="hide()">anisotropy</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span> )</pre>
+<div class=list><tt>width</tt> -- ширина текстуры.</div>
+<div class=list><tt>height</tt> -- высота текстуры.</div>
+<div class=list><tt>type</tt> -- значением по умолчанию является <a href="../constants/textures.htm#types" onmouseover="show('unsigned short type - короткий тип без знака<br>т.е. короткое целочисленное число без знака<br>(диапазон от 0 до 65 535)')" onmouseout="hide()">THREE.UnsignedShortType</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#types" onmouseover="show('types')" onmouseout="hide()">константах типа</a>.</div>
+<div class=list><tt>wrapS</tt> -- значением по умолчанию является <a href="../constants/textures.htm#wrappingModes" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки<br>последний пиксел текстуры растягивается до края<br>полигональной сетки (mesh)')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#wrappingModes" onmouseover="show('wrapping modes')" onmouseout="hide()">константах режима укладки текстур</a>.</div>
+<div class=list><tt>wrapT</tt> -- значением по умолчанию является <a href="../constants/textures.htm#wrappingModes" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки<br>последний пиксел текстуры растягивается до края<br>полигональной сетки (mesh)')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#wrappingModes" onmouseover="show('wrapping modes')" onmouseout="hide()">константах режима укладки текстур</a>.</div>
+<div class=list><tt>magFilter</tt> -- определяет способ выборки текстуры, когда тексель занимает больше одного пикселя.
+Значением по умолчанию является <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('nearest filter - ближайший фильтр<br>наиболее близкое значение к указанным<br>координатам текстуры')" onmouseout="hide()">THREE.NearestFilter</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('magnification filters')" onmouseout="hide()">константах фильтров увеличения</a>.</div>
+<div class=list><tt>minFilter</tt> -- определяет способ выборки текстуры, когда тексель занимает меньше одного пикселя.
+Значением по умолчанию является <a href="../constants/textures.htm#minificationFilters" onmouseover="show('nearest filter - ближайший фильтр<br>наиболее близкое значение к указанным<br>координатам текстуры')" onmouseout="hide()">THREE.NearestFilter</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#minificationFilters" onmouseover="show('minification filters')" onmouseout="hide()">константах фильтров минимизации</a>.</div>
+<div class=list><tt>anisotropy</tt> -- число выборок, взятых через пиксель по оси с наибольшей плотностью текселей.<br>
+По умолчанию, значение данного аргумента равно <tt>1</tt>. Более высокое значение дает менее размытый результат, чем базовая mip-карта, за счет большего количества используемых выборок текстуры.<br>
+Поиск максимально возможного значения анизотропии для <span class="lnk" onmouseover="show('GPU - сокращ. англ. слов graphics processing unit - блок<br>графической обработки, графический процессор или<br>попросту видеокарта')" onmouseout="hide()">GPU</span>
+делается с помощью <tt><a href="../renderers/webGLrenderer.htm#capabilities" onmouseover="show('WebGLrenderer.getMaxAnisotropy')" onmouseout="hide()">renderer.getMaxAnisotropy</a></tt>; это значение обычно является степень&nbsp;<tt>2</tt>.</div>
+
+<div class=list><tt><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span></tt> -- формат используемый в текстуре, должен быть либо <a href="../constants/textures.htm#formats" onmouseover="show('Константы текстур<br>depth format - формат глубины')" onmouseout="hide()">DepthFormat</a> (по умолчанию) либо <a href="../constants/textures.htm#formats" onmouseover="show('Константы текстур<br>depth stencil format - формат трафарета глубины')" onmouseout="hide()">DepthStencilFormat</a>.
+Подробнее смотрите в <a href="../constants/textures.htm#formats" onmouseover="show('formats')" onmouseout="hide()">константах формата</a>.</div><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.
+Свойства, приведенные ниже, также являются частью класса <a href="texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>, но имеют здесь другие значения по умолчанию.
+<div class=blockindent><br>
+<pre id="format"><a href="texture.htm#format" onmouseover="show('Texture.format')" onmouseout="hide()">.format</a></pre>
+Значением свойства должно быть либо <a href="../constants/textures.htm#formats" onmouseover="show('Константы текстур<br>depth format - формат глубины')" onmouseout="hide()">DepthFormat</a> (по умолчанию) либо <a href="../constants/textures.htm#formats" onmouseover="show('Константы текстур<br>depth stencil format - формат трафарета глубины')" onmouseout="hide()">DepthStencilFormat</a>.
+Подробнее смотрите в <a href="../constants/textures.htm#formats" onmouseover="show('formats')" onmouseout="hide()">константах формата</a>.<br><br>
+
+<pre id="type"><a href="texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">.type</a></pre>
+значением по умолчанию является <a href="../constants/textures.htm#types" onmouseover="show('unsigned short type - короткий тип без знака<br>т.е. короткое целочисленное число без знака<br>(диапазон от 0 до 65 535)')" onmouseout="hide()">THREE.UnsignedShortType</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#types" onmouseover="show('types')" onmouseout="hide()">константах типа</a>.<br><br>
+
+<pre id="magFilter"><a href="texture.htm#magFilter" onmouseover="show('Texture.magFilter')" onmouseout="hide()">.magFilter</a></pre>
+определяет способ выборки текстуры, когда тексель занимает больше одного пикселя.
+Значением по умолчанию является <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('nearest filter - ближайший фильтр<br>наиболее близкое значение к указанным<br>координатам текстуры')" onmouseout="hide()">THREE.NearestFilter</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('magnification filters')" onmouseout="hide()">константах фильтров увеличения</a>.<br><br>
+
+<pre id="minFilter"><a href="texture.htm#minFilter" onmouseover="show('Texture.minFilter')" onmouseout="hide()">.minFilter</a></pre>
+Свойство определяет способ выборки текстуры, когда тексель занимает меньше одного пикселя.
+Значением по умолчанию является <a href="../constants/textures.htm#minificationFilters" onmouseover="show('nearest filter - ближайший фильтр<br>наиболее близкое значение к указанным<br>координатам текстуры')" onmouseout="hide()">THREE.NearestFilter</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#minificationFilters" onmouseover="show('minification filters')" onmouseout="hide()">константах фильтров минимизации</a>.<br><br>
+
+<pre id="flipY"><a href="texture.htm#flipY" onmouseover="show('Texture.flipY')" onmouseout="hide()">.flipY</a></pre>
+Текстуры глубины не требуется переворачивать, так что это свойство по умолчанию установлено как <tt>false</tt>.<br><br>
+
+<pre id="generateMipmaps"><a href="texture.htm#generateMipmaps" onmouseover="show('Texture.generateMipmaps')" onmouseout="hide()">.generateMipmaps</a></pre>
+Текстуры глубины не используют mip-картирование.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/textures/DepthTexture.js" target="_blank">DepthTexture.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

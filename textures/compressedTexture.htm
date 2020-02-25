@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="texture.htm" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+<h3>CompressedTexture</h3>
+Создает текстуру, основываясь на данных в сжатом виде, например из <a href="https://ru.wikipedia.org/wiki/DirectDraw_Surface" target="_blank" onmouseover="show('DDS (DirectDraw Surface) — формат хранения данных,<br>разработанный корпорацией Майкрософт для<br>использования в DirectX SDK.<br>DDS чаще всего используется для хранения текстур и<br>позволяет хранить их как в сжатом, так и в несжатом<br>виде.')" onmouseout="hide()">DDS-файла</a>.<br>
+Используется с <a href="../loaders/compressedTextureLoader.htm" onmouseover="show('CompressedTextureLoader')" onmouseout="hide()">CompressedTextureLoader</a>.<br><br>
+
+<h4>Конструктор</h4>
+<pre>CompressedTexture( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mipmaps - mip-карта или mip-пирамида.<br>Сокращение mip происходит от лат.<br>multum in parvo — «много в малом».')" onmouseout="hide()">mipmaps</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mapping - картирование')" onmouseout="hide()">mapping</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapS - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">wrapS</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapT - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">wrapT</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('magFilter - сокращ. от англ. слов magnification filter<br>- фильтр по максимуму (по увеличению)')" onmouseout="hide()">magFilter</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minFilter - сокращ. от англ. слов minification filter<br>- фильтр по минимуму (уменьшению)')" onmouseout="hide()">minFilter</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия (от др.-греч. анизос — неравный и<br>тропос — направление), т.е. различие свойств среды (например,<br>физических: упругости, электропроводности, теплопроводности,<br>показателя преломления, скорости звука или света и др.) в<br>различных направлениях внутри этой среды; в противоположность<br>изотропии.')" onmouseout="hide()">anisotropy</a></span> )</pre>
+<div class=list><tt>mipmaps</tt> - массив mip-карт должен содержать объекты с данными, шириной и высотой. mip-карты должны быть правильного формата и типа.<br>
+<div class=note_trans><b>Примечание переводчика:</b> mip-карта или mip-пирамида (mipmap) - множественное отображение (последовательность текстур одного и того же изображения с уменьшающимся разрешением по мере удаления отображаемого объекта от наблюдателя). Каждая из этих текстур называется mip-уровнем (англ. mip level) или уровнем детализации (англ. level of detail).<br>
+mip - это сокращение по первым буквам латинского выражения "multum in parvo", означающего "множество в малом" или "много вещей на одном пятачке".<br><br>
+<span style='float:right; margin-top:-16px; background-color:#ffffe8;'><em>(из <a href='https://ru.wikipedia.org/wiki/MIP-%D1%82%D0%B5%D0%BA%D1%81%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5' target='_blank'>Википедии</a>)</em>&nbsp;&nbsp;&nbsp;</span></div></div>
+<div class=list><tt>width</tt> - ширина наибольшей mip-карты.</div>
+<div class=list><tt>height</tt> - высота наибольшей mip-карты.</div>
+<div class=list><tt>format</tt> - формат, используемый в mip-картах.
+В качестве возможных вариантов смотрите форматы сжатия текстуры <a href="../constants/textures.htm#dds" onmouseover="show('formats')" onmouseout="hide()">ST3C</a>, <a href="../constants/textures.htm#pvrtc" onmouseover="show('formats')" onmouseout="hide()">PVRTC</a> и <a href="../constants/textures.htm#etc" onmouseover="show('formats')" onmouseout="hide()">ETC</a>.</div>
+<div class=list><tt>type</tt> - тип, используемый в mip-картах. Значением по умолчанию является <a href="../constants/textures.htm#types" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">THREE.UnsignedByteType</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#types" onmouseover="show('types')" onmouseout="hide()">константах типа</a>.</div>
+<div class=list><tt>mapping</tt> -- способ наложения изображения на поверхность объекта (картирование). Типом картирования по умолчанию является <a href="../constants/textures.htm#mappingModes" onmouseover="show('текстура накладывается на поверхность объекта<br>в соответствии с координатами UV полигональной<br>сетки (mesh)')" onmouseout="hide()">THREE.UVMapping</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#mappingModes" onmouseover="show('mapping modes')" onmouseout="hide()">константах режима картирования</a>.</div>
+<div class=list><tt>wrapS</tt> -- значением по умолчанию является <a href="../constants/textures.htm#wrappingModes" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки<br>последний пиксел текстуры растягивается до края<br>полигональной сетки (mesh)')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#wrappingModes" onmouseover="show('wrapping modes')" onmouseout="hide()">константах режима укладки текстур</a>.</div>
+<div class=list><tt>wrapT</tt> -- значением по умолчанию является <a href="../constants/textures.htm#wrappingModes" onmouseover="show('clamp to edge wrapping - стыковать с краем оболочки<br>последний пиксел текстуры растягивается до края<br>полигональной сетки (mesh)')" onmouseout="hide()">THREE.ClampToEdgeWrapping</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#wrappingModes" onmouseover="show('wrapping modes')" onmouseout="hide()">константах режима укладки текстур</a>.</div>
+<div class=list><tt>magFilter</tt> -- определяет способ выборки текстуры, когда тексель занимает больше одного пикселя.
+Значением по умолчанию является <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('linear filter - линейный фильтр<br>средневзвешенное значение четырех текстурных элементов,<br>наиболее близких к указанным координатам текстуры')" onmouseout="hide()">THREE.LinearFilter</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#magnificationFilters" onmouseover="show('magnification filters')" onmouseout="hide()">константах фильтров увеличения</a>.</div>
+<div class=list><tt>minFilter</tt> -- определяет способ выборки текстуры, когда тексель занимает меньше одного пикселя.
+Значением по умолчанию является <a href="../constants/textures.htm#minificationFilters" onmouseover="show('linear mipmap linear filter - линейная mip-карта с линейным фильтром<br>выбирает две mip-карты, которые наиболее точно соответствуют размеру<br>текстурируемого пиксела и использует критерий LinearFilter (линейного<br>фильтра) для получения значения текстуры из каждой mip-карты')" onmouseout="hide()">THREE.LinearMipMapLinearFilter</a>.
+Другие возможные варианты смотрите в <a href="../constants/textures.htm#minificationFilters" onmouseover="show('minification filters')" onmouseout="hide()">константах фильтров минимизации</a>.</div>
+<div class=list><tt>anisotropy</tt> -- число выборок, взятых через пиксель по оси с наибольшей плотностью текселей.<br>
+По умолчанию, значение данного аргумента равно&nbsp;<tt>1</tt>. Более высокое значение дает менее размытый результат, чем базовая mip-карта, за счет большего количества используемых выборок текстуры.<br>
+Поиск максимально возможного значения анизотропии для <span class="lnk" onmouseover="show('GPU - сокращ. англ. слов graphics processing unit - блок<br>графической обработки, графический процессор или<br>попросту видеокарта')" onmouseout="hide()">GPU</span>
+делается с помощью <tt><a href="../renderers/webGLrenderer.htm#capabilities" onmouseover="show('WebGLrenderer.getMaxAnisotropy')" onmouseout="hide()">renderer.getMaxAnisotropy</a></tt>; это значение обычно является степенью&nbsp;<tt>2</tt>.</div><br>&nbsp;
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.
+<div class=blockindent><br>
+<pre id="flipY"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('flip Y - перевернуть (отразить) по оси Y (по вертикали)')" onmouseout="hide()">.flipY</a></span></pre>
+Значение по умолчанию равно <tt>false</tt>. Для сжатых текстур отражение не работает.<br><br>
+
+<pre id="generateMipmaps"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('generate mipmaps - сгенерировать mip-карты')" onmouseout="hide()">.generateMipmaps</a></span></pre>
+Значение по умолчанию равно <tt>false</tt>. Для сжатых текстур нельзя создать mip-карты.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/textures/CompressedTexture.js" target="_blank">CompressedTexture.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

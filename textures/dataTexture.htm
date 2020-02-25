@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="texture.htm" title="Переход к родительскому классу"><tt>Texture &rarr;</tt></a></span>
+<h3>DataTexture</h3>
+Создает текстуру непосредственно из необработанных данных (raw data), ширины и высоты.<br><br>
+
+<h4>Пример</h4>
+<pre>// create a buffer with color data
+// создаем буфер с данными цвета
+var size = width * height;
+var data = new Uint8Array( 3 * size );<br>
+var r = Math.floor( color.r * 255 );
+var g = Math.floor( color.g * 255 );
+var b = Math.floor( color.b * 255 );<br>
+for ( var i = 0; i &#60; size; i ++ ) {<br>
+  var stride = i * 3;<br>
+  data[ stride ] = r;
+  data[ stride + 1 ] = g;
+  data[ stride + 2 ] = b;
+}<br>
+// used the buffer to create a DataTexture
+// используем буфер для создания DataTexture
+var texture = new THREE.DataTexture( data, width, height, THREE.RGBFormat );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>DataTexture( <span onclick="showClick('значением должен быть либо ArrayBuffer,<br>либо разновидность типизированного массива')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('data - данные')" onmouseout="hide()">data</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('format - формат')" onmouseout="hide()">format</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mapping - картирование')" onmouseout="hide()">mapping</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapS - укладка текстуры по горизонтали (координата S)')" onmouseout="hide()">wrapS</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('wrapT - укладка текстуры по вертикали (координата T)')" onmouseout="hide()">wrapT</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('magFilter - сокращ. от англ. слов magnification filter<br>- фильтр по максимуму (по увеличению)')" onmouseout="hide()">magFilter</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minFilter - сокращ. от англ. слов minification filter<br>- фильтр по минимуму (уменьшению)')" onmouseout="hide()">minFilter</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('anisotropy - анизотропия (от др.-греч. анизос — неравный<br>и тропос — направление), т.е. различие свойств среды<br>(например, физических: упругости, электропроводности,<br>теплопроводности, показателя преломления, скорости звука<br>или света и др.) в различных направлениях внутри этой среды;<br>в противоположность изотропии.')" onmouseout="hide()">anisotropy</a></span> )</pre>
+Аргумент <tt>data</tt> должен быть ArrayBuffer или разновидностью типизированного массива. Остальные параметры соответствуют свойствам,
+наследуемым из <a href="texture.htm" onmouseover="show('Texture')" onmouseout="hide()">Texture</a>, среди которых и <tt>magFilter</tt> и <tt>minFilter</tt>,
+оба имеют по умолчанию значение <tt><a href="../constants/textures.htm#magnificationFilters" onmouseover="show('фильтры текстур')" onmouseout="hide()">THREE.NearestFilter</a></tt>.
+Свойства <tt>flipY</tt> и <tt>generateMipmaps</tt> изначально установлены как <tt>false</tt>.<br><br>
+Интерпретация данных (аргумент <tt>data</tt>) зависит от типа и формата:
+Если типом является <tt><a href="../constants/textures.htm#types" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">THREE.UnsignedByteType</a></tt>, то для адресации данных текселей целесообразен <tt><span class="lnk" onmouseover="show(type_uint8array)" onmouseout="hide()">Uint8Array</span></tt>.
+Если форматом является <tt><a href="../constants/textures.htm#formats" onmouseover="show('RGBA format - формат RGBA')" onmouseout="hide()">THREE.RGBAFormat</a></tt>, то для данных требуется четыре значения на каждый тексель; значения цвета - красный (red), зеленый (green), синий (blue) и значение альфа-канала (обычно канал прозрачности).
+Аналогично, формат <tt><a href="../constants/textures.htm#formats" onmouseover="show('RGB format - формат RGB')" onmouseout="hide()">THREE.RGBFormat</a></tt> определяет только три значения каждого текселя.<br>
+Для типов упакованных данных, <tt><a href="../constants/textures.htm#types" onmouseover="show('тип упаковки значений цвета и прозрачности<br>в шестнадцатиразрядное двоичное число<br>по четыре разряда на каждое из значений')" onmouseout="hide()">THREE.UnsignedShort4444Type</a></tt>,
+<tt><a href="../constants/textures.htm#types" onmouseover="show('тип упаковки значений цвета и прозрачности<br>в шестнадцатиразрядное двоичное число<br>по пять разрядов на каждое из значений цвета<br>и один разряд для значения прозрачности')" onmouseout="hide()">THREE.UnsignedShort5551Type</a></tt>
+или <tt><a href="../constants/textures.htm#types" onmouseover="show('тип упаковки значений цвета в шестнадцатиразрядное<br>двоичное число по пять разрядов на красный и синий<br>цвета и шесть разрядов на зеленый цвет')" onmouseout="hide()">THREE.UnsignedShort565Type</a></tt>, все компоненты цвета одного текселя можно рассматривать как битовые поля внутри целочисленного элемента в формате <tt><span class="lnk" onmouseover="show(type_uint16array)" onmouseout="hide()">Uint16Array</span></tt>.<br>
+Для использования типов <tt><a href="../constants/textures.htm#types" onmouseover="show('float type - тип числа с плавающей запятой')" onmouseout="hide()">THREE.FloatType</a></tt> и <tt><a href="../constants/textures.htm#types" onmouseover="show('half float type - тип числа с плавающей запятой половинной точности')" onmouseout="hide()">THREE.HalfFloatType</a></tt> реализация WebGL должна поддерживать соответствующие расширения <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/OES_texture_float" target="_blank">OES_texture_float</a></tt>
+и <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/OES_texture_half_float" target="_blank">OES_texture_half_float</a></tt>.<br>
+Чтобы использовать <tt><a href="../constants/textures.htm#magnificationFilters" onmouseover="show('linear filter - линейный фильтр')" onmouseout="hide()">THREE.LinearFilter</a></tt> для покомпонентной, билинейной интерполяции текселей на основе этих типов,
+также должны присутствовать WebGL расширения <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/OES_texture_float_linear" target="_blank">OES_texture_float_linear</a></tt>
+или <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/OES_texture_half_float_linear" target="_blank">OES_texture_half_float_linear</a></tt>.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="image"><span onclick="showClick('Image')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('image - изображение')" onmouseout="hide()">.image</a></span></pre>
+Переопределяет тип записи удерживаемых данных, шириной и высотой.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/textures/DataTexture.js" target="_blank">DataTexture.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

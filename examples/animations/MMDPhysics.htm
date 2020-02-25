@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Анимация</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDPhysics</h3>
+Обработчик физических параметров для ресурсов <em><a href="https://ru.wikipedia.org/wiki/MikuMikuDance" target="_blank">MMD</a></em>.<br>
+MMDPhysics рассчитывает физические параметры для моделей, загруженных при помощи <a href="../loaders/MMDLoader.htm" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a> с <a href="https://github.com/kripken/ammo.js/" target="_blank">ammo.js</a> (физический движок JavaScript на основе <a href="https://pybullet.org/wordpress/" target="_blank" onmouseover="show('Bullet Physics - профессиональное обнаружение столкновений<br>с открытым исходным кодом, библиотека динамики жестких<br>и гибких тел, написанная на портативном C++. Библиотека<br>предназначена в основном для использования в играх,<br>визуальных эффектах и роботизированном моделировании.')" onmouseout="hide()">Bullet</a>).<br><br>
+
+<h4>Пример</h4>
+<pre>var physics;<br>
+// Load MMD resources and instantiate MMDPhysics
+// загрузка MMD ресурсов и создание экземпляра MMDPhysics
+new THREE.MMDLoader().load(
+  'models/mmd/miku.pmd',
+  function ( mesh ) {
+    physics = new THREE.MMDPhysics( mesh )
+    scene.add( mesh );
+  }
+);<br>
+function render() {
+  var delta = clock.getDelta();
+  animate( delta );  // update bones
+  if ( physics !== undefined ) physics.update( delta );
+  renderer.render( scene, camera );
+}</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>MMDPhysics( <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rigid body param(eter)s - параметры жесткого тела')" onmouseout="hide()">rigidBodyParams</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constraint param(eter)s - параметры ограничения')" onmouseout="hide()">constraintParams</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>mesh</tt> — <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, для которой MMDPhysics рассчитывает физические параметры.</div>
+<div class=list><tt>rigidBodyParams</tt> — массив объектов, определяющий параметры жесткого тела.</div>
+<div class=list><tt>constraintParams</tt> — массив объектов, определяющий параметры ограничений. Дополнительный, необязательный аргумент.</div>
+<div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unit step - единичный шаг')" onmouseout="hide()">unitStep</a></span></tt> - значение по умолчанию равно&nbsp;<tt>1/65</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max step num - сокращ. англ. слов maximum<br>step number - максимальное число шагов')" onmouseout="hide()">maxStepNum</a></span></tt> - значение по умолчанию равно&nbsp;<tt>3</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>gravity - гравитация, сила тяжести')" onmouseout="hide()">gravity</a></tt> - значением по умолчанию является&nbsp;<tt>( 0, - 9.8 * 10, 0 )</tt></div>
+Создает новый MMDPhysics.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="mesh"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mesh - сетка')" onmouseout="hide()">.mesh</a></span></pre>
+<a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, переданная в конструкторе.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="createHelper"><a href="#" onmouseover="show('MMDPhysics.<br>create helper - создать вспомогательный элемент')" onmouseout="hide()">.createHelper</a>( )</pre>
+Возвращает MMDPhysicsHelper. Можно показать жесткие тела, добавлением вспомогательного элемента на сцену.<br><br>
+
+<pre id="reset"><a href="CCDIKSolver.htm" onmouseover="show('CCDIKSolver.<br>reset - сбросить')" onmouseout="hide()">.reset</a>( )</pre>
+Метод сбрасывает изменение жестких тел в текущей кости.<br><br>
+
+<pre id="setGravity"><a href="CCDIKSolver.htm" onmouseover="show('CCDIKSolver.<br>set gravity - установить гравитацию')" onmouseout="hide()">.setGravity</a>( <a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>gravity - гравитация, сила тяжести')" onmouseout="hide()">gravity</a> )</pre>
+<div class=list><tt>gravity</tt> — направление и уровень гравитации.</div>
+Метод устанавливает гравитацию (силу тяжести).<br><br>
+
+<pre id="update"><a href="CCDIKSolver.htm" onmouseover="show('CCDIKSolver.<br>update - обновить')" onmouseout="hide()">.update</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delta - ')" onmouseout="hide()">delta</a></span> )</pre>
+<div class=list><tt>delta</tt> — время в секундах.</div>
+Метод производит предварительный расчет физических параметров и обновление костей.<br><br>
+
+<pre id="warmup"><a href="CCDIKSolver.htm" onmouseover="show('CCDIKSolver.<br>warmup - разогрев, разминка')" onmouseout="hide()">.warmup</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cycles - циклы')" onmouseout="hide()">cycles</a></span> )</pre>
+<div class=list><tt>cycles</tt> — число циклов.</div>
+Warm up Rigid bodies. Calculates cycles steps.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDPhysics.js" target="_blank">MMDPhysics.js на github.com</a></div><br><br>
+  
+<br><br>
+</body></html>

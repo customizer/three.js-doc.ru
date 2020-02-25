@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Face3</h3>
+Треугольная грань, используемая в <a href="geometry.htm" onmouseover="show('Geometry')" onmouseout="hide()"><tt>Geometry</tt></a>. Грани создаются автоматически для всех стандартных типов геометрических элементов, однако если строится нестандартная геометрия, их придется создавать вручную.<br><br>
+
+<h4>Пример</h4><br>
+<pre>var material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );<br>
+// create a triangular geometry
+// создадим геометрию треугольника
+var geometry = new THREE.Geometry();
+geometry.vertices.push( new THREE.Vector3( -50, -50, 0 ) );
+geometry.vertices.push( new THREE.Vector3(  50, -50, 0 ) );
+geometry.vertices.push( new THREE.Vector3(  50,  50, 0 ) );<br>
+// create a new face using vertices 0, 1, 2
+// создаем новую грань, используя вершины 0, 1, 2
+var normal = new THREE.Vector3( 0, 1, 0 ); // optional (необязательно)
+var color = new THREE.Color( 0xffaa00 ); // optional (необязательно)
+var materialIndex = 0; // optional (необязательно)
+var face = new THREE.Face3( 0, 1, 2, normal, color, materialIndex );<br>
+// add the face to the geometry's faces array
+// добавляем грань к массиву граней геометрии
+geometry.faces.push( face );<br>
+// the face normals and vertex normals can be calculated automatically if not supplied above
+// если выше не предоставлено, то нормали граней и вершин могут вычисляться автоматически
+geometry.computeFaceNormals();
+geometry.computeVertexNormals();<br>
+scene.add( new THREE.Mesh( geometry, material ) );</pre>
+
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#svg_sandbox" target="_blank">svg / sandbox</a>
+<a href="https://threejs.org/examples/#misc_exporter_obj" target="_blank">WebGL / exporter / obj</a>
+<a href="https://threejs.org/examples/#webgl_shaders_vector" target="_blank">WebGL / shaders / vector</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>Face3( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('здесь начальными буквами англ. алфавита обозначены вершины треугольной грани<br>- ячейки сетки-арматуры, из которой состоят все грани геометрического элемента')" onmouseout="hide()">a</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('здесь начальными буквами англ. алфавита обозначены вершины треугольной грани<br>- ячейки сетки-арматуры, из которой состоят все грани геометрического элемента')" onmouseout="hide()">b</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('здесь начальными буквами англ. алфавита обозначены вершины треугольной грани<br>- ячейки сетки-арматуры, из которой состоят все грани геометрического элемента')" onmouseout="hide()">c</a></span>, <a href="../math/vector3.htm" onmouseover="show('Vector3.<br>normal - нормаль')" onmouseout="hide()">normal</a>, <a href="../math/color.htm" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material index - индекс материала')" onmouseout="hide()">materialIndex</a></span> )</pre>
+<div class=list><tt>a</tt> - индекс вершины A.</div>
+<div class=list><tt>b</tt> - индекс вершины B.</div>
+<div class=list><tt>c</tt> - индекс вершины C.</div>
+<div class=list><tt>normal</tt> - нормаль грани (<a href="../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>) или массив нормалей вершин (дополнительный, необязательный аргумент).
+Если в этом аргументе передается одиночный вектор, то он устанавливается как <tt><a href="#normal" onmouseover="show('Face3.normal')" onmouseout="hide()">normal</a></tt>, или же, если здесь передается массив из трех векторов, устанавливается <tt><a href="#vertexNormals" onmouseover="show('Face3.vertexNormals')" onmouseout="hide()">vertexNormals</a></tt>.</div>
+<div class=list><tt>color</tt> - цвет грани или массив цветов вершин (дополнительный, необязательный аргумент).
+Если в этом аргументе передается одно значение, то оно устанавливается как <tt><a href="#color" onmouseover="show('Face3.color')" onmouseout="hide()">color</a></tt>, или же, если здесь передается массив из трех значений, устанавливается <tt><a href="#vertexColors" onmouseover="show('Face3.vertexColors')" onmouseout="hide()">vertexColors</a></tt>.</div>
+<div class=list><tt>materialIndex</tt> - это индекс массива материалов, связанного с данной гранью (дополнительный, необязательный аргумент).</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="a"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('здесь начальными буквами англ. алфавита обозначены вершины треугольной грани<br>- ячейки сетки-арматуры, из которой состоят все грани геометрического элемента')" onmouseout="hide()">.a</a></span></pre>
+Индекс вершины A.<br><br>
+
+<pre id="b"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('здесь начальными буквами англ. алфавита обозначены вершины треугольной грани<br>- ячейки сетки-арматуры, из которой состоят все грани геометрического элемента')" onmouseout="hide()">.b</a></span></pre>
+Индекс вершины B.<br><br>
+
+<pre id="c"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('здесь начальными буквами англ. алфавита обозначены вершины треугольной грани<br>- ячейки сетки-арматуры, из которой состоят все грани геометрического элемента')" onmouseout="hide()">.c</a></span></pre>
+Индекс вершины C.<br><br>
+
+<pre id="normal"><a href="../math/vector3.htm" onmouseover="show('Vector3.<br>normal - нормаль')" onmouseout="hide()">.normal</a></pre>
+Нормаль грани - вектор, представляющий направление данной грани (Face3).
+При автоматическом вычислении (используется метод <tt><a href="geometry.htm#computeFaceNormals" onmouseover="show('Geometry.computeFaceNormals')" onmouseout="hide()">Geometry.computeFaceNormals</a></tt>),
+это будет нормализованное <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank">векторное произведение</a> двух сторон треугольника.
+Значением по умолчанию является&nbsp;<tt>(0, 0, 0)</tt>.<br><br>
+
+<pre id="color"><a href="../math/color.htm" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+Цвет грани - при этом должно использоваться свойство материала <tt><a href="../materials/material.htm#vertexColors" onmouseover="show('Material.vertexColors')" onmouseout="hide()">vertexColors</a></tt>,
+установленное как <tt><a href="../constants/materials.htm#colors" onmouseover="show('константа материала')" onmouseout="hide()">THREE.FaceColors</a></tt>.<br><br>
+
+<pre id="vertexNormals"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertex normals - нормали вершин')" onmouseout="hide()">.vertexNormals</a></span></pre>
+Массив из&nbsp;3 <a href="../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">нормалей вершин</a>.<br><br>
+
+<pre id="vertexColors"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertex colors - цвета вершин')" onmouseout="hide()">.vertexColors</a></span></pre>
+Массив из&nbsp;3 цветов вершин - при этом должно использоваться свойство материала <tt><a href="../materials/material.htm#vertexColors" onmouseover="show('Material.vertexColors')" onmouseout="hide()">vertexColors</a></tt>,
+установленное как <tt><a href="../constants/materials.htm#colors" onmouseover="show('константа материала')" onmouseout="hide()">THREE.VertexColors</a></tt>.<br><br>
+
+<pre id="materialIndex"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material index - индекс материала')" onmouseout="hide()">.materialIndex</a></span></pre>
+Индекс материала (показывает индекс в массиве материалов, связанном с гранью). Значение по умолчанию равно&nbsp;<tt>0</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="clone"><a href="#" onmouseover="show('Face3.<br>clone - клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Создает новый клон объекта Face3.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Face3.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Face3')" onmouseout="hide()">face3</a> )</pre>
+Копирует в эту треугольную грань параметры другой треугольной грани (переданной в аргументе <tt>face3</tt>).</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/Face3.js" target="_blank">Face3.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Контролы (элементы управления)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../../core/eventDispatcher.htm" title="Переход к родительскому классу"><tt>EventDispatcher &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TrackballControls</h3>
+TrackballControls похож на <a href="orbitControls.htm" onmouseover="show('OrbitControls')" onmouseout="hide()">OrbitControls</a>.
+Однако, он не поддерживает свойство камеры <tt><a href="../../core/object3D.htm#up" onmouseover="show('Свойство <tt>up</tt> (вверх), камера наследует от своего родительского<br>объекта - Object3D.')" onmouseout="hide()">camera.up</a></tt>.
+Это означает, что когда камера находится над "северным" и "южным" полюсами, её нельзя повернуть так, чтобы правая сторона оказалась вверху.<br><br>
+
+<tt><a href="../../core/object3D.htm#up" onmouseover="show('Свойство <tt>up</tt> камера наследует от своего родительского<br>объекта - Object3D.')" onmouseout="hide()">camera.up</a></tt>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/#misc_controls_trackball" target="_blank">misc / controls / trackball</a></pre>
+
+<h4>Конструктор</h4>
+<pre>TrackballControls( <a href="../../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">camera</a>, <a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">domElement</a> )</pre>
+<div class=list><tt>camera</tt> - камера представленной сцены.</div>
+<div class=list><tt>domElement</tt> - HTML-элемент, используемый для слушателей (listener) событий.</div>
+Создает новый экземпляр TrackballControls.<br><br>
+
+<h4>События</h4>
+<div class=blockindent><br>
+<pre id="change"><span class="lnk" onmouseover="show('change - изменение')" onmouseout="hide()">change</span></pre>
+Событие происходит при изменении положения камеры элементом управления (контролом).<br><br>
+
+<pre id="start"><span class="lnk" onmouseover="show('start - старт, начало, пуск')" onmouseout="hide()">start</span></pre>
+Срабатывает при начале взаимодействия (например, прикосновению к тачпаду (экрану, в случае сенсорного экрана) или движению мышки).<br><br>
+
+<pre id="end"><span class="lnk" onmouseover="show('end - конец, завершение')" onmouseout="hide()">end</span></pre>
+Срабатывает по завершению взаимодействия.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="domElement"><a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">.domElement</a></pre>
+Элемент DOM-структуры HTML-документа, используемый для прослушивания событий мышки/тачпада. Это свойство должно быть передано в конструкторе; его изменение здесь не приведет к созданию новых слушателей событий.<br><br>
+
+<pre id="dynamicDampingFactor"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dynamic damping factor - ')" onmouseout="hide()">.dynamicDampingFactor</a></span></pre>
+Свойство определяет интенсивность затухания (damping). Учитывается только если свойство <a href="#staticMoving" onmouseover="show('TrackballControls.staticMoving')" onmouseout="hide()">staticMoving</a> установлено как&nbsp;<tt>false</tt>.
+Значение по умолчанию равно&nbsp;<tt>0.2</tt>.<br><br>
+
+<pre id="enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">.enabled</a></span></pre>
+Свойство определяет, будет или нет включен элемент управления (контрол).<br><br>
+
+<pre id="keys"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('keys - ключи, клавиши, кнопки')" onmouseout="hide()">.keys</a></span></pre>
+В данном массиве хранятся коды кнопок клавиатуры для управления взаимодействием.
+<div class=list>Если нажата клавиша, указанная первой, все действия с мышкой (нажатия на левую, среднюю и правую кнопки с перемещением самой мышки) приведут к движению по окружности (по орбите).</div>
+<div class=list>Если нажата клавиша, указанная второй, все действия с мышкой (нажатия на левую, среднюю и правую кнопки с перемещением самой мышки) приведут к изменению масштаба.</div>
+<div class=list>Если нажата клавиша, указанная третьей, все действия с мышкой (нажатия на левую, среднюю и правую кнопки с перемещением самой мышки) приведут к панорамированию, т.е. к перемещению в сторону (влево, вправо, вверх и вниз).</div>
+Значением по умолчанию являются <a href="https://ru.wikipedia.org/wiki/ASCII" target="_blank" onmouseover="show('ASCII (англ. American standard code for information interchange, [æ&#769;s.ki])<br>— название таблицы (кодировки, набора), в которой некоторым<br>распространённым печатным и непечатным символам сопоставлены<br>числовые коды.<br>Название «ASCII» по-русски часто произносится как [аск(и)и&#769;]')" onmouseout="hide()"><tt>65</tt>, <tt>83</tt> и <tt>68</tt></a>, которые соответственно представляют клавиши <tt>A</tt>, <tt>S</tt> и <tt>D</tt>.<br>
+Вот <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode" target="_blank">полный список кодов нажатий клавиш клавиатуры</a>.<br><br>
+
+<pre id="maxDistance"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max distance - максимальное расстояние')" onmouseout="hide()">.maxDistance</a></span></pre>
+Насколько сильно можно уменьшить масштаб. Значение по умолчанию равно&nbsp;<tt>Infinity</tt>.<br><br>
+
+<pre id="minDistance"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min distance - минимальное расстояние')" onmouseout="hide()">.minDistance</a></span></pre>
+Насколько сильно можно увеличить масштаб. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="mouseButtons"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mouse buttons - кнопки мышки')" onmouseout="hide()">.mouseButtons</a></span></pre>
+Данный объект содержит ссылки на действия мышки, используемые элементами управления (контролами).
+<div class=list><tt>.LEFT</tt> присваивается значение <tt>THREE.MOUSE.ROTATE</tt></div>
+<div class=list><tt>.MIDDLE</tt> присваивается значение <tt>THREE.MOUSE.ZOOM</tt></div>
+<div class=list><tt>.RIGHT</tt> присваивается значение <tt>THREE.MOUSE.PAN</tt></div><br>
+
+<pre id="noPan"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no pan(ning) - нет панорамирования')" onmouseout="hide()">.noPan</a></span></pre>
+Свойство определяет, будет или нет отключено панорамирование. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="noRotate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no rotate - нет поворота')" onmouseout="hide()">.noRotate</a></span></pre>
+Будет или нет отключено вращение. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="noZoom"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no zoom - нет масштабирования')" onmouseout="hide()">.noZoom</a></span></pre>
+Свойство определяет будет или нет отключено масштабирование. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="object"><a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">.object</a></pre>
+Камера, которой будем управлять.<br><br>
+
+<pre id="panSpeed"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pan(ning) speed - скорость панорамирования')" onmouseout="hide()">.panSpeed</a></span></pre>
+Скорость панорамирования. Значение по умолчанию равно&nbsp;<tt>0.3</tt>.<br><br>
+
+<pre id="rotateSpeed"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotate speed - скорость вращения')" onmouseout="hide()">.rotateSpeed</a></span></pre>
+Скорость вращения. Значение по умолчанию равно&nbsp;<tt>1.0</tt>.<br><br>
+
+<pre id="screen"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('screen - экран')" onmouseout="hide()">.screen</a></span></pre>
+Представляет свойства экрана. Устанавливается автоматически при вызове <tt><a href="#handleResize" onmouseover="show('TrackballControls.handleResize()')" onmouseout="hide()">handleResize()</a></tt>.
+<div class=list><tt>left</tt> - представляет смещение в пикселах от левой границы экрана.</div>
+<div class=list><tt>top</tt> - представляет смещение в пикселах от верхней границы экрана.</div>
+<div class=list><tt>width</tt> - представляет ширину экрана в пикселах.</div>
+<div class=list><tt>height</tt> - представляет высоту экрана в пикселах.</div><br>
+
+<pre id="staticMoving"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('static moving - статическое перемещение')" onmouseout="hide()">.staticMoving</a></span></pre>
+Определяет будет или нет отключено затухание (damping). Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="zoomSpeed"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom speed - скорость масштабирования')" onmouseout="hide()">.zoomSpeed</a></span></pre>
+Скорость масштабирования. Значение по умолчанию равно&nbsp;<tt>1.2</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="checkDistances"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('check distances - проверка расстояний')" onmouseout="hide()">.checkDistances</a></span>()</pre>
+Обеспечивает, что элементы управления остаются в диапазоне расстояний <tt>[<a href="#minDistance" onmouseover="show('TrackballControls.minDistance')" onmouseout="hide()">minDistance</a>,
+<a href="#maxDistance" onmouseover="show('TrackballControls.maxDistance')" onmouseout="hide()">maxDistance</a>]</tt>.
+Вызывается методом <tt><a href="#update" onmouseover="show('TrackballControls.update()')" onmouseout="hide()">update()</a></tt>.<br><br>
+
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - избавиться, устранить, выбросить')" onmouseout="hide()">.dispose</a></span>()</pre>
+Данный метод следует вызывать когда элемент управления (контрол) больше не требуется.<br><br>
+
+<pre id="handleResize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('handle resize - изменение размера вручную')" onmouseout="hide()">.handleResize</a></span>()</pre>
+Данный метод должен быть вызван при изменении размера окна приложения.<br><br>
+
+<pre id="panCamera"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pan(ning) camera - панорамирующая камера')" onmouseout="hide()">.panCamera</a></span>()</pre>
+При необходимости выполняет панорамирование. Вызывается методом <tt><a href="#update" onmouseover="show('TrackballControls.update()')" onmouseout="hide()">update()</a></tt>.<br><br>
+
+<pre id="reset"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset - сброс настроек')" onmouseout="hide()">.reset</a></span>()</pre>
+Сбрасывает настройки элемента управления (контрола) к первоначальному состоянию.<br><br>
+
+<pre id="rotateCamera"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotate camera - поворот камеры')" onmouseout="hide()">.rotateCamera</a></span>()</pre>
+При необходимости выполняет поворот камеры. Вызывается методом <tt><a href="#update" onmouseover="show('TrackballControls.update()')" onmouseout="hide()">update()</a></tt>.<br><br>
+
+<pre id="update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">.update</a></span>()</pre>
+Обновляет элемент управления (контрол). Обычно вызывается в анимационном цикле.<br><br>
+
+<pre id="zoomCamera"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom camera - масштабирование (зум) камеры')" onmouseout="hide()">.zoomCamera</a></span>()</pre>
+При необходимости выполняет масштабирование. Вызывается методом <tt><a href="#update" onmouseover="show('TrackballControls.update()')" onmouseout="hide()">update()</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/TrackballControls.js" target="_blank">TrackballControls.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

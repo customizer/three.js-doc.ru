@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - ConvexHull</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3 id="VertexList">VertexList</h3>
+<a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA" target="_blank" onmouseover="show('Двусвязный список - двунаправленный связный список,<br>ссылки в каждом узле указывают на предыдущий и на<br>последующий узел в списке. Как и односвязный список,<br>двусвязный допускает только последовательный доступ<br>к элементам, но при этом дает возможность<br>перемещения в обе стороны.')" onmouseout="hide()">Двусвязный список</a> вершин.<br><br>
+
+<h4>Конструктор</h4>
+<pre>VertexList( )</pre><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="head"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>head - голова')" onmouseout="hide()">.head</a></pre>
+Ссылка на первую вершину в связном списке. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="tail"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>tail - хвост, окончание')" onmouseout="hide()">.tail</a></pre>
+Ссылка на последнюю вершину в связном списке. Значением по умолчанию является&nbsp;<tt>null</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="first"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>first - первый')" onmouseout="hide()">.first</a>( )</pre>
+Возвращает головную ссылку, т.е. ссылка направлена в начало списка.<br><br>
+
+<pre id="last"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>last - последний')" onmouseout="hide()">.last</a>( )</pre>
+Возвращает хвостовую ссылку, т.е. ссылка направлена в конец списка.<br><br>
+
+<pre id="clear"><a href="#" onmouseover="show('VertexList.<br>clear - очистить')" onmouseout="hide()">.clear</a>( )</pre>
+Очищает связный список.<br><br>
+
+<pre id="insertBefore"><a href="#" onmouseover="show('VertexList.<br>insert before - вставить перед')" onmouseout="hide()">.insertBefore</a>( <span onmouseover="show('Vertex.<br>target - цель')" onmouseout="hide()">target</span>, <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
+<div class=list><tt>target</tt> - целевая вершина. Предполагается, что данная вершина входит в этот связный список.</div>
+<div class=list><tt>vertex</tt> - вершина, которую нужно вставить.</div>
+Метод вставляет вершину в список <b>перед</b> целевой вершиной.<br><br>
+
+<pre id="insertAfter"><a href="#" onmouseover="show('VertexList.<br>insert after - вставить после')" onmouseout="hide()">.insertAfter</a>( <span onmouseover="show('Vertex.<br>target - цель')" onmouseout="hide()">target</span>, <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
+<div class=list><tt>target</tt> - целевая вершина. Предполагается, что данная вершина входит в этот связный список.</div>
+<div class=list><tt>vertex</tt> - вершина, которую нужно вставить.</div>
+Метод вставляет вершину в список <b>после</b> целевой вершины.<br><br>
+
+<pre id="append"><a href="#" onmouseover="show('VertexList.<br>append - добавлять, присоединять')" onmouseout="hide()">.append</a>( <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
+<div class=list><tt>vertex</tt> - добавляемая вершина.</div>
+Добавляет вершину в конец связного списка.<br><br>
+
+<pre id="appendChain"><a href="#" onmouseover="show('VertexList.<br>append chain - добавить цепочку')" onmouseout="hide()">.appendChain</a>( <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
+<div class=list><tt>vertex</tt> - головная (начальная) вершина в цепочке вершин.</div>
+Метод добавляет цепочку вершин, в которой заданная вершина является началом.<br><br>
+
+<pre id="remove"><a href="#" onmouseover="show('VertexList.<br>remove - удалить')" onmouseout="hide()">.remove</a>( <span onmouseover="show('Vertex.<br>vertex - вершина')" onmouseout="hide()">vertex</span> )</pre>
+<div class=list><tt>vertex</tt> - удаляемая вершина.</div>
+Удаляет вершину из связного списка.<br><br>
+
+<pre id="removeSubList"><a href="#" onmouseover="show('VertexList.<br>remove sublist - удалить вложенный список')" onmouseout="hide()">.removeSubList</a>( <span onmouseover="show('Vertex.<br>a - первая буква алфавита - здесь просто<br>обозначение первой (головной) вершины')" onmouseout="hide()">a</span>, <span onmouseover="show('Vertex.<br>b - вторая буква алфавита - здесь просто<br>обозначение конечной (хвостовой) вершины')" onmouseout="hide()">b</span> )</pre>
+<div class=list><tt>a</tt> - голова (начало) вложенного списка.</div>
+<div class=list><tt>b</tt> - хвост (конец) вложенного списка.</div>
+Удаляет вложенный список вершин из связного списка.<br><br>
+
+<pre id="isEmpty"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is empty - является пустым')" onmouseout="hide()">.isEmpty</a></span>( )</pre>
+Возвращает значение <tt>true</tt>, если связанный список пуст.</div>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/math/ConvexHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
+  
+<br><br>
+</body></html>

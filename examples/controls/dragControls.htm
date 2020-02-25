@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Контролы (элементы управления)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../../core/eventDispatcher.htm" title="Переход к родительскому классу"><tt>EventDispatcher &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DragControls</h3>
+Данный класс можно использовать для предоставления операций перетаскивания объектов.<br><br>
+
+<h4>Пример</h4>
+<pre>var controls = new THREE.DragControls( objects, camera, renderer.domElement );
+// add event listener to highlight dragged objects
+// добавляем слушатель событий для подсветки перетаскиваемых объектов
+controls.addEventListener( 'dragstart', function ( event ) {
+  event.object.material.emissive.set( 0xaaaaaa );
+} );<br>
+controls.addEventListener( 'dragend', function ( event ) {
+  event.object.material.emissive.set( 0x000000 );
+} );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#misc_controls_drag" target="_blank">misc / controls / drag</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>DragControls( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('objects - объекты')" onmouseout="hide()">objects</a></span>, <a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a>, <a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">domElement</a> )</pre>
+<div class=list><pre id="objects" style="display:inline-block;">objects</pre> - массив перетаскиваемых 3D-объектов.</div>
+<div class=list><tt>camera</tt> - камера представленной сцены.</div>
+<div class=list><tt>domElement</tt> - HTML-элемент, используемый для слушателей (listener) событий.</div>
+Создает новый экземпляр DragControls.<br><br>
+
+<h4>События</h4>
+<div class=blockindent><br>
+<pre id="dragstart"><span class="lnk" onmouseover="show('drag start - начало перетаскивания')" onmouseout="hide()">dragstart</span></pre>
+Событие срабатывает когда пользователь начинает перетаскивать 3D-объект.<br><br>
+
+<pre id="drag"><span class="lnk" onmouseover="show('drag - перетаскивание')" onmouseout="hide()">drag</span></pre>
+Происходит когда пользователь перетаскивает 3D-объект.<br><br>
+
+<pre id="dragend"><span class="lnk" onmouseover="show('drag end - конец перетаскивания')" onmouseout="hide()">dragend</span></pre>
+Происходит когда пользователь завершает перетаскивание 3D-объекта.<br><br>
+
+<pre id="hoveron"><span class="lnk" onmouseover="show('hover on - наведение на')" onmouseout="hide()">hoveron</span></pre>
+Событие происходит когда указатель наведен на 3D-объект или на один из его дочерних объектов.<br><br>
+
+<pre id="hoveroff"><span class="lnk" onmouseover="show('hover off - снять наведение')" onmouseout="hide()">hoveroff</span></pre>
+Событие происходит когда снято наведение указателя на 3D-объект.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">.enabled</a></span></pre>
+Свойство определяет, включен или нет элемент управления (контрол).<br><br>
+
+<pre id="transformGroup"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('transform group - изменение группы')" onmouseout="hide()">.transformGroup</a></span></pre>
+Данная опция работает только если <a href="#objects" onmouseover="show('DragControls.objects')" onmouseout="hide()">массив объектов</a> содержит отдельный перетаскиваемый групповой объект.<br>
+Если установлено значение <tt>true</tt>, DragControls изменяет положение не отдельных объектов, а группы объектов целиком. Значением по умолчанию является <tt>false</tt>.
+</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../../core/eventDispatcher.htm" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a>.
+<div class=blockindent><br>
+<pre id="activate"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('activate - активировать')" onmouseout="hide()">.activate</a></span>()</pre>
+Добавляет слушатель событий элемента управления (контрола).<br><br>
+
+<pre id="deactivate"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('deactivate - деактивировать, выключить')" onmouseout="hide()">.deactivate</a></span>()</pre>
+Удаляет слушатель событий элемента управления (контрола).<br><br>
+
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - избавиться, устранить, выбросить')" onmouseout="hide()">.dispose</a></span>()</pre>
+Данный метод следует вызывать когда элемент управления (контрол) больше не требуется.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/DragControls.js" target="_blank">DragControls.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

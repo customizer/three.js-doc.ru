@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Визуализаторы (рендереры)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>SVGRenderer</h3>
+SVGRenderer может быть применен для визуализации данных геометрических элементов, использующих формат SVG. Получаемая векторная графика особенно эффективна в следующих случаях применения:
+<ul><li>анимированные логотипы или иконки</li>
+<li>интерактивные двух-трехмерные диаграммы и графики.</li>
+<li>интерактивные карты</li>
+<li>сложные или анимированные пользовательские интерфейсы.</li></ul>
+SVGRenderer имеет различные достоинства. Он дает кристально чистый и резкий результат, который не зависит от фактического разрешения области видимости.<br>
+SVG-элементы можно оформить через CSS. И у них хорошая доступность, поскольку можно добавлять метаданные вроде названия (title) или описания (description) (используются поисковыми движками или программами считывания с экрана.<br>
+Тем не менее, существуют значительные ограничения:
+<ul><li>нет дополнительной тонировки</li>
+<li>не поддерживается текстура</li>
+<li>не поддерживается тень.</li></ul><br>
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/#svg_lines" target="_blank">lines</a>
+<a href="https://threejs.org/examples/#svg_sandbox" target="_blank">sandbox</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>SVGRenderer( )</pre><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="overdraw"><span onclick="showClick(type_Number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('overdraw - преувеличение')" onmouseout="hide()">.overdraw</a></span></pre>
+Число долей пиксела для увеличения полигонов для того, чтобы предотвратить промежутки при сглаживании (антиалиасинге).
+Number of fractional pixels to enlarge polygons in order to prevent anti-aliasing gaps.
+Значение должно быть в диапазоне&nbsp;<tt>[0..1]</tt>. Значение по умолчанию равно&nbsp;<tt>0.5</tt>.
+</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="clear"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear - очистить')" onmouseout="hide()">.clear</a></span>( )</pre>
+Указывает рендереру очистить свою поверхность рисования.<br><br>
+
+<pre id="render"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - представлять, отображать')" onmouseout="hide()">.render</a></span>( <a href="../../scenes/scene.htm" onmouseover="show('Scene.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+Отображает сцену (аргумент <tt>scene</tt>) при помощи камеры (аргумент <tt>camera</tt>).<br><br>
+
+<pre id="setClearColor"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set clear color - установить прозрачный цвет')" onmouseout="hide()">.setClearColor</a></span>( <a href="../../math/color.htm" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">color</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - альфа-канал (прозрачность)')" onmouseout="hide()">alpha</a></span> )</pre>
+Устанавливает прозрачный цвет (<tt>clearColor</tt>) и его коэффициент прозрачности (<tt>clearAlpha</tt>).<br><br>
+
+<pre id="setPrecision"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set precision - установить точность')" onmouseout="hide()">.setPrecision</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('precision - точность')" onmouseout="hide()">precision</a></span> )</pre>
+Устанавливает точность данных, используемых для создания пути (контура).<br><br>
+
+<pre id="setQuality"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set quality - установить качество')" onmouseout="hide()">.setQuality</a></span>( )</pre>
+Устанавливает качество визуализации. Возможные значения - <tt>low</tt> (низкое) и <tt>high</tt> (высокое). Значение по умолчанию - <tt>high</tt>.<br><br>
+
+<pre id="setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
+Изменяет размеры рендерера на указанные в аргументах <tt>width</tt> и <tt>height</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/SVGRenderer.js" target="_blank">SVGRenderer.js на github.com</a></div><br><br>
+  
+<br><br>
+</body></html>

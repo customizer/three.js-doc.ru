@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Константы</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Константы текстур</h3>
+
+<h4 id="mappingModes">Режимы картирования (mapping modes)</h4>
+<pre><span class="lnk" onmouseover="show('UV mapping - картирование<br>по координатам U и V<br><br>'+type_const);" onmouseout="hide()">THREE.UVMapping</span>
+<span class="lnk" onmouseover="show('cube reflection mapping - картирование<br>кубической текстуры с отражением<br><br>'+type_const);" onmouseout="hide()">THREE.CubeReflectionMapping</span>
+<span class="lnk" onmouseover="show('cube refraction mapping - картирование<br>кубической текстуры с преломлением<br><br>'+type_const);" onmouseout="hide()">THREE.CubeRefractionMapping</span>
+<span class="lnk" onmouseover="show('equirectangular reflection mapping - картирование<br>с отражением равнопромежуточной проекции<br><br>'+type_const);" onmouseout="hide()">THREE.EquirectangularReflectionMapping</span>
+<span class="lnk" onmouseover="show('equirectangular refraction mapping - картирование<br>с преломлением равнопромежуточной проекции<br><br>'+type_const);" onmouseout="hide()">THREE.EquirectangularRefractionMapping</span>
+<span class="lnk" onmouseover="show('spherical reflection mapping - картирование<br>сферического отражения<br><br>'+type_const);" onmouseout="hide()">THREE.SphericalReflectionMapping</span>
+<span class="lnk" onmouseover="show('cube UV reflection mapping -<br>картирование кубической текстуры<br>с отражением по координатам U и V.<br><br>'+type_const);" onmouseout="hide()">THREE.CubeUVReflectionMapping</span>
+<span class="lnk" onmouseover="show('cube UV refraction mapping - картирование<br>кубической текстуры с преломлением по<br>координатам U и V.<br><br>'+type_const);" onmouseout="hide()">THREE.CubeUVRefractionMapping</span></pre>
+Эти константы определяют режим наложения текстуры на поверхность объекта.<br>
+Значением по умолчанию является <tt><span class="lnk" onmouseover="show('UV mapping - картирование<br>по координатам U и V<br><br>'+type_const);" onmouseout="hide()">THREE.UVMapping</span></tt>, при которой текстура накладывается на поверхность объекта в соответствии с координатами UV сетки (mesh).<br>
+Остальные константы определяют типы картирования окружающей обстановки.<br>
+<tt>CubeReflectionMapping</tt> и <tt>CubeRefractionMapping</tt> предназначены для использования с <a href="../textures/cubeTexture.htm" onmouseover="show('CubeTexture')" onmouseout="hide()">CubeTexture</a>, состоящей из шести текстур, по одной на каждую грань куба.
+Для <a href="../textures/cubeTexture.htm" onmouseover="show('CubeTexture')" onmouseout="hide()">CubeTexture</a> значением по умолчанию является CubeReflectionMapping.<br>
+<tt>EquirectangularReflectionMapping</tt> и <tt>EquirectangularRefractionMapping</tt> предназначены для использования с картой равнопромежуточной проекции.
+Также она называется картой (lat-long map) с долготой (longitude) и широтой (latitude), равнопромежуточная текстура представляет вид на 360 градусов по горизонтальной оси и на 180 градусов по вертикальной оси,
+с верхним и нижним краями изображения соответствующими северному и южному полюсам отображаемой сферы.<br>
+Вот статьи Википедии <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B2%D0%BD%D0%BE%D0%BF%D1%80%D0%BE%D0%BC%D0%B5%D0%B6%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank">Равнопромежуточная проекция</a>
+и <a href="https://en.wikipedia.org/wiki/Equirectangular_projection" target="_blank">Equirectangular projection</a>.<br>
+<span class="lnk" onmouseover="show('spherical reflection mapping - картирование<br>сферического отражения<br><br>'+type_const);" onmouseout="hide()">SphericalReflectionMapping</span> предназначена для использования с картой сферического отражения, такой, какая может быть получена путем обрезки фотографии зеркального шара.
+Сферические карты будут отображаться лицевой стороной к камере, независимо от её положения относительно объекта с кубическим картированием или поверхности.<br>
+Смотрите пример <a href="https://threejs.org/examples/webgl_materials_envmaps" target="_blank">materials / envmaps</a>.<br><br>
+
+<h4 id="wrappingModes">Режимы укладки текстур (wrapping modes)</h4>
+<pre><span class="lnk" onmouseover="show('repeat wrapping - повторение<br>обёртки, т.е. укладываемой<br>текстуры<br><br>'+type_const);" onmouseout="hide()">THREE.RepeatWrapping</span>
+<span class="lnk" onmouseover="show('clamp to edge wrapping - обёртка<br>стыкуется с краем объекта, т.е.<br>укладываемая текстура соединяется<br>с краем сетки (mesh) объекта<br><br>'+type_const);" onmouseout="hide()">THREE.ClampToEdgeWrapping</span>
+<span class="lnk" onmouseover="show('mirrored repeat wrapping - зеркальное<br>повторение обёртки, т.е. укладываемая<br>текстура повторяется, каждый раз<br>зеркально повторяясь<br><br>'+type_const);" onmouseout="hide()">THREE.MirroredRepeatWrapping</span></pre>
+Эти константы определяют свойства текстур <tt><a href="../textures/texture.htm#wrapS" onmouseover="show('Texture.wrapS');" onmouseout="hide()">wrapS</a></tt> и <tt><a href="../textures/texture.htm#wrapT" onmouseover="show('Texture.wrapT');" onmouseout="hide()">wrapT</a></tt>,
+которые устанавливают стыковку текстур по горизонтали и вертикали.
+<div class=blockindent>С константой <tt><span class="lnk" onmouseover="show('repeat wrapping - повторение<br>обёртки, т.е. укладываемой<br>текстуры<br><br>'+type_const);" onmouseout="hide()">RepeatWrapping</span></tt> текстура будет попросту повторяться до бесконечности.<br>
+По умолчанию применяется константа <tt><span class="lnk" onmouseover="show('clamp to edge wrapping - обёртка<br>стыкуется с краем объекта, т.е.<br>укладываемая текстура соединяется<br>с краем сетки (mesh) объекта<br><br>'+type_const);" onmouseout="hide()">ClampToEdgeWrapping</span></tt>.
+Последний пиксел текстуры растягивается до края сетки (mesh).<br>
+С константой <tt><span class="lnk" onmouseover="show('mirrored repeat wrapping - зеркальное<br>повторение обёртки, т.е. укладываемая<br>текстура повторяется, каждый раз<br>зеркально повторяясь<br><br>'+type_const);" onmouseout="hide()">MirroredRepeatWrapping</span></tt> текстура будет повторяться бесконечно, зеркально отображаясь при каждом повторе.</div><br>
+
+<h4 id="magnificationFilters">Фильтры увеличения (magnification filters)</h4>
+<pre><span class="lnk" onmouseover="show('nearest filter - фильтровать<br>по ближайшему (значению)<br><br>'+type_const)" onmouseout="hide()">THREE.NearestFilter</span>
+<span class="lnk" onmouseover="show('linear filter - линейная фильтрация<br><br>'+type_const)" onmouseout="hide()">THREE.LinearFilter</span></pre>
+Эти константы предназначены для свойства текстуры <tt><a href="../textures/texture.htm#magFilter" onmouseover="show('Texture.magFilter')" onmouseout="hide()">magFilter</a></tt>,
+они определяют функцию увеличения текстуры, используемую когда пиксель существующей текстуры отображает область меньше или равную одному элементу текстуры (текселю).
+<div class=list><span class="lnk" onmouseover="show('nearest filter - фильтровать<br>по ближайшему (значению)<br><br>'+type_const)" onmouseout="hide()">NearestFilter</span> возвращает значение элемента текстуры, которое является ближайшим
+(по <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B8%D1%85_%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B0%D0%BB%D0%BE%D0%B2" target="_blank">манхэттенскому расстоянию</a>
+- <a href="http://en.wikipedia.org/wiki/Taxicab_geometry" target="_blank">Manhattan distance</a>) к указанным координатам текстуры.</div>
+<div class=list><span class="lnk" onmouseover="show('linear filter - линейная фильтрация<br><br>'+type_const)" onmouseout="hide()">LinearFilter</span> является значением по умолчанию и
+возвращает средневзвешенное значение четырех текстурных элементов, наиболее близких к указанным координатам текстуры, и может включать элементы пристыкованные или повторяющиеся из других частей текстуры,
+в зависимости от значений свойств текстуры <tt><a href="../textures/texture.htm#wrapS" onmouseover="show('Texture.wrapS');" onmouseout="hide()">wrapS</a></tt> и <tt><a href="../textures/texture.htm#wrapT" onmouseover="show('Texture.wrapT');" onmouseout="hide()">wrapT</a></tt> и от точности отображения.</div><br>
+
+<h4 id="minificationFilters">Фильтры минимизации (minification filters)</h4>
+<pre><span class="lnk" onmouseover="show('nearest filter - фильтрация по ближайшему (значению)<br><br>'+type_const)" onmouseout="hide()">THREE.NearestFilter</span>
+<span class="lnk" onmouseover="show('nearest mipmap nearest filter -<br>ближайшая mip-карта, фильтрация<br>по ближайшему (значению)<br><br>'+type_const)" onmouseout="hide()">THREE.NearestMipMapNearestFilter</span>
+<span class="lnk" onmouseover="show('nearest mipmap linear filter -<br>ближайшая mip-карта, линейная<br>фильтрация<br><br>'+type_const)" onmouseout="hide()">THREE.NearestMipMapLinearFilter</span>
+<span class="lnk" onmouseover="show('linear filter - линейная фильтрация<br><br>'+type_const)" onmouseout="hide()">THREE.LinearFilter</span>
+<span class="lnk" onmouseover="show('linear mipmap nearest filter -<br>линейная mip-карта, фильтрация<br>по ближайшему (значению)<br><br>'+type_const)" onmouseout="hide()">THREE.LinearMipMapNearestFilter</span>
+<span class="lnk" onmouseover="show('linear mipmap linear filter -<br>линейная mip-карта, линейная<br>фильтрация<br><br>'+type_const)" onmouseout="hide()">THREE.LinearMipMapLinearFilter</span></pre>
+Эти константы предназначены для использования со свойством текстуры <tt><a href="../textures/texture.htm#minFilter" onmouseover="show('Texture.minFilter');" onmouseout="hide()">minFilter</a></tt>,
+они определяют функцию минимизации текстуры, которая используется всякий раз, когда пиксел существующей текстуры отображает область больше, чем один элемент текстуры (тексель).<br>
+В дополнение к <tt>NearestFilter</tt> и <tt>LinearFilter</tt> для минимизации можно использовать следующие четыре функции:
+<div class=list><tt><span class="lnk" onmouseover="show('nearest mipmap nearest filter -<br>ближайшая mip-карта, фильтрация<br>по ближайшему (значению)<br><br>'+type_const)" onmouseout="hide()">THREE.NearestMipMapNearestFilter</span></tt>
+выбирает mip-карту, которая наиболее точно соответствует размеру пиксела существующей текстуры и использует константу <tt>NearestFilter</tt>
+(тексель, ближайший к центру пиксела) в качестве условия для получения значения текстуры.</div>
+<div class=list><tt><span class="lnk" onmouseover="show('nearest mipmap linear filter -<br>ближайшая mip-карта, линейная<br>фильтрация<br><br>'+type_const)" onmouseout="hide()">NearestMipMapLinearFilter</span></tt>
+выбирает mip-карту, которые наиболее точно соответствующую размеру пиксела существующей текстуры и использует константу <tt>LinearFilter</tt>
+(средневзвешенное значение от четырех текселей, ближайших к центру пиксела) в качестве условия для получения значения текстуры.</div>
+<div class=list><tt><span class="lnk" onmouseover="show('linear mipmap nearest filter -<br>линейная mip-карта, фильтрация<br>по ближайшему (значению)<br><br>'+type_const)" onmouseout="hide()">LinearMipMapNearestFilter</span></tt>
+выбирает две mip-карты, которые наиболее точно соответствуют размеру пиксела существующей текстуры и использует константу <tt>NearestFilter</tt> в качестве условия для получения значения текстуры от каждой mip-карты.
+Конечным значением текстуры будет средневзвешенное от этих двух значений.</div>
+<div class=list><tt><span class="lnk" onmouseover="show('linear mipmap linear filter -<br>линейная mip-карта, линейная<br>фильтрация<br><br>'+type_const)" onmouseout="hide()">LinearMipMapLinearFilter</span></tt> является значением по умолчанию
+и выбирает две mip-карты, которые наиболее близко соответствуют размеру пиксела существующей текстуры, и использует константу <tt>LinearFilter</tt> в качестве условия для получения значения текстуры от каждой mip-карты.
+Конечным значением текстуры будет средневзвешенное значение от этих двух значений.</div>
+Смотрите пример <a href="https://threejs.org/examples/#webgl_materials_texture_filters" target="_blank">materials / texture / filters</a>.<br><br>
+
+<h4 id="types">Типы</h4>
+
+<pre><span class="lnk" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">THREE.UnsignedByteType</span>
+<span class="lnk" onmouseover="show('byte type - тип байта')" onmouseout="hide()">THREE.ByteType</span>
+<span class="lnk" onmouseover="show('short type - тип числа в коротком формате')" onmouseout="hide()">THREE.ShortType</span>
+<span class="lnk" onmouseover="show('unsigned short type - тип числа в коротком формате без знака')" onmouseout="hide()">THREE.UnsignedShortType</span>
+<span class="lnk" onmouseover="show('int(eger) type - целочисленный тип')" onmouseout="hide()">THREE.IntType</span>
+<span class="lnk" onmouseover="show('unsigned int(eger) type - целочисленный тип без знака')" onmouseout="hide()">THREE.UnsignedIntType</span>
+<span class="lnk" onmouseover="show('float type - тип числа с плавающей запятой')" onmouseout="hide()">THREE.FloatType</span>
+<span class="lnk" onmouseover="show('half float type - тип числа с плавающей запятой половинной точности')" onmouseout="hide()">THREE.HalfFloatType</span>
+<span class="lnk" onmouseover="show('тип упаковки значений цвета и прозрачности<br>в шестнадцатиразрядное двоичное число<br>по четыре разряда на каждое из значений')" onmouseout="hide()">THREE.UnsignedShort4444Type</span>
+<span class="lnk" onmouseover="show('тип упаковки значений цвета и прозрачности<br>в шестнадцатиразрядное двоичное число<br>по пять разрядов на каждое из значений цвета<br>и один разряд для значения прозрачности')" onmouseout="hide()">THREE.UnsignedShort5551Type</span>
+<span class="lnk" onmouseover="show('тип упаковки значений цвета в шестнадцатиразрядное<br>двоичное число по пять разрядов на красный и синий<br>цвета и шесть разрядов на зеленый цвет')" onmouseout="hide()">THREE.UnsignedShort565Type</span>
+<span class="lnk" onmouseover="show('упаковка значений глубины и трафарета<br>в 32-битное число, 24 бита на значение<br>глубины и 8 бит на значение трафарета')" onmouseout="hide()">THREE.UnsignedInt248Type</span></pre>
+Для использования со свойством текстуры <tt><a href="../textures/texture.htm#type" onmouseover="show('Texture.type');" onmouseout="hide()">type</a></tt>, которое должно соответствовать правильному формату.<br>
+Значением по умолчанию является <tt><span class="lnk" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">UnsignedByteType</span></tt>.<br>
+Для типов упакованных данных <tt>THREE.UnsignedShort4444Type</tt>, <tt>THREE.UnsignedShort5551Type</tt> или <tt>THREE.UnsignedShort565Type</tt>, все компоненты цвета одного текселя можно рассматривать как битовые поля внутри целочисленного элемента в формате <tt>Uint16Array</tt>.<br>
+Это метод хранения цвета текселя (пикселя текстуры). Описываемые битовые поля связаны с числами, определяющими количество бит каждого канала цвета.<br>
+Цифры&nbsp;4444 в названии типа означают число бит для каждого из каналов цвета и канала прозрачности в формате RGBA - по четыре бита на каждый канал.<br>
+<pre> 16-разрядное беззнаковое число
+|R|R|R|R|G|G|G|G|B|B|B|B|A|A|A|A|
+ красный|зеленый| синий | альфа</pre>
+В типе 5551 по пять бит отведено на каждый из каналов цвета и один бит на канал прозрачности, т.е. альфа-канал может быть либо&nbsp;100%, либо&nbsp;0% (или&nbsp;1, или&nbsp;0).<br>
+<pre> 16-разрядное беззнаковое число
+|R|R|R|R|R|G|G|G|G|G|B|B|B|B|B|A|
+| красный | зеленый |  синий  |альфа</pre>
+У типа 565 нет альфа-канала, но имеется дополнительный бит в канале зеленого цвета.
+<pre> 16-разрядное беззнаковое число
+|R|R|R|R|R|G|G|G|G|G|G|B|B|B|B|B|
+  красный |  зеленый  |  синий</pre>
+Тип <tt>THREE.UnsignedInt248Type</tt> это упаковка значений глубины и трафарета в 32-битное целое число без знака. Цифры&nbsp;<tt>248</tt> означают, что на значение глубины (depth) отводится <tt>24</tt>&nbsp;бита, а на значение трафарета (stencil) - <tt>8</tt>&nbsp;бит.<br><br>
+
+<h4 id="formats">Форматы</h4>
+<div class="limit_height">
+<pre><span class="lnk" onmouseover="show('alpha format - формат канала<br>прозрачности (альфа-канала)<br><br>'+type_const)" onmouseout="hide()">THREE.AlphaFormat</span>
+<span class="lnk" onmouseover="show('red format - формат<br>красного (канала)<br><br>'+type_const)" onmouseout="hide()">THREE.RedFormat</span>
+<span class="lnk" onmouseover="show('red integer format - формат<br>красного (канала)<br>в целочисленном варианте<br><br>'+type_const)" onmouseout="hide()">THREE.RedIntegerFormat</span>
+<span class="lnk" onmouseover="show('red green format - формат<br>красного и зеленого (каналов)<br><br>'+type_const)" onmouseout="hide()">THREE.RGFormat</span>
+<span class="lnk" onmouseover="show('red green integer format - формат<br>красного и зеленого (каналов)<br>в целочисленном варианте<br><br>'+type_const)" onmouseout="hide()">THREE.RGIntegerFormat</span>
+<span class="lnk" onmouseover="show('RGB format - формат компонентов<br>цвета RGB<br><br>'+type_const)" onmouseout="hide()">THREE.RGBFormat</span>
+<span class="lnk" onmouseover="show('RGB integer format - формат компонентов<br>цвета RGB в целочисленном варианте<br><br>'+type_const)" onmouseout="hide()">THREE.RGBIntegerFormat</span>
+<span class="lnk" onmouseover="show('RGBA format - формат компонентов<br>цвета RGB и канала прозрачности<br>(альфа-канала)<br><br>'+type_const)" onmouseout="hide()">THREE.RGBAFormat</span>
+<span class="lnk" onmouseover="show('RGBA integer format - формат компонентов<br>цвета RGB и канала прозрачности<br>(альфа-канала) в целочисленном<br>варианте<br><br>'+type_const)" onmouseout="hide()">THREE.RGBAIntegerFormat</span>
+<span class="lnk" onmouseover="show('luminance format - формат яркости<br><br>'+type_const)" onmouseout="hide()">THREE.LuminanceFormat</span>
+<span class="lnk" onmouseover="show('luminance alpha format - формат<br>яркости и прозрачности (альфа-канал)<br><br>'+type_const)" onmouseout="hide()">THREE.LuminanceAlphaFormat</span>
+<span class="lnk" onmouseover="show('RGBE format - формат компонентов<br>цвета RGB (на каждый цвет отводится<br>по одному байту) и канала показателя<br>степени (exponent) - также один байт<br><br>'+type_const)" onmouseout="hide()"><a href="https://en.wikipedia.org/wiki/RGBE_image_format" target="_blank">THREE.RGBEFormat</a></span>
+<span class="lnk" onmouseover="show('depth format - формат глубины<br><br>'+type_const)" onmouseout="hide()">THREE.DepthFormat</span>
+<span class="lnk" onmouseover="show('depth stencil format - формат<br>глубины и трафарета<br><br>'+type_const)" onmouseout="hide()">THREE.DepthStencilFormat</span></pre></div>
+Предназначены для использования со свойством <tt><a href="../textures/texture.htm#format" onmouseover="show('Texture.format');" onmouseout="hide()">format</a></tt>, они определяют как элементы двумерной текстуры (тексели), считываются шейдерами.
+<div class="limit_height">
+<div class=list><tt><span class="lnk" onmouseover="show('alpha format - формат канала<br>прозрачности (альфа-канала)<br><br>'+type_const)" onmouseout="hide()">AlphaFormat</span></tt>
+отбрасывает компоненты цвета (red - красный, green - зеленый и blue - синий) и считывает только канал прозрачности (альфа-канал).<br>
+Значением свойства текстуры <tt><a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">type</a></tt> должна быть константа <tt><a href="#types" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">UnsignedByteType</a></tt>.</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('red format - формат<br>красного (канала)<br><br>'+type_const)" onmouseout="hide()">RedFormat</span></tt> отбрасывает зеленый (green) и синий (blue) компоненты цвета и считывает только значение красного цвета.</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('red integer format - формат<br>красного (канала)<br>в целочисленном варианте<br><br>'+type_const)" onmouseout="hide()">RedIntegerFormat</span></tt> отбрасывает зеленый (green) и синий (blue) компоненты цвета и считывает только значение красного цвета.
+Тексели считываются только как целые числа, а не числа с плавающей запятой (формат может использоваться только при визуализации с применением WebGL 2).</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('red green format - формат<br>красного и зеленого (каналов)<br><br>'+type_const)" onmouseout="hide()">RGFormat</span></tt> отбрасывает значения альфа-канала и синего цвета, считывает значения компонентов красного и зеленого цветов (формат может использоваться только при визуализации с применением WebGL 2).</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('red green integer format - формат<br>красного и зеленого (каналов)<br>в целочисленном варианте<br><br>'+type_const)" onmouseout="hide()">RGIntegerFormat</span></tt> отбрасывает значения альфа-канала и синего цвета, считывает значения компонентов красного и зеленого цветов.
+Тексели считываются только как целые числа, а не числа с плавающей запятой (формат может использоваться только при визуализации с применением WebGL 2).</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('RGB format - формат компонентов<br>цвета RGB<br><br>'+type_const)" onmouseout="hide()">RGBFormat</span></tt>
+отбрасывает компонент альфа-канала (канала прозрачности) и считывает компоненты цвета (red - красный, green - зеленый и blue - синий).<br>
+Значением свойства текстуры <tt><a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">type</a></tt> должна быть константа
+<tt><a href="#types" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">UnsignedByteType</a></tt> или
+<tt><a href="#types" onmouseover="show('тип упаковки значений цвета в шестнадцатиразрядное<br>двоичное число по пять разрядов на красный и синий<br>цвета и шесть разрядов на зеленый цвет')" onmouseout="hide()">UnsignedShort565Type</a></tt>.</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('RGB integer format - формат компонентов<br>цвета RGB в целочисленном варианте<br><br>'+type_const)" onmouseout="hide()">RGBIntegerFormat</span></tt> отбрасывает компонент альфа-канала (канала прозрачности) и считывает компоненты цвета (red - красный, green - зеленый и blue - синий).
+Тексели считываются только как целые числа, а не числа с плавающей запятой (формат может использоваться только при визуализации с применением WebGL 2).</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('RGBA format - формат компонентов<br>цвета RGB и канала прозрачности<br>(альфа-канала)<br><br>'+type_const)" onmouseout="hide()">RGBAFormat</span></tt>
+применяется по умолчанию и считывает компоненты цвета (red - красный, green - зеленый и blue - синий) и значение альфа-канала (канала прозрачности).<br>
+Значением свойства текстуры <tt><a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">type</a></tt> должна быть константа
+<tt><a href="#types" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">UnsignedByteType</a></tt>,
+<tt><a href="#types" onmouseover="show('тип упаковки значений цвета и прозрачности<br>в шестнадцатиразрядное двоичное число<br>по четыре разряда на каждое из значений')" onmouseout="hide()">UnsignedShort4444Type</a></tt> или
+<tt><a href="#types" onmouseover="show('тип упаковки значений цвета и прозрачности<br>в шестнадцатиразрядное двоичное число<br>по пять разрядов на каждое из значений цвета<br>и один разряд для значения прозрачности')" onmouseout="hide()">UnsignedShort5551Type</a></tt>.</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('RGBA integer format - формат компонентов<br>цвета RGB и канала прозрачности<br>(альфа-канала) в целочисленном<br>варианте<br><br>'+type_const)" onmouseout="hide()">RGBAIntegerFormat</span></tt> применяется по умолчанию и считывает компоненты цвета (red - красный, green - зеленый и blue - синий) и значение альфа-канала (канала прозрачности).
+Тексели считываются только как целые числа, а не числа с плавающей запятой (формат может использоваться только при визуализации с применением WebGL 2).</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('luminance format - формат яркости<br><br>'+type_const)" onmouseout="hide()">LuminanceFormat</span></tt> считывает каждый элемент как отдельный компонент яркости.
+Далее он преобразуется в число с плавающей запятой, фиксируется в диапазоне от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>, затем собирается в элемент RGBA, помещая значение яркости в каналах красного, зеленого и синего цветов и присоединяет&nbsp;<tt>1.0</tt> к альфа-каналу.<br>
+Значением свойства текстуры <tt><a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">type</a></tt> должна быть константа <tt><a href="#types" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">UnsignedByteType</a></tt>.</div>
+<div class=list><tt><span class="lnk" onmouseover="show('luminance alpha format - формат<br>яркости и прозрачности (альфа-канал)<br><br>'+type_const)" onmouseout="hide()">LuminanceAlphaFormat</span></tt> считывает каждый элемент как пару яркость/прозрачность.
+Происходит тот же процесс что и у <tt>THREE.LuminanceFormat</tt>, за исключением того, что альфа-канал может иметь значения отличные от&nbsp;<tt>1.0</tt>.<br>
+Значением свойства текстуры <tt><a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">type</a></tt> должна быть константа <tt><a href="#types" onmouseover="show('unsigned byte type - тип байта без знака')" onmouseout="hide()">UnsignedByteType</a></tt>.</div>
+<div class=list><tt><span class="lnk" onmouseover="show('RGBE format - формат компонентов<br>цвета RGB (на каждый цвет отводится<br>по одному байту) и канала показателя<br>степени (exponent) - также один байт<br><br>'+type_const)" onmouseout="hide()">RGBEFormat</span></tt>
+идентичен с форматом <tt><span class="lnk" onmouseover="show(type_const+'<br><br>RGBA format - формат компонентов<br>цвета RGB и канала прозрачности<br>(альфа-канала)')" onmouseout="hide()">THREE.RGBAFormat</span></tt>.</div>
+<div class=list><tt><span class="lnk" onmouseover="show('depth format - формат глубины<br><br>'+type_const)" onmouseout="hide()">DepthFormat</span></tt> считывает каждый элемент как отдельное значение глубины.
+Далее оно преобразуется в число с плавающей запятой, фиксируется в диапазоне от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. Эта константа является значением по умолчанию для <a href="../textures/depthTexture.htm" onmouseover="show('DepthTexture')" onmouseout="hide()">DepthTexture</a>.<br>
+Значением свойства текстуры <tt><a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">type</a></tt> должна быть константа
+<tt><a href="#types" onmouseover="show('unsigned int(eger) type - целочисленный тип без знака')" onmouseout="hide()">UnsignedIntType</a></tt> или
+<tt><a href="#types" onmouseover="show('unsigned short type - тип числа в коротком формате без знака')" onmouseout="hide()">UnsignedShortType</a></tt>.</div>
+<div class=list><tt><span class="lnk" onmouseover="show('depth stencil format - формат<br>глубины и трафарета<br><br>'+type_const)" onmouseout="hide()">DepthStencilFormat</span></tt> считывает каждый элемент как пару из значений глубины и трафарета.
+Компонент глубины этой пары интерпретируется как константа <tt>DepthFormat</tt>.
+Компонент трафарета интерпретируется на основе внутреннего формата <tt>depth + stencil</tt>.<br>
+Значением свойства текстуры <tt><a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">type</a></tt> должна быть константа <tt><a href="#types" onmouseover="show('упаковка значений глубины и трафарета<br>в 32-битное целое число без знака,<br>24 бита на значение глубины и 8 бит<br>на значение трафарета')" onmouseout="hide()">UnsignedInt248Type</a></tt>.</div></div>
+Обратите внимание, что текстура должна иметь правильный <a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">тип</a>, как указано выше.
+Подробности смотрите <a href="https://developer.mozilla.org/en/docs/Web/API/WebGLRenderingContext/texImage2D" target="_blank">на этой странице</a>.<br><br>
+
+<h4 id="dds">Форматы сжатия текстур DDS / ST3C Compressed Texture Formats</h4>
+<div class=note_trans>S3 Texture Compression – это формат сжатия графических данных с потерями, с фиксированным уровнем сжатия.<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Его особенности делают этот формат идеальным для сжатия текстур, используемых в 3D-приложениях, рассчитанных на использование графического ускорителя. Интеграция S3TC с Microsoft DirectX 6.0 и OpenGL 1.3 способствовала его широкому распространению. Существует как минимум 5 различных вариантов формата S3TC (от  DXT1 до DXT5).<br>
+DXT1 обеспечивает наиболее сильное сжатие. Каждый входной 16-пиксельный блок конвертируется в 64-битный блок, состоящий из двух 16-битных RGB 5:6:5 цветовых значений и 2-х битной таблицы подстановок размером 4x4. Поддержка прозрачности ограничена одним цветом (1-битная прозрачность).<br>
+DXT3 конвертирует каждый блок из 16 пикселей в 128 бит, 64 бита приходятся на данные альфа-канала, 64 – на цветовую информацию. DXT3 очень хорошо подходит для изображений или текстур с резкими переходами между прозрачными и непрозрачными областями. Однако если градаций прозрачности нет, а прозрачные участки в изображении имеются, стоит рассмотреть использование DXT1.<br>
+DXT5, как и DXT3, конвертирует каждый блок из 16 пикселей в 128 бит, 64 бита приходятся на данные альфа-канала, 64 – на цветовую информацию. Однако, в отличие от DXT3, DXT5 подходит для изображений или текстур с плавными переходами между прозрачными и непрозрачными областями.<br>
+Преимущества:
+<div class=list>Размер файла значительно меньше аналогичного PNG-файла.</div>
+<div class=list>Достойное качество, низкий процент артефактов в виде полосок, связанных с наложением цветов.</div>
+<div class=list>Хорошая скорость кодирования и декодирования.</div>
+<div class=list>Аппаратное ускорение на множестве GPU. На настольных системах поддерживается практически всеми решениями, постепенно распространяется и на платформе Android.</div>
+Недостатки:
+<div class=list>Качество ниже, чем у PNG (S3TC – это формат сжатия изображений с потерями информации).</div>
+<div class=list>Поддерживается не на всех Android-устройствах.</div></div></div>
+<pre><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB<br>в формате S3TC (вариант DXT1)')" onmouseout="hide()">THREE.RGB_S3TC_DXT1_Format</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате S3TC (вариант DXT1)')" onmouseout="hide()">THREE.RGBA_S3TC_DXT1_Format</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате S3TC (вариант DXT3)')" onmouseout="hide()">THREE.RGBA_S3TC_DXT3_Format</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате S3TC (вариант DXT5)')" onmouseout="hide()">THREE.RGBA_S3TC_DXT5_Format</span></pre>
+Предназначены для использования со свойством <tt><a href="../textures/texture.htm#format" onmouseover="show('Texture.format');" onmouseout="hide()">format</a></tt> <a href="../textures/compressedTexture.htm" onmouseover="show('CompressedTexture');" onmouseout="hide()">CompressedTexture</a>, при этом требуется поддержка расширения <a href="https://www.khronos.org/registry/webgl/extensions/WEBGL_compressed_texture_s3tc/" target="_blank">WEBGL_compressed_texture_s3tc</a>.<br>
+С поддержкой этого расширения имеется четыре <a href="https://en.wikipedia.org/wiki/S3_Texture_Compression" target="_blank">S3TC</a> формата.
+<div class=list><tt><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB<br>в формате S3TC (вариант DXT1)')" onmouseout="hide()">RGB_S3TC_DXT1_Format</span></tt>
+- вариант сжатия изображения DXT1 в формате RGB.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате S3TC (вариант DXT1)')" onmouseout="hide()">RGBA_S3TC_DXT1_Format</span></tt>
+- вариант сжатия изображения DXT1 в формате RGB с простейшим (вкл/выкл) значением альфа-канала.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате S3TC (вариант DXT3)')" onmouseout="hide()">RGBA_S3TC_DXT3_Format</span></tt>
+- вариант сжатия изображения DXT3 в формате RGBA. По сравнению с 32-битной RGBA текстурой, в этом варианте формата предполагается четырехкратное сжатие.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате S3TC (вариант DXT5)')" onmouseout="hide()">RGBA_S3TC_DXT5_Format</span></tt>
+- вариант сжатия изображения DXT5 в формате RGBA. Данный вариант формата также предполагает четырехкратное сжатие, но от варианта DXT3 отличается способом сжатия альфа-канала.</div><br>
+
+<h4 id="pvrtc">Форматы сжатия текстур PVRTC (PowerVR Texture Compression)</h4>
+<div class=note_trans>PowerVR Texture Compression – это формат компрессии графических данных с потерями, с фиксированным уровнем сжатия,<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>который используется, преимущественно, в устройствах Imagination Technology PowerVR MBX, SGX и Rogue. Он применяется в качестве стандартного метода сжатия изображений в iPhone, iPod, iPad.<br>
+В отличие от ETC и S3TC, алгоритм PVRTC не работает с фиксированными блоками пикселей. В нём используется билинейное увеличение и смешивание с низкой точностью двух изображений низкого разрешения. В дополнение к уникальному процессу сжатия, PVRTC поддерживает формат RGBA (с прозрачностью) и для варианта 2-bpp (2 бита на пиксель), и для варианта 4-bpp (4 бита на пиксель).
+Преимущества:
+<div class=list>Поддержка альфа-каналов.</div>
+<div class=list>Поддержка RGBA для варианта 2-bpp (2 бита на пиксель) и для варианта 4-bpp (4 бита на пиксель).</div>
+<div class=list>Размер файлов намного меньше, чем у PNG.</div>
+<div class=list>Поддержка аппаратного ускорения на GPU PoverVR.</div>
+Недостатки:
+<div class=list>Качество не так высоко, как при использовании PNG (PVRTC – это формат сжатия изображений с потерями).</div>
+<div class=list>PVRTC поддерживается только на аппаратном обеспечении PoverVR.</div>
+<div class=list>Обеспечивается поддержка квадратных POT-текстур, то есть текстур, ширина и высота которых являются степенью числа&nbsp;2, хотя в некоторых случаях имеется поддержка прямоугольных текстур.</div>
+<div class=list>Сжатие текстур в этот формат может быть медленным.</div></div></div>
+<pre><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB в формате PVRTC,<br>в 4-битном режиме')" onmouseout="hide()">THREE.RGB_PVRTC_4BPPV1_Format</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB в формате PVRTC,<br>в 2-битном режиме')" onmouseout="hide()">THREE.RGB_PVRTC_2BPPV1_Format</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате PVRTC, в 4-битном режиме')" onmouseout="hide()">THREE.RGBA_PVRTC_4BPPV1_Format</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате PVRTC, в 2-битном режиме')" onmouseout="hide()">THREE.RGBA_PVRTC_2BPPV1_Format</span></pre>
+Предназначены для использования со свойством <tt><a href="../textures/texture.htm#format" onmouseover="show('Texture.format');" onmouseout="hide()">format</a></tt> <a href="../textures/compressedTexture.htm" onmouseover="show('CompressedTexture');" onmouseout="hide()">CompressedTexture</a>,
+при этом требуется поддержка расширения <a href="https://www.khronos.org/registry/webgl/extensions/WEBGL_compressed_texture_pvrtc/" target="_blank">WEBGL_compressed_texture_pvrtc</a>.<br>
+Формат сжатия PVRTC обычно доступен только на мобильных устройствах с наборами микросхем PowerVR, в основном это устройства Apple.<br>
+С поддержкой этого расширения имеется четыре <a href="https://en.wikipedia.org/wiki/PVRTC" target="_blank">PVRTC</a> формата.
+<div class=list><tt><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB в формате PVRTC,<br>в 4-битном режиме')" onmouseout="hide()">RGB_PVRTC_4BPPV1_Format</span></tt> - сжатие компонентов цвета RGB в 4-битном режиме. Один блок на каждые <tt>4&#215;4</tt> пикселей.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB в формате PVRTC,<br>в 2-битном режиме')" onmouseout="hide()">RGB_PVRTC_2BPPV1_Format</span></tt> - сжатие компонентов цвета RGB в 2-битном режиме. Один блок на каждые <tt>8&#215;4</tt> пикселей.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате PVRTC, в 4-битном режиме')" onmouseout="hide()">RGBA_PVRTC_4BPPV1_Format</span></tt> - сжатие компонентов цвета RGB и канала прозрачности (альфа-канала) в 4-битном режиме. Один блок на каждые <tt>4&#215;4</tt> пикселей.</div>
+<div class=list><tt><span class="lnk" onmouseover="show(type_const+'<br><br>сжатие компонентов цвета RGB и<br>канала прозрачности (альфа-канала)<br>в формате PVRTC, в 2-битном режиме')" onmouseout="hide()">RGBA_PVRTC_2BPPV1_Format</span></tt> сжатие компонентов цвета RGB и канала прозрачности (альфа-канала) в 2-битном режиме. Один блок на каждые <tt>8&#215;4</tt> пикселей.</div><br>
+
+<h4 id="etc">Формат сжатия текстур ETC</h4>
+<div class=note_trans>ETC - сокращение от Ericsson Texture Compression<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'> – это формат сжатия текстур, который оперирует блоками пикселей размером 4x4. Изначально Khronos использовал ETC как стандартный формат для Open GL ES 2.0 (эта версия ещё называется ETC1).
+В результате этот формат доступен практически на всех Android-устройствах. С выходом OpenGL ES 3.0 в качестве нового стандарта использован формат ETC2 – переработанная версия ETC1.
+Основное различие между этими двумя стандартами заключается в алгоритме, который оперирует пиксельными группами. Улучшения в алгоритме привели к более высокой точности вывода мелких деталей изображений.
+Как результат, качество изображений улучшилось, а размер файлов – нет.<br>
+ETC1 и ETC2 поддерживают сжатие 24-битных RGB-данных, но они не поддерживают сжатие изображений с альфа-каналом.</div></div>
+<pre><span class="lnk" onmouseover="show(type_const+'<br><br>RGB_ETC1_Format - формат ETC1 (сжатия компонентов цвета) RGB')" onmouseout="hide()">THREE.RGB_ETC1_Format</span></pre>
+Предназначена для использования со свойством <tt><a href="../textures/texture.htm#format" onmouseover="show('Texture.format');" onmouseout="hide()">format</a></tt> <a href="../textures/compressedTexture.htm" onmouseover="show('CompressedTexture');" onmouseout="hide()">CompressedTexture</a>, при этом требуется поддержка расширения <a href="https://www.khronos.org/registry/webgl/extensions/WEBGL_compressed_texture_etc1/" target="_blank">WEBGL_compressed_texture_etc1</a>.<br><br>
+
+<h4 id="internal">Внутренние форматы</h4>
+<!-- https://www.khronos.org/opengl/wiki/Image_Format
+http://steps3d.narod.ru/tutorials/tex-formats-tutorial.html -->
+Более подробно о текстурных форматах можно узнать на сайте <a href="https://www.khronos.org/opengl/wiki/Image_Format" target="_blank">https://www.khronos.org/opengl/wiki/Image_Format</a> (англ. язык) и
+<a href="http://steps3d.narod.ru/tutorials/tex-formats-tutorial.html" target="_blank">http://steps3d.narod.ru/tutorials/tex-formats-tutorial.html</a> (русский язык).
+<div class=note_trans>Некоторые подробности о форматах OpenGL.<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>
+Вот на рисунке показаны все возможные в OpenGL форматы текстур. Как видите, они разделяются на форматы цвета (color), форматы глубины (depth) и комбинированные форматы глубины-трафарета (depth-stencil).<br>
+Далее они подразделяются на нормализованные (normalized), целочисленные (integer), числа с плавающей запятой (floating) и специальные (special).
+<div class="caption_top"><img src="../img/texture-formats.png" width=60%><br>
+Возможные типы и форматы текстур OpenGL</div>
+</div></div>
+<div class="limit_height">
+<pre>
+'ALPHA'
+'RGB'
+'RGBA'
+'LUMINANCE'
+'LUMINANCE_ALPHA'
+'RED_INTEGER'
+'R8'
+'R8_SNORM'
+'R8I'
+'R8UI'
+'R16I'
+'R16UI'
+'R16F'
+'R32I'
+'R32UI'
+'R32F'
+'RG8'
+'RG8_SNORM'
+'RG8I'
+'RG8UI'
+'RG16I'
+'RG16UI'
+'RG16F'
+'RG32I'
+'RG32UI'
+'RG32F'
+'RGB565'
+'RGB8'
+'RGB8_SNORM'
+'RGB8I'
+'RGB8UI'
+'RGB16I'
+'RGB16UI'
+'RGB16F'
+'RGB32I'
+'RGB32UI'
+'RGB32F'
+'RGB9_E5'
+'SRGB8'
+'R11F_G11F_B10F'
+'RGBA4'
+'RGBA8'
+'RGBA8_SNORM'
+'RGBA8I'
+'RGBA8UI'
+'RGBA16I'
+'RGBA16UI'
+'RGBA16F'
+'RGBA32I'
+'RGBA32UI'
+'RGBA32F'
+'RGB5_A1'
+'RGB10_A2'
+'RGB10_A2UI'
+'SRGB8_ALPHA8'
+'DEPTH_COMPONENT16'
+'DEPTH_COMPONENT24'
+'DEPTH_COMPONENT32F'
+'DEPTH24_STENCIL8'
+'DEPTH32F_STENCIL8'</pre>
+</div>
+<div class=warning><b>Предупреждение:</b> при использовании визуализации с применением WebGL 2, изменение внутреннего формата текстуры повлияет только на текстуру.</div>
+Внутренние форматы определяют способ хранения в графическом процессоре элементов текстур или текселей.
+<div class="limit_height">
+<tt class="lnk" onmouseover="show('R8 означает red 8 bit, т.е. восьмибитный красный цвет')" onmouseout="hide()">R8</tt> хранит красный компонент цвета на 8 битах.<br>
+<tt class="lnk" onmouseover="show('R8_SNORM означает red 8 bit signed normalized,<br>т.е. восьмибитное нормализованное (приведенное<br>в диапазон от <tt>-1</tt> до <tt>1</tt>) значение красного цвета<br>в виде числа со знаком')" onmouseout="hide()">R8_SNORM</tt> хранит красный компонент цвета на 8 битах в нормализованном виде, т.е. приведенным к диапазону от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>.<br>
+<tt class="lnk" onmouseover="show('R8I означает red 8 bit integer, т.е. восьмибитное<br>значение красного цвета в виде целого числа')" onmouseout="hide()">R8I</tt> хранит красный компонент цвета на 8 битах как целое число.<br>
+<tt class="lnk" onmouseover="show('R8UI означает red 8 bit unsigned integer,<br>т.е. восьмибитное значение красного<br>цвета в виде целого числа без знака')" onmouseout="hide()">R8UI</tt> хранит красный компонент цвета на 8 битах как целое число без знака.<br>
+<tt class="lnk" onmouseover="show('R16I означает red 16 bit integer, т.е. значение<br>красного цвета как целое число в 16 бит')" onmouseout="hide()">R16I</tt> хранит красный компонент цвета на 16 битах как целое число.<br>
+<tt class="lnk" onmouseover="show('R16UI означает red 16 bit unsigned integer,<br>т.е. значение красного цвета как беззнаковое<br>целое число в 16 бит')" onmouseout="hide()">R16UI</tt> хранит красный компонент цвета на 16 битах как целое число без знака.<br>
+<tt class="lnk" onmouseover="show('R16F означает red 16 bit floating,<br>т.е. значение красного цвета в виде<br>16-битного числа с плавающей запятой')" onmouseout="hide()">R16F</tt> хранит красный компонент в виде 16-битного числа с плавающей запятой.<br>
+<tt class="lnk" onmouseover="show('R32I означает red 32 bit integer, т.е. значение<br>красного цвета как целое число в 32 бит')" onmouseout="hide()">R32I</tt> хранит красный компонент цвета на 32 битах как целое число.<br>
+<tt class="lnk" onmouseover="show(' означает red 32 bit unsigned integer,<br>т.е. значение красного цвета как беззнаковое<br>целое число в 32 бит')" onmouseout="hide()">R32UI</tt> хранит красный компонент цвета на 32 битах как целое число без знака.<br>
+<tt class="lnk" onmouseover="show('R32F означает red 32 bit floating,<br>т.е. значение красного цвета в виде<br>32-битного числа с плавающей запятой')" onmouseout="hide()">R32F</tt> хранит красный компонент цвета в виде 32-битного числа с плавающей запятой.<br>
+<tt class="lnk" onmouseover="show('RG8 означает red green 8 bit, т.е. 8-битные<br>значения красного и зеленого компонентов цвета')" onmouseout="hide()">RG8</tt> хранит красный (red) и зеленый (green) компоненты цвета по 8 бит на каждый.<br>
+<tt class="lnk" onmouseover="show('RG8_SNORM означает red green 8 bit signed normalized, т.е. восьмибитные<br>нормализованные (приведенное в диапазон от <tt>-1</tt> до <tt>1</tt>) значения красного и<br>зеленого цвета в виде числа со знаком')" onmouseout="hide()">RG8_SNORM</tt> хранит нормализованные значения красного (red) и зеленого (green) компонентов цвета по 8 бит на каждый.<br>
+<tt class="lnk" onmouseover="show('RG8I означает red green 8 bit integer, т.е. восьмибитные<br>значения красного и зеленого компонентов цвета в виде<br>целого числа')" onmouseout="hide()">RG8I</tt> хранит в виде целого числа красный и зеленый компоненты цвета на 8 битах каждый.<br>
+<tt class="lnk" onmouseover="show('RG8UI означает red green 8 bit unsigned integer,<br>т.е. восьмибитные значения красного и зеленого<br>цвета в виде целого числа без знака')" onmouseout="hide()">RG8UI</tt> хранит в виде целых чисел без знака красный и зеленый компоненты цвета на 8 битах каждый.<br>
+
+<tt class="lnk" onmouseover="show('RG16I')" onmouseout="hide()">RG16I</tt> stores the red and green components on 16 bits each. Every component is stored as an integer.<br>
+
+<tt class="lnk" onmouseover="show('RG16UI')" onmouseout="hide()">RG16UI</tt> stores the red and green components on 16 bits each. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('RG16F')" onmouseout="hide()">RG16F</tt> stores the red and green components on 16 bits each. Every component is stored as floating point.<br>
+
+<tt class="lnk" onmouseover="show('RG32I')" onmouseout="hide()">RG32I</tt> stores the red and green components on 32 bits each. Every component is stored as an integer.<br>
+
+<tt class="lnk" onmouseover="show('RG32UI')" onmouseout="hide()">RG32UI</tt> stores the red and green components on 32 bits. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('RG32F')" onmouseout="hide()">RG32F</tt> stores the red and green components on 32 bits. Every component is stored as floating point.<br>
+
+<tt class="lnk" onmouseover="show('RGB8')" onmouseout="hide()">RGB8</tt> stores the red, green, and blue components on 8 bits each.<br>
+
+<tt class="lnk" onmouseover="show('RGB8_SNORM')" onmouseout="hide()">RGB8_SNORM</tt> stores the red, green, and blue components on 8 bits each. Every component is stored as normalized.<br>
+
+<tt class="lnk" onmouseover="show('RGB8I')" onmouseout="hide()">RGB8I</tt> stores the red, green, and blue components on 8 bits each. Every component is stored as an integer.<br>
+
+<tt class="lnk" onmouseover="show('RGB8UI')" onmouseout="hide()">RGB8UI</tt> stores the red, green, and blue components on 8 bits each. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('RGB16I')" onmouseout="hide()">RGB16I</tt> stores the red, green, and blue components on 16 bits each. Every component is stored as an integer.<br>
+
+<tt class="lnk" onmouseover="show('RGB16UI')" onmouseout="hide()">RGB16UI</tt> stores the red, green, and blue components on 16 bits each. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('RGB16F')" onmouseout="hide()">RGB16F</tt> stores the red, green, and blue components on 16 bits each. Every component is stored as floating point<br>
+
+<tt class="lnk" onmouseover="show('RGB32I')" onmouseout="hide()">RGB32I</tt> stores the red, green, and blue components on 32 bits each. Every component is stored as an integer.<br>
+
+<tt class="lnk" onmouseover="show('RGB32UI')" onmouseout="hide()">RGB32UI</tt> stores the red, green, and blue components on 32 bits each. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('RGB32F')" onmouseout="hide()">RGB32F</tt> хранит значения красного (red), зеленого (green) и синего (blue) компонентов цвета в виде 32-битного числа с плавающей запятой для каждого.<br>
+
+<tt class="lnk" onmouseover="show('R11F_G11F_B10F')" onmouseout="hide()">R11F_G11F_B10F</tt> stores the red, green, and blue components respectively on 11 bits, 11 bits, and 10bits. Every component is stored as floating point.<br>
+
+<tt class="lnk" onmouseover="show('RGB565')" onmouseout="hide()">RGB565</tt> stores the red, green, and blue components respectively on 5 bits, 6 bits, and 5 bits.<br>
+
+<tt class="lnk" onmouseover="show('RGB9_E5 означает red green blue 9 bit exponent 5 bit,<br>т.е. значения красного, зеленого и синего цветов<br>по 9 бит и общее значение мантиссы в 5 бит')" onmouseout="hide()">RGB9_E5</tt> stores the red, green, and blue components on 9 bits each.<br>
+The 14-bit float format is exclusively used in the GL_RGB9_E5 image format. These have no sign bit, as they're generally used to represent image data. They have individual mantissa bits, but share a single exponent for all 3 values.<br>
+
+<tt class="lnk" onmouseover="show('RGBA8')" onmouseout="hide()">RGBA8</tt> stores the red, green, blue, and alpha components on 8 bits each.<br>
+
+<tt class="lnk" onmouseover="show('RGBA8_SNORM')" onmouseout="hide()">RGBA8_SNORM</tt> stores the red, green, blue, and alpha components on 8 bits. Every component is stored as normalized.<br>
+
+<tt class="lnk" onmouseover="show('RGBA8I')" onmouseout="hide()">RGBA8I</tt> stores the red, green, blue, and alpha components on 8 bits each. Every component is stored as an integer.<br>
+
+<tt class="lnk" onmouseover="show('RGBA8UI')" onmouseout="hide()">RGBA8UI</tt> stores the red, green, blue, and alpha components on 8 bits. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('RGBA16I')" onmouseout="hide()">RGBA16I</tt> stores the red, green, blue, and alpha components on 16 bits. Every component is stored as an integer.<br>
+
+<tt class="lnk" onmouseover="show('RGBA16UI')" onmouseout="hide()">RGBA16UI</tt> stores the red, green, blue, and alpha components on 16 bits. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('RGBA16F')" onmouseout="hide()">RGBA16F</tt> stores the red, green, blue, and alpha components on 16 bits. Every component is stored as floating point.<br>
+
+<tt class="lnk" onmouseover="show('RGBA32I')" onmouseout="hide()">RGBA32I</tt> stores the red, green, blue, and alpha components on 32 bits. Every component is stored as an integer.<br>
+
+<tt class="lnk" onmouseover="show('RGBA32UI')" onmouseout="hide()">RGBA32UI</tt> stores the red, green, blue, and alpha components on 32 bits. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('RGBA32F')" onmouseout="hide()">RGBA32F</tt> stores the red, green, blue, and alpha components on 32 bits. Every component is stored as floating point.<br>
+
+<tt class="lnk" onmouseover="show('RGB5_A1')" onmouseout="hide()">RGB5_A1</tt> stores the red, green, blue, and alpha components respectively on 5 bits, 5 bits, 5 bits, and 1 bit.<br>
+
+<tt class="lnk" onmouseover="show('RGB10_A2')" onmouseout="hide()">RGB10_A2</tt> stores the red, green, blue, and alpha components respectively on 10 bits, 10 bits, 10 bits and 2 bits.<br>
+
+<tt class="lnk" onmouseover="show('RGB10_A2UI')" onmouseout="hide()">RGB10_A2UI</tt> stores the red, green, blue, and alpha components respectively on 10 bits, 10 bits, 10 bits and 2 bits. Every component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('SRGB8')" onmouseout="hide()">SRGB8</tt> хранит красный (red), зеленый (green) и синий (blue) компоненты цвета по 8 бит на каждый.<br>
+
+<tt class="lnk" onmouseover="show('SRGB8_ALPHA8')" onmouseout="hide()">SRGB8_ALPHA8</tt> stores the red, green, blue, and alpha components on 8 bits each.<br>
+
+<tt class="lnk" onmouseover="show('DEPTH_COMPONENT16')" onmouseout="hide()">DEPTH_COMPONENT16</tt> stores the depth component on 16bits.<br>
+
+<tt class="lnk" onmouseover="show('DEPTH_COMPONENT24')" onmouseout="hide()">DEPTH_COMPONENT24</tt> stores the depth component on 24bits.<br>
+
+<tt class="lnk" onmouseover="show('DEPTH_COMPONENT32F')" onmouseout="hide()">DEPTH_COMPONENT32F</tt> stores the depth component on 32bits. The component is stored as floating point.<br>
+
+<tt class="lnk" onmouseover="show('DEPTH24_STENCIL8')" onmouseout="hide()">DEPTH24_STENCIL8</tt> stores the depth, and stencil components respectively on 24 bits and 8 bits. The stencil component is stored as an unsigned integer.<br>
+
+<tt class="lnk" onmouseover="show('DEPTH32F_STENCIL8')" onmouseout="hide()">DEPTH32F_STENCIL8</tt> stores the depth, and stencil components respectively on 32 bits and 8 bits. The depth component is stored as floating point, and the stencil component as an unsigned integer.
+</div>
+Обратите внимание, что текстура должна иметь правильный набор <a href="../textures/texture.htm#type" onmouseover="show('Texture.type')" onmouseout="hide()">типов</a>, а также правильный <a href="../textures/texture.htm#format" onmouseover="show('Texture.format')" onmouseout="hide()">формат</a>.
+Для более подробных сведений относительно возможных комбинаций формата, внутреннего формата и типа смотрите
+<a href="https://developer.mozilla.org/en/docs/Web/API/WebGLRenderingContext/texImage2D" target="_blank" onmouseover="show('<tt>WebGLRenderingContext.texImage2D()</tt> метод API WebGL<br>определяющий изображение двумерной текстуры.')" onmouseout="hide()">WebGLRenderingContext.texImage2D</a>
+и <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext/texImage3D" target="_blank" onmouseover="show('<tt>WebGLRenderingContext.texImage3D()</tt> метод API WebGL<br>определяющий изображение трехмерной текстуры.<br>Пока это экспериментальная технология.')" onmouseout="hide()">WebGL2RenderingContext.texImage3D</a>.<br>
+Для получения всесторонней информации относительно внутренних форматов можно обратиться непосредственно к спецификациям <a href="https://www.khronos.org/registry/webgl/specs/latest/2.0/" target="_blank">WebGL2</a> и <a href="https://www.khronos.org/registry/OpenGL/specs/es/3.0/es_spec_3.0.pdf" target="_blank">OpenGL ES 3.0</a>.<br><br>
+
+<h4 id="encoding">Кодирование</h4>
+<pre><span class="lnk" onmouseover="show(type_const+'<br><br>linear encoding - линейное кодирование')" onmouseout="hide()">LinearEncoding</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>sRGB encoding - кодирование sRGB')" onmouseout="hide()">THREE.sRGBEncoding</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>gamma encoding - гамма-кодирование')" onmouseout="hide()">THREE.GammaEncoding</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>RGBE encoding - кодирование RGBE')" onmouseout="hide()">THREE.RGBEEncoding</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>RGBM7 encoding - кодировка RGBM7')" onmouseout="hide()">THREE.LogLuvEncoding</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>')" onmouseout="hide()">THREE.RGBM7Encoding</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>RGBM16 encoding - кодировка RGBM16')" onmouseout="hide()">THREE.RGBM16Encoding</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>RGBD encoding - кодировка RGBD')" onmouseout="hide()">THREE.RGBDEncoding</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>basic depth packing -<br>базовая упаковка глубины')" onmouseout="hide()">THREE.BasicDepthPacking</span>
+<span class="lnk" onmouseover="show(type_const+'<br><br>RGBA depth packing -<br>упаковка глубины компонентов<br>цвета RGB и прозрачности A')" onmouseout="hide()">THREE.RGBADepthPacking</span></pre>
+Для использования со свойством текстуры <tt><a href="../textures/texture.htm#encoding" onmouseover="show('Texture.encoding');" onmouseout="hide()">encoding</a></tt>.<br>
+Если тип кодирования изменяется после того, как текстура уже была использована материалом,
+нужно установить свойство <tt><a href="../materials/material.htm#needsUpdate" onmouseover="show('Material.needsUpdate')" onmouseout="hide()">Material.needsUpdate</a></tt> как <tt>true</tt>, чтобы пересобрать (перекомпилировать) материал.<br>
+Значением по умолчанию является <span class="lnk" onmouseover="show(type_const+'<br><br>linear encoding - линейное кодирование')" onmouseout="hide()">LinearEncoding</span>.
+Значения, отличные от данных, действительны только для свойств материала
+<tt><a href="../materials/meshStandardMaterial.htm#map" onmouseover="show('MeshStandardMaterial.map')" onmouseout="hide()">map</a></tt>,
+<tt><a href="../materials/meshStandardMaterial.htm#envMap" onmouseover="show('MeshStandardMaterial.envMap')" onmouseout="hide()">envMap</a></tt>
+и <tt><a href="../materials/meshStandardMaterial.htm#emissiveMap" onmouseover="show('MeshStandardMaterial.emissiveMap')" onmouseout="hide()">emissiveMap</a></tt> (в качестве примера приведен <a href="../materials/meshStandardMaterial.htm" onmouseover="show('MeshStandardMaterial')" onmouseout="hide()">MeshStandardMaterial</a>).<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

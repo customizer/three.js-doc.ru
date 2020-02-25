@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InterleavedBuffer</h3>
+Слово "Interleaved" (т.е. "с чередованием") в названии означает, что несколько атрибутов
+(возможно разных типов, например, <tt>position</tt> - положение, <tt>normal</tt> - нормаль, <tt>uv</tt> - UV-координаты, <tt>color</tt> - цвет) упаковываются в один-единственный буфер массива.<br>
+Введение в массивы с чередованием можно найти здесь: <a href="https://blog.tojicode.com/2011/05/interleaved-array-basics.html" target="_blank">Interleaved array basics</a> (Основы массива с чередованием).<br><br>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/#webgl_buffergeometry_points_interleaved" target="_blank">webgl / buffergeometry / points / interleaved</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>InterleavedBuffer( <span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stride - шаг')" onmouseout="hide()">stride</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span></tt> -- типизированный массив с общим буфером. Содержит данные геометрического элемента.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stride - шаг')" onmouseout="hide()">stride</a></span></tt> -- количество элементов типизированного массива, приходящихся на одну вершину.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="array"><span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">.array</a></span></pre>
+Типизированный массив с общим буфером. Содержит данные геометрического элемента.<br><br>
+
+<pre id="stride"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stride - шаг')" onmouseout="hide()">.stride</a></span></pre>
+Количество элементов типизированного массива, приходящихся на одну вершину.<br><br>
+
+<pre id="count"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет, подсчитывать')" onmouseout="hide()">.count</a></span></pre>
+Указывает общее число элементов в массиве.<br><br>
+
+<pre id="dynamic"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dynamic - активный, динамический')" onmouseout="hide()">.dynamic</a></span></pre>
+Значение по умолчанию равно <tt>false</tt>.<br><br>
+
+<pre id="updateRange"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update range - диапазон обновления')" onmouseout="hide()">.updateRange</a></span></pre>
+Объект, содержащий <tt>offset</tt> (смещение) и <tt>count</tt> (счет).<br><br>
+
+<pre id="updateRange.offset"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update range offset - смещение диапазона обновления')" onmouseout="hide()">.updateRange.offset</a></span></pre>
+Значение по умолчанию равно <tt>0</tt>.<br><br>
+
+<pre id="updateRange.count"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update range count - счет диапазона обновления')" onmouseout="hide()">.updateRange.count</a></span></pre>
+Значение по умолчанию равно <tt>-1</tt>.<br><br>
+
+<pre id="version"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('version - версия')" onmouseout="hide()">.version</a></span></pre>
+Номер версии, увеличивающийся каждый раз, когда свойство <tt>needsUpdate</tt> установливается как <tt>true</tt>.<br><br>
+
+<pre id="isInterleavedBuffer"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is interleaved buffer - является буфером с чередованием')" onmouseout="hide()">.isInterleavedBuffer</a></span></pre>
+Значение по умолчанию равно <tt>true</tt>.<br><br>
+
+<pre id="needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('needs update - нуждается в обновлении')" onmouseout="hide()">.needsUpdate</a></span></pre>
+Значение по умолчанию равно <tt>false</tt>. Установка этого свойства как <tt>true</tt> увеличивает значение свойства <tt><a href="#version" onmouseover="show('InterleavedBuffer.version')" onmouseout="hide()">version</a></tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="setArray"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set array - установить массив')" onmouseout="hide()">.setArray</a></span>( <span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span> )</pre>
+<div class=list><tt>array</tt> - должен быть типизированным массивом.</div><br>
+
+<pre id="setDynamic"><a href="#" onmouseover="show('InterleavedBuffer.<br>set dynamic - установить свойство dynamic')" onmouseout="hide()">.setDynamic</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает в свойство <tt><a href="#dynamic" onmouseover="show('InterleavedBuffer.dynamic')" onmouseout="hide()">dynamic</a></tt> значение, приведенное в аргументе <tt>value</tt>.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('InterleavedBuffer.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('InterleavedBuffer.<br>source - исходник, источник')" onmouseout="hide()">source</a> )</pre>
+Копирует InterleavedBuffer, приведенный в аргументе <tt>source</tt>, в данный InterleavedBuffer.<br><br>
+
+<pre id="copyAt"><a href="#" onmouseover="show('InterleavedBuffer.<br>copy at - копировать в')" onmouseout="hide()">.copyAt</a>( index1, attribute, index2 )</pre>
+Метод копирует данные из <tt><span class="lnk" onmouseover="show('значение с индексом <tt>index2</tt> из массива по имени <tt>attribute</tt>')" onmouseout="hide()">attribute[index2]</span></tt> в <tt><span class="lnk" onmouseover="show('на место в массиве <tt>array</tt> с индексом <tt>index1</tt>')" onmouseout="hide()">array[index1]</span></tt>.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('InterleavedBuffer.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span></tt> - исходный (типизированный) массив.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span></tt>
+- смещение в целевом массиве, с которого начинается запись значений из исходного массива. Значение по умолчанию равно <tt>0</tt>.</div>
+Сохраняет несколько значений в буфер, считывая входные значения из указанного массива.<br><br>
+		
+<pre id="clone"><a href="#" onmouseover="show('InterleavedBuffer.<br>clone - клон, клонировать')" onmouseout="hide()">.clone</a>( )</pre>
+Создает клон данного InterleavedBuffer.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBuffer.js" target="_blank">InterleavedBuffer.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Анимация</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CCDIKSolver</h3>
+Решающее устройство (<span class=lnk onmouseover="show('Решатель — (англ. solver)  программное обеспечение,<br>предназначенное для решения рассматриваемой<br>математической задачи. На вход решателю поступает<br>описание задачи в некоторой заданной форме, а на<br>выходе он выдает решение задачи.')" onmouseout="hide()">решатель</span>)
+для <a href="https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D0%BD%D0%B0%D1%8F_%D0%BA%D0%B8%D0%BD%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0" target="_blank" onmouseover="show('Инверсная кинематика (инверсная кинематическая анимация,<br>англ. inverse kinematics, IK) — процесс определения<br>параметров связанных гибких объектов (например,<br>кинематическая пара или кинематическая цепь) для достижения<br>необходимой позиции, ориентации и расположения этих<br>объектов. Инверсная кинематика является типом планирования<br>движения (англ.). Инверсная кинематика активно используется<br>в робототехнике, трёхмерной компьютерной анимации и в<br>разработке компьютерных игр. Она используется в основном<br>в тех ситуациях, когда необходимо точное позиционирование<br>гибких сочленений одного объекта относительно других<br>объектов окружающей среды.<br>Инверсная кинематика использует принцип, диаметрально<br>противоположный принципу прямой кинематики — перемещение<br>компонентов-потомков приводит к изменению положения<br>компонентов-предков, то есть алгоритм рассчитывает<br>положение и ориентацию компонентов-предков, исходя из<br>положения и ориентации компонентов-потомков.')" onmouseout="hide()">инверсной кинематики</a>
+с <a href="https://sites.google.com/site/auraliusproject/ccd-algorithm" target="_blank" onmouseover="show('CCD - сокращ. англ. слов cyclic coordinate descent<br>- циклический покоординатный спуск')" onmouseout="hide()">алгоритмом CCD</a>.<br>
+Статья <a href="https://en.wikipedia.org/wiki/Coordinate_descent" target="_blank">о покоординатном спуске</a> в англоязычной Википедии
+и пара (<a href="http://www.machinelearning.ru/wiki/index.php?title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%BF%D0%BE%D0%BA%D0%BE%D0%BE%D1%80%D0%B4%D0%B8%D0%BD%D0%B0%D1%82%D0%BD%D0%BE%D0%B3%D0%BE_%D1%81%D0%BF%D1%83%D1%81%D0%BA%D0%B0" target="_blank">вот</a> и <a href="http://4exam.info/book_48_glava_26_4.1._Metod_%D1%81iklicheskogo_pokoordinatnogo_spuska.html" target="_blank">вот</a>) русскоязычных ссылок.<br>
+CCDIKSolver решает задачу инверсной кинематики с помощью алгоритма CCD.
+CCDIKSolver предназначен для работы с <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, загруженной с помощью MMDLoader,
+но также может использоваться для стандартной <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var ikSolver;<br>
+// Load MMD resources and instantiate CCDIKSolver
+// загрузка ресурсов MMD и создание экземпляра CCDIKSolver
+new THREE.MMDLoader().load(
+  'models/mmd/miku.pmd',
+  function ( mesh ) {
+    ikSolver = new CCDIKSolver( mesh, mesh.geometry.iks );
+    scene.add( mesh );
+  }
+);<br>
+function render() {
+  animate(); // update bones (обновление костей)
+  if ( ikSolver !== undefined ) ikSolver.update();
+  renderer.render( scene, camera );
+}</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_pose" target="_blank">webgl_loader_mmd_pose</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>CCDIKSolver( <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iks - сокращ. англ. слов inverse kinematics<br>- (элементы) инверсной кинематики')" onmouseout="hide()">iks</a></span> )</pre>
+<div class=list><tt>mesh</tt> — <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> для которой CCDIKSolver решает задачу инверсной кинематики.</div>
+<div class=list><tt>iks</tt> — массив объектов, определяющих параметр инверсной кинематики (IK). <tt><span class="lnk" onmouseover="show('target - цель,- здесь обозначение целевой кости')" onmouseout="hide()">target</span></tt>,
+<tt><span class="lnk" onmouseover="show('effector - эффектор, рабочий орган,- здесь это кость,<br>которую передвигают, чтобы целевая кость достигла цели')" onmouseout="hide()">effector</span></tt> и
+<tt><span class="lnk" onmouseover="show('link-index - индекс костей-связок, которые связывают<br>родительскую и целевую кости в единую цепочку')" onmouseout="hide()">link-index</span></tt>
+- это целочисленные индексы в <tt><span class="lnk" onmouseover="show('skeleton.bones - костях скелета')" onmouseout="hide()">.skeleton.bones</span></tt>.
+Кости должны быть увязаны как "<tt>links[ n ]</tt>, <tt>links[ n - 1 ]</tt>, <tt>...</tt>, <tt>links[ 0 ]</tt>, <tt>effector</tt>", по порядку от родительского объекта к дочернему.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('target - цель')" onmouseout="hide()">target</a></span></tt> — целевая (target) кость.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('effector - эффектор, исполнительный элемент, рабочий орган')" onmouseout="hide()">effector</a></span></tt> — эффекторная кость.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('links - связки, соединения')" onmouseout="hide()">links</a></span></tt>
+— массив объектов, определяющий кости-связки.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span></tt> — связывающая кость (кость-связка).<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>limitation - ограничение')" onmouseout="hide()">limitation</a></tt> — ось вращения. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>rotation min - минимум вращения')" onmouseout="hide()">rotationMin</a></tt> — ограничение вращения по минимуму. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>rotation max - максимум вращения')" onmouseout="hide()">rotationMax</a></tt> — ограничение вращения по максимуму. Значением по умолчанию является <tt>undefined</tt>, т.е. не определено. Дополнительный, необязательный параметр.<br>
+&nbsp; &nbsp; &nbsp; &#9675; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span></tt>
+— значением по умолчанию является&nbsp;<tt>true</tt>. Дополнительный, необязательный параметр.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iteration - итерация, повтор, перебор')" onmouseout="hide()">iteration</a></span></tt>
+— количество расчетных итераций (шагов).Чем меньше, тем быстрее, но ниже точность. Значение по умолчанию равно&nbsp;<tt>1</tt>. Дополнительный, необязательный параметр.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min angle - минимальный угол')" onmouseout="hide()">minAngle</a></span></tt>
+— минимальный угол поворота за один шаг. Значением по умолчанию является <tt>undefined</tt>, т.е. значение неопределено. Дополнительный, необязательный параметр.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max angle - максимальный угол')" onmouseout="hide()">maxAngle</a></span></tt>
+— максимальный угол поворота за один шаг. Значением по умолчанию является <tt>undefined</tt>, т.е. значение неопределено. Дополнительный, необязательный параметр.</div>
+Создает новый CCDIKSolver.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="iks"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('iks - сокращ. англ. слов inverse kinematics<br>- (элементы) инверсной кинематики')" onmouseout="hide()">.iks</a></span></pre>
+Массив параметров инверсной кинематики, переданный конструктору.<br><br>
+
+<pre id="mesh"><a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">.mesh</a></pre>
+<a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, переданный конструктору.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="createHelper"><span onclick="showClick('CCDIKHelper')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('create helper - создать вспомогательный элемент')" onmouseout="hide()">.createHelper( )</a></span></pre>
+Метод возвращает <span class=lnk onmouseover="show('CCDIKHelper - сокращ. англ. слов cyclic coordinate descent<br>inverse kinematic helper - вспомогательный элемент инверсной<br>кинематики циклического покоординатного спуска')" onmouseout="hide()">CCDIKHelper</span>. Можно визуализировать кости инверсной кинематики, добавив на сцену вспомогательный элемент.<br><br>
+
+<pre id="update"><a href="#" onmouseover="show('CCDIKSolver.<br>update - обновить')" onmouseout="hide()">.update</a>( )</pre>
+Метод обновляет кватернион костей с помощью алгоритма CCD.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/CCDIKSolver.js" target="_blank">CCDIKSolver.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

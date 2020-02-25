@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Контролы (элементы управления)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OrbitControls</h3>
+Орбитальный контрол (элемент управления) позволяет камере вращаться вокруг цели.<br>
+Для его использования, как и всех файлов в директории <tt>/examples</tt>, нужно будет отдельно включить этот файл в HTML-код.<br><br>
+<h4>Пример</h4>
+<pre>var renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );<br>
+var scene = new THREE.Scene();<br>
+var  camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );<br>
+var controls = new THREE.OrbitControls( camera );<br>
+// controls.update() must be called after any manual changes to the camera's transform
+// после любых ручных изменений состояния камеры должен быть вызван controls.update()
+camera.position.set( 0, 20, 100 );
+controls.update();<br>
+function animate() {<br>
+  requestAnimationFrame( animate );<br>
+  // required if controls.enableDamping or controls.autoRotate are set to true
+  // если controls.enableDamping или controls.autoRotate установлен как true, необходимо
+  controls.update();<br>
+  renderer.render( scene, camera );<br>
+}</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#misc_controls_orbit" target="_blank">misc / controls / orbit</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>OrbitControls( <a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">object</a>, <span class="lnk" onmouseover="show('domElement - элемент DOM (от англ. Document Object Model — «объектная модель документа»)')" onmouseout="hide()">domElement</span> )</pre>
+<div class=list><tt><a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">object</a></tt> - камера, которой нужно управлять (обязательный аргумент).</div>
+
+<div class=list><tt><span class="lnk" onmouseover="show('domElement - элемент DOM (от англ. Document Object Model — «объектная модель документа»)')" onmouseout="hide()">domElement</span></tt> - элемент HTML, используемый для прослушивателей (приемников) событий (дополнительный, необязательный аргумент).
+По умолчанию это весь документ целиком, однако, если нужно чтобы элементы управления (контролы) работали от какого-либо определенного элемента (например, <tt>&lt;canvas&gt;</tt> - холст), укажите его в этом аргументе.<br>
+Статья о <a href="https://ru.wikipedia.org/wiki/Document_Object_Model" target="_blank">DOM</a> в Википедии.</div><br>
+
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="autoRotate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto rotate - автоматическое вращение')" onmouseout="hide()">.autoRotate</a></span></pre>
+Для автоматического вращения вокруг цели установите значение данного свойства как <tt>true</tt>.<br>
+Обратите внимание, если это свойство включено, в цикле анимации нужно вызывать метод <tt><a href="#update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update</a></tt>.<br><br>
+
+<pre id="autoRotateSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto rotate speed - скорость автоматического вращения')" onmouseout="hide()">.autoRotateSpeed</a></span></pre>
+Свойство определяет скорость вращения камеры вокруг цели, если свойство <tt><a href="#autoRotate" onmouseover="show('OrbitControls.autoRotate')" onmouseout="hide()">autoRotate</a></tt> установлено как <tt>true</tt>.
+Значение по умолчанию равно <tt>2.0</tt>, что равно 30 секундам на один оборот при 60 кадрах в секунду.<br>
+Обратите внимание, если свойство <tt><a href="#autoRotate" onmouseover="show('OrbitControls.autoRotate')" onmouseout="hide()">autoRotate</a></tt> включено, в цикле анимации нужно вызывать метод <tt><a href="#update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update</a></tt>.<br><br>
+
+<pre id="dampingFactor"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('damping factor - коэффициент демпфирования (затухания)')" onmouseout="hide()">.dampingFactor</a></span></pre>
+Затухающая инерция используется, если для параметра <tt><a href="#enableDamping" onmouseover="show('OrbitControls.enableDamping')" onmouseout="hide()">enableDamping</a></tt> установлено как <tt>true</tt>.<br>
+Обратите внимание, для работы этого свойства в цикле анимации нужно вызывать метод <tt><a href="#update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update</a></tt>.<br><br>
+
+<pre id="domElement"><span class="lnk" onmouseover="show('domElement - HTML элемент DOM (от англ. Document Object Model — «объектная модель документа»)')" onmouseout="hide()">.domElement</span></pre>
+DOM элемент HTML, используется для прослушивания (приема) событий от мышки / касаний. Он должен быть передан в конструкторе; его изменение здесь не создаст новых приемников событий.<br>
+Значением по умолчанию является весь документ.<br>
+Статья о <a href="https://ru.wikipedia.org/wiki/Document_Object_Model" target="_blank">DOM</a> в Википедии.<br><br>
+
+<pre id="enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включить (управление)')" onmouseout="hide()">.enabled</a></span></pre>
+Свойство определяет, будет или нет включено управление.<br><br>
+
+<pre id="enableDamping"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable damping - включить затухание')" onmouseout="hide()">.enableDamping</a></span></pre>
+Установите значение этого свойства как <tt>true</tt> для включения затухания (инерции), которое может быть использовано чтобы придать ощущение веса элементам управления. Значением по умолчанию является <tt>false</tt>.<br>
+Обратите внимание, если данное свойство включено (т.е. <tt>true</tt>), в каждом цикле анимации требуется вызывать <tt><a href="#update" onmouseover="show('OrbitControls.update')" onmouseout="hide()">update( )</a></tt>.<br><br>
+
+<pre id="enableKeys"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable keys - включить клавиши<br>(в смысле - отслеживать нажатия<br>клавиш клавиатуры)')" onmouseout="hide()">.enableKeys</a></span></pre>
+Включает или отключает использование управления от клавиатуры.<br><br>
+
+<pre id="enablePan"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable pan - включить панорамирование')" onmouseout="hide()">.enablePan</a></span></pre>
+Включает или отключает панорамирование камерой. Значением по умолчанию является <tt>true</tt>.<br><br>
+
+<pre id="enableRotate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable rotate - включить поворот')" onmouseout="hide()">.enableRotate</a></span></pre>
+Включает или отключает горизонтальный и вертикальный поворот камеры. Значением по умолчанию является <tt>true</tt>.<br>
+Обратите внимание, что можно отключать одну ось установкой минимального и максимального значения <a href="#minPolarAngle" onmouseover="show('OrbitControls.minPolarAngle')" onmouseout="hide()">полярного</a>
+или <a href="#minAzimuthAngle" onmouseover="show('OrbitControls.minAzimuthAngle')" onmouseout="hide()">азимутального</a> углов на одно и тоже значение,
+что приведет к тому, что вертикальное или горизонтальное вращение будет зафиксировано в этом значении.<br><br>
+
+<pre id="enableZoom"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enable zoom - включить масштабирование')" onmouseout="hide()">.enableZoom</a></span></pre>
+Включает или отключает масштабирование (наезд - отъезд) камеры.<br><br>
+
+<pre id="keyPanSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('key pan speed - скорость панорамирования (от) клавиши')" onmouseout="hide()">.keyPanSpeed</a></span></pre>
+Свойство определяет скорость панорамирования камеры при использовании клавиатуры для её управления. Значение по умолчанию равно <tt>7.0</tt> пикселов на одно нажатие клавиши.<br><br>
+
+<pre id="keys"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('keys - ключи, клавиши, кнопки')" onmouseout="hide()">.keys</a></span></pre>
+Этот объект содержит ссылки на коды клавиш, используемых для управления панорамированием камеры.
+<pre>controls.keys = {
+  LEFT: 37,  // left arrow (стрелка влево)
+  UP: 38,    // up arrow (стрелка вверх)
+  RIGHT: 39, // right arrow (стрелка вправо)
+  BOTTOM: 40 // down arrow (стрелка вниз)
+}</pre>
+Вот <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode" target="_blank">полный список кодов нажатий клавиш клавиатуры</a>.<br><br>
+
+<pre id="maxAzimuthAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max azimuth angle - максимальный азимутальный угол')" onmouseout="hide()">.maxAzimuthAngle</a></span></pre>
+Свойство определяет, насколько велика может быть орбита по горизонтали, верхний предел. Возможный диапазон от&nbsp;<tt>-Math.PI</tt> до&nbsp;<tt>Math.PI</tt> (или <tt>Infinity</tt> при отсутствии ограничений). Значением по умолчанию является <tt>Infinity</tt> (бесконечность).<br><br>
+
+<pre id="maxDistance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max distance - максимальное расстояние')" onmouseout="hide()">.maxDistance</a></span></pre>
+Свойство определяет, насколько далеко может отъехать камера (только для <a href="../../cameras/perspectiveCamera.htm" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камеры с перспективной проекцией</a>).
+Значением по умолчанию является <tt>Infinity</tt> (бесконечность).<br><br>
+
+<pre id="maxPolarAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max polar angle - максимальный полярный угол')" onmouseout="hide()">.maxPolarAngle</a></span></pre>
+Свойство определяет, насколько велика может быть орбита по вертикали, верхний предел. Возможный диапазон от&nbsp;<tt>0</tt> до&nbsp;<tt>Math.PI</tt>, в радианах.
+Значением по умолчанию является <tt>Math.PI</tt>.<br><br>
+
+<pre id="maxZoom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max zoom - максимальное увеличение')" onmouseout="hide()">.maxZoom</a></span></pre>
+Свойство определяет, насколько можно уменьшить масштаб (только для <a href="../../cameras/orthographicCamera.htm" onmouseover="show('OrthographicCamera')" onmouseout="hide()">камеры с ортографической проекцией</a>).
+Значением по умолчанию является&nbsp;<tt>Infinity</tt> (бесконечность).<br><br>
+
+<pre id="minAzimuthAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min azimuth angle - минимальный азимутальный угол')" onmouseout="hide()">.minAzimuthAngle</a></span></pre>
+Свойство определяет нижний предел ограничения орбиты по горизонтали (т.е. минимальный угол поворота по горизонтали).
+Диапазон значений от&nbsp;<tt>-Math.PI</tt> до&nbsp;<tt>Math.PI</tt> (или <tt>-Infinity</tt> при отсутствии ограничений). Значением по умолчанию является&nbsp;<tt>-Infinity</tt> (минус бесконечность).<br><br>
+
+<pre id="minDistance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min distance - минимальное расстояние')" onmouseout="hide()">.minDistance</a></span></pre>
+Свойство определяет, как близко может наехать камера (только для <a href="../../cameras/perspectiveCamera.htm" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камеры с перспективной проекцией</a>). Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="minPolarAngle"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min polar angle - минимальный полярный угол')" onmouseout="hide()">.minPolarAngle</a></span></pre>
+Свойство определяет нижний предел ограничения орбиты по вертикали (т.е. минимальный угол поворота по вертикали).
+Диапазон значений в радианах от&nbsp;<tt>0</tt> до&nbsp;<tt>Math.PI</tt>. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="minZoom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('min zoom - минимальное увеличение')" onmouseout="hide()">.minZoom</a></span></pre>
+Свойство определяет, насколько можно увеличить масштаб (только для <a href="../../cameras/orthographicCamera.htm" onmouseover="show('OrthographicCamera')" onmouseout="hide()">камеры с ортографической проекцией</a>).
+Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="mouseButtons"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mouse buttons - кнопки мышки')" onmouseout="hide()">.mouseButtons</a></span></pre>
+Этот объект содержит ссылки на кнопки мышки, используемые для управления камерой.
+<pre>controls.mouseButtons = {
+  ORBIT: THREE.MOUSE.LEFT,
+  ZOOM: THREE.MOUSE.MIDDLE,
+  PAN: THREE.MOUSE.RIGHT
+}</pre><br>
+
+<pre id="object"><a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">.object</a></pre>
+Камера, которой управляет контрол.<br><br>
+
+<pre id="panSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pan speed - скорость панорамирования')" onmouseout="hide()">.panSpeed</a></span></pre>
+Скорость панорамирования. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="position0"><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>position 0 - позиция 0')" onmouseout="hide()">.position0</a></pre>
+Данное свойство используется внутри контрола методами <tt><a href="#saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>
+и <tt><a href="#reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>.<br><br>
+
+<pre id="rotateSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotate speed - скорость поворота')" onmouseout="hide()">.rotateSpeed</a></span></pre>
+Скорость поворота. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="screenSpacePanning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('screen space panning - панорамирование пространства экрана')" onmouseout="hide()">.screenSpacePanning</a></span></pre>
+Свойство определяет, как позиция камеры изменяется при панорамировании.
+Если установлено значение&nbsp;<tt>true</tt>, панорамирование происходит в пространстве экрана. В противном случае, камера поворачивается в плоскости ортогональной (перпендикулярной) к направлению камеры вверх.
+Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="target0"><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>target 0 - цель 0')" onmouseout="hide()">.target0</a></pre>
+Данное свойство используется внутри контрола методами <tt><a href="#saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>
+и <tt><a href="#reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>.<br><br>
+
+<pre id="target"><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">.target</a></pre>
+Точка фокуса элемента управления, вокруг которой вращается <a href="#object" onmouseover="show('OrbitControls.object')" onmouseout="hide()">камера</a>.
+Для смены фокуса элемента управления её можно в любой момент обновить вручную.<br><br>
+
+<pre id="zoom0"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom 0 - масштабирование 0')" onmouseout="hide()">.zoom0</a></span></pre>
+Данное свойство используется внутри контрола методами <tt><a href="#saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>
+и <tt><a href="#reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>.<br><br>
+
+<pre id="zoomSpeed"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom speed - скорость масштабирования')" onmouseout="hide()">.zoomSpeed</a></span></pre>
+Скорость масштабирования / наезда - отъезда камеры. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, отбросить')" onmouseout="hide()">.dispose</a></span>( )</pre>
+Метод удаляет все прослушиватели (приемники) событий.<br><br>
+
+<pre id="getAzimuthalAngle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get azimuthal angle - получить азимутальный угол')" onmouseout="hide()">.getAzimuthalAngle</a></span>( )</pre>
+Получает текущий угол поворота по горизонтали, в радианах.<br><br>
+
+<pre id="getPolarAngle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get polar angle - получить полярный угол')" onmouseout="hide()">.getPolarAngle</a></span>( )</pre>
+Получает текущий угол поворота по вертикали, в радианах.<br><br>
+
+<pre id="reset"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset - сброс')" onmouseout="hide()">.reset</a></span>( )</pre>
+Метод сбрасывает состояние элемента управления либо в его состояние, сохраненное последним вызовом <tt><a href="#saveState" onmouseover="show('OrbitControls.saveState')" onmouseout="hide()">saveState</a></tt>, либо в исходное состояние.<br><br>
+
+<pre id="saveState"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('save state - сохранить состояние')" onmouseout="hide()">.saveState</a></span>( )</pre>
+Сохраняет текущее состояние элемента управления. Впоследствии оно может быть восстановлено с помощью метода <tt><a href="#reset" onmouseover="show('OrbitControls.reset')" onmouseout="hide()">reset</a></tt>.<br><br>
+
+<pre id="update"><span onclick="showClick('false')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление')" onmouseout="hide()">.update</a></span>( )</pre>
+Метод обновляет элемент управления. Должен вызываться после любых изменений состояния камеры вручную или в цикле обновления,
+если установлены <tt><a href="#autoRotate" onmouseover="show('OrbitControls.autoRotate')" onmouseout="hide()">autoRotate</a></tt>
+или <tt><a href="#enableDamping" onmouseover="show('OrbitControls.enableDamping')" onmouseout="hide()">enableDamping</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/OrbitControls.js" target="_blank">OrbitControls.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

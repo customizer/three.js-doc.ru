@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Загрузчики</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>TGALoader</h3>
+Загрузчик для загрузки ресурса в формате <em>.tga</em>.<br>
+<a href="https://en.wikipedia.org/wiki/Truevision_TGA" target="_blank" onmouseover="show('TGA - Truevision TGA, часто называемый как TARGA, - это формат файлов для растровой графики, созданный Truevision Inc. (сейчас это часть Avid Technology)')" onmouseout="hide()">TGA</a> - формат файлов для растровой графики.<br>
+Вот статья Википедии <a href="https://ru.wikipedia.org/wiki/Truevision_TGA" target="_blank">о формате TGA</a> на русском языке.<br><br>
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создание экземпляра загрузчика)
+var loader = new THREE.TGALoader();<br>
+// load a resource (загрузка ресурса)
+var texture = loader.load(
+  // resource URL (URL-адрес ресурса)
+  'textures/crate_grey8.tga'<br>
+  // called when loading is completed (вызывается по завершении загрузки)
+  function ( texture ) {
+    console.log( 'Текстура загружена' );
+  },<br>
+  // called when the loading is in progresses (вызывается во время загрузки)
+  function ( xhr ) {
+     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+  },<br>
+  // called when the loading failes (вызывается при ошибках в загрузке)
+  function ( error ) {
+    console.log( 'Произошла ошибка' );
+  }
+);<br>
+var material = new THREE.MeshPhongMaterial( {
+  color: 0xffffff,
+  map: texture
+} );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_texture_tga" target="_blank">webgl / loader / texture / tga</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>TGALoader( <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="../../loaders/defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый TGALoader.<br><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><a href="../../textures/dataTexture.htm" onmouseover="show('DataTexture.<br>load - загрузить')" onmouseout="hide()">.load</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>tga</tt>-файла (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает загруженную <a href="../../textures/dataTexture.htm" onmouseover="show('DataTexture')" onmouseout="hide()">DataTexture</a>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения передает загруженную <a href="../../textures/dataTexture.htm" onmouseover="show('DataTexture')" onmouseout="hide()">текстуру</a> функции, указанную в <tt>onLoad</tt>.
+Эта текстура также сразу возвращается для немедленного использования (но может быть полностью не загружена).</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/TGALoader.js" target="_blank">TGALoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

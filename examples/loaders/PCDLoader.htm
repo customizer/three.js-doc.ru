@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Загрузчики</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>PCDLoader</h3>
+Загрузчик для загрузки ресурсов в формате <em>pcd</em>.<br>
+Формат файла <tt><span class="lnk" onmouseover="show('от Point Cloud Data - данные облака точек')" onmouseout="hide()">pcd</span></tt> - это формат файла для <a href="https://en.wikipedia.org/wiki/Point_Cloud_Library" target="_blank" onmouseover="show('point cloud library - библиотека облака точек')" onmouseout="hide()">Point Cloud Library</a>.
+Вот статья Википедии об <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE_%D1%82%D0%BE%D1%87%D0%B5%D0%BA" target="_blank">облаке точек</a>.<br>
+Загрузчик поддерживает формат ascii и бинарный формат. Сжатые бинарные файлы не поддерживаются.<br><br>
+
+<h4>Пример</h4>
+<pre>// instantiate a loader (создание экземпляра загрузчика)
+var loader = new THREE.PCDLoader();<br>
+// load a resource (загрузка ресурса)
+loader.load(
+  // resource URL (URL-адрес ресурса)
+  'pointcloud.pcd',<br>
+  // called when the resource is loaded (вызывается по завершении загрузки)
+  function ( mesh ) {
+    scene.add( mesh );
+  },<br>
+  // called when loading is in progresses (вызывается во время загрузки)
+  function ( xhr ) {
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+  },<br>
+  // called when loading has errors (вызывается при ошибках в загрузке)
+  function ( error ) {
+    console.log( 'Произошла ошибка' );
+  }
+);</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_pcd" target="_blank">webgl / loader / pcd</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>PCDLoader( <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="../../loaders/defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый PCDLoader.<br><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="littleEndian"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('little endian -  малым концом, т.е.<br>порядок следования байтов от<br>младшего разряда к старшему')" onmouseout="hide()">.littleEndian</a></span></pre>
+Значением по умолчанию является <tt>true</tt>.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>pcd</tt>-файла (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
+В качестве аргумента, эта функция получает загруженный <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с проанализированным содержимым ответа.<br><br>
+
+<pre id="parse"><a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick('Arraybuffer - значением является буферный массив')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('data - данные')" onmouseout="hide()">data</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - url-адрес')" onmouseout="hide()">url</a></span> )</pre>
+<div class=list><tt>data</tt> — двоичная структура для разбора (синтаксического анализа).</div>
+<div class=list><tt>url</tt> — имя файла или url-адрес файла.</div>
+Метод производит синтаксический анализ (разбор) двоичной структуры в формате <tt>pcd</tt> и возвращает <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.<br>
+Объект конвертируется в <a href="../../objects/points.htm" onmouseover="show('Points')" onmouseout="hide()">Points</a> с <a href="../../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>
+и <a href="../../materials/pointsMaterial.htm" onmouseover="show('PointsMaterial')" onmouseout="hide()">PointsMaterial</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/PCDLoader.js" target="_blank">PCDLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

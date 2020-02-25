@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Вспомогательные математические функции</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>Lut</h3>
+Представляет <a href="https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0" target="_blank" onmouseover="show('lut - сокращ. англ. слов lookup table - таблица поиска, просмотра')" onmouseout="hide()">таблицу поиска</a> для карт цвета.
+Она используется для определения значений цвета из ряда значений данных.<br>
+Вот ещё <a href="https://dic.academic.ru/dic.nsf/ruwiki/473635" target="_blank">статья о таблице поиска</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var lut = new THREE.Lut( "rainbow", 512 );
+var data = [0, 10.1, 4.2, 3.4, 63, 28];
+lut.setMax(63);
+color = lut.getColor(10);</pre><br>
+
+<h4>Конструктор</h4>
+<pre>Lut( <span class="lnk" onmouseover="show('color map - карта цвета')" onmouseout="hide()">colormap</span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('number of colors - число значений цвета')" onmouseout="hide()">numberOfColors</a></span> )</pre>
+<div class=list><tt>colormap</tt> — дополнительный, необязательный аргумент, устанавливающий цветовую карту из предустановленных цветовых карт.<br>
+Доступны карты цвета: "<tt><span class="lnk" onmouseover="show('rainbow - радуга')" onmouseout="hide()">rainbow</span></tt>", "<tt><span class="lnk" onmouseover="show('cool to warm - (от) холодного к теплому')" onmouseout="hide()">cooltowarm</span></tt>", "<tt><span class="lnk" onmouseover="show('black body - черное тело')" onmouseout="hide()">blackbody</span></tt>", "<tt><span class="lnk" onmouseover="show('gray scale - шкала серого цвета, шкала полутонов')" onmouseout="hide()">grayscale</span></tt>".</div>
+<div class=list><tt>numberOfColors</tt> — дополнительный, необязательный аргумент, который устанавливает количество значений цвета, используемых для представления  массива данных.</div><br>
+
+<h4>Свойства</h4>
+<div class="blockindent"><br>
+<pre id="minV"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minV - сокращ. англ. слов minimum value - минимальное значение')" onmouseout="hide()">.minV</a></span></pre>
+Минимальное значение, которое должно быть представлено в таблице поиска. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="maxV"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('maxV - сокращ. англ. слов maximum value - максимальное значение')" onmouseout="hide()">.maxV</a></span></pre>
+Максимальное значение, которое должно быть представлено в таблице поиска. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="legend"><span class="lnk" onmouseover="show('legend - легенда, надпись, условное обозначение')" onmouseout="hide()">.legend</span></pre>
+Обозначение (легенда) таблицы поиска.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="copy"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('copy - копировать')" onmouseout="hide()">.copy</a></span>( <a href="#" onmouseover="show('Lut.<br>lut - сокращ. англ. слов lookup table - таблица поиска, просмотра')" onmouseout="hide()">lut</a> ) <a href="#" onmouseover="show('Lut.<br>this - этот, данный')" onmouseout="hide()">this</a></pre>
+<div class=list><tt>color</tt> — копируемая таблица поиска.</div>
+Копирует заданную таблицу поиска.<br><br>
+
+<pre id="setLegendOn"><a href="#" onmouseover="show('Lut.<br>set legend on - установить со включенной легендой')" onmouseout="hide()">.setLegendOn</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+<div class=list><tt>parameters</tt> —<br>
+<tt>{ layout: value,</tt> <tt>position: { x: value, y: value, z: value },</tt> <tt>dimensions: { width: value, height: value } }</tt><br>
+&nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('layout - расположение, планировка, схема')" onmouseout="hide()">layout</span></tt> — горизонтальное (<tt>'horizontal'</tt>) или вертикальное (<tt>'vertical'</tt>) расположение.
+Значением по умолчанию является <tt>'vertical'</tt> - вертикальное.<br>
+&nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('position - позиция, положение, место')" onmouseout="hide()">position</span></tt> — положение легенды в координатах <tt>x</tt>, <tt>y</tt>, <tt>z</tt>. Значением по умолчанию является <tt>{ 'x': 4, 'y': 0, 'z': 0 }</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('dimensions - размеры')" onmouseout="hide()">dimensions</span></tt> — размеры (ширина (width) и высота (height)) легенды. Значением по умолчанию является <tt>{ 'width': 0.5, 'height': 3 }</tt>.</div>
+Метод устанавливает данную таблицу поиска с легендой.<br><br>
+
+<pre id="setLegendOff"><a href="#" onmouseover="show('Lut.<br>set legend off - установить с выключенной легендой')" onmouseout="hide()">.setLegendOff</a></pre>
+Метод устанавливает данную таблицу поиска без легенды.<br><br>
+
+<pre id="setLegendLabels"><a href="#" onmouseover="show('Lut.<br>set legend labels - установить метки легенды')" onmouseout="hide()">.setLegendLabels</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback - обратный (повторный) вызов')" onmouseout="hide()">callback</a></span> )</pre>
+<div class=list><tt>parameters</tt> —
+<tt>{ fontsize: value, fontface: value, title: value, um: value, ticks: value, decimal: value, notation: value }</tt><br>
+&nbsp; &#9679; &nbsp; <tt>fontsize</tt> — размер шрифта, используемого для надписей. Значение по умолчанию равно&nbsp;<tt>24</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>fontface</tt> — тип шрифта, используемого для надписей. Значением по умолчанию является <tt>'Arial'</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>title</tt> — заголовок (название) легенды. Значением по умолчанию является пустая строка&nbsp;<tt>''</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>um</tt> — единицы измерения значений легенды. Значением по умолчанию является пустая строка&nbsp;<tt>''</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>ticks</tt> — число тиков отображения легенды. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>decimal</tt> — число десятичных знаков, которые будут использоваться для значений легенды. Значение по умолчанию равно&nbsp;<tt>2</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt>notation</tt> — нотация (форма записи) легенды: <span class="lnk" onmouseover="show('standard - стандартная или обычная форма<br>записи чисел, т.е. десятичная')" onmouseout="hide()"><tt>'standard'</tt></span> (значение по умолчанию) или <span class="lnk" onmouseover="show('scientific - &quot;научная&quot; форма записи чисел, например - 1e3<br>т.е. в обычной записи это будет 1000')" onmouseout="hide()"><tt>'scientific'</tt></span>.</div>
+<div class=list><tt>callback</tt> — дополнительная, необязательная функция обратного вызова, которая будет использоваться для форматирования меток (label) легенды.</div>
+Метод устанавливает метки (label) легенды данной таблицы поиска (Lut).<br><br>
+
+<pre id="setminV"><a href="#" onmouseover="show('Lut.<br>set minV - установить значение minV')" onmouseout="hide()">.setminV</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('minV - сокращ. англ. слов minimum value - минимальное значение')" onmouseout="hide()">minV</a></span> )</pre>
+<div class=list><tt>minV</tt> — минимальное значение, которое должно быть представлено в таблице поиска.</div>
+Устанавливает данную таблицу просмотра (Lut) с представленным минимальным значением.<br><br>
+
+<pre id="setmaxV"><a href="#" onmouseover="show('Lut.<br>set maxV - установить значение maxV')" onmouseout="hide()">.setmaxV</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('maxV - сокращ. англ. слов maximum value - максимальное значение')" onmouseout="hide()">maxV</a></span> )</pre>
+<div class=list><tt>maxV</tt> - максимальное значение, которое должно быть представлено в таблице поиска.</div>
+Устанавливает данную таблицу просмотра (Lut) с представленным максимальным значением.<br><br>
+
+<pre id="changeNumberOfColors"><a href="#" onmouseover="show('Lut.<br>change number of colors - изменить число значений цвета')" onmouseout="hide()">.changeNumberOfColors</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('number of colors - число значений цвета')" onmouseout="hide()">numberOfColors</a></span> )</pre>
+<div class=list><tt>numberOfColors</tt> — количество значений цвета, используемых для представления  массива данных.</div>
+Устанавливает данную таблицу поиска (Lut) с количеством используемых значений цвета.<br><br>
+
+<pre id="changeColorMap"><a href="#" onmouseover="show('Lut.<br>change color map - изменить карту цвета')" onmouseout="hide()">.changeColorMap</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color map - карта цвета')" onmouseout="hide()">colorMap</a></span> )</pre>
+<div class=list><tt>colorMap</tt> — название карты цвета, которая будет использоваться для представления массива данных.</div>
+Метод устанавливает данную таблицу поиска (Lut) для использования с указанной картой цвета.<br><br>
+
+<pre id="addColorMap"><a href="#" onmouseover="show('Lut.<br>add color map - добавить карту цвета')" onmouseout="hide()">.addColorMap</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color map name - название карты цвета')" onmouseout="hide()">colorMapName</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array of colors - массив (значений) цвета')" onmouseout="hide()">arrayOfColors</a></span> )</pre>
+Метод помещает новую карту цвета (с названием, указанным в аргументе <tt>colorMapName</tt>, и массивом значений цвета из <tt>arrayOfColors</tt>) в набор доступных карт цвета.<br><br>
+
+<pre id="getColor"><a href="#" onmouseover="show('Lut.<br>get color - получить цвет')" onmouseout="hide()">.getColor</a>( value ) <a href="#" onmouseover="show('Lut.<br>this - этот, данный')" onmouseout="hide()">this</a></pre>
+<div class=list><tt>value</tt> — значение данных, отображаемое в виде цвета.</div>
+Метод возвращает <a href="../../math/color.htm" onmouseover="show('Color')" onmouseout="hide()">Color</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/math/Lut.js" target="_blank">Lut.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

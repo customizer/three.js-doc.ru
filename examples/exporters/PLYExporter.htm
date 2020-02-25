@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Экспортеры</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>PLYExporter</h3>
+Экспортер данных в формате <em>PLY</em>.<br>
+<a href="https://ru.wikipedia.org/wiki/PLY" target="_blank">PLY</a> (известный также как Polygon File Format и Stanford Triangle Format) - это формат файлов для эффективной передачи и загрузки простых статичных трехмерных данных в уплотненном формате, например 3D сканеров.
+Формат хранения данных поддерживает относительно простое описание одиночного объекта как списка условно плоских полигонов.
+Поддерживаются оба варианта формата: как ASCII, так и бинарная версия. Файл PLY может хранить позиции вершин, цвета, нормали и UV координаты. Текстуры и ссылки на текстуры не сохраняются.<br><br>
+
+<h4>Пример</h4>
+<pre>// Instantiate an exporter (создание экземпляра экспортера)
+var exporter = new THREE.PLYExporter();<br>
+// Parse the input and generate the ply output
+// анализ входных данных и генерация выходных данных в формате ply
+var data = exporter.parse( scene, options );
+downloadFile(data);</pre><br>
+
+<h4>Конструктор</h4>
+<pre>PLYExporter()</pre>
+Создает новый PLYExporter.<br><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="parse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( <a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>input - вход, входные данные')" onmouseout="hide()">input</a>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on completed - по завершении, по окончании')" onmouseout="hide()">onCompleted</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции, параметры')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list><tt>input</tt> — экспортируемый Object3D</div>
+<div class=list><tt>onCompleted</tt> — функция, которая будет вызвана по завершению экспорта. Аргументом этой функции будет созданный ресурс <tt>ply</tt> в виде <tt>ascii</tt> или в бинарной форме - как буферный массив.</div>
+<div class=list><tt>options</tt> — параметры экспорта<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('exclude attributes - исключить атрибуты')" onmouseout="hide()">excludeAttributes</a></span></tt> - массив.
+Определяет, какие свойства следует явно исключить из экспортированного PLY-файла. Действующими значениями являются '<tt>color</tt>', '<tt>normal</tt>', '<tt>uv</tt>', и '<tt>index</tt>'.
+Если исключаются индексы треугольников, то экспортируется множество (облако) точек. Значением по умолчанию является пустой массив.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('binary - бинарный, двоичный')" onmouseout="hide()">binary</a></span></tt> - логическое значение. Определяет, экспортировать ли в бинарном формате, возвращая буферный массив. Значением по умолчанию является&nbsp;<tt>false</tt>.</div>
+Создает на выходе файл данных в формате <tt>ply</tt> в виде строки или буферного массива (ascii или бинарный) из входного объекта.
+Возвращаемые данные также передаются функции, указанной в <tt>onDone</tt>, в качестве аргумента.
+Если объект состоит из нескольких дочерних объектов и геометрических элементов, они объединяются в файле в одну сетку.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/exporters/PLYExporter.js" target="_blank">PLYExporter.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

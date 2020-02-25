@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clock</h3>
+Объект для отслеживания времени. Он использует метод <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" target="_blank">performance.now()</a></tt>, если такая возможность имеется,
+в противном случае он обращается к менее точному методу <tt><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Date/now" target="_blank">Date.now()</a></tt>.
+Вот описание методов <tt><a href="https://developer.mozilla.org/ru/docs/Web/API/Performance/now" target="_blank">performance.now()</a></tt> и <tt><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/now" target="_blank">Date.now()</a></tt> на русском языке.<br><br>
+
+<h4>Конструктор</h4><br>
+<pre>Clock( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов auto start - автоматический запуск')" onmouseout="hide()">autoStart</a></span> )</pre>
+<div class=list><tt>autoStart</tt> — определяет, будет ли отсчет времени запускаться автоматически, (дополнительный, необязательный аргумент). Значением по умолчанию является&nbsp;<tt>true</tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class="blockindent"><br>
+<pre id="autoStart"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов auto start - автоматический запуск')" onmouseout="hide()">autoStart</a></span></pre>
+Если значение свойства установлено как <tt>true</tt>, отсчет времени запускается автоматически, при первом вызове обновления. Значением по умолчанию является&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="startTime"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов start time - начальное время')" onmouseout="hide()">.startTime</a></span></pre>
+Здесь хранится время последнего вызова метода <tt><a href="#start" onmouseover="show('Clock.start')" onmouseout="hide()">start</a></tt>.<br><br>
+
+<pre id="oldTime"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов old time - старое время')" onmouseout="hide()">.oldTime</a></span></pre>
+Это свойство хранит время последнего вызова методов <tt><a href="#start" onmouseover="show('Clock.start')" onmouseout="hide()">start</a></tt>, <tt><a href="#getElapsedTime" onmouseover="show('Clock.getElapsedTime')" onmouseout="hide()">getElapsedTime</a></tt> или <tt><a href="#getDelta" onmouseover="show('Clock.getDelta')" onmouseout="hide()">getDelta</a></tt>.<br><br>
+
+<pre id="elapsedTime"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов elapsed time - прошедшее (истекшее) время')" onmouseout="hide()">.elapsedTime</a></span></pre>
+Свойство отслеживает полное время работы часов (отсчет всего времени).<br><br>
+
+<pre id="running"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова running - ход, работа')" onmouseout="hide()">.running</a></span></pre>
+Данное свойство отслеживает, запущены часы или нет.</div><br>
+
+<h4>Методы</h4>
+<div class="blockindent"><br>
+<pre id="start"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова start - начало, старт')" onmouseout="hide()">.start</a></span>()</pre>
+Запускает отсчет времени. Также устанавливает значения свойств <tt><a href="#startTime" onmouseover="show('Clock.startTime')" onmouseout="hide()">startTime</a></tt> и <tt><a href="#oldTime" onmouseover="show('Clock.oldTime')" onmouseout="hide()">oldTime</a></tt> в текущее время,
+обнуляет значение свойства <tt><a href="#elapsedTime" onmouseover="show('Clock.elapsedTime')" onmouseout="hide()">elapsedTime</a></tt> и устанавливает значение свойства <tt><a href="#running" onmouseover="show('Clock.running')" onmouseout="hide()">running</a></tt> как <tt>true</tt>.<br><br>
+
+<pre id="3stop"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова stop - стоп, остановка')" onmouseout="hide()">.stop</a></span>()</pre>
+Останавливает отсчет времени и устанавливает значение свойства <tt><a href="#oldTime" onmouseover="show('Clock.oldTime')" onmouseout="hide()">oldTime</a></tt> на текущее время.<br><br>
+
+<pre id="getElapsedTime"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов get elapsed time - получить истекшее время')" onmouseout="hide()">.getElapsedTime</a></span>()</pre>
+Метод получает секунды, прошедшие после запуска отсчета времени и устанавливает значение свойства <tt><a href="#oldTime" onmouseover="show('Clock.oldTime')" onmouseout="hide()">oldTime</a></tt> на текущее время.<br>
+Если отсчет времени не запущен, а значение свойства <tt><a href="#autoStart" onmouseover="show('Clock.autoStart')" onmouseout="hide()">autoStart</a></tt> установлено как <tt>true</tt>, также запускает отсчет времени.<br><br>
+
+<pre id="getDelta"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов get delta - получить дельту, т.е. разницу, в данном случае - во времени')" onmouseout="hide()">.getDelta</a></span>()</pre>
+Метод получает секунды, прошедшие после установки значения свойства <tt><a href="#oldTime" onmouseover="show('Clock.oldTime')" onmouseout="hide()">oldTime</a></tt> и устанавливает значение <tt><a href="#oldTime" onmouseover="show('Clock.oldTime')" onmouseout="hide()">oldTime</a></tt> на текущее время.<br>
+Если отсчет времени не запущен, а значение свойства <tt><a href="#autoStart" onmouseover="show('Clock.autoStart')" onmouseout="hide()">autoStart</a></tt> установлено как <tt>true</tt>, также запускает отсчет времени.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/Clock.js" target="_blank">Clock.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

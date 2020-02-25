@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Raycaster</h3>
+<div class=note_trans><b>Примечание переводчика:</b> Raycasting в переводе на русский - бросание луча (ray - луч, casting - бросание). <a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Следовательно, raycaster - это тот, кто бросает лучи. В русском языке для перевода слова raycaster есть такие слова как излучатель и облучатель, а для raycasting - излучение, облучение, но прижилась озвучка английский слов - рейкастер, рейкастинг.<br><br>
+В основу рейкастинга положена идея испускать лучи из «глаз» наблюдателя, один луч на пиксель, и находить самый близкий объект, который блокирует путь распространения этого луча.
+Используя свойства материала и эффект света в сцене, алгоритм рейкастинга может определить затенение данного объекта. Предположение в упрощении основано на том, что если поверхность размещена перед светом, то свет достигнет поверхности и не будет блокирован или находиться в тени.
+Затенение поверхности вычисляется, используя алгоритмы затенения традиционной компьютерной трёхмерной графики.
+Одним из преимуществ рейкастинга является способность легко обрабатывать неплоские поверхности и сплошные тела вроде сферы или конуса.
+Если математическая поверхность может быть пересечена лучом, то она может быть отрендерена, используя рейкастинг. Сложные объекты могут быть созданы с использованием методов моделирования сплошных тел и легко отрендерены.</div></div>
+Данный класс предназначен для оказания помощи с <a href="https://en.wikipedia.org/wiki/Ray_casting" target="_blank">raycasting</a>. <a href="https://ru.wikipedia.org/wiki/Ray_casting" target="_blank">Вот описание рейкастинга</a> в Википедии на русском языке.
+Рейкастинг используется для выборки объекта курсором мышки среди других объектов (вычисляет какие из объектов в трехмерном пространстве накрывает курсор мышки).<br><br>
+
+<h4>Пример</h4>
+<pre>var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();<br>
+function onMouseMove( event ) {<br>
+  // calculate mouse position in normalized device coordinates
+  // (-1 to +1) for both components
+  // вычисляем положение курсора мышки в нормализованной
+  // системе координат (от -1 до +1) для обоих компонентов<br>
+  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;<br>
+}<br>
+function render() {<br>
+  // update the picking ray with the camera and mouse position
+  // обновляем луч выборки с позиций камеры и курсора мышки
+  raycaster.setFromCamera( mouse, camera );<br>
+  // calculate objects intersecting the picking ray
+  // вычисляем объекты, пересекающие луч выборки
+  var intersects = raycaster.intersectObjects( scene.children );<br>
+  for ( var i = 0; i &lt; intersects.length; i++ ) {<br>
+    intersects[ i ].object.material.color.set( 0xff0000 );<br>
+  }<br>
+  renderer.render( scene, camera );<br>
+}<br>
+window.addEventListener( 'mousemove', onMouseMove, false );<br>
+window.requestAnimationFrame(render);</pre>
+
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_interactive_cubes" target="_blank">рейкастинг к сетке (Mesh)</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_cubes_ortho" target="_blank">рейкастинг к сетке (Mesh) при использовании камеры с ортографической проекцией</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_buffergeometry" target="_blank">рейкастинг к сетке (Mesh) с BufferGeometry</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_lines" target="_blank">рейкастинг к линии</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_raycasting_points" target="_blank">рейкастинг к точкам</a>,
+<a href="https://threejs.org/examples/#webgl_geometry_terrain_raycast" target="_blank">рейкастинг к рельефу местности</a>,
+<a href="https://threejs.org/examples/#webgl_octree_raycasting" target="_blank">рейкастинг, использующий</a> <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%BA%D1%82%D0%BE%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE" onmouseover="show('Октодерево (дерево октантов, восьмеричное дерево, англ. octree)<br>— тип древовидной структуры данных, в которой у каждого внутреннего<br>узла ровно восемь «потомков». Восьмеричные деревья чаще всего<br>используются для разделения трёхмерного пространства, рекурсивно<br>разделяя его на восемь ячеек.')" onmouseout="hide()">октодерево (octree)</a>,
+<a href="https://threejs.org/examples/#webgl_interactive_voxelpainter" target="_blank">рейкастинг к окрашенным</a> <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%BE%D0%BA%D1%81%D0%B5%D0%BB" onmouseover="show('от англ. слова voxel — образованного из слов volumetric (объёмный)<br>и pixel (пиксель) — элемент объёмного изображения, содержащий<br>значение элемента растра в трёхмерном пространстве.')" onmouseout="hide()">вокселям</a>,
+<a href="https://threejs.org/examples/#webgl_raycast_texture" target="_blank">рейкастинг к текстуре</a></pre>
+
+<h4>Конструктор</h4>
+<pre>Raycaster( <a href="../math/vector3.htm" onmouseover="show('Vector3.<br>от англ. слова origin - начало, источник')" onmouseout="hide()">origin</a>, <a href="../math/vector3.htm" onmouseover="show('Vector3.<br>от англ. слова direction - направление')" onmouseout="hide()">direction</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова near - близко')" onmouseout="hide()">near</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова far - далеко')" onmouseout="hide()">far</a></span> ) {</pre>
+<div class=list><tt>origin</tt> -- начальный вектор, из которого берется луч.</div>
+<div class=list><tt>direction</tt> — направляющий вектор, который задает направление лучу, должен быть нормализованным.</div>
+<div class=list><tt>near</tt> — все возвращаемые результаты должны быть дальше <tt>near</tt>. Значение <tt>near</tt> не может быть отрицательным. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>far</tt> — все возвращаемые результаты должны быть ближе <tt>far</tt>. Значение <tt>far</tt> не может быть меньше значения <tt>near</tt>. Значение по умолчанию равно <tt>Infinity</tt> (бесконечность).</div>
+Данный метод создает новый объект raycaster.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="far"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова far - далеко')" onmouseout="hide()">.far</a></span></pre>
+Фактор дальности рейкастера. Это значение показывает какие объекты можно отбросить из-за расстояния (то есть, они не будут отображаться, так как их не видно из-за большого расстояния до них).
+Данное значение не может быть отрицательным, а также должно быть больше значения свойства <tt>near</tt>.<br><br>
+
+<pre id="linePrecision"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов line precision - линейная точность')" onmouseout="hide()">.linePrecision</a></span></pre>
+Фактор точности рейкастера при пересечении объектов <a href="../objects/line.htm" onmouseover="show('Line - линия')" onmouseout="hide()">Line</a>.<br><br>
+
+<pre id="near"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова near - близко')" onmouseout="hide()">.near</a></span></pre>
+Фактор близости рейкастера. Это значение показывает какие объекты можно отбросить из-за расстояния (то есть, они не будут отображаться, так как до них слишком близко).
+Данное значение не может быть отрицательным, а также должно быть меньше значения свойства <tt>far</tt>.<br><br>
+
+<pre id="params"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение англ. слова parameters - параметры')" onmouseout="hide()">.params</a></span></pre>
+Это объект со следующими свойствами:
+<pre>{
+  Mesh: {},
+  Line: {},
+  LOD: {},
+  Points: { threshold: 1 },
+  Sprite: {}
+}</pre><br>
+
+<pre id="ray"><a href="../math/ray.htm" onmouseover="show('ray - луч')" onmouseout="hide()">.ray</a></pre>
+<a href="../math/ray.htm" onmouseover="show('Ray')" onmouseout="hide()">Луч</a>, используемый для рейкастинга.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="set"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение англ. слова set - установить')" onmouseout="hide()">.set</a></span>( <a href="../math/vector3.htm" onmouseover="show('Vector3.<br>от англ. слова origin - начало, источник')" onmouseout="hide()">origin</a>, <a href="../math/vector3.htm" onmouseover="show('Vector3.<br>от англ. слова direction - направление')" onmouseout="hide()">direction</a> )</pre>
+<div class=list><tt>origin</tt> -- начальный вектор, из которого берется луч.</div>
+<div class=list><tt>direction</tt> -- нормализованный вектор направления, который задает направление луча.</div>
+Метод обновляет луч (ray) с новыми значениями <tt>origin</tt> и <tt>direction</tt>.<br><br>
+
+<pre id="setFromCamera"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов set from camera - установка от (позиции) камеры')" onmouseout="hide()">.setFromCamera</a></span>( <a href="../math/vector2.htm" onmouseover="show('Vector2.<br>сокращение англ. слова coordinates - координаты')" onmouseout="hide()">coords</a>, <a href="../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+<div class=list><tt>coords</tt> — двумерные (2D) координаты курсора мышки, в нормализованных координатах устройства (normalized device coordinates - NDC), т.е. значения координат <tt>X</tt> и <tt>Y</tt> должны быть в диапазоне между <tt>-1</tt> и <tt>1</tt>.</div>
+<div class=list><tt>camera</tt> -- камера, из которой должен исходить луч.</div>
+Метод обновляет луч (ray) с новыми координатами курсора мышки и камерой.<br><br>
+
+<pre id="intersectObject"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов intersect object - пересечение объекта')" onmouseout="hide()">.intersectObject</a></span>( <a href="object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('recursive - рекурсивный')" onmouseout="hide()">recursive</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a></span> )</pre>
+<div class=list><tt>object</tt> — объект, проверяемый на пересечение данным лучом.</div>
+<div class=list><tt>recursive</tt> - если установить как <tt>true</tt>, то будут проверены на пересечение все дочерние элементы данного объекта. В противном случае, метод проверит на пересечение с лучом только сам объект. По умолчанию значение равно <tt>false</tt>.</div>
+<div class=list><tt>optionalTarget</tt> — дополнительный, необязательный аргумент для установки результата метода, в противном случае будет создан новый экземпляр массива. Если аргумент определен, необходимо очищать этот массив перед каждым вызовом (т. е. <tt>array.length = 0;</tt>).</div>
+Метод проверяет на пересечение лучом объекта, при этом в проверку могут быть включены (или не включены) все потомки объекта. Случаи пересечения возвращаются отсортированными по расстоянию, первым оказывается самое ближайшее пересечение.<br>
+Возвращаемый массив пересечений...
+<pre>[ { distance, point, face, faceIndex, object }, ... ]</pre>
+<div class=blockindent>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние')" onmouseout="hide()">distance</a></span></tt>
+-- расстояние между началом луча и точкой пересечения.</div>
+<div class=list><tt><a href="../math/vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a></tt> -- точка пересечения, в "мировых" координатах.</div>
+<div class=list><tt><a href="face3.htm" onmouseover="show('Face3.<br>face - грань')" onmouseout="hide()">face</a></tt> -- пересекаемая грань.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('face index - индексы граней')" onmouseout="hide()">faceIndex</a></span></tt> -- индекс пересекаемой грани.</div>
+<div class=list><tt><a href="object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a></tt> -- пересекаемый объект.</div>
+<div class=list><tt><a href="../math/vector2.htm" onmouseover="show('Vector2.<br>uv - координаты U и V')" onmouseout="hide()">uv</a></tt> -- координаты U, V точки пересечения.</div></div>
+
+Raycaster делегирует методу <tt><a href="object3D.htm#raycast" onmouseover="show('Object3D.raycast')" onmouseout="hide()">raycast</a></tt> переданного объекта определение того, пересекает ли луч объект или нет. Это позволяет <a href="../objects/mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">сеткам</a> реагировать на рейкастинг по-другому, нежели <a href="../objects/line.htm" onmouseover="show('Line')" onmouseout="hide()">линии</a> и <a href="../objects/points.htm" onmouseover="show('Points')" onmouseout="hide()">облака точек</a>.<br><br>
+Обратите внимание, что для <a href="../objects/mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">сеток</a>, чтобы обнаружить грани, эти грани должны быть направлены передней стороной к исходной точке <a href="#ray" onmouseover="show('Raycaster.ray')" onmouseout="hide()">луча</a>; пересечение лучом грани через обратную (заднюю) сторону, не "замечает" грань.
+Чтобы луч срабатывал на обоих сторонах грани объекта, следует установить свойство <tt><a href="../materials/material.htm#side" onmouseover="show('Material.side')" onmouseout="hide()">side</a></tt> <a href="../objects/mesh.htm#material" onmouseover="show('Mesh.material')" onmouseout="hide()">материала</a> как <tt><a href="../constants/materials.htm#side" onmouseover="show('константа THREE.DoubleSide')" onmouseout="hide()">THREE.DoubleSide</a></tt>.<br><br>
+
+<pre id="intersectObjects"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intersect objects - пересечение объектов')" onmouseout="hide()">.intersectObjects</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('objects - объекты')" onmouseout="hide()">objects</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('recursive - рекурсивный')" onmouseout="hide()">recursive</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('optional target - дополнительная цель')" onmouseout="hide()">optionalTarget</a></span> )</pre>
+<div class=list><tt>objects</tt> — объекты, проверяемые на пересечение с данным лучом.</div>
+<div class=list><tt>recursive</tt> — если установить как <tt>true</tt>, то будут проверены на пересечение все дочерние элементы данного объекта. В противном случае, метод проверит на пересечение с лучом только сам объект. По умолчанию значение равно <tt>false</tt>.</div>
+<div class=list><tt>optionalTarget</tt> — дополнительный, необязательный аргумент для установки результата метода, в противном случае будет создан новый экземпляр массива. Если аргумент определен, необходимо очищать этот массив перед каждым вызовом (т. е. <tt>array.length = 0;</tt>).</div>
+Метод проверяет на пересечение лучом объекты, при этом в проверку могут быть включены (или не включены) все потомки объектов. Случаи пересечения возвращаются отсортированными по расстоянию, первым оказывается самое ближайшее пересечение.
+Пересечения возвращаются в том же самом виде, что и у метода <tt><a href="#intersectObject" onmouseover="show('Raycaster.intersectObject')" onmouseout="hide()">intersectObject</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/Raycaster.js" target="_blank">Raycaster.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

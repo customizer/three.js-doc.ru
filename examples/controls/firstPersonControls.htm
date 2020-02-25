@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Контролы (элементы управления)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FirstPersonControls</h3>
+Данный класс является альтернативной реализацией <a href="flyControls.htm" onmouseover="show('FlyControls')" onmouseout="hide()">FlyControls</a>.<br><br>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_terrain" target="_blank">webgl / geometry / terrain</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>FirstPersonControls( <a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">object</a>, <a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">domElement</a> )</pre>
+<div class=list><tt>object</tt> - камера, которой будем управлять.</div>
+<div class=list><tt>domElement</tt> - HTML-элемент, используемый для слушателей (listener) событий.</div>
+Создает новый экземпляр FirstPersonControls.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="activeLook"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('active look - ')" onmouseout="hide()">.activeLook</a></span></pre>
+Свойство определяет, есть или нет возможности осмотреться вокруг. Значением по умолчанию является&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="autoForward"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto forward - автоматическое (движение) вперед')" onmouseout="hide()">.autoForward</a></span></pre>
+Свойство определяет, будет ли камера автоматически двигаться вперед или нет. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="constrainVertical"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constrain vertical - ограничение по вертикали')" onmouseout="hide()">.constrainVertical</a></span></pre>
+Определяет будет или нет круговой осмотр ограничен по вертикали посредством свойств <tt><a href="#verticalMin" onmouseover="show('FirstPersonControls.verticalMin')" onmouseout="hide()">verticalMin</a></tt>
+и <tt><a href="#verticalMax" onmouseover="show('FirstPersonControls.verticalMax')" onmouseout="hide()">verticalMax</a></tt>. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="domElement"><a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">.domElement</a></pre>
+Элемент DOM-структуры HTML-документа, используемый для прослушивания событий мышки/тачпада. Это свойство должно быть передано в конструкторе; его изменение здесь не приведет к созданию новых слушателей событий.<br><br>
+
+<pre id="enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">.enabled</a></span></pre>
+Свойство определяет, включен или нет элемент управления (контрол). Значением по умолчанию является&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="heightCoef"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height coef(ficient) - коэффициент высоты')" onmouseout="hide()">.heightCoef</a></span></pre>
+Определяет, насколько быстро движется камера, когда её y-координата находится около <tt><a href="#heightMax" onmouseover="show('FirstPersonControls.heightMax')" onmouseout="hide()">heightMax</a></tt>.
+Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="heightMax"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height max - максимум по высоте')" onmouseout="hide()">.heightMax</a></span></pre>
+Верхний предел высоты камеры, используемый для регулировки скорости движения. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="heightMin"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height min - минимум по высоте')" onmouseout="hide()">.heightMin</a></span></pre>
+Нижний предел высоты камеры, используемый для регулировки скорости движения. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="heightSpeed"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height speed - скорость по высоте')" onmouseout="hide()">.heightSpeed</a></span></pre>
+Влияет ли высота камеры на скорость движения вперед. Значением по умолчанию является&nbsp;<tt>false</tt>.
+Для настройки используйте свойства <tt><a href="#heightCoef" onmouseover="show('FirstPersonControls.heightCoef')" onmouseout="hide()">heightCoef</a></tt>,
+<tt><a href="#heightMin" onmouseover="show('FirstPersonControls.heightMin')" onmouseout="hide()">heightMin</a></tt> и <tt><a href="#heightMax" onmouseover="show('FirstPersonControls.heightMax')" onmouseout="hide()">heightMax</a></tt>.<br><br>
+
+<pre id="lookVertical"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('look vertical - просмотр по вертикали')" onmouseout="hide()">.lookVertical</a></span></pre>
+Свойство определяет, имеется ли возможность посмотреть вкруговую по вертикали или нет. Значением по умолчанию является&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="lookSpeed"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('look speed - скорость просмотра')" onmouseout="hide()">.lookSpeed</a></span></pre>
+Скорость просмотра вокруг. Значение по умолчанию равно&nbsp;<tt>0.005</tt>.<br><br>
+
+<pre id="mouseDragOn"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mouse drag on - перетаскивание мышкой')" onmouseout="hide()">.mouseDragOn</a></span></pre>
+Определяет, могут или нет нажиматься кнопки мышки. Свойство только для считывания.<br><br>
+
+<pre id="movementSpeed"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('movement speed - скорость передвижения')" onmouseout="hide()">.movementSpeed</a></span></pre>
+Скорость передвижения. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="object"><a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">.object</a></pre>
+Камера, которой будем управлять.<br><br>
+
+<pre id="verticalMax"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertical max - максимум по вертикали')" onmouseout="hide()">.verticalMax</a></span></pre>
+Насколько высоко можно смотреть по вертикали, верхний предел.
+Значение измеряется в радианах и должно быть в диапазоне от&nbsp;<tt>0</tt> до&nbsp;<tt>Math.PI</tt>. Значение по умолчанию равно&nbsp;<tt>Math.PI</tt>.<br><br>
+
+<pre id="verticalMin"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertical min - минимум по вертикали')" onmouseout="hide()">.verticalMin</a></span></pre>
+Насколько низко можно смотреть по вертикали, нижний предел.
+Значение измеряется в радианах и должно быть в диапазоне от&nbsp;<tt>0</tt> до&nbsp;<tt>Math.PI</tt>. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - избавиться, устранить, выбросить')" onmouseout="hide()">.dispose</a></span>()</pre>
+Данный метод следует вызывать когда элемент управления (контрол) больше не требуется.<br><br>
+
+<pre id="handleResize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('handle resize - изменение размера вручную')" onmouseout="hide()">.handleResize</a></span>()</pre>
+Данный метод должен быть вызван при изменении размера окна приложения.<br><br>
+
+<pre id="lookAt"><a href="#" onmouseover="show('FirstPersonControls.<br>look at - смотреть на...')" onmouseout="hide()">.lookAt</a>( <a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>vector - вектор')" onmouseout="hide()">vector</a> )
+<a href="#" onmouseover="show('FirstPersonControls.<br>look at - смотреть на...')" onmouseout="hide()">.lookAt</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата X')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата Y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата Z')" onmouseout="hide()">z</a></span> )</pre>
+<div class=list><tt>vector</tt> - вектор, представляющий целевую позицию.<br>
+Дополнительно, можно представить положение в "мировом" пространстве компонентами вектора, координатами <tt>x</tt>, <tt>y</tt> и <tt>z</tt>.</div>
+Обеспечивает ориентацию камеры элементом управления (контролом) в направлении к заданному целевому положению.<br><br>
+
+<pre id="update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновить')" onmouseout="hide()">.update</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delta - буква греческого алфавита, обычно<br>обозначает какую-либо часть процесса,<br>объекта... - промежуток, разрыв и т.д.')" onmouseout="hide()">delta</a></span> )</pre>
+<div class=list><tt>delta</tt> - значение дельты (промежутка) времени.</div>
+Обновляет элемент управления (контрол). Обычно вызывается в анимационном цикле.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js" target="_blank">FirstPersonControls.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

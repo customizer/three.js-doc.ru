@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Geometry</h3>
+Основной класс для всех геометрий (но не для элементов <a href="bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>). Также его можно использовать напрямую для построения собственных и нестандартных геометрий.<br>
+С Geometry работать легче, чем с <a href="bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>, так как она хранит атрибуты, такие как вершины, грани, цвета и тому подобное непосредственно у себя (а не в буферах), хотя она, как правило, работает медленней.<br><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.Geometry();<br>
+geometry.vertices.push(
+	new THREE.Vector3( -10,  10, 0 ),
+	new THREE.Vector3( -10, -10, 0 ),
+	new THREE.Vector3(  10, -10, 0 )
+);<br>
+geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );<br>
+geometry.computeBoundingSphere();</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_minecraft" target="_blank">WebGL / geometry / minecraft</a>
+<a href="https://threejs.org/examples/#webgl_geometry_minecraft_ao" target="_blank">WebGL / geometry / minecraft / ao</a>
+<a href="https://threejs.org/examples/#webgl_geometry_nurbs" target="_blank">WebGL / geometry / nurbs</a>
+<a href="https://threejs.org/examples/#webgl_geometry_spline_editor" target="_blank">WebGL / geometry / spline / editor</a>
+<a href="https://threejs.org/examples/#webgl_interactive_cubes_gpu" target="_blank">WebGL / interactive / cubes / gpu</a>
+<a href="https://threejs.org/examples/#webgl_interactive_lines" target="_blank">WebGL / interactive / lines</a>
+<a href="https://threejs.org/examples/#webgl_interactive_raycasting_points" target="_blank">WebGL / interactive / raycasting / points</a>
+<a href="https://threejs.org/examples/#webgl_interactive_voxelpainter" target="_blank">WebGL / interactive / voxelpainter</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>Geometry()</pre>
+Конструктор не принимает аргументов.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="boundingBox"><a href="../math/box3.htm" onmouseover="show('Box3.<br>от англ. слова bounding box - ограничительная рамка')" onmouseout="hide()">.boundingBox</a></pre>
+Ограничительная рамка для Geometry, которую можно вычислить методом <tt><a href="#computeBoundingBox" onmouseover="show('Geometry.computeBoundingBox')" onmouseout="hide()">computeBoundingBox</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="boundingSphere"><a href="../math/sphere.htm" onmouseover="show('Sphere.<br>от англ. слова bounding sphere - ограничительная сфера')" onmouseout="hide()">.boundingSphere</a></pre>
+Ограничительная сфера для Geometry, которую можно вычислить методом <tt><a href="#computeBoundingSphere" onmouseover="show('Geometry.computeBoundingSphere')" onmouseout="hide()">computeBoundingSphere</a></tt>. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="colors"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова colors - цвета')" onmouseout="hide()">.colors</a></span></pre>
+Массив значений <a href="../math/color.htm" onmouseover="show('Color')" onmouseout="hide()">цвета</a> вершин, в соответствии с их числом и порядком.<br>
+Это свойство используется классами <a href="../objects/points.htm" onmouseover="show('Points - точки')" onmouseout="hide()">Points</a> и <a href="../objects/line.htm" onmouseover="show('Line - линия')" onmouseout="hide()">Line</a>,
+а также любыми классами, производными от их, такими как <a href="../objects/lineSegments.htm" onmouseover="show('LineSegments - отрезки линии')" onmouseout="hide()">LineSegments</a> и различными <a href="../helpers/helpers.htm" onmouseover="show('helpers - помощники')" onmouseout="hide()">вспомогательными элементами</a>.
+<a href="../objects/mesh.htm" onmouseover="show('Mesh - сетка')" onmouseout="hide()">Сетки</a> взамен этого свойства используют <a href="face3.htm#vertexColors" onmouseover="show('Face3.vertexColors - цвета вершин треугольной грани')" onmouseout="hide()">Face3.vertexColors</a>.<br>
+Чтобы задать обновление этого массива, нужно установить свойство <a href="#colorsNeedUpdate">Geometry.colorsNeedUpdate</a> как <tt>true</tt>.<br><br>
+
+<pre id="faces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова faces - грани')" onmouseout="hide()">.faces</a></span></pre>
+Массив <a href="face3.htm" onmouseover="show('Face3')" onmouseout="hide()">граней</a>.<br>
+Массив граней описывает, как для формирования граней соединяется каждая вершина модели. Кроме того, в нем содержится информация о цвете и нормалях граней и вершин.<br>
+Чтобы задать обновление этого массива, нужно установить свойство <a href="#elementsNeedUpdate" onmouseover="show('Geometry.elementsNeedUpdate')" onmouseout="hide()">elementsNeedUpdate</a> как <tt>true</tt>.<br><br>
+
+<pre id="faceVertexUvs"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('face vertex UVs - координаты UV вершин граней')" onmouseout="hide()">.faceVertexUvs</a></span></pre>
+Массив <a href="https://en.wikipedia.org/wiki/UV_mapping" target="_blank">слоев UV-координат</a> грани, используемый для <span class="lnk" onmouseover="show('т.е. отображения текстуры на геометрическом<br>элементе в соответствующем порядке, в данном<br>случае, изображение накладывается по<br>координатам UV')" onmouseout="hide()">картирования</span> текстур на геометрическом элементе. Каждый UV-слой является массивом UV-координат, соответствующих порядку и количеству вершин в гранях.<br>Вот эта статья Википедии о <a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">UV-преобразовании</a> на русском языке.<br>
+Чтобы задать обновление этого массива, нужно установить свойство <tt><a href="#uvsNeedUpdate" onmouseover="show('Geometry.uvsNeedUpdate')" onmouseout="hide()">uvsNeedUpdate</a></tt> как <tt>true</tt>.<br><br>
+
+<pre id="id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокр. англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
+Уникальный номер для данного экземпляра геометрического элемента.<br><br>
+
+<pre id="isGeometry"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов is geometry - является геометрией')" onmouseout="hide()">.isGeometry</a></span></pre>
+Используется для проверки, является ли данный класс и его производные геометрическими элементами. Значением по умолчанию является <tt>true</tt>.<br>
+Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="lineDistances"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов line distances - линейные расстояния')" onmouseout="hide()">.lineDistances</a></span></pre>
+Массив содержит расстояния между вершинами для геометрических элементов Line. Они нужны для правильной визуализации материала <a href="../materials/lineDashedMaterial.htm" onmouseover="show('LineDashedMaterial')" onmouseout="hide()">LineDashedMaterial</a>.
+Линейные расстояния могут быть сгенерированы автоматически методом <tt><a href="#computeLineDistances" onmouseover="show('Geometry.computeLineDistances')" onmouseout="hide()">computeLineDistances</a></tt>.<br><br>
+
+<pre id="morphTargets"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов morphing targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
+Массив из <a href="https://en.wikipedia.org/wiki/Morph_target_animation" target="_blank">целей морфинга</a>. Каждая цель морфинга является объектом Javascript:
+<pre>{ name: "targetName", vertices: [ new THREE.Vector3(), ... ] }</pre>
+Вершины морфинга соответствуют по порядку и количеству основным вершинам.<br><br>
+
+<pre id="morphNormals"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов morphing normals - нормали морфинга')" onmouseout="hide()">.morphNormals</a></span></pre>
+Массив нормалей морфинга. Нормали морфинга имеют структуру подобную целям морфинга, каждый набор нормалей является объектом Javascript:
+<pre>morphNormal = { name: "NormalName", normals: [ new THREE.Vector3(), ... ] }</pre><br>
+
+<pre id="name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова name - имя, название')" onmouseout="hide()">.name</a></span></pre>
+Дополнительное, необязательное имя для данной геометрии. Значением по умолчанию является пустая строка ("").<br><br>
+
+<pre id="skinWeights"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skin weights - веса кожи (оболочки)')" onmouseout="hide()">.skinWeights</a></span></pre>
+При работе с <a href="../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, каждая вершина может иметь до&nbsp;4 <a href="../objects/bone.htm" onmouseover="show('Bone')" onmouseout="hide()">костей</a>, влияющих на неё.
+Свойство <tt>skinWeights</tt> - это массив значений веса, который соответствует порядку вершин данной геометрии. Так например, первый <tt>skinWeight</tt> будет соответствовать первой вершине геометрического элемента.
+Поскольку каждая вершина может быть изменена&nbsp;4 костями, для представления веса оболочки каждой вершины используется <a href="../math/vector4.htm" onmouseover="show('Vector4')" onmouseout="hide()">четырехмерный вектор</a>.<br>
+Значения вектора обычно должны быть в диапазоне между&nbsp;<tt>0</tt> и&nbsp;<tt>1</tt>. Например при установке значения равным&nbsp;<tt>0</tt>, преобразование кости не будет иметь никакого эффекта.
+Если установить значение равным&nbsp;<tt>0.5</tt>, преобразование будет иметь эффект в&nbsp;50%. При установке&nbsp;<tt>1</tt>, будет влияние на&nbsp;100%. Если существует только одна кость, связанная с конкретной вершиной, нужно побеспокоиться только о первом компоненте приданного вектора, остальные можно проигнорировать и установить равными&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="skinIndices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skin indices - индексы кожи (оболочки)')" onmouseout="hide()">.skinIndices</a></span></pre>
+Точно также как у свойства <tt>skinWeights</tt>, значения свойста <tt>skinIndices</tt> соответствуют вершинам геометрического элемента. Каждая вершина может иметь до четырех вершин, связанных с ней.
+Поэтому, если посмотреть на первую вершину (vertex) и первый индекс оболочки (<tt>skinIndex</tt>), то они расскажут о костях, связанный с данной вершиной.
+Например предположим, первая вершина имеет значение <tt>( 10.05, 30.10, 12.12 )</tt>, значением первого индекса оболочки может быть <tt>( 10, 2, 0, 0 )</tt>, а первый вес оболочки имеет значение <tt>( 0.8, 0.2, 0, 0 )</tt>.
+В результате это будет воспринято первой вершиной и затем костью <tt>mesh.bones[10]</tt> и к ней применено 80% воздействия. Затем это будет воспринято костью <tt>skeleton.bones[2]</tt> и к ней применено 20% воздействия.
+Последующие два значения имеют вес равный&nbsp;<tt>0</tt>, так что они не будут оказывать никакого влияния.<br><br>
+Код подобного примера может выглядеть так:
+<pre>// e.g. (например)
+geometry.skinIndices[15] = new THREE.Vector4(   0,   5,   9, 0 );
+geometry.skinWeights[15] = new THREE.Vector4( 0.2, 0.5, 0.3, 0 );<br>
+// corresponds with the following vertex
+// соответствует следующей вершине
+geometry.vertices[15];<br>
+// these bones will be used like so:
+// эти кости будут использоваться вот так:
+skeleton.bones[0]; // weight of 0.2 (вес 0.2)
+skeleton.bones[5]; // weight of 0.5 (вес 0.5)
+skeleton.bones[9]; // weight of 0.3 (вес 0.3)
+skeleton.bones[10]; // weight of 0 (вес 0)</pre><br>
+
+<pre id="uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uuid - сокращ. англ. слов universally unique identifier<br>- универсальный уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank">UUID</a> данного экземпляра объекта.
+Вот статья Википедии о <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">UUID</a> на русском языке. Он присваивается автоматически и не должен редактироваться.<br><br>
+
+<pre id="vertices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices - вершины')" onmouseout="hide()">.vertices</a></span></pre>
+Массив <a href="../math/vector3.htm" onblur="hideClick()" onmouseover="show('Vector3')" onmouseout="hide()">вершин</a>.<br>
+Массив вершин содержит положение каждой вершины геометрического элемента.
+Для подачи сигнала по обновлению данного массива, значение свойства <tt><a href="#verticesNeedUpdate" onmouseover="show('Geometry.verticesNeedUpdate')" onmouseout="hide()">verticesNeedUpdate</a></tt> должно быть установлено как <tt>true</tt>.<br><br>
+
+<pre id="verticesNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices need update - вершинам нужно обновление')" onmouseout="hide()">.verticesNeedUpdate</a></span></pre>
+Установите значение свойства как <tt>true</tt>, если <a href="#vertices" onmouseover="show('Geometry.vertices')" onmouseout="hide()">массив вершин</a> был изменен.<br><br>
+
+<pre id="elementsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('elements need update - требуется обновление элементов')" onmouseout="hide()">.elementsNeedUpdate</a></span></pre>
+Установите значение свойства как <tt>true</tt>, если массив <a href="#faces" onmouseover="show('Geometry.faces')" onmouseout="hide()">граней</a> был изменен.<br><br>
+
+<pre id="uvsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('UVs need update - требуется обновление координат UV')" onmouseout="hide()">.uvsNeedUpdate</a></span></pre>
+Установите значение свойства как <tt>true</tt>, если массив <a href="#faceVertexUvs" onmouseover="show('Geometry.faceVertexUvs')" onmouseout="hide()">UV координат</a> был обновлен.<br><br>
+
+<pre id="normalsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('normals need update - требуется обновление нормалей')" onmouseout="hide()">.normalsNeedUpdate</a></span></pre>
+Установите значение свойства как <tt>true</tt>, если массив нормалей был изменен.<br><br>
+
+<pre id="colorsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('colors need update - требуется обновление цвета')" onmouseout="hide()">.colorsNeedUpdate</a></span></pre>
+Установите значение свойства как <tt>true</tt>, если <a href="#colors" onmouseover="show('Geometry.colors')" onmouseout="hide()">массив цвета</a> или массив <a href="face3.htm#color" onmouseover="show('Face3.color')" onmouseout="hide()">цвета граней</a> был изменен.<br><br>
+
+<pre id="groupsNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('groups need update - требуется обновление групп')" onmouseout="hide()">.groupsNeedUpdate</a></span></pre>
+Установите значение свойства как <tt>true</tt>, если был изменен <a href="face3.htm#materialIndex" onmouseover="show('Face3.materialIndex')" onmouseout="hide()">индекс материала треугольной грани</a>.<br><br>
+
+<pre id="lineDistancesNeedUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line distances need update - требуется<br>обновление линейных расстояний (между<br>вершинами для геометрий Line)')" onmouseout="hide()">.lineDistancesNeedUpdate</a></span></pre>
+Установите значение свойства как <tt>true</tt>, если массив <a href="#lineDistances" onmouseover="show('Geometry.lineDistances')" onmouseout="hide()">линейных расстояний</a> был изменен.</div><br>
+
+<h4>Методы</h4>
+В данном классе возможно применение методов <tt><a href="eventDispatcher.htm" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a></tt>.
+<div class=blockindent><br>
+<pre id="applyMatrix4"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('apply matrix - применить матрицу')" onmouseout="hide()">.applyMatrix4</a></span>( <a href="../math/matrix4.htm" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
+Метод передает изменение матрицы непосредственно в координаты вершин.<br><br>
+
+<pre id="center"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('center - центр, центрировать')" onmouseout="hide()">.center</a></span>( )</pre>
+Метод центрирует геометрический элемент относительно ограничительной рамки.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('Geometry')" onmouseout="hide()">.clone</a>( )</pre>
+Создает новый клон Geometry.<br>
+Этот метод копирует только вершины, грани и UV-координаты. Он не копирует все остальные свойства геометрического элемента.<br><br>
+
+<pre id="computeBoundingBox"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute bounding box - рассчитать ограничительную рамку')" onmouseout="hide()">.computeBoundingBox</a></span>( )</pre>
+Метод рассчитывает ограничительную рамку вокруг геометрического элемента, обновляя атрибут <tt><a href="#boundingBox" onmouseover="show('Geometry.boundingBox')" onmouseout="hide()">boundingBox</a></tt>.<br><br>
+
+<pre id="computeBoundingSphere"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute bounding sphere - рассчитать ограничительную сферу')" onmouseout="hide()">.computeBoundingSphere</a></span>( )</pre>
+Метод рассчитывает ограничительную сферу вокруг геометрического элемента, обновляя атрибут <tt><a href="#boundingSphere" onmouseover="show('Geometry.boundingSphere')" onmouseout="hide()">boundingSphere</a></tt>.<br>
+По умолчанию, ни ограничительные рамки, ни ограничительные сферы не рассчитываются. Они должны рассчитываться явно, в противном случае значения этих свойств равно <tt>null</tt>.<br><br>
+
+<pre id="computeFaceNormals"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute face normals - рассчитать нормали граней')" onmouseout="hide()">.computeFaceNormals</a></span>( )</pre>
+Метод вычисляет <a href="face3.htm#normal" onmouseover="show('Face3.normal')" onmouseout="hide()">нормали граней</a>.<br><br>
+
+<pre id="computeFlatVertexNormals"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute flat vertex normals - вычислить нормали вершин плоскости')" onmouseout="hide()">.computeFlatVertexNormals</a></span>( )</pre>
+Метод вычисляет <a href="face3.htm#vertexNormals" onmouseover="show('Face3.vertexNormals')" onmouseout="hide()">нормали вершин плоскости</a>. Устанавливает вершинную нормаль любой вершины каждой грани такой же, как нормаль грани.<br><br>
+
+<pre id="computeLineDistances"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute line distances - рассчитать линейные расстояния')" onmouseout="hide()">.computeLineDistances</a></span>( )</pre>
+Метод вычисляет <a href="#lineDistances" onmouseover="show('Geometry.lineDistances')" onmouseout="hide()">расстояния между вершинами</a>.<br><br>
+
+<pre id="computeMorphNormals"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute morph normals - рассчитать нормали морфинга')" onmouseout="hide()">.computeMorphNormals</a></span>( )</pre>
+Метод вычисляет <a href="#morphNormals" onmouseover="show('Geometry.morphNormals')" onmouseout="hide()">нормали морфинга</a>.<br><br>
+
+<pre id="computeVertexNormals"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute vertex normals - рассчитать нормали вершин')" onmouseout="hide()">.computeVertexNormals</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('area weighted - взвешенный по площади')" onmouseout="hide()">areaWeighted</a></span> )</pre>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('area weighted - взвешенный по площади')" onmouseout="hide()">areaWeighted</a></span></tt>
+- если установлено значение <tt>true</tt>, то вклад каждой нормали грани к нормали вершины определяется по площади грани. Значением по умолчанию является <tt>true</tt>.</div>
+Метод рассчитывает нормали вершин путем усреднения нормалей граней.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('Geometry.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('Geometry')" onmouseout="hide()">geometry</a> )</pre>
+Метод копирует вершины, грани и UV-координаты в данную геометрию. Никакие другие свойства не копируются.<br><br>
+
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - избавиться, устранить, выбросить')" onmouseout="hide()">.dispose</a></span>( )</pre>
+Метод удаляет объект из памяти.<br>
+Не забывайте вызывать этот метод при удалении геометрического элемента, так как он может привести к утечке памяти.<br><br>
+
+<pre id="fromBufferGeometry"><a href="#" onmouseover="show('Geometry.<br>from buffer geometry - из буферной геометрии')" onmouseout="hide()">.fromBufferGeometry</a>( <a href="bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">geometry</a> )</pre>
+Метод конвертирует <a href="bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a> в Geometry.<br><br>
+
+<pre id="lookAt"><a href="#" onmouseover="show('Geometry.<br>look at - смотреть на')" onmouseout="hide()">.lookAt</a>( <a href="../math/vector3.htm" onmouseover="show('Vector3.<br>vector - вектор')" onmouseout="hide()">vector</a> )</pre>
+<div class=list><tt>vector</tt> -  вектор, представляющий позицию в "мировом" пространстве, на которую должен "смотреть" геометрический элемент.</div>
+Метод поворачивает этот геометрический элемент к указанной точке пространства.
+Обычно выполняется как однократная операция, но не во время цикла визуализации.<br>
+Для стандартного обращения к сетке в реальном времени используйте метод <tt><a href="object3D.htm#lookAt" onmouseover="show('Object3D.lookAt')" onmouseout="hide()">Object3D.lookAt</a></tt>.<br><br>
+
+<pre id="merge"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('merge - сливать, соединять')" onmouseout="hide()">.merge</a></span>( <a href="#" onmouseover="show('Geometry.<br>geometry - геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="../math/matrix4.htm" onmouseover="show('Matrix4.<br>matrix - матрица')" onmouseout="hide()">matrix</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material index offset - смещение индекса материала')" onmouseout="hide()">materialIndexOffset</a></span> )</pre>
+Метод объединяет два геометрических элемента или геометрический элемент и геометрический элемент из объекта (используя преобразование объекта).<br><br>
+
+<pre id="mergeMesh"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('merge mesh - объединить сетку')" onmouseout="hide()">.mergeMesh</a></span>( <a href="../objects/mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">mesh</a> )</pre>
+Метод объединяет геометрию сетки (mesh) с данным геометрическим элементом, также применяется трансформация сетки.<br><br>
+
+<pre id="mergeVertices"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('merge vertices - объединить вершины')" onmouseout="hide()">.mergeVertices</a></span>( )</pre>
+При помощи <a href="https://ru.wikipedia.org/wiki/%D0%A5%D0%B5%D1%88-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0" target="_blank" onmouseover="show('хеш-таблица - hash map')" onmouseout="hide()">хеш-таблицы</a> проводится проверка вершин на дубликаты.<br>
+Продублированные вершины удаляются, а вершины граней обновляются.<br><br>
+
+<pre id="normalize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('normalize - нормализовать')" onmouseout="hide()">.normalize</a></span>( )</pre>
+Метод нормализует геометрический элемент.<br>
+Делает центрирование данного геометрического элемента и помещает его в ограничивающую сферу радиусом&nbsp;<tt>1.0</tt>.<br><br>
+
+<pre id="rotateX"><a href="#" onmouseover="show('Geometry.<br>rotate X - повернуть вокруг оси X')" onmouseout="hide()">.rotateX</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radians - радианы')" onmouseout="hide()">radians</a></span> )</pre>
+Поворот геометрического элемента вокруг оси <tt>X</tt>. Обычно он выполняется как однократная операция, но не во время цикла визуализации.<br>
+Для стандартного поворота сетки (mesh) в реальном времени используйте метод <tt><a href="object3D.htm#rotation" onmouseover="show('Object3D.rotation')" onmouseout="hide()">rotation</a></tt>.<br><br>
+
+<pre id="rotateY"><a href="#" onmouseover="show('Geometry.<br>rotate X - повернуть вокруг оси Y')" onmouseout="hide()">.rotateY</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radians - радианы')" onmouseout="hide()">radians</a></span> )</pre>
+Поворот геометрического элемента вокруг оси <tt>Y</tt>. Обычно он выполняется как однократная операция, но не во время цикла визуализации.<br>
+Для стандартного поворота сетки (mesh) в реальном времени используйте метод <tt><a href="object3D.htm#rotation" onmouseover="show('Object3D.rotation')" onmouseout="hide()">rotation</a></tt>.<br><br>
+
+<pre id="rotateZ"><a href="#" onmouseover="show('Geometry.<br>rotate X - повернуть вокруг оси Z')" onmouseout="hide()">.rotateZ</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radians - радианы')" onmouseout="hide()">radians</a></span> )</pre>
+Поворот геометрического элемента вокруг оси <tt>Z</tt>. Обычно он выполняется как однократная операция, но не во время цикла визуализации.<br>
+Для стандартного поворота сетки (mesh) в реальном времени используйте метод <tt><a href="object3D.htm#rotation" onmouseover="show('Object3D.rotation')" onmouseout="hide()">rotation</a></tt>.<br><br>
+
+<pre id="setFromPoints"><a href="#" onmouseover="show('Geometry.<br>set from points - установить из точек')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+Метод устанавливает вершины данного геометрического элемента из массива точек.<br><br>
+
+<pre id="sortFacesByMaterialIndex"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sort faces by material index - сортировать грани по индексу материала')" onmouseout="hide()">.sortFacesByMaterialIndex</a></span>( )</pre>
+Метод сортирует массив граней в соответствии с индексом материала. Для сложных геометрических элементов с несколкими материалами, это может привести к снижению вызовов прорисовки и улучшению производительности.<br><br>
+
+<pre id="scale"><a href="#" onmouseover="show('Geometry.<br>scale - масштаб')" onmouseout="hide()">.scale</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span> )</pre>
+Метод масштабирует данные геометрического элемента. Обычно выполняется как однократная операция, но не во время цикла визуализации.<br>
+Для обычного масштабирования сетки (mesh) в реальном времени используйте <tt><a href="object3D.htm#scale" onmouseover="show('Object3D.scale')" onmouseout="hide()">Object3D.scale</a></tt>.<br><br>
+
+<pre id="toJSON"><span onclick="showClick('JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - сокр. от англ. слов to JavaScript Object<br>Notation, — то есть, в текстовый формат описания<br>объекта, основанный на JavaScript')" onmouseout="hide()">.toJSON</a></span>( )</pre>
+Метод конвертирует геометрический элемент в JSON формат.<br><br>
+
+<pre id="translate"><a href="#" onmouseover="show('Geometry.<br>translate - перевод, перенос')" onmouseout="hide()">.translate</a>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата z')" onmouseout="hide()">z</a></span> )</pre>
+Метод переставляет геометрический элемент. Обычно выполняется как однократная операция, но не во время цикла визуализации.<br>
+Для обычного переноса сетки (mesh) в реальном времени используйте <tt><a href="object3D.htm#position" onmouseover="show('Object3D.position')" onmouseout="hide()">Object3D.position</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/Geometry.js" target="_blank">Geometry.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

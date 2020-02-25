@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - ConvexHull</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>HalfEdge</h3>
+Основа для полурёберной структуры данных (half-edge data structure),
+также известной как <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B2%D1%83%D1%81%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%80%D1%91%D0%B1%D0%B5%D1%80" target="_blank">двусвязный список рёбер</a>
+(doubly connected edge list - DCEL).<br><br>
+
+<h4>Конструктор</h4>
+<pre>HalfEdge( <a href="vertexNode.htm" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="face.htm" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
+<div class=list><tt>vertex</tt> - ссылка на свою целевую вершину.</div>
+<div class=list><tt>face</tt> - ссылка на свою грань.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="vertex"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">.vertex</a></pre>
+Ссылка на целевую вершину. Исходная вершина может быть получена при помощи запроса целевой вершины своего полуребра-двойника или целевой вершины предыдущего полуребра.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
+
+<pre id="prev"><a href="#" onmouseover="show('HalfEdge.<br>prev - сокращ. англ. слова previous - предыдущий')" onmouseout="hide()">.prev</a></pre>
+Ссылка на предыдущее полуребро той же самой грани. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="next"><a href="#" onmouseover="show('HalfEdge.<br>next - следующий')" onmouseout="hide()">.next</a></pre>
+Ссылка на следующее полуребро той же самой грани. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="twin"><a href="#" onmouseover="show('HalfEdge.<br>twin - двойной')" onmouseout="hide()">.twin</a></pre>
+Ссылка на парное полуребро (полуребро-близнец) для перехода на противоположную грань. Значением по умолчанию является <tt>null</tt>.<br><br>
+
+<pre id="face"><a href="face.htm" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">.face</a></pre>
+Каждое полуребро ограничивает отдельную грань и соответственно имеет ссылку на эту грань. Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="head"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>head - голова')" onmouseout="hide()">.head</a>( )</pre>
+Возвращает целевую вершину (вершину назначения).<br><br>
+
+<pre id="tail"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>tail - хвост')" onmouseout="hide()">.tail</a>()</pre>
+Возвращает исходную (начальную) вершину.<br><br>
+
+<pre id="length"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина')" onmouseout="hide()">.length</a></span>( )</pre>
+Возвращает <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">эвклидову длину</a> (расстояние по прямой) ребра.<br>
+Статья Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">эвклидовом расстоянии</a> на русском языке.<br><br>
+
+<pre id="lengthSquared"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length squared - квадрат длины, или длина во второй степени')" onmouseout="hide()">.lengthSquared</a></span>( )</pre>
+Возвращает квадрат <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">эвклидовой длины</a> (расстояние по прямой) ребра.<br>
+Статья Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%BE%D0%B2%D0%B0_%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0" target="_blank">эвклидовом расстоянии</a> на русском языке.<br><br>
+
+<pre id="setTwin"><a href="#" onmouseover="show('HalfEdge.<br>set twin - установить двойника (парное ребро)')" onmouseout="hide()">.setTwin</a>( <a href="#" onmouseover="show('HalfEdge.<br>edge - ребро')" onmouseout="hide()">.edge</a> )</pre>
+<div class=list><tt>edge</tt> - любое полуребро.</div>
+Метод устанавливает парное ребро (ребро-близнец) к данному полуребру. Также он правильно устанавливает двойную ссылку заданного полуребра.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/math/ConvexHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

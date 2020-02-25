@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EventDispatcher</h3>
+События JavaScript для настраиваемых объектов.<br>
+<a href="https://github.com/mrdoob/eventdispatcher.js" target="_blank">EventDispatcher на Гитхабе</a>.<br><br>
+<h4>Пример</h4>
+<pre>// Adding events to a custom object
+// Добавляем события в пользовательский объект
+var Car = function () {
+    this.start = function () {
+        this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
+    };
+};<br>
+// Mixin the EventDispatcher.prototype with the custom object prototype
+// Объединяем EventDispatcher.prototype с прототипом пользовательского объекта
+Object.assign( Car.prototype, EventDispatcher.prototype );<br>
+// Using events with the custom object
+// Использование событий с пользовательским объектом
+var car = new Car();
+car.addEventListener( 'start', function ( event ) {
+    alert( event.message );
+} );<br>
+car.start();</pre><br>
+<h4>Конструктор</h4>
+<pre><span class="lnk" onmouseover="show('от англ. слов add event dispatcher - диспетчер событий')" onmouseout="hide()">EventDispatcher</span>()</pre>
+Создает объект <tt>EventDispatcher</tt>.<br><br>
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="addEventListener"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов add event listener<br>- добавить приемник событий')" onmouseout="hide()">.addEventListener</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова listener - слушатель, приемник')" onmouseout="hide()">listener</a></span> )</pre>
+<div class=list><tt>type</tt> - тип принимаемого события.</div>
+<div class=list><tt>listener</tt> - функция, вызываемая при запуске события.</div>
+Добавляет приемник к типу события.<br><br>
+<pre id="hasEventListener"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов has event listener<br>- имеется приемник событий')" onmouseout="hide()">hasEventListener</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова listener - слушатель, приемник')" onmouseout="hide()">listener</a></span> )</pre>
+<div class=list><tt>type</tt> - тип принимаемого события.</div>
+<div class=list><tt>listener</tt> - функция, вызываемая при запуске события.</div>
+Проверяет, добавлен ли приемник к типу события.<br><br>
+<pre id="removeEventListener"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов remove event listener<br>- удалить приемник событий')" onmouseout="hide()">removeEventListenerremove</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова listener - слушатель, приемник')" onmouseout="hide()">listener</a></span> )</pre>
+<div class=list><tt>type</tt> - тип приемника удаляемого события.</div>
+<div class=list><tt>listener</tt> - функция удаляемого приемника.</div>
+Удаляет приемник с типом события.<br><br>
+<pre id="dispatchEvent"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов dispatch event - рассылка события')" onmouseout="hide()">dispatchEvent</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова event - событие')" onmouseout="hide()">event</a></span> )</pre>
+<div class=list><tt>event</tt> - запускаемое событие.</div>
+Запускает тип события.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/EventDispatcher.js" target="_blank">EventDispatcher.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

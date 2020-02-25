@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Константы</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Константы материалов</h3>
+Эти константы определяют свойства, общие для всех типов материала, за исключением операций комбинирования текстур (Texture Combine Operations),
+которые применяются только к <a href="../materials/meshBasicMaterial.htm#combine" onmouseover="show('MeshBasicMaterial.combine');" onmouseout="hide()">MeshBasicMaterial</a>,
+<a href="../materials/meshLambertMaterial.htm#combine" onmouseover="show('MeshLambertMaterial.combine');" onmouseout="hide()" onclick="backlight(this)">MeshLambertMaterial</a>
+и <a href="../materials/meshPhongMaterial.htm#combine" onmouseover="show('MeshPhongMaterial.combine');" onmouseout="hide()">MeshPhongMaterial</a>.<br><br>
+
+<h4 id="side">Сторона (side)</h4>
+<pre><span class="lnk" onmouseover="show('front side - лицевая (передняя) сторона');" onmouseout="hide()">THREE.FrontSide</span>
+<span class="lnk" onmouseover="show('back side - оборотная (задняя) сторона');" onmouseout="hide()">THREE.BackSide</span>
+<span class="lnk" onmouseover="show('double side - две стороны');" onmouseout="hide()">THREE.DoubleSide</span></pre>
+Эти константы определяют какая сторона грани будет отображаться - передняя (front), задняя (back) или обе.
+По умолчанию используется <span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">FrontSide</span>.<br><br>
+
+<h4 id="colors">Цвета (colors)</h4>
+<pre><span class="lnk" onmouseover="show('no colors - нет цвета');" onmouseout="hide()">THREE.NoColors</span>
+<span class="lnk" onmouseover="show('face colors - цвета граней (сторон)');" onmouseout="hide()">THREE.FaceColors</span>
+<span class="lnk" onmouseover="show('vertex colors - цвета вершин');" onmouseout="hide()">THREE.VertexColors</span></pre>
+<span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">NoColors</span> используется по умолчанию и применяет ко всем граням (поверхностям) цвет материала.<br>
+<span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">FaceColors</span> окрашивает грани (т.е. ячейки каркаса) в соответствии со значением цвета
+<a href="../math/color.htm" onmouseover="show('Color');" onmouseout="hide()"><tt>color</tt></a> каждой треугольной грани <a href="../core/face3.htm" onmouseover="show('Face3');" onmouseout="hide()">Face3</a>.<br>
+<span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">VertexColors</span> окрашивает грани в соответствии со значением
+<tt><a href="../core/face3.htm#vertexColors" onmouseover="show('Face3.vertexColors - цвета вершин треугольной грани<br>'+type_array);" onmouseout="hide()">vertexColors</a></tt> каждой из вершин грани <a href="../core/face3.htm" onmouseover="show('Face3');" onmouseout="hide()">Face3</a>.
+Это массив из трех значений <a href="../math/color.htm" onmouseover="show('Color');" onmouseout="hide()"><tt>color</tt></a>, по одному для каждой вершины грани.<br>
+Смотрите пример <a href="https://threejs.org/examples/webgl_geometry_colors" target="_blank">geometry / colors</a>.<br><br>
+
+<h4 id="blendingMode">Режим смешивания (blending mode)</h4>
+<pre><span class="lnk" onmouseover="show('no blending - нет смешивания');" onmouseout="hide()">THREE.NoBlending</span>
+<span class="lnk" onmouseover="show('normal blending - обычное смешивание');" onmouseout="hide()">THREE.NormalBlending</span>
+<span class="lnk" onmouseover="show('additive blending - смешивание с дополнением');" onmouseout="hide()">THREE.AdditiveBlending</span>
+<span class="lnk" onmouseover="show('subtractive blending - смешивание с вычитанием');" onmouseout="hide()">THREE.SubtractiveBlending</span>
+<span class="lnk" onmouseover="show('multiply blending - смешивание перемножением');" onmouseout="hide()">THREE.MultiplyBlending</span>
+<span class="lnk" onmouseover="show('custom blending - настраиваемое смешивание');" onmouseout="hide()">THREE.CustomBlending</span></pre>
+Эти константы управляют исходным и целевым уравнениями смешивания для каналов цвета (RGB) и канала прозрачности (Alpha) материала, отправляемых WebGLRenderer'у для использования в WebGL.<br>
+<span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">NormalBlending</span> используется по умолчанию.<br>
+Обратите внимание, что для использования <a href="customBlendingEquation.htm" onmouseover="show('CustomBlendingEquation');" onmouseout="hide()">констант настраиваемых уравнений смешивания</a> должен быть установлен режим <span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">CustomBlending</span>.<br>
+Смотрите пример <a href="https://threejs.org/examples/webgl_materials_blending" target="_blank">materials / blending</a>.<br><br>
+
+<h4 id="depthMode">Режим глубины (depth mode)</h4>
+<pre><span class="lnk" onmouseover="show('never depth - никогда нет глубины');" onmouseout="hide()">THREE.NeverDepth</span>
+<span class="lnk" onmouseover="show('always depth - глубина есть всегда');" onmouseout="hide()">THREE.AlwaysDepth</span>
+<span class="lnk" onmouseover="show('less depth - ме&#769;ньшая глубина');" onmouseout="hide()">THREE.LessDepth</span>
+<span class="lnk" onmouseover="show('less equal depth - глубина меньше или равна');" onmouseout="hide()">THREE.LessEqualDepth</span>
+<span class="lnk" onmouseover="show('greater equal depth - глубина больше или равна');" onmouseout="hide()">THREE.GreaterEqualDepth</span>
+<span class="lnk" onmouseover="show('greater depth - бо&#769;льшая глубина');" onmouseout="hide()">THREE.GreaterDepth</span>
+<span class="lnk" onmouseover="show('not equal depth - нет равной глубины');" onmouseout="hide()">THREE.NotEqualDepth</span></pre>
+Эти константы определяют функцию, используемую материалом для сравнения значения входящего пиксела глубины (т.е. значения по оси&nbsp;Z) с текущим значением буфера глубины. Если результатом этого сравнения будет значение&nbsp;<tt>true</tt>, пиксель будет прорисован.
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>never depth - никогда нет глубины')" onmouseout="hide()">NeverDepth</span> никогда не возвращает значение&nbsp;<tt>true</tt>.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>always depth - глубина есть всегда')" onmouseout="hide()">AlwaysDepth</span> всегда возвращает значение&nbsp;<tt>true</tt>.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>less depth - ме&#769;ньшая глубина')" onmouseout="hide()">LessDepth</span> возвращает значение&nbsp;<tt>true</tt>, если значение входящего пиксела Z-глубины меньше значения текущего буфера Z-глубины.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>less equal depth - глубина меньше или равна')" onmouseout="hide()">LessEqualDepth</span> возвращает значение <tt>true</tt>, если значение входящего пиксела Z-глубины меньше или равно значению текущего буфера Z-глубины. Эта константа применяется по умолчанию.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>greater equal depth - глубина больше или равна')" onmouseout="hide()">GreaterEqualDepth</span>, если значение входящего пиксела Z-глубины больше или равно значению текущего буфера Z-глубины.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>greater depth - бо&#769;льшая глубина')" onmouseout="hide()">GreaterDepth</span> возвращает значение <tt>true</tt>, если значение входящего пиксела Z-глубины меньше или равно значению текущего буфера Z-глубины.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>not equal depth - нет равной глубины')" onmouseout="hide()">NotEqualDepth</span> возвращает значение <tt>true</tt>, если значение входящего пиксела Z-глубины равно значению текущего буфера Z-глубины.</div><br>
+
+<h4 id="textureCombineOperations">Операции комбинирования (совмещения) текстур</h4>
+<pre><span class="lnk" onmouseover="show('multiply operation - операция умножения');" onmouseout="hide()">THREE.MultiplyOperation</span>
+<span class="lnk" onmouseover="show('mix operation - операция смешивания');" onmouseout="hide()">THREE.MixOperation</span>
+<span class="lnk" onmouseover="show('add operation - операция сложения');" onmouseout="hide()">THREE.AddOperation</span></pre>
+Эти операции определяют каков будет результат при совмещении цвета поверхности с картой цвета среды (если существует),
+для таких материалов как <a href="../materials/meshBasicMaterial.htm#combine" onmouseover="show('MeshBasicMaterial.combine');" onmouseout="hide()">MeshBasicMaterial</a>,
+<a href="../materials/meshLambertMaterial.htm#combine" onmouseover="show('MeshLambertMaterial.combine');" onmouseout="hide()" onclick="backlight(this)">MeshLambertMaterial</a>
+и <a href="../materials/meshPhongMaterial.htm#combine" onmouseover="show('MeshPhongMaterial.combine');" onmouseout="hide()">MeshPhongMaterial</a>.
+<div class=list><span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">MultiplyOperation</span> применяется по умолчанию и перемножает карту цвета среды и цвет поверхности.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">MixOperation</span> при смешивании двух цветов используется отражение.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const);" onmouseout="hide()">AddOperation</span> складывает два цвета.</div><br>
+
+<h4 id="stencilFunctions">Функции трафарета</h4>
+<pre><span class="lnk" onmouseover="show('сокращение от never stencil functions -<br>никогда (не применять) функции трафарета')" onmouseout="hide()">THREE.NeverStencilFunc</span>
+<span class="lnk" onmouseover="show('сокращение от less stencil function -<br>функция меньшего трафарета')" onmouseout="hide()">THREE.LessStencilFunc</span>
+<span class="lnk" onmouseover="show('сокращение от equal stencil function -<br>функция равного трафарета')" onmouseout="hide()">THREE.EqualStencilFunc</span>
+<span class="lnk" onmouseover="show('сокращение от less equal stencil function -<br>функция меньшего (или) равного трафарета')" onmouseout="hide()">THREE.LessEqualStencilFunc</span>
+<span class="lnk" onmouseover="show('сокращение от greater stencil function -<br>функция бо&#769;льшего трафарета')" onmouseout="hide()">THREE.GreaterStencilFunc</span>
+<span class="lnk" onmouseover="show('сокращение от not equal stencil function -<br>функция неравного трафарета')" onmouseout="hide()">THREE.NotEqualStencilFunc</span>
+<span class="lnk" onmouseover="show('сокращение от greater equal stencil function -<br>функция бо&#769;льшего (или) равного трафарета')" onmouseout="hide()">THREE.GreaterEqualStencilFunc</span>
+<span class="lnk" onmouseover="show('сокращение от always stencil functions -<br>функции трафарета (выполняются) всегда')" onmouseout="hide()">THREE.AlwaysStencilFunc</span></pre>
+Функции трафарета, используемые на материале, для определения выполнения или невыполнения операций трафарета.
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от never stencil functions -<br>никогда (не применять) функции трафарета')" onmouseout="hide()">NeverStencilFunc</span> никогда не возвращает значение&nbsp;<tt>true</tt>.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от less stencil function -<br>функция меньшего трафарета')" onmouseout="hide()">LessStencilFunc</span> возвращает значение&nbsp;<tt>true</tt>, если опорное (исходное) значение трафарета меньше текущего.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от equal stencil function -<br>функция равного трафарета')" onmouseout="hide()">EqualStencilFunc</span> возвращает значение&nbsp;<tt>true</tt>, если опорное (исходное) значение трафарета равно текущему значению трафарета.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от less equal stencil function -<br>функция меньшего (или) равного трафарета')" onmouseout="hide()">LessEqualStencilFunc</span> возвращает значение&nbsp;<tt>true</tt>, если опорное (исходное) значение трафарета меньше или равно текущему значению трафарета.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от greater stencil function -<br>функция бо&#769;льшего трафарета')" onmouseout="hide()">GreaterStencilFunc</span> возвращает значение&nbsp;<tt>true</tt>, если опорное (исходное) значение трафарета больше текущего.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от not equal stencil function -<br>функция неравного трафарета')" onmouseout="hide()">NotEqualStencilFunc</span> возвращает значение&nbsp;<tt>true</tt>, если опорное (исходное) значение трафарета неравно текущему значению трафарета.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от greater equal stencil function -<br>функция бо&#769;льшего (или) равного трафарета')" onmouseout="hide()">GreaterEqualStencilFunc</span> возвращает значение&nbsp;<tt>true</tt>, если опорное (исходное) значение трафарета больше или равно значению текущего трафарета.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от always stencil functions -<br>функции трафарета (выполняются) всегда')" onmouseout="hide()">AlwaysStencilFunc</span> всегда возвращает значение&nbsp;<tt>true</tt>.</div><br>
+
+<h4 id="stencilOperations">Операции трафарета</h4>
+<pre><span class="lnk" onmouseover="show('сокращение от zero stencil operation<br>- операция обнуления трафарета')" onmouseout="hide()">THREE.ZeroStencilOp</span>
+<span class="lnk" onmouseover="show('сокращение от keep stencil operation<br>- операция сохранения трафарета')" onmouseout="hide()">THREE.KeepStencilOp</span>
+<span class="lnk" onmouseover="show('сокращение от replace stencil operation<br>- операция замены трафарета')" onmouseout="hide()">THREE.ReplaceStencilOp</span>
+<span class="lnk" onmouseover="show('сокращение от increment stencil operation<br>- операция увеличения трафарета')" onmouseout="hide()">THREE.IncrementStencilOp</span>
+<span class="lnk" onmouseover="show('сокращение от decrement stencil operation<br>- операция уменьшения трафарета')" onmouseout="hide()">THREE.DecrementStencilOp</span>
+<span class="lnk" onmouseover="show('сокращение от increment wrap stencil operation<br>- операция увеличения оболочки трафарета')" onmouseout="hide()">THREE.IncrementWrapStencilOp</span>
+<span class="lnk" onmouseover="show('сокращение от decrement wrap stencil operation<br>- операция уменьшения оболочки трафарета')" onmouseout="hide()">THREE.DecrementWrapStencilOp</span>
+<span class="lnk" onmouseover="show('сокращение от invert stencil operation<br>- операция инвертирования трафарета')" onmouseout="hide()">THREE.InvertStencilOp</span></pre>
+Если передана предоставленная функция трафарета, с материалом выполняются операции на пикселе буфера трафарета.
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от zero stencil operation -<br>операция обнуления трафарета')" onmouseout="hide()">ZeroStencilOp</span> устанавливает значение данного трафарета равным&nbsp;<tt>0</tt>.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от keep stencil operation -<br>операция сохранения трафарета')" onmouseout="hide()">KeepStencilOp</span> не изменяет текущее значение трафарета</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от replace stencil operation -<br>операция замены трафарета')" onmouseout="hide()">ReplaceStencilOp</span> заменяет значение данного трафарета на указанное опорное (исходное) значение трафарета.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от increment stencil operation<br>- операция увеличения трафарета')" onmouseout="hide()">IncrementStencilOp</span> увеличивает текущее значение трафарета на&nbsp;<tt>1</tt>.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от decrement stencil operation<br>- операция уменьшения трафарета')" onmouseout="hide()">DecrementStencilOp</span> уменьшает текущее значение трафарета на&nbsp;<tt>1</tt></div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от increment wrap stencil operation<br>- операция увеличения оболочки трафарета')" onmouseout="hide()">IncrementWrapStencilOp</span> увеличивает текущее значение оболочки трафарета на&nbsp;<tt>1</tt>. Если значение увеличивается свыше&nbsp;<tt>255</tt>, оно устанавливается как&nbsp;<tt>0</tt>.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от decrement wrap stencil operation<br>- операция уменьшения оболочки трафарета')" onmouseout="hide()">DecrementWrapStencilOp</span> уменьшает текущее значение оболочки трафарета на&nbsp;<tt>1</tt>. Если значение становится меньше&nbsp;<tt>0</tt>, оно устанавливается как&nbsp;<tt>255</tt>.</div>
+<div class=list><span class="lnk" onmouseover="show(type_const+'<br><br>сокращение от invert stencil operation<br>- операция инвертирования трафарета')" onmouseout="hide()">InvertStencilOp</span> выполняет побитовую инверсию текущего значения трафарета.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

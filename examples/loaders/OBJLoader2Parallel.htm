@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Загрузчики</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+<h3>OBJLoader2Parallel</h3>
+
+A loader for loading a .obj resource.
+The OBJ file format is a simple data-format that represents 3D geometry in a human readable format as, the position of each vertex, the UV position of each texture coordinate vertex, vertex normals, and the faces that make each polygon defined as a list of vertices, and texture vertices.
+
+<h4>Примеры</h4>
+<pre>// instantiate the loader
+let objLoader2Parallel = new OBJLoader2Parallel();
+
+// define where to attach the data
+let local = new THREE.Object3D();
+
+// function called on successful completion of parsing
+function callbackOnLoad( object3d, message ) {
+	local.add( object3d );
+}
+
+// load a resource from provided URL in parallel to Main
+objLoader2Parallel.load( 'models/obj/walt/WaltHead.obj', callbackOnLoad, null, null, null );</pre>
+<h5>Другие примеры:</h5>
+<pre>webgl_loader_obj2_options - Example for multiple use-cases (parse and load, sync (see OBJLoader2) or in parallel to main)</pre>
+
+<h4>Конструктор</h4>
+<pre>OBJLoader2Parallel( <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="../../loaders/defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+
+Creates a new OBJLoader2Parallel. Use it to load OBJ data from files or to parse OBJ data from arraybuffer. It extends OBJLoader2 with the capability to run the parser in a web worker.
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="OBJLoader2.htm" onmouseover="show('OBJLoader2')" onmouseout="hide()">OBJLoader2</a>.
+<br><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="OBJLoader2.htm" onmouseover="show('OBJLoader2')" onmouseout="hide()">OBJLoader2</a>.
+<div class=blockindent><br>
+<pre id="parse"><a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">.parse</a></pre>
+Смотрите описание метода <tt><a href="OBJLoader2.htm#parse" onmouseover="show('OBJLoader2.parse')" onmouseout="hide()">OBJLoader2.parse</a></tt>.
+The callback OBJLoader2.onLoad needs to be set to be able to receive the content if used in parallel mode. Fallback is possible via OBJLoader2Parallel.setExecuteParallel.<br><br>
+
+<pre id="load">.load : null</pre>
+
+See OBJLoader2.load.<br><br>
+
+<pre id="setExecuteParallel">.setExecuteParallel ( executeParallel : boolean ) : OBJLoader2Parallel</pre>
+
+<div class=list>executeParallel - True or False</div>
+
+Execution of parse in parallel via Worker is default, but synchronous OBJLoader2 parsing can be enforced via false here.<br><br>
+
+<pre id="setPreferJsmWorker">.setPreferJsmWorker ( preferJsmWorker : boolean ) : OBJLoader2Parallel</pre>
+
+<div class=list>preferJsmWorker - True or False</div>
+
+Set whether jsm modules in workers should be used. This requires browser support which is currently only experimental.<br><br>
+
+<pre id="getWorkerExecutionSupport">.getWorkerExecutionSupport () : WorkerExecutionSupport</pre>
+
+Allow to get hold of WorkerExecutionSupport for configuration purposes.<br><br>
+
+<pre id="buildWorkerCode">.buildWorkerCode () : CodeBuilderInstructions </pre>
+
+Provide instructions on what is to be contained in the worker.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/OBJLoader2Parallel.js" target="_blank">OBJLoader2Parallel.js на github.com</a></div><br><br>
+<br><br>
+</body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Контролы (элементы управления)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../../core/eventDispatcher.htm" title="Переход к родительскому классу"><tt>EventDispatcher &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PointerLockControls</h3>
+Реализация данного класса основывается на <a href="https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API" target="_blank" onmouseover="show('Pointer lock API(прежнее название Mouse Lock API) обеспечивает методы ввода,<br>основанные на движении мыши, а не только абсолютно позиционированых<br>координатах курсора в окне. Это дает вам доступ к необработанным движениям<br>мыши, прикрепляет курсор мыши к любому элементу в окне браузера,<br>предоставляет возможность вычислять координаты мыши не ограниченной<br>областью окна проекции, и скрывает курсор из поля зрения.')" onmouseout="hide()">Pointer Lock API</a>
+(вот эта же <a href="https://developer.mozilla.org/ru/docs/Web/API/Pointer_Lock_API" target="_blank">статья на русском языке</a>).
+PointerLockControls - идеальный выбор для 3D-игр от первого лица.<br><br>
+
+<h4>Пример</h4>
+<pre>var controls = new PointerLockControls( camera );
+// add event listener to show/hide a UI (e.g. the game's menu)
+// добавляем слушатель событий для показа/скрытия <span class="lnk" onmouseover="show('UI - сокращ. англ. слов user interface - интерфейс пользователя')" onmouseout="hide()">UI</span> (например, меню игры)
+
+controls.addEventListener( 'lock', function () {
+	menu.style.display = 'none';
+} );
+
+controls.addEventListener( 'unlock', function () {
+	menu.style.display = 'block';
+} );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#misc_controls_pointerlock" target="_blank">misc / controls / pointerlock</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>PointerLockControls( <a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a>, <a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">domElement</a> )</pre>
+<div class=list><tt>camera</tt> - камера представленной сцены.</div>
+<div class=list><tt>domElement</tt> - HTML-элемент, используемый для слушателей (listener) событий (дополнительный, необязательный параметр).
+По умолчанию им является тело документа (тег <tt>&#60;body&#62;</tt>).</div>
+Создает новый экземпляр PointerLockControls.<br><br>
+
+<h4>События</h4>
+<div class=blockindent><br>
+<pre id="change_event"><span class="lnk" onmouseover="show('change - изменение')" onmouseout="hide()">change</span></pre>
+Событие происходит когда пользователь передвигает мышку.<br><br>
+
+<pre id="lock_event"><span class="lnk" onmouseover="show('lock - заблокировано')" onmouseout="hide()">lock</span></pre>
+Происходит когда указатель зафиксирован в состоянии "locked", т.е заблокировано (другими словами: курсор мышки скрыт и никакие действия с курсором невозможны).<br><br>
+
+<pre id="unlock_event"><span class="lnk" onmouseover="show('unlock - разблокировано')" onmouseout="hide()">unlock</span></pre>
+Происходит когда указатель зафиксирован в состоянии "unlocked", т.е разблокировано (другими словами: курсор мышки виден и возможны все доступные действия с курсором).</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="domElement"><a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">.domElement</a></pre>
+Элемент DOM-структуры HTML-документа, используемый для прослушивания событий мышки/тачпада. Это свойство должно быть передано в конструкторе; его изменение здесь не приведет к созданию новых слушателей событий.
+По умолчанию им является тело документа (тег <tt>&#60;body&#62;</tt>).<br><br>
+
+<pre id="isLocked"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is locked - является заблокированным')" onmouseout="hide()">.isLocked</a></span></pre>
+Свойство определяет, будет или нет блокироваться элемент управления (контрол).</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../../core/eventDispatcher.htm" onmouseover="show('EventDispatcher')" onmouseout="hide()">EventDispatcher</a>.
+<div class=blockindent><br>
+<pre id="connect"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('connect - подключить, соединить')" onmouseout="hide()">.connect</a></span>()</pre>
+Добавляет слушателей событий элемента управления (контрола).<br><br>
+
+<pre id="disconnect"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('disconnect - отключить, разъединить')" onmouseout="hide()">.disconnect</a></span>()</pre>
+Удаляет слушателей событий из элемента управления (контрола).<br><br>
+
+<pre id="getDirection"><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>get direction - получить направление')" onmouseout="hide()">.getDirection</a>( <a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>target</tt> - целевой вектор.</div>
+Метод возвращает направление, в которое смотрит камера.<br><br>
+
+<pre id="lock"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('lock - заблокировать, запереть')" onmouseout="hide()">.lock</a></span>()</pre>
+Метод активирует блокировку указателя (скрывает курсор).<br><br>
+
+<pre id="moveForward"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('move forward - передвинуть вперед')" onmouseout="hide()">.moveForward</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние, удаленность')" onmouseout="hide()">distance</a></span> )</pre>
+<div class=list><tt>distance</tt> - обозначенное расстояние, т.е. расстояние может быть как положительным, так и отрицательным.</div>
+Метод передвигает камеру вперед, параллельно плоскости <tt>xz</tt>, по осям координат. При этом предполагается, что за направление <tt><a href="../../core/object3D.htm#up" onmouseover="show('Свойство <tt>up</tt> камера наследует от своего родительского<br>объекта - Object3D.<br>Здесь же, видно в целях сокращения так написано, чтобы<br>пояснить положение описываемой плоскости <tt>xz</tt>. Можно<br>заменить словами &#171;движения камеры вверх&#187;')" onmouseout="hide()">camera.up</a></tt> берется ось <tt>y</tt> (up - верх).<br><br>
+
+<pre id="moveRight"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('move right - передвинуть вправо')" onmouseout="hide()">.moveRight</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние, удаленность')" onmouseout="hide()">distance</a></span> )</pre>
+<div class=list><tt>distance</tt> - обозначенное расстояние, т.е. расстояние может быть как положительным, так и отрицательным.</div>
+Передвигает камеру в сторону, параллельно плоскости <tt>xz</tt>, по осям координат.<br><br>
+
+<pre id="unlock"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unlock - разблокировать, открыть')" onmouseout="hide()">.unlock</a></span>()</pre>
+Метод выводит указатель из блокировки.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/PointerLockControls.js" target="_blank">PointerLockControls.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

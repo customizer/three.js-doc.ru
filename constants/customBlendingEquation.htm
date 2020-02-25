@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Константы</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>Константы настраиваемых уравнений смешивания</h3>
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/webgl_materials_blending_custom" target="_blank">materials / blending / custom</a></pre><br>
+
+<h4>Применение</h4>
+Константы работают со всеми типами материалов. Вначале устанавливается режим смешивания материалов (<tt>THREE.CustomBlending</tt>),
+затем устанавливается желаемые уравнение смешивания (<tt>Blending Equation</tt>), исходный фактор (<tt>Source Factor</tt>) и целевой фактор (<tt>Destination Factor</tt>).
+<pre>var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+material.blending = THREE.CustomBlending;
+material.blendEquation = THREE.AddEquation; // по умолчанию
+material.blendSrc = THREE.SrcAlphaFactor; // по умолчанию
+material.blendDst = THREE.OneMinusDstAlphaFactor; // по умолчанию</pre><br>
+
+<h4 id="blendingEquations">Уравнения смешивания (blending equations)</h4>
+<pre><span class="lnk" onmouseover="show('add equation - уравнение сложения');" onmouseout="hide()">THREE.AddEquation</span>
+<span class="lnk" onmouseover="show('subtract equation - уравнение вычитания');" onmouseout="hide()">THREE.SubtractEquation</span>
+<span class="lnk" onmouseover="show('reverse subtract equation - уравнение обратного вычитания,<br>т.е. такое же вычитание, но аргументы меняются местами.');" onmouseout="hide()">THREE.ReverseSubtractEquation</span>
+<span class="lnk" onmouseover="show('min equation - уравнение минимизации');" onmouseout="hide()">THREE.MinEquation</span>
+<span class="lnk" onmouseover="show('max equation - уравнение максимизации');" onmouseout="hide()">THREE.MaxEquation</span></pre><br>
+
+<h4 id="sourceFactors">Исходные факторы (source factors)</h4>
+<pre><span class="lnk" onmouseover="show('zero factor - нулевой фактор');" onmouseout="hide()">THREE.ZeroFactor</span>
+<span class="lnk" onmouseover="show('one factor - единичный фактор');" onmouseout="hide()">THREE.OneFactor</span>
+<span class="lnk" onmouseover="show('source color factor - исходный фактор цвета');" onmouseout="hide()">THREE.SrcColorFactor</span>
+<span class="lnk" onmouseover="show('one minus source color factor - исходный фактор цвета, за вычетом одного');" onmouseout="hide()">THREE.OneMinusSrcColorFactor</span>
+<span class="lnk" onmouseover="show('source alpha factor - исходный фактор альфа-канала (прозрачность)');" onmouseout="hide()">THREE.SrcAlphaFactor</span>
+<span class="lnk" onmouseover="show('one minus source alpha factor - исходный фактор альфа-канала (прозрачность), за вычетом одного');" onmouseout="hide()">THREE.OneMinusSrcAlphaFactor</span>
+<span class="lnk" onmouseover="show('destination alpha factor - целевой фактор альфа-канала (прозрачность)');" onmouseout="hide()">THREE.DstAlphaFactor</span>
+<span class="lnk" onmouseover="show('one minus destination alpha factor - целевой фактор альфа-канала (прозрачность), за вычетом одного');" onmouseout="hide()">THREE.OneMinusDstAlphaFactor</span>
+<span class="lnk" onmouseover="show('destination color factor - целевой фактор цвета');" onmouseout="hide()">THREE.DstColorFactor</span>
+<span class="lnk" onmouseover="show('one minus destination color factor - целевой фактор цвета, за вычетом одного');" onmouseout="hide()">THREE.OneMinusDstColorFactor</span>
+<span class="lnk" onmouseover="show('source alpha saturate factor - исходный фактор насыщения альфа-канала (прозрачность)');" onmouseout="hide()">THREE.SrcAlphaSaturateFactor</span></pre><br>
+
+<h4 id="destinationFactors">Целевые факторы (destination factors)</h4>
+Все исходные факторы работают и как целевые, за исключением <tt>THREE.SrcAlphaSaturateFactor</tt>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/constants.js" target="_blank">constants.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

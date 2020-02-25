@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - ConvexHull</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>Face</h3>
+Представляет секцию, ограниченную определенным числом полуребер. Текущая реализация предполагает, что грань всегда состоит из трех ребер.<br><br>
+
+<h4>Конструктор</h4>
+<pre>Face( )</pre>
+<br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="normal"><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>normal - нормаль')" onmouseout="hide()">.normal</a></pre>
+Вектор нормали к грани. Значением по умолчанию является <a href="../../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a> <tt>(0, 0, 0)</tt>.<br><br>
+
+<pre id="midpoint"><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>midpoint - средняя точка')" onmouseout="hide()">.midpoint</a></pre>
+Средняя точка или центроид грани. Значением по умолчанию является <a href="../../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерный вектор</a> <tt>(0, 0, 0)</tt>.<br><br>
+
+<pre id="area"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('area - площадь')" onmouseout="hide()">.area</a></span></pre>
+Площадь грани. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="constant"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('constant - постоянная, константа')" onmouseout="hide()">.constant</a></span></pre>
+Знаковое расстояние от грани до начала координат. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="outside"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>outside - за пределами, снаружи')" onmouseout="hide()">.outside</a></pre>
+Ссылка на вершину в списке вершин, которые может видеть данная грань. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="mark"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mark - метка')" onmouseout="hide()">.mark</a></span></pre>
+Свойство указывает, видима грань или удалена. Значением по умолчанию является '<tt>Visible</tt>'.<br><br>
+
+<pre id="edge"><a href="halfEdge.htm" onmouseover="show('HalfEdge.<br>edge - ребро, край')" onmouseout="hide()">.edge</a></pre>
+Ссылка на базовое ребро грани. Для получения всех ребер можно воспользоваться ссылкой <tt><a href="halfEdge.htm#next" onmouseover="show('HalfEdge.next')" onmouseout="hide()">next</a></tt> текущей грани. Значением по умолчанию является&nbsp;<tt>null</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="create"><a href="#" onmouseover="show('Face.<br>create - создать')" onmouseout="hide()">.create</a>( <a href="vertexNode.htm" onmouseover="show('VertexNode')" onmouseout="hide()">a</a>, <a href="vertexNode.htm" onmouseover="show('VertexNode')" onmouseout="hide()">b</a>, <a href="vertexNode.htm" onmouseover="show('VertexNode')" onmouseout="hide()">c</a> )</pre>
+<div class=list><tt>a</tt> - первая вершина грани.</div>
+<div class=list><tt>b</tt> - вторая вершина грани.</div>
+<div class=list><tt>c</tt> - третья вершина грани.</div>
+Создает грань.<br><br>
+
+<pre id="getEdge"><a href="halfEdge.htm" onmouseover="show('HalfEdge.<br>get edge - получить ребро')" onmouseout="hide()">.getEdge</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('i - сокращ. от англ. слова index - индекс')" onmouseout="hide()">i</a></span> )</pre>
+<div class=list><tt>i</tt> - индекс ребра.</div>
+Возвращает ребро по заданному индексу.<br><br>
+
+<pre id="compute"><a href="#" onmouseover="show('Face.<br>compute - вычислить')" onmouseout="hide()">.compute</a>( )</pre>
+Вычисляет все свойства этой грани.<br><br>
+
+<pre id="distanceToPoint"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance to point - расстояние до точки')" onmouseout="hide()">.distanceToPoint</a></span>( <a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>point - точка')" onmouseout="hide()">point</a> )</pre>
+<div class=list><tt>point</tt> - любая точка в трехмерном пространстве.</div>
+Возвращает знаковое расстояние от заданной точки до плоскости, представленной данной гранью.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/math/ConvexHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

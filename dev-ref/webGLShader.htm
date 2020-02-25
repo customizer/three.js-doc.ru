@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>WebGLShader</h3>
+Низкоуровневая функция для компиляции либо вершинного, либо шейдера фрагментов.<br>
+Подробнее можно прочитать на <a href="https://webglfundamentals.org/webgl/lessons/ru/webgl-fundamentals.html" target="_blank">https://webglfundamentals.org/webgl/lessons/ru/webgl-fundamentals.html</a><br><br>
+
+<h4>Пример</h4>
+<pre>var gl = renderer.context;<br>
+var glVertexShader = new THREE.WebGLShader( gl, gl.VERTEX_SHADER, vertexSourceCode );
+var glFragmentShader = new THREE.WebGLShader( gl, gl.FRAGMENT_SHADER, fragmentSourceCode );<br>
+var program = gl.createProgram();<br>
+gl.attachShader( program, glVertexShader );
+gl.attachShader( program, glFragmentShader );<br>
+gl.linkProgram( program );</pre><br>
+
+<h4>Функция</h4>
+<div class=blockindent><br>
+<pre><a href="#" onmouseover="show('WebGLShader.<br>objects - объекты')" onmouseout="hide()">objects</a>( <a href="#" onmouseover="show('WebGLContext.<br>gl - сокращ. от англ. слов graphics library - графическая библиотека')" onmouseout="hide()">gl</a>, <a href="#" onmouseover="show('WebGLEnum.<br>type - тип')" onmouseout="hide()">type</a>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('source - источник, исходник')" onmouseout="hide()">source</a></span> )</pre>
+<div class=list><tt>gl</tt> -- текущий контекст WebGL</div>
+<div class=list><tt>type</tt> -- тип шейдера WebGL, либо <tt>gl.VERTEX_SHADER</tt> (вершинный шейдер), либо <tt>gl.FRAGMENT_SHADER</tt> (шейдер фрагментов).</div>
+<div class=list><tt>source</tt> -- исходный код для шейдера</div>
+Функция скомпилирует (соберет) индивидуальный шейдер, но не увяжет (слинкует) его до полной <a href="webGLProgram.htm" onmouseover="show('WebGLProgram')" onmouseout="hide()">WebGLProgram</a>.
+<div class=note><b>Примечание:</b> Это функция, так что другие операторы использовать нельзя.</div></div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/webgl/WebGLShader.js" target="_blank">WebGLShader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

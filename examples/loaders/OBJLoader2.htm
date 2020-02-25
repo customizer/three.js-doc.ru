@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Загрузчики</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>OBJLoader2</h3>
+Загрузчик для загрузки ресурсов в формате <em>obj</em>.<br>
+<a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" target="_blank"  onmouseover="show('OBJ - сокращ. англ. слова object - объект')" onmouseout="hide()">Формат файла OBJ</a> - это простой формат данных,
+представляющий трехмерную геометрию в удобочитаемой для человека форме, в виде положения каждой вершины, UV-координат позиции каждой текстуры, связанных с вершиной, нормалей вершин,
+граней, образуемых каждым многоугольником, определяемым списком вершин, и вершин текстур.<br>
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/Obj" target="_blank">о формате obj</a> на русском языке.<br><br>
+
+<h4>Пример</h4>
+<pre>// instantiate the loader (создание экземпляра загрузчика)
+let loader = new THREE.OBJLoader2();<br>
+// function called on successful load (вызывается по успешному завершению загрузки)
+function callbackOnLoad ( object3d ) {
+  scene.add( object3d );
+};<br>
+// load a resource from provided URL synchronously
+// синхронная загрузка ресурса из предоставленного URL-адреса
+loader.load( 'obj/female02/female02.obj', callbackOnLoad, null, null, null );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_obj2" target="_blank">webgl/loader/obj2</a> - простой пример
+<a href="https://threejs.org/examples/#webgl_loader_obj2_options" target="_blank">webgl/loader/obj2/options</a> - пример нескольких вариантов использования (разбор, загрузка
+                            и запуск с инструкциями (сихронно или параллельно основному
+                            - смотрите описание <a href="OBJLoader2Parallel.htm" onmouseover="show('OBJLoader2Parallel')" onmouseout="hide()">OBJLoader2Parallel</a>))</pre><br>
+
+<h4>Конструктор</h4>
+<pre>OBJLoader2( <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="../../loaders/defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый OBJLoader2.
+Используйте OBJLoader2 для загрузки данных в формате OBJ из файлов или для синтаксического анализа OBJ-данных из текста или буферного массива.<br><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+
+<pre id="parse"><a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a>( <span onclick="showClick('тип значения - либо буферный массив Uint8Array,<br>из 8-разрядных целых чисел без знака, либо строка')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('content - содержимое')" onmouseout="hide()">content</a></span> )</pre>
+<div class=list><tt>content</tt> - данные в формате OBJ или в виде массива из 8-разрядных целых чисел без знака (<tt>Uint8Array</tt>), или в виде строкового значения (<tt>string</tt>).</div>
+Метод проводит синхронный синтаксический анализ данных в формате OBJ из буферного массива или строкового значения и возвращает <a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>parse - разбор, синтаксический анализ')" onmouseout="hide()">базовый трехмерный объект</a> (<tt>baseObject3d</tt>).
+<div class=note_trans><b>Примечание переводчика:</b> Базовый трехмерный объект - это объект, уже прикрепленный к графу сцены, к которому будут присоединены новые сетки (mesh), смотрите метод <tt><a href="#setBaseObject3d" onmouseover="show('setBaseObject3d - установить базовый трехмерный объект')" onmouseout="hide()">setBaseObject3d</a></tt>.</div><br>
+
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on mesh alter - на изменение сетки (mesh)')" onmouseout="hide()">onMeshAlter</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес загружаемого файла.</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.
+В качестве аргумента, эта функция получает загруженный <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки (дополнительный, необязательный параметр).
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке (дополнительный, необязательный параметр). Функция принимает ошибку в качестве аргумента.</div>
+<div class=list><tt>onMeshAlter</tt> - функция, которая будет вызвана после того, как новые исходные данные сетки станут доступными для изменения. Дополнительный, необязательный параметр.</div>
+Используйте этот удобный метод для загрузки файла по указанному URL-адресу. По умолчанию загрузчик файлов использует буферный массив.<br><br>
+
+<pre id="setLogging"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set logging - установить ведение журнала (логирование)')" onmouseout="hide()">.setLogging</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">enabled</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('debug - отладка')" onmouseout="hide()">debug</a></span> )</pre>
+<div class=list><tt>enabled</tt> - логическое значение (<tt>true</tt> или <tt>false</tt>).</div>
+<div class=list><tt>debug</tt> - логическое значение (<tt>true</tt> или <tt>false</tt>).</div>
+Метод включает или отключает логирование (ведение журнала) в целом (за исключением предупреждений и ошибок), а также включает или отключает ведение журнала отладки.<br><br>
+
+<pre id="addMaterialPerSmoothingGroup"><a href="#" onmouseover="show('OBJLoader2.<br>add material per smoothing group - добавить материал в группу сглаживания')" onmouseout="hide()">.addMaterialPerSmoothingGroup</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material per smoothing group - материал в группу сглаживания')" onmouseout="hide()">materialPerSmoothingGroup</a></span> )</pre>
+<div class=list><tt>materialPerSmoothingGroup</tt> - логическое значение (<tt>true</tt> или <tt>false</tt>).</div>
+Метод указывает, должен ли материал создаваться для группы сглаживания.<br><br>
+
+<pre id="setUseOAsMesh"><a href="#" onmouseover="show('OBJLoader2.<br>setUseOAsMesh - установить использование в качестве сетки (меша)')" onmouseout="hide()">.setUseOAsMesh</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use o as mesh - использовать в качестве сетки (меша)')" onmouseout="hide()">useOAsMesh</a></span> )</pre>
+<div class=list><tt>useOAsMesh</tt> - логическое значение (<tt>true</tt> или <tt>false</tt>).</div>
+Обычно <tt>"o"</tt> является мета-информацией и не приводит к созданию новых сеток, но возможно принудительное создание сетки (mesh) при появлении <tt>"o"</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> Здесь <tt>"o"</tt> - это именованный объект смотрите раздел "Справочные материалы" статьи <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file#Referencing_materials" target="_blank">Wavefront .obj file</a> в англ. Википедии.</div><br>
+
+<pre id="setUseIndices"><a href="#" onmouseover="show('OBJLoader2.<br>set use indices - установить использование индексов')" onmouseout="hide()">.setUseIndices</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use indices - использовать индексы')" onmouseout="hide()">useIndices</a></span> )</pre>
+<div class=list><tt>useIndices</tt> - логическое значение.</div>
+Метод поручает загрузчикам создавать индексированную <a href="../../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.<br><br>
+
+<pre id="setDisregardNormals"><a href="#" onmouseover="show('OBJLoader2.<br>set disregard normals - установить пренебрежение нормалями')" onmouseout="hide()">.setDisregardNormals</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('disregard normals - игнорировать нормали')" onmouseout="hide()">disregardNormals</a></span> )</pre>
+<div class=list><tt>disregardNormals</tt> - логическое значение.</div>
+Метод указывает, следует ли полностью проигнорировать и восстановить нормали.<br><br>
+
+<pre id="setModelName"><a href="#" onmouseover="show('OBJLoader2.<br>set model name - установить название модели')" onmouseout="hide()">.setModelName</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('model name - название модели')" onmouseout="hide()">modelName</a></span> )</pre>
+<div class=list><tt>modelName</tt> - название модели.</div>
+Метод устанавливает название (имя) модели.<br><br>
+
+<pre id="setBaseObject3d"><a href="#" onmouseover="show('OBJLoader2.<br>set base object3d - установить<br>базовый трехмерный объект')" onmouseout="hide()">.setBaseObject3d</a>( <a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>base Object3d - базовый трехмерный объект')" onmouseout="hide()">baseObject3d</a> )</pre>
+<div class=list><tt>baseObject3d</tt> - объект, уже прикрепленный к графу сцены, к которому будут присоединены новые сетки (mesh).</div>
+Метод устанавливает узел, к которому будут непосредственно присоединены загруженные объекты.<br><br>
+
+<pre id="setMaterials"><a href="#" onmouseover="show('set materials - установить материалы')" onmouseout="hide()">.setMaterials</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('materials - материалы')" onmouseout="hide()">materials</a></span> )</pre>
+<div class=list><tt>materials</tt> - массив материалов.</div>
+Добавляет материалы как ассоциированный (объединенный) массив.<br><br>
+
+<pre id="setCallbackOnLoad"><a href="#" onmouseover="show('OBJLoader2.<br>set callback on load - установить функцию обратного вызова на загрузку')" onmouseout="hide()">.setCallbackOnLoad</a>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span> )</pre>
+<div class=list><tt>onLoad</tt> - функция, вызываемая при загрузке</div>
+Метод регистрирует функцию, которая вызывается по завершении синтаксического разбора.<br><br>
+
+<pre id="setCallbackOnAssetAvailable"><a href="#" onmouseover="show('OBJLoader2.<br>set callback on asset available - установить функцию<br>обратного вызова на доступность ресурса')" onmouseout="hide()">.setCallbackOnAssetAvailable</a>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on asset available - на доступность ресурса')" onmouseout="hide()">onAssetAvailable</a></span> )</pre>
+<div class=list><tt>onAssetAvailable</tt> - функция, вызываемая когда ресурс становится доступным.</div>
+Метод регистрирует функцию, которая вызывается как только ресурс (сетка или материал) становится доступным.<br><br>
+
+<pre id="setCallbackOnProgress"><a href="#" onmouseover="show('OBJLoader2.<br>set callback on progress - установить функцию<br>обратного вызова на ход процесса')" onmouseout="hide()">.setCallbackOnProgress</a>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span> )</pre>
+<div class=list><tt>onProgress</tt> - функция, вызываемая во время процесса.</div>
+Метод регистрирует функцию, которая используется для сообщений об общем ходе обработки.<br><br>
+
+<pre id="setCallbackOnError"><a href="#" onmouseover="show('OBJLoader2.<br>set callback on error - установить функцию<br>обратного вызова на ошибку')" onmouseout="hide()">.setCallbackOnError</a>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>onError</tt> - функция, вызываемая в случае ошибки процесса обработки.</div>
+Метод регистрирует функцию обработчика ошибок, которая вызывается в случае ошибки процесса обработки. Она может решить или вести журнал, или выдать исключение.<br><br>
+
+<pre id="setCallbackOnMeshAlter"><a href="#" onmouseover="show('OBJLoader2.<br>set callback on mesh alter - установить функцию<br>обратного вызова на изменение сетки')" onmouseout="hide()">.setCallbackOnMeshAlter</a>( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on mesh alter - на изменение сетки')" onmouseout="hide()">onMeshAlter</a></span> )</pre>
+<div class=list><tt>onMeshAlter</tt> - функция, вызываемая как только сетка становится доступной.</div>
+Метод регистрирует функцию, которая вызывается как только сетка становится доступной и она может быть изменена предоставленной функцией.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/OBJLoader2.js" target="_blank">OBJLoader2.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

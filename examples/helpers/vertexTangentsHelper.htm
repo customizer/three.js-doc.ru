@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Вспомогательные элементы</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+<span class="right_side"><a href="../../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> &nbsp; &nbsp; <a href="../../objects/line.htm" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a> &nbsp; &nbsp; <a href="../../objects/lineSegments.htm" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3>VertexTangentsHelper</h3>
+
+Renders arrows to visualize an object's vertex tangent vectors. Requires that tangents have been specified in a custom attribute or have been calculated using computeTangents.<br><br>
+
+This helper supports BufferGeometry only.<br><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxBufferGeometry( 10, 10, 10, 2, 2, 2 );
+var material = new THREE.MeshNormalMaterial();
+var box = new THREE.Mesh( geometry, material );
+
+var helper = new THREE.VertexTangentsHelper( box, 1, 0x00ffff, 1 );
+
+scene.add( box );
+scene.add( helper );</pre>
+
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL / helpers</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>VertexTangentsHelper( object : Object3D, size : Number, color : Hex, linewidth : Number )</pre>
+
+<div class=list><tt>object</tt> -- object for which to render vertex tangents.</div>
+<div class=list><tt>size</tt> -- (optional) length of the arrows. Default is 1.</div>
+<div class=list><tt>color</tt> -- hex color of the arrows. Default is 0x00ffff.</div>
+<div class=list><tt>linewidth</tt> -- (optional) width of the arrow lines. Default is 1. (Setting lineWidth is currently not supported.)</div><br>
+
+<h4>Свойства</h4>
+
+See the base LineSegments class for common properties.
+<div class=blockindent><br>
+<pre id="matrixAutoUpdate">.matrixAutoUpdate : object</pre>
+
+See Object3D.matrixAutoUpdate. Set to false here as the helper is using the objects's matrixWorld.
+<pre id="object">.object : Object3D</pre>
+
+The object for which the vertex tangents are being visualized.
+<pre id="size">.size : Number</pre>
+
+Length of the arrows. Default is 1.</div><br>
+
+<h4>Методы</h4>
+
+See the base LineSegments class for common methods.
+
+<div class=blockindent><br>
+<pre id="update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+
+Updates the vertex tangents preview based on the object's world transform.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/helpers/VertexTangentsHelper.js" target="_blank">VertexNormalsHelper.js на github.com</a></div>
+  
+<br><br>
+</body></html>

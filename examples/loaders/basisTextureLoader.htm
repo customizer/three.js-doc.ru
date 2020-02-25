@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Загрузчики</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../../loaders/loader.htm" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
+<h3>BasisTextureLoader</h3>
+Загрузчик для кодека текстур видеокарты (GPU) <a href="https://www.opennet.ru/opennews/art.shtml?num=50732" target="_blank">Basis Universal</a>.<br>
+<a href="https://github.com/BinomialLLC/basis_universal/" target="_blank">Basis Universal</a> - система сжатия "<a href="http://gamma.cs.unc.edu/GST/gst.pdf" target="_blank">сверхсжатых</a>" текстур GPU и видеотекстур,
+которая выдает файл в промежуточном формате (<tt>.basis</tt>) с очень высокой степенью сжатия, который, в свою очередь, может быть быстро перекодирован в широкий спектр форматов сжатия текстур GPU.<br>
+Данный загрузчик распараллеливает процесс перекодировки среди настраиваемого числа веб-обработчиков (web worker) перед передачей перекодированной сжатой текстуры обратно в основной поток.
+Требуемый транскодер (перекодировщик) WASM и оболочка JS доступны в каталоге <tt>examples/js/libs/basis</tt>.<br>
+
+<h4>Пример</h4>
+<pre>var basisLoader = new THREE.BasisTextureLoader();
+basisLoader.setTranscoderPath( 'examples/js/libs/basis/' );
+basisLoader.detectSupport( renderer );
+basisLoader.load( 'diffuse.basis', function ( texture ) {
+  var material = new THREE.MeshStandardMaterial( { map: texture } );<br>
+}, function () {
+  console.log( 'onProgress' );<br>
+}, function ( e ) {
+  console.error( e );
+} );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_texture_basis" target="_blank">webgl/loader/texture_basis</a></pre><br>
+
+<h4>Совместимость с браузером</h4>
+
+BasisTextureLoader transcodes input textures in '.basis' format to an appropriate compressed texture format for the target device, where possible. This allows the same source texture to be served across desktop, Android, and iOS devices, and transcoded into DXT, ETC1, or PVRTC1. Other output formats may be supported in the future.<br>
+
+This loader relies on ES6 Promises and Web Assembly, which are not supported in IE11.<br><br>
+
+<h4>Конструктор</h4>
+<pre>BasisTextureLoader( <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="../../loaders/defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый BasisTextureLoader.<br><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load">.load ( url : String, onLoad : Function, onProgress : Function, onError : Function ) : null</pre>
+<div class=list>url — A string containing the path/URL of the .basis file.</div>
+onLoad — A function to be called after the loading is successfully completed.
+onProgress — (optional) A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, that contains .total and .loaded bytes.
+onError — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.
+
+Load from url and call the onLoad function with the transcoded CompressedTexture.
+<pre id="detectSupport">.detectSupport ( renderer : WebGLRenderer ) : this</pre>
+
+renderer — A renderer instance.
+
+Detects hardware support for available compressed texture formats, to determine the output format for the transcoder. Must be called before loading a texture.
+<pre id="setCrossOrigin">.setCrossOrigin ( crossOrigin : String ) : this</pre>
+
+crossOrigin — Options are '', 'anonymous', or 'use-credentials'. Default is 'anonymous'.
+
+Sets options for CORS requests.
+<pre id="setTranscoderPath">.setTranscoderPath ( path : String ) : this</pre>
+
+path — Path to folder containing the WASM transcoder and JS wrapper.
+
+The WASM transcoder and JS wrapper are available from the examples/js/libs/basis directory.
+<pre id="setWorkerLimi">.setWorkerLimit ( limit : Number ) : this</pre>
+
+limit — Maximum number of workers. Default is '4'.
+
+Sets the maximum number of web workers to be allocated by this instance.
+<pre id="dispose">.dispose () : this</pre>
+
+Disposes the loader object, de-allocating any Web Workers created.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BasisTextureLoader.js" target="_blank">BasisTextureLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

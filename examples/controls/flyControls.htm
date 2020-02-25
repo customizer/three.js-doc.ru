@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Контролы (элементы управления)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FlyControls</h3>
+FlyControls обеспечивает навигацию аналогичную режимам полета в <span class="lnk" onmouseover="show('Digital content creation — создание цифрового контента')" onmouseout="hide()">DCC</span>-инструментах,
+таких как <a href="https://ru.wikipedia.org/wiki/Blender" target="_blank" onmouseover="show('Blender — профессиональное cвободное и открытое программное обеспечение для<br>создания трёхмерной компьютерной графики, включающее в себя средства<br>моделирования, скульптинга, анимации, симуляции, рендеринга, постобработки<br>и монтажа видео со звуком, компоновки с помощью «узлов» (Node Compositing),<br>а также создания 2D-анимаций.')" onmouseout="hide()">Blender</a>.
+Можно произвольно изменять положение камеры в трехмерном пространстве без каких-либо ограничений (например, сфокусироваться на конкретной цели).<br><br>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/#misc_controls_fly" target="_blank">misc / controls / fly</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>FlyControls( <a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">object</a>, <a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">domElement</a> )</pre>
+<div class=list><tt>object</tt> - камера, которой будем управлять.</div>
+<div class=list><tt>domElement</tt> - HTML-элемент, используемый для слушателей (listener) событий.</div>
+Создает новый экземпляр FlyControls.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="autoForward"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('auto forward - автоматическое (движение) вперед')" onmouseout="hide()">.autoForward</a></span></pre>
+Если установить как <tt>true</tt>, камера будет автоматически двигаться вперед (без остановки) с самого начала перемещения. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="domElement"><a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">.domElement</a></pre>
+Элемент DOM-структуры HTML-документа, используемый для прослушивания событий мышки/тачпада. Это свойство должно быть передано в конструкторе; его изменение здесь не приведет к созданию новых слушателей событий.<br><br>
+
+<pre id="dragToLook"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('drag to look - перетаскивание для просмотра')" onmouseout="hide()">.dragToLook</a></span></pre>
+Если установить как <tt>true</tt>, то смотреть вокруг можно только выполняя операцию перетаскивания. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="movementSpeed"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('movement speed - скорость движения')" onmouseout="hide()">.movementSpeed</a></span></pre>
+Скорость движения. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="object"><a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>object - объект')" onmouseout="hide()">.object</a></pre>
+Камера, которой будем управлять.<br><br>
+
+<pre id="rollSpeed"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('roll speed - скорость поворота')" onmouseout="hide()">.rollSpeed</a></span></pre>
+Скорость вращения. Значение по умолчанию равно&nbsp;<tt>0.005</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - избавиться, устранить, выбросить')" onmouseout="hide()">.dispose</a></span>()</pre>
+Данный метод следует вызывать когда элемент управления (контрол) больше не требуется.<br><br>
+
+<pre id="update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновить')" onmouseout="hide()">.update</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delta - буква греческого алфавита, обычно<br>обозначает какую-либо часть процесса,<br>объекта... - промежуток, разрыв и т.д.')" onmouseout="hide()">delta</a></span> )</pre>
+<div class=list><tt>delta</tt> - значение дельты (промежутка) времени.</div>
+Обновляет элемент управления (контрол). Обычно вызывается в анимационном цикле.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FlyControls.js" target="_blank">FlyControls.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

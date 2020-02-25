@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - ConvexHull</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>ConvexHull</h3>
+Общие сведения об алгоритме Quickhull: <span class="lnk" onmouseover="show('лекция Дирк Григориус на конференции<br>разработчиков игр в марте 2014 года')" onmouseout="hide()">Dirk Gregorius. March 2014, Game Developers Conference</span>: <a href="http://media.steampowered.com/apps/valve/2014/DirkGregorius_ImplementingQuickHull.pdf" target="_blank">Implementing QuickHull</a> (Реализация алгоритма QuickHull).<br>
+Вот <a href="https://archive.org/details/GDC2014Gregorius" target="_blank">видеоролик</a> с этой презентацией.
+Перевод этой статьи на русский язык <a href="https://customizer.github.io/DirkGregorius_QuickHull.ru/DirkGregorius_ImplementingQuickHull.htm" target="_blank">здесь</a>.
+<br><br>
+
+<h4>Конструктор</h4>
+<pre>ConvexHull( )</pre><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="tolerance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tolerance - допустимое отклонение')" onmouseout="hide()">.tolerance</a></span></pre>
+Значение эпсилон (epsilon), используемое для внутренних операций сравнения.
+Вычисление этого значения зависит от размера геометрического элемента. Значение по умолчанию равно&nbsp;<tt>-1</tt>.<br><br>
+
+<pre id="faces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('faces - грани')" onmouseout="hide()">.faces</a></span></pre>
+Созданные грани выпуклой оболочки. Значением по умолчанию является пустой массив.<br><br>
+
+<pre id="newFaces"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('new faces - новые грани')" onmouseout="hide()">.newFaces</a></span></pre>
+Данный массив содержит грани, созданные в течение одной итерации. Значением по умолчанию является пустой массив.<br><br>
+
+<pre id="assigned"><a href="vertexList.htm" onmouseover="show('VertexList.<br>assigned - присвоить, назначить')" onmouseout="hide()">.assigned</a></pre>
+Данный <a href="vertexList.htm" onmouseover="show('VertexList')" onmouseout="hide()">список вершин</a> содержит все вершины, назначенные грани. Значением по умолчанию является пустой список вершин.<br><br>
+
+<pre id="unassigned"><a href="vertexList.htm" onmouseover="show('VertexList.<br>unassigned - неназначить, отменить присвоенное')" onmouseout="hide()">.unassigned</a></pre>
+Данный <a href="vertexList.htm" onmouseover="show('VertexList')" onmouseout="hide()">список вершин</a> содержит все вершины, не назначенные грани. Значением по умолчанию является пустой список вершин.<br><br>
+
+<pre id="vertices"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vertices - вершины')" onmouseout="hide()">.vertices</a></span></pre>
+Внутреннее представление сведений о заданных геометрических элементах (массив <a href="vertexNode.htm" onmouseover="show('VertexNode')" onmouseout="hide()">вершин</a>).</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="setFromPoints"><a href="#" onmouseover="show('ConvexHull.<br>set from points - установить из точек')" onmouseout="hide()">.setFromPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> - массив <a href="../../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерных векторов</a>, который будет содержать получающаяся выпуклая оболочка.</div>
+Вычисляет выпуклую оболочку по заданному массиву точек.<br><br>
+
+<pre id="setFromObject"><a href="#" onmouseover="show('ConvexHull.<br>set from object - установить из объекта')" onmouseout="hide()">.setFromObject</a>( <a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
+<div class=list><tt>object</tt> - <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> по которому вычисляется выпуклая оболочка.</div>
+Вычисляет выпуклую оболочку по <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a> (включая его дочерние элементы), с учетом "мировых" преобразований как самого объекта, так и его потомков.<br><br>
+
+<pre id="makeEmpty"><a href="#" onmouseover="show('ConvexHull.<br>make empty - сделать пустой')" onmouseout="hide()">.makeEmpty</a>( )</pre>
+Делает данную выпуклую оболочку пустой.<br><br>
+
+<pre id="addVertexToFace"><a href="#" onmouseover="show('ConvexHull.<br>add vertex to face - добавить вершину к грани')" onmouseout="hide()">.addVertexToFace</a>( <a href="vertexNode.htm" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="face.htm" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
+<div class=list><tt>vertex</tt> - добавляемая вершина.</div>
+<div class=list><tt>face</tt> - целевая грань.</div>
+Метод добавляет вершину к списку 'назначенных' вершин и присваивает её заданной грани.<br><br>
+
+<pre id="removeVertexFromFace"><a href="#" onmouseover="show('ConvexHull.<br>remove vertex from face - удалить вершину грани')" onmouseout="hide()">.removeVertexFromFace</a>( <a href="vertexNode.htm" onmouseover="show('VertexNode.<br>vertex - вершина')" onmouseout="hide()">vertex</a>, <a href="face.htm" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
+<div class=list><tt>vertex</tt> - удаляемая вершина.</div>
+<div class=list><tt>face</tt> - целевая грань.</div>
+Метод удаляет вершину от указанной грани <tt>face</tt> и из списка 'назначенных' вершин. Также он гарантирует, что привязка от грани <tt>face</tt> к первой вершине из списка 'назначенных' вершин, которую она видит, после удаления сделана правильно.<br><br>
+
+<pre id="removeAllVerticesFromFace"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>remove all vertices from face - удалить все вершины грани')" onmouseout="hide()">.removeAllVerticesFromFace</a>( <a href="face.htm" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a> )</pre>
+<div class=list><tt>face</tt> - задаваемая грань.</div>
+Метод удаляет все видимые вершины из списка 'назначенных' вершин, которые заданная грань в состоянии видеть.<br><br>
+
+<pre id="deleteFaceVertices"><a href="#" onmouseover="show('ConvexHull.<br>delete face vertices - удалить вершины грани')" onmouseout="hide()">.deleteFaceVertices</a>( <a href="face.htm" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a>, <a href="face.htm" onmouseover="show('Face.<br>absorbing face - поглощающая грань')" onmouseout="hide()">absorbingFace</a> )</pre>
+<div class=list><tt>face</tt> - задаваемая грань.</div>
+<div class=list><tt>absorbingFace</tt> - дополнительная грань, которая пытается поглотить все вершины первой грани.</div>
+Метод удаляет все видимые вершины, которые грань <tt>face</tt> может видеть.<br>
+&nbsp; &#9679; &nbsp; Если аргумент '<tt>absorbingFace</tt>' не указан, то все удаленные вершины будут добавлены  в список 'неназначенных' вершин.<br>
+&nbsp; &#9679; &nbsp; Если аргумент '<tt>absorbingFace</tt>' существует, тогда данный метод назначит все вершины грани <tt>'face'</tt>, которые может видеть грань <tt>'absorbingFace'</tt>.<br>
+&nbsp; &#9679; &nbsp; Если вершину не видит <tt>'absorbingFace'</tt>, она добавляется в список 'неназначенных' ('unassigned') вершин.<br><br>
+
+<pre id="resolveUnassignedPoints"><a href="#" onmouseover="show('ConvexHull.<br>resolve unassigned points - разрешить неназначенные точки')" onmouseout="hide()">.resolveUnassignedPoints</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('new faces - новые грани')" onmouseout="hide()">newFaces</a></span> )</pre>
+<div class=list><tt>newFaces</tt> - массив новых граней.</div>
+Метод переназначает как можно больше вершин из списка 'неназначенных' вершин новым граням.<br><br>
+
+<pre id="computeExtremes"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compute extremes - вычислить экстремумы')" onmouseout="hide()">.computeExtremes</a></span>( )</pre>
+Метод вычисляет экстремальные значения (минимальный и максимальный векторы), которые будут использованы для расчета начальной оболочки.<br><br>
+
+<pre id="computeInitialHull"><a href="#" onmouseover="show('ConvexHull.<br>compute initial hull - вычислить начальную оболочку')" onmouseout="hide()">.computeInitialHull</a>( )</pre>
+Метод вычисляет начальную простейшую выпуклую оболочку, назначая её граням все точки, являющиеся кандидатами на формирование части оболочки.<br><br>
+
+<pre id="reindexFaces"><a href="#" onmouseover="show('ConvexHull.<br>reindex faces - переиндексация граней')" onmouseout="hide()">.reindexFaces</a>()</pre>
+Удаляет неактивные (то есть, удаленные) грани из внутреннего списка граней.<br><br>
+
+<pre id="nextVertexToAdd"><a href="vertexNode.htm" onmouseover="show('VertexNode.<br>next vertex to add - следующая добавляемая вершина')" onmouseout="hide()">.nextVertexToAdd</a>( )</pre>
+Метод выполняет поиск следующей вершины для создания грани с текущей оболочкой.<br>
+&nbsp; &#9679; &nbsp; Пусть начальная грань будет первой гранью, существующей в списке 'назначенных' вершин.<br>
+&nbsp; &#9679; &nbsp; Если грань не существует, то происходит возврат, поскольку больше вершин нет.<br>
+&nbsp; &#9679; &nbsp; В противном случае, для каждой вершины, которую видит грань, находим наиболее удаленную от нее вершину.<br><br>
+
+<pre id="computeHorizon"><a href="#" onmouseover="show('ConvexHull.<br>compute horizon - вычислить горизонт')" onmouseout="hide()">.computeHorizon</a>( <a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>eye point - точка зрения')" onmouseout="hide()">eyePoint</a>, <a href="halfEdge.htm" onmouseover="show('HalfEdge.<br>cross edge - ')" onmouseout="hide()">crossEdge</a>, <a href="face.htm" onmouseover="show('Face.<br>face - грань')" onmouseout="hide()">face</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('horizon - горизонт')" onmouseout="hide()">horizon</a></span> )</pre>
+<div class=list><tt>eyePoint</tt> - координаты точки в трехмерном пространстве.</div>
+<div class=list><tt>crossEdge</tt> - ребро, используемое для перехода к текущей грани.</div>
+<div class=list><tt>face</tt> - текущая проверяемая грань.</div>
+<div class=list><tt>horizon</tt> - ребра, составляющие часть горизонта, в направлении против часовой стрелки.</div>
+Метод вычисляет цепь полуребер, называемую горизонтом ('horizon'), в направлении против часовой стрелки.
+Чтобы ребро стало частью горизонта, оно должно соединять грань, видимую из точки просмотра ('eyeVertex'), и грань, которую нельзя увидеть из точки просмотра ('eyeVertex').<br><br>
+
+<pre id="addAdjoiningFace"><a href="halfEdge.htm" onmouseover="show('HalfEdge.<br>add adjoining face - добавить прилегающую грань')" onmouseout="hide()">.addAdjoiningFace</a>( <a href="vertexNode.htm" onmouseover="show('VertexNode.<br>eye vertex - вершина просмотра,<br>т.е. вершина, которая является<br>точкой просмотра')" onmouseout="hide()">eyeVertex</a>, <a href="halfEdge.htm" onmouseover="show('HalfEdge.<br>horizon edge - край (ребро) горизонта')" onmouseout="hide()">horizonEdge</a> )</pre>
+<div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
+<div class=list><tt>horizonEdge</tt> - один край горизонта.</div>
+Создает грань с вершинами '<span class="lnk" onmouseover="show('eyeVertex.point - вершина, которая<br>является точкой просмотра')" onmouseout="hide()">eyeVertex.point</span>', '<span class="lnk" onmouseover="show('horizonEdge.tail - хвостовая вершина<br>ребра, являющегося частью горизонта')" onmouseout="hide()">horizonEdge.tail</span>' и '<span class="lnk" onmouseover="show('horizonEdge.head - головная вершина<br>ребра, являющегося частью горизонта')" onmouseout="hide()">horizonEdge.head</span>' в направлении против часовой стрелки.<br>
+Все полуребра создаются в направлении против часовой стрелки, поэтому грань всегда указывает за пределы оболочки.<br><br>
+
+<pre id="addNewFaces"><a href="#" onmouseover="show('ConvexHull.<br>add new faces - добавить новые грани')" onmouseout="hide()">.addNewFaces</a>( <a href="vertexNode.htm" onmouseover="show('VertexNode.<br>eye vertex - вершина просмотра,<br>т.е. вершина, которая является<br>точкой просмотра')" onmouseout="hide()">eyeVertex</a>, <a href="halfEdge.htm" onmouseover="show('HalfEdge.<br>horizon - горизонт')" onmouseout="hide()">horizon</a> )</pre>
+<div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
+<div class=list><tt>horizon</tt> - массив полуребер, формирующий горизонт.</div>
+Метод добавляет к оболочке грани протяженности горизонта ('horizon.length'), каждая грань будет связана с противоположной гранью горизонта и гранями слева/справа.<br><br>
+
+<pre id="addVertexToHull"><a href="#" onmouseover="show('ConvexHull.<br>add vertex to hull - добавить вершину к оболочке')" onmouseout="hide()">.addVertexToHull</a>( <a href="vertexNode.htm" onmouseover="show('VertexNode.<br>eye vertex - вершина просмотра,<br>т.е. вершина, которая является<br>точкой просмотра')" onmouseout="hide()">eyeVertex</a> )</pre>
+<div class=list><tt>eyeVertex</tt> - вершина, добавляемая к оболочке.</div>
+Метод добавляет вершину к оболочке по следующему алгоритму:<br>
+&nbsp; &#9679; &nbsp; Вычисляется цепь полуребер, называемая горизонтом ('horizon'). Чтобы ребро стало частью горизонта, оно должно соединять грань, видимую из точки просмотра ('eyeVertex'), и грань, которую нельзя увидеть из точки просмотра ('eyeVertex').<br>
+&nbsp; &#9679; &nbsp; Все грани, которые могут быть видны из точки просмотра ('eyeVertex') имеют свои видимые вершины, удаляемые из списка назначенных вершин.<br>
+&nbsp; &#9679; &nbsp; С добавлением каждой точки просмотра ('eyeVertex') и каждого ребра горизонта ('horizon') создается новый набор граней. Каждая грань связана с противоположной гранью горизонта и гранями слева/справа.<br>
+&nbsp; &#9679; &nbsp; Вершины, удаленные со всех видимых граней, по возможности назначаются новым граням.<br><br>
+
+<pre id="cleanup"><a href="#" onmouseover="show('ConvexHull.<br>clean up - очистить')" onmouseout="hide()">.cleanup</a>( )</pre>
+Метод удаляет внутренние свойства, после вычисления выпуклой оболочки.<br><br>
+
+<pre id="compute"><a href="#" onmouseover="show('ConvexHull.<br>compute - вычислить')" onmouseout="hide()">.compute</a>( )</pre>
+Запускает выполнение алгоритма построения выпуклой оболочки (QuickHull).</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/math/ConvexHull.js" target="_blank">QuickHull.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

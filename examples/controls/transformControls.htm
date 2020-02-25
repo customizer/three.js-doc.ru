@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Контролы (элементы управления)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TransformControls</h3>
+Данный класс можно использовать для преобразования объектов в 3D пространстве посредством адаптации сходных интерактивных моделей из
+<span class="lnk" onmouseover="show('Digital content creation — создание цифрового контента')" onmouseout="hide()">DCC</span> инструментов вроде <a href="https://ru.wikipedia.org/wiki/Blender" target="_blank" onmouseover="show('Blender — профессиональное cвободное и открытое программное обеспечение для<br>создания трёхмерной компьютерной графики, включающее в себя средства<br>моделирования, скульптинга, анимации, симуляции, рендеринга, постобработки<br>и монтажа видео со звуком, компоновки с помощью «узлов» (Node Compositing),<br>а также создания 2D-анимаций.')" onmouseout="hide()">Blender</a>'а.
+В отличие от других элементов управления, он не предназначен для изменения камеры сцены.<br>
+Для работы TransformControls предполагается, что связанный с ним трехмерный объект является частью графа сцены.<br><br>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/#misc_controls_transform" target="_blank">misc / controls / transform</a></pre>
+
+<h4>Конструктор</h4>
+<pre>TransformControls( <a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">camera</a>, <a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">domElement</a> )</pre>
+<div class=list><tt>camera</tt> - камера представленной сцены.</div>
+<div class=list><tt>domElement</tt> - HTML-элемент, используемый для слушателей (listener) событий (дополнительный, необязательный параметр).
+По умолчанию им является документ целиком, тем не менее, если требуется чтобы элементы управления (контролы) работали только с определенным документом (например с <tt>canvas</tt>), его можно здесь указать.</div>
+Создает новый экземпляр TransformControls.<br><br>
+
+<h4>События</h4>
+<div class=blockindent><br>
+<pre id="change"><span class="lnk" onmouseover="show('change - изменение')" onmouseout="hide()">change</span></pre>
+Событие вызывается при выполнении любого типа изменения объекта или свойства. Изменения свойств являются отдельными событиями, на которые также можно добавить слушатели событий. Типом события является "<span class="lnk" onmouseover="show('property name changed - изменено поименованное свойство')" onmouseout="hide()">propertyname-changed</span>".<br><br>
+
+<pre id="mouseDown"><span class="lnk" onmouseover="show('mouse down - мышка вниз')" onmouseout="hide()">mouseDown</span></pre>
+Срабатывает когда указатель (мышка/тачпад) становится активным, например в случае мышки - курсор находится над объектом и нажата кнопка мышки.<br><br>
+
+<pre id="mouseUp"><span class="lnk" onmouseover="show('mouse up - мышка вверх')" onmouseout="hide()">mouseUp</span></pre>
+Срабатывает когда указатель (мышка/тачпад) перестает быть активным, например в случае мышки - курсор находится над объектом и отпущена кнопка мышки.<br><br>
+
+<pre id="objectChange"><span class="lnk" onmouseover="show('object change - изменение объекта')" onmouseout="hide()">objectChange</span></pre>
+Событие срабатывает при изменении управляемого 3D-объекта.</div><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="axis"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('axis - ось')" onmouseout="hide()">.axis</a></span></pre>
+Ось координат текущей трансформации.<br><br>
+
+<pre id="camera"><a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">.camera</a></pre>
+Камера представленной сцены.<br><br>
+
+<pre id="domElement"><a href="https://learn.javascript.ru/dom-nodes" onmouseover="show('HTML DOM Element, т.е. элемент объектной модели HTML документа<br>(«Document Object Model», коротко DOM) или любой тег, например<br><tt>body</tt> или <tt>div</tt>.')" onmouseout="hide()">.domElement</a></pre>
+Элемент DOM-структуры HTML-документа, используемый для прослушивания событий мышки/тачпада. Это свойство должно быть передано в конструкторе; его изменение здесь не приведет к созданию новых слушателей событий.<br><br>
+
+<pre id="dragging"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dragging - перетаскивание')" onmouseout="hide()">.dragging</a></span></pre>
+Определяет будет или нет в настоящий момент выполняться перетаскивание. Свойство предназначено только для считывания.<br><br>
+
+<pre id="enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">.enabled</a></span></pre>
+Свойство определяет, включен или нет элемент управления (контрол).<br><br>
+
+<pre id="mode"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mode - режим')" onmouseout="hide()">.mode</a></span></pre>
+Текущий режим трансформации. Возможными значениями являются "<tt class="lnk" onmouseover="show('translate - перенос, перемещение')" onmouseout="hide()">translate</tt>",
+"<tt class="lnk" onmouseover="show('rotate - поворот, вращение')" onmouseout="hide()">rotate</tt>" и "<tt class="lnk" onmouseover="show('scale - масштаб')" onmouseout="hide()">scale</tt>".
+Значение по умолчанию "<tt class="lnk" onmouseover="show('translate - перенос, перемещение')" onmouseout="hide()">translate</tt>".<br><br>
+
+<pre id="object"><a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">.object</a></pre>
+Управляемый контролом 3D-объект.<br><br>
+
+<pre id="rotationSnap"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotation snap - ')" onmouseout="hide()">.rotationSnap</a></span></pre>
+По умолчанию, 3D объекты постоянно вращаются. Если установить данное свойство равным какому-либо числовому значению (в радианах), можно определить за сколько шагов 3D объект будет повернут.
+ you can define in which steps the 3D object should be rotated. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="showX"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('show X - показать X')" onmouseout="hide()">.showX</a></span></pre>
+Определяет, будет или нет видна вспомогательная ось X. Значением по умолчанию является&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="showY"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('show Y - показать Y')" onmouseout="hide()">.showY</a></span></pre>
+Определяет, будет или нет видна вспомогательная ось Y. Значением по умолчанию является&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="showZ"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('show Z - показать Z')" onmouseout="hide()">.showZ</a></span></pre>
+Определяет, будет или нет видна вспомогательная ось Z. Значением по умолчанию является&nbsp;<tt>true</tt>.<br><br>
+
+<pre id="size"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер')" onmouseout="hide()">.size</a></span></pre>
+Размер вспомогательного UI интерфейса пользователя (оси/плоскости). Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="space"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('space - пространство, объем')" onmouseout="hide()">.space</a></span></pre>
+Свойство определяет, в каком пространстве координат следует выполнять изменения.
+Возможными значениями являются "<tt>world</tt>" и "<tt>local</tt>". Значение по умолчанию&nbsp;"<tt>world</tt>".<br><br>
+
+<pre id="translationSnap"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('translation snap - ')" onmouseout="hide()">.translationSnap</a></span></pre>
+По умолчанию 3D объекты постоянно перемещаются. Если установить в данном свойстве числовое значение (в "мировых" единицах), можно определить за сколько шагов 3D объект будет перенесен.
+By default, 3D objects are continously translated. If you set this property to a numeric value (world units), you can define in which steps the 3D object should be translated.
+Значением по умолчанию является&nbsp;<tt>null</tt>.</div><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="attach"><a href="#" onmouseover="show('TransformControls')" onmouseout="hide()">.attach</a>( <a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a> )</pre>
+<div class=list><tt>object</tt> - 3D объект, который должен быть изменен.</div>
+Задает 3D объект для изменения и обеспечивает видимость управляющего UI (интерфейс пользователя).<br><br>
+
+<pre id="detach"><a href="#" onmouseover="show('TransformControls')" onmouseout="hide()">.detach</a>()</pre>
+Метод удаляет текущий 3D объект из элемента управления (контрола) и делает невидимым управляющий UI (интерфейс пользователя).<br><br>
+
+<pre id="dispose"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - избавиться, устранить, выбросить')" onmouseout="hide()">.dispose</a></span>()</pre>
+Данный метод следует вызывать когда элемент управления (контрол) больше не требуется.<br><br>
+
+<pre id="getMode"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get mode - получить режим')" onmouseout="hide()">.getMode</a></span>()</pre>
+Возвращает установленный режим изменения.<br><br>
+
+<pre id="setMode"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set mode - установить режим')" onmouseout="hide()">.setMode</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('mode - режим')" onmouseout="hide()">mode</a></span> )</pre>
+<div class=list><tt>mode</tt> - режим изменения.</div>
+Метод устанавливает режим изменения.<br><br>
+
+<pre id="setRotationSnap"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set rotation snap')" onmouseout="hide()">.setRotationSnap</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotation snap - ')" onmouseout="hide()">rotationSnap</a></span> )</pre>
+
+<div class=list><tt>rotationSnap</tt> - The rotation snap.</div>
+
+Sets the rotation snap.<br><br>
+
+<pre id="setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер')" onmouseout="hide()">size</a></span> )</pre>
+<div class=list><tt>size</tt> - размер вспомогательного UI (интерфейса пользователя).</div>
+Метод устанавливает размер вспомогательного UI (интерфейса пользователя).<br><br>
+
+<pre id="setSpace"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set space - установить пространство')" onmouseout="hide()">.setSpace</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('space - пространство')" onmouseout="hide()">space</a></span> )</pre>
+<div class=list><tt>space</tt> - пространство координат, в которых применяется трансформация (изменение).</div>
+Метод устанавливает пространство координат, в которых применяется трансформация (изменение).<br><br>
+
+<pre id="setTranslationSnap"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set translation snap - установить')" onmouseout="hide()">.setTranslationSnap</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('translation snap - ')" onmouseout="hide()">translationSnap</a></span> )</pre>
+<div class=list><tt>translationSnap</tt> - The translation snap.</div>
+Sets the translation snap.</div><br>
+
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/controls/TransformControls.js" target="_blank">TransformControls.js на github.com</a></div><br><br>
+  
+<br><br>
+</body></html>

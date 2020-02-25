@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Экспортеры</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>ColladaExporter</h3>
+Экспортер данных в формате <a href="https://ru.wikipedia.org/wiki/COLLADA" target="_blank"><em>Collada</em></a>.<br>
+<a href="https://www.khronos.org/collada/" target="_blank" onmouseover="show('COLLADA устанавливает схему на основе XML как промежуточный формат<br>для облегчения переноса 3D-ресурсов между приложениями - позволяя<br>объединять различные 3D-разработки и инструменты обработки<br>содержимого в технологичный конвейер.<br>Промежуточный язык обеспечивает комплексное кодирование визуальных<br>сцен, включая геометрические элементы, шейдеры и эффекты, имитацию<br>физических воздействий, >анимацию, кинематику и даже несколько<br>вариантов представления одного и того же ресурса.')" onmouseout="hide()">Collada</a>
+это формат файлов для надежного представления сцен, материалов, анимаций и  другого 3D содержимого в формате <a href="https://ru.wikipedia.org/wiki/XML" target="_blank" onmouseover="show('XML (/ˌeks em ˈel/ англ. eXtensible Markup Language) — расширяемый<br>язык разметки. Рекомендован Консорциумом Всемирной паутины (W3C).<br>Спецификация XML описывает XML-документы и частично описывает поведение<br>XML-процессоров (программ, читающих XML-документы и обеспечивающих<br>доступ к их содержимому). XML разрабатывался как язык с простым<br>формальным синтаксисом, удобный для создания и обработки документов<br>программами и одновременно удобный для чтения и создания документов<br>человеком, с подчёркиванием нацеленности на использование в Интернете.<br>Язык называется расширяемым, поскольку он не фиксирует разметку,<br>используемую в документах: разработчик волен создать разметку в<br>соответствии с потребностями к конкретной области, будучи ограниченным<br>лишь синтаксическими правилами языка.')" onmouseout="hide()"><tt>xml</tt></a>.
+Этот экспортер поддерживает экспорт только геометрических элементов, материалов, текстур и иерархии сцен.<br><br>
+
+<h4>Пример</h4>
+<pre>// Instantiate an exporter (создание экспортера)
+var exporter = new THREE.ColladaExporter();
+
+// Parse the input and generate the ply output
+// разбор входных данных и создание выходного слоя
+var data = exporter.parse( scene, null, options );
+downloadFile(data);</pre>
+
+<h4>Конструктор</h4>
+<pre>ColladaExporter()</pre>
+Создает новый ColladaExporter.
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="parse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - синтаксический анализ, разбор')" onmouseout="hide()">.parse</a></span>( <a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>input - вход, входные данные')" onmouseout="hide()">input</a>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on completed - по завершении, по окончании')" onmouseout="hide()">onCompleted</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции, параметры')" onmouseout="hide()">options</a></span> )</pre>
+
+<div class=list><tt>input</tt> — экспортируемый Object3D</div>
+<div class=list><tt>onCompleted</tt> — функция, которая будет вызвана по завершению экспорта. Дополнительный, необязательный параметр.
+The same data is immediately returned from the function.</div>
+<div class=list><tt>options</tt> — параметры экспорта<br>
+&nbsp; &#9679; &nbsp; <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('version - версия, вариант')" onmouseout="hide()"><tt>version</tt></a></span>
+- строковое значение, которое показывает версию Collada для экспорта. Возможные значения - либо <tt>1.4.1</tt>, либо <tt>1.5.0</tt>. Значением по умолчанию является&nbsp;<tt>1.4.1</tt>.<br>
+&nbsp; &#9679; &nbsp; <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('author - автор, создатель')" onmouseout="hide()"><tt>author</tt></a></span>
+- строковое значение, обозначающее имя, вносимое в поле <tt>author</tt>. По умолчанию поле <tt>author</tt> исключено.<br>
+&nbsp; &#9679; &nbsp; <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('texture directory - каталог текстуры')" onmouseout="hide()"><tt>textureDirectory</tt></a></span>
+- строковое значение, обозначающее путь к каталогу (относительно файла Collada), в котором хранятся текстуры.</div>
+Создает объект из файла в формате Collada и данных текстуры. Этот объект метод возвращает и передает его в функцию обратного вызова, указанную в параметре <tt>onCompleted</tt>.
+<pre>{
+  // Collada file content (содержание файла в формате Collada)
+  data: "",<br>
+  // List of referenced textures (список текстур)
+  textures: [{
+    // File directory, name, and extension of the texture data
+    // каталог с файлом, имя и расширение данных текстуры
+    directory: "",
+    name: "",
+    ext: "",<br>
+    // The texture data and original texture object
+    // данные текстуры и исходный объект текстуры
+    data: [],
+    original: &#60;THREE.Texture&#62;
+  }, ...]
+}</pre></div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/exporters/ColladaExporter.js" target="_blank">ColladaExporter.js на github.com</a></div><br><br>
+  
+<br><br>
+</body></html>

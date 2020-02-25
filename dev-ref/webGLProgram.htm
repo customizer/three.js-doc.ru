@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>WebGLProgram</h3>
+Конструктор для программы GLSL, отправляемой в вершинные и фрагментарные шейдеры, включая стандартные атрибуты и униформы.
+
+<h4>Встроенные униформы и атрибуты</h4>
+<h5>Вершинный шейдер (безусловный):</h5>
+<pre>// = object.matrixWorld
+uniform mat4 modelMatrix;<br>
+// = camera.matrixWorldInverse * object.matrixWorld
+uniform mat4 modelViewMatrix;<br>
+// = camera.projectionMatrix
+uniform mat4 projectionMatrix;<br>
+// = camera.matrixWorldInverse
+uniform mat4 viewMatrix;<br>
+// = inverse transpose of modelViewMatrix (обратная перестановка modelViewMatrix)
+uniform mat3 normalMatrix;<br>
+// = camera position in world space (положение камеры в мировом пространстве)
+uniform vec3 cameraPosition;</pre><br>
+<pre>// default vertex attributes provided by Geometry and BufferGeometry
+// стандартные атрибуты вершин, предоставленные Geometry и BufferGeometry
+attribute vec3 position;
+attribute vec3 normal;
+attribute vec2 uv;</pre>
+Обратите внимание, что таким образом можно рассчитать положение вершины в вершинном шейдере посредством:
+<pre>gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );</pre>
+или же
+<pre>gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4( position, 1.0 );</pre>
+
+<h5>Шейдер вершин (условный):</h5>
+<pre>#ifdef USE_COLOR
+  // vertex color attribute (атрибут цвета вершины)
+	attribute vec3 color;
+#endif</pre><br>
+<pre>#ifdef USE_MORPHTARGETS<br>
+  attribute vec3 morphTarget0;
+  attribute vec3 morphTarget1;
+  attribute vec3 morphTarget2;
+  attribute vec3 morphTarget3;<br>
+  #ifdef USE_MORPHNORMALS<br>
+    attribute vec3 morphNormal0;
+    attribute vec3 morphNormal1;
+    attribute vec3 morphNormal2;
+    attribute vec3 morphNormal3;<br>
+  #else<br>
+    attribute vec3 morphTarget4;
+    attribute vec3 morphTarget5;
+    attribute vec3 morphTarget6;
+    attribute vec3 morphTarget7;<br>
+  #endif
+#endif</pre>
+<pre>#ifdef USE_SKINNING
+  attribute vec4 skinIndex;
+  attribute vec4 skinWeight;
+#endif</pre>
+
+<h5>Шейдер фрагментов:</h5>
+<pre>uniform mat4 viewMatrix;
+uniform vec3 cameraPosition;</pre><br>
+
+
+<h4>Конструктор</h4>
+<pre>WebGLProgram( <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">renderer</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('code - код')" onmouseout="hide()">code</a></span>, <a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
+Параметры смотрите в описании <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a>.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="id"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('id - сокращение от англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
+
+<pre id="code"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('code - код')" onmouseout="hide()">.code</a></span></pre>
+
+<pre id="usedTimes"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('used times - ')" onmouseout="hide()">.usedTimes</a></span></pre>
+
+<pre id="program"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('program - программа')" onmouseout="hide()">.program</a></span></pre>
+
+<pre id="vertexShader"><a href="webGLShader.htm" onmouseover="show('WebGLShader.<br>vertex shader - вершинный шейдер')" onmouseout="hide()">.vertexShader</a></pre>
+
+<pre id="fragmentShader"><a href="webGLShader.htm" onmouseover="show('WebGLShader.<br>fragment shader - шейдер фрагментов')" onmouseout="hide()">.fragmentShader</a></pre>
+</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="getUniforms"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get uniforms - получить униформы')" onmouseout="hide()">.getUniforms</a></span>( )</pre>
+Метод возвращает соответствующие пары имя-значение (<tt>name</tt>-<tt>value</tt>) из всех активных мест, где расположены униформы.<br><br>
+
+<pre id="getAttributes"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get attributes - получить атрибуты')" onmouseout="hide()">.getAttributes</a></span>( )</pre>
+Метод возвращает соответствующие пары имя-значение (<tt>name</tt>-<tt>value</tt>) из всех активных мест, где расположены атрибуты вершин.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/webgl/WebGLProgram.js" target="_blank">WebGLProgram.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

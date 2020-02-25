@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Анимация</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MMDAnimationHelper</h3>
+Вспомогательный элемент (helper - помощник) анимации для <a href="https://www.mikufan.com/" target="_blank">MMD</a> ресурсов. <a href="http://hatsune-miku.ru/faq-for-mikumikudance-page" target="_blank">Здесь</a> на русском языке.<br>
+MMDAnimationHelper обрабатывает анимацию MMD-ресурсов, загруженных с помощью <a href="../loaders/MMDLoader.htm" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a>, со специальными свойствами MMD,
+такими как <span class="lnk" onmouseover="show('сокращ. от англ. слов Inverse Kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">IK</span>, Grant,
+и <span class="lnk" onmouseover="show('Physics - физика, т.е. физические параметры')" onmouseout="hide()">Physics</span>.
+Внутри вспомогательного элемента MMDAnimationHelper используются <a href="CCDIKSolver.htm" onmouseover="show('CCDIKSolver')" onmouseout="hide()">CCDIKSolver</a> и <a href="MMDPhysics.htm" onmouseover="show('MMDPhysics')" onmouseout="hide()">MMDPhysics</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// Instantiate a helper (создаем вспомогательный элемент)
+var helper = new THREE.MMDAnimationHelper();<br>
+// Load MMD resources and add to helper
+// Загрузка MMD ресурсов и добавление вспомогательного элемента
+new THREE.MMDLoader().loadWithAnimation(
+  'models/mmd/miku.pmd',
+  'models/mmd/dance.vmd',
+  function ( mmd ) {
+    helper.add( mmd.mesh, {
+      animation: mmd.animation,
+      physics: true
+    } );<br>
+    scene.add( mmd.mesh );<br>
+    new THREE.AudioLoader().load(
+      'audios/mmd/song.mp3',
+      function ( buffer ) {
+      var listener = new THREE.AudioListener();
+      var audio = new THREE.Audio( listener )
+        .setBuffer( buffer );
+      listener.position.z = 1;<br>
+        scene.add( audio );
+        scene.add( listener );
+      }
+    );
+  }
+);<br>
+function render() {
+  helper.update( clock.getDelta() );
+  renderer.render( scene, camera );
+}</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_mmd" target="_blank">webgl_loader_mmd</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_pose" target="_blank">webgl_loader_mmd_pose</a>
+<a href="https://threejs.org/examples/#webgl_loader_mmd_audio" target="_blank">webgl_loader_mmd_audio</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>MMDAnimationHelper( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sync')" onmouseout="hide()">sync</a></span></tt> - определяет, будет ли синхронизированы длительности анимации добавленных объектов. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('afterglow - послесвечение')" onmouseout="hide()">afterglow</a></span></tt> - Значение по умолчанию равно&nbsp;<tt>0.0</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset physics on loop - сброс физики (т.е. физических параметров) в цикле')" onmouseout="hide()">resetPhysicsOnLoop</a></span></tt> - Значением по умолчанию является&nbsp;<tt>true</tt>.</div>
+Создает новый MMDAnimationHelper.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="audio"><a href="../../audio/audio.htm" onmouseover="show('Audio.<br>audio - аудио, звук, звуковой')" onmouseout="hide()">.audio</a></pre>
+К вспомогательному элементу добавляется объект <a href="../../audio/audio.htm" onmouseover="show('Audio')" onmouseout="hide()">Audio</a>.<br><br>
+
+<pre id="camera"><a href="../../cameras/camera.htm" onmouseover="show('Camera.<br>camera - камера')" onmouseout="hide()">.camera</a></pre>
+К вспомогательному элементу добавляется объект <a href="../../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>.<br><br>
+
+<pre id="meshes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('meshes - сетки')" onmouseout="hide()">.meshes</a></span></pre>
+К вспомогательному элементу добавляется массив <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.<br><br>
+
+<pre id="objects"><span onclick="showClick('WeakMap - карта со &quot;слабыми&quot; ссылками')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('objects - объекты')" onmouseout="hide()">.objects</a></span></pre>
+Значением свойства является <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/WeakMap" target="_blank" onmouseover="show('weak map - &quot;слабая&quot; карта, т.е. карта со &quot;слабыми&quot;<br>ссылками.<br>Объект WeakMap — коллекция пар ключ-значение.<br>В качестве ключей могут быть использованы только<br>объекты, а значения могут быть произвольных<br>типов.')" onmouseout="hide()">WeakMap</a>,
+которая хранит элементы анимации, используемые в помощь объектам, добавленным к вспомогательному элементу.
+Например, можно получить доступ к <a href="../../animation/animationMixer.htm" onmouseover="show('AnimationMixer')" onmouseout="hide()">AnimationMixer</a> для добавленной <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> при помощи "<tt>helper.objects.get( mesh ).mixer</tt>"<br><br>
+
+<pre id="onBeforePhysics"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on before physics - на (событие) перед<br>(расчетом) физических (параметров)')" onmouseout="hide()">.onBeforePhysics</a></span></pre>
+Дополнительная, необязательная функция обратного вызова, которая исполняется непосредственно перед расчетом физических параметров <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.
+Эта функция вызывается вместе с <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="add"><a href="#" onmouseover="show('MMDAnimationHelper.<br>add - добавить')" onmouseout="hide()">.add</a> ( <a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>object</tt> — может быть <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, <a href="../../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Camera</a> или <a href="../../audio/audio.htm" onmouseover="show('Audio')" onmouseout="hide()">Audio</a>.</div>
+<div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
+&nbsp; &#9679; &nbsp; <tt><a href="../../animation/animationClip.htm" onmouseover="show('AnimationClip')" onmouseout="hide()">animation</a></tt> - <a href="../../animation/animationClip.htm" onmouseover="show('AnimationClip')" onmouseout="hide()">AnimationClip</a>
+или массив <a href="../../animation/animationClip.htm" onmouseover="show('AnimationClip')" onmouseout="hide()">AnimationClip</a>'ов установленный в объект.
+Только для <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> и <a href="../../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('physics - физика, в данном случае - физические параметры')" onmouseout="hide()">physics</a></span></tt>
+- только для <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>. Флаг, который включает физические параметры. Значением по умолчанию является <tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('warmup - разминка, прогрев')" onmouseout="hide()">warmup</a></span></tt>
+- только для <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> и флаге <tt>physics</tt> установленному как&nbsp;<tt>true</tt>. Физический параметр. Значение по умолчанию равно&nbsp;<tt>60</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('unit step - единичный шаг')" onmouseout="hide()">unitStep</a></span></tt>
+- только для <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> и флаге <tt>physics</tt> установленному как&nbsp;<tt>true</tt>. Физический параметр. Значение по умолчанию равно&nbsp;<tt>1/65</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('max step num - сокращ. англ. слов maximum<br>step number - максимальное число шагов')" onmouseout="hide()">maxStepNum</a></span></tt>
+- только для <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> и флаге <tt>physics</tt> установленному как&nbsp;<tt>true</tt>. Физический параметр. Значение по умолчанию равно&nbsp;<tt>3</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>gravity - гравитация, сила тяжести')" onmouseout="hide()">gravity</a></tt>
+- только для <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> и флаге <tt>physics</tt> установленному как&nbsp;<tt>true</tt>. Физический параметр. Значением по умолчанию является&nbsp;<tt>( 0, - 9.8 * 10, 0 )</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delay time - время задержки')" onmouseout="hide()">delayTime</a></span></tt>
+- только для <a href="../../audio/audio.htm" onmouseover="show('Audio')" onmouseout="hide()">Audio</a>. Значение по умолчанию равно&nbsp;<tt>0.0</tt>.</div>
+Метод добавляет к вспомогательному элементу <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, <a href="../../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>,
+или <a href="../../audio/audio.htm" onmouseover="show('Audio')" onmouseout="hide()">Audio</a> и устанавливает анимацию.
+Длительность анимации добавленных объектов синхронизируется. Если объекты камера и/или аудио уже были добавлены, они будут заменены на новые.<br><br>
+
+<pre id="enable"><a href="#" onmouseover="show('MMDAnimationHelper.<br>enable - включить, разрешить')" onmouseout="hide()">.enable</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('key - ключ')" onmouseout="hide()">key</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включен, разрешен')" onmouseout="hide()">enabled</a></span> )</pre>
+<div class=list><tt>key</tt> — разрешены строковые значения '<tt><span class="lnk" onmouseover="show('animation - анимация')" onmouseout="hide()">animation</span></tt>',
+'<tt><span class="lnk" onmouseover="show('ik - сокращ. от англ. слов inverse kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">ik</span></tt>',
+'<tt><span class="lnk" onmouseover="show('grant')" onmouseout="hide()">grant</span></tt>',
+'<tt><span class="lnk" onmouseover="show('physics - физика, в данном случае - физические параметры')" onmouseout="hide()">physics</span></tt>',
+и '<tt><span class="lnk" onmouseover="show('camera animation - анимация камеры')" onmouseout="hide()">cameraAnimation</span></tt>'.</div>
+<div class=list><tt>enabled</tt> — установка <tt>true</tt> означает включение, <tt>false</tt> - отключение.</div>
+Метод включает/отключает функцию анимации.<br><br>
+
+<pre id="pose"><a href="#" onmouseover="show('MMDAnimationHelper.<br>pose - поза')" onmouseout="hide()">.pose</a>( <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vpd - сокращ. от англ. слов vocaloid pose data file - файл<br>данных поз для Vocaloid (использовался в рекламе<br>звукосинтезатора Vocaloid от фирмы Yamaha.)<br>Бинарный файл 3D моделей, используемых<br>MikuMikuDance (MMD), синхронизирует партии танца и ритма;<br>сохраняет позиции костей модели персонажа, задающие его<br>позу; может использоваться в последовательности поз,<br>составляющих анимацию танца (VMD файл).')" onmouseout="hide()">vpd</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('params - сокращ. англ. слова parameters - параметры')" onmouseout="hide()">params</a></span> )</pre>
+<div class=list><tt>mesh</tt> — <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, которая изменяет позу. Её не нужно добавлять к вспомогательному элементу.</div>
+<div class=list><tt>vpd</tt> — содержимое VPD, полученное с помощью метода <tt><a href="../loaders/MMDLoader.htm" onmouseover="show('MMDLoader')" onmouseout="hide()">MMDLoader</a>.loadVPD</tt>.</div>
+<div class=list><tt>params</tt> — дополнительный, необязательный аргумент.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset pose - сбросить позу')" onmouseout="hide()">resetPose</a></span></tt> - значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ik - сокращ. от англ. слов inverse kinematics - инверсная (обратная) кинематика')" onmouseout="hide()">ik</a></span></tt> - значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('grant - ')" onmouseout="hide()">grant</a></span></tt> - значением по умолчанию является&nbsp;<tt>true</tt>.</div>
+Метод изменяет позу <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a> так, как указано в содержимом VPD.<br><br>
+
+<pre id="remove"><a href="#" onmouseover="show('MMDAnimationHelper.<br>remove - удалить')" onmouseout="hide()">.remove</a>( object : Object3D )</pre>
+<div class=list><tt>object</tt> — <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, <a href="../../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>,
+или <a href="../../audio/audio.htm" onmouseover="show('Audio')" onmouseout="hide()">Audio</a></div>
+Метод удаляет из вспомогательного элемента <a href="../../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">SkinnedMesh</a>, <a href="../../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Camera</a>,
+или <a href="../../audio/audio.htm" onmouseover="show('Audio')" onmouseout="hide()">Audio</a>.<br><br>
+
+<pre id="update"><a href="#" onmouseover="show('MMDAnimationHelper.<br>update - обновить')" onmouseout="hide()">.update</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delta - ')" onmouseout="hide()">delta</a></span> )</pre>
+<div class=list><tt>delta</tt> — число секунд.</div>
+Передвигает вперед время микшера и обновляет анимации объектов, добавленных к вспомогательному элементу.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/animation/MMDAnimationHelper.js" target="_blank">MMDAnimationHelper.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

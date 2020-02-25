@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Визуализаторы (рендереры)</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>CSS3DRenderer</h3>
+CSS3DRenderer может использоваться для иерархических трехмерных преобразований применяемых к DOM элементам с помощью свойства CSS3 <tt><a href="http://htmlbook.ru/css/transform" target="_blank">transform</a></tt>.<br>
+Данный визуализатор особенно интересен, если нужно применить на вебсайте 3D эффекты без отображения, основанного на <tt><a href="http://htmlbook.ru/html/canvas" target="_blank">canvas</a></tt>. Также его можно использовать для объединения элементов DOM с WebGL контентом.<br>
+Тем не менее, существуют значительные ограничения:
+<ul><li>нельзя использовать систему материалов <b>three.js</b>.</li>
+<li>также нет возможности использовать геометрические элементы (Geometry).</li>
+<li>на данный момент поддерживается только <a href="../../cameras/perspectiveCamera.htm" onmouseover="show('PerspectiveCamera')" onmouseout="hide()">камера с перспективной проекцией</a>.</li></ul>
+Так что CSS3DRenderer сфокусирован только на обычных DOM-элементах. Эти элементы упаковываются в специальные объекты (CSS3DObject или CSS3DSprite), а затем добавляются к графу сцены.<br><br>
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/#css3d_molecules" target="_blank">molecules</a>
+<a href="https://threejs.org/examples/css3d_orthographic.html" target="_blank">orthographic camera</a>
+<a href="https://threejs.org/examples/#css3d_panorama" target="_blank">panorama</a>
+<a href="https://threejs.org/examples/#css3d_periodictable" target="_blank">periodictable</a>
+<a href="https://threejs.org/examples/#css3d_sprites" target="_blank">sprites</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>CSS3DRenderer( )</pre><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="getSize"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get size - получить размер')" onmouseout="hide()">.getSize</a></span>( )</pre>
+Возвращает объект, содержащий ширину и высоту рендерера.<br><br>
+
+<pre id="render"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('render - представлять, отображать')" onmouseout="hide()">.render</a></span>( <a href="../../scenes/scene.htm" onmouseover="show('Scene.<br>scene - сцена')" onmouseout="hide()">scene</a>, <a href="../../cameras/perspectiveCamera.htm" onmouseover="show('PerspectiveCamera.<br>camera - камера')" onmouseout="hide()">camera</a> )</pre>
+Отображает сцену (аргумент <tt>scene</tt>) при помощи камеры (аргумент <tt>camera</tt>) с перспективной проекцией.<br><br>
+
+<pre id="setSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set size - установить размер')" onmouseout="hide()">.setSize</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина')" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span> )</pre>
+Изменяет размеры рендерера на указанные в аргументах <tt>width</tt> и <tt>height</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/renderers/CSS3DRenderer.js" target="_blank">CSS3DRenderer.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

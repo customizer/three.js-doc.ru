@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Вспомогательные математические функции</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>MeshSurfaceSampler</h3>
+Вспомогательный класс для выборки случайных нагруженных точек на поверхности сетки (mesh).
+<div class=note_trans><b>Примечание переводчика:</b> Mesh Surface Sampler в переводе будет "выборщик поверхности сетки".</div>
+Выборка нагруженных точек полезна при таких эффектах, как ускоренный рост растительности на определенных участках местности или более интенсивное излучение частиц из конкретных частей сетки.
+Веса вершин могут быть написаны программно или нарисованы вручную в качестве цвета вершин в программах-редакторах 3D-графики, например таких как <a href="https://www.blender.org/" target="_blank">Blender</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// Create a sampler for a Mesh surface. (создать выборщик для поверхности сетки)
+var sampler = new THREE.MeshSurfaceSampler( surfaceMesh )
+	.setWeightAttribute( 'color' )
+	.build();<br>
+var sampleMesh = new THREE.InstancedMesh( sampleGeometry, sampleMaterial, 100 );
+var _position = new THREE.Vector3();
+var _normal = new THREE.Vector3();
+var _matrix = new THREE.Matrix4();<br>
+// Sample randomly from the surface, creating an instance of the sample
+// geometry at each sample point.
+// Произвольная выборка на поверхности, с созданием в каждой точке выборки
+// экземпляра выбранного геометрического элемента.
+for ( var i = 0; i &#60; 100; i ++ ) {
+	sampler.sample( _position, _normal );
+	_matrix.makeTranslation( _position.x, _position.y, _position.z );
+	mesh.setMatrixAt( i, _matrix );
+}
+mesh.instanceMatrix.needsUpdate = true;
+scene.add( mesh );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_instancing_scatter" target="_blank">WebGL / helpers / scatter</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>MeshSurfaceSampler( <a href="../../objects/mesh.htm" onmouseover="show('Mesh.<br>mesh - сетка')" onmouseout="hide()">mesh</a> )</pre>
+<div class=list><tt>mesh</tt> — поверхность сетки, на которой производится выборка.</div>
+Создает новый MeshSurfaceSampler. Если входной геометрический элемент проиндексирован, создается неиндексированная копия.
+После создания выборщик не может возвращать выборки до тех пор, пока не будет вызван метод <a href="#build" onmouseover="show('MeshSurfaceSampler.build')" onmouseout="hide()"><tt>build</tt></a>.<br><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="setWeightAttribute"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set weight attribute - установить атрибут веса')" onmouseout="hide()">.setWeightAttribute</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">name</a></span> )</pre>
+Определяет атрибут вершины, который будет использован в качестве веса при выборке на поверхности.
+С большей вероятностью будут отобраны грани с большим весом, грани с нулевым весом совсем не будут отбираться. При выборке из атрибутов вектора используется только координата&nbsp;<tt>x</tt>.<br>
+Если атрибут веса не выбран, выборка будет случайным образом распределена по областям поверхности.<br><br>
+
+<pre id="build"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('build - построить, создать')" onmouseout="hide()">.build</a></span>( )</pre>
+Метод обрабатывает входной геометрический элемент и готовит к возврату выборок. Любая настройка геометрического элемента или выборщика должна происходить до вызова данного метода.
+<a href="https://ru.wikipedia.org/wiki/%D0%92%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B0" target="_blank">Временная сложность алгоритма</a> равна&nbsp;<tt>O(n)</tt> для поверхности с&nbsp;<tt>n</tt> гранями.<br><br>
+
+<pre id="sample"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sample - выборка, образец, пример')" onmouseout="hide()">.sample</a></span>( <a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>target position - целевая позиция')" onmouseout="hide()">targetPosition</a>, <a href="../../math/vector3.htm" onmouseover="show('Vector3.<br>target normal - целевая нормаль')" onmouseout="hide()">targetNormal</a> )</pre>
+Метод выбирает случайную точку на поверхности входного геометрического элемента и возвращает позицию и вектор нормали в этой точке.
+<a href="https://ru.wikipedia.org/wiki/%D0%92%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B0" target="_blank">Временная сложность алгоритма</a> равна&nbsp;<tt>O(log n)</tt> для поверхности с&nbsp;<tt>n</tt> гранями.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/dev/docs/examples/en/math/MeshSurfaceSampler.html" target="_blank">MeshSurfaceSampler.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

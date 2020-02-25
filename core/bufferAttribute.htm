@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BufferAttribute</h3>
+Данный класс сохраняет данные атрибута (такие как положения вершин, индексы граней, нормали, цвета, текстурные координаты
+(<a href="https://ru.wikipedia.org/wiki/UV-%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank" onmouseover="show('соответствие между координатами на поверхности трёхмерного<br>объекта (X, Y, Z) и координатами на текстуре (U, V - эти буквы<br>обозначают оси двумерной текстуры, потому что «X», «Y» и «Z»<br>уже используются для обозначения осей 3D-объекта в пространстве<br>модели). Значения U и V обычно изменяются от 0 до 1.')" onmouseout="hide()">UV</a>)
+и все атрибуты, установленные пользователем), связанного с <tt><a href="bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a></tt>, который позволяет более эффективное прохождение всех этих данных к <span class="lnk" onmouseover="show('сокращение от англ. слов graphics processing unit -<br>блок графических вычислений или графический процессор<br>или попросту - процессор видеокарты')" onmouseout="hide()">GPU</span>.
+Посмотрите <a href="bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">эту страницу</a> для дополнительных сведений и примеров использования.<br><br>
+Данные хранятся как векторы произвольной длины (определяемые <tt><a href="#itemSize" onmouseover="show('BufferAttribute.itemSize')" onmouseout="hide()">itemSize</a></tt>), и вообще в методах, описанных ниже, если передаются с индексом, то он автоматически умножается на длину вектора.<br><br>
+
+<h4 id="constructor">Конструктор</h4>
+<pre>BufferAttribute( <span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов item size - размер элемента')" onmouseout="hide()">itemSize</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова normalized - нормализованный,<br>нормированный, т.е. приведенный к какой-то норме')" onmouseout="hide()">normalized</a></span> )</pre>
+<div class=list><tt>array</tt> - должен быть TypedArray (<a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Typed_arrays" target="_blank">типизированным массивом</a>).
+Используется для создания экземпляра буфера.<br>
+В этом массиве должно быть (<tt>itemSize&nbsp;*&nbsp;numVertices</tt>) элементов, где <tt>numVertices</tt> - это число вершин в соответствующей <a href="bufferGeometry.htm">BufferGeometry</a>.</div>
+<div class=list><tt>itemSize</tt> - число значений массива, связанного с конкретной вершиной.
+Например, если данный атрибут хранит 3-компонентный вектор (такой как <tt>position</tt> - положение, <tt>normal</tt> - нормаль, или <tt>color</tt> - цвет), тогда <tt>itemSize</tt> должен быть равен <tt>3</tt>.</div>
+<div class=list><tt>normalized</tt> - дополнительный, необязательный атрибут, применяется только для целочисленных данных и показывает как базовые данные в буфере сопоставлены со значениями в коде
+<a href="https://ru.wikipedia.org/wiki/OpenGL_Shading_Language" target="_blank" class="lnk" onmouseover="show('сокращение от англ. слов OpenGL Shading Language — язык высокого уровня<br>для программирования шейдеров. Синтаксис языка базируется на языке<br>программирования ANSI C, однако, из-за его специфической направленности,<br>из него были исключены многие возможности, для упрощения языка и повышения<br>производительности. В язык включены дополнительные функции и типы данных,<br>например для работы с векторами и матрицами. Основное преимущество GLSL<br>перед другими шейдерными языками — переносимость кода между<br>платформами и ОС.')" onmouseout="hide()">GLSL</a>.
+Например, если массив (аргумент <tt>array</tt>) является экземпляром <tt>UInt16Array</tt>, а аргумент <tt>normalized</tt> установлен как <tt>true</tt>, то значения от <tt>0</tt>&nbsp;до&nbsp;<tt>+65535</tt> в данных массива будут отображены в атрибуте GLSL как значения от <tt>0.0f</tt>&nbsp;до&nbsp;<tt>+1.0f</tt>.
+Массив <tt>Int16Array</tt> (со знаком) от <tt>-32767</tt>&nbsp;до&nbsp;<tt>+32767</tt> будет сопоставлен как <tt>-1.0f</tt>&nbsp;-&nbsp;<tt>+1.0f</tt>.
+Если <tt>normalized</tt> установлен как <tt>false</tt> значения будут конвертированы в числа с плавающей запятой, которые содержат точное значение, т.е.&nbsp;<tt>32767</tt> станет&nbsp;<tt>32767.0f</tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="array"><span onclick="showClick(type_typearray)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова array - массив')" onmouseout="hide()">.array</a></span></pre>
+Массив, в котором содержаться данные, хранящиеся в буфере.<br><br>
+<pre id="count"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова count - счет, подсчет')" onmouseout="hide()">.count</a></span></pre>
+Хранит длину массива деленную на <tt><a href="#itemSize" onmouseover="show('BufferAttribute.itemSize')" onmouseout="hide()">itemSize</a></tt>.<br>
+Если буфер хранит 3-компонентный вектор (как например положение, нормали или цвет), то в этом случае будет подсчитано число таких хранящихся векторов.<br><br>
+
+<pre id="isBufferAttribute"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов is buffer attribute - является буферным атрибутом')" onmouseout="hide()">.isBufferAttribute</a></span></pre>
+Используется для проверки является ли данный класс или производные от него <tt>BufferAttribute</tt>. Значение по умолчанию равно <tt>true</tt>.<br>
+Не изменяйте это свойство, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+<pre id="itemSize"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов item size - размер элемента')" onmouseout="hide()">.itemSize</a></span></pre>
+Длина векторов, хранящихся в <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>.<br><br>
+<pre id="1name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название')" onmouseout="hide()">.name</a></span></pre>
+Дополнительное имя для экземпляра данного атрибута. По умолчанию это пустая строка.<br><br>
+<pre id="needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов needs update - требуется обновление')" onmouseout="hide()">.needsUpdate</a></span></pre>
+Флаг, показывающий что данный атрибут был изменен и должен быть повторно отправлен в графический процессор (GPU). Установите его как <tt>true</tt> при изменении значения массива.<br>
+Установка этого значения как <tt>true</tt> также увеличивает <tt><a href="#version" onmouseover="show('BufferAttribute.version')" onmouseout="hide()">version</a></tt>.<br><br>
+<pre id="normalized"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова normalized - нормализованный, нормированный, т.е. приведенный к какой-то норме')" onmouseout="hide()">.normalized</a></span></pre>
+Указывает каким образом базовые данные в буфере соответствуют значениям в коде GLSL. Подробности смотрите выше, в <a href="#constructor">описании конструктора</a>.<br><br>
+<pre id="onUploadCallback"><span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов on upload callback - на загрузку функции обратного вызова')" onmouseout="hide()">.onUploadCallback</a></span></pre>
+Функция обратного вызова, выполняемая после того, как визуализатор (renderer) передал данные массива атрибутов в GPU.<br><br>
+<pre id="updateRange"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов update range - диапазон обновления')" onmouseout="hide()">.updateRange</a></span></pre>
+Объект содержит:
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова offset - смещение')" onmouseout="hide()">offset</a></span></tt>: позиция, с которой начинается обновление, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова count - счет, подсчет')" onmouseout="hide()">count</a></span></tt>: значение по умолчанию равно&nbsp;<tt>-1</tt>, что означает не использовать диапазон обновления.</div>
+Данное свойство может быть использовано для отдельного обновления некоторых компонентов хранящихся векторов (например, только для компонента относящегося к цвету).<br><br>
+
+<pre id="usage"><span class="lnk" onmouseover="show('usage - использование, употребление')" onmouseout="hide()">.usage</span></pre>
+Определяет предполагаемый шаблон использования хранилища данных в целях оптимизации.
+Соответствует параметру <tt>usage</tt> в <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData" target="_blank" onmouseover="show('метод API WebGL, который инициализирует и<br>создает хранилище данных буферного объекта')" onmouseout="hide()">WebGLRenderingContext.bufferData()</a></tt>.
+Значением по умолчанию является <tt>THREE.StaticDrawUsage</tt>.
+<div class=note_trans><b>Примечание переводчика:</b> перевод части статьи, касающейся параметру <tt>usage</tt>, по ссылке выше.<a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>
+<code style="font-size:130%;">usage</code><br>
+Значение <tt class="lnk" onmouseover="show('GL enum - значение перечислителя (нумератора) в  OpenGL.<br>Представляет собой 32-разрядное целое беззнаковое число.')" onmouseout="hide()">GLenum</tt> указывающее предполагаемую схему использования хранилища данных в целях оптимизации. Возможные значения:
+<div class=list><tt class="lnk" onmouseover="show('static draw - статичное рисование')" onmouseout="hide()">gl.STATIC_DRAW</tt>:
+содержимое предназначено для того, чтобы устанавливаться приложением только один раз и многократно использоваться как источник команд для WebGL рисования и описания изображения.</div>
+<div class=list><tt class="lnk" onmouseover="show('dynamic draw - динамичное рисование')" onmouseout="hide()">gl.DYNAMIC_DRAW</tt>:
+содержимое предназначено для того, чтобы повторно переопределяться приложением и многократно использоваться как источник команд для WebGL рисования и описания изображения.</div>
+<div class=list><tt class="lnk" onmouseover="show('stream draw - потоковое рисование')" onmouseout="hide()">gl.STREAM_DRAW</tt>:
+содержимое предназначено для того, чтобы устанавливаться приложением только один раз и использоваться не более чем несколько раз в качестве источника команд для WebGL рисования и описания изображения.</div>
+При использовании среды WebGL 2 дополнительно доступны следующие значения:
+<div class=list><tt class="lnk" onmouseover="show('static read - статичное считывание')" onmouseout="hide()">gl.STATIC_READ</tt>:
+предполагается что содержимое будет установлено только однажды, считыванием данных из WebGL, и многократно запрашиваться приложением.</div>
+<div class=list><tt class="lnk" onmouseover="show('dynamic read - динамичное считывание')" onmouseout="hide()">gl.DYNAMIC_READ</tt>:
+содержимое предназначено для того, чтобы повторно переопределяться, считыванием данных из WebGL, и многократно запрашиваться приложением.</div>
+<div class=list><tt class="lnk" onmouseover="show('stream read - потоковое чтение')" onmouseout="hide()">gl.STREAM_READ</tt>:
+содержимое предназначено для того, чтобы однократно определиться, считыванием данных из WebGL, и запрашиваться приложением не более чем несколько раз.</div>
+<div class=list><tt class="lnk" onmouseover="show('static copy - статичная копия, т.е. неизменяемая')" onmouseout="hide()">gl.STATIC_COPY</tt>:
+содержимое предназначено для того, чтобы однократно определиться, считыванием данных из WebGL, и многократно использоваться в качестве источника команд для WebGL рисования и описания изображения.</div>
+<div class=list><tt class="lnk" onmouseover="show('dynamic copy - динамичная копия')" onmouseout="hide()">gl.DYNAMIC_COPY</tt>:
+содержимое предназначено для того, чтобы повторно переопределяться, считыванием данных из WebGL, и многократно использоваться в качестве источника команд для WebGL рисования и описания изображения.</div>
+<div class=list><tt class="lnk" onmouseover="show('stream copy - копия потока')" onmouseout="hide()">gl.STREAM_COPY</tt>:
+содержимое предназначено для того, чтобы однократно определиться, считыванием данных из WebGL, и использоваться не более чем несколько раз в качестве источника команд для WebGL рисования и описания изображения.</div></div></div><br>
+
+<pre id="version"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова version - версия, вариант')" onmouseout="hide()">.version</a></span></pre>
+Номер версии, увеличивающийся каждый раз, когда свойство <tt><a href="#needsUpdate" onmouseover="show('BufferAttribute.needsUpdate')" onmouseout="hide()">needsUpdate</a></tt> устанавливается как <tt>true</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="applyMatrix3">.applyMatrix3 ( m : Matrix3 ) : this</pre>
+
+Applies matrix m to every Vector3 element of this BufferAttribute.<br><br>
+
+<pre id="applyMatrix4">.applyMatrix4 ( m : Matrix4 ) : this</pre>
+
+Applies matrix m to every Vector3 element of this BufferAttribute.<br><br>
+
+<pre id="applyNormalMatrix">.applyNormalMatrix ( m : Matrix3 ) : this</pre>
+
+Applies normal matrix m to every Vector3 element of this BufferAttribute.<br><br>
+
+<pre id="transformDirection">.transformDirection ( m : Matrix4 ) : this</pre>
+
+Applies matrix m to every Vector3 element of this BufferAttribute, interpreting the elements as a direction vectors.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('от англ. слова clone - клон, двойник')" onmouseout="hide()">.clone( )</a></pre>
+Возвращает копию данного <tt>bufferAttribute</tt>.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('от англ. слова copy - копировать')" onmouseout="hide()">.copy( <a href="#" onmouseover="show('BufferAttribute<br>buffer attribute - буферный атрибут')" onmouseout="hide()">bufferAttribute</a> )</a></pre>
+Копирует в данный <tt>BufferAttribute</tt> другой (указанный в аргументе) <tt>BufferAttribute</tt>.<br><br>
+
+<pre id="copyArray"><a href="#" onmouseover="show('от англ. слова copy array - копировать массив')" onmouseout="hide()">.copyArray</a>( array )</pre>
+Копирует, заданный здесь в качестве аргумента, массив (который может быть обычным массивом или типизированным - TypedArray) в массив <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>.
+Если копируется <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Typed_arrays" target="_blank">типизированный массив</a> (TypedArray),
+ознакомьтесь на <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set" target="_blank">TypedArray.set</a> с примечаниями по требованиям.
+<a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set" target="_blank">Вот TypedArray.set</a> на русском языке.<br><br>
+
+<pre id="copyAt"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов copy at - копировать в')" onmouseout="hide()">.copyAt</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index1</a></span>, <a href="#" onmouseover="show('BufferAttribute')" onmouseout="hide()">bufferAttribute</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index2</a></span> )</pre>
+Копирует вектор из <tt>bufferAttribute[index2]</tt> в <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a>[index1]</tt>.<br><br>
+
+<pre id="copyColorsArray"><a href="#" onmouseover="show('BufferAttribute.<br>copy colors array - копировать массив (значений) цвета')" onmouseout="hide()">.copyColorsArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('colors - цвета')" onmouseout="hide()">colors</a></span> )</pre>
+Копирует массив, представленный значениями цвета в формате RGB, в <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>.<br><br>
+
+<pre id="copyVector2sArray"><a href="#" onmouseover="show('BufferAttribute.<br>copy vector2s array - копировать массив двумерных векторов')" onmouseout="hide()">.copyVector2sArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vectors - векторы')" onmouseout="hide()">vectors</a></span> )</pre>
+Копирует массив, представленный векторами <a href="../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>, в <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>.<br><br>
+
+<pre id="copyVector3sArray"><a href="#" onmouseover="show('BufferAttribute.<br>copy vector3s array - копировать массив трехмерных векторов')" onmouseout="hide()">.copyVector3sArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vectors - векторы')" onmouseout="hide()">vectors</a></span> )</pre>
+Копирует массив, представленный векторами <a href="../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>, в <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>.<br><br>
+
+<pre id="copyVector4sArray"><a href="#" onmouseover="show('BufferAttribute.<br>copy vector4s array - копировать массив четырехмерных векторов')" onmouseout="hide()">.copyVector4sArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('vectors - векторы')" onmouseout="hide()">vectors</a></span> )</pre>
+Копирует массив, представленный векторами <a href="../math/vector4.htm" onmouseover="show('Vector4')" onmouseout="hide()">Vector4</a>, в <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>.<br><br>
+
+<pre id="getX"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от англ. слов get X coordinate<br>- получить координату по оси X')" onmouseout="hide()">.getX</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span> )</pre>
+Возвращает компоненту&nbsp;<tt>x</tt> вектора по заданному индексу.<br><br>
+
+<pre id="getY"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от англ. слов get Y coordinate<br>- получить координату по оси Y')" onmouseout="hide()">.getY</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span> )</pre>
+Возвращает компоненту&nbsp;<tt>y</tt> вектора по заданному индексу.<br><br>
+
+<pre id="getZ"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от англ. слов get Z coordinate<br>- получить координату по оси Z')" onmouseout="hide()">.getZ</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span> )</pre>
+Возвращает компоненту&nbsp;<tt>z</tt> вектора по заданному индексу.<br><br>
+
+<pre id="getW"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от англ. слов get W coordinate<br>- получить компонент W')" onmouseout="hide()">.getW</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span> )</pre>
+Возвращает компоненту&nbsp;<tt>w</tt> вектора по заданному индексу.<br><br>
+
+<pre id="onUpload"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on upload - на загрузку')" onmouseout="hide()">.onUpload</a></span> ( <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('callback - обратный (повторный) вызов')" onmouseout="hide()">callback</a></span> )</pre>
+Устанавливает значение свойства <tt><a href="#onUploadCallback">onUploadCallback</a></tt>.<br>
+В примере <tt><a href="https://threejs.org/examples/#webgl_buffergeometry" target="_blank">WebGL / Buffergeometry</a></tt> этот метод используется для высвобождения памяти после того, как буфер был передан GPU.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('BufferAttribute.<br>set - установить')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>value</tt> - массив или типизированный массив, из которого копируются значения.</div>
+<div class=list><tt>offset</tt> - индекс массива <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>, с которого начинается копирование, (дополнительный, необязательный аргумент).</div>
+Метод вызывает метод <tt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set" target="_blank">TypedArray.set</a>( value, offset )</tt> на данный <tt><a href="#array" onmouseover="show('BufferAttribute.array')" onmouseout="hide()">array</a></tt>.<br>
+В частности, посмотрите эту страничку насчет требований к <tt>value</tt> в <tt>TypedArray</tt>. <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set" target="_blank">Вот здесь</a> она на русском языке.<br><br>
+
+<pre id="setUsage"><a href="#" onmouseover="show('BufferAttribute.<br>set usage - установить использование')" onmouseout="hide()">.setUsage</a>( <a href="#usage" onmouseover="show('BufferAttribute.usage')" onmouseout="hide()">value</a> )</pre>
+Метод устанавливает значение, переданное в аргументе <tt>value</tt>, как значение свойства <tt><a href="#usage" onmouseover="show('BufferAttribute.usage')" onmouseout="hide()">usage</a></tt>.<br><br>
+
+<pre id="setX"><a href="#" onmouseover="show('BufferAttribute.<br>set X - установить (координату) X')" onmouseout="hide()">.setX</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата X')" onmouseout="hide()">x</a></span> )</pre>
+Устанавливает компонент <tt>x</tt> вектора по заданному индексу.<br><br>
+
+<pre id="setY"><a href="#" onmouseover="show('BufferAttribute.<br>set Y - установить (координату) Y')" onmouseout="hide()">.setY</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата Y')" onmouseout="hide()">y</a></span> )</pre>
+Устанавливает компонент <tt>y</tt> вектора по заданному индексу.<br><br>
+
+<pre id="setZ"><a href="#" onmouseover="show('BufferAttribute.<br>set Z - установить (координату) Z')" onmouseout="hide()">.setZ</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата Z')" onmouseout="hide()">z</a></span> )</pre>
+Устанавливает компонент <tt>z</tt> вектора по заданному индексу.<br><br>
+
+<pre id="setW"><a href="#" onmouseover="show('BufferAttribute.<br>set W - установить (координату) W')" onmouseout="hide()">.setW</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('w - координата W')" onmouseout="hide()">w</a></span> )</pre>
+Устанавливает компонент <tt>w</tt> вектора по заданному индексу.<br><br>
+
+<pre id="setXY"><a href="#" onmouseover="show('BufferAttribute.<br>set X Y - установить (координаты) X, Y')" onmouseout="hide()">.setXY</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата X')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата Y')" onmouseout="hide()">y</a></span> )</pre>
+Устанавливает компоненты вектора <tt>x</tt>, и <tt>y</tt> по заданному индексу.<br><br>
+
+<pre id="setXYZ"><a href="#" onmouseover="show('BufferAttribute.<br>set X Y Z  - установить (координаты) X, Y, Z')" onmouseout="hide()">.setXYZ</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата X')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата Y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата Z')" onmouseout="hide()">z</a></span> )</pre>
+Устанавливает компоненты вектора <tt>x</tt>, <tt>y</tt>, и <tt>z</tt> по заданному индексу.<br><br>
+
+<pre id="setXYZW"><a href="#" onmouseover="show('BufferAttribute.<br>set X Y Z W - установить (координаты) X, Y, Z, W')" onmouseout="hide()">.setXYZW</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата X')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата Y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('z - координата Z')" onmouseout="hide()">z</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('w - координата W')" onmouseout="hide()">w</a></span> )</pre>
+Устанавливает компоненты вектора <tt>x</tt>, <tt>y</tt>, <tt>z</tt> и <tt>w</tt> по заданному индексу.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/BufferAttribute.js" target="_blank">BufferAttribute.js на github.com</a></div><br><br>
+
+
+<span class="right_side"><a href="#" title="Переход к родительскому классу"><tt>BufferAttribute &rarr;</tt></a></span>
+<h3 id="BufferAttributeTypes">Типы BufferAttribute</h3>
+В <em>three.js</em> имеются девять типов BufferAttribute. Они соответствуют <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" target="_blank">типизированным массивам</a> в JavaScript.
+<pre><span class="lnk" onmouseover="show('массив 64-битных чисел с плавающей точкой IEEE-стандарта')" onmouseout="hide()">THREE.Float64BufferAttribute</span>
+<span class="lnk" onmouseover="show('массив 32-битных чисел с плавающей точкой IEEE-стандарта')" onmouseout="hide()">THREE.Float32BufferAttribute</span>
+<span class="lnk" onmouseover="show('массив 32-битных беззнаковых чисел')" onmouseout="hide()">THREE.Uint32BufferAttribute</span>
+<span class="lnk" onmouseover="show('массив 32-битных целых чисел')" onmouseout="hide()">THREE.Int32BufferAttribute</span>
+<span class="lnk" onmouseover="show('массив 16-битных беззнаковых целых чисел')" onmouseout="hide()">THREE.Uint16BufferAttribute</span>
+<span class="lnk" onmouseover="show('массив 16-битных целых чисел с дополнением до двух')" onmouseout="hide()">THREE.Int16BufferAttribute</span>
+<span class="lnk" onmouseover="show('массив 8-битных беззнаковых целых чисел (фиксированных от 0 до 255)')" onmouseout="hide()">THREE.Uint8ClampedBufferAttribute</span>
+<span class="lnk" onmouseover="show('массив 8-битных беззнаковых целых чисел')" onmouseout="hide()">THREE.Uint8BufferAttribute</span>
+<span class="lnk" onmouseover="show('массив 8-битных целых чисел с дополнением до двух')" onmouseout="hide()">THREE.Int8BufferAttribute</span></pre><br>
+
+<h4>Конструктор</h4>
+Все вышеперечисленное вызывается одним и тем же способом.
+<pre>TypedBufferAttribute( <span onclick="showClick('значением может быть либо массив - <tt>array</tt>,<br>либо целое число - <tt>integer</tt>')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item size - размер элемента')" onmouseout="hide()">itemSize</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слова normalized - нормализованный,<br>нормированный, т.е. приведенный к какой-то норме')" onmouseout="hide()">normalized</a></span> )</pre>
+<div class=list><tt>array</tt> - это может быть типизированный или нетипизированный (обычный) массив или целое число в качестве длины массива.
+Значение массива будет преобразовано в массив указанного типа. Если указана длина массива, будет создан новый типизированный массив (TypedArray), который инициализируется со всеми элементами, установленными как "ноль".</div>
+<div class=list><tt>itemSize</tt> - число значений массива, которые должны быть увязаны с конкретной вершиной.</div>
+<div class=list><tt>normalized</tt> - дополнительный, необязательный атрибут, который показывает как базовые данные в буфере сопоставлены со значениями в коде
+<a href="https://ru.wikipedia.org/wiki/OpenGL_Shading_Language" target="_blank" class="lnk" onmouseover="show('сокращение от англ. слов OpenGL Shading Language — язык высокого уровня<br>для программирования шейдеров. Синтаксис языка базируется на языке<br>программирования ANSI C, однако, из-за его специфической направленности,<br>из него были исключены многие возможности, для упрощения языка и повышения<br>производительности. В язык включены дополнительные функции и типы данных,<br>например для работы с векторами и матрицами. Основное преимущество GLSL<br>перед другими шейдерными языками — переносимость кода между<br>платформами и ОС.')" onmouseout="hide()">GLSL</a>.</div><br>
+
+<h4>Свойства</h4><br>
+Унаследованные свойства смотрите на странице <a href="#">BufferAttribute</a>.<br><br>
+
+<h4>Методы</h4><br>
+Унаследованные методы смотрите на странице <a href="#">BufferAttribute</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/BufferAttribute.js" target="_blank">BufferAttribute.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

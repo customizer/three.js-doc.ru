@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../objects/lineSegments.htm" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
+<h3>FaceNormalsHelper</h3>
+Показывает <a href="arrowHelper.htm" onmouseover="show('ArrowHelper');" onmouseout="hide()">стрелки</a> для визуализации нормалей <a href="../core/Face3.htm" onmouseover="show('Face3');" onmouseout="hide()">граней</a> объекта.
+Требуется, чтобы нормали граней были указаны для всех <a href="../core/Face3.htm" onmouseover="show('Face3');" onmouseout="hide()">граней</a> или были вычислены с помощью метода <tt><a href="../core/geometry.htm#computeFaceNormals" onmouseover="show('Geometry.computeFaceNormals');" onmouseout="hide()">computeFaceNormals</a></tt>.<br>
+Обратите внимание, что этот вспомогательный объект работает только с объектами, чья геометрия является экземпляром <tt><a href="../core/geometry.htm" onmouseover="show('Geometry');" onmouseout="hide()">Geometry</a></tt>. Для <tt><a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry');" onmouseout="hide()">BufferGeometry</a></tt> вместо него используйте <tt><a href="vertexNormalsHelper.htm" onmouseover="show('VertexNormalsHelper');" onmouseout="hide()">VertexNormalsHelper</a></tt>.
+<div class="caption"><img src="../img/normals.png" width=300><br>
+Нормали к вершинам (красные) и граням (зеленые)</div><br>
+
+<h4>Пример</h4>
+<pre>geometry = new THREE.BoxGeometry( 10, 10, 10, 2, 2, 2 );
+material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+box = new THREE.Mesh( geometry, material );<br>
+helper = new THREE.FaceNormalsHelper( box, 2, 0x00ff00, 1 );<br>
+scene.add( box );
+scene.add( helper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL / helpers</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>FaceNormalsHelper( <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект');" onmouseout="hide()">object</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">size</a></span>, <span onclick="showClick(type_color)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - ширина (толщина) линии');" onmouseout="hide()">linewidth</a></span> )</pre>
+<div class=list><tt>object</tt> -- объект, для которого нужно отобразить нормали к граням.</div>
+<div class=list><tt>size</tt> -- длина стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>color</tt> -- шестнадцатиричное значение цвета стрелок (дополнительный, необязательный параметр). Значение по умолчанию равно&nbsp;<tt>0xffff00</tt>.</div>
+<div class=list><tt>linewidth</tt> -- ширина линий стрелок (дополнительный, необязательный параметр).  Значение по умолчанию равно&nbsp;<tt>1</tt>.</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах посмотрите базовый класс <a href="../objects/lineSegments.htm" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
+<div class=blockindent><br>
+<pre id="matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы');" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+Посмотрите описание <a href="../core/object3D.htm#matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a>.
+Установите данное свойство как <tt>false</tt>, так как этот вспомогательный элемент использует <a href="../core/object3D.htm#matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a> объекта.<br><br>
+
+<pre id="object"><a href="../core/object3D.htm" onmouseover="show('Object3D');" onmouseout="hide()">.object</a></pre>
+Объект, для которого должны быть показаны нормали граней.<br><br>
+
+<pre id="size"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер');" onmouseout="hide()">.size</a></span></pre>
+Длина стрелок, значение по умолчанию равно <tt>1</tt>.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <a href="../objects/lineSegments.htm" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
+<div class=blockindent><br>
+<pre id="7update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
+Обновляет предпросмотр нормалей граней на основе перемещения объекта.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/FaceNormalsHelper.js" target="_blank">FaceNormalsHelper.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

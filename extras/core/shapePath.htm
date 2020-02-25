@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="curvePath.htm" title="Переход к родительскому классу"><tt>CurvePath &rarr;</tt></a></span>
+<h3>ShapePath</h3>
+Этот класс используется для конвертирования ряда фигур в массив <a href="path.htm" onmouseover="show('Path')" onmouseout="hide()">путей</a>, например SVG-формы в путь (смотрите пример ниже). Также он используется внутри <a href="font.htm" onmouseover="show('Font')" onmouseout="hide()">Font</a> для преобразования шрифта (в формате JSON) в ряд путей.<br><br>
+
+<h4>Пример</h4>
+<pre><a href="https://threejs.org/examples/webgl_geometry_extrude_shapes2" target="_blank">geometry / extrude / shapes2</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>ShapePath( )</pre>
+Создает новый ShapePath. В отличие от <a href="path.htm" onmouseover="show('Path')" onmouseout="hide()">Path</a>, никаких точек не передается, так как ShapePath предназначен для генерации пути уже созданной фигуры.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="subPaths"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sub paths - вложенные пути')" onmouseout="hide()">.subPaths</a></span></pre>
+Массив из <a href="path.htm" onmouseover="show('Path')" onmouseout="hide()">путей</a>.<br><br>
+
+<pre id="currentPath"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('current path - текущий путь')" onmouseout="hide()">.currentPath</a></span></pre>
+Текущий <a href="path.htm" onmouseover="show('Path')" onmouseout="hide()">путь</a>, т.е. путь, который создается в настоящий момент.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="bezierCurveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bezier curve to - кривая Безье к')" onmouseout="hide()">.bezierCurveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp1X - сокращ. от англ. слов control point 1 X<br>- координата X первой контрольной точки')" onmouseout="hide()">cp1X</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp1Y - сокращ. от англ. слов control point 1 Y<br>- координата Y первой контрольной точки')" onmouseout="hide()">cp1Y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp2X - сокращ. от англ. слов control point 2 X<br>- координата X второй контрольной точки')" onmouseout="hide()">cp2X</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp2Y - сокращ. от англ. слов control point 2 Y<br>- координата Y второй контрольной точки')" onmouseout="hide()">cp2Y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод создает кубическую кривую Безье от смещения <a href="#currentPath" onmouseover="show('ShapePath.currentPath')" onmouseout="hide()">текущего пути</a> к точке с координатами, переданными в аргументах <tt>x</tt> и <tt>y</tt>,
+с помощью контрольных точек (с координатами <tt>cp1X</tt>, <tt>cp1Y</tt> и <tt>cp2X</tt>, <tt>cp2Y</tt>), а затем обновляет смещение текущего пути на значения, переданные в аргументах <tt>x</tt> и <tt>y</tt>.<br><br>
+
+<pre id="lineTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line to - линия для')" onmouseout="hide()">.lineTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод создает линию от смещения <a href="#currentPath" onmouseover="show('ShapePath.currentPath')" onmouseout="hide()">текущего пути</a> к точке с координатами, переданными в аргументах <tt>x</tt> и <tt>y</tt>,
+а затем обновляет смещение текущего пути на значения, переданные в аргументах <tt>x</tt> и <tt>y</tt>.<br><br>
+
+<pre id="moveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('move to - переместить в')" onmouseout="hide()">.moveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод начинает новый <a href="path.htm" onmouseover="show('Path')" onmouseout="hide()">путь</a> и вызывает метод <tt><a href="path.htm#moveTo" onmouseover="show('Path.moveTo')" onmouseout="hide()">Path.moveTo( x, y )</a></tt> для этого пути.
+Также указывает <tt><a href="#currentPath" onmouseover="show('ShapePath.currentPath')" onmouseout="hide()">currentPath</a></tt> для этого пути.<br><br>
+
+<pre id="quadraticCurveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('quadratic curve to - квадратичная кривая для')" onmouseout="hide()">.quadraticCurveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cpX - сокращ. от англ. слов control point X<br>- координата X контрольной точки')" onmouseout="hide()">cpX</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cpY - сокращ. от англ. слов control point Y<br>- координата Y контрольной точки')" onmouseout="hide()">cpY</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x - координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y - координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод создает квадратичную кривую Безье от смещения <a href="#currentPath" onmouseover="show('ShapePath.currentPath')" onmouseout="hide()">текущего пути</a> к точке с координатами, переданными в аргументах <tt>x</tt> и <tt>y</tt>,
+с помощью контрольной точки (с координатами <tt>cpX</tt> и <tt>cpY</tt>), а затем обновляет смещение текущего пути на значения, переданные в аргументах <tt>x</tt> и <tt>y</tt>.<br><br>
+
+<pre id="splineThru"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('spline thru - сплайн через')" onmouseout="hide()">.splineThru</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list>points - массив <a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>.</div>
+Присоединяет новую <a href="../curve/splineCurve.htm" onmouseover="show('SplineCurve')" onmouseout="hide()">сплайновую кривую</a> к <a href="#currentPath" onmouseover="show('ShapePath.currentPath')" onmouseout="hide()">текущему пути</a>.<br><br>
+
+<pre id="toShapes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to shapes - для форм')" onmouseout="hide()">.toShapes</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CCW - сокращ. англ. слов is counterclockwise<br>- против часовой стрелки')" onmouseout="hide()">isCCW</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no holes - нет дырок')" onmouseout="hide()">noHoles</a></span> )</pre>
+<div class=list><tt>isCCW</tt> -- изменяет способ генерации основного тела фигуры и отверстий в нем.</div>
+<div class=list><tt>noHoles</tt> -- определяет, будут или нет генерироваться отверстия.</div>
+Метод конвертирует массив <a href="#subPaths" onmouseover="show('ShapePath.subPaths')" onmouseout="hide()">вложенных путей</a> в массив <a href="shape.htm" onmouseover="show('Shape')" onmouseout="hide()">форм</a>.
+По умолчанию, основные тела фигур определяются по часовой стрелке (CW - clockwise), а отверстия в них - против часовой стрелки (CCW - counterclockwise).
+Если аргумент <tt>isCCW</tt> установлен как <tt>true</tt>, то эти направления переворачиваются.
+Если параметр <tt>noHoles</tt> установлен как <tt>true</tt>, то все пути задаются как для основных тел фигур, а аргумент <tt>isCCW</tt> игнорируется.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Path.js" target="_blank">Path.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

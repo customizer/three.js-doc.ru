@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/curve.htm" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3>CatmullRomCurve3</h3>
+Создает гладкую трехмерную сплайновую кривую из ряда точек при помощи <a href="https://en.wikipedia.org/wiki/Centripetal_Catmull-Rom_spline" target="_blank">алгоритма Катмулл-Ром (Catmull-Rom)</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>// Create a closed wavey loop
+// создаем замкнутый волновой цикл
+var curve = new THREE.CatmullRomCurve3( [
+	new THREE.Vector3( -10, 0, 10 ),
+	new THREE.Vector3( -5, 5, 5 ),
+	new THREE.Vector3( 0, 0, 0 ),
+	new THREE.Vector3( 5, -5, 5 ),
+	new THREE.Vector3( 10, 0, 10 )
+] );<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var curveObject = new THREE.Line( geometry, material );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_geometry_extrude_splines" target="_blank">geometry / extrude / splines</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>CatmullRomCurve3( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">.points</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closed - закрыть, замкнуть')" onmouseout="hide()">closed</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve type - тип кривой')" onmouseout="hide()">curveType</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tension - упругость, напряженность, натяжение')" onmouseout="hide()">tension</a></span> )</pre>
+<div class=list><tt>points</tt> – массив <a href="../../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерных векторов</a> - точек, определяющих кривую.</div>
+<div class=list><tt>closed</tt> – параметр определяет, будет ли замкнута кривая. Значение по умолчанию является <tt>false</tt>, т.е не замкнута.</div>
+<div class=list><tt>curveType</tt> – тип кривой. Значением по умолчанию является <tt>centripetal</tt> (центростремительный).</div>
+<div class=list><tt>tension</tt> – упругость кривой. Значение по умолчанию равно <tt>0.5</tt>.</div><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="../core/curve.htm">Curve</a>.
+<div class=blockindent><br>
+<pre id="isCatmullRomCurve3"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is CatmullRomCurve3 - является CatmullRomCurve3')" onmouseout="hide()">.isCatmullRomCurve3</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него CatmullRomCurve3. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="points"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">.points</a></span></pre>
+Массив <a href="../../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерных векторов</a> - точек, определяющих кривую. Требуется, как минимум, две точки.<br><br>
+
+<pre id="closed"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closed - закрыть, замкнуть')" onmouseout="hide()">.closed</a></span></pre>
+Если это значение установлено как <tt>true</tt>, кривая будет замкнута на себя (конец кривой будет соединен с её началом).<br><br>
+
+<pre id="curveType"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve type - тип кривой')" onmouseout="hide()">.curveType</a></span></pre>
+Возможными значениями являются: <tt>centripetal</tt> (центростремительный), <tt>chordal</tt> (хордовый) и <tt>catmullrom</tt> (тип по алгоритму Катмулл-Ром).<br><br>
+
+<pre id="tension"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tension - упругость, напряженность, натяжение')" onmouseout="hide()">.tension</a></span></pre>
+При установке типа как <tt>catmullrom</tt>, определяет упругость сплайна по алгоритму Катмулл-Ром.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="../core/curve.htm">Curve</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/CatmullRomCurve3.js" target="_blank">CatmullRomCurve3.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

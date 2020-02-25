@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/geometry.htm" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3>TorusKnotGeometry</h3>
+Это геометрический объект в виде тора с узлом, конкретная форма которого определяется парой <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B7%D0%B0%D0%B8%D0%BC%D0%BD%D0%BE_%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%8B%D0%B5_%D1%87%D0%B8%D1%81%D0%BB%D0%B0" target="_blank" onmouseover="show('Целые числа называются взаимно простыми, если<br>они не имеют никаких общих делителей, кроме ±1.')" onmouseout="hide()">взаимно простых целых чисел</a>, <tt>p</tt> и <tt>q</tt>. Если значения <tt>p</tt> и <tt>q</tt> не взаимно простые, получится тороидное звено.
+<div class="caption"><img src="../img/TorusKnotGeometry.png" width=500><br>
+Тор с узлом</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torusKnot = new THREE.Mesh( geometry, material );
+scene.add( torusKnot );</pre>
+
+<h4>Конструктор</h4>
+<pre>TorusKnotGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tube - труба')" onmouseout="hide()">tube</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tubular segments - сегменты по длине трубы')" onmouseout="hide()">tubularSegments</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radial segments - радиальные сегменты')" onmouseout="hide()">radialSegments</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - ')" onmouseout="hide()">p</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('q - ')" onmouseout="hide()">q</a></span> )</pre>
+<div class=list><tt>radius</tt> — радиус тора, от центра тора до центра трубы. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>tube</tt> — радиус трубы, из которой сделан тор. Значение по умолчанию равно&nbsp;<tt>0.4</tt>.</div>
+<div class=list><tt>tubularSegments</tt> — сегменты по длине трубы. Значение по умолчанию равно&nbsp;<tt>64</tt>. Чем больше это значение, тем ближе к окружности кольцо тора.</div>
+<div class=list><tt>radialSegments</tt> — радиальные сегменты. Значение по умолчанию равно&nbsp;<tt>8</tt>.
+Чем больше это значение, тем ближе к окружности сечение трубы, из которой сделано кольцо тора (т.е. при значении 3 - труба в сечении будет треугольной, при 4 - квадратной и т.д.).</div>
+<div class=list><tt>p</tt> — данное значение определяет, сколько оборотов делает этот геометрический элемент вокруг своей центральной оси. Значение по умолчанию равно&nbsp;<tt>2</tt>.</div>
+<table align=center><tr><td><img src="../img/p1.png" width=100><br><div class="caption">p=1, q=1</div></td>
+<td><img src="../img/p2.png" width=100><br><div class="caption">p=2, q=1</div></td>
+<td><img src="../img/p3.png" width=100><br><div class="caption">p=3, q=1</div></td>
+<td><img src="../img/p4.png" width=100><br><div class="caption">p=4, q=1</div></td></table>
+<div class=list><tt>q</tt> — данное значение определяет, сколько оборотов делает этот геометрический элемент внутри тора, вокруг осевой окружности трубы (кольца) тора. Значение по умолчанию равно&nbsp;<tt>3</tt>.</div>
+<table align=center><tr><td><img src="../img/p1.png" width=100><br><div class="caption">p=1, q=1</div></td>
+<td><img src="../img/q2.png" width=100><br><div class="caption">p=1, q=2</div></td>
+<td><img src="../img/q3.png" width=100><br><div class="caption">p=1, q=3</div></td>
+<td><img src="../img/q4.png" width=100><br><div class="caption">p=1, q=4</div></td></table><br>
+<script language="javascript">document.write (prop_1);</script>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TorusKnotGeometry.js" target="_blank">TorusKnotGeometry.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

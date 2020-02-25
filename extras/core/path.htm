@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="curvePath.htm" title="Переход к родительскому классу"><tt>CurvePath &rarr;</tt></a></span>
+<h3>Path</h3>
+Представление двумерного пути или контура. Данный класс предоставляет методы создания путей и контуров двумерных фигур, аналогичных создаваемым с помощью 2D Canvas API.<br><br>
+
+<h4>Пример</h4>
+<pre>var path = new THREE.Path();<br>
+  path.lineTo( 0, 0.8 );
+  path.quadraticCurveTo( 0, 1, 0.2, 1 );
+  path.lineTo( 1, 1 );<br>
+  var points = path.getPoints();<br>
+  var geometry = new THREE.BufferGeometry().setFromPoints( points );
+  var material = new THREE.LineBasicMaterial( { color: 0xffffff } );<br>
+  var line = new THREE.Line( geometry, material );
+  scene.add( line );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>Path( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> -- массив <a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>, (дополнительный, необязательный аргумент).</div>
+Создает Path по заданным точкам. Первая точка в массиве <tt>points</tt> определяет смещение (т.е. это значение свойства <tt>currentPoint</tt>),
+затем последующие точки добавляются в массив <tt><a href="curvePath.htm" onmouseover="show('CurvePath.curves')" onmouseout="hide()">curves</a></tt> как <a href="../curve/lineCurve.htm" onmouseover="show('LineCurve')" onmouseout="hide()">линейные кривые</a>.<br>
+Если точки не указаны (т.е. аргумент <tt>points</tt> отсутствует), создается пустой путь, а текущей точкой (т.е. значением свойства <tt>currentPoint</tt>) устанавливается начало координат.<br><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="curvePath.htm">CurvePath</a>.
+<div class=blockindent><br>
+<pre id="currentPoint"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('current point - текущая точка')" onmouseout="hide()">.currentPoint</a></span></pre>
+Значение этого свойства определяет смещение данного пути. Любая вновь добавляемая <a href="curve.htm" onmouseover="show('Curve')" onmouseout="hide()">кривая</a> будет начинаться отсюда.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="curvePath.htm">CurvePath</a>.
+<div class=blockindent><br>
+<pre id="absarc"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('absarc - сокращ. англ. слов abs(olute<br>center of the) arc - абсолютный центр дуги')" onmouseout="hide()">.absarc</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start angle - начальный угол')" onmouseout="hide()">startAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end angle - конечный угол')" onmouseout="hide()">endAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clockwise - по часовой стрелке')" onmouseout="hide()">clockwise</a></span> )</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- координаты абсолютного центра дуги.</div>
+<div class=list><tt>radius</tt> -- радиус дуги.</div>
+<div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
+<div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
+<div class=list><tt>clockwise</tt> -- проводить ли дугу эллипса по часовой стрелке. Значением по умолчанию является&nbsp;<tt>false</tt>.</div>
+Добавляет к пути полностью позиционированную <a href="../curve/ellipseCurve.htm" onmouseover="show('EllipseCurve')" onmouseout="hide()">эллипсовидную кривую</a>.<br><br>
+
+<pre id="absellipse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('abs ellipse - сокращ. англ. слов absolutely<br>(positioned) ellipse - полностью позиционированный<br>эллипс')" onmouseout="hide()">.absellipse</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x radius - радиус по оси x')" onmouseout="hide()">xRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y radius - радиус по оси y')" onmouseout="hide()">yRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start angle - начальный угол')" onmouseout="hide()">startAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end angle - конечный угол')" onmouseout="hide()">endAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clockwise - по часовой стрелке')" onmouseout="hide()">clockwise</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotation - поворот, вращение')" onmouseout="hide()">rotation</a></span> )</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- координаты абсолютного центра эллипса.</div>
+<div class=list><tt>xRadius</tt> -- радиус эллипса по оси <tt>x</tt>.</div>
+<div class=list><tt>yRadius</tt> -- радиус эллипса по оси <tt>y</tt>.</div>
+<div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
+<div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
+<div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является&nbsp;<tt>false</tt>.</div>
+<div class=list><tt>rotation</tt> -- угол поворота дуги эллипса в радианах, отсчитываемый от положительной оси <tt>X</tt> против часовой стрелки. Дополнительный, необязательный аргумент, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+Добавляет к пути полностью позиционированную <a href="../curve/ellipseCurve.htm" onmouseover="show('EllipseCurve')" onmouseout="hide()">эллипсовидную кривую</a>.<br><br>
+
+<pre id="arc"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('arc - дуга')" onmouseout="hide()">.arc</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start angle - начальный угол')" onmouseout="hide()">startAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end angle - конечный угол')" onmouseout="hide()">endAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clockwise - по часовой стрелке')" onmouseout="hide()">clockwise</a></span> )</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- смещение центра дуги, считая от последнего вызова.</div>
+<div class=list><tt>radius</tt> -- радиус дуги.</div>
+<div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
+<div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
+<div class=list><tt>clockwise</tt> -- проводить ли дугу эллипса по часовой стрелке. Значением по умолчанию является&nbsp;<tt>false</tt>.</div>
+Добавляет к пути <a href="../curve/ellipseCurve.htm" onmouseover="show('EllipseCurve')" onmouseout="hide()">эллипсовидную кривую</a>, позиционированную относительно <tt><a href="#currentPoint" onmouseover="show('Path.currentPoint')" onmouseout="hide()">currentPoint</a></tt>.<br><br>
+
+<pre id="bezierCurveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bezier curve to - кривая Безье для')" onmouseout="hide()">.bezierCurveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp1X - сокращ. англ. слов control point 1 X -<br>координата <tt>x</tt> первой контрольной точки')" onmouseout="hide()">cp1X</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp1Y - сокращ. англ. слов control point 1 Y -<br>координата <tt>y</tt> первой контрольной точки')" onmouseout="hide()">cp1Y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp2X - сокращ. англ. слов control point 2 X -<br>координата <tt>x</tt> второй контрольной точки')" onmouseout="hide()">cp2X</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cp2Y - сокращ. англ. слов control point 2 Y -<br>координата <tt>y</tt> второй контрольной точки')" onmouseout="hide()">cp2Y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
+Данный метод создает кривую Безье из <tt><a href="path.htm#currentPoint" onmouseover="show('Path.currentPoint')" onmouseout="hide()">currentPoint</a></tt> и двух контрольных точек (координаты первой <tt>cp1X</tt> и <tt>cp1Y</tt>, второй <tt>cp2X</tt> и <tt>cp2Y</tt>) и обновляет координаты <tt>currentPoint</tt> до <tt>x</tt> и <tt>y</tt>.<br><br>
+
+<pre id="ellipse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('ellipse - эллипс')" onmouseout="hide()">.ellipse</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x radius радиус по оси x')" onmouseout="hide()">xRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y radius - радиус по оси y')" onmouseout="hide()">yRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start angle - начальный угол')" onmouseout="hide()">startAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end angle - конечный угол')" onmouseout="hide()">endAngle</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clockwise - по часовой стрелке')" onmouseout="hide()">clockwise</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('rotation - поворот, вращение')" onmouseout="hide()">rotation</a></span> )</pre>
+<div class=list><tt>x</tt>, <tt>y</tt> -- смещение центра эллипса, считая от последнего вызова.</div>
+<div class=list><tt>xRadius</tt> -- радиус эллипса по оси <tt>x</tt>.</div>
+<div class=list><tt>yRadius</tt> -- радиус эллипса по оси <tt>y</tt>.</div>
+<div class=list><tt>startAngle</tt> -- начальный угол, в радианах.</div>
+<div class=list><tt>endAngle</tt> -- конечный угол, в радианах.</div>
+<div class=list><tt>clockwise</tt> -- проводить ли дугу по часовой стрелке. Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt>rotation</tt> -- угол поворота дуги эллипса в радианах, отсчитываемый от положительной оси <tt>X</tt> против часовой стрелки. Дополнительный, необязательный аргумент, значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+Добавляет к пути <a href="../curve/ellipseCurve.htm" onmouseover="show('EllipseCurve')" onmouseout="hide()">эллипсовидную кривую</a>, позиционированную относительно <tt><a href="path.htm#currentPoint" onmouseover="show('Path.currentPoint')" onmouseout="hide()">currentPoint</a></tt>.<br><br>
+
+<pre id="lineTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line to - линия к')" onmouseout="hide()">.lineTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод соединяет <a href="../curve/lineCurve.htm" onmouseover="show('LineCurve')" onmouseout="hide()">линейной кривой</a> от <tt><a href="path.htm#currentPoint" onmouseover="show('Path.currentPoint')" onmouseout="hide()">currentPoint</a></tt> до точки на пути с координатами <tt>x</tt> и <tt>y</tt>.<br><br>
+
+<pre id="moveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('move to - передвинуть к')" onmouseout="hide()">.moveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод перемещает <tt><a href="path.htm#currentPoint" onmouseover="show('Path.currentPoint')" onmouseout="hide()">currentPoint</a></tt> в точку с координатами <tt>x</tt> и <tt>y</tt>.<br><br>
+
+<pre id="quadraticCurveTo"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('quadratic curve to - квадратичная кривая к')" onmouseout="hide()">.quadraticCurveTo</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cpX - сокращ. англ. слов control point X<br>- координата <tt>x</tt> контрольной точки')" onmouseout="hide()">cpX</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cpY - сокращ. англ. слов control point Y<br>- координата <tt>y</tt> контрольной точки')" onmouseout="hide()">cpY</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x')" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y')" onmouseout="hide()">y</a></span> )</pre>
+Метод создает квадратичную кривую из <tt><a href="path.htm#currentPoint" onmouseover="show('Path.currentPoint')" onmouseout="hide()">currentPoint</a></tt> и контрольной точки (координаты <tt>cpX</tt> и <tt>cpY</tt>) и обновляет координаты <tt>currentPoint</tt> до <tt>x</tt> и <tt>y</tt>.<br><br>
+
+<pre id="setFromPoints"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set from points - установить из точек')" onmouseout="hide()">.setFromPoints</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> - массив <a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>.</div>
+Метод добавляет точки в массив <tt><a href="curvePath.htm#curves" onmouseover="show('CurvePath.curves')" onmouseout="hide()">curves</a></tt> как <a href="../curve/lineCurve.htm" onmouseover="show('LineCurve')" onmouseout="hide()">линейные кривые</a>.<br><br>
+
+<pre id="splineThru"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('spline thru - сплайн от')" onmouseout="hide()">.splineThru</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> - массив <a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>.</div>
+Подсоединяет к пути новую <a href="../curve/splineCurve.htm" onmouseover="show('SplineCurve')" onmouseout="hide()">сплайновую кривую</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Path.js" target="_blank">Path.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

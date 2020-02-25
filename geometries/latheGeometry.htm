@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/geometry.htm" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3>LatheGeometry</h3>
+Класс для построения сеток (Mesh) с осевой симметрией. Возможное применение включает вазы, трубы, пончики и т.д. Вращение происходит вокруг вертикальной оси&nbsp;Y.
+<div class=note_trans><b>Примечание переводчика:</b> в переводе на русский язык lathe - станок, а конкретнее - токарный станок. То есть, подразумевается что данный класс позволяет создавать объекты подобно токарному станку.</div>
+<div class="caption"><img src="../img/LatheGeometry.png" width=500><br>Lathe</div><br>
+
+<h4>Пример</h4>
+<pre>var points = [];
+for ( var i = 0; i &#60; 10; i ++ ) {
+	points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5, ( i - 5 ) * 2 ) );
+}
+var geometry = new THREE.LatheGeometry( points );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var lathe = new THREE.Mesh( geometry, material );
+scene.add( lathe );</pre>
+
+<h4>Конструктор</h4>
+<pre>LatheGeometry( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('segments - части, сегменты')" onmouseout="hide()">segments</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('phi start - начало (центрального угла),<br>обозначенного греческой<br>буквой фи - &#966;')" onmouseout="hide()">phiStart</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('phi length - длина дуги окружности (центральный угол')" onmouseout="hide()">phiLength</a></span> )</pre>
+<div class=list><tt>points</tt> — массив <a href="../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>. Координата <tt>x</tt> каждой точки должна быть больше нуля.</div>
+<div class=list><tt>segments</tt> — количество сегментов по окружности создаваемого объекта. Значение по умолчанию равно&nbsp;<tt>12</tt>.</div>
+<div class=list><tt>phiStart</tt> — начальный угол, в радианах. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>phiLength</tt> — длина окружности, в радианах (в диапазоне от <tt>0</tt> до <tt>2PI</tt>). Значение равное <tt>2PI</tt> означает, что окружность замкнута, менее <tt>2PI</tt> - часть окружности. Значение по умолчанию равно&nbsp;<tt>2PI</tt>.</div>
+Данный конструктор на основе заданных параметров создает LatheBufferGeometry.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/LatheGeometry.js" target="_blank">LatheGeometry.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

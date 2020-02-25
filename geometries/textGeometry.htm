@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="extrudeGeometry.htm" title="Переход к родительскому классу"><tt>ExtrudeGeometry &rarr;</tt></a></span>
+<h3>TextGeometry</h3>
+Класс для создания текста как отдельного геометрического элемента. Он строится по предоставлению строки текста и набора параметров,
+состоящих из загруженного <a href="../extras/core/font.htm" onmouseover="show('Font')" onmouseout="hide()">шрифта</a> и настроек родительского класса <a href="extrudeGeometry.htm">ExtrudeGeometry</a>.
+Дополнительные сведения смотрите в описании <a href="../extras/core/font.htm" onmouseover="show('Font')" onmouseout="hide()">Font</a>, <a href="../loaders/fontLoader.htm" onmouseover="show('FontLoader')" onmouseout="hide()">FontLoader</a>
+и <a href="../intro/creatingText.htm" onmouseover="show('Creating_Text')" onmouseout="hide()">Создание текста</a>.
+<div class="caption"><img src="../img/TextGeometry.png" width=650><br>Text</div><br>
+
+<h4>Пример</h4>
+<pre>var loader = new THREE.FontLoader();<br>
+loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {<br>
+  var geometry = new THREE.TextGeometry( 'Hello three.js!', {
+    font: font,
+    size: 80,
+    height: 5,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 10,
+    bevelSize: 8,
+    bevelSegments: 5
+  } );
+} );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometry_text" target="_blank">geometry / text</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>TextGeometry( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">.parameters</a></span> )</pre>
+<div class=list><tt>text</tt> — текст, который требуется показать.</div>
+<div class=list><tt>parameters</tt> — объект, который может содержать следующие параметры:</div>
+<div class=blockindent>
+<div class=list><tt><span onclick="showClick('THREE.Font')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('font - шрифт')" onmouseout="hide()">font</a></span></tt> — экземпляр THREE.Font.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер')" onmouseout="hide()">size</a></span></tt>
+— размер текста. Значение по умолчанию равно&nbsp;<tt>100</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота')" onmouseout="hide()">height</a></span></tt>
+— толщина выдавленного текста.  Значение по умолчанию равно&nbsp;<tt>50</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve segments - отрезки кривой')" onmouseout="hide()">curveSegments</a></span></tt>
+— количество точек на кривых. Значение по умолчанию равно&nbsp;<tt>12</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel enabled - ')" onmouseout="hide()">bevelEnabled</a></span></tt>
+— включает фаску (скос). Значением по умолчанию является <tt>false</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel thickness - толщина фаски')" onmouseout="hide()">bevelThickness</a></span></tt>
+— насколько глубоко в тексте снимается фаска. Значение по умолчанию равно&nbsp;<tt>10</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel size - размер фаски (скоса)')" onmouseout="hide()">bevelSize</a></span></tt>
+— насколько далеко выступает фаска из текста. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel segments - сегменты фаски')" onmouseout="hide()">bevelSegments</a></span></tt>
+— количество сегментов (слоев) фаски (скоса). Значение по умолчанию равно&nbsp;<tt>3</tt>.</div></div><br>
+
+<h4>Доступные шрифты</h4>
+<tt>TextGeometry</tt> использует шрифты, сгенерированные <a href='http://gero3.github.io/facetype.js/' target="_blank">typeface.json</a>.<br>
+Несколько имеющихся шрифтов можно найти в <b>/examples/fonts</b> и они должны быть включены в коде страницы.
+<table class="tbl_1" border="1" cellpadding="5">
+<tr class="head"><td>Font<br>шрифт</td><td>Weight<br>плотность</td><td>Style<br>стиль</td><td>File Path<br>путь к файлу</td></tr>
+<tr><td>helvetiker</td><td>normal</td><td>normal</td><td>/examples/fonts/helvetiker_regular.typeface.json</td></tr>
+<tr><td>helvetiker</td><td>bold</td><td>normal</td><td>/examples/fonts/helvetiker_bold.typeface.json</td></tr>
+<tr><td>optimer</td><td>normal</td><td>normal</td><td>/examples/fonts/optimer_regular.typeface.json</td></tr>
+<tr><td>optimer</td><td>bold</td><td>normal</td><td>/examples/fonts/optimer_bold.typeface.json</td></tr>
+<tr><td>gentilis</td><td>normal</td><td>normal</td><td>/examples/fonts/gentilis_regular.typeface.json</td></tr>
+<tr><td>gentilis</td><td>bold</td><td>normal</td><td>/examples/fonts/gentilis_bold.typeface.json</td></tr>
+<tr><td>droid&nbsp;sans</td><td>normal</td><td>normal</td><td>/examples/fonts/droid/droid_sans_regular.typeface.json</td></tr>
+<tr><td>droid&nbsp;sans</td><td>bold</td><td>normal</td><td>/examples/fonts/droid/droid_sans_bold.typeface.json</td></tr>
+<tr><td>droid&nbsp;serif</td><td>normal</td><td>normal</td><td>/examples/fonts/droid/droid_serif_regular.typeface.json</td></tr>
+<tr><td>droid&nbsp;serif</td><td>bold</td><td>normal</td><td>/examples/fonts/droid/droid_serif_bold.typeface.json</td></tr></table><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TextGeometry.js" target="_blank">TextGeometry.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

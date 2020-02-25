@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3>ArrowHelper</h3>
+Объект трехмерной (3D) стрелки для визуализации направлений.
+<div class="caption"><img src="../img/arrowAndGrid.png" width=600><br>
+Сетка и стрелка</div><br>
+
+<h4>Пример</h4>
+<pre>var dir = new THREE.Vector3( 1, 2, 0 );<br>
+// normalize the direction vector (convert to vector of length 1)
+// нормализуем вектор направления (конвертируем в вектор единичной длины)
+dir.normalize();<br>
+var origin = new THREE.Vector3( 0, 0, 0 );
+var length = 1;
+var hex = 0xffff00;<br>
+var arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+scene.add( arrowHelper );</pre>
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/#webgl_geometries" target="_blank">WebGL / geometries</a>
+<a href="https://threejs.org/examples/#webgl_geometry_normals" target="_blank">WebGL / geometry / normals</a>
+<a href="https://threejs.org/examples/#webgl_shadowmesh" target="_blank">WebGL / shadowmesh</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>ArrowHelper( <a href="../math/vector3.htm" onmouseover="show('Vector3.<br>dir - сокращ. англ. слова direction - направление');" onmouseout="hide()">dir</a>, <a href="../math/vector3.htm"  onmouseover="show('Vector3.<br>origin - начало, источник');" onmouseout="hide()">origin</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина');" onmouseout="hide()">length</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('hex - сокращ. англ. слова hexadecimal - шестнадцатиричный');" onmouseout="hide()">hex</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head length - длина головки');" onmouseout="hide()">headLength</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head width - ширина головки');" onmouseout="hide()">headWidth</a></span> )</pre>
+<div class=list><tt>dir</tt> -- направление из <tt>origin</tt> (т.е из начальной точки стрелки). Должен быть единичным вектором.</div>
+<div class=list><tt>origin</tt> -- точка из которой начинается стрелка.</div>
+<div class=list><tt>length</tt> -- длина стрелки. Значением по умолчанию является&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>hex</tt> -- шестнадцатиричное значение, определяющее цвет. Значение по умолчанию равно&nbsp;<tt>0xffff00</tt>.</div>
+<div class=list><tt>headLength</tt> -- длина наконечника стрелки. Значение по умолчанию равно&nbsp;<tt>0.2&nbsp;*&nbsp;length</tt>.</div>
+<div class=list><tt>headWidth</tt> -- ширина наконечника стрелки. Значение по умолчанию равно&nbsp;<tt>0.2&nbsp;*&nbsp;headLength</tt>.</div><br>
+
+<h4>Свойства</h4>
+Для информации об общих свойствах посмотрите базовый класс <a href="../core/object3D.htm" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="line"><a href="../objects/line.htm" onmouseover="show('line - линия. Родительский класс - Line');" onmouseout="hide()">.line</a></pre>
+Содержит линейную часть <tt>arrowHelper</tt>.<br><br>
+
+<pre id="cone"><a href="../objects/mesh.htm" onmouseover="show('cone - конус. Родительский класс - Mesh');" onmouseout="hide()">.cone</a></pre>
+Содержит коническую часть <tt>arrowHelper</tt>.</div><br>
+
+<h4>Методы</h4>
+Для информации об общих методах посмотрите базовый класс <a href="../core/object3D.htm" onmouseover="show('Object3D');" onmouseout="hide()">Object3D</a>.
+<div class=blockindent><br>
+<pre id="setColor"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set color - установить цвет');" onmouseout="hide()">.setColor</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span> )</pre>
+<div class=list><tt>color</tt> -- желаемый цвет.</div>
+Устанавливает цвет <tt>arrowHelper</tt>.<br><br>
+
+<pre id="setLength"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов set length - установить длину');" onmouseout="hide()">.setLength</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('length - длина');" onmouseout="hide()">length</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head length - длина головки');" onmouseout="hide()">headLength</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов head width - ширина головки');" onmouseout="hide()">headWidth</a></span> )</pre>
+<div class=list><tt>length</tt> -- желаемая длина стрелки.</div>
+<div class=list><tt>headLength</tt> -- длина наконечника стрелки.</div>
+<div class=list><tt>headWidth</tt> -- ширина наконечника стрелки.</div>
+Устанавливает длину <tt>arrowHelper</tt>.<br><br>
+
+<pre id="setDirection"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов set direction - установить направление');" onmouseout="hide()">.setDirection</a></span>( <a href="../math/vector3.htm" onmouseover="show('Vector3.<br>dir - сокращ. англ. слова direction - направление');" onmouseout="hide()">dir</a> )</pre>
+<div class=list><tt>dir</tt> -- желаемое направление. Должен быть единичным вектором.</div>
+Устанавливает направление <tt>arrowHelper</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/ArrowHelper.js" target="_blank">ArrowHelper.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

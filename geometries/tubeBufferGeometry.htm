@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/bufferGeometry.htm" title="Переход к родительскому классу"><tt>BufferGeometry &rarr;</tt></a></span>
+<h3>TubeBufferGeometry</h3>
+Создает трубу, вытянутую вдоль трехмерной кривой линии.<br>
+<div class="caption"><img src="../img/TubeGeometry.png" width=300><br>Труба</div><br>
+
+<h4>Пример</h4>
+<pre>function CustomSinCurve( scale ) {
+  THREE.Curve.call( this );
+  this.scale = ( scale === undefined ) ? 1 : scale;
+}<br>
+CustomSinCurve.prototype = Object.create( THREE.Curve.prototype );
+CustomSinCurve.prototype.constructor = CustomSinCurve;
+CustomSinCurve.prototype.getPoint = function ( t ) {
+  var tx = t * 3 - 1.5;
+  var ty = Math.sin( 2 * Math.PI * t );
+  var tz = 0;
+  return new THREE.Vector3( tx, ty, tz ).multiplyScalar( this.scale );
+};<br>
+var path = new CustomSinCurve( 10 );
+var geometry = new THREE.TubeBufferGeometry( path, 20, 2, 8, false );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>TubeBufferGeometry( <a href="../extras/core/curve.htm" onmouseover="show('Curve.<br>path - путь, контур')" onmouseout="hide()">path</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tubular segments - сегменты трубы')" onmouseout="hide()">tubularSegments</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius segments - радиальные сегменты')" onmouseout="hide()">radiusSegments</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('closed - закрыто')" onmouseout="hide()">closed</a></span> )</pre>
+<div class=list><tt>path</tt> — путь или траектория, наследуемая от базового класса <a href="../extras/core/curve.htm" onmouseover="show('Curve')" onmouseout="hide()">Curve</a>.</div>
+<div class=list><tt>tubularSegments</tt> — число сегментов по длине трубы. Значение по умолчанию равно&nbsp;<tt>64</tt>.</div>
+<div class=list><tt>radius</tt> — радиус трубы. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>radiusSegments</tt> — число сегментов поперечного сечения трубы т.е. при значении 3 - труба в сечении будет треугольной, при 4 - квадратной и т.д. Значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt>closed</tt> — определяет, открыта или закрыта труба. Значением по умолчанию является <tt>false</tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class=note_trans><b>Примечание переводчика:</b> Прямая, перпендикулярная касательной и проходящая через точку касания, называется нормалью к кривой.
+Плоскость, перпендикулярная касательной в данной точке кривой, называется нормальной плоскостью; все нормали для данной точки лежат в нормальной плоскости.
+Нормаль, лежащую в соприкасающейся плоскости, называют главной нормалью, а нормаль, перпендикулярная соприкасающейся плоскости, называется бинормалью.</div>
+<div class=blockindent><br>
+<pre id="parameters"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">.parameters</a></span></pre>
+Объект со всеми параметрами, использованными при создании данного геометрического элемента.<br><br>
+
+<pre id="tangents"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tangents - касательные')" onmouseout="hide()">.tangents</a></span></pre>
+Массив касательных (<a href="../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>).<br><br>
+
+<pre id="normals"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('normals - нормали')" onmouseout="hide()">.normals</a></span></pre>
+Массив нормалей (<a href="../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>).<br><br>
+
+<pre id="binormals"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('binormals - бинормали')" onmouseout="hide()">.binormals</a></span></pre>
+Массив бинормалей (<a href="../math/vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">Vector3</a>).</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TubeGeometry.js" target="_blank">TubeGeometry.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

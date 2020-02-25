@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/curve.htm" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3>SplineCurve</h3>
+Создает гладкую <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD" target="_blank" onmouseover="show('сплайн (spline) - набор кривых линий, гладко состыкованных между собой')" onmouseout="hide()">сплайновую</a> кривую из ряда точек. Для создания кривой внутри этой функции используется <tt><a href="../core/interpolations.htm#CatmullRom" onmouseover="show('Interpolations.CatmullRom')" onmouseout="hide()">Interpolations.CatmullRom</a></tt>.<br><br>
+
+<h4>Пример</h4>
+<pre>// Create a sine-like wave
+// создаем синусоиду
+var curve = new THREE.SplineCurve( [
+  new THREE.Vector2( -10, 0 ),
+  new THREE.Vector2( -5, 5 ),
+  new THREE.Vector2( 0, 0 ),
+  new THREE.Vector2( 5, -5 ),
+  new THREE.Vector2( 10, 0 )
+] );<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var splineObject = new THREE.Line( geometry, material );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>SplineCurve( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> – массив точек (<a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), определяющих кривую.</div><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="../core/curve.htm">Curve</a>.
+<div class=blockindent><br>
+<pre id="isSplineCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is SplineCurve - является классом SplineCurve')" onmouseout="hide()">.isSplineCurve</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него SplineCurve. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="points"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">.points</a></span></pre>
+Массив точек (<a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">Vector2</a>), определяющих кривую.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="../core/curve.htm">Curve</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/SplineCurve.js" target="_blank">SplineCurve.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/curve.htm" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3>EllipseCurve</h3>
+Создает двумерную кривую в виде эллипса. При установке параметров <tt>xRadius</tt> и <tt>yRadius</tt> равными, получится окружность.<br><br>
+
+<h4>Пример</h4>
+<pre>var curve = new THREE.EllipseCurve(
+	0,  0,            // ax, aY
+	10, 10,           // xRadius, yRadius
+	0,  2 * Math.PI,  // aStartAngle, aEndAngle
+	false,            // aClockwise
+	0                 // aRotation
+);<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var ellipse = new THREE.Line( geometry, material );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>EllipseCurve( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('aX - координата X')" onmouseout="hide()">aX</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('aY - координата Y')" onmouseout="hide()">aY</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x radius - радиус по оси x')" onmouseout="hide()">xRadius</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y radius - радиус по оси y')" onmouseout="hide()">yRadius</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a start angle начальный угол')" onmouseout="hide()">aStartAngle</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a end angle - конечный угол')" onmouseout="hide()">aEndAngle</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a clockwise - по часовой стрелке')" onmouseout="hide()">aClockwise</a></span>, <span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a rotation - поворот, вращение')" onmouseout="hide()">aRotation</a></span> )</pre>
+<div class=list><tt>aX</tt> – координата <tt>X</tt> центра эллипса. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>aY</tt> – координата <tt>Y</tt> центра эллипса. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>xRadius</tt> – радиус эллипса по горизонтали (по оси <tt>x</tt>). Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>yRadius</tt> – радиус эллипса по вертикали (по оси <tt>y</tt>). Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>aStartAngle</tt> – начальный угол кривой (в радианах), отсчитываемый от середины правой стороны, т.е. от положения на&nbsp;3 часа. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=list><tt>aEndAngle</tt> – конечный угол кривой (в радианах), отсчитываемый от середины правой стороны, т.е. от положения на&nbsp;3 часа. Значением по умолчанию является <tt>2&#215;Math.PI</tt>.</div>
+<div class=list><tt>aClockwise</tt> – рисовать ли эллипс в направлении по часовой стрелке. Значением по умолчанию является&nbsp;<tt>false</tt>.</div>
+<div class=list><tt>aRotation</tt> – угол поворота эллипса (в радианах), отсчитываемый против часовой стрелки от положительной ветви оси <tt>X</tt>. Дополнительный, необязательный параметр. Значение по умолчанию равно&nbsp;<tt>0</tt>.</div>
+<div class=note><b>Примечание:</b> При движении против часовой стрелки (параметр <tt>aClockwise = true</tt>, лучше установить начальный угол (<tt>aStartAngle</tt>) как <tt>(Math.PI * 2)</tt> и затем работать в направлении меньших чисел.</div><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="../core/curve.htm">Curve</a>.
+<div class=blockindent><br>
+<pre id="aX"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('aX - координата X')" onmouseout="hide()">.aX</a></span></pre>
+Координата&nbsp;<tt>X</tt> центра эллипса.<br><br>
+
+<pre id="aY"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('aY - координата Y')" onmouseout="hide()">.aY</a></span></pre>
+Координата&nbsp;<tt>Y</tt> центра эллипса.<br><br>
+
+<pre id="xRadius"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('x radius - радиус по оси x')" onmouseout="hide()">.xRadius</a></span></pre>
+Радиус эллипса по горизонтали (по оси <tt>x</tt>). Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="yRadius"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('y radius - радиус по оси y')" onmouseout="hide()">.yRadius</a></span></pre>
+Радиус эллипса по вертикали (по оси&nbsp;<tt>y</tt>). Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
+
+<pre id="aStartAngle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a start angle начальный угол')" onmouseout="hide()">.aStartAngle</a></span></pre>
+Начальный угол кривой (в радианах), отсчитываемый от середины правой стороны, т.е. от положения на 3 часа. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="aEndAngle"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a end angle - конечный угол')" onmouseout="hide()">.aEndAngle</a></span></pre>
+Конечный угол кривой (в радианах), отсчитываемый от середины правой стороны, т.е. от положения на 3 часа. Значением по умолчанию является&nbsp;<tt>2&#215;Math.PI</tt>.<br><br>
+
+<pre id="aClockwise"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a clockwise - по часовой стрелке')" onmouseout="hide()">.aClockwise</a></span></pre>
+Свойство определяет, рисовать ли эллипс в направлении по часовой стрелке. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
+
+<pre id="aRotation"><span onclick="showClick(type_rad)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('a rotation - поворот, вращение')" onmouseout="hide()">.aRotation</a></span></pre>
+Угол поворота эллипса (в радианах), отсчитываемый против часовой стрелки от положительной ветви оси <tt>X</tt>. Дополнительный, необязательный параметр. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="isEllipseCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is EllipseCurve - является классом EllipseCurve,<br>т.е. эллиптической кривой')" onmouseout="hide()">.isEllipseCurve</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него EllipseCurve. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="../core/curve.htm">Curve</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/EllipseCurve.js" target="_blank">EllipseCurve.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

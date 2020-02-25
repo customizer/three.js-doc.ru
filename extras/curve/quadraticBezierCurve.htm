@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/curve.htm" title="Переход к родительскому классу"><tt>Curve &rarr;</tt></a></span>
+<h3>QuadraticBezierCurve</h3>
+Создает гладкую двумерную <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif" target="_blank">квадратичную кривую Безье</a>.<br>
+Статья Википедии <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve" target="_blank">о кривых Безье</a> на английском языке.
+Статья Википедии <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">о кривых Безье</a> на русском языке.<br><br>
+
+<h4>Пример</h4>
+<pre>var curve = new THREE.QuadraticBezierCurve(
+  new THREE.Vector2( -10, 0 ),
+  new THREE.Vector2( 20, 15 ),
+  new THREE.Vector2( 10, 0 )
+);<br>
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );<br>
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );<br>
+// Create the final object to add to the scene
+// создаем конечный объект для добавления на сцену
+var curveObject = new THREE.Line( geometry, material );</pre>
+
+<h4>Конструктор</h4>
+<pre>QuadraticBezierCurve( <a href="../../math/vector2.htm" onmouseover="show('Vector2.<br>v0 - сокращ. англ. слова vector с индексом 0')" onmouseout="hide()">v0</a>, <a href="../../math/vector2.htm" onmouseover="show('Vector2.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">v1</a>, <a href="../../math/vector2.htm" onmouseover="show('Vector2.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">v2</a> )</pre>
+<div class=list><tt>v0</tt> – начальная точка.</div>
+<div class=list><tt>v1</tt> – контрольная точка.</div>
+<div class=list><tt>v2</tt> – конечная точка.</div><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="../core/curve.htm">Curve</a>.
+<div class=blockindent><br>
+<pre id="isQuadraticBezierCurve"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is QuadraticBezierCurve - является классом QuadraticBezierCurve')" onmouseout="hide()">.isQuadraticBezierCurve</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него QuadraticBezierCurve. Значением по умолчанию является <tt>true</tt>.<br>
+Не нужно его изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
+
+<pre id="v0"><a href="../../math/vector2.htm" onmouseover="show('Vector2.<br>v0 - сокращ. англ. слова vector с индексом 0')" onmouseout="hide()">.v0</a></pre>
+Начальная точка.<br><br>
+
+<pre id="v1"><a href="../../math/vector2.htm" onmouseover="show('Vector2.<br>v1 - сокращ. англ. слова vector с индексом 1')" onmouseout="hide()">.v1</a></pre>
+Контрольная точка.<br><br>
+
+<pre id="v2"><a href="../../math/vector2.htm" onmouseover="show('Vector2.<br>v2 - сокращ. англ. слова vector с индексом 2')" onmouseout="hide()">.v2</a></pre>
+Конечная точка.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="../core/curve.htm">Curve</a>.<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/QuadraticBezierCurve.js" target="_blank">QuadraticBezierCurve.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

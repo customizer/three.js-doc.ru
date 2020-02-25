@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/geometry.htm" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3 id="4">CircleGeometry</h3>
+CircleGeometry (геометрия круга) это простая форма эвклидовой геометрии. Она формируется из нескольких треугольных сегментов (<tt>segments</tt>), расширяющихся до значения, заданного радиусом (<tt>radius</tt>), и расположенных вокруг центральной точки.
+Она строится на заданный центральный угол (<tt>thetaLength</tt>) против часовой стрелки, начинаясь с начального угла (<tt>thetaStart</tt>).
+Также этот геометрический элемент может применяться для создания обычных многоугольников, в которых число сегментов определяется количеством сторон.
+<div class="caption"><img src="../img/CircleGeometry1.png" width=500><br>
+Круг с радиусом 20 и 32 сегментами, остальные параметры по умолчанию.<br><span style="font-size:80%; font-style:italic;">Обратите внимание на более светлую границу между сегментами, справа.<br>Так обозначен <tt>thetaStart</tt> — начальный угол.</span></div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.CircleGeometry( 5, 32 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var circle = new THREE.Mesh( geometry, material );
+scene.add( circle );</pre><br>
+
+<h4>Конструктор</h4>
+<pre>CircleGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('radius - радиус')" onmouseout="hide()">radius</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('segments - сегменты')" onmouseout="hide()">segments</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta start - начало (угла) тэта')" onmouseout="hide()">thetaStart</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('theta length - длина (дуги угла) тэта')" onmouseout="hide()">thetaLength</a></span> )</pre>
+<div class=list><tt>radius</tt> — радиус круга, значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>segments</tt> — число сегментов (треугольников), минимальное значение равно&nbsp;<tt>3</tt>, значение по умолчанию равно&nbsp;<tt>8</tt>.</div>
+<div class=list><tt>thetaStart</tt> — начальный угол для первого сегмента, значение по умолчанию равно&nbsp;<tt>0</tt> (положение на 3 часа).</div>
+<div class=list><tt>thetaLength</tt> — центральный угол (часто называемый theta) кругового сектора. Значение по умолчанию равно&nbsp;<tt>2*Pi</tt>, что составляет полный круг.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/CircleGeometry.js" target="_blank">CircleGeometry.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>ShapeUtils</h3>
+Класс содержащий вспомогательные функции для форм.<br>
+Обратите внимание, что все они являются линейными функциями, поэтому необходимо отдельно рассчитывать для <tt>x</tt>, <tt>y</tt> (и <tt>z</tt>, <tt>w</tt>, если они есть) компоненты вектора.<br><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="area"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('area - область, площадь, участок')" onmouseout="hide()">.area</a></span>( contour )</pre>
+<div class=list><tt>contour</tt> -- двумерный многоугольник (полигон).</div>
+Метод вычисляет площадь двумерного многоугольника, переданного в аргументе <tt>contour</tt>.<br><br>
+
+<pre id="isClockwise"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is clockwise - по часовой стрелке')" onmouseout="hide()">.isClockwise</a></span>( pts )</pre>
+<div class=list><tt>pts</tt> -- точки, определяющие двумерный многоугольник.</div>
+Обратите внимание, что это линейная функция, поэтому необходимо делать отдельные вычисления для <tt>x</tt> и <tt>y</tt> компонентов многоугольника.<br>
+Используется внутри <em>three.js</em> классами <a href="core/path.htm" onmouseover="show('Path')" onmouseout="hide()">Path</a>,
+<a href="../geometries/extrudeGeometry.htm" onmouseover="show('ExtrudeGeometry')" onmouseout="hide()">ExtrudeGeometry</a> и <a href="../geometries/shapeGeometry.htm" onmouseover="show('ShapeGeometry')" onmouseout="hide()">ShapeGeometry</a>.<br><br>
+
+<pre id="triangulateShape"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('triangulate shape - триангуляция формы,<br>т.е. разбиение формы на треугольники')" onmouseout="hide()">.triangulateShape</a></span>( contour, holes )</pre>
+<div class=list><tt>contour</tt> -- двумерный многоугольник.</div>
+<div class=list><tt>holes</tt> -- массив дырок.</div>
+Используется внутри <em>three.js</em> для вычисления граней в формах с дырками классами
+<a href="../geometries/extrudeGeometry.htm" onmouseover="show('ExtrudeGeometry')" onmouseout="hide()">ExtrudeGeometry</a> и <a href="../geometries/shapeGeometry.htm" onmouseover="show('ShapeGeometry')" onmouseout="hide()">ShapeGeometry</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/ShapeUtils.js" target="_blank">ShapeUtils.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

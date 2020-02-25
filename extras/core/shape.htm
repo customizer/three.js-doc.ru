@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="path.htm" title="Переход к родительскому классу"><tt>Path &rarr;</tt></a></span>
+<h3>Shape</h3>
+Определяет при помощи путей произвольную <span class="lnk" onmouseover="show('shape - фигура, форма, профиль')" onmouseout="hide()">двумерную фигурную плоскость</span> с дополнительными отверстиями.
+Они могут использоваться для получения точек или для получения триангулированных (т.е. разбитых на треугольники) граней
+в <a href="../../geometries/extrudeGeometry.htm" onmouseover="show('ExtrudeGeometry')" onmouseout="hide()">ExtrudeGeometry</a> и <a href="../../geometries/shapeGeometry.htm" onmouseover="show('ShapeGeometry')" onmouseout="hide()">ShapeGeometry</a>.<br><br>
+
+<h4>Пример</h4>
+<pre>var heartShape = new THREE.Shape();<br>
+heartShape.moveTo( 25, 25 );
+heartShape.bezierCurveTo( 25, 25, 20, 0, 0, 0 );
+heartShape.bezierCurveTo( 30, 0, 30, 35,30,35 );
+heartShape.bezierCurveTo( 30, 55, 10, 77, 25, 95 );
+heartShape.bezierCurveTo( 60, 77, 80, 55, 80, 35 );
+heartShape.bezierCurveTo( 80, 35, 80, 0, 50, 0 );
+heartShape.bezierCurveTo( 35, 0, 25, 25, 25, 25 );<br>
+var extrudeSettings = { amount: 8, bevelEnabled: true, bevelSegments: 2,
+                        steps: 2, bevelSize: 1, bevelThickness: 1 };<br>
+var geometry = new THREE.ExtrudeGeometry( heartShape, extrudeSettings );<br>
+var mesh = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );</pre>
+
+<h5>Другие примеры</h5>
+<pre><a href="https://threejs.org/examples/webgl_geometry_shapes" target="_blank">geometry / shapes</a>
+<a href="https://threejs.org/examples/webgl_geometry_extrude_shapes" target="_blank">geometry / extrude / shapes</a>
+<a href="https://threejs.org/examples/webgl_geometry_extrude_shapes2" target="_blank">geometry / extrude / shapes2</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>Shape( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('points - точки')" onmouseout="hide()">points</a></span> )</pre>
+<div class=list><tt>points</tt> -- массив <a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a> (дополнительный, необязательный аргумент).</div>
+Создает Shape из массива точек. Первая точка определяет смещение, затем последующие точки добавляются к массиву <a href="curvePath.htm#curves" onmouseover="show('CurvePath.curves')" onmouseout="hide()">кривых</a> как <a href="../curve/lineCurve.htm" onmouseover="show('LineCurve')" onmouseout="hide()">линейные кривые</a>.<br>
+Если точки не предоставлены (аргумент <tt>points</tt> отсутствует), создается пустая фигура и <a href="path.htm#currentPoint" onmouseover="show('Path.currentPoint')" onmouseout="hide()">текущей точкой</a> устанавливается начало координат.<br><br>
+
+<h4>Свойства</h4>
+Сведения об общих свойствах смотрите в описании базового класса <a href="path.htm">Path</a>.
+<div class=blockindent><br>
+<pre id="holes"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('holes - отверстия, дыры')" onmouseout="hide()">.holes</a></span></pre>
+Массив путей, определяющих отверстия в форме.<br><br>
+
+<pre id="uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uuid - сокращ. англ. слов universally unique identifier<br>- универсальный уникальный идентификатор')" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank">UUID</a> данного экземпляра.
+Вот статья Википедии о <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">UUID</a> на русском языке. Он присваивается автоматически и не должен редактироваться.</div><br>
+
+<h4>Методы</h4>
+Сведения об общих методах смотрите в описании базового класса <a href="path.htm">Path</a>.
+<div class=blockindent><br>
+<pre id="extractPoints"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extract points - извлечь точки')" onmouseout="hide()">.extractPoints</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - части, разделы')" onmouseout="hide()">divisions</a></span> )</pre>
+<div class=list><tt>divisions</tt> -- число отрезков, на которые будет разделен контур фигуры.</div>
+Вызывает метод <tt><a href="curve.htm#getPoints" onmouseover="show('Curve.getPoints')" onmouseout="hide()">getPoints</a></tt> для фигуры и массива <tt><a href="#holes" onmouseover="show('Shape.holes')" onmouseout="hide()">holes</a></tt> и возвращает объект в виде:
+<pre>{
+  shape
+  holes
+}</pre>
+где <tt>shape</tt> и <tt>holes</tt> являются массивами <a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>.<br><br>
+
+<pre id="getPointsHoles"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get points holes - получить точки отверстий')" onmouseout="hide()">.getPointsHoles</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('divisions - части, разделы')" onmouseout="hide()">divisions</a></span> )</pre>
+<div class=list><tt>divisions</tt> -- число отрезков, на которые будет разделен контур фигуры.</div>
+Метод получает массив <a href="../../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерных векторов</a>, представляющий отверстия в фигуре.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Shape.js" target="_blank">Shape.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

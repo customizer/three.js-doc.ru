@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<h3>PMREMGenerator</h3>
+
+This class generates a Prefiltered, Mipmapped Radiance Environment Map (PMREM) from a cubeMap environment texture. This allows different levels of blur to be quickly accessed based on material roughness. It is packed into a special CubeUV format that allows us to perform custom interpolation so that we can support nonlinear formats such as RGBE. Unlike a traditional mipmap chain, it only goes down to the LOD_MIN level (above), and then creates extra even more filtered 'mips' at the same LOD_MIN resolution, associated with higher roughness levels. In this way we maintain resolution to smoothly interpolate diffuse lighting while limiting sampling computation.<br><br>
+
+<h4>Конструктор</h4>
+<pre>PMREMGenerator( renderer : WebGLRenderer )</pre>
+Данный конструктор создает новый PMREMGenerator.<br><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="fromScene">.fromScene ( scene : Scene, sigma : Number, near : Number, far : Number ) : WebGLRenderTarget</pre>
+
+<div class=list><tt>scene</tt> - The given scene.</div>
+<div class=list><tt>sigma</tt> - (optional) Specifies a blur radius in radians to be applied to the scene before PMREM generation. Default is 0.</div>
+<div class=list><tt>near</tt> - (optional) The near plane value. Default is 0.1.</div>
+<div class=list><tt>far</tt> - (optional) The far plane value. Default is 100.</div>
+
+Generates a PMREM from a supplied Scene, which can be faster than using an image if networking bandwidth is low. Optional near and far planes ensure the scene is rendered in its entirety (the cubeCamera is placed at the origin).<br><br>
+
+<pre id="fromEquirectangular">.fromEquirectangular ( equirectangular : Texture ) : WebGLRenderTarget</pre>
+
+<div class=list><tt>equirectangular</tt> - The equirectangular texture.</div>
+
+Generates a PMREM from an equirectangular texture, which can be either LDR (RGBFormat) or HDR (RGBEFormat). The ideal input image size is 1k (1024 x 512), as this matches best with the 256 x 256 cubemap output.<br><br>
+
+<pre id="fromCubemap">.fromCubemap ( cubemap : CubeTexture ) : WebGLRenderTarget</pre>
+
+<div class=list><tt>cubemap</tt> - The cubemap texture.</div>
+
+Generates a PMREM from an cubemap texture, which can be either LDR (RGBFormat) or HDR (RGBEFormat). The ideal input cube size is 256 x 256, as this matches best with the 256 x 256 cubemap output.<br><br>
+
+<pre id="compileCubemapShader">.compileCubemapShader () : void</pre>
+
+Pre-compiles the cubemap shader. You can get faster start-up by invoking this method during your texture's network fetch for increased concurrency.<br><br>
+
+<pre id="compileEquirectangularShader">.compileEquirectangularShader () : void</pre>
+
+Pre-compiles the equirectangular shader. You can get faster start-up by invoking this method during your texture's network fetch for increased concurrency.<br><br>
+
+<pre id="dispose">.dispose () : void</pre>
+
+Disposes of the PMREMGenerator's internal memory. Note that PMREMGenerator is a static class, so you should not need more than one PMREMGenerator object. If you do, calling dispose() on one of them will cause any others to also become unusable.
+</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/PMREMGenerator.js" target="_blank">PMREMGenerator.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/geometry.htm" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3>ExtrudeGeometry</h3>
+Создает рельефный (выдавленный) геометрический элемент по контурной фигуре.
+<div class="caption"><img src="../img/ExtrudeGeometry.png" width=500><br>ExtrudeGeometry</div><br>
+
+<h4>Пример</h4>
+<pre>var length = 12, width = 8;<br>
+var shape = new THREE.Shape();
+shape.moveTo( 0,0 );
+shape.lineTo( 0, width );
+shape.lineTo( length, width );
+shape.lineTo( length, 0 );
+shape.lineTo( 0, 0 );<br>
+var extrudeSettings = {
+  steps: 2,
+  amount: 16,
+  bevelEnabled: true,
+  bevelThickness: 1,
+  bevelSize: 1,
+  bevelSegments: 1
+};<br>
+var geometry = new THREE.ExtrudeGeometry( shape, data );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material ) ;
+scene.add( mesh );</pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>ExtrudeGeometry( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shapes - форма')" onmouseout="hide()">shapes</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - параметры, опции, варианты')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list><tt>shapes</tt> — форма или массив форм.</div>
+<div class=list><tt>options</tt> — объект, который может содержать следующие параметры:</div>
+<div class=blockindent>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve segments - сегменты (части) кривой')" onmouseout="hide()">curveSegments</a></span></tt>
+— количество точек на кривых. Значение по умолчанию равно&nbsp;<tt>12</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('steps - шаги')" onmouseout="hide()">steps</a></span></tt>
+— количество точек для разделения сегментов по глубине выдавленного <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD" target="_blank">сплайна</a>. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('amount - количество, сумма')" onmouseout="hide()">amount</a></span></tt>
+— глубина выдавливания (рельефа) фигуры. Значение по умолчанию равно&nbsp;<tt>100</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel enabled - включить скос, фаску')" onmouseout="hide()">bevelEnabled</a></span></tt>
+— разрешить ли фаску (скос). Значением по умолчанию является&nbsp;<tt>true</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel thickness - толщина скоса, фаски')" onmouseout="hide()">bevelThickness</a></span></tt>
+— насколько глубоко входит фаска в исходную форму. Значение по умолчанию равно&nbsp;<tt>6</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel size - размер скоса, фаски')" onmouseout="hide()">bevelSize</a></span></tt>
+— насколько далеко выходит рельеф из контура фигуры или расстояние от контура формы, на которое простирается рельеф. Значением по умолчанию является <tt>bevelThickness - 2</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel segments - сегменты скоса')" onmouseout="hide()">bevelSegments</a></span></tt>
+— количество слоев фаски. Значение по умолчанию равно&nbsp;<tt>3</tt>.</div>
+<div class=list><tt>extrudePath</tt> — <tt><a href="../extras/core/curvePath.htm" onmouseover="show('THREE.CurvePath')" onmouseout="hide()">THREE.CurvePath</a></tt>.
+Трехмерный сплайн контура, по которому выдавливается форма (создает Frames, если <tt>frames</tt> не определены).</div>
+<div class=list><tt>frames</tt> — объект, содержащий массивы касательных, нормалей, бинормалей для каждого шага (<tt>step</tt>) вдоль выдавливаемого контура (extrudePath).
+<div class=note_trans><b>Примечание переводчика:</b> Прямая, перпендикулярная касательной и проходящая через точку касания, называется нормалью к кривой.
+Плоскость, перпендикулярная касательной в данной точке кривой, называется нормальной плоскостью; все нормали для данной точки лежат в нормальной плоскости.
+Нормаль, лежащую в соприкасающейся плоскости, называют главной нормалью, а нормаль, перпендикулярная соприкасающейся плоскости, называется бинормалью.</div></div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material - материал')" onmouseout="hide()">material</a></span></tt>
+— индекс материала для передней и задней граней.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extrude material - ')" onmouseout="hide()">extrudeMaterial</a></span></tt>
+— индекс материала для выдавленных и скошенных граней.</div>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('UV generator - генератор координат U и V')" onmouseout="hide()">UVGenerator</a></span></tt> — объект, который обеспечивает функции генератора координат UV.</div></div>
+Данный объект выдавливается двухмерной формой на трехмерном геометрическом элементе.<br>
+При создании сетки (Mesh) с этим геометрическим элементов, если требуются отдельные материалы для собственно грани и для сторон рельефа, можно использовать массив материалов.
+Первый материал будет применен к грани; второй будет применен к сторонам рельефа.<br><br>
+
+<h4>Свойства</h4>
+<br><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="addShapeList"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add shape list - добавить список форм')" onmouseout="hide()">.addShapeList</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shapes - форма')" onmouseout="hide()">shapes</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - параметры, опции, варианты')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list><tt>shapes</tt> — массив добавляемых форм.</div>
+<div class=list><tt>options</tt> — объект, который может содержать следующие параметры:</div>
+<div class=blockindent>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve segments - сегменты (части) кривой')" onmouseout="hide()">curveSegments</a></span></tt>
+— количество точек на кривых. Значение по умолчанию равно&nbsp;<tt>12</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('steps - шаги')" onmouseout="hide()">steps</a></span></tt>
+— количество точек для разделения сегментов по глубине выдавленного <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD" target="_blank">сплайна</a>. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('amount - количество, сумма')" onmouseout="hide()">amount</a></span></tt>
+— глубина выдавливания (рельефа) фигуры. Значение по умолчанию равно&nbsp;<tt>100</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel enabled - включить скос, фаску')" onmouseout="hide()">bevelEnabled</a></span></tt>
+— разрешить ли фаску (скос). Значением по умолчанию является&nbsp;<tt>true</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel thickness - толщина скоса, фаски')" onmouseout="hide()">bevelThickness</a></span></tt>
+— насколько глубоко входит фаска в исходную форму. Значение по умолчанию равно&nbsp;<tt>6</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel size - размер скоса, фаски')" onmouseout="hide()">bevelSize</a></span></tt>
+— насколько далеко выходит рельеф из контура фигуры или расстояние от контура формы, на которое простирается рельеф. Значением по умолчанию является <tt>bevelThickness - 2</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel segments - сегменты скоса')" onmouseout="hide()">bevelSegments</a></span></tt>
+— количество слоев фаски. Значение по умолчанию равно&nbsp;<tt>3</tt>.</div>
+<div class=list><tt>extrudePath</tt> — <tt><a href="../extras/core/curvePath.htm" onmouseover="show('THREE.CurvePath')" onmouseout="hide()">THREE.CurvePath</a></tt>.
+Трехмерный сплайн контура, по которому выдавливается форма (создает Frames, если <tt>frames</tt> не определены).</div>
+<div class=list><tt>frames</tt> — объект, содержащий массивы касательных, нормалей, бинормалей для каждого шага (<tt>step</tt>) вдоль выдавливаемого контура (extrudePath).</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material - материал')" onmouseout="hide()">material</a></span></tt>
+— индекс материала для передней и задней граней.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extrude material - ')" onmouseout="hide()">extrudeMaterial</a></span></tt>
+— индекс материала для выдавленных и скошенных граней.</div>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('UV generator - генератор координат U и V')" onmouseout="hide()">UVGenerator</a></span></tt> — объект, который обеспечивает функции генератора координат UV.</div></div>
+Метод добавляет формы в список на выдавливание.<br><br>
+
+<pre id="addShape"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add shape - добавить форму')" onmouseout="hide()">addShape</a></span>( <a href="../extras/core/shape.htm" onclick="return false" onblur="hideClick()" onmouseover="show('Shape.<br>shape - форма')" onmouseout="hide()">shape</a>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - параметры, опции, варианты')" onmouseout="hide()">options</a></span> )</pre>
+<div class=list>shape — добавляемая форма.</div>
+<div class=list><tt>options</tt> — объект, который может содержать следующие параметры:</div>
+<div class=blockindent>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('curve segments - сегменты (части) кривой')" onmouseout="hide()">curveSegments</a></span></tt>
+— количество точек на кривых. Значение по умолчанию равно&nbsp;<tt>12</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('steps - шаги')" onmouseout="hide()">steps</a></span></tt>
+— количество точек для разделения сегментов по глубине выдавленного <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD" target="_blank">сплайна</a>. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('amount - количество, сумма')" onmouseout="hide()">amount</a></span></tt>
+— глубина выдавливания (рельефа) фигуры. Значение по умолчанию равно&nbsp;<tt>100</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel enabled - включить скос, фаску')" onmouseout="hide()">bevelEnabled</a></span></tt>
+— разрешить ли фаску (скос). Значением по умолчанию является&nbsp;<tt>true</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel thickness - толщина скоса, фаски')" onmouseout="hide()">bevelThickness</a></span></tt>
+— насколько глубоко входит фаска в исходную форму. Значение по умолчанию равно&nbsp;<tt>6</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel size - размер скоса, фаски')" onmouseout="hide()">bevelSize</a></span></tt>
+— насколько далеко выходит рельеф из контура фигуры или расстояние от контура формы, на которое простирается рельеф. Значением по умолчанию является <tt>bevelThickness - 2</tt>.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bevel segments - сегменты скоса')" onmouseout="hide()">bevelSegments</a></span></tt>
+— количество слоев фаски. Значение по умолчанию равно&nbsp;<tt>3</tt>.</div>
+<div class=list><tt>extrudePath</tt> — <tt><a href="../extras/core/curvePath.htm" onmouseover="show('THREE.CurvePath')" onmouseout="hide()">THREE.CurvePath</a></tt>.
+Трехмерный сплайн контура, по которому выдавливается форма (создает Frames, если <tt>frames</tt> не определены).</div>
+<div class=list><tt>frames</tt> — объект, содержащий массивы касательных, нормалей, бинормалей для каждого шага (<tt>step</tt>) вдоль выдавливаемого контура (extrudePath).</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('material - материал')" onmouseout="hide()">material</a></span></tt>
+— индекс материала для передней и задней граней.</div>
+<div class=list><tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('extrude material - ')" onmouseout="hide()">extrudeMaterial</a></span></tt>
+— индекс материала для выдавленных и скошенных граней.</div>
+<div class=list><tt><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('UV generator - генератор координат U и V')" onmouseout="hide()">UVGenerator</a></span></tt> — объект, который обеспечивает функции генератора координат UV.</div></div>
+Метод добавляет форму в список на выдавливание.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/ExtrudeGeometry.js" target="_blank">ExtrudeGeometry.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

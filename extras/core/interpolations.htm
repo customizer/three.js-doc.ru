@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>Интерполяция</h3>
+Здесь рассматриваются методы построения кривых по алгоритму Катмулл-Ром и Безье.<br><br>
+
+<h5 id="Catmull-Rom"><a href="https://www.mvps.org/directx/articles/catmull/" target="_blank">Сплайновые кривые по алгоритму Кэтмулл-Ром</a></h5>
+<div><a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD" target="_blank">Сплайн</a> назван в честь авторов: Эдвина Кэтмулла (Edwin Catmull) и Рафаэля Рома (Raphael Rom).<a class='link' onclick='javascript:spoiler(this)'> ... читать далее</a>
+<div style='display:none;'>Как следует из статьи <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD_%D0%AD%D1%80%D0%BC%D0%B8%D1%82%D0%B0" target="_blank">Сплайн Эрмита</a> в Википедии, сплайновая кривая по алгоритму Кэтмулл-Ром является частным случаем кардинального сплайна, которая, в свою очередь, является видом кубического сплайна Эрмита.<br>
+Основное преимущество алгоритма Catmull–Rom заключается в том, что точки вдоль исходного набора точек также являются и контрольными точками для сплайновой кривой, т.е. кривая проходит через все опорные (контрольные) точки. На каждом конце кривой требуются две дополнительные точки.
+<div>Существует три метода выполнения алгоритма Catmull–Rom: равномерный или базовый (uniform), центростремительный (centripetal) и хордовый (chordal).<br>
+<table cellpadding="30"><tr><td width=50% align=center><img width=340 src="../../img/Catmull-Rom_example.png">
+<div class="caption">На этом рисунке базовый сплайн Catmull-Rom (показан зеленым цветом) образует петлю/самопересечение, в то время как линия кривой хордового (chordal) сплайна Catmull-Rom (показан красным) несовсем точно проходит через контрольные (опорные) точки.</div></td>
+<td width=50% align=center valign=bottom><img width=360 src="../../img/Catmull-Rom_Parameterized_Time.png">
+<div class="caption">Здесь графически показана зависимость параметра <tt>t</tt> (сокращ. англ. слова tension - натяжение, напряженность) от типа кривой Catmull-Rom.<br>
+(uniform - равномерный сплайн, chordal - хордовый, centripetal - центростремительный)</div></td></tr></table>
+Тип кривой Catmull-Rom определяется значением параметра <tt>t</tt>, рассчитываемого по формуле:<br>
+<img width=340 src="../../img/CatmullRom_eval.png"><br>
+где <tt>&#945;</tt> для узлов параметризации находится в диапазоне от <tt>0</tt> до <tt>1</tt>,<br>
+индекс или номер опорной точки по порядку <tt>i = 0, 1, 2, 3</tt>,<br>
+<tt>t<sub>0</sub> = 0,</tt><br>
+<tt>x<sub>1</sub></tt> и <tt>y<sub>1</sub></tt> - координаты соответствующей опорной точки <tt>P<sub>i</sub></tt>.<br>
+<div class=list>При <tt>&#945; = 0</tt> получающаяся кривая является обычным равномерным (uniform) Catmull-Rom сплайном (т.е. формула вырождается в <tt>t<sub>i+1</sub> = 1 + t<sub>i</sub></tt>).</div>
+<div class=list>При <tt>&#945; = 1</tt> на выходе получается хордовый (chordal) Catmull-Rom сплайн.
+<!-- (параметр <tt>t<sub>i+1</sub> = |P<sub>i+1</sub> – P<sub>i</sub>| + t<sub>i</sub></tt>) --></div>
+<div class=list>Для центростремительного (centripetal) сплайна Catmull-Rom значение <tt>&#945; = 0.5</tt>.</div></div>
+
+При выполнении равномерного (uniform) типа алгоритма Catmull–Rom может создавать петли (loop), самопересечения (self intersections) и острые пики (cusp) на кривой линии.<br><br>
+
+<div class="caption">Вот что происходит, если одни и те же контрольные полигоны используются для создания изгиба волос с различными видами сплайнов Catmull-Rom. Как видите, центростремительный тип гораздо лучше отражает намерения художника.<br>
+<span style="font-size:90%;">Картинка взята на <a href="http://www.cemyuksel.com/research/catmullrom_param/" target="_blank">http://www.cemyuksel.com/research/catmullrom_param/</a>.</span><br>
+<img width=800 src="../../img/hair.png"></div>
+В компьютерной графике сплайны Кэтмулла-Рома часто используются для получения плавного интерполированного движения между ключевыми кадрами.
+Например, большинство анимаций траектории камеры, сгенерированных из дискретных ключевых кадров, обрабатываются с использованием сплайнов Catmull–Rom.
+Они популярны главным образом за то, что относительно легко вычисляются, обеспечивает точное попадание в положение каждого ключевого кадра, а также гарантируют что касательные генерируемой кривой непрерывны по нескольким отрезкам.<br><br>
+Свойства составной сплайновой кривой Catmul-Rom:<br>
+<ul><li>проходит точно через опорные точки;</li>
+<li>является геометрически непрерывной;</li>
+<li>набор базовых функций однозначно определяет кривую, т.е. нет возможности регулирования формы.</li></ul><br>
+Вот несколько англоязычных ссылок по теме различных кривых линий, включая сплайны Catmull–Rom:
+<div class=list><a href="http://bl.ocks.org/d3indepth/b6d4845973089bc1012dec1674d3aff8" target="_blank">D3 curve explorer</a> - интерактивный обзор различных кривых, построенных с помощью <a href="https://en.wikipedia.org/wiki/D3.js" target="_blank">D3</a> (это библиотека JavaScript, используемая для создания интерактивных диаграмм). Можно переключать различные виды кривых и мышкой перетаскивать опорные точки линии.</div>
+<div class=list>Статья <a href="https://qroph.github.io/2018/07/30/smooth-paths-using-catmull-rom-splines.html" target="_blank">Smooth Paths Using Catmull-Rom Splines</a> - построение плавных кривых при помощи сплайнов Catmull-Rom от <a href="https://github.com/qroph" target="_blank">Mika Rantanen ака <tt>qroph</tt></a>.
+В статью включен интерактивный пример построения кривых по алгоритму Catmull-Rom разных типов. Можно самому устанавливать опорные точки и выбирать тип сплайна Catmull-Rom.</div>
+<div class=list><a href="https://satoshikawabata.github.io/SVGCatmullRomSpline/" target="_blank">SVG Catmull-Rom Spline</a> от <a href="https://github.com/SatoshiKawabata" target="_blank">Satoshi Kawabata</a>.</div>
+</div></div><br>
+
+<h5 id="Bezier"><a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5" target="_blank">Кривые Безье</a></h5>
+<div>Это типы кривых, предложенные в 60-х годах XX века независимо друг от друга Пьером Безье и Полем де Кастельжо. Они являются частным случаем многочленов Бернштейна, описанных Сергеем Натановичем Бернштейном в 1912 году.
+<a class='link' onclick='javascript:spoiler(this)'> ... читать далее</a>
+<div style='display:none;'><br>
+Для расчета кривой требуются координаты опорных точек. Их может быть две, три, четыре и т.д. Здесь они подразделяются на начальную, конечную и контрольные точки. Причем в случае с двумя опорными точками, контрольной точки нет.
+Расчет производится в зависимости от параметра <tt>t</tt> - интерполяционный вес (шаг, с которым высчитывается положение кривой).
+<table><tr><td valign=top>Например, имеется две опорные точки с координатами <tt>x<sub>0</sub></tt>, <tt>y<sub>0</sub></tt> (назовем её P<sub>0</sub>) и <tt>x<sub>1</sub></tt>, <tt>y<sub>1</sub></tt> (P<sub>1</sub>).
+Параметр <tt>t</tt> изменяется в диапазоне от <tt>0</tt> до <tt>1</tt> с шагом <tt>0,02</tt>. Для каждого значения <tt>t</tt> высчитываются координаты кривой по формулам:
+<pre>x = (1−t)x<sub>0</sub> + t*x<sub>1</sub>
+y = (1−t)y<sub>0</sub> + t*y<sub>1</sub></pre>
+Получится вот такая "кривая" Безье. Она называется линейная кривая или кривая первой степени или же первого порядка.<br>
+Степень или порядок кривой всегда меньше числа опорных точек на единицу.<br>
+Если бы эта кривая размещалась в трехмерном пространстве, тогда точно также была рассчитана и третья координата.
+<pre>z = (1−t)z<sub>0</sub> + t*z<sub>1</sub></pre></td>
+<td><img width=360 src="../../img/Bezier1.png" onclick="this.src=(this.src.indexOf('.png')>0)?'../../img/Bezier1.gif':'../../img/Bezier1.png'"><div class="caption">Линейная кривая<br>
+<span style="font-size:90%;">(для запуска / остановки анимации построения<br>кривой сделайте клик по картинке)</span>.</div></td></tr></table><br>
+
+<table><tr><td valign=top>Увеличим число опорных точек до трех и получим квадратичную кривую Безье (или кривую Безье второй степени).<br>
+Здесь имеется три опорных точки: начальная P<sub>0</sub>, контрольная P<sub>1</sub> и конечная P<sub>2</sub> с соответствующими координатами <tt>x</tt> и <tt>y</tt>. Точки Q<sub>0</sub> и Q<sub>1</sub> перемещаются (т.е. их координаты изменяются) по отрезкам P<sub>0</sub>-P<sub>1</sub> и P<sub>1</sub>-P<sub>2</sub> с шагом <tt>t=0.02</tt>, т.е. они двигаются по линейным кривым.<br>
+Точка B перемещается от Q<sub>0</sub> к Q<sub>1</sub> (также с шагом <tt>t=0.02</tt>) и описывает квадратичную кривую Безье.<br>
+Математически это описывается так:
+<pre>x = (1−t)<sup>2</sup>x<sub>0</sub> + 2(1−t)t*x<sub>1</sub> + t<sup>2</sup>x<sub>2</sub>
+y = (1−t)<sup>2</sup>y<sub>0</sub> + 2(1−t)t*y<sub>1</sub> + t<sup>2</sup>y<sub>2</sub></pre>
+Для трехмерного варианта добавился бы расчет третьей координаты
+<pre>z = (1−t)<sup>2</sup>z<sub>0</sub> + 2(1−t)t*z<sub>1</sub> + t<sup>2</sup>z<sub>2</sub></pre></td>
+<td><img width=360 src="../../img/Bezier2.png" onclick="this.src=(this.src.indexOf('.png')>0)?'../../img/Bezier2.gif':'../../img/Bezier2.png'"><div class="caption">Квадратичная кривая<br>
+<span style="font-size:90%;">(для запуска / остановки анимации построения<br>кривой сделайте клик по картинке)</span>.</div></td></tr></table><br>
+
+<table><tr><td valign=top>При добавлении второй контрольной точки получится кубическая кривая Безье или кривая третьего порядка.<br>
+Итак, имеются четыре опорных точки: начальная (P<sub>0</sub>), две контрольных (P<sub>1</sub>, P<sub>2</sub>) и конечная - (P<sub>3</sub>) с соответствующими координатами <tt>x</tt> и <tt>y</tt>.<br>
+Точки Q<sub>0</sub>, Q<sub>1</sub> и Q<sub>2</sub> перемещаются (т.е. их координаты изменяются) по отрезкам P<sub>0</sub>-P<sub>1</sub>, P<sub>1</sub>-P<sub>2</sub> и P<sub>2</sub>-P<sub>3</sub> с шагом <tt>t=0.02</tt>, т.е. они двигаются по линейным кривым.<br>
+Точки R<sub>0</sub> и R<sub>1</sub> перемещаются по отрезкам Q<sub>0</sub>-Q<sub>1</sub> и Q<sub>1</sub>-Q<sub>2</sub>. Они движутся по квадратичным кривым.<br>
+А вот по отрезку R<sub>0</sub>-R<sub>1</sub> движется точка B (с тем же самым шагом <tt>t</tt>), которая описывает кривую третьего порядка, т.е. кубическую кривую.
+<pre>x = (1−t)<sup>3</sup>x<sub>0</sub> + 3(1−t)<sup>2</sup>t*x<sub>1</sub> + 3(1−t)t<sup>2</sup>x<sub>3</sub> + t<sup>3</sup>x<sub>4</sub>
+y = (1−t)<sup>3</sup>y<sub>0</sub> + 3(1−t)<sup>2</sup>t*y<sub>1</sub> + 3(1−t)t<sup>2</sup>y<sub>3</sub> + t<sup>3</sup>y<sub>4</sub></pre>
+Для трехмерного варианта добавился бы расчет третьей координаты
+<pre>z = (1−t)<sup>3</sup>z<sub>0</sub> + 3(1−t)<sup>2</sup>t*z<sub>1</sub> + 3(1−t)t<sup>2</sup>z<sub>3</sub> + t<sup>3</sup>z<sub>4</sub></pre></td>
+<td><img width=360 src="../../img/Bezier3.png" onclick="this.src=(this.src.indexOf('.png')>0)?'../../img/Bezier3.gif':'../../img/Bezier3.png'"><div class="caption">Кубическая кривая<br>
+<span style="font-size:90%;">(для запуска / остановки анимации построения<br>кривой сделайте клик по картинке)</span>.</div></td></tr></table><br>
+
+Свойства кривой Безье
+<ul><li>непрерывность заполнения сегмента между начальной и конечной точками;</li>
+<li>кривая всегда располагается внутри фигуры, образованной линиями, соединяющими контрольные точки;</li>
+<li>при наличии только двух контрольных точек сегмент представляет собой прямую линию;</li>
+<li>прямая линия образуется при коллинеарном (на одной прямой) размещении управляющих точек;</li>
+<li>кривая Безье симметрична, то есть обмен местами между начальной и конечной точками (изменение направления траектории) не влияет на форму кривой;</li>
+<li>масштабирование и изменение пропорций кривой Безье не нарушает её стабильности, так как она с математической точки зрения «аффинно инвариантна»;</li>
+<li>изменение координат хотя бы одной из точек ведет к изменению формы всей кривой Безье;</li>
+<li>любой частичный отрезок кривой Безье также является кривой Безье;</li>
+<li>степень (порядок) кривой всегда на одну ступень меньше числа контрольных точек. Например, при трех контрольных точках форма кривой — парабола, так как парабола — кривая 2-го порядка;</li>
+<li>окружность не может быть описана параметрическим уравнением кривой Безье;</li>
+<li>невозможно создать параллельные кривые Безье, за исключением тривиальных случаев (прямые линии и совпадающие кривые), хотя существуют алгоритмы, строящие приближённую параллельную кривую Безье с приемлемой для практики точностью.</li></ul>
+<div style='width:100%; background-color:#f0f0f0;'>&nbsp;<span style='float:right; background-color:#f0f0f0;'>сведения из <a href='https://ru.wikipedia.org/wiki/%D0%9A%D1%80%D0%B8%D0%B2%D0%B0%D1%8F_%D0%91%D0%B5%D0%B7%D1%8C%D0%B5' target='_blank'>Википедии</a>
+и сайта <a href='https://learn.javascript.ru/bezier' target='_blank'>javascript.ru</a></span></div></div></div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="CatmullRom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('CatmullRom - ')" onmouseout="hide()">.CatmullRom</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - сокращ. англ. слова tension - натяжение, напряженность')" onmouseout="hide()">t</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p0</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p2</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p3</a></span> )</pre>
+<div class=list><tt>t</tt> -- интерполяционный вес (значение) (шаг, с которым высчитывается положение кривой).</div>
+<div class=list><tt>p0</tt>, <tt>p1</tt>, <tt>p2</tt>, <tt>p3</tt> -- точки, определяющие <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD" target="_blank">сплайновую</a> кривую.</div>
+Используется внутри функции <a href="../curve/splineCurve.htm" onmouseover="show('SplineCurve')" onmouseout="hide()">SplineCurve</a>.<br>
+<div class=note_trans><b>Примечание переводчика:</b> Кривая будет рассчитываться по следующей формуле:
+<pre>B(t) = (2P<sub>1</sub> - 2P<sub>2</sub> + V<sub>0</sub> + V<sub>1</sub>)t<sup>3</sup> + (-3P<sub>1</sub> + 3P<sub>2</sub> - 2V<sub>0</sub> - V<sub>1</sub>)t<sup>2</sup> + V<sub>0</sub>t + P<sub>1</sub></pre>
+где
+<pre>V<sub>0</sub> = (P<sub>2</sub> - P<sub>0</sub>)0.5
+V<sub>1</sub> = (P<sub>3</sub> - P<sub>1</sub>)0.5</pre>
+<div class=list>То есть, здесь <tt>B(t)</tt> - это координаты точек на рассчитываемой кривой <tt>B</tt> в зависимости от шага <tt>t</tt>, с которым рассчитывается данная кривая.
+<tt>P<sub>0</sub> - P<sub>3</sub></tt> - координаты заданных точек, определяющих кривую.
+<tt>V<sub>0</sub>, V<sub>1</sub></tt> - дополнительные точки, производные от опорных точек, в данном случае это среднеарифметические значения координат предыдущей и последующей точек.</div></div><br><br>
+
+<pre id="QuadraticBezier"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('quadratic Bezier - квадратичная (кривая) Безье')" onmouseout="hide()">.QuadraticBezier</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - сокращ. англ. слова tension - натяжение, напряженность')" onmouseout="hide()">t</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p0</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p2</a></span> )</pre>
+<div class=list><tt>t</tt> -- интерполяционный вес (значение) (шаг, с которым высчитывается положение кривой).</div>
+<div class=list><tt>p0</tt>, <tt>p1</tt>, <tt>p2</tt> -- начальная, контрольная и конечная точки, определяющие кривую.</div>
+Используется внутри классов <a href="../curve/quadraticBezierCurve3.htm" onmouseover="show('QuadraticBezierCurve3')" onmouseout="hide()">QuadraticBezierCurve3</a>, <a href="../curve/quadraticBezierCurve.htm" onmouseover="show('QuadraticBezierCurve')" onmouseout="hide()">QuadraticBezierCurve</a> и <a href="font.htm" onmouseover="show('Font')" onmouseout="hide()">Font</a>.<br><br>
+
+<pre id="CubicBezier"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cubic Bezier - ')" onmouseout="hide()">.CubicBezier</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('t - сокращ. англ. слова tension - натяжение, напряженность')" onmouseout="hide()">t</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p0</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p1</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p2</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('p - сокращ. англ. слова point - точка')" onmouseout="hide()">p3</a></span> )</pre>
+<div class=list><tt>t</tt> -- интерполяционный вес (значение) (шаг, с которым высчитывается положение кривой).</div>
+<div class=list><tt>p0</tt>, <tt>p1</tt>, <tt>p2</tt>, <tt>p3</tt> -- начальная, две контрольных и конечная точки, определяющие кривую.</div>
+Используется внутри классов <a href="../curve/cubicBezierCurve3.htm" onmouseover="show('CubicBezierCurve3')" onmouseout="hide()">CubicBezierCurve3</a>, <a href="../curve/cubicBezierCurve.htm" onmouseover="show('CubicBezierCurve')" onmouseout="hide()">CubicBezierCurve</a> и <a href="font.htm" onmouseover="show('Font')" onmouseout="hide()">Font</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Interpolations.js" target="_blank">Interpolations.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

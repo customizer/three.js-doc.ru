@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/geometry.htm" title="Переход к родительскому классу"><tt>Geometry &rarr;</tt></a></span>
+<h3>BoxGeometry</h3>
+<tt>BoxGeometry</tt> is the quadrilateral primitive geometry class. Обычно он используется для построения куба или параллелипипеда с размерами, представленными аргументами конструктора <tt>width</tt> - ширина, <tt>height</tt> - высота, и <tt>depth</tt> - глубина.
+<div class="caption"><img src="../img/BoxGeometry2.png" width=450><br>
+Куб со стороной равной 20, разделенной на 4 сегмента.</div><br>
+
+<h4>Пример</h4>
+<pre>var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );</pre><br><br>
+
+<h4>Конструктор</h4>
+<pre>BoxGeometry( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина');" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота');" onmouseout="hide()">height</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth - глубина');" onmouseout="hide()">depth</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width segments - сегменты (части) по ширине');" onmouseout="hide()">widthSegments</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height segments - сегменты (части) по высоте');" onmouseout="hide()">heightSegments</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth segments - сегменты (части) по глубине');" onmouseout="hide()">depthSegments</a></span> )</pre>
+<div class=list><tt>width</tt> — ширина куба, размер сторон по оси <tt>X</tt>. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>height</tt> — высота куба, т.е. размер сторон по оси <tt>Y</tt>. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>depth</tt> — глубина куба, т.е. размер сторон по оси <tt>Z</tt>. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>widthSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по ширине. По умолчанию значение равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>heightSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по высоте. По умолчанию значение равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>depthSegments</tt> — дополнительный, необязательный параметр. Количество частей, на которые разделяется сторона куба по глубине. По умолчанию значение равно&nbsp;<tt>1</tt>.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="parameters" onmouseover="show('parameters - параметры')" onmouseout="hide()">.parameters</pre>
+Используем код вышеприведенного примера как основу:
+<pre>geometry.parameters; // outputs an object (параметры объекта) {width:1, height:1,
+                     // depth:1, widthSegments:undefined, heightSegments:undefined}
+  cube.geometry.parameters;              // as above, т.е. как указано выше
+  cube.geometry.parameters.width;        // === 1, т.е. ширина равна 1
+  cube.geometry.parameters.widthSegments // === undefined, т.е. неопределено и
+                                         // используется значение по умолчанию</pre></div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/geometries/BoxGeometry.js" target="_blank">BoxGeometry.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

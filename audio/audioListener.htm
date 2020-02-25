@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3 id="4">AudioListener</h3>
+AudioListener представляет виртуального <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioListener" target="_blank">слушателя</a> всех звуковых эффектов на сцене, как имеющих определенное положение, так и не имеющих такового.<br>
+Приложение <em>three.js</em> обычно создает один экземпляр AudioListener. Это обязательный параметр конструктора для аудио-объектов, таких как <a href="audio.htm" onmouseover="show('Audio');" onmouseout="hide()">Audio</a>
+и <a href="positionalAudio.htm" onmouseover="show('PositionalAudio');" onmouseout="hide()">PositionalAudio</a>.<br>
+В большинстве случаев, объект-слушатель является дочерним элементом камеры. Таким образом, изменение положения камеры в трехмерном пространстве представляет и изменение положения слушателя.<br><br>
+<h4>Пример</h4>
+<pre>// Create an AudioListener and add it to the camera
+// создаем AudioListener и добавляем его к камере
+var listener = new THREE.AudioListener();
+camera.add( listener );<br>
+// create a global audio source (создаем глобальный аудиоисточник)
+var sound = new THREE.Audio( listener );<br>
+// Load a sound and set it as the Audio object's buffer
+// загружаем звук и устанавливаем его как буфер объекта Audio
+var audioLoader = new THREE.AudioLoader();
+audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
+	sound.setBuffer( buffer );
+	sound.setLoop(true);
+	sound.setVolume(0.5);
+	sound.play();
+});</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webaudio_sandbox" target="_blank">webaudio / sandbox</a>
+<a href="https://threejs.org/examples/#webaudio_timing" target="_blank">webaudio / timing</a>
+<a href="https://threejs.org/examples/#webaudio_visualizer" target="_blank">webaudio / visualizer</a></pre><br>
+<h4>Конструктор</h4>
+<pre>AudioListener( )</pre>
+Создает новый AudioListener.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="context"><a href="audioContext.htm" onmouseover="show('AudioContext.<br>context - контекст, среда, фон');" onmouseout="hide()">.context</a></pre>
+Заданный в конструкторе, <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext" target="_blank">AudioContext</a> <a href="#" onmouseover="show('AudioListener');" onmouseout="hide()">слушателя</a>.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/API/AudioContext" target="_blank">статья о AudioContext</a> на русском языке.<br><br>
+
+<pre id="gain"><span onclick="showClick('GainNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gain - усиление, увеличение');" onmouseout="hide()">.gain</a></span></pre>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/GainNode" target="_blank">GainNode</a> созданный при помощи метода <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createGain" target="_blank">AudioContext.createGain</a>.<br><br>
+
+<pre id="filter"><span onclick="showClick('AudioNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('filter - фильтр');" onmouseout="hide()">.filter</a></span></pre>
+Значением по умолчанию является <tt>null</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="getInput"><span onclick="showClick('GainNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get input - получить вход');" onmouseout="hide()">.getInput</a></span>()</pre>
+Возвращает значение <tt><a href="#gain" onmouseover="show('AudioListener.gain');" onmouseout="hide()">gainNode</a></tt>.<br><br>
+
+<pre id="removeFilter"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('remove filter - удалить фильтр');" onmouseout="hide()">.removeFilter</a></span>()</pre>
+Устанавливает свойство <tt><a href="#filter" onmouseover="show('AudioListener.filter');" onmouseout="hide()">filter</a></tt> как <tt>null</tt>.<br><br>
+
+<pre id="getFilter"><span onclick="showClick('AudioNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get filter - получить фильтр');" onmouseout="hide()">.getFilter</a></span>()</pre>
+Возвращает значение свойства <tt><a href="#filter" onmouseover="show('AudioListener.filter');" onmouseout="hide()">filter</a></tt>.<br><br>
+
+<pre id="setFilter"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set filter - установить фильтр');" onmouseout="hide()">.setFilter</a></span>( <a href="https://developer.mozilla.org/ru/docs/Web/API/AudioNode" target="_blank" onmouseover="show('AudioNode')" onmouseout="hide()">value</a> )</pre>
+Устанавливает свойство <tt><a href="#filter" onmouseover="show('AudioListener.filter');" onmouseout="hide()">filter</a></tt> равным значению, указанному в параметре <tt>value</tt>.<br><br>
+
+<pre id="getMasterVolume"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get master volume - получить основную громкость');" onmouseout="hide()">.getMasterVolume</a></span>()</pre>
+Возвращает значение уровня громкости.<br><br>
+<pre id="setMasterVolume"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set master volume - установить основную громкость');" onmouseout="hide()">.setMasterVolume</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает значение уровня громкости.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/audio/AudioListener.js" target="_blank">AudioListener.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PropertyMixer</h3>
+Буферное свойство графа сцены, которое позволяет весовое накопление (аккумуляцию); используется внутри <em>three.js</em>.<br><br>
+
+<h4>Конструктор</h4>
+<pre>PropertyMixer( <a href="propertyBinding.htm" onmouseover="show('PropertyBinding.<br>binding - привязка');" onmouseout="hide()">binding</a>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type name - название типа')" onmouseout="hide()">typeName</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value size - размер значения')" onmouseout="hide()">valueSize</a></span> )</pre>
+<div class=list><tt>binding</tt> -- </div>
+<div class=list><tt>typeName</tt> -- </div>
+<div class=list><tt>valueSize</tt> -- </div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="binding"><a href="propertyBinding.htm" onmouseover="show('PropertyBinding.<br>binding - привязка');" onmouseout="hide()">.binding</a></pre>
+<br><br>
+
+<pre id="buffer"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('buffer - буфер');" onmouseout="hide()">.buffer</a></span></pre>
+Буфер размером <tt><a href="#" onmouseover="show('PropertyMixer.<br>value size - размер значения');" onmouseout="hide()">valueSize</a> * 4</tt>. <br>
+Свойство имеет такую схему: <tt>[ <span class="lnk" onmouseover="show('incoming - входящий')" onmouseout="hide()">incoming</span> | <span class="lnk" onmouseover="show('accu0 - сокращ. англ. слова accumulator - аккумулятор,<br>накопитель (в данном случае под номером 0)')" onmouseout="hide()">accu0</span> | <span class="lnk" onmouseover="show('accu1 - сокращ. англ. слова accumulator - аккумулятор,<br>накопитель (в данном случае под номером 1)')" onmouseout="hide()">accu1</span> | <span class="lnk" onmouseover="show('orig - сокращ. англ. слова original<br>- оригинал, подлинник, исходник')" onmouseout="hide()">orig</span> ]</tt><br>
+Интерполяторы могут использовать свойство <tt>buffer</tt> в качестве своего <tt><span class="lnk" onmouseover="show('result - результат, здесь скорее говорится о буфере<br>для хранения итогов вычислений интерполятора')" onmouseout="hide()">result</span></tt>
+и затем данные передавать в <tt><span class="lnk" onmouseover="show('incoming - входящий, т.е. ')" onmouseout="hide()">incoming</span></tt>.<br>
+<tt>accu0</tt> и <tt>accu1</tt> используются с чередованием кадров для накопления результата и сравниваются для определения изменений.<br>
+<tt>orig</tt> сохраняет исходное состояние свойства.<br><br>
+
+<pre id="cumulativeWeight"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cumulative weight - совокупный (накопленный) вес');" onmouseout="hide()">.cumulativeWeight</a></span></pre>
+Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="valueSize"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value size - размер значения');" onmouseout="hide()">.valueSize</a></span></pre>
+<br><br>
+
+<pre id="referenceCount"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reference count - счетчик ссылок');" onmouseout="hide()">.referenceCount</a></span></pre>
+Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="useCount"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use count - счетчик использования');" onmouseout="hide()">.useCount</a></span></pre>
+Значение по умолчанию равно&nbsp;<tt>0</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="accumulate"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('accumulate - накапливать');" onmouseout="hide()">.accumulate</a></span>( <span class=lnk onmouseover="show('accuIndex - сокращ. англ. слов accumulator index - индекс накопителя (аккумулятора)');" onmouseout="hide()">accuIndex</span>, <span class=lnk onmouseover="show('weight - вес');" onmouseout="hide()">weight</span> )</pre>
+Аккумулирует (накапливает) данные в <tt><a href="#buffer" onmouseover="show('PropertyMixer.buffer')" onmouseout="hide()">buffer</a>[accuIndex]</tt> области <tt>incoming</tt> в <tt>accu[i]</tt>.<br>
+Если вес (параметр <tt>weight</tt>) равен&nbsp;<tt>0</tt>, то не делается ничего.<br><br>
+
+<pre id="apply"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('apply - применить');" onmouseout="hide()">.apply</a></span>( accuIndex )</pre>
+Метод применяет состояние <tt>accu[i]</tt> <tt><a href="#buffer" onmouseover="show('PropertyMixer.buffer');" onmouseout="hide()">buffer</a></tt>'а к привязке, когда данные в аккумуляторах различаются. <br><br>
+
+<pre id="saveOriginalState"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('save original state - сохранить исходное состояние');" onmouseout="hide()">.saveOriginalState</a></span>( )</pre>
+Запоминает состояние связанного свойства и копирует его в оба накопителя (<tt>accu</tt>).<br><br>
+
+<pre id="restoreOriginalState"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('restore original state - восстановить исходное состояние');" onmouseout="hide()">.restoreOriginalState</a></span>(  )</pre>
+Метод применяет к привязке состояние, ранее взятое с помощью метода <tt><a href="#saveOriginalState" onmouseover="show('PropertyMixer.saveOriginalState');" onmouseout="hide()">saveOriginalState</a></tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/animation/PropertyMixer.js" target="_blank">PropertyMixer.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

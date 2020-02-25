@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> <a href="camera.htm" title="Переход к родительскому классу"><tt>Camera &rarr;</tt></a></span>
+<h3>PerspectiveCamera</h3>
+Камера с <a href="https://en.wikipedia.org/wiki/Perspective_(graphical)" target="_blank">перспективной проекцией</a>. Статья Википедии о <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%B0" target="_blank">перспективе</a> на русском языке.<br>
+Этот режим проекции предназначен чтобы наиболее полно сымитировать человеческое зрение. Это самый распространенный режим проецирования, используемый для визуализации (рендеринга) трехмерной (3D) сцены.<br><br>
+<h4>Пример</h4>
+<pre>var camera = new THREE.PerspectiveCamera( 45, width / height, 1, 1000 );
+scene.add( camera );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/webgl_animation_skinning_blending" target="_blank">animation / skinning / blending</a>
+<a href="https://threejs.org/examples/webgl_animation_skinning_morph" target="_blank">animation / skinning / morph</a>
+<a href="https://threejs.org/examples/webgl_effects_stereo" target="_blank">effects / stereo</a>
+<a href="https://threejs.org/examples/webgl_interactive_cubes" target="_blank">interactive / cubes</a>
+<a href="https://threejs.org/examples/webgl_loader_collada_skinning" target="_blank">loader / collada / skinning</a></pre>
+
+<h4>Конструктор</h4>
+<pre>PerspectiveCamera( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение англ. слов field of view - поле просмотра');" onmouseout="hide()">fov</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от aspect ratio - соотношение сторон');" onmouseout="hide()">aspect</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near - ближний');" onmouseout="hide()">near</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far - дальний');" onmouseout="hide()">far</a></span> )</pre>
+<div class=list><tt>fov</tt> — вертикальный угол области просмотра камеры.</div>
+<div class=list><tt>aspect</tt> — соотношение сторон области видимости камеры.</div>
+<div class=list><tt>near</tt> — ближняя плоскость отсечения области видимости камеры.</div>
+<div class=list><tt>far</tt> — дальняя плоскость отсечения области видимости камеры.</div>
+<div>Вместе они определяют <a href="https://en.wikipedia.org/wiki/Viewing_frustum" target="_blank">область просмотра</a> камеры (в виде усеченной пирамиды).
+<a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
+<div style='display:none;'><img src="../img/1.png" width="600"></div></div><br>
+
+<h4>Свойства</h4>
+Описание общих свойств смотрите в статье о базовом классе <tt><a href="camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Camera</a></tt>.
+Обратите внимание, чтобы изменения вступили в силу, после внесения изменений в большинство этих свойств, следует вызвать метод <tt><a href="#updateProjectionMatrix" onmouseover="show('PerspectiveCamera.updateProjectionMatrix');" onmouseout="hide()">updateProjectionMatrix</a></tt>.
+<div class=blockindent><br>
+<pre id="aspect"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от aspect ratio - соотношение сторон');" onmouseout="hide()">.aspect</a></span></pre>
+Соотношение сторон области видимости камеры, т.е. ширина окна (canvas) деленная на высоту окна (canvas). Значение по умолчанию равно&nbsp;<tt>1</tt> (квадратное окно / canvas).<br><br>
+
+<pre id="far"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far - дальний');" onmouseout="hide()">.far</a></span></pre>
+Дальняя плоскость отсечения области просмотра камеры. Значение по умолчанию равно&nbsp;<tt>2000</tt>.<br>
+Допустимый диапазон значений находится между текущим значением ближней плоскости отсечения (свойство <tt><a href="#near" onmouseover="show('PerspectiveCamera.near');" onmouseout="hide()">near</a></tt>) и бесконечностью.<br><br>
+
+<pre id="filmGauge"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('film gauge - ширина кинопленки');" onmouseout="hide()">.filmGauge</a></span></pre>
+Размер кинопленки, используемый для большей оси. Значение по умолчанию равно&nbsp;<tt>35</tt> (миллиметров).
+Этот параметр не оказывает никакого влияния на проекционную матрицу, за исключением случая, когда свойство <tt><a href="#filmOffset" onmouseover="show('PerspectiveCamera.filmOffset');" onmouseout="hide()">filmOffset</a></tt> установлено в ненулевое значение.<br><br>
+
+<pre id="filmOffset"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('film offset - смещение кинопленки');" onmouseout="hide()">.filmOffset</a></span></pre>
+Смещение от центра по горизонтали в тех же единицах, что и у свойства <tt><a href="#filmGauge" onmouseover="show('PerspectiveCamera.filmGauge');" onmouseout="hide()">filmGauge</a></tt>. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="focus"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('focus - фокус');" onmouseout="hide()">.focus</a></span></pre>
+Расстояние до объекта, используемое для стереоскопии и эффектов глубины резкости (depth-of-field). Вот статьи из Википедии на <a href="https://en.wikipedia.org/wiki/Depth_of_field" target="_blank">английском</a> и <a href="https://ru.wikipedia.org/wiki/%D0%93%D0%BB%D1%83%D0%B1%D0%B8%D0%BD%D0%B0_%D1%80%D0%B5%D0%B7%D0%BA%D0%BE_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B0%D0%B5%D0%BC%D0%BE%D0%B3%D0%BE_%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%B0" target="_blank">русском</a> языках.
+Этот параметр не влияет на матрицу проекции, если не используется <a href="stereoCamera.htm" onmouseover="show('StereoCamera');" onmouseout="hide()">стереокамера</a>. Значение по умолчанию равно&nbsp;<tt>10</tt>.<br><br>
+
+<pre id="fov"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение англ. слов field of view - поле просмотра');" onmouseout="hide()">.fov</a></span></pre>
+Вертикальный угол области просмотра камеры, снизу доверху, в градусах. Значение по умолчанию равно&nbsp;<tt>50</tt>.<br><br>
+
+<pre id="isPerspectiveCamera"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is perspective camera - является перспективной камерой');" onmouseout="hide()">.isPerspectiveCamera</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классы, камерами с перспективной проекцией. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> визуализатором для оптимизации.<br><br>
+
+<pre id="near"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near - ближний');" onmouseout="hide()">.near</a></span></pre>
+Ближняя плоскость отсечения области просмотра камеры. Значение по умолчанию равно&nbsp;<tt>0.1</tt>.<br>
+Допустимый диапазон значений находится между числом, большим&nbsp;<tt>0</tt>, и текущим значением дальней плоскости отсечения (свойство <tt><a href="#far" onmouseover="show('PerspectiveCamera.far');" onmouseout="hide()">far</a></tt>).<br>
+Обратите внимание, в отличие от <a href="orthographicCamera.htm" onmouseover="show('OrthographicCamera');" onmouseout="hide()">камеры с ортографической проекцией</a>, значение&nbsp;<tt>0</tt> для ближней плоскости отсечения <tt>PerspectiveCamera</tt> недопустимо.<br><br>
+
+<pre id="view"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('view - вид');" onmouseout="hide()">.view</a></span></pre>
+Свойство может быть или описанием области видимости камеры в виде усеченной пирамиды, или&nbsp;<tt>null</tt>.
+Значение этого свойства устанавливается методом <tt><a href="#setViewOffset" onmouseover="show('PerspectiveCamera.setViewOffset');" onmouseout="hide()">setViewOffset</a></tt>,
+а удаляется методом <tt><a href="#clearViewOffset" onmouseover="show('PerspectiveCamera.clearViewOffset');" onmouseout="hide()">clearViewOffset</a></tt>.<br><br>
+
+<pre id="zoom"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom - увеличение, масштабирование');" onmouseout="hide()">.zoom</a></span></pre>
+Возвращает или устанавливает коэффициент масштабирования камеры.</div><br>
+
+<h4>Методы</h4>
+Описание общих методов смотрите в статье о базовом классе <tt><a href="camera.htm" onmouseover="show('Camera')" onmouseout="hide()">Camera</a></tt>.
+<div class=blockindent>
+<pre id="clearViewOffset"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear view offset - убрать смещение области просмотра');" onmouseout="hide()">.clearViewOffset</a></span>()</pre>
+Удаляет любые смещения, установленные при помощи метода <tt><a href="#setViewOffset" onmouseover="show('PerspectiveCamera.setViewOffset');" onmouseout="hide()">setViewOffset</a></tt>.<br><br>
+
+<pre id="getEffectiveFOV"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов get effective field of view -<br>получить действующий угол поля просмотра');" onmouseout="hide()">.getEffectiveFOV</a></span>()</pre>
+Возвращает текущий вертикальный угол поля просмотра в градусах, с учетом <tt><a href="#zoom" onmouseover="show('PerspectiveCamera.zoom');" onmouseout="hide()">zoom</a></tt>.<br><br>
+
+<pre id="getFilmHeight"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get film height - получить высоту кинопленки');" onmouseout="hide()">.getFilmHeight</a></span>()</pre>
+Возвращает высоту изображения на кинопленке. Если значение свойства <tt><a href="#aspect" onmouseover="show('PerspectiveCamera.aspect');" onmouseout="hide()">aspect</a></tt> меньше или равно единице (книжный формат), результат равен <tt><a href="#filmGauge" onmouseover="show('PerspectiveCamera.filmGauge');" onmouseout="hide()">filmGauge</a></tt>.<br><br>
+
+<pre id="getFilmWidth"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get film width - получить ширину кинопленки');" onmouseout="hide()">.getFilmWidth</a></span>( )</pre>
+Возвращает ширину изображения на кинопленке. Если значение свойства <tt><a href="#aspect" onmouseover="show('PerspectiveCamera.aspect');" onmouseout="hide()">aspect</a></tt> больше или равно единице (альбомный формат), результат равен <tt><a href="#filmGauge" onmouseover="show('PerspectiveCamera.filmGauge');" onmouseout="hide()">filmGauge</a></tt>.<br><br>
+
+<pre id="getFocalLength"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get focal length - получить фокусное расстояние');" onmouseout="hide()">.getFocalLength</a></span>()</pre>
+Метод возвращает фокусное расстояние по текущему значению свойства <tt><a href="#fov" onmouseover="show('PerspectiveCamera.fov');" onmouseout="hide()">fov</a></tt>
+в соответствии со значением свойства <tt><a href="#filmGauge" onmouseover="show('PerspectiveCamera.filmGauge');" onmouseout="hide()">filmGauge</a></tt>.<br><br>
+
+<pre id="setFocalLength"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set focal length - установить фокусное расстояние');" onmouseout="hide()">.setFocalLength</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('focal length - фокусное расстояние');" onmouseout="hide()">focalLength</a></span> )</pre>
+Метод устанавливает свойство <tt><a href="#fov" onmouseover="show('PerspectiveCamera.fov');" onmouseout="hide()">fov</a></tt> по фокусному расстоянию (заданному в параметре <tt>focalLength</tt>)
+в соответствии с текущим значением свойства <tt><a href="#filmGauge" onmouseover="show('PerspectiveCamera.filmGauge');" onmouseout="hide()">filmGauge</a></tt>.<br>
+По умолчанию фокусное расстояние задается для 35-миллиметровой (полнокадровой) камеры.<br><br>
+
+<pre id="setViewOffset"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set view offset - установить смещение области просмотра');" onmouseout="hide()">.setViewOffset</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('full width - полная ширина');" onmouseout="hide()">fullWidth</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('full height - полная высота');" onmouseout="hide()">fullHeight</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x');" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y');" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина');" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота');" onmouseout="hide()">height</a></span> )</pre>
+<div class=list><tt>fullWidth</tt> — полная ширина при установке нескольких областей просмотра.</div>
+<div class=list><tt>fullHeight</tt> — полная высота при установке нескольких областей просмотра.</div>
+<div class=list><tt>x</tt> — горизонтальное смещение субкамеры.</div>
+<div class=list><tt>y</tt> — вертикальное смещение субкамеры.</div>
+<div class=list><tt>width</tt> — ширина субкамеры.</div>
+<div class=list><tt>height</tt> — высота субкамеры.</div>
+Метод устанавливает смещение при большой области просмотра. Это годится для многооконных или многомониторных/многомашинных установках.<br>
+Например, если имеются два ряда мониторов друг над другом, по три монитора в каждом ряду (<tt>3&#215;2</tt>), причем каждый монитор (обозначены буквами <tt>A</tt>, <tt>B</tt>, <tt>C</tt>, <tt>D</tt>, <tt>E</tt> и <tt>F</tt>) с разрешением <tt>1920&#215;1080</tt> пикселей и они располагаются в сетке вот таким образом:
+<pre>+---+---+---+
+| A | B | C |
++---+---+---+
+| D | E | F |
++---+---+---+</pre>
+то для каждого монитора будем вызывать его следующим образом:
+<pre>var w = 1920;
+var h = 1080;
+var fullWidth = w * 3;
+var fullHeight = h * 2;<br>
+// A
+camera.setViewOffset( fullWidth, fullHeight, w * 0, h * 0, w, h );
+// B
+camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 0, w, h );
+// C
+camera.setViewOffset( fullWidth, fullHeight, w * 2, h * 0, w, h );
+// D
+camera.setViewOffset( fullWidth, fullHeight, w * 0, h * 1, w, h );
+// E
+camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 1, w, h );
+// F
+camera.setViewOffset( fullWidth, fullHeight, w * 2, h * 1, w, h );</pre>
+Обратите внимание, мониторы могут быть разного размера и не располагаться в сетке.<br><br>
+
+<pre id="updateProjectionMatrix"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update projection matrix - обновление матрицы проецирования');" onmouseout="hide()">.updateProjectionMatrix</a></span></pre>
+Метод обновляет матрицу проецирования. Он должен быть вызван после любого изменения параметров.<br><br>
+
+<pre id="toJSON"><span onclick="showClick('JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - сокр. от англ. слов to JavaScript Object Notation,<br>— то есть, в текстовый формат описания объекта,<br>основанный на JavaScript');" onmouseout="hide()">.toJSON</a></span>()</pre>
+Метод возвращает данные камеры в формате <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">JSON</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/cameras/PerspectiveCamera.js" target="_blank">PerspectiveCamera.js на Гитхабе</a></div><br>
+
+<br><br>
+</body></html>

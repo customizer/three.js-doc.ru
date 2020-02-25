@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; KeyframeTrack</h3>
+Трек ключевых кадров (KeyframeTrack) это, согласованная по времени показа, последовательность <a href="https://en.wikipedia.org/wiki/Key_frame" target="_blank">ключевых кадров (keyframes)</a>, которые состоят из списков моментов времени и связанных с ними значений, и которые используются для анимации определенного свойства объекта.<br>
+<div class=note_trans><b>Примечание переводчика:</b> вот перевод начала вышеприведенной статьи о ключевых кадрах.<br><a class='link' onclick='javascript:spoiler(this)'>... читать далее</a>
+<div style='display:none;'>Ключевой кадр в анимации и кинопроизводстве - это картинка, определяющая начальные и конечные точки любого плавного перехода. Эти картинки называются "кадрами", так как их положение во времени измеряется в кадрах на ленте кинопленки.
+Последовательность ключевых кадров определяет, какое движение будет видеть зритель, тогда как положение ключевых кадров на кинопленке, видео или анимации определяет время движения.
+Поскольку только два или три ключевых кадра в течение секунды не создадут иллюзию движения, оставшиеся кадры заполняются промежуточными изображениями (в мультипликации они называются &#171;фазами &#187;).
+Ключевые кадры определяет художник-мультипликатор. Созданием фаз в традиционной рисованной мультипликации занимается художник-фазовщик, в компьютерной анимации его роль выполняет программа.</div></div>
+Обзор различных элементов системы анимации <em>three.js</em> можно найти в статье <a href="../intro/animationSystem.htm">"Системы анимации"</a> раздела "Следующие действия" данного руководства.<br><br>
+В отличие от иерархии анимации <a href="https://github.com/mrdoob/three.js/wiki/JSON-Model-format-3" target="_blank">модели в формате JSON</a>,
+<tt>KeyframeTrack</tt> не сохраняет свои отдельные ключевые кадры как объекты в массиве <tt>keys</tt> (ключи) (размещая времена и значения для каждого кадра сообща и в одном месте).<br><br>
+Вместо этого, в <tt>KeyframeTrack</tt> имеются два массива: массив <a href="#times" onmouseover="show('KeyframeTrack.times');" onmouseout="hide()">времён</a>, где хранятся значения времени для всех ключевых кадров данного трека в последовательном порядке,
+и массив <a href="#values" onmouseover="show('KeyframeTrack.values');" onmouseout="hide()">значений</a>, содержащий соответствующие изменяемые значения свойства анимации.<br><br>
+
+Отдельное значение, принадлежащее конкретному моменту времени, может быть не только простым числом, но (например) вектором (если анимируется положение объекта) или кватернионом (если анимируется вращение объекта).
+По этой причине массив значений (который также является "плоским" массивом) может быть в три или четыре раза длиннее массива времени.<br><br>
+В соответствии с различными возможными типами анимированных значений существует несколько подклассов <tt>KeyframeTrack</tt>, наследующих большинство свойств и методов:
+<ul><li><a href="booleanKeyframeTrack.htm">BooleanKeyframeTrack</a></li>
+<li><a href="colorKeyframeTrack.htm">ColorKeyframeTrack</a></li>
+<li><a href="numberKeyframeTrack.htm">NumberKeyframeTrack</a></li>
+<li><a href="quaternionKeyframeTrack.htm">QuaternionKeyframeTrack</a></li>
+<li><a href="stringKeyframeTrack.htm">StringKeyframeTrack</a></li>
+<li><a href="vectorKeyframeTrack.htm">VectorKeyframeTrack</a></li></ul>
+Некоторые примеры создания вручную <a href="animationClip.htm" onmouseover="show('AnimationClip');" onmouseout="hide()">клипов анимации</a> с разными видами ключевых кадров можно найти в <a href="https://threejs.org/examples/js/animation/AnimationClipCreator.js" target="_blank">файле AnimationClipCreator</a>.
+Поскольку явные значения определены только для дискретных точек времени, хранящихся в массиве времен, все промежуточные значения между ними должны быть интерполированы.<br><br>
+Имя (название) трека важно для соединения данного трека с конкретным свойством анимированного узла (сделанного <tt><a href="propertyBinding.htm">PropertyBinding</a></tt>).<br><br>
+
+<h4>Конструктор</h4><br>
+<pre>KeyframeTrack( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">name</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('times - времена');" onmouseout="hide()">times</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('values - значения');" onmouseout="hide()">values</a></span>, <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('interpolation - интерполяция');" onmouseout="hide()">interpolation</a></span> )</pre>
+<div class=list><tt>name</tt> - идентификатор для <tt>KeyframeTrack</tt>, т.е. имя трека ключевых кадров.</div>
+<div class=list><tt>times</tt> - массив времен ключевых кадров, внутренне преобразованный в <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">Float32Array</a>.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">статья Википедии о Float32Array</a> на русском языке.</div>
+<div class=list><tt>values</tt> - массив значений, связанных с массивом времен, внутренне преобразованный в <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">Float32Array</a>.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">статья Википедии о Float32Array</a> на русском языке.</div>
+<div class=list><tt>interpolation</tt> - тип используемой интерполяции.
+Возможные значения смотрите в статье "<a href="../constants/animation.htm">Анимационные константы</a>". Значением по умолчанию является <tt><a href="../constants/animation.htm#interpolation">InterpolateLinear</a></tt>.</div><br>
+
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">.name</a></span></pre>
+Имя (название) трека может относиться к <a href="../core/geometry.htm#morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">целям морфинга</a> или <a href="../objects/skinnedMesh.htm" onmouseover="show('SkinnedMesh')" onmouseout="hide()">"костям"</a>, или возможно, к другим значениям внутри объекта анимации.
+Посмотрите описание метода <tt><a href="propertyBinding.htm#parseTrackName" onmouseover="show('PropertyBinding.parseTrackName')" onmouseout="hide()">PropertyBinding.parseTrackName</a></tt> для форм строк для привязки свойств, которые могут быть проанализированы:<br>
+Имя может указывать на узел (ноду), либо используя его имя, либо его <tt>uuid</tt> (несмотря на то, что он должен быть во вложенном структурном "дереве" узла графа сцены, переданного в миксер).
+Или, если имя трека начинается с точки, трек относится к корневому узлу, переданному в миксер.<br>
+Обычно после названия узла непосредственно указывается свойство.
+Но можно также указывать вложенное свойство, как например <tt>.rotation[x]</tt>, если нужно управлять компонентом вращения <tt>X</tt> с помощью via a float track.<br>
+Также можно указывать "кости" или мультиматериалы, используя имя объекта, например: <tt>.bones[R_hand].scale</tt>;
+в качестве дополнительного примера, к красному каналу распространяемого цвета четвертого материала в массиве материалов можно обратиться как <tt>.materials[3].diffuse[r]</tt>.<br>
+
+PropertyBinding также разрешает имена целей морфинга, например: <tt>.morphTargetInfluences[run]</tt>.
+<div class=note><b>Примечание:</b> Название трека необязательно должно быть уникальным. Несколько треков могут управлять одним и тем же свойством.
+Результат должен основываться на весовом сочетании между несколькими треками в соответствии с весами соответствующим им действий.</div><br>
+
+<pre id="times"><span onclick="showClick(type_float32array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('times - времена');" onmouseout="hide()">.times</a></span></pre>
+Это массив <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">Float32Array</a>, преобразован из массива времен, переданного в конструкторе.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">эта статья о Float32Array</a> на русском языке.<br><br>
+
+<pre id="values"><span onclick="showClick(type_float32array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('values - значения');" onmouseout="hide()">.values</a></span></pre>
+Это массив <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">Float32Array</a>, преобразован из массива значений, переданного в конструкторе.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">эта статья о Float32Array</a> на русском языке.<br><br>
+
+<pre id="DefaultInterpolation"><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('default interpolation - интерполяция по умолчанию')" onmouseout="hide()">.DefaultInterpolation</a></span></pre>
+Тип интерполяции по умолчанию: <a href="../constants/animation.htm#interpolation" onmouseover="show('interpolate linear - линейная интерполяция')" onmouseout="hide()">InterpolateLinear</a>.<br><br>
+
+<pre id="TimeBufferType"><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('time buffer type - тип буфера времени')" onmouseout="hide()">.TimeBufferType</a></span></pre>
+Это массив <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">Float32Array</a>, тип буфера для времён, используемый внутри <em>three.js</em>. Вот <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">эта статья о Float32Array</a> на русском языке.<br><br>
+
+<pre id="ValueBufferType"><span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value buffer type - тип буфера значений')" onmouseout="hide()">.ValueBufferType</a></span></pre>
+Это массив <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">Float32Array</a>, тип буфера для значений, используемый внутри <em>three.js</em>. Вот <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Float32Array" target="_blank">эта статья о Float32Array</a> на русском языке.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="createInterpolant"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('create interpolant - создать интерполяцию');" onmouseout="hide()">.createInterpolant</a></span>( )</pre>
+Метод, в зависимости от значения параметра интерполяции, переданного в конструкторе, создает <span class="lnk" onmouseover="show('функция для интерполирования')" onmouseout="hide()">интерполянт</span>:
+<a href="../math/interpolant.htm#LinearInterpolant" onmouseover="show('linear interpolant - функция для линейной интерполяции')" onmouseout="hide()">LinearInterpolant</a>,
+<a href="../math/interpolant.htm#CubicInterpolant" onmouseover="show('cubic interpolant - функция для кубической интерполяции')" onmouseout="hide()">CubicInterpolant</a>
+или <a href="../math/interpolant.htm#DiscreteInterpolant" onmouseover="show('discrete interpolant - функция для дискретной интерполяции')" onmouseout="hide()">DiscreteInterpolant</a>.<br><br>
+
+<pre id="getInterpolation"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get interpolation - получить интерполяцию')" onmouseout="hide()">.getInterpolation</a></span>( )</pre>
+Возвращает тип интерполяции.<br><br>
+
+<pre id="getValueSize"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get value size - получить размер значения')" onmouseout="hide()">.getValueSize</a></span>( )</pre>
+Метод возвращает размер каждого значения (это длина <a href="#values" onmouseover="show('KeyframeTrack.values')" onmouseout="hide()">массива значений</a>, деленная на длину <a href="#times" onmouseover="show('KeyframeTrack.times')" onmouseout="hide()">массива времён</a>).<br><br>
+
+<pre id="InterpolantFactoryMethodDiscrete"><a href="../math/interpolant.htm#DiscreteInterpolant.htm" onmouseover="show('DiscreteInterpolant.<br>interpolant factory method discrete - ')" onmouseout="hide()">.InterpolantFactoryMethodDiscrete</a>( <span onclick="showClick(type_float32array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('result - результат')" onmouseout="hide()">result</a></span> )</pre>
+Создает новый <a href="../math/discreteInterpolant.htm" onmouseover="show('DiscreteInterpolant')" onmouseout="hide()">DiscreteInterpolant</a> из <a href="#times" onmouseover="show('KeyframeTrack.times')" onmouseout="hide()">times</a> и <a href="#values" onmouseover="show('KeyframeTrack.values')" onmouseout="hide()">values</a>.
+В качестве аргумента (<tt>result</tt>) можно передать массив 32-разрядных чисел с плавающей запятой, в котором и будут размещены получаемые результаты.
+В противном случае будет создан автоматически новый массив соответствующего размера.<br><br>
+
+<pre id="InterpolantFactoryMethodLinear"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('interpolant factory method linear - ')" onmouseout="hide()">.InterpolantFactoryMethodLinear</a></span>( <span onclick="showClick(type_float32array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('result - результат')" onmouseout="hide()">result</a></span> )</pre>
+Создает новый <a href="../math/linearInterpolant.htm" onmouseover="show('LinearInterpolant')" onmouseout="hide()">LinearInterpolant</a> из <a href="#times" onmouseover="show('KeyframeTrack.times')" onmouseout="hide()">times</a> и <a href="#values" onmouseover="show('KeyframeTrack.values')" onmouseout="hide()">values</a>.
+В качестве аргумента (<tt>result</tt>) можно передать массив 32-разрядных чисел с плавающей запятой, в котором и будут размещены получаемые результаты.
+В противном случае будет создан автоматически новый массив соответствующего размера.<br><br>
+
+<pre id="InterpolantFactoryMethodSmooth"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('interpolant factory method smooth - ')" onmouseout="hide()">.InterpolantFactoryMethodSmooth</a></span>( <span onclick="showClick(type_float32array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('result - результат')" onmouseout="hide()">result</a></span> )</pre>
+Создает новый <a href="../math/cubicInterpolant.htm" onmouseover="show('CubicInterpolant')" onmouseout="hide()">CubicInterpolant</a> из <a href="#times" onmouseover="show('KeyframeTrack.times')" onmouseout="hide()">times</a> и <a href="#values" onmouseover="show('KeyframeTrack.values')" onmouseout="hide()">values</a>.
+В качестве аргумента (<tt>result</tt>) можно передать массив 32-разрядных чисел с плавающей запятой, в котором и будут размещены получаемые результаты.
+В противном случае будет создан автоматически новый массив соответствующего размера.<br><br>
+
+<pre id="optimize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('optimize - оптимизировать')" onmouseout="hide()">.optimize</a></span>( )</pre>
+Метод удаляет одинаковые последовательные ключи, которые являются общеиспользуемыми для череды целей морфинга. Метод вызывается конструктором автоматически.<br><br>
+
+<pre id="scale"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scale - масштабировать')" onmouseout="hide()">.scale</a></span>( )</pre>
+Метод масштабирует все времена ключевых кадров на коэффициент (множитель).
+<div class=note><b>Примечание:</b> Этот метод применяется например для перевода на определенную частоту кадров в секунду (как это делается внутри метода <tt><a href="animationClip.htm#CreateFromMorphTargetSequence" onmouseover="show('AnimationClip.CreateFromMorphTargetSequence')" onmouseout="hide()">AnimationClip.CreateFromMorphTargetSequence</a></tt>).</div><br>
+
+<pre id="setInterpolation"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set interpolation - установить интерполяцию')" onmouseout="hide()">.setInterpolation</a></span>( <span onclick="showClick(type_const)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('interpolation type - тип интерполяции')" onmouseout="hide()">interpolationType</a></span> )</pre>
+Метод устанавливает тип интерполяции. Для выбора смотрите <a href="../constants/animation.htm">Анимационные константы</a>.<br><br>
+
+<pre id="shift"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shift - сдвиг')" onmouseout="hide()">.shift</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('time offset in seconds - время смещения в секундах')" onmouseout="hide()">timeOffsetInSeconds</a></span> )</pre>
+Передвигает все ключевые кадры (keyframes) либо вперед, либо назад во времени.<br><br>
+
+<pre id="trim"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('trim - обрезать')" onmouseout="hide()">.trim</a></span> <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start time in seconds - начальное время в секундах')" onmouseout="hide()">startTimeInSeconds</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('end time in seconds - конечное время в секундах')" onmouseout="hide()">endTimeInSeconds</a></span> )</pre>
+Метод удаляет ключевые кадры перед <tt>startTime</tt> и после <tt>endTime</tt>, без изменения каких-либо значений в диапазоне <tt>[startTime, endTime]</tt>.<br><br>
+
+<pre id="validate"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('validate - проверять, подтверждать')" onmouseout="hide()">.validate</a></span>( )</pre>
+Метод выполняет минимальную проверку треков. Метод вызывается конструктором автоматически.<br>
+Данный метод выводит ошибки в консоль, есле трек пустой, если неправильный размер <a href="#values" onmouseover="show('KeyframeTrack.values')" onmouseout="hide()">значений (<tt>values</tt>)</a>,
+если элемент массива <a href="#times" onmouseover="show('KeyframeTrack.times')" onmouseout="hide()">времен</a> или <a href="#values" onmouseover="show('KeyframeTrack.values')" onmouseout="hide()">значений</a> имеет неправильное число или,
+если элементы в <a href="#times" onmouseover="show('KeyframeTrack.times')" onmouseout="hide()">массиве времен</a> неупорядочены.</div><br>
+
+<h4>Статические методы</h4>
+<div class=blockindent><br>
+<pre id="parse"><a href="#" onmouseover="show('KeyframeTrack')" onmouseout="hide()">.parse</a>( <span onclick="showClick('объект в формате JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('json - сокращ. от англ. JavaScript Object Notation —<br>текстовый формат обмена данными, основанный<br>на JavaScript.')" onmouseout="hide()">json</a></span> )</pre>
+Метод производит разбор объекта в формате JSON и возвращает новый трек ключевого кадра правильного типа.<br><br>
+
+<pre id="toJSON"><span onclick="showClick('объект в формате JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в (формат) JSON')" onmouseout="hide()">.toJSON</a></span>( <a href="#" onmouseover="show('KeyframeTrack')" onmouseout="hide()">track</a> )</pre>
+Конвертирует трек в формат JSON.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/animation/KeyframeTrack.js" target="_blank">KeyframeTrack.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

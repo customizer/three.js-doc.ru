@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> <a href="camera.htm" title="Переход к родительскому классу"><tt>Camera &rarr;</tt></a></span>
+<h3>Ортографическая камера</h3>
+Камера с <a href="https://ru.wikipedia.org/wiki/%D0%98%D0%B7%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank">ортографической проекцией</a>.<br>
+При этом способе проецирования, размер объекта в отображаемой картинке остается постоянным, независимо от расстояния между ним и камерой.<br>
+Между прочим, это может быть полезным при отображении двухмерных (2D) сцен и элементов интерфейса пользователя (UI).
+<!-- Проекция из трёхмерного пространства на плоскость
+Проекционный метод изображения предметов основан на их зрительном представлении. Если соединить все точки предмета прямыми линиями (проекционными лучами) с постоянной точкой О (центр проекции), в которой предполагается глаз наблюдателя, то на пересечении этих лучей с какой-либо плоскостью получается проекция всех точек предмета. Таким образом получаем на плоскости перспективное изображение предмета или центральную проекцию.<br><br>
+
+Если центр проекции бесконечно удалён от картинной плоскости, то говорят о параллельной проекции; при этом, если проекционные лучи падают перпендикулярно к плоскости — то об ортогональной проекции, а если наклонно — о косоугольной проекции.<br><br>
+
+Если плоскость проекции не параллельна ни одной из координатных плоскостей — это аксонометрическая проекция.<br><br>
+
+    При любом виде проекции отрезок прямой переходит в отрезок прямой (в вырожденном случае — когда отрезок лежит на проекционном луче — в точку); прямая может перейти в прямую или в луч.<br>
+    Это свойство заметно упрощает приложение проекции в изобразительных целях, особенно в техническом черчении, когда объект содержит много прямолинейных элементов. В последнем случае достаточно спроецировать концы отрезков и соединить их на чертеже прямыми.<br>
+    Эллипс или окружность переходят в эллипс (в вырожденном случае — в отрезок или окружность).
+https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D1%8F_(%D0%B3%D0%B5%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%8F) -->
+<br><br>
+
+<h4>Пример</h4>
+<pre>var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+scene.add( camera );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/webgl_camera" target="_blank">camera</a>
+<a href="https://threejs.org/examples/webgl_interactive_cubes_ortho" target="_blank">interactive / cubes / ortho</a>
+<a href="https://threejs.org/examples/webgl_materials_cubemap_dynamic" target="_blank">materials / cubemap / dynamic</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_advanced" target="_blank">postprocessing / advanced</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_dof2" target="_blank">postprocessing / dof2</a>
+<a href="https://threejs.org/examples/webgl_postprocessing_godrays" target="_blank">postprocessing / godrays</a>
+<a href="https://threejs.org/examples/webgl_rtt" target="_blank">rtt</a>
+<a href="https://threejs.org/examples/webgl_shaders_tonemapping" target="_blank">shaders / tonemapping</a>
+<a href="https://threejs.org/examples/webgl_shadowmap" target="_blank">shadowmap</a></pre>
+
+<h4>Конструктор</h4>
+<pre>OrthographicCamera( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('left - левый');" onmouseout="hide()">left</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('right - правый');" onmouseout="hide()">right</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('top - верхний');" onmouseout="hide()">top</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bottom - нижний');" onmouseout="hide()">bottom</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near - ближний');" onmouseout="hide()">near</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far - дальний');" onmouseout="hide()">far</a></span> )</pre>
+<div class=list><tt>left</tt> — левая плоскость отсечения области видимости камеры.</div>
+<div class=list><tt>right</tt> — правая плоскость отсечения области видимости камеры.</div>
+<div class=list><tt>top</tt> — верхняя плоскость отсечения области видимости камеры.</div>
+<div class=list><tt>bottom</tt> — нижняя плоскость отсечения области видимости камеры.</div>
+<div class=list><tt>near</tt> — ближняя плоскость отсечения области видимости камеры.</div>
+<div class=list><tt>far</tt> — дальняя плоскость отсечения области видимости камеры.</div>
+<div>Вместе они определяют <a href="https://en.wikipedia.org/wiki/Viewing_frustum" target="_blank">область просмотра</a> камеры (в виде усеченной пирамиды).
+<a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
+<div style='display:none;'><img src="../img/ViewFrustum.png" width="400"></div></div><br>
+
+<h4>Свойства</h4>
+Описание общих свойств смотрите в статье о базовом классе <tt><a href="camera.htm" onmouseover="show('Camera');" onmouseout="hide()">Camera</a></tt>.<br>
+Обратите внимание, чтобы изменения вступили в силу, после внесения изменений в большинство этих свойств, следует вызвать метод <tt><a href="#updateProjectionMatrix" onmouseover="show('OrthographicCamera.updateProjectionMatrix');" onmouseout="hide()">updateProjectionMatrix</a></tt>.
+<div class=blockindent><br>
+<pre id="bottom"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bottom - нижний');" onmouseout="hide()">.bottom</a></span></pre>
+Нижняя плоскость отсечения области просмотра камеры.<br><br>
+
+<pre id="far"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far - дальний');" onmouseout="hide()">.far</a></span></pre>
+Дальняя плоскость отсечения области просмотра камеры. Значение по умолчанию равно&nbsp;<tt>2000</tt>.<br>
+Допустимый диапазон значений находится между текущим значением ближней плоскости отсечения (свойство <tt><a href="#near" onmouseover="show('OrthographicCamera.near');" onmouseout="hide()">near</a></tt>) и бесконечностью.<br><br>
+
+<pre id="isOrthographicCamera"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is orthographic camera - является ортографической камерой');" onmouseout="hide()">.isOrthographicCamera</a></span></pre>
+Свойство используется для проверки, является ли данный класс и производные от него классы, ортографическими камерами. Значением по умолчанию является&nbsp;<tt>true</tt>.<br>
+Это свойство нельзя изменять, так как оно используется внутри <em>three.js</em> визуализатором для оптимизации.<br><br>
+
+<pre id="left"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('left - левый');" onmouseout="hide()">.left</a></span></pre>
+Левая плоскость отсечения области просмотра камеры.<br><br>
+
+<pre id="near"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near - ближний');" onmouseout="hide()">.near</a></span></pre>
+Ближняя плоскость отсечения области просмотра камеры. Значением по умолчанию является&nbsp;<tt>0.1</tt>.<br>
+Допустимый диапазон значений находится между&nbsp;<tt>0</tt> и текущим значением дальней плоскости отсечения (свойство <tt><a href="#far" onmouseover="show('OrthographicCamera.far');" onmouseout="hide()">far</a></tt>).
+Обратите внимание, что, в отличие от <a href="perspectiveCamera.htm" onmouseover="show('PerspectiveCamera');" onmouseout="hide()">камеры с перспективной проекцией</a>, для ближней плоскости отсечения <tt>OrthographicCamera</tt> значение&nbsp;<tt>0</tt> является допустимым.<br><br>
+
+<pre id="right"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('right - правый');" onmouseout="hide()">.right</a></span></pre>
+Правая плоскость отсечения области просмотра камеры.<br><br>
+
+<pre id="top"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('top - верхний');" onmouseout="hide()">.top</a></span></pre>
+Верхняя плоскость отсечения области просмотра камеры.<br><br>
+
+<pre id="view"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('view - вид');" onmouseout="hide()">.view</a></span></pre>
+Значение свойства устанавливается методом <tt><a href="#setViewOffset" onmouseover="show('OrthographicCamera.setViewOffset');" onmouseout="hide()">setViewOffset</a></tt>. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="zoom"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('zoom - увеличение изображения, масштабирование');" onmouseout="hide()">.zoom</a></span></pre>
+Получает или устанавливает коэффициент масштабирования камеры. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div><br>
+
+<h4>Методы</h4>
+Описание общих методов смотрите в статье о базовом классе <tt><a href="camera.htm" onmouseover="show('Camera');" onmouseout="hide()">Camera</a></tt>.
+<div class=blockindent><br>
+<pre id="setViewOffset"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set view offset - установить смещение области просмотра');" onmouseout="hide()">.setViewOffset</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('full width - полная ширина');" onmouseout="hide()">fullWidth</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('full height - полная высота');" onmouseout="hide()">fullHeight</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата x');" onmouseout="hide()">x</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('координата y');" onmouseout="hide()">y</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('width - ширина');" onmouseout="hide()">width</a></span>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('height - высота');" onmouseout="hide()">height</a></span> )</pre>
+<div class=list><tt>fullWidth</tt> — полная ширина при установке нескольких областей просмотра.</div>
+<div class=list><tt>fullHeight</tt> — полная высота при установке нескольких областей просмотра.</div>
+<div class=list><tt>x</tt> — горизонтальное смещение субкамеры</div>
+<div class=list><tt>y</tt> — вертикальное смещение субкамеры</div>
+<div class=list><tt>width</tt> — ширина субкамеры</div>
+<div class=list><tt>height</tt> — высота субкамеры</div>
+Метод устанавливает смещение при большой области просмотра. Это полезно для многооконных или многомониторных/многомашинных настройках. Пример подобного использования смотрите в описании <a href="perspectiveCamera.htm#setViewOffset" onmouseover="show('PerspectiveCamera.setViewOffset');" onmouseout="hide()">камеры с перспективной проекцией</a>.<br><br>
+
+<pre id="clearViewOffset"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear view offset - удалить смещение просмотра');" onmouseout="hide()">.clearViewOffset</a></span>()</pre>
+Удаляет любые смещения, установленные методом <tt><a href="#setViewOffset" onmouseover="show('OrthographicCamera.setViewOffset');" onmouseout="hide()">setViewOffset</a></tt>.<br><br>
+
+<pre id="updateProjectionMatrix"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update projection matrix - обновление матрицы проецирования');" onmouseout="hide()">.updateProjectionMatrix</a></span></pre>
+Метод обновляет матрицу проецирования. Он должен быть вызван после любого изменения параметров.<br><br>
+<pre id="toJSON"><span onclick="showClick('JSON')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - сокр. от англ. слов to JavaScript Object Notation,<br>— то есть, в текстовый формат описания объекта,<br>основанный на JavaScript');" onmouseout="hide()">.toJSON</a></span>()</pre>
+Метод возвращает данные камеры в формате <a href="https://ru.wikipedia.org/wiki/JSON" target="_blank">JSON</a>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/cameras/OrthographicCamera.js" target="_blank">OrthographicCamera.js на Гитхабе</a></div><br>
+
+<br><br>
+</body></html>

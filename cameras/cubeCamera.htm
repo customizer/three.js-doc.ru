@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3>CubeCamera</h3>
+Создает 6 камер, которые представляют визуализатор <tt><a href="../renderers/webGLCubeRenderTarget.htm" onmouseover="show('WebGLCubeRenderTarget');" onmouseout="hide()">WebGLCubeRenderTarget</a></tt>.<br><br>
+
+<h4>Пример</h4>
+<pre>  // Create cube camera (создаем кубическую камеру)
+  var cubeCamera = new THREE.CubeCamera( 1, 100000, 128 );
+  scene.add( cubeCamera );<br>
+  // Create car (создаем машину)
+  var chromeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: cubeCamera.renderTarget } );
+  var car = new Mesh( carGeometry, chromeMaterial );
+  scene.add( car );<br>
+  // Update the render target cube (обновляем представление заданного куба)
+  car.setVisible( false );
+  cubeCamera.position.copy( car.position );
+  cubeCamera.updateCubeMap( renderer, scene );<br>
+  // Render the scene (визуализация сцены)
+  car.setVisible( true );
+  renderer.render( scene, camera );</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/webgl_materials_cubemap_dynamic.html" target="_blank">materials / cubemap / dynamic</a>
+<a href="https://threejs.org/examples/webgl_shading_physical.html" target="_blank">shading / physical</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>CubeCamera( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near - ближний');" onmouseout="hide()">near</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far - дальний');" onmouseout="hide()">far</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cube resolution - разрешение куба');" onmouseout="hide()">cubeResolution</a></span> )</pre>
+<div class=list><tt>near</tt> -- расстояние до ближней плоскости отсечения.</div>
+<div class=list><tt>far</tt> -- расстояние до дальней плоскости отсечения.</div>
+<div class=list><tt>cubeResolution</tt> -- параметр устанавливает длину ребер куба.</div>
+Создает CubeCamera, которая содержит&nbsp;6 <a href="perspectiveCamera.htm" onmouseover="show('PerspectiveCamera');" onmouseout="hide()">камер с перспективной проекцией</a>,
+каковые затем представляют визуализатор <tt><a href="../renderers/webGLCubeRenderTarget.htm" onmouseover="show('WebGLCubeRenderTarget');" onmouseout="hide()">WebGLCubeRenderTarget.htm</a></tt>.<br><br>
+
+<h4>Свойства</h4>
+Для просмотра общих свойств посмотрите базовый класс <a href="../core/object3D.htm"><tt>Object3D</tt></a>.
+<div class=blockindent><br>
+<pre id="renderTarget"><a href="../renderers/webGLCubeRenderTarget.htm" onmouseover="show('WebGLCubeRenderTarget<br>render target - целевой объект визуализации');" onmouseout="hide()">.renderTarget</a></pre>
+Создаваемая кубическая текстура.</div><br>
+
+<h4>Методы</h4>
+Для просмотра общих методов посмотрите базовый класс <a href="../core/object3D.htm"><tt>Object3D</tt></a>.
+<div class=blockindent><br>
+<pre id="update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновить')" onmouseout="hide()">.update</a></span>( <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer.<br>renderer - визуализатор (рендерер),<br>средство визуализации');" onmouseout="hide()">renderer</a>, <a href="../scenes/scene.htm" onmouseover="show('Scene.<br>scene - сцена');" onmouseout="hide()">scene</a> )</pre>
+<div class=list><tt>renderer</tt> -- текущий WebGL визуализатор (рендерер).</div>
+<div class=list><tt>scene</tt> -- текущая (т.е. действующая в данный момент) сцена.</div>
+Этот метод вызывается для обновления свойства <tt><a href="#renderTarget" onmouseover="show('CubeCamera.renderTarget');" onmouseout="hide()">renderTarget</a></tt>.<br><br>
+
+<pre id="clear"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()">.clear</a></span>( <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer');" onmouseout="hide()">renderer</a>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет');" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('depth - глубина');" onmouseout="hide()">depth</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stencil - трафарет');" onmouseout="hide()">stencil</a></span>)</pre>
+Метод вызывается для очистки <tt><a href="#renderTarget" onmouseover="show('CubeCamera.renderTarget');" onmouseout="hide()">renderTarget</a></tt>'овских буферов цвета, глубины и/или трафарета.
+Буфер цвета устанавливается как текущий прозрачный цвет визуализатора (рендерера). По умолчанию аргументы равны&nbsp;<tt>true</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/tree/dev/src/cameras/CubeCamera.js" target="_blank">CubeCamera.js на Гитхабе</a></div><br>
+
+<br><br>
+</body></html>

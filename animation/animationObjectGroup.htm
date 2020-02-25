@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AnimationObjectGroup</h3>
+Группа объектов, которая получает общее состояние анимации.<br>
+Обзор различных элементов системы анимации <em>three.js</em> можно найти в статье <a href="../intro/animationSystem.htm">"Системы анимации"</a> раздела "Следующие действия" данного руководства.<br><br>
+
+<h4>Применение</h4><br>
+Добавление объектов, которые в противном случае пришлось передавать в конструктор как <tt>root</tt>,
+или методу <tt><a href="animationMixer.htm#clipAction" onmouseover="show('AnimationMixer.clipAction')" onmouseout="hide()">clipAction</a></tt> от <a href="animationMixer.htm" onmouseover="show('AnimationMixer')" onmouseout="hide()">AnimationMixer</a>
+и вместо передачи данного объекта в качестве <tt>root</tt>.<br>
+Обратите внимание, что объекты этого класса в микшере представлены как один объект, поэтому управление кэшем отдельных объектов должен выполняться в группе.<br><br>
+
+<h4>Ограничения</h4><br>
+Свойства анимации должны быть совместимы среди всех объектов группы.<br>
+Отдельным свойством можно управлять либо через целевую группу, либо непосредственно, но нельзя одновременно и тем и другим способами.<br><br>
+
+<h4>Конструктор</h4><br>
+<pre>AnimationObjectGroup( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj1</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj2</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj3</a></span>, ... )</pre>
+<div class=list><tt>obj</tt> - произвольное число сеток (meshes), с одинаковым состоянием анимации.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="stats"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stats - сокращ. англ. слова statistics - статистика');" onmouseout="hide()">.stats</a></span></pre>
+Объект, который содержит некоторую информацию о данной <a href="#" onmouseover="show('AnimationObjectGroup')" onmouseout="hide()">AnimationObjectGroup</a> (общее количество, количество используемых объектов, число связей на объект)<br><br>
+
+<pre id="uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uuid - сокращ. от англ. слов universally<br>unique identifier - универсальный<br>уникальный идентификатор');" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" onmouseover="show('сокращ. от англ. слов universally<br>unique identifier - универсальный<br>уникальный идентификатор');" onmouseout="hide()">UUID</a> данного <a href="#" onmouseover="show('AnimationObjectGroup')" onmouseout="hide()">AnimationObjectGroup</a>. Он присваивается автоматически и не должен быть изменен.<br>
+Вот <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">статья Википедии про UUID</a> на русском языке.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="add"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('add - добавить');" onmouseout="hide()">.add</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj1</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj2</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj3</a></span>, ... )</pre>
+Метод добавляет произвольное число объектов в данную <tt>AnimationObjectGroup</tt>.<br><br>
+
+<pre id="remove"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('remove - удалить');" onmouseout="hide()">.remove</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj1</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj2</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj3</a></span>, ... )</pre>
+Удаляет произвольное число объектов из данной <tt>AnimationObjectGroup</tt>.<br><br>
+
+<pre id="uncache"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uncache - вычистить');" onmouseout="hide()">.uncache</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj1</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj2</a></span>, <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слова object - объект');" onmouseout="hide()">obj3</a></span>, ... )</pre>
+Высвобождает все ресурсы оперативной памяти для переданных объектов данной <tt>AnimationObjectGroup</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/animation/AnimationObjectGroup.js" target="_blank">AnimationObjectGroup.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

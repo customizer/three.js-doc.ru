@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AnimationMixer</h3>
+AnimationMixer - это проигрыватель для анимации конкретного объекта на сцене. Если на сцене независимо анимируется множество объектов, для всех объектов может использоваться один <tt>AnimationMixer</tt>.<br>
+Обзор различных элементов системы анимации <em>three.js</em> можно найти в статье <a href="../intro/animationSystem.htm">"Системы анимации"</a> раздела "Следующие действия" данного руководства.<br><br>
+
+<h4>Конструктор</h4><br>
+<pre>AnimationMixer( <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>root object - корневой объект');" onmouseout="hide()">rootObject</a> )</pre>
+<div class=list><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>root object - корневой объект');" onmouseout="hide()"><tt>rootObject</tt></a> - объект, анимация которого должна воспроизводиться этим микшером.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="time"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('time - время');" onmouseout="hide()">.time</a></span></pre>
+Общее (глобальное) время микшера (в секундах; начиная с&nbsp;<tt>0</tt> в момент создания микшера).<br><br>
+
+<pre id="timeScale"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('time scale - временная шкала');" onmouseout="hide()">.timeScale</a></span></pre>
+Коэффициент масштабирования для общего (глобального) <a href="#" onmouseover="show('AnimationMixer.time');" onmouseout="hide()">времени микшера</a>.
+<div class=note><b>Примечание:</b> Установка параметра <tt>timeScale</tt> микшера в&nbsp;<tt>0</tt> и последующий возврат его к&nbsp;<tt>1</tt> - это возможность приостановки/возобновления (pause/unpause) всех действий, управляемых этим микшером.</div></div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="clipAction"><a href="animationAction.htm" onmouseover="show('AnimationAction.<br>clip action - действие клипа');" onmouseout="hide()">.clipAction</a>( <a href="animationClip.htm" onmouseover="show('AnimationClip.<br>clip - клип');" onmouseout="hide()">clip</a>, <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>optional root - дополнительный корень');" onmouseout="hide()">optionalRoot</a> )</pre>
+Возвращает <a href="animationAction.htm" onmouseover="show('AnimationAction');" onmouseout="hide()">AnimationAction</a> для клипа, указанного в параметре <tt>clip</tt>, с дополнительным (необязательным) использованием корневого объекта, отличного от корневого объекта по умолчанию данного микшера.
+Первым параметром может быть либо объект <a href="animationClip.htm" onmouseover="show('AnimationClip');" onmouseout="hide()">AnimationClip</a>, либо имя/название <tt>AnimationClip</tt>.<br>
+Если действие, связанное с этими параметрами, еще не существует, данным методом оно будет создано.
+<div class=note><b>Примечание:</b> Вызов этого метода несколько раз с одними и теми же параметрами всегда возвращает один и тот же экземпляр клипа.</div><br>
+
+<pre id="existingAction"><a href="animationAction.htm" onmouseover="show('AnimationAction.<br>existing action - существующее действие');" onmouseout="hide()">.existingAction</a>( <a href="animationClip.htm" onmouseover="show('AnimationClip.<br>clip - клип');" onmouseout="hide()">clip</a>, <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>optional root - дополнительный корень');" onmouseout="hide()">optionalRoot</a> )</pre>
+Возвращает текущее <a href="animationAction.htm" onmouseover="show('AnimationAction');" onmouseout="hide()">AnimationAction</a> для переданного клипа, при необходимости можно использовать корневой объект, отличный от корневого объекта микшера по умолчанию.<br>
+Первым параметром может быть либо объект <tt><a href="animationClip.htm" onmouseover="show('AnimationClip');" onmouseout="hide()">AnimationClip</a></tt>, либо имя (название) <tt>AnimationClip</tt>'а.<br><br>
+
+<pre id="getRoot"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>get root - получить корень');" onmouseout="hide()">.getRoot</a>()</pre>
+Возвращает корневой объект микшера.<br><br>
+<pre id="stopAllAction"><a href="#" onmouseover="show('AnimationMixer.<br>stop all action - остановить все действие');" onmouseout="hide()">.stopAllAction</a>()</pre>
+Деактивирует на этом микшере все ранее запланированные действия.<br><br>
+
+<pre id="update"><a href="#" onmouseover="show('AnimationMixer.<br>update - обновление');" onmouseout="hide()">.update</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('delta time in seconds - дельта (промежуток) времени в секундах');" onmouseout="hide()">deltaTimeInSeconds</a></span> )</pre>
+Увеличивает время глобального микшера и обновляет анимацию.<br>
+Обычно это делается в цикле визуализации (рендеринга), передавая <tt><a href="../core/clock.htm#getDelta" onmouseover="show('Clock.getDelta')" onmouseout="hide()">Clock.getDelta</a></tt>,
+масштабированное по <tt><a href="#timeScale" onmouseover="show('AnimationMixer.timeScale')" onmouseout="hide()">timeScale</a></tt> микшера.<br><br>
+
+<pre id="uncacheClip"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uncache clip - вычистить клип');" onmouseout="hide()">.uncacheClip</a></span>( <a href="animationClip.htm" onmouseover="show('AnimationClip.<br>clip - клип');" onmouseout="hide()">clip</a> )</pre>
+Высвобождает все ресурсы памяти от клипа.<br><br>
+<pre id="uncacheRoot"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uncache root - вычистить корень');" onmouseout="hide()">.uncacheRoot</a></span>( <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>root - корень');" onmouseout="hide()">root</a> )</pre>
+Высвобождает все ресурсы памяти от корневого объекта.<br><br>
+<pre id="uncacheAction"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('uncache action - вычистить действие');" onmouseout="hide()">.uncacheAction</a></span>( <a href="animationClip.htm" onmouseover="show('AnimationClip.<br>clip - клип');" onmouseout="hide()">clip</a>, <a href="../core/object3D.htm" onmouseover="show('Object3D.<br>optional root - дополнительный корень');" onmouseout="hide()">optionalRoot</a> )</pre>
+Высвобождает все ресурсы памяти от действия.</div><br>
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/animation/AnimationMixer.js" target="_blank">AnimationMixer.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

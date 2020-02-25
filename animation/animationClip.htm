@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AnimationClip</h3>
+AnimationClip - это многократно используемый набор треков ключевых кадров, представляющих анимацию.<br>
+Обзор различных элементов системы анимации <em>three.js</em> можно найти в статье <a href="../intro/animationSystem.htm">"Системы анимации"</a> раздела "Следующие действия" данного руководства.<br><br>
+
+<h4>Конструктор</h4><br>
+<pre>AnimationClip( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">name</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('duration - продолжительность');" onmouseout="hide()">duration</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tracks - треки, дорожки');" onmouseout="hide()">tracks</a></span> )</pre>
+<div class=list><tt>name</tt> - имя данного клипа.</div>
+<div class=list><tt>duration</tt> - продолжительность данного клипа (в секундах).
+Если передано отрицательное значение, продолжительность будет рассчитываться из переданного массива <tt>tracks</tt>.</div>
+<div class=list><tt>tracks</tt> - массив <tt><a href="keyframeTrack.htm" onmouseover="show('KeyframeTrack');" onmouseout="hide()">треков ключевых кадров</a></tt>.</div>
+<div class=note><b>Примечание:</b> Вместо создания экземпляра AnimationClip непосредственно с помощью конструктора, для создания анимационных клипов можно использовать один из его статических методов:
+из JSON (<tt><a href="#parse" onmouseover="show('AnimationClip.parse');" onmouseout="hide()">parse</a></tt>),
+из череды целей морфинга (<tt><a href="#CreateFromMorphTargetSequence" onmouseover="show('AnimationClip.CreateFromMorphTargetSequence')" onmouseout="hide()">CreateFromMorphTargetSequence</a></tt>,
+<tt><a href="#CreateClipsFromMorphTargetSequences" onmouseover="show('AnimationClip.CreateClipsFromMorphTargetSequences')" onmouseout="hide()">CreateClipsFromMorphTargetSequences</a></tt>)
+или из анимационных иерархий (<tt><a href="#parseAnimation" onmouseover="show('AnimationClip.parseAnimation')" onmouseout="hide()">parseAnimation</a></tt>) - если модель уже не содержит AnimationClip'ов в своем массиве анимаций геометрических элементов.</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="duration"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('duration - продолжительность');" onmouseout="hide()">.duration</a></span></pre>
+Продолжительность данного клипа (в секундах). Она может быть рассчитана из массива <a href="#tracks" onmouseover="show('AnimationClip.tracks')" onmouseout="hide()">треков</a>
+с помощью метода <tt><a href="#resetDuration" onmouseover="show('AnimationClip.resetDuration')" onmouseout="hide()">resetDuration</a></tt>.<br><br>
+
+<pre id="name"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">.name</a></span></pre>
+Имя данного клипа. Конкретный клип может быть найден с помощью метода <tt><a href="#findByName" onmouseover="show('AnimationClip.findByName');" onmouseout="hide()">findByName</a></tt>.<br><br>
+
+<pre id="tracks"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('tracks - треки, дорожки');" onmouseout="hide()">.tracks</a></span></pre>
+Массив, содержащий <tt><a href="keyframeTrack.htm" onmouseover="show('KeyframeTrack');" onmouseout="hide()">KeyframeTrack</a></tt> для каждого свойства, которые анимируются с помощью данного клипа.<br><br>
+
+<pre id="uuid"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. от англ. слов universally<br>unique identifier - универсальный<br>уникальный идентификатор');" onmouseout="hide()">.uuid</a></span></pre>
+<a href="http://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank" onmouseover="show('сокращ. от англ. слов universally<br>unique identifier - универсальный<br>уникальный идентификатор');" onmouseout="hide()">UUID</a> данного экземпляра клипа. Он присваивается автоматически и не должен быть изменен.<br>
+Вот <a href="https://ru.wikipedia.org/wiki/UUID" target="_blank">статья Википедии про UUID</a> на русском языке.</div><br>
+
+<h4>Методы</h4><br>
+<div class=blockindent>
+<pre id="optimize"><a href="#" onmouseover="show('AnimationClip.<br>optimize - оптимизировать');" onmouseout="hide()">.optimize</a>()</pre>
+Оптимизирует каждый трек путем удаления равнозначных последовательных ключей (которые являются общими в последовательности целей морфинга).<br><br>
+
+<pre id="resetDuration"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reset duration - сброс продолжительности');" onmouseout="hide()">.resetDuration</a></span>()</pre>
+Метод устанавливает <a href="#duration" onmouseover="show('AnimationClip.duration');" onmouseout="hide()">продолжительность</a> клипа как продолжительность самого длинного <tt><a href="keyframeTrack.htm" onmouseover="show('KeyframeTrack');" onmouseout="hide()">KeyframeTrack</a></tt>.<br><br>
+
+<pre id="trim"><a href="#" onmouseover="show('AnimationClip.<br>trim - обрезать, подстригать');" onmouseout="hide()">.trim</a>()</pre>
+Метод обрезает все треки по времени продолжительности клипа.</div><br>
+
+<h4>Статические методы</h4>
+<div class=blockindent><br>
+<pre id="CreateClipsFromMorphTargetSequences"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('create clips from morph target sequence -<br>создать клипы из последовательности целей морфинга');" onmouseout="hide()">.CreateClipsFromMorphTargetSequences</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">name</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target sequence - последовательность целей морфинга');" onmouseout="hide()">morphTargetSequence</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов frames per second - кадры в секунду');" onmouseout="hide()">fps</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no loop - нет цикла');" onmouseout="hide()">noLoop</a></span> )</pre>
+Метод возвращает массив новых AnimationClip'ов, созданный из <a href="../core/geometry.htm#morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">последовательности целей морфинга</a> геометрического элемента,
+с попыткой сортировки имен целей морфинга в структуры, ориентированные по группам анимации, наподобие "<tt><span class="lnk" onmouseover="show('Walk_001 - Ходьба_001')" onmouseout="hide()">Walk_001</span>, Walk_002, <span class="lnk" onmouseover="show('Run_001 - Бег_001')" onmouseout="hide()">Run_001</span>, Run_002 ...</tt>"<br><br>
+
+<pre id="CreateFromMorphTargetSequence"><a href="#" onmouseover="show('AnimationClip.<br>create from morph target sequence - создать<br>из последовательности целей морфинга');" onmouseout="hide()">.CreateFromMorphTargetSequence</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">name</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph target sequence - последовательность целей морфинга');" onmouseout="hide()">morphTargetSequence</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращ. англ. слов frames per second - кадры в секунду');" onmouseout="hide()">fps</a></span>, <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('no loop - нет цикла');" onmouseout="hide()">noLoop</a></span> )</pre>
+Возвращает новый <a href="#" onmouseover="show('AnimationClip');" onmouseout="hide()">AnimationClip</a> исходя из переданного
+<a href="../core/geometry.htm#morphTargets" onmouseover="show('Geometry.morphTargets')" onmouseout="hide()">массива целей морфинга</a> геометрического элемента, принимая в качестве аргументов название и количество кадров в секунду.
+<div class=note><b>Примечание:</b> Параметр <tt>fps</tt> обязателен, но скорость анимации в <tt>AnimationAction</tt> может быть переопределена методом <tt><a href="animationAction.htm#setDuration" onmouseover="show('AnimationAction.setDuration');" onmouseout="hide()">AnimationAction.setDuration</a></tt>.</div><br>
+
+<pre id="findByName"><a href="#" onmouseover="show('AnimationClip.<br>find by name - найти по имени');" onmouseout="hide()">.findByName</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('object or clip array - массив объектов или клипов');" onmouseout="hide()">objectOrClipArray</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('name - имя, название');" onmouseout="hide()">name</a></span> )</pre>
+Метод разыскивает <tt>AnimationClip</tt> по названию, принимая в качестве своего первого параметра либо массив анимационных клипов, либо сетку (Mesh), либо геометрию (Geometry), которые содержат массив, поименованный как "<tt>animations</tt>".<br><br>
+
+<pre id="parse"><a href="#" onmouseover="show('AnimationClip.<br>parse - разбор, синтаксический анализ, парсинг');" onmouseout="hide()">.parse</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('json - здесь объект в формате JSON');" onmouseout="hide()">json</a></span> )</pre>
+Метод производит разбор представления клипа в формате JSON и возвращает <a href="#" onmouseover="show('AnimationClip');" onmouseout="hide()">AnimationClip</a>.<br><br>
+
+<pre id="parseAnimation"><a href="#" onmouseover="show('AnimationClip.<br>parse animation - разобрать (т.е. сделать анализ) анимацию');" onmouseout="hide()">.parseAnimation</a>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('animation - анимация');" onmouseout="hide()">animation</a></span>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bones - кости');" onmouseout="hide()">bones</a></span> )</pre>
+Метод производит разбор формата иерархии анимации и возвращает AnimationClip.<br><br>
+
+<pre id="toJSON"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to JSON - в формат JSON');" onmouseout="hide()">.toJSON</a></span>( <a href="#" onmouseover="show('AnimationClip.<br>clip - клип, обрезать');" onmouseout="hide()">clip</a> )</pre>
+Метод принимает <tt>AnimationClip</tt> и возвращает JSON-объект.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/animation/AnimationClip.js" target="_blank">AnimationClip.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

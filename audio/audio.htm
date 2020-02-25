@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a></span>
+<h3>Audio</h3>
+Создает глобальный, т.е. не имеющий конкретного расположения, аудио объект.<br>
+Для его работы используется <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a>.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a> на русском языке.<br><br>
+<h4>Пример</h4>
+<pre>// Create an AudioListener and add it to the camera
+// создаем AudioListener и добавляем его к камере
+var listener = new THREE.AudioListener();
+camera.add( listener );<br>
+// create a global audio source (создаем глобальный аудиоисточник)
+var sound = new THREE.Audio( listener );<br>
+// Load a sound and set it as the Audio object's buffer
+// загружаем звук и устанавливаем его как буфер объекта Audio
+var audioLoader = new THREE.AudioLoader();
+audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
+	sound.setBuffer( buffer );
+	sound.setLoop(true);
+	sound.setVolume(0.5);
+	sound.play();
+});</pre>
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webaudio_sandbox" target="_blank">webaudio / sandbox</a>
+<a href="https://threejs.org/examples/#webaudio_visualizer" target="_blank">webaudio / visualizer</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>Audio( <a href="audioListener.htm" onmouseover="show('AudioListener.<br>listener - слушатель, приемник');" onmouseout="hide()">listener</a> )</pre>
+<div class=list><tt>listener</tt> — экземпляр <tt><a href="audioListener.htm" onmouseover="show('AudioListener');" onmouseout="hide()">AudioListener</a></tt> (этот аргумент обязателен).</div><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="autoplay"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('autoplay - автозапуск,<br>автоматическое воспроизведение');" onmouseout="hide()">.autoplay</a></span></pre>
+Свойство определяет, будет ли звуковое сопровождение запускаться автоматически. Значением по умолчанию является <tt>false</tt>.<br><br>
+<pre id="context"><a href="audioContext.htm" onmouseover="show('AudioContext');" onmouseout="hide()">.context</a></pre>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext" target="_blank">AudioContext</a> для <a href="audioListener.htm" onmouseover="show('AudioListener');" onmouseout="hide()">listener</a>, заданного в конструкторе.
+Вот <a href="https://developer.mozilla.org/ru/docs/Web/API/AudioContext" target="_blank">AudioContext</a> на русском языке.<br><br>
+
+<pre id="detune"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('detune - расстройка')" onmouseout="hide()">.detune</a></span></pre>
+Изменяет высоту тона, измеряемую в <a href="https://ru.wikipedia.org/wiki/%D0%A6%D0%B5%D0%BD%D1%82_(%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D0%B0)" target="_blank" onmouseover="show('Цент (лат. centum — сто) — безразмерная логарифмическая единица<br>отношения двух частот или значений границ музыкального интервала.<br>Изменение частоты на 1 цент соответствует её изменению примерно<br>на 0,058 процента. 100 центов составляют один полутон равномерно<br>темперированного строя, 50 центов равны половине полутона<br>равномерно темперированного строя, 1200 центов равны октаве.')" onmouseout="hide()">центах</a>.
+<tt>+/- 100</tt> - это <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%83%D1%82%D0%BE%D0%BD" target="_blank" onmouseover="show('Полутон (лат. semitonium) — музыкальный интервал, равный<br>половине целого тона. Полутон — наименьший интервал в<br>традиционной и академической музыке Европы.')" onmouseout="hide()">полутон</a>.
+<tt>+/- 1200</tt> - <a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%BA%D1%82%D0%B0%D0%B2%D0%B0" target="_blank" onmouseover="show('Октава (от лат. octava «восьмая») — музыкальный интервал,<br>в котором соотношение частот между звуками составляет<br>один к двум (то есть частота высокого звука в два раза<br>больше низкого).')" onmouseout="hide()">октава</a>.
+Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="filters"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('filters - фильтры');" onmouseout="hide()">.filters</a></span></pre>
+Свойство определяет, воспроизводится ли звук в настоящий момент. Значением по умолчанию является пустой массив.<br><br>
+
+<pre id="gain"><span onclick="showClick('GainNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('gain - усиление, увеличение');" onmouseout="hide()">.gain</a></span></pre>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/GainNode" target="_blank">GainNode</a> созданный при помощи метода <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createGain" target="_blank">AudioContext.createGain</a>().<br><br>
+
+<pre id="hasPlaybackControl"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('has playback control - имеется управление воспроизведением');" onmouseout="hide()">.hasPlaybackControl</a></span></pre>
+Можно ли управлять воспроизведением при помощи <tt><a href="#play" onmouseover="show('Audio.play');" onmouseout="hide()">play</a>()</tt>, <tt><a href="#pause" onmouseover="show('Audio.pause');" onmouseout="hide()">pause</a>()</tt> и т.п. методами. Значением по умолчанию является <tt>true</tt>.<br><br>
+
+<pre id="isPlaying"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is playing - есть воспроизведение');" onmouseout="hide()">.isPlaying</a></span></pre>
+Свойство показывает, воспроизводится ли звук в данный момент.<br><br>
+
+<pre id="offset"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение');" onmouseout="hide()">.offset</a></span></pre>
+Смещение времени внутри аудиобуфера, с которого должно начаться воспроизведение.
+Это тоже самое, что и параметр <tt>offset</tt> из <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/start" target="_blank">AudioBufferSourceNode.start</a></tt>.
+Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
+
+<pre id="playbackRate"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('playback rate - множитель (скорости) воспроизведения');" onmouseout="hide()">.playbackRate</a></span></pre>
+Множитель скорости воспроизведения. Значение по умолчанию равно <tt>1</tt>.<br><br>
+
+<pre id="startTime"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('start time - время запуска');" onmouseout="hide()">.startTime</a></span></pre>
+Момент, с которого начинается воспроизведение звука. Значение по умолчанию равно <tt>0</tt>.<br><br>
+
+<pre id="source"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('source - источник');" onmouseout="hide()">.source</a></span></pre>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode" target="_blank">AudioBufferSourceNode</a> созданный при помощи метода <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createBufferSource" target="_blank">AudioContext.createBufferSource</a>().<br><br>
+
+<pre id="sourceType"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('source type - тип источника');" onmouseout="hide()">.sourceType</a></span></pre>
+Тип источника звука. Значением по умолчанию является строка <span class="lnk" onmouseover="show('empty - пусто');" onmouseout="hide()">'<tt>empty</tt>'</span>.<br><br>
+
+<pre id="type"><span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип');" onmouseout="hide()">.type</a></span></pre>
+Строковое значение, обозначающее тип установленного '<tt>Audio</tt>'.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="connect"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('connect - подключить');" onmouseout="hide()">.connect</a></span>()</pre>
+Подключение к <tt><a href="#source" onmouseover="show('Audio.source');" onmouseout="hide()">Audio.source</a></tt>. Использование метода внутреннее при инициализации и при установке / удалении фильтров.<br><br>
+
+<pre id="disconnect"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('disconnect - отключить');" onmouseout="hide()">.disconnect</a></span>()</pre>
+Отключение от <tt><a href="#source" onmouseover="show('Audio.source');" onmouseout="hide()">Audio.source</a></tt>. Использование метода внутреннее при установке / удалении фильтров.<br><br>
+
+<pre id="getFilter"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get filter - получить фильтр');" onmouseout="hide()">.getFilter</a></span>()</pre>
+Возвращает первый элемент из массива <tt><a href="#filters" onmouseover="show('Audio.filters');" onmouseout="hide()">filters</a></tt>.<br><br>
+
+<pre id="getFilters"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get filters - получить фильтры');" onmouseout="hide()">.getFilters</a></span>()</pre>
+Возвращает массив <tt><a href="#filters" onmouseover="show('Audio.filters');" onmouseout="hide()">filters</a></tt>.<br><br>
+
+<pre id="getLoop"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get loop - получить цикл');" onmouseout="hide()">.getLoop</a></span>()</pre>
+Возвращает значение свойства <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loop" target="_blank">source.loop</a></tt> (свойство определяет, зациклено ли воспроизведение).<br><br>
+
+<pre id="getOutput"><span onclick="showClick('GainNode')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get output - получить выход');" onmouseout="hide()">.getOutput</a></span>()</pre>
+Возвращает <tt><a href="#gain" onmouseover="show('Audio.gain');" onmouseout="hide()">gainNode</a></tt>.<br><br>
+
+<pre id="getPlaybackRate"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get playback rate - получить<br>множитель (скорости) воспроизведения');" onmouseout="hide()">.getPlaybackRate</a></span>()</pre>
+Возвращает значение <tt><a href="#playbackRate" onmouseover="show('Audio.playbackRate');" onmouseout="hide()">playbackRate</a></tt>.<br><br>
+
+<pre id="getVolume"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get volume - получить громкость');" onmouseout="hide()">.getVolume</a></span>( value )</pre>
+Возвращает текущее значение громкости.<br><br>
+
+<pre id="play"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('play - играть');" onmouseout="hide()">.play</a></span>()</pre>
+Если свойство <tt><a href="#hasPlaybackControl" onmouseover="show('Audio.hasPlaybackControl');" onmouseout="hide()">hasPlaybackControl</a></tt> установлено как <tt>true</tt>, то этот метод запускает воспроизведение.<br><br>
+
+<pre id="pause"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('pause - пауза');" onmouseout="hide()">.pause</a></span>()</pre>
+Если свойство <tt><a href="#hasPlaybackControl" onmouseover="show('Audio.hasPlaybackControl');" onmouseout="hide()">hasPlaybackControl</a></tt> установлено как <tt>true</tt>, то этот метод приостанавливает воспроизведение, т.е. переводит в режим "пауза".<br><br>
+
+<pre id="onEnded"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on ended - по окончании');" onmouseout="hide()">.onEnded</a></span>()</pre>
+Вызывается автоматически по окончании воспроизведения. Устанавливает свойство <tt><a href="#isPlaying" onmouseover="show('Audio.isPlaying');" onmouseout="hide()">isPlaying</a></tt> как <tt>false</tt>.<br><br>
+
+<pre id="setBuffer"><a href="#" onmouseover="show('Audio. set buffer - установить буфер');" onmouseout="hide()">.setBuffer</a>( audioBuffer )</pre>
+Устанавливает <tt><a href="#source" onmouseover="show('Audio.source');" onmouseout="hide()">source</a></tt> в <tt>audioBuffer</tt>, и назначает <tt><a href="#sourceType" onmouseover="show('Audio.sourceType');" onmouseout="hide()">sourceType</a></tt> в <tt>buffer</tt>.<br>
+Кроме этого запускает воспроизведение, если свойство <tt><a href="#autoplay" onmouseover="show('Audio.autoplay');" onmouseout="hide()">autoplay</a></tt> установлено как <tt>true</tt>.<br><br>
+
+<pre id="setFilter"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set filter - установить фильтр');" onmouseout="hide()">.setFilter</a></span>( filter )</pre>
+Добавляет фильтр в массив <tt><a href="#filters" onmouseover="show('Audio.filters');" onmouseout="hide()">filters</a></tt>.<br><br>
+
+<pre id="setFilters"><a href="#" onmouseover="show('Audio.<br>set filters - установить фильтры');" onmouseout="hide()">.setFilters</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+<div class=list><tt>value</tt> - массив из фильтров.</div>
+Устанавливает в качестве массива <tt><a href="#filters" onmouseover="show('Audio.filters');" onmouseout="hide()">filters</a></tt> массив, приведенный в параметре <tt>value</tt>.<br><br>
+
+<pre id="setLoop"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set loop - установить цикл');" onmouseout="hide()">.setLoop</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает свойство <tt><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loop" target="_blank">source.loop</a></tt> в состояние, указанное в <tt>value</tt> (будет ли зациклено ли воспроизведение).<br><br>
+
+<pre id="setNodeSource"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set node source - установить источник узла');" onmouseout="hide()">.setNodeSource</a></span>( audioNode )</pre>
+Устанавливает <tt><a href="#source" onmouseover="show('Audio.source');" onmouseout="hide()">source</a></tt> в <tt>audioBuffer</tt>, и назначает <tt><a href="#sourceType" onmouseover="show('Audio.sourceType');" onmouseout="hide()">sourceType</a></tt> в <tt>audioNode</tt>.<br>
+Также устанавливает <tt><a href="#hasPlaybackControl" onmouseover="show('Audio.hasPlaybackControl');" onmouseout="hide()">hasPlaybackControl</a></tt> как	<tt>false</tt>.<br><br>
+
+<pre id="setPlaybackRate"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set playback rate - установка<br>множителя (скорости) воспроизведения');" onmouseout="hide()">.setPlaybackRate</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+Если <tt><a href="#hasPlaybackControl" onmouseover="show('Audio.hasPlaybackControl');" onmouseout="hide()">hasPlaybackControl</a></tt> включен, то свойство <tt><a href="#playbackRate" onmouseover="show('Audio.playbackRate');" onmouseout="hide()">playbackRate</a></tt> устанавливается как <tt>value</tt>.<br><br>
+
+<pre id="setVolume"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set volume - установка громкости');" onmouseout="hide()">.setVolume</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение');" onmouseout="hide()">value</a></span> )</pre>
+Устанавливает уровень громкости.<br><br>
+
+<pre id="stop"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('stop - стоп, остановка');" onmouseout="hide()">.stop</a></span>()</pre>
+Если <tt><a href="#hasPlaybackControl" onmouseover="show('Audio.hasPlaybackControl');" onmouseout="hide()">hasPlaybackControl</a></tt> включен,
+то воспроизведение останавливается, <tt><a href="#startTime" onmouseover="show('Audio.startTime');" onmouseout="hide()">startTime</a></tt> сбрасывается в <tt>0</tt>,
+а <tt><a href="#isPlaying" onmouseover="show('Audio.isPlaying');" onmouseout="hide()">isPlaying</a></tt> устанавливается как <tt>false</tt>.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/audio/Audio.js" target="_blank">Audio.js на github.com</a></div><br>
+
+<br><br>
+</body></html>

@@ -7,33 +7,37 @@
 </head>
 <body>
 <h3>OBJLoader2Parallel</h3>
-
-A loader for loading a .obj resource.
-The OBJ file format is a simple data-format that represents 3D geometry in a human readable format as, the position of each vertex, the UV position of each texture coordinate vertex, vertex normals, and the faces that make each polygon defined as a list of vertices, and texture vertices.
+Загрузчик для загрузки ресурсов в формате <em><a href="https://ru.wikipedia.org/wiki/Obj" target="_blank">obj</a></em>.<br>
+<a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" target="_blank"  onmouseover="show('OBJ - сокращ. англ. слова object - объект')" onmouseout="hide()">Формат файла OBJ</a> - это простой формат данных,
+представляющий трехмерную геометрию в удобочитаемой для человека форме, в виде положения каждой вершины, UV-координат позиции каждой текстуры, связанных с вершиной, нормалей вершин,
+граней, образуемых каждым многоугольником, определяемым списком вершин, и вершин текстур.<br><br>
 
 <h4>Примеры</h4>
-<pre>// instantiate the loader
-let objLoader2Parallel = new OBJLoader2Parallel();
-
-// define where to attach the data
-let local = new THREE.Object3D();
-
+<pre>// instantiate the loader (создание экземпляра загрузчика)
+let objLoader2Parallel = new OBJLoader2Parallel();<br>
+// define where to attach the data (определение места присоединения данных)
+let local = new THREE.Object3D();<br>
 // function called on successful completion of parsing
+// функция, вызываемая после успешного выполнения разбора
 function callbackOnLoad( object3d, message ) {
-	local.add( object3d );
-}
-
+  local.add( object3d );
+}<br>
 // load a resource from provided URL in parallel to Main
+// загружаем ресурс из предоставленного URL параллельно основному
 objLoader2Parallel.load( 'models/obj/walt/WaltHead.obj', callbackOnLoad, null, null, null );</pre>
 <h5>Другие примеры:</h5>
-<pre>webgl_loader_obj2_options - Example for multiple use-cases (parse and load, sync (see OBJLoader2) or in parallel to main)</pre>
+<pre><a href="https://threejs.org/examples/#webgl_loader_obj2_options" target="_blank">webgl/loader/obj2/options</a> - пример нескольких вариантов использования (разбор, загрузка
+                            и запуск с инструкциями (синхронно - смотрите описание <a href="OBJLoader2.htm" onmouseover="show('OBJLoader2')" onmouseout="hide()">OBJLoader2</a>
+                            или параллельно основному)</pre><br>
 
 <h4>Конструктор</h4>
 <pre>OBJLoader2Parallel( <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
 <div class=list><tt>manager</tt> — <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
 Значением по умолчанию является <a href="../../loaders/defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
-
-Creates a new OBJLoader2Parallel. Use it to load OBJ data from files or to parse OBJ data from arraybuffer. It extends OBJLoader2 with the capability to run the parser in a web worker.
+Создает новый OBJLoader2Parallel. Используйте его для загрузки данных в формате OBJ из файлов или для синтаксического анализа OBJ-данных из буферного массива.
+OBJLoader2Parallel расширяет возможности <a href="OBJLoader2.htm" onmouseover="show('OBJLoader2')" onmouseout="hide()">OBJLoader2</a> способностью запустить парсер (синтаксический анализатор) через
+<a href="https://developer.mozilla.org/ru/docs/DOM/Using_web_workers" target="_blank" onmouseover="show('Веб-обработчики (web worker-ы) это механизм, который позволяет скрипту<br>выполняться в фоновом потоке, отделенном от основного потока<br>веб-приложения. Преимущество заключается в том, ресурсоёмкие вычисления<br>могут выполняться в отдельном потоке, позволяя запустить основной<br>(обычно пользовательский) поток без блокировки и замедления.<br>Поток обработчика может выполнять задачи без вмешательства в<br>пользовательский интерфейс. К тому же, они могут осуществлять ввод/вывод,<br>используя XMLHttpRequest (хотя атрибуты <tt>responseXML</tt> и <tt>channel</tt><br>всегда будут равны <tt>null</tt>). Существующий веб-обработчик может<br>отсылать сообщения JavaScript коду-создателю через обработчик событий,<br>указанный этим кодом (и наоборот).')" onmouseout="hide()">веб-обработчик</a>
+(<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers" target="_blank">web worker</a>).<br><br>
 
 <h4>Свойства</h4>
 Общие свойства смотрите в описании базового класса <a href="OBJLoader2.htm" onmouseover="show('OBJLoader2')" onmouseout="hide()">OBJLoader2</a>.
@@ -46,19 +50,17 @@ Creates a new OBJLoader2Parallel. Use it to load OBJ data from files or to parse
 Смотрите описание метода <tt><a href="OBJLoader2.htm#parse" onmouseover="show('OBJLoader2.parse')" onmouseout="hide()">OBJLoader2.parse</a></tt>.
 The callback OBJLoader2.onLoad needs to be set to be able to receive the content if used in parallel mode. Fallback is possible via OBJLoader2Parallel.setExecuteParallel.<br><br>
 
-<pre id="load">.load : null</pre>
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span></pre>
+Смотрите описание метода <tt><a href="OBJLoader2.htm#load" onmouseover="show('OBJLoader2.load')" onmouseout="hide()">OBJLoader2.load</a></tt>.<br><br>
 
-See OBJLoader2.load.<br><br>
-
-<pre id="setExecuteParallel">.setExecuteParallel ( executeParallel : boolean ) : OBJLoader2Parallel</pre>
-
-<div class=list>executeParallel - True or False</div>
+<pre id="setExecuteParallel"><a href="#" onmouseover="show('OBJLoader2Parallel.<br>set execute parallel - установить параллельное выполнение')" onmouseout="hide()">.setExecuteParallel</a>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('execute parallel - параллельное выполнение')" onmouseout="hide()">executeParallel</a></span> )</pre>
+<div class=list><tt>executeParallel</tt> - значением может быть либо <tt>true</tt>, либо <tt>false</tt>.</div>
 
 Execution of parse in parallel via Worker is default, but synchronous OBJLoader2 parsing can be enforced via false here.<br><br>
 
-<pre id="setPreferJsmWorker">.setPreferJsmWorker ( preferJsmWorker : boolean ) : OBJLoader2Parallel</pre>
+<pre id="setPreferJsmWorker">.setPreferJsmWorker ( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('prefer jsm worker - ')" onmouseout="hide()">preferJsmWorker</a></span> ) : OBJLoader2Parallel</pre>
 
-<div class=list>preferJsmWorker - True or False</div>
+<div class=list><tt>preferJsmWorker</tt> - значением может быть либо <tt>true</tt>, либо <tt>false</tt>.</div>
 
 Set whether jsm modules in workers should be used. This requires browser support which is currently only experimental.<br><br>
 

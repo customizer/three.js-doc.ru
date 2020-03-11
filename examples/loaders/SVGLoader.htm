@@ -9,29 +9,48 @@
 
 <h3>SVGLoader</h3>
 Загрузчик для загрузки ресурса в формате <em>.svg</em>.<br>
-Формат <tt><a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" target="_blank" onmouseover="show('svg - сокращ. англ. слов scalabe vector graphics - масштабируемая векторная графика')" onmouseout="hide()">svg</a></tt> основанный на формате векторных изображений XML для двумерной графики с поддержкой интерактивности и анимации.<br>
+Формат <tt><a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" target="_blank" onmouseover="show('svg - сокращ. англ. слов scalabe vector graphics - масштабируемая векторная графика')" onmouseout="hide()">svg</a></tt> основанный на XML-формате векторных изображений для двумерной графики с поддержкой интерактивности и анимации.<br>
 Статья Википедии о <a href="https://ru.wikipedia.org/wiki/SVG" target="_blank">SVG на русском языке</a>.<br><br>
 
 <h4>Пример</h4>
+<div><a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
+<div style='display:none;'>
 <pre>// instantiate a loader (создание экземпляра загрузчика)
-var loader = new THREE.SVGLoader();<br>
+var loader = new SVGLoader();<br>
 // load a SVG resource (загрузка SVG ресурса)
 loader.load(
   // resource URL (URL-адрес ресурса)
-  'data/svgSample.svg',<br>
+  'data/svgSample.svg',
   // called when the resource is loaded (вызывается по завершении загрузки)
-  function ( doc ) {
-    scene.add( new THREE.SVGObject(doc) );
-  },<br>
-  // called when loading is in progresses (вызывается во время загрузки)
+  function ( data ) {
+    var paths = data.paths;
+    var group = new THREE.Group();<br>
+    for ( var i = 0; i &#60; paths.length; i ++ ) {
+    var path = paths[ i ];
+    var material = new THREE.MeshBasicMaterial( {
+      color: path.color,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    } );<br>
+      var shapes = path.toShapes( true );
+      for ( var j = 0; j &#60; shapes.length; j ++ ) {
+        var shape = shapes[ j ];
+        var geometry = new THREE.ShapeBufferGeometry( shape );
+        var mesh = new THREE.Mesh( geometry, material );
+        group.add( mesh );
+     }
+    }
+    scene.add( group );
+  },
+  // called when loading is in progresses (вызывается при ошибках в загрузке)
   function ( xhr ) {
     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-  },<br>
-  // called when loading has errors (вызывается при ошибках в загрузке)
+  },
+  // called when loading has errors
   function ( error ) {
     console.log( 'Произошла ошибка' );
   }
-);</pre>
+);</pre></div></div>
 <h5>Другие примеры:</h5>
 <pre><a href="https://threejs.org/examples/#webgl_loader_svg" target="_blank">webgl / loader / svg</a></pre><br>
 
@@ -49,14 +68,13 @@ loader.load(
 Общие методы смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
 <div class=blockindent><br>
 <pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. от англ. слов Uniform Resource Locator<br>— единообразный локатор (определитель местонахождения)<br>ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
-<div class=list><tt>url</tt> — обязательный параметр</div>
-<div class=list><tt>onLoad</tt> — функция, которая должна быть вызвана по завершении загрузки.
-Её аргументом должен быть загруженный <a href="https://ru.wikipedia.org/wiki/SVG#.D0.A1.D1.82.D1.80.D1.83.D0.BA.D1.82.D1.83.D1.80.D0.B0_.D0.B4.D0.BE.D0.BA.D1.83.D0.BC.D0.B5.D0.BD.D1.82.D0.B0_SVG" target="_blank">SVGDocument</a>.</div>
+<div class=list><tt>url</tt> — строка, содержащая путь или url-адрес к <tt>.svg</tt> файлу, обязательный параметр.</div>
+<div class=list><tt>onLoad</tt> — функция, которая должна быть вызвана после того, как загрузка успешно завершена. В качестве аргумента, эта функция принимает массив <a href="../../extras/core/shapePath.htm" onmouseover="show('ShapePath')" onmouseout="hide()">ShapePath</a>.</div>
 <div class=list><tt>onProgress</tt> — функция, которая будет вызываться во время хода процесса загрузки.
 Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана при ошибках загрузки.</div>
-Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с проанализированным содержимым ответа.</div><br>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с содержимым ответа.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/SVGLoader.js" target="_blank">SVGLoader.js на github.com</a></div><br><br>

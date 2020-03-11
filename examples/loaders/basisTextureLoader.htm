@@ -12,8 +12,12 @@
 Загрузчик для кодека текстур видеокарты (GPU) <a href="https://www.opennet.ru/opennews/art.shtml?num=50732" target="_blank">Basis Universal</a>.<br>
 <a href="https://github.com/BinomialLLC/basis_universal/" target="_blank">Basis Universal</a> - система сжатия "<a href="http://gamma.cs.unc.edu/GST/gst.pdf" target="_blank">сверхсжатых</a>" текстур GPU и видеотекстур,
 которая выдает файл в промежуточном формате (<tt>.basis</tt>) с очень высокой степенью сжатия, который, в свою очередь, может быть быстро перекодирован в широкий спектр форматов сжатия текстур GPU.<br>
-Данный загрузчик распараллеливает процесс перекодировки среди настраиваемого числа веб-обработчиков (web worker) перед передачей перекодированной сжатой текстуры обратно в основной поток.
-Требуемый транскодер (перекодировщик) WASM и оболочка JS доступны в каталоге <tt>examples/js/libs/basis</tt>.<br>
+Данный загрузчик распараллеливает процесс перекодировки среди настраиваемого числа
+<a href="https://developer.mozilla.org/ru/docs/DOM/Using_web_workers" target="_blank" onmouseover="show('Веб-обработчики (web worker-ы) это механизм, который позволяет скрипту<br>выполняться в фоновом потоке, отделенном от основного потока<br>веб-приложения. Преимущество заключается в том, ресурсоёмкие вычисления<br>могут выполняться в отдельном потоке, позволяя запустить основной<br>(обычно пользовательский) поток без блокировки и замедления.<br>Поток обработчика может выполнять задачи без вмешательства в<br>пользовательский интерфейс. К тому же, они могут осуществлять ввод/вывод,<br>используя XMLHttpRequest (хотя атрибуты <tt>responseXML</tt> и <tt>channel</tt><br>всегда будут равны <tt>null</tt>). Существующий веб-обработчик может<br>отсылать сообщения JavaScript коду-создателю через обработчик событий,<br>указанный этим кодом (и наоборот).')" onmouseout="hide()">веб-обработчиков</a>
+(<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers" target="_blank">web worker</a>)
+перед передачей перекодированной сжатой текстуры обратно в основной поток.
+Требуемый транскодер (перекодировщик) <a href="https://ru.wikipedia.org/wiki/WebAssembly" target="_blank" onmouseover="show('WebAssembly (сокращенно wasm) — это бинарный формат инструкций<br>для стековой виртуальной машины. WebAssembly спроектирован как<br>портативная цель компиляции для высокоуровневых языков, таких<br>как C/C++/Rust/Go, которую можно развертывать в web для<br>клиентских и серверных приложений.<br>WebAssemblу представляет собой переносимое абстрактное<br>синтаксическое дерево, обеспечивающее как более быстрый анализ,<br>так и более быстрое выполнение кода, чем JavaScript.')" onmouseout="hide()">WASM</a>
+и оболочка JS доступны в каталоге <tt><a href="https://github.com/mrdoob/three.js/tree/dev/examples/js/libs/basis" target="_blank">examples/js/libs/basis</a></tt>.<br>
 
 <h4>Пример</h4>
 <pre>var basisLoader = new THREE.BasisTextureLoader();
@@ -30,10 +34,16 @@ basisLoader.load( 'diffuse.basis', function ( texture ) {
 <pre><a href="https://threejs.org/examples/#webgl_loader_texture_basis" target="_blank">webgl/loader/texture_basis</a></pre><br>
 
 <h4>Совместимость с браузером</h4>
-
-BasisTextureLoader transcodes input textures in '.basis' format to an appropriate compressed texture format for the target device, where possible. This allows the same source texture to be served across desktop, Android, and iOS devices, and transcoded into DXT, ETC1, or PVRTC1. Other output formats may be supported in the future.<br>
-
-This loader relies on ES6 Promises and Web Assembly, which are not supported in IE11.<br><br>
+BasisTextureLoader перекодирует входные текстуры в формате <tt><a href="https://www.opennet.ru/opennews/art.shtml?num=50732" target="_blank">.basis</a></tt> в формат сжатия текстур соответствующий целевому устройству, там где это возможно.
+Это позволяет использовать одну и ту же исходную текстуру на настольных компьютерах, устройствах
+с <a href="https://ru.wikipedia.org/wiki/Android" target="_blank">Android</a> и <a href="https://ru.wikipedia.org/wiki/IOS" target="_blank">iOS</a>
+и перекодировать её в форматы <a href="https://ru.wikipedia.org/wiki/S3TC" target="_blank" onmouseover="show('сокращ. от <b>D</b>irect<b>X</b> <b>T</b>exture Compression')" onmouseout="hide()">DXT</a>,
+<a href="https://en.wikipedia.org/wiki/Ericsson_Texture_Compression" target="_blank" onmouseover="show('сокращ. от Ericsson Texture Compression<br>- сжатие текстур от Ericsson')" onmouseout="hide()">ETC1</a>
+или <a href="https://ru.wikipedia.org/wiki/PVRTC" target="_blank" onmouseover="show('сокращ. от PowerVR Texture Compression<br>- сжатие текстур от компании PowerVR')" onmouseout="hide()">PVRTC1</a>.
+В будущем возможна поддержка и других форматов вывода.<br>
+Данный загрузчик использует так называемые <a href="https://learn.javascript.ru/promise-basics" target="_blank">"обещания" - promises</a>, введенными с принятием <a href="https://ru.wikipedia.org/wiki/ECMAScript" target="_blank">ES6</a> и
+<a href="https://ru.wikipedia.org/wiki/WebAssembly" target="_blank" onmouseover="show('WebAssembly (сокращенно wasm) — это бинарный формат инструкций<br>для стековой виртуальной машины. WebAssembly спроектирован как<br>портативная цель компиляции для высокоуровневых языков, таких<br>как C/C++/Rust/Go, которую можно развертывать в web для<br>клиентских и серверных приложений.<br>WebAssemblу представляет собой переносимое абстрактное<br>синтаксическое дерево, обеспечивающее как более быстрый анализ,<br>так и более быстрое выполнение кода, чем JavaScript.')" onmouseout="hide()">Web Assembly</a>,
+которые не поддерживаются в <a href="https://ru.wikipedia.org/wiki/Internet_Explorer_11" target="_blank" onmouseover="show('Internet Explorer 11 (сокр. — IE11) — последняя<br>версия браузера Internet Explorer от Microsoft.')" onmouseout="hide()">IE11</a>.<br><br>
 
 <h4>Конструктор</h4>
 <pre>BasisTextureLoader( <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
@@ -48,36 +58,30 @@ This loader relies on ES6 Promises and Web Assembly, which are not supported in 
 <h4>Методы</h4>
 Общие методы смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
 <div class=blockindent><br>
-<pre id="load">.load ( url : String, onLoad : Function, onProgress : Function, onError : Function ) : null</pre>
-<div class=list>url — A string containing the path/URL of the .basis file.</div>
-onLoad — A function to be called after the loading is successfully completed.
-onProgress — (optional) A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, that contains .total and .loaded bytes.
-onError — (optional) A function to be called if an error occurs during loading. The function receives error as an argument.
+<pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь или url-адрес к <tt>.basis</tt> файлу.</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.</div>
+<div class=list><tt>onProgress</tt> — функция, которая будет вызываться пока идет процесс загрузки (дополнительный, необязательный параметр).
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке (дополнительный, необязательный параметр). Функция принимает ошибку в качестве аргумента.</div>
+Метод загружает файл из url-адреса и вызывает функцию, указанную в аргументе <tt>onLoad</tt> с перекодировкой <a href="../../textures/compressedTexture.htm" onmouseover="show('CompressedTexture')" onmouseout="hide()">CompressedTexture</a>.<br><br>
 
-Load from url and call the onLoad function with the transcoded CompressedTexture.
-<pre id="detectSupport">.detectSupport ( renderer : WebGLRenderer ) : this</pre>
+<pre id="detectSupport"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('detect support - обнаружить поддержку')" onmouseout="hide()">.detectSupport</a></span>( <a href="../../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">renderer</a> )</pre>
+<div class=list><tt>renderer</tt> — экземпляр визуализатора (рендерера).</div>
+Метод выявляет поддержку доступных форматов сжатия текстур имеющимися аппаратными средствами для определения выходного формата перекодировщика. Данный метод должен вызываться перед загрузкой текстуры.<br><br>
 
-renderer — A renderer instance.
+<pre id="setTranscoderPath"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set transcoder path - установить путь к перекодировщику')" onmouseout="hide()">.setTranscoderPath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span> )</pre>
+<div class=list><tt>path</tt> — путь к папке, содержащей перекодировщик (транскодер) WASM и оболочку JS.</div>
+Транскодер (перекодировщик) <a href="https://ru.wikipedia.org/wiki/WebAssembly" target="_blank" onmouseover="show('WebAssembly (сокращенно wasm) — это бинарный формат инструкций<br>для стековой виртуальной машины. WebAssembly спроектирован как<br>портативная цель компиляции для высокоуровневых языков, таких<br>как C/C++/Rust/Go, которую можно развертывать в web для<br>клиентских и серверных приложений.<br>WebAssemblу представляет собой переносимое абстрактное<br>синтаксическое дерево, обеспечивающее как более быстрый анализ,<br>так и более быстрое выполнение кода, чем JavaScript.')" onmouseout="hide()">WASM</a>
+и оболочка JS доступны в каталоге <tt><a href="https://github.com/mrdoob/three.js/tree/dev/examples/js/libs/basis" target="_blank">examples/js/libs/basis</a></tt>.<br><br>
 
-Detects hardware support for available compressed texture formats, to determine the output format for the transcoder. Must be called before loading a texture.
-<pre id="setCrossOrigin">.setCrossOrigin ( crossOrigin : String ) : this</pre>
+<pre id="setWorkerLimit"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set worker limit - установить ограничение по числу веб-обработчиков')" onmouseout="hide()">.setWorkerLimit</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('limit - предел, граница')" onmouseout="hide()">limit</a></span> )</pre>
+<div class=list><tt>limit</tt> — максимальное количество веб-обработчиков (web worker). Значение по умолчанию равно&nbsp;<tt>4</tt>.</div>
+Метод устанавливает максимальное количество веб-обработчиков (web worker), которое будет выделено данному экземпляру.<br><br>
 
-crossOrigin — Options are '', 'anonymous', or 'use-credentials'. Default is 'anonymous'.
-
-Sets options for CORS requests.
-<pre id="setTranscoderPath">.setTranscoderPath ( path : String ) : this</pre>
-
-path — Path to folder containing the WASM transcoder and JS wrapper.
-
-The WASM transcoder and JS wrapper are available from the examples/js/libs/basis directory.
-<pre id="setWorkerLimi">.setWorkerLimit ( limit : Number ) : this</pre>
-
-limit — Maximum number of workers. Default is '4'.
-
-Sets the maximum number of web workers to be allocated by this instance.
-<pre id="dispose">.dispose () : this</pre>
-
-Disposes the loader object, de-allocating any Web Workers created.</div><br>
+<pre id="dispose"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - удалить, выбросить')" onmouseout="hide()">.dispose</a></span>()</pre>
+Удаляет объект загрузчика и отменяет выделение всех созданных веб-обработчиков.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/js/loaders/BasisTextureLoader.js" target="_blank">BasisTextureLoader.js на github.com</a></div><br><br>

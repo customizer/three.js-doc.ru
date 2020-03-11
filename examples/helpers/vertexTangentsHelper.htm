@@ -8,10 +8,9 @@
 <body>
 <span class="right_side"><a href="../../core/object3D.htm" title="Переход к родительскому классу"><tt>Object3D &rarr;</tt></a> &nbsp; &nbsp; <a href="../../objects/line.htm" title="Переход к родительскому классу"><tt>Line &rarr;</tt></a> &nbsp; &nbsp; <a href="../../objects/lineSegments.htm" title="Переход к родительскому классу"><tt>LineSegments &rarr;</tt></a></span>
 <h3>VertexTangentsHelper</h3>
-
-Renders arrows to visualize an object's vertex tangent vectors. Requires that tangents have been specified in a custom attribute or have been calculated using computeTangents.<br><br>
-
-This helper supports BufferGeometry only.<br><br>
+Вспомогательный элемент показывает стрелки для визуализации векторов, касательных вершинам объекта.
+Требуется, чтобы касательные были указаны в <a href="../../core/bufferAttribute.htm" onmouseover="show('BufferAttribute')" onmouseout="hide()">атрибуте, установленном пользователем</a> или были рассчитаны с помощью метода <tt><a href="../utils/bufferGeometryUtils.htm#computeTangents" onmouseover="show('compute tangents - вычислить касательные')" onmouseout="hide()">computeTangents</a></tt>.<br><br>
+Данный вспомогательный элемент поддерживает только объекты <a href="../../core/bufferGeometry.htm" onmouseover="show('BufferGeometry')" onmouseout="hide()">BufferGeometry</a>.<br><br>
 
 <h4>Пример</h4>
 <pre>var geometry = new THREE.BoxBufferGeometry( 10, 10, 10, 2, 2, 2 );
@@ -27,35 +26,32 @@ scene.add( helper );</pre>
 <pre><a href="https://threejs.org/examples/#webgl_helpers" target="_blank">WebGL / helpers</a></pre><br>
 
 <h4>Конструктор</h4>
-<pre>VertexTangentsHelper( object : Object3D, size : Number, color : Hex, linewidth : Number )</pre>
+<pre>VertexTangentsHelper( <a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект')" onmouseout="hide()">object</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер')" onmouseout="hide()">size</a></span>, <span onclick="showClick(type_hex)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('color - цвет')" onmouseout="hide()">color</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('line width - ширина (толщина) линии')" onmouseout="hide()">linewidth</a></span> )</pre>
 
-<div class=list><tt>object</tt> -- object for which to render vertex tangents.</div>
-<div class=list><tt>size</tt> -- (optional) length of the arrows. Default is 1.</div>
-<div class=list><tt>color</tt> -- hex color of the arrows. Default is 0x00ffff.</div>
-<div class=list><tt>linewidth</tt> -- (optional) width of the arrow lines. Default is 1. (Setting lineWidth is currently not supported.)</div><br>
+<div class=list><tt>object</tt> - объект, для которого требуется показать касательные к вершинам.</div>
+<div class=list><tt>size</tt> - длина стрелок (дополнительный, необязательный аргумент). Значение по умолчанию равно&nbsp;<tt>1</tt>.</div>
+<div class=list><tt>color</tt> - шестнадцатиричное значение цвета стрелок. Значение по умолчанию равно&nbsp;<tt>0x00ffff</tt>.</div>
+<div class=list><tt>linewidth</tt> - толщина линий стрелок (дополнительный, необязательный аргумент). Значение по умолчанию равно&nbsp;<tt>1</tt>. (На настоящий момент настройка <tt>linewidth</tt> не поддерживается.)</div><br>
 
 <h4>Свойства</h4>
-
-See the base LineSegments class for common properties.
+Для информации об общих свойствах посмотрите базовый класс <a href="../../objects/lineSegments.htm" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
 <div class=blockindent><br>
-<pre id="matrixAutoUpdate">.matrixAutoUpdate : object</pre>
+<pre id="matrixAutoUpdate"><span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('matrix auto update - автоматическое обновление матрицы')" onmouseout="hide()">.matrixAutoUpdate</a></span></pre>
+Посмотрите описание <a href="../../core/object3D.htm#matrixAutoUpdate" onmouseover="show('Object3D.matrixAutoUpdate');" onmouseout="hide()">Object3D.matrixAutoUpdate</a>.
+Установите данное свойство как&nbsp;<tt>false</tt>, так как этот вспомогательный элемент использует <a href="../../core/object3D.htm#matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a> объекта.<br><br>
 
-See Object3D.matrixAutoUpdate. Set to false here as the helper is using the objects's matrixWorld.
-<pre id="object">.object : Object3D</pre>
+<pre id="object"><a href="../../core/object3D.htm" onmouseover="show('Object3D.<br>object - объект');" onmouseout="hide()">.object</a></pre>
+Объект, для которого требуется показать касательные к вершинам.<br><br>
 
-The object for which the vertex tangents are being visualized.
-<pre id="size">.size : Number</pre>
-
-Length of the arrows. Default is 1.</div><br>
+<pre id="size"><span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('size - размер')" onmouseout="hide()">.size</a></span></pre>
+Длина стрелок. Значение по умолчанию равно&nbsp;<tt>1</tt>.</div><br>
 
 <h4>Методы</h4>
-
-See the base LineSegments class for common methods.
+Для информации об общих методах посмотрите базовый класс <a href="../../objects/lineSegments.htm" onmouseover="show('LineSegments');" onmouseout="hide()">LineSegments</a>.
 
 <div class=blockindent><br>
 <pre id="update"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('update - обновление');" onmouseout="hide()">.update</a></span>()</pre>
-
-Updates the vertex tangents preview based on the object's world transform.</div><br>
+Метод обновляет предпросмотр касательных к вершинам, основываясь на изменении "мира" объекта.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/helpers/VertexTangentsHelper.js" target="_blank">VertexNormalsHelper.js на github.com</a></div>

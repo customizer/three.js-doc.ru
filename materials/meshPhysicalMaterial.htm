@@ -9,13 +9,23 @@
 
 <span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a>&nbsp;&nbsp;<a href="meshStandardMaterial.htm" title="Переход к родительскому классу: MeshStandardMaterial"><tt>MeshStandardMaterial &rarr;</tt></a></span>
 <h3>MeshPhysicalMaterial</h3>
-Расширение <a href="meshStandardMaterial.htm" onmouseover="show('MeshStandardMaterial')" onmouseout="hide()"><tt>MeshStandardMaterial</tt></a>, позволяющее увеличить регулировку способности к отражению.<br>
+Расширение <a href="meshStandardMaterial.htm" onmouseover="show('MeshStandardMaterial')" onmouseout="hide()"><tt>MeshStandardMaterial</tt></a>'а, предоставляющее несколько дополнительных, физически обоснованных свойств визуализации:
+<div class=list><em class="lnk" onmouseover="show('clearcoat')" onmouseout="hide()">Прозрачное покрытие</em>:
+Некоторые материалы, вроде автомобильных красок, углепластика или мокрых поверхностей, - требуют прозрачного, отражающего слоя, нанесенного поверх другого, который может быть неровным и шероховатым.
+Свойство <tt><a href="#clearCoat" onmouseover="show('MeshPhysicalMaterial.clearCoat')" onmouseout="hide()">clearCoat</a></tt> придает материалу подобный эффект без необходимости создания отдельной прозрачной поверхности.</div>
+<div class=list><em class="lnk" onmouseover="show('physically-based transparency')" onmouseout="hide()">Физически обоснованная прозрачность</em>:
+Одним из ограничений свойства <tt><a href="material.htm#opacity" onmouseover="show('Material.opacity')" onmouseout="hide()">opacity</a></tt> является уменьшение способности к отражению.
+Свойство <tt><a href="#transparency" onmouseover="show('MeshPhysicalMaterial.transparency')" onmouseout="hide()">transparency</a></tt>, основанное на физических законах, предоставляет более реалистичный выбор для тонких, прозрачных поверхностей, таких как стекло.</div>
+<div class=list><em class="lnk" onmouseover="show('advanced reflectivity')" onmouseout="hide()">Расширенная способность к отражению</em>:
+Более гибкая способность к отражению неметаллических материалов (свойство <tt><a href="#reflectivity" onmouseover="show('MeshPhysicalMaterial.reflectivity')" onmouseout="hide()">reflectivity</a></tt>).</div>
+В результате этих сложных функций затенения, MeshPhysicalMaterial имеет более низкую производительность на пиксель, чем другие материалы библиотеки <em>three.js</em>.
+Большинство эффектов отключены по умолчанию и снижают производительность вычислений по мере их включения.<br>
 Обратите внимание, что при использовании этого материала, для достижения наилучших результатов, всегда следует указывать <a href="meshStandardMaterial.htm#envMap" onmouseover="show('MeshStandardMaterial.envMap')" onmouseout="hide()">карту окружения</a>.<br><br>
 
 <h4>Примеры</h4>
 <pre><a href="https://threejs.org/examples/webgl_materials_variations_physical" target="_blank">webgl / materials / variations / physical</a>
 <a href="https://threejs.org/examples/webgl_materials_physical_clearcoat" target="_blank">webgl / materials / physical / clearcoat</a>
-<a href="https://threejs.org/examples/webgl_materials_reflectivity" target="_blank">webgl / materials / reflectivity</a>
+<a href="https://threejs.org/examples/#webgl_materials_physical_reflectivity" target="_blank">webgl / materials / reflectivity</a>
 <a href="https://threejs.org/examples/webgl_materials_physical_transparency" target="_blank">webgl / materials / physical / transparency</a></pre><br>
 
 <h4>Конструктор</h4>
@@ -29,6 +39,13 @@
 <div class=blockindent><br>
 <pre id="clearCoat"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear coat - прозрачная оболочка')" onmouseout="hide()">.clearCoat</a></span></pre>
 Уровень прозрачной оболочки, диапазон значений от&nbsp;<tt>0.0</tt> до&nbsp;<tt>1.0</tt>. Значение по умолчанию равно&nbsp;<tt>0.0</tt>.<br><br>
+
+<pre id="clearcoatNormalMap"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clearcoat normal map - карта нормалей<br>прозрачного покрытия')" onmouseout="hide()">.clearcoatNormalMap</a></span></pre>
+Свойство может использоваться для включения собственных нормалей слоя прозрачного покрытия. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
+
+<pre id="clearcoatNormalScale"><a href="../math/vector2.htm" onmouseover="show('Vector2.<br>clearcoat normal scale - масштаб нормалей<br>прозрачного покрытия')" onmouseout="hide()">.clearcoatNormalScale</a></pre>
+Свойство определяет насколько сильно свойство <tt><a href="#clearcoatNormalMap" onmouseover="show('MeshPhysicalMaterial.clearcoatNormalMap')" onmouseout="hide()">clearcoatNormalMap</a></tt> влияет на слой прозрачного покрытия (значение может быть в диапазоне от&nbsp;<tt>(0,0)</tt> до&nbsp;<tt>(1,1)</tt>.
+Значение по умолчанию равно&nbsp;<tt>(1,1)</tt>.<br><br>
 
 <pre id="clearCoatRoughness"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('clear coat roughness - шероховатость (неровность) прозрачной оболочки')" onmouseout="hide()">.clearCoatRoughness</a></span></pre>
 Свойство определяет, насколько велика шероховатость прозрачной оболочки, диапазон значений от&nbsp;<tt>0.0</tt> до&nbsp;<tt>1.0</tt>. Значение по умолчанию равно&nbsp;<tt>0.0</tt>.<br><br>

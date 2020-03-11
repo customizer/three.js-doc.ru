@@ -10,23 +10,27 @@
 <span class="right_side"><a href="../../loaders/loader.htm" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
 <h3>GLTFLoader</h3>
 Загрузчик для загрузки ресурсов в формате <em>glTF 2.0</em>.<br>
-Формат <a href="https://www.khronos.org/gltf" target="_blank">glTF (GL Transmission Format)</a> это <a href="https://github.com/KhronosGroup/glTF/tree/master/specification/2.0" target="_blank">спецификация открытого формата</a> для эффективной передачи и загрузки 3D content.
+Формат <a href="https://www.khronos.org/gltf" target="_blank">glTF (GL Transmission Format)</a> это <a href="https://github.com/KhronosGroup/glTF/tree/master/specification/2.0" target="_blank">спецификация открытого формата</a> для загрузки и эффективной передачи 3D компонентов.
 Ресурсы могут быть предоставлены либо в формате JSON (с расширением <tt>.gltf</tt>), либо в бинарном формате (<tt>.glb</tt>). Текстуры (<tt>.jpg</tt>, <tt>.png</tt>, ...) и дополнительные бинарные данные (<tt>.bin</tt>) хранятся во внешних файлах.
 Ресурс glTF может представить одну или несколько сцен, включая сетки (mesh), материалы, текстуры, оболочки (skin), "скелеты", цели морфинга, анимации, освещение и/или камеры.<br><br>
 
 <h4>Расширения</h4>
 GLTFLoader поддерживает следующие <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/" target="_blank">расширения glTF 2.0</a>:
-<div class=blockindent>KHR_draco_mesh_compression<br>
-KHR_materials_pbrSpecularGlossiness<br>
-KHR_materials_unlit<br>
-KHR_mesh_quantization<br>
-KHR_lights_punctual<sup>1</sup><br>
-KHR_texture_transform<sup>2</sup><br>
-MSFT_texture_dds</div>
-<div class=note><b>Примечание 1:</b> Requires <a href="https://threejs.org/docs/#api/en/renderers/WebGLRenderer.physicallyCorrectLights" target="_blank">physicallyCorrectLights</a> to be enabled.</div>
-<div class=note><b>Примечание 2:</b> UV transforms are supported, with several key limitations.
-Transforms applied to a texture using the first UV slot (all textures except aoMap and lightMap) must share the same transform, or no transfor at all. The aoMap and lightMap textures cannot be transformed.
-No more than one transform may be used per material. Each use of a texture with a unique transform will result in an additional GPU texture upload. See <a href="https://github.com/mrdoob/three.js/pull/13831" target="_blank">#13831</a> and <a href="https://github.com/mrdoob/three.js/issues/12788" target="_blank">#12788</a>.</div><br>
+<div class=blockindent><a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_draco_mesh_compression/" target="_blank">KHR_draco_mesh_compression</a><br>
+<a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness/" target="_blank">KHR_materials_pbrSpecularGlossiness</a><br>
+<a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_unlit/" target="_blank">KHR_materials_unlit</a><br>
+<a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_mesh_quantization/" target="_blank">KHR_mesh_quantization</a><br>
+<a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_lights_punctual/" target="_blank">KHR_lights_punctual</a><sup>1</sup><br>
+<a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_texture_transform/" target="_blank">KHR_texture_transform</a><sup>2</sup><br>
+<a href="https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Vendor/MSFT_texture_dds/" target="_blank">MSFT_texture_dds</a></div>
+<div class=note><b>Примечание 1:</b> Требуется чтобы было включено свойство <a href="../../renderers/webGLRenderer.htm#physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights')" onmouseout="hide()">physicallyCorrectLights</a>.</div>
+<div class=note><b>Примечание 2:</b> Поддерживаются изменения UV-координат с некоторыми ключевыми ограничениями.
+Изменения, применяемые к текстуре, использующей один набор UV-координат (все текстуры, кроме
+<tt class="lnk" onmouseover="show('<tt>aoMap</tt> это сокращ. англ. слов ambient occlusion map -<br>карта перекрытия (затенения) при общем (фоновом)<br>освещении.<br>В данной текстуре канал красного цвета используется<br>в качестве карты затенения при фоновом освещении<br>(ambient occlusion map). Свойству <tt>aoMap</tt> требуется<br>второй набор текстурных координат <tt>UV</tt>.')" onmouseout="hide()">aoMap</tt>
+и <tt class="lnk" onmouseover="show('<tt>lightMap</tt> - карта освещения.<br>Свойству <tt>lightMap</tt> требуется второй<br>набор текстурных координат <tt>UV</tt>.')" onmouseout="hide()">lightMap</tt>),
+должны быть одним и тем же изменением, или изменений не должно быть вообще. Текстуры <tt>aoMap</tt> и <tt>lightMap</tt> невозможно изменять. На каждый материал не должно быть более одного изменения.
+Любое использование текстуры с уникальным изменением приводит к дополнительной загрузке текстуры в GPU.
+Смотрите обсуждение этих вопросов: <a href="https://github.com/mrdoob/three.js/pull/13831" target="_blank">#13831</a> и <a href="https://github.com/mrdoob/three.js/issues/12788" target="_blank">#12788</a>.</div><br>
 
 <h4>Пример</h4>
 <div><a class='link' onclick='javascript:spoiler1(this)'>... показать</a>
@@ -63,9 +67,29 @@ loader.load(
 <pre><a href="https://threejs.org/examples/#webgl_loader_gltf" target="_blank">webgl / loader / gltf</a></pre><br>
 
 <h4>Совместимость с браузером</h4>
-GLTFLoader полагается на <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">обещания (Promise)</a> от ES6, которые не поддерживаются в IE11.
-Для использования загрузчика в IE11, нужно подключить полифилл предоставляющий подмену Promise (обещания).<br>
-Вот <a href="https://learn.javascript.ru/promise" target="_blank">описание Promise на javascript.ru</a>.<br><br>
+GLTFLoader использует так называемые <a href="https://learn.javascript.ru/promise-basics" target="_blank">"обещания"</a> - <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">promises</a>,
+введенными с принятием <a href="https://ru.wikipedia.org/wiki/ECMAScript" target="_blank">ES6</a>, которые не поддерживаются в
+<a href="https://ru.wikipedia.org/wiki/Internet_Explorer_11" target="_blank" onmouseover="show('Internet Explorer 11 (сокр. — IE11) — последняя<br>версия браузера Internet Explorer от Microsoft.')" onmouseout="hide()">IE11</a>.
+Чтобы применить данный загрузчик в IE11, следует подключить <a href="https://github.com/stefanpenner/es6-promise" target="_blank">полифилл</a>, предоставляющий подмену "обещаний".<br><br>
+
+<h4>Текстуры</h4>
+Текстуры, содержащие информацию о цвете (<tt class="lnk" onmouseover="show('map - карта')" onmouseout="hide()">map</tt>,
+<tt class="lnk" onmouseover="show('emissive map - карта излучения')" onmouseout="hide()">emissiveMap</tt>
+и <tt class="lnk" onmouseover="show('specular map - карта отражения')" onmouseout="hide()">specularMap</tt>), в glTF всегда используют цветовое пространство sRGB, в то время как цвета вершин и свойства материала
+(<tt class="lnk" onmouseover="show('color - цвет, здесь свойство, в котором<br>хранится цвет материала')" onmouseout="hide()">color</tt>,
+<tt class="lnk" onmouseover="show('emissive - излучающий, испускающий, эмиссионный.<br>В данном случае это цвет света, излучаемого материалом;<br>фактически это однотонный цвет, не подверженный<br>влиянию другого освещения.')" onmouseout="hide()">emissive</tt>,
+<tt class="lnk" onmouseover="show('specular - зеркальный, отражающий.<br>Это цвет, отражаемый материалом. Свойство определяет,<br>насколько сильно блестит материал и цвет его блеска.')" onmouseout="hide()">specular</tt>) используют линейное цветовое пространство.
+В типовом рабочем процессе визуализации, текстуры преобразуются в линейное цветовое пространство с помощью визуализатора (рендерера), производятся расчеты освещения, затем конечный результат преобразуется обратно в sRGB и отображается на экране.
+Если постобработка в линейном цветовом пространстве не нужна, всегда при использовании glTF настраивайте <a href="../../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">WebGLRenderer</a> следующим образом:
+<pre>renderer.outputEncoding = THREE.sRGBEncoding;</pre>
+GLTFLoader автоматически правильно настроит текстуры, указанных файлов <tt>.gltf</tt> или <tt>.glb</tt>, при условии, что визуализатор настроен как показано выше.
+При загрузке текстур извне (например, с помощью <a href="../../loaders/textureLoader.htm" onmouseover="show('TextureLoader')" onmouseout="hide()">TextureLoader</a>) и применении их к модели glTF необходимо задать цветовое пространство и ориентацию:
+<pre>// If texture is used for color information, set colorspace.
+// Если текстура используется для информации о цвете, устанавливаем пространство цвета.
+texture.encoding = THREE.sRGBEncoding;<br>
+// UVs use the convention that (0, 0) corresponds to the upper left corner of a texture.
+// Использование UV-координат предполагает, что (0, 0) соответствует верхнему левому углу текстуры.
+texture.flipY = false;</pre><br>
 
 <h4>Нестандартные расширения</h4>
 Метаданные из неизвестных расширений сохраняются в экземплярах Object3D, Scene и Material как “<tt>.userData.gltfExtensions</tt>” или прилагаются к ответу объекта “<tt>gltf</tt>”. Вот пример:
@@ -100,22 +124,13 @@ GLTFLoader полагается на <a href="https://developer.mozilla.org/ru/d
 <div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
 Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию обратного вызова с разобранным содержимым ответа.<br><br>
 
-<pre id="setPath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set path - установить путь')" onmouseout="hide()">.setPath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span> )</pre>
-<div class=list><tt>path</tt> — базовый путь для загрузки дополнительных ресурсов, например текстур или двоичных данных (<tt>.bin</tt>).</div>
-Устанавливает базовый путь для дополнительных ресурсов.<br><br>
-
-<pre id="setCrossOrigin"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
-<div class=list><tt>value</tt> — строковое значение <tt><span class="lnk" onmouseover="show('cross origin - перекрестный источник')" onmouseout="hide()">crossOrigin</span></tt> для реализации
-<a href="https://ru.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank" onmouseover="show('CORS - сокращ. англ. слов cross-origin resource sharing<br>- совместное использование ресурсов между разными<br>источниками — технология современных браузеров, которая<br>позволяет предоставить веб-странице доступ к ресурсам<br>другого домена')" onmouseout="hide()">CORS</a>
-для загрузки url-адреса с другого домена, который предоставляет CORS.</div><br>
-
-<pre id="setDRACOLoader"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set DRACO loader - установить загрузчик DRACO')" onmouseout="hide()">.setDRACOLoader</a></span>( dracoLoader : DRACOLoader )</pre>
-<div class=list><tt>dracoLoader</tt> — экземпляр THREE.DRACOLoader, который будет использоваться для декодирования компонентов, сжатых с расширением KHR_draco_mesh_compression.</div>
+<pre id="setDRACOLoader"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set DRACO loader - установить загрузчик DRACO')" onmouseout="hide()">.setDRACOLoader</a></span>( <a href="DRACOLoader.htm" onmouseover="show('DRACOLoader')" onmouseout="hide()">dracoLoader</a> )</pre>
+<div class=list><tt>dracoLoader</tt> — экземпляр THREE.DRACOLoader, который будет использоваться для декодирования компонентов, сжатых с расширением <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_draco_mesh_compression/" target="_blank">KHR_draco_mesh_compression</a>.</div>
 Подробности о Draco и его декодере смотрите <a href="https://github.com/mrdoob/three.js/tree/dev/examples/js/libs/draco#readme" target="_blank">здесь</a>.<br><br>
 
-<pre id="setDDSLoader">.setDDSLoader ( ddsLoader : DDSLoader ) : null</pre>
+<pre id="setDDSLoader"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set DDS loader - установить загрузчик DDS')" onmouseout="hide()">.setDDSLoader</a></span>( <a href="https://github.com/mrdoob/three.js/blob/dev/examples/js/loaders/DDSLoader.js" target="_blank" onmouseover="show('DDSLoader')" onmouseout="hide()">ddsLoader</a> )</pre>
 
-<div class=list>ddsLoader — Instance of THREE.DDSLoader, to be used for loading compressed textures with the MSFT_TEXTURE_DDS extension.</div><br>
+<div class=list><tt>ddsLoader</tt> — экземпляр THREE.DDSLoader, который будет использоваться для загрузки сжатых текстур с расширением <a href="https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Vendor/MSFT_texture_dds/" target="_blank">MSFT_TEXTURE_DDS</a>.</div><br>
 
 <pre id="parse"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( <span onclick="showClick('ArrayBuffer')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('data - данные')" onmouseout="hide()">data</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
 <div class=list><tt>data</tt> — glTF компонент для синтаксического анализа, в виде буфера массива (<span class="lnk" onmouseover="show('Объект ArrayBuffer - это стандартный набор бинарных данных<br>с фиксированной длиной. Нельзя манипулировать содержимым<br>ArrayBuffer напрямую. Вместо этого, необходимо создать<br>типизованное представление DataView, которое будет отображать<br>буфер в определенном формате, и даст доступ на запись и<br>чтение его содержимого.')" onmouseout="hide()">ArrayBuffer</span>) или строки в формате JSON.</div>

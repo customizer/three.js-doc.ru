@@ -29,24 +29,11 @@
 <pre id="load"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('load - загрузить')" onmouseout="hide()">.load</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса.')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
 <div class=list><tt>url</tt> —  строка, содержащая путь/URL-адрес <tt>.mtl</tt> файла.</div>
 <div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки, дополнительный, необязательный параметр.
-В качестве аргумента, эта функция получает загруженный экземпляр <tt>MTLLoader.MaterialCreator</tt>.</div>
+В качестве аргумента, эта функция получает загруженный экземпляр <tt class="lnk" onmouseover="show('<tt>MaterialCreator</tt> это внутренняя функция MTLLoader.<br>Смотрите исходный код MTLLoader.')" onmouseout="hide()">MTLLoader.MaterialCreator</tt>.</div>
 <div class=list><tt>onProgress</tt> —  функция, которая будет вызываться пока идет процесс загрузки. Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
 и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
 <div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
 Начинает загрузку с переданного url-адреса и возвращает загруженный материал.<br><br>
-
-<pre id="setPath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set path - установить путь')" onmouseout="hide()">.setPath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span> )</pre>
-<div class=list><tt>path</tt> — обязательный параметр.</div>
-Устанавливает базовый путь для решающих ссылок. Если это установлено, этот путь будет добавлен к каждой загруженной и найденной ссылке.<br><br>
-
-<pre id="setTexturePath"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set texture path - установить путь (к) текстуре')" onmouseout="hide()">.setTexturePath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь, контур')" onmouseout="hide()">path</a></span> )</pre>
-<div class=list><tt>path</tt> — обязательный параметр.</div>
-Устанавливает базовый путь для решающих ссылок к текстуре. Если он установлен, этот путь будет добавлен к каждой загруженной и найденной ссылке к текстуре.
-Если не установлен, а <tt>setPath</tt> имеется, он будет использоваться в качестве базового пути к текстуре.<br><br>
-
-<pre id="setCrossOrigin"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set cross origin - установить перекрестный источник')" onmouseout="hide()">.setCrossOrigin</a></span>( <span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('use cross origin - использовать перекрестный источник')" onmouseout="hide()">useCrossOrigin</a></span> )</pre>
-<div class=list><tt>useCrossOrigin</tt> — обязательный параметр.</div>
-Установите значение <tt>true</tt>, если нужно загрузить текстуры из другого источника.<br><br>
 
 <pre id="setMaterialOptions"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set material options - установить параметры материала')" onmouseout="hide()">.setMaterialOptions</a></span>( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('options - опции, параметры, варианты')" onmouseout="hide()">options</a></span> )</pre>
 <div class=list><tt>options</tt> — обязательный параметр.<br>
@@ -62,11 +49,15 @@
 &nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('ignore zero RGBs - игнорировать нулевые<br>(значения) RGB (компонентов цвета)')" onmouseout="hide()">ignoreZeroRGBs</span></tt>:
 игнорировать значения в RGB формате (<tt><span class="lnk" onmouseover="show('цвет окружающего освещения')" onmouseout="hide()">Ka</span></tt>,
 <tt><span class="lnk" onmouseover="show('диффузный цвет')" onmouseout="hide()">Kd</span></tt>, <tt><span class="lnk" onmouseover="show('цвет зеркального отражения')" onmouseout="hide()">Ks</span></tt>),
-равные <tt>0</tt>. Значением по умолчанию является <tt>false</tt>.</div>
+равные <tt>0</tt>. Значением по умолчанию является <tt>false</tt>.<br>
+&nbsp; &#9679; &nbsp; <tt><span class="lnk" onmouseover="show('это похоже на сокращ. англ. слов<br>invert transparent property -<br>инвертировать свойство прозрачности')" onmouseout="hide()">invertTrProperty</span></tt>: для полной непрозрачности используйте значения&nbsp;<tt>1</tt> поля&nbsp;<tt>Tr</tt> (transparent - прозрачность).
+Данный параметр используется при экспорте <tt>obj</tt>-файлов из <a href="https://ru.wikipedia.org/wiki/Autodesk_3ds_Max" target="_blank">3ds MAX</a>, <a href="https://github.com/cnr-isti-vclab/vcglib" target="_blank">vcglib</a>
+или <a href="https://en.wikipedia.org/wiki/MeshLab" target="_blank">meshlab</a>. Значением по умолчанию является <tt>false</tt>.</div>
 Устанавливает параметры построения материалов.<br><br>
 
-<pre id="parse"><span onclick="showClick('MTLLoaderMaterialCreator')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span> )</pre>
+<pre id="parse"><span onclick="showClick('MTLLoaderMaterialCreator')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parse - разбор, синтаксический анализ')" onmouseout="hide()">.parse</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('text - текст')" onmouseout="hide()">text</a></span>, <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('path - путь')" onmouseout="hide()">path</a></span> )</pre>
 <div class=list><tt>text</tt> — текстовая структура <tt>mtl</tt> для разбора (синтаксического анализа).</div>
+<div class=list><tt>path</tt> — путь к <tt>mtl</tt>-файлу.</div>
 Метод проводит синтаксический анализ текстовой структуры <tt>mtl</tt> и возвращает экземпляр <tt>MTLLoader.MaterialCreator</tt>.</div><br>
 
 <h4>Исходники</h4>

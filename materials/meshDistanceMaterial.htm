@@ -9,11 +9,9 @@
 
 <span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3>MeshDistanceMaterial</h3>
-
-
-MeshDistanceMaterial is internally used for implementing shadow mapping with PointLights.<br><br>
-
-Can also be used to customize the shadow casting of an object by assigning an instance of MeshDistanceMaterial to Object3D.customDistanceMaterial. The following examples demonstrates this approach in order to ensure transparent parts of objects do no cast shadows.<br><br>
+MeshDistanceMaterial используется внутри библиотеки для реализации картирования теней при <a href="../lights/pointLight.htm" onmouseover="show('PointLight')" onmouseout="hide()">точечном освещении</a>.<br>
+Также может использоваться для настройки отбрасываемых теней от объекта, посредством присоединения экземпляра MeshDistanceMaterial к <a href="../core/object3D.htm#customDistanceMaterial" onmouseover="show('Object3D.customDistanceMaterial')" onmouseout="hide()">Object3D.customDistanceMaterial</a>.
+Следующий пример показывает этот вариант для достижения того, чтобы прозрачные части объекта не отбрасывали тени.<br><br>
 
 <h4>Пример</h4>
 <pre><a href="https://threejs.org/examples/webgl_shadowmap_pointlight" target="_blank">WebGL / shadowmap / pointlight</a></pre><br>
@@ -26,46 +24,45 @@ Can also be used to customize the shadow casting of an object by assigning an in
 Для информации об общих свойствах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
 <pre id="alphaMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>alpha map - карта альфа-канала, т.е. канала прозрачности')" onmouseout="hide()">.alphaMap</a></pre>
+Карта альфа-канала (т.е. канала прозрачности) - это текстура в оттенках серого, которая управляет непрозрачностью всей поверхности объекта (черный цвет - полная прозрачность, белый цвет - полная непрозрачность).
+Значением по умолчанию является&nbsp;<tt>null</tt>.<br>
+Используется только цвет текстуры, если существует альфа-канал, то он игнорируется.
+Для текстур в формате RGB и RGBA, при выборке этой текстуры <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">визуализатор WebGL</a> будет использовать канал зеленого цвета из-за дополнительного бита точности,
+предоставляемого для зеленого цвета в сжатом <a href="../constants/textures.htm#dds" onmouseover="show('форматы сжатия текстур DDS / ST3C')" onmouseout="hide()">DXT формате</a> и упаковке в <a href="../constants/textures.htm#types" onmouseover="show('типы упаковки')" onmouseout="hide()">формате RGB 565</a>.
+Форматы текстур только <a href="../constants/textures.htm#formats" onmouseover="show('форматы')" onmouseout="hide()">яркости и яркости+альфа-канала</a> также будут работать должным образом.<br><br>
 
-The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.<br>
+<pre id="displacementMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>displacement map - карта сдвига')" onmouseout="hide()">.displacementMap</a></pre>
+Карта сдвига влияет на положение вершин сетки (mesh). В отличие от других карт, влияющих только на свет и тень материала, сдвиг вершин может отбрасывать тени, блокировать другие объекты, а то и действовать как реальные геометрические элементы.
+Текстура сдвига - это изображение, на котором значение каждого пиксела (белый будет самым высоким) сопоставляется с вершинами сетки (mesh) и перемещает их.<br><br>
 
-Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.<br><br>
+<pre id="displacementScale"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('displacement scale - масштаб сдвига')" onmouseout="hide()">.displacementScale</a></span></pre>
+Значение свойства определяет, насколько сильно карта сдвига влияет на сетку (где черный цвет, там нет сдвига, а где белый - сдвиг максимален).
+Без установки карты сдвига данное значение не применяется. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
 
-.displacementMap : Texture
+<pre id="displacementBias"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('displacement bias - смещение сдвига')" onmouseout="hide()">.displacementBias</a></span></pre>
+Смещение значений карты сдвига на вершинах сетки (mesh). Без установки карты сдвига данное значение не применяется. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
 
-The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
-.displacementScale : Float
+<pre id="farDistance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far distance - дальнее расстояние')" onmouseout="hide()">.farDistance</a></span></pre>
+Дальнее значение внутренней теневой камеры точечного источника света.<br><br>
 
-How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied. Default is 1.
-.displacementBias : Float
+<pre id="fog"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('fog - туман')" onmouseout="hide()">.fog</a></span></pre>
+Свойство определяет, будет ли на данный материал влиять <a href="../scenes/fog.htm" onmouseover="show(Fog.<br>fog - туман')" onmouseout="hide()">туман</a>.
+Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
-The offset of the displacement map's values on the mesh's vertices. Without a displacement map set, this value is not applied. Default is 0.
-.farDistance : Float
+<pre id="map"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>map - карта')" onmouseout="hide()">.map</a></pre>
+Карта цвета. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
 
-The far value of the point light's internal shadow camera.
-.fog : Boolean
+<pre id="morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - сокращ. англ. слов morphing targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
+Свойство определяет, будет ли материал использовать цели морфинга. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
-Whether the material is affected by fog. Default is false.
-.isMeshDistanceMaterial : Boolean
+<pre id="nearDistance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near distance - ближнее расстояние')" onmouseout="hide()">.nearDistance</a></span></pre>
+Ближнее значение внутренней теневой камеры точечного источника света.<br><br>
 
-Used to check whether this or derived classes are mesh depth materials. Default is true.
+<pre id="referencePosition"><a href="../math/vector3.htm" onmouseover="show('Vector3.<br>reference position - исходное положение')" onmouseout="hide()">.referencePosition</a></pre>
+Положение <a href="../lights/pointLight.htm" onmouseover="show('PointLight.')" onmouseout="hide()">источника точечного света</a> в "мировом" пространстве.<br><br>
 
-You should not change this, as it used internally for optimisation.
-.map : Texture
-
-The color map. Default is null.
-.morphTargets : boolean
-
-Define whether the material uses morphTargets. Default is false.
-.nearDistance : Float
-
-The near value of the point light's internal shadow camera.
-.referencePosition : Vector3
-
-The position of the point light in world space.
-.skinning : Boolean
-
-Define whether the material uses skinning. Default is false.</div><br>
+<pre id="skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - скиннинг (операция обворачивания<br>3D-модели полигональной сеткой)')" onmouseout="hide()">.skinning</a></span></pre>
+Свойство определяет, будет ли использоваться <span class="lnk" onmouseover="show('(от английского слова skin - кожа,<br>skinning - процесс создания кожи<br>- операция обворачивания 3D-модели<br>полигональной сеткой.')" onmouseout="hide()">скиннинг (skinning)</span>. Значением по умолчанию является&nbsp;<tt>false</tt>.</div><br>
 
 <h4>Методы</h4>
 Общие методы смотрите в описании базового класса <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()"><tt>Material</tt></a>.<br><br>

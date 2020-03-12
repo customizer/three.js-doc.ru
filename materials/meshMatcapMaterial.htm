@@ -9,75 +9,82 @@
 
 <span class="right_side"><a href="material.htm" title="Переход к родительскому классу: Material"><tt>Material &rarr;</tt></a></span>
 <h3>MeshMatcapMaterial</h3>
-
-
-MeshMatcapMaterial is defined by a MatCap (or Lit Sphere) texture, which encodes the material color and shading.<br><br>
-
-MeshMatcapMaterial does not respond to lights since the matcap image file encodes baked lighting. It will cast a shadow onto an object that receives shadows (and shadow clipping works), but it will not self-shadow or receive shadows.<br><br>
+MeshMatcapMaterial определяется текстурой <span class="lnk" onmouseover="show('MatCap - сокращ. англ. слов material cap - покрытие материала.<br>')" onmouseout="hide()">MatCap</span> (или <span class="lnk" onmouseover="show('lit sphere - сфера освещенности.<br>')" onmouseout="hide()">Lit Sphere</span>), которая кодирует цвет материала и его затенение.<br><br>
+MeshMatcapMaterial не реагирует на источники света, так как в файле matcap-изображения  кодируется "запеченное" освещение. Этот материал будет отбрасывать тень на объект, воспринимающий тени (обрезка теней также работает), но он не будет затенять сам себя или воспринимать тени.
+<!-- Mat cap (маткап) – это материал, дающий наглядное (или не очень) представление вашей модели имитируя материал и настройки окружения с помощью всего одного изображения. -->
+<div class="caption"><img src="../img/MeshMatcapMaterial.png" width=700><br>
+MeshMatcapMaterial.</div><br>
 
 <h4>Конструктор</h4>
 <pre>MeshMatcapMaterial( <span onclick="showClick(type_obj)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('parameters - параметры')" onmouseout="hide()">parameters</a></span> )</pre>
 <script>document.write(note_0), note_01;</script><br>
-The exception is the property color, which can be passed in as a hexadecimal string and is 0xffffff (white) by default. Color.set( color ) is called internally.<br><br>
+Исключением является только свойство <tt>color</tt> (цвет), которое может быть передано как шестнадцатиричное число в виде строкового значения и по умолчанию установлено как <tt>0xffffff</tt> (белый цвет).
+Внутри класса вызывается метод <tt><a href="../math/color.htm#set" onmouseover="show('Color.set( color )')" onmouseout="hide()">Color.set</a>( color )</tt>.<br><br>
 
 <h4>Свойства</h4>
 Для информации об общих свойствах смотрите базовый класс <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()">Material</a>.
 <div class=blockindent><br>
 <pre id="alphaMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>alpha map - карта альфа-канала, т.е. канала прозрачности')" onmouseout="hide()">.alphaMap</a></pre>
+Карта альфа-канала (т.е. канала прозрачности) - это текстура в оттенках серого, которая управляет непрозрачностью всей поверхности объекта (черный цвет - полная прозрачность, белый цвет - полная непрозрачность).
+Значением по умолчанию является&nbsp;<tt>null</tt>.<br>
+Используется только цвет текстуры, если существует альфа-канал, то он игнорируется.
+Для текстур в формате RGB и RGBA, при выборке этой текстуры <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">визуализатор WebGL</a> будет использовать канал зеленого цвета из-за дополнительного бита точности,
+предоставляемого для зеленого цвета в сжатом <a href="../constants/textures.htm#dds" onmouseover="show('форматы сжатия текстур DDS / ST3C')" onmouseout="hide()">DXT формате</a> и упаковке в <a href="../constants/textures.htm#types" onmouseover="show('типы упаковки')" onmouseout="hide()">формате RGB 565</a>.
+Форматы текстур только <a href="../constants/textures.htm#formats" onmouseover="show('форматы')" onmouseout="hide()">яркости и яркости+альфа-канала</a> также будут работать должным образом.<br><br>
 
-The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.<br>
+<pre id="bumpMap"><a href="" onmouseover="show('Texture.<br>bump map - карта рельефа')" onmouseout="hide()">.bumpMap</a></pre>
+Текстура для создания карты рельефа. Значения черного и белого цвета сопоставляются с предполагаемой глубиной по отношению с освещением. Рельеф не оказывает влияния на геометрию объекта, только на освещение. Если определена <a href="#normalMap" onmouseover="show('MeshMatcapMaterial.normalMap')" onmouseout="hide()">карта нормалей</a>, карта рельефа будет проигнорирована.<br>
+Смотрите статью Википедии "<a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BB%D1%8C%D0%B5%D1%84%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D0%BA%D1%81%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">Рельефное текстурирование</a>".<br><br>
 
-Only the color of the texture is used, ignoring the alpha channel if one exists. For RGB and RGBA textures, the WebGL renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.<br><br>
+<pre id="bumpScale"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('bump scale - масштаб рельефности')" onmouseout="hide()">.bumpScale</a></span></pre>
+Свойство определяет, как сильно <a href="#bumpMap" onmouseover="show('MeshMatcapMaterial.bumpMap')" onmouseout="hide()">карта рельефа</a> повлияет на материал.
+Типичный диапазон значений от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
 
-.bumpMap : Texture
+<pre id="color"><a href="../math/color.htm" onmouseover="show('Color.<br>color - цвет')" onmouseout="hide()">.color</a></pre>
+Цвет материала, по умолчанию установлен как белый (<tt>0xffffff</tt>).<br><br>
 
-The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights. Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
-.bumpScale : Float
+<pre id="displacementMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>displacement map - карта сдвига')" onmouseout="hide()">.displacementMap</a></pre>
+Карта сдвига влияет на положение вершин сетки (mesh). В отличие от других карт, влияющих только на свет и тень материала, сдвиг вершин может отбрасывать тени, блокировать другие объекты, а то и действовать как реальные геометрические элементы.
+Текстура сдвига - это изображение, на котором значение каждого пиксела (белый будет самым высоким) сопоставляется с вершинами сетки (mesh) и перемещает их.<br><br>
 
-How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
-.color : Color
+<pre id="displacementScale"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('displacement scale - масштаб сдвига')" onmouseout="hide()">.displacementScale</a></span></pre>
+Значение свойства определяет, насколько сильно карта сдвига влияет на сетку (где черный цвет, там нет сдвига, а где белый - сдвиг максимален).
+Без установки карты сдвига данное значение не применяется. Значение по умолчанию равно&nbsp;<tt>1</tt>.<br><br>
 
-Color of the material, by default set to white (0xffffff).
-.displacementMap : Texture
+<pre id="displacementBias"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('displacement bias - смещение сдвига')" onmouseout="hide()">.displacementBias</a></span></pre>
+Смещение значений карты сдвига на вершинах сетки (mesh). Без установки карты сдвига данное значение не применяется. Значение по умолчанию равно&nbsp;<tt>0</tt>.<br><br>
 
-The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
-.displacementScale : Float
+<pre id="map"><a href="../textures/texture.htm"" onmouseover="show('Texture.<br>map - карта')" onmouseout="hide()">.map</a></pre>
+Карта цвета. Значением по умолчанию является&nbsp;<tt>null</tt>.
+The texture map color is modulated by the diffuse .color.<br><br>
 
-How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied. Default is 1.
-.displacementBias : Float
+<pre id="matcap"><a href="../textures/texture.htm"" onmouseover="show('Texture.<br>matcap - ')" onmouseout="hide()">.matcap</a>Texture</pre>
 
-The offset of the displacement map's values on the mesh's vertices. Without a displacement map set, this value is not applied. Default is 0.
-.isMeshMatcapMaterial : Boolean
+The matcap map. Значением по умолчанию является&nbsp;<tt>null</tt>.<br><br>
 
-Used to check whether this or derived classes are mesh Matcap materials. Default is true.
+<pre id="morphNormals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph normals - сокращ. англ. слов<br>morphing normals - нормали морфинга')" onmouseout="hide()">.morphNormals</a></span></pre>
+Свойство определяет, будет ли материал использовать нормали морфинга. Установите его как <tt>true</tt> для передачи атрибутов
+<tt><a href="../core/geometry.htm#morphNormals" onmouseover="show('Geometry.morphNormals')" onmouseout="hide()">morphNormals</a></tt> из
+<a href="../core/geometry.htm" onmouseover="show('Geometry')" onmouseout="hide()">Geometry</a> в шейдер. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
-You should not change this, as it used internally for optimisation.
-.map : Texture
+<pre id="morphTargets"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('morph targets - сокращ. англ. слов morphing targets - цели морфинга')" onmouseout="hide()">.morphTargets</a></span></pre>
+Свойство определяет, будет ли материал использовать цели морфинга. Значением по умолчанию является&nbsp;<tt>false</tt>.<br><br>
 
-The color map. Default is null. The texture map color is modulated by the diffuse .color.
-.matcap : Texture
+<pre id="normalMap"><a href="../textures/texture.htm" onmouseover="show('Texture.<br>normal map - карта нормалей')" onmouseout="hide()">.normalMap</a></pre>
+Текстура для создания карты нормалей. Значения RGB влияют на нормаль к поверхности каждого пиксельного фрагмента и изменяют способ подсветки цвета.
+Карты нормалей не изменяют действующую форму поверхности и влияют только на освещение.<br>
+Смотрите раздел "<a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BB%D1%8C%D0%B5%D1%84%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D0%BA%D1%81%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5#Normal_mapping" target="_blank">Картирование нормалей</a>" в статье Википедии "Рельефное текстурирование".<br><br>
 
-The matcap map. Default is null.
-.morphNormals : boolean
+<pre id="normalMapType"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('normal map type - тип карты нормалей')" onmouseout="hide()">.normalMapType</a></span></pre>
+Тип карты нормалей.<br>
+Можно выбирать из THREE.TangentSpaceNormalMap (значение по умолчанию) и THREE.ObjectSpaceNormalMap.<br><br>
 
-Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the Geometry	to the shader. Default is false.
-.morphTargets : Boolean
+<pre id="normalScale"><a href="../math/vector2.htm" onmouseover="show('Vector2.<br>normal scale - масштаб нормалей')" onmouseout="hide()">.normalScale</a></pre>
+Свойство определяет, насколько сильно карта нормалей влияет на материал. Типовой диапазон значений от&nbsp;<tt>0</tt> до&nbsp;<tt>1</tt>.
+Значением по умолчанию является <a href="../math/vector2.htm" onmouseover="show('Vector2')" onmouseout="hide()">двумерный вектор</a>, установленный как&nbsp;<tt>(1,1)</tt>.<br><br>
 
-Define whether the material uses morphTargets. Default is false.
-.normalMap : Texture
-
-The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.
-.normalMapType : Integer
-
-The type of normal map.
-
-Options are THREE.TangentSpaceNormalMap (default), and THREE.ObjectSpaceNormalMap.
-.normalScale : Vector2
-
-How much the normal map affects the material. Typical ranges are 0-1. Default is a Vector2 set to (1,1).
-.skinning : Boolean
-
-Define whether the material uses skinning. Default is false.</div><br>
+<pre id="skinning"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('skinning - скиннинг (операция обворачивания<br>3D-модели полигональной сеткой)')" onmouseout="hide()">.skinning</a></span></pre>
+Свойство определяет, будет ли использоваться <span class="lnk" onmouseover="show('(от английского слова skin - кожа,<br>skinning - процесс создания кожи<br>- операция обворачивания 3D-модели<br>полигональной сеткой.')" onmouseout="hide()">скиннинг (skinning)</span>. Значением по умолчанию является&nbsp;<tt>false</tt>.</div><br>
 
 <h4>Методы</h4>
 Общие методы смотрите в описании базового класса <a href="material.htm" onmouseover="show('Material')" onmouseout="hide()"><tt>Material</tt></a>.<br><br>

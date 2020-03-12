@@ -17,12 +17,28 @@
 Конструктор не принимает аргументов.<br><br>
 
 <h4>Свойства</h4>
-<div class=blockindent>
+<div class=blockindent><br>
 <pre id="castShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cast shadow - бросать тень')" onmouseout="hide()">.castShadow</a></span></pre>
 Будет ли объект представлен в теневой карте. Значением по умолчанию является <tt>false</tt>.<br><br>
 
 <pre id="children"><a href="#" onmouseover="show('Object3D.<br>children - дети, здесь имеются ввиду дочерние объекты,<br>т.е. объекты, являющиеся производными от объекта-родителя')" onmouseout="hide()">.children</a></pre>
 Массив дочерних объектов. Для информации о группировке объектов вручную, смотрите <a href="../objects/group.htm" onmouseover="show('Group')" onmouseout="hide()">Group</a>.<br><br>
+
+<pre id="customDepthMaterial"><a href="../materials/material.htm" onmouseover="show('Material.<br>custom depth material - настраиваемый материал глубины')" onmouseout="hide()">.customDepthMaterial</a></pre>
+Настраиваемый материал глубины для использования при отображении матералов с указанной картой глубины. Использоваться может только в контексте сеток (mesh).
+При отбрасывании теней от источников света <a href="../lights/directionalLight.htm" onmouseover="show('directional light - направленный свет')" onmouseout="hide()">DirectionalLight</a>
+или <a href="../lights/spotLight.htm" onmouseover="show('spot light - прожекторное освещение')" onmouseout="hide()">SpotLight</a>, если имеется
+<div class=indent1><tt>a)</tt> изменение положений вершин в вершинном шейдере,</div>
+<div class=indent1><tt>b)</tt> использовании <a href="../materials/meshStandardMaterial.htm#displacementMap" onmouseover="show('в качестве примера, при клике будет показан<br><tt>MeshStandardMaterial.displacementMap</tt>')" onmouseout="hide()">карты сдвига</a> (displacement map),</div>
+<div class=indent1><tt>c)</tt> применении <a href="../materials/meshStandardMaterial.htm#alphaMap" onmouseover="show('в качестве примера, при клике будет показан<br><tt>MeshStandardMaterial.alphaMap</tt>')" onmouseout="hide()">карты прозрачности</a> с <tt><a href="../materials/material.htm#alphaTest" onmouseover="show('Material.alphaTest')" onmouseout="hide()">alphaTest</a></tt>, или</div>
+<div class=indent1><tt>d)</tt> использовании прозрачной текстуры с <tt><a href="../materials/material.htm#alphaTest" onmouseover="show('Material.alphaTest')" onmouseout="hide()">alphaTest</a></tt>,</div>
+для правильного отображения теней следует указать значение свойства <tt>customDepthMaterial</tt>.
+Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
+
+<pre id="customDistanceMaterial"><a href="../materials/material.htm" onmouseover="show('Material.<br>custom distance material - настраиваемый материал расстояния')" onmouseout="hide()">.customDistanceMaterial</a></pre>
+Настраиваемый материал расстояния.
+Почти тоже самое, что и <tt><a href="#customDepthMaterial" onmouseover="show('Object3D.customDepthMaterial')" onmouseout="hide()">customDepthMaterial</a></tt>, но используется с
+<a href="../lights/pointLight.htm" onmouseover="show('PointLight')" onmouseout="hide()">точечным источником света</a>. Значением по умолчанию является <tt>undefined</tt>, т.е. значение не определено.<br><br>
 
 <pre id="frustumCulled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('от англ. слов frustum culled -<br>отбраковка (объектов вне) усеченного<br>конуса видимости (камеры)')" onmouseout="hide()">.frustumCulled</a></span></pre>
 При установке данного свойства как <tt>true</tt> перед отображением объекта в каждом кадре будет проверяться, входит ли он в зону видимости камеры (в виде усеченного конуса).
@@ -30,10 +46,6 @@
 
 <pre id="id"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('сокращение от англ. слова identifier - идентификатор')" onmouseout="hide()">.id</a></span></pre>
 Уникальное число для данного экземпляра объекта, свойство только для чтения.<br><br>
-
-<pre id="isObject"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is object - является объектом')" onmouseout="hide()">.isObject</a></span></pre>
-Используется для проверки, является ли этот класс или классы, производные от него, трехмерными объектами (Object3D). Значением по умолчанию является <tt>true</tt>.<br>
-Это свойство нельзя изменять, так как оно используется для оптимизации внутри <em>three.js</em>.<br><br>
 
 <pre id="layers"><a href="layers.htm" onmouseover="show('Layers.<br>layers - слои, уровни')" onmouseout="hide()">.layers</a></pre>
 Принадлежность к какому-либо слою. Объект отображается только в том случае, если имеет хотя бы один слой, используемый совместно с <a href="../cameras/camera.htm" onmouseover="show('Camera')" onmouseout="hide()">камерой</a>.<br><br>

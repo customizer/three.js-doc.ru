@@ -9,7 +9,8 @@
 
 <span class="right_side"><a href="mesh.htm" title="Переход к родительскому классу"><tt>Mesh &rarr;</tt></a></span>
 <h3>InstancedMesh</h3>
-A special version of Mesh with instanced rendering support. Use InstancedMesh if you have to render a large number of objects with the same geometry and material but with different world transformations. The usage of InstancedMesh will help you to reduce the number of draw calls and thus improve the overall rendering performance in your application. <br><br>
+Специальная версия сетки (Mesh) с поддержкой визуализации экземпляров. Используйте InstancedMesh ("экземплярная" сетка) если нужно показать большое число объектов с одинаковой геометрией и материалом, но с различными "мировыми" изменениями.
+Использование InstancedMesh поможет уменьшить число вызовов перерисовки и тем самым улучшит общую производительность визуализации в приложении.<br><br>
 
 <h4>Пример</h4>
 <pre><a href="https://threejs.org/examples/#webgl_instancing_dynamic" target="_blank">WebGL / instancing / dynamic</a>
@@ -21,8 +22,8 @@ A special version of Mesh with instanced rendering support. Use InstancedMesh if
 <h4>Конструктор</h4>
 <pre>InstancedMesh( <a href="../core/bufferGeometry.htm" onmouseover="show('BufferGeometry.<br>geometry - геометрия, в данном случае<br>означает геометрический элемент')" onmouseout="hide()">geometry</a>, <a href="../materials/material.htm" onmouseover="show('Material.<br>material - материал')" onmouseout="hide()">material</a>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет, итог, подсчитанное число')" onmouseout="hide()">count</a></span>)</pre>
 
-<div class=list><tt>geometry</tt> - an instance of BufferGeometry.</div>
-<div class=list><tt>material</tt> - an instance of Material. Значением по умолчанию является новый <a href="../materials/meshBasicMaterial.htm" onmouseover="show('MeshBasicMaterial')" onmouseout="hide()">MeshBasicMaterial</a>.</div>
+<div class=list><tt>geometry</tt> - экземпляр BufferGeometry.</div>
+<div class=list><tt>material</tt> - экземпляр Material. Значением по умолчанию является новый <a href="../materials/meshBasicMaterial.htm" onmouseover="show('MeshBasicMaterial')" onmouseout="hide()">MeshBasicMaterial</a>.</div>
 <div class=list><tt>count</tt> - число экземпляров.</div><br>
 
 <h4>Свойства</h4>
@@ -30,25 +31,26 @@ A special version of Mesh with instanced rendering support. Use InstancedMesh if
 <div class=blockindent><br>
 
 <pre id="count"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет, итог, подсчитанное число')" onmouseout="hide()">.count</a></span></pre>
-
-The number of instances. The count value passed into the constructor represents the maximum number of instances of this mesh. You can change the number of instances at runtime to an integer value in the range [0, count].<br>
-
-If you need more instances than the original count value, you have to create a new InstancedMesh.<br><br>
+Число экземпляров. Значение <tt>count</tt>, переданное в конструктор, представляет максимальное число экземпляров данной сетки.
+Число экземпляров можно изменять во время выполнения приложения на целочисленное значение в диапазоне <tt>[0, count]</tt>.<br>
+Если требуется больше экземпляров, чем исходное значение <tt>count</tt>, нужно создать новый InstancedMesh.<br><br>
 
 <pre id="instanceMatrix"><a href="../core/bufferAttribute.htm" onmouseover="show('BufferAttribute.<br>instance matrix - матрица экземпляра')" onmouseout="hide()">.instanceMatrix</a></pre>
-
-Represents the local transformation of all instances. For internal use only.</div><br>
+Представляет локальные изменения всех экземпляров. Если требуется изменить данные экземпляра с помощью <tt><a href="#setMatrixAt" onmouseover="show('InstancedMesh.setMatrixAt')" onmouseout="hide()">setMatrixAt()</a></tt>,
+то вначале нужно установить его флаг <tt><a href="../core/bufferAttribute.htm#needsUpdate" onmouseover="show('BufferAttribute.needsUpdate')" onmouseout="hide()">needsUpdate</a></tt> как <tt>true</tt>.</div><br>
 
 <h4>Методы</h4>
 Общие методы смотрите в описании базового класса <a href="mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">Mesh</a>.
 <div class=blockindent><br>
-<pre id="setMatrixAt"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set matrix at - установить матрицу в...')" onmouseout="hide()">.setMatrixAt</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <a href="../math/matrix4.htm" onmouseover="show('Matrix4<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
-
+<pre id="getMatrixAt"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set matrix at - установить матрицу в...')" onmouseout="hide()">.getMatrixAt</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <a href="../math/matrix4.htm" onmouseover="show('Matrix4<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
 <div class=list><tt>index</tt> - индекс экземпляра. Значение должно быть в диапазоне <tt>[0, count]</tt>, т.е. от <tt>0</tt> до значения, определенного свойством <tt>count</tt>.</div>
+<div class=list><tt>matrix</tt> - матрица <tt>4&#215;4</tt>, представляющая локальные преобразования экземпляра с указанным <tt>index</tt>.</div>
+Получает локальную матрицу преобразования указанного экземпляра.<br><br>
 
-<div class=list><tt>matrix</tt> - матрица <tt>4&#215;4</tt>, представляющая локальные преобразования одиночного экземпляра. matrix representing the local transformation of a single instance.<br>
-Устанавливает заданную локальную матрицу преобразования для конкретного экземпляра.
-Sets the given local transformation matrix to the defined instance.</div></div><br>
+<pre id="setMatrixAt"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set matrix at - установить матрицу в...')" onmouseout="hide()">.setMatrixAt</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс, указатель')" onmouseout="hide()">index</a></span>, <a href="../math/matrix4.htm" onmouseover="show('Matrix4<br>matrix - матрица')" onmouseout="hide()">matrix</a> )</pre>
+<div class=list><tt>index</tt> - индекс экземпляра. Значение должно быть в диапазоне <tt>[0, count]</tt>, т.е. от <tt>0</tt> до значения, определенного свойством <tt>count</tt>.</div>
+<div class=list><tt>matrix</tt> - матрица <tt>4&#215;4</tt>, представляющая локальные преобразования отдельного экземпляра.<br>
+Устанавливает заданную локальную матрицу преобразования для экземпляра с указанным <tt>index</tt>.</div></div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/objects/InstancedMesh.js" target="_blank">InstancedMesh.js на github.com</a></div><br><br>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<h3>WebXRManager</h3>
+Данный класс представляет собой обобщенный API устройства WebXR и используется внутри WebGLRenderer.
+WebXRManager также предоставляет общедоступный интерфейс, который позволяет пользователям включать/отключать расширенную реальность (XR) и выполнять связанные с XR задачи, такие как, например, получение контроллеров.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="enabled"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('enabled - включено')" onmouseout="hide()">.enabled</a></span></pre>
+Данный флаг уведомляет визуализатор (рендерер) о готовности к визуализации расширенной реальности (XR). Значением по умолчанию является <tt>false</tt>.
+Установите его значение как <tt>true</tt>, если в приложении будет использоваться расширенная реальность (XR).<br><br>
+
+<pre id="isPresenting"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is presenting - ')" onmouseout="hide()">.isPresenting</a></span></pre>
+Свойство показывает, является ли демонстрация расширенной реальности (XR) активной или нет. Значением по умолчанию является <tt>false</tt>.
+Этот флаг доступен только для чтения и автоматически устанавливается WebXRManager'ом.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="getController"><a href="../../objects/group.htm" onmouseover="show('Group.<br>get controller - получить контроллер')" onmouseout="hide()">.getController</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span> )</pre>
+<div class=list><tt>index</tt> - индекс контроллера.</div>
+Возвращает <a href="../../objects/group.htm" onmouseover="show('Group')" onmouseout="hide()">группу</a>, представляющую так называемое пространство целевых лучей (target ray space) контроллера.
+Используйте это пространство для визуализации трехмерных объектов, которые помогают пользователю указывать задачи, такие как взаимодействие с пользовательским интерфейсом.<br><br>
+
+<pre id="getControllerGrip"><a href="../../objects/group.htm" onmouseover="show('Group.<br>get controller grip - получить контроллер захвата')" onmouseout="hide()">.getControllerGrip</a>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('index - индекс')" onmouseout="hide()">index</a></span> )</pre>
+<div class=list><tt>index</tt> - индекс контроллера.</div>
+Возвращает <a href="../../objects/group.htm" onmouseover="show('Group')" onmouseout="hide()">группу</a>, представляющую так называемое пространство захвата (grip space) контроллера.
+Используйте это пространство, если пользователь собирается удерживать дополнительные 3D объекты, такие как световой меч.
+<div class=note><b>Примечание:</b> Если нужно показать что-то в руке пользователя и одновременно выдвинуть указывающий луч, то потребуется присоединить переносной объект к группе, возвращаемой методом <tt><a href="#getControllerGrip" onmouseover="show('WebXRManager.getControllerGrip')" onmouseout="hide()">getControllerGrip</a></tt>, а луч присоединить к группе возвращаемой методом <tt><a href="#getController" onmouseover="show('WebXRManager.getController')" onmouseout="hide()">getController</a></tt>.
+Идея в том, что возможно получить две разные группы в двух разных пространствах координат для одного и того же контроллера WebXR.</div><br>
+
+<pre id="setFramebufferScaleFactor"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set frame buffer scale factor -<br>установить множитель масштаба буфера кадров')" onmouseout="hide()">.setFramebufferScaleFactor</a></span>( <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('frame buffer scale factor -<br>множитель масштаба буфера кадров')" onmouseout="hide()">framebufferScaleFactor</a></span> )</pre>
+<div class=list><tt>framebufferScaleFactor</tt> - устанавливаемый множитель масштаба буфера кадров.</div>
+Задает множитель масштабирования, используемый при определении размера буфера кадров, когда происходит визуализация на устройстве расширенной реальности (XR).
+Значение устанавливается относительно разрешения по умолчанию устройства расширенной реальности (XR).
+Значение по умолчанию для множителя равно&nbsp;<tt>1</tt>. Значение&nbsp;<tt>0.5</tt> установит буфер кадров в 50% от собственного разрешения дисплея.
+<div class=note><b>Примечание:</b> При демонстрации содержимого расширенной реальности (XR) невозможно изменять множитель масштаба буфера кадров.</div><br>
+
+<pre id="setReferenceSpaceType"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set reference space type - установить<br>тип эталонного пространства')" onmouseout="hide()">.setReferenceSpaceType</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('reference space type - тип эталонного пространства')" onmouseout="hide()">referenceSpaceType</a></span> )</pre>
+<div class=list><tt>referenceSpaceType</tt> — устанавливаемый тип эталонного пространства.</div>
+Может использоваться для настройки пространственных взаимосвязей с физической средой пользователя.
+В зависимости от того, как пользователь перемещается в 3D-пространстве, установка соответствующего эталонного (опорного) пространства может улучшить отслеживание.
+Значением по умолчанию является <tt>local-floor</tt>. Ознакомьтесь с возможными значениями и случаями их использования на <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType" target="_blank">сайте MDN</a>.
+<div class=note><b>Примечание:</b> Нельзя изменять тип эталонного пространства при демонстрации содержимого расширенной реальности (XR).</div>
+</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/webxr/WebXRManager.js" target="_blank">WebXRManager.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

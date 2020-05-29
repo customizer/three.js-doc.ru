@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<h3>SphericalHarmonics3</h3>
+Представляет сферические гармоники третьего порядка (SH). Этот класс используется <a href="../lights/lightProbe.htm" onmouseover="show('LightProbe')" onmouseout="hide()">пробниками света</a> (датчиками для проверки освещения) для кодировки информации освещения.<br><br>
+
+<h4>Конструктор</h4>
+<pre>SphericalHarmonics3()</pre>
+Создает новый экземпляр SphericalHarmonics3.<br><br>
+
+<h4>Свойства</h4>
+<div class=blockindent><br>
+<pre id="coefficients"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('coefficients - коэффициенты')" onmouseout="hide()">.coefficients</a></span></pre>
+Массив, в котором хранятся 9&nbsp;коэффициентов сферических гармоник (SH).
+Одиночный коэффициент представляет собой экземпляр <a href="vector3.htm" onmouseover="show('Vector3')" onmouseout="hide()">трехмерного вектора</a>.</div><br>
+
+<h4>Методы</h4>
+<div class=blockindent><br>
+<pre id="add"><a href="#" onmouseover="show('SphericalHarmonics3.<br>add - добавить, сложить')" onmouseout="hide()">.add</a>( <a href="#" onmouseover="show('SphericalHarmonics3.<br>sh - сокращ. англ. слов spherical harmonics<br>- сферические гармоники')" onmouseout="hide()">sh</a> )</pre>
+<div class=list><tt>sh</tt> - сферические гармоники (SH), которые нужно добавить.</div>
+Метод добавляет заданные сферические гармоники (SH) к уже имеющемуся результату.<br><br>
+
+<pre id="addScaledSH"><a href="#" onmouseover="show('SphericalHarmonics3.<br>add scaled sh - сокращ. англ. слов add scaled spherical<br>harmonics - добавить масштабированные сферические<br>гармоники')" onmouseout="hide()">.addScaledSH</a>( <a href="#" onmouseover="show('SphericalHarmonics3.<br>sh - сокращ. англ. слов spherical harmonics<br>- сферические гармоники')" onmouseout="hide()">sh</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scale - масштаб')" onmouseout="hide()">scale</a></span> )</pre>
+
+<div class=list><tt>sh</tt> - сферические гармоники (SH), которые нужно добавить.</div>
+<div class=list><tt>scale</tt> - множитель масштабирования.</div>
+Удобный метод для одновременного выполнения методов <tt><a href="#add" onmouseover="show('SphericalHarmonics3.add')" onmouseout="hide()">add</a></tt> и <tt><a href="#scale" onmouseover="show('SphericalHarmonics3.scale')" onmouseout="hide()">scale</a></tt>.<br><br>
+
+<pre id="clone"><a href="#" onmouseover="show('SphericalHarmonics3.<br>clone - клонировать')" onmouseout="hide()">.clone</a>()</pre>
+Метод возвращает новый экземплар SphericalHarmonics3 с равными коэффициентами.<br><br>
+
+<pre id="copy"><a href="#" onmouseover="show('SphericalHarmonics3.<br>copy - копировать')" onmouseout="hide()">.copy</a>( <a href="#" onmouseover="show('SphericalHarmonics3.<br>sh - сокращ. англ. слов spherical harmonics<br>- сферические гармоники')" onmouseout="hide()">sh</a> )</pre>
+<div class=list><tt>sh</tt> - копируемые сферические гармоники (SH).</div>
+Метод копирует заданные сферические гармоники (SH) в данный экземпляр.<br><br>
+
+<pre id="equals"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('equals - равнять')" onmouseout="hide()">.equals</a></span>( <a href="#" onmouseover="show('SphericalHarmonics3.<br>sh - сокращ. англ. слов spherical harmonics<br>- сферические гармоники')" onmouseout="hide()">sh</a> )</pre>
+<div class=list><tt>sh</tt> - сферические гармоники (SH), с которыми нужно сравнить уже имеющиеся.</div>
+Метод возвращает значение <tt>true</tt>, если сферические гармоники, заданные в аргументе <tt>sh</tt> и в данном экземпляре, имеют равные коэффициенты.<br><br>
+
+<pre id="fromArray"><a href="#" onmouseover="show('SphericalHarmonics3.<br>from array - из массива')" onmouseout="hide()">.fromArray</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - массив, содержащий числа коэффициентов сферический гармоник (SH).</div>
+<div class=list><tt>offset</tt> - смещение массива (дополнительный, необязательный аргумент).</div>
+Метод устанавливает коэффициенты данного экземпляра на взятые из массива, переданного в аргументе <tt>array</tt>.<br><br>
+
+<pre id="getAt"><a href="vector3.htm" onmouseover="show('Vector3.<br>get at - получить в ...')" onmouseout="hide()">.getAt</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>normal - нормаль')" onmouseout="hide()">normal</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>normal</tt> - вектор нормали (предполагается что он единичной длины).</div>
+<div class=list><tt>target</tt> - полученный (результирующий) вектор.</div>
+Метод возвращает излучение в направлении заданной нормали.<br><br>
+
+<pre id="getIrradianceAt"><a href="vector3.htm" onmouseover="show('Vector3.<br>get irradiance at - получить интенсивность излучения в ...')" onmouseout="hide()">.getIrradianceAt</a>( <a href="vector3.htm" onmouseover="show('Vector3.<br>normal - нормаль')" onmouseout="hide()">normal</a>, <a href="vector3.htm" onmouseover="show('Vector3.<br>target - цель')" onmouseout="hide()">target</a> )</pre>
+<div class=list><tt>normal</tt> - вектор нормали (предполагается что он единичной длины).</div>
+<div class=list><tt>target</tt> - полученный (результирующий) вектор.</div>
+Метод возвращает интенсивность излучения (radiance convolved with cosine lobe) в направлении заданной нормали.<br><br>
+
+<pre id="lerp"><a href="#" onmouseover="show('SphericalHarmonics3.<br>lerp - сокращ. англ. слов linearly<br>interpolate - линейная интерполяция')" onmouseout="hide()">.lerp</a>( <a href="#" onmouseover="show('SphericalHarmonics3.<br>sh - сокращ. англ. слов spherical harmonics<br>- сферические гармоники')" onmouseout="hide()">sh</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('alpha - альфа, название буквы греческого алфавита,<br>в данном случае обозначает коэффициент интерполяции')" onmouseout="hide()">alpha</a></span> )</pre>
+<div class=list><tt>sh</tt> - сферические гармоники (SH) to interpolate with.</div>
+<div class=list><tt>alpha</tt> - альфа-коэффициент (коэффициент интерполяции).</div>
+Выполняется линейная интерполяция между сферическими гармониками (SH), заданными в аргументе <tt>sh</tt> и данным экземпляром по заданному альфа-коэффициенту.<br><br>
+
+<pre id="scale"><a href="#" onmouseover="show('SphericalHarmonics3.<br>scale - масштабировать, определять масштаб')" onmouseout="hide()">.scale</a>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('scale - масштаб')" onmouseout="hide()">scale</a></span> )</pre>
+<div class=list><tt>scale</tt> - множитель масштабирования.</div>
+Масштабирует данные сферические гармоники (SH) согласно заданного множителя масштабирования.<br><br>
+
+<pre id="set"><a href="#" onmouseover="show('SphericalHarmonics3.<br>set - установить, задать')" onmouseout="hide()">.set</a>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('coefficients - коэффициенты')" onmouseout="hide()">coefficients</a></span> )</pre>
+<div class=list><tt>coefficients</tt> - массив коэффициентов сферических гармоник (SH).</div>
+Метод устанавливает заданные коэффициенты сферических гармоник (SH) для данного экземпляра.<br><br>
+
+<pre id="toArray"><span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('to array - в массив')" onmouseout="hide()">.toArray</a></span>( <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('array - массив')" onmouseout="hide()">array</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('offset - смещение')" onmouseout="hide()">offset</a></span> )</pre>
+<div class=list><tt>array</tt> - целевой массив (дополнительный, необязательный аргумент).</div>
+<div class=list><tt>offset</tt> - смещение массива (дополнительный, необязательный аргумент).</div>
+Метод возвращает массив с коэффициентами или копирует их в предоставленный массив. Коэффициенты представлены в виде чисел.<br><br>
+
+<pre id="zero"><a href="#" onmouseover="show('SphericalHarmonics3.<br>zero - ноль')" onmouseout="hide()">.zero</a>()</pre>
+Метод устанавливает все сферические гармоники (SH) равными&nbsp;0.</div><br>
+
+<h4>Статические методы</h4>
+<div class=blockindent><br>
+<pre id="getBasisAt"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('get basis at - получить базис на ...')" onmouseout="hide()">.getBasisAt</a></span>( <a href="vector3.htm" onmouseover="show('Vector3.<br>normal - нормаль')" onmouseout="hide()">normal</a>, <span onclick="showClick(type_array)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('shBasis - сокращ. англ. слов<br>spherical harmonics basis -<br>базис сферических гармоник')" onmouseout="hide()">shBasis</a></span> )</pre>
+<div class=list><tt>normal</tt> - вектор нормали (предполагается что он единичной длины).</div>
+<div class=list><tt>shBasis</tt> - полученный базис сферических гармоник (SH).</div>
+Метод вычисляет базис сферических гармоник (SH) для заданного вектора нормали.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/math/SphericalHarmonics3.js" target="_blank">SphericalHarmonics3.js на Гитхабе</a></div><br><br>
+
+<br><br>
+</body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="light.htm" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LightProbe</h3>
+Пробники света (light probes) - это альтернативный способ добавления освещения на 3D сцену.
+В отличие от классических источников света (например, <a href="directionalLight.htm" onmouseover="show('DirectionalLight')" onmouseout="hide()">направленное (directional)</a>,
+<a href="pointLight.htm" onmouseover="show('PointLight')" onmouseout="hide()">точечное (point)</a> или
+<a href="spotLight.htm" onmouseover="show('SpotLight')" onmouseout="hide()">прожекторное (spot)</a> освещение), пробники света не излучают свет.
+Вместо этого, они сохраняют информацию о свете, проходящем через 3D-пространство.
+Во время визуализации свет, попадающий на 3D-объект приближается к естественному освещению реального мира с помощью данных пробника света.<br><br>
+Пробники света создают обычно из карт (излучения) окружающей среды.
+Для создания пробников света из экземпляров <a href="../textures/cubeTexture.htm" onmouseover="show('CubeTexture')" onmouseout="hide()">CubeTexture</a>
+или <a href="../renderers/webGLCubeRenderTarget.htm" onmouseover="show('WebGLCubeRenderTarget')" onmouseout="hide()">WebGLCubeRenderTarget</a>
+можно использовать класс <a href="../examples/lights/lightProbeGenerator.htm" onmouseover="show('LightProbeGenerator')" onmouseout="hide()">LightProbeGenerator</a>.
+Впрочем, данные об оценке освещенности могут быть представлены и в других формах, например с помощью <a href="../renderers/webXR/webXR.htm" onmouseover="show('(похоже это сокращение от англ. слов web eXtended Reality -<br>расширенная реальность в сети интернет) - это<br>группа стандартов, которые используются совместно для<br>поддержки визуализации трехмерных сцен на оборудовании,<br>предназначенном для представления виртуальных миров<br> - виртуальной реальности.')" onmouseout="hide()">WebXR</a>.
+Это позволяет визуализировать контент <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%80%D0%B5%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C" target="_blank" onmouseover="show('от англ. слов augmented reality или<br>сокращенно AR - дополненная реальность')" onmouseout="hide()">дополненной реальности</a>, который реагирует на освещение реального мира.<br><br>
+Текущая реализация пробника света в <em>three.js</em> поддерживает так называемые датчики рассеянного (диффузного) света. Этот тип светового пробника функционально эквивалентен карте излучения окружающей среды.<br><br>
+
+<h4>Примеры</h4>
+<pre><a href="https://threejs.org/examples/#webgl_lightprobe" target="_blank">WebGL / light probe</a>
+<a href="https://threejs.org/examples/#webgl_lightprobe_cubecamera" target="_blank">WebGL / light probe / cube camera</a></pre><br>
+
+<h4>Конструктор</h4><br>
+<pre>LightProbe( <a href="../math/sphericalHarmonics3.htm" onmouseover="show('SphericalHarmonics3.<br>sh - сокращ. от spherical harmonics<br>- сферические гармоники');" onmouseout="hide()">sh</a>, <span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span> )</pre>
+<div class=list><tt>sh</tt> - экземпляр <a href="../math/sphericalHarmonics3.htm" onmouseover="show('SphericalHarmonics3')" onmouseout="hide()">SphericalHarmonics3</a> (дополнительный, необязательный аргумент).</div>
+<div class=list><tt><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интенсивность');" onmouseout="hide()">intensity</a></span></tt> — числовое значение силы/интенсивности пробника света (дополнительный, необязательный параметр). Значение по умолчанию равно <tt>1</tt>.</div>
+Создает новый <tt>LightProbe</tt>.<br><br>
+
+<h4>Свойства</h4><br>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light ');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
+Свойство <tt><a href="light.htm#color" onmouseover="show('Light.color')" onmouseout="hide()">color</a></tt> в настоящее время не рассчитывается и поэтому не имеет никакого влияния.
+<div class=blockindent><br>
+<pre id="sh"><a href="../math/sphericalHarmonics3.htm" onmouseover="show('SphericalHarmonics3.<br>sh - сокращ. от spherical harmonics<br>- сферические гармоники');" onmouseout="hide()">.sh</a></pre>
+Для кодирования информации освещения пробник света использует сферические гармоники.<br><br>
+<!--
+<pre id="intensity"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('intensity - интесивность');" onmouseout="hide()">.intensity</a></span></pre>
+<a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B8%D0%BB%D0%B0_%D1%81%D0%B2%D0%B5%D1%82%D0%B0" target="_blank">Интенсивность (сила) света</a>.<br>
+В режиме, <a href="../renderers/webGLRenderer.htm#physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights');" onmouseout="hide()">правильном с точки зрения физики</a>, произведение <tt><a href="light.htm#color" onmouseover="show('Light.color');" onmouseout="hide()">color</a></tt> * <tt>intensity</tt> интерпретируется как интенсивность (сила) света, измеряемая в канделах (candela).<br>
+Значение по умолчанию равно&nbsp;<tt>1.0</tt>.<br><br> -->
+</div><br>
+
+<h4>Методы</h4><br>
+Смотрите базовый класс <a href="light.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.
+<br><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/lights/LightProbe.js" target="_blank">LightProbe.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

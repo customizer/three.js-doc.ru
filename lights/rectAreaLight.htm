@@ -9,18 +9,22 @@
 
 <span class="right_side"><a href="../core/object3D.htm" title="Переход к родительскому классу: Object3D"><tt>Object3D &rarr;</tt></a>&nbsp;&nbsp;<a href="light.htm" title="Переход к родительскому классу: Light"><tt>Light &rarr;</tt></a></span>
 <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="lnk" onmouseover="show('сокращ. от англ. слов rectangular area light - свет прямоугольной области');" onmouseout="hide()">RectAreaLight</span></h3>
-Этот свет излучается равномерно всей стороной прямоугольной плоскости. Он может быть использован для симуляции таких вещей как светящееся окно или освещение лентой (полосой).
-<div class=note><b>Примечание:</b> этот класс в настоящее время находится в активной разработке и пока ещё не готов к полноценному использованию (начиная с версии r83). Вернитесь сюда через месяц или два! И в тоже время не стесняйтесь попробовать его в работе.</div><br>
+Этот свет излучается равномерно всей стороной прямоугольной плоскости. Он может быть использован для симуляции таких вещей как светящееся окно или освещение лентой (полосой).<br><br>
+Важные примечания:
+<ul><li>Нет поддержки теней.</li>
+<li>Поддерживаются только <a href="../materials/meshStandardMaterial.htm" onmouseover="show('MeshStandardMaterial')" onmouseout="hide()">MeshStandardMaterial</a> и <a href="../materials/meshPhysicalMaterial.htm" onmouseover="show('MeshPhysicalMaterial')" onmouseout="hide()">MeshPhysicalMaterial</a>.</li>
+<li>Требуется подключить <a href="https://threejs.org/examples/jsm/lights/RectAreaLightUniformsLib.js" target="_blank">RectAreaLightUniformsLib</a> к коду сцены и вызвать <code>init()</code>.</li></ul><br>
 
 <h4>Пример</h4>
-<pre>var width = 2;
+<pre>var width = 10;
 var height = 10;
-var rectLight = new THREE.RectAreaLight( 0xffffff, undefined,  width, height );
-rectLight.intensity = 70.0;
+var intensity = 1;
+var rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height );
 rectLight.position.set( 5, 5, 0 );
+rectLight.lookAt( 0, 0, 0 );
 scene.add( rectLight )<br>
 rectLightHelper = new THREE.RectAreaLightHelper( rectLight );
-scene.add( rectLightHelper );</pre>
+rectLight.add( rectLightHelper );</pre>
 <h5>Другие примеры:</h5>
 <pre><a href="https://threejs.org/examples/#webgl_lights_rectarealight" target="_blank">lights / rectarealight</a></pre><br>
 
@@ -33,48 +37,7 @@ scene.add( rectLightHelper );</pre>
 Создает новый RectAreaLight.<br><br>
 
 <h4>Свойства</h4>
-Смотрите базовый класс <a href="../core/object3D.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.
-<div class=blockindent><br>
-<pre id="castShadow"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('cast shadow - отбрасывать тень');" onmouseout="hide()">castShadow</a></span></pre>
-<!-- Если задано значение true, то данный тип освещения будет отбрасывать динамические тени.
-<div class=warning><b>Предупреждение:</b>  Это затратно по ресурсам и для правильного отображения теней требуется подстройка. Подробнее смотрите в описании <a href="#6.1" onmouseover="show('RectAreaLightShadow');" onmouseout="hide()">RectAreaLightShadow</a>.</div>
-Значением по умолчанию является <tt>false</tt>. -->
-<div class=note><b>Примечание:</b> это свойство для этого типа освещения пока ещё не реализовано! (версия three.js r83).</div><br>
-
-<pre id="decay"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('decay - распад');" onmouseout="hide()">.decay</a></span></pre>
-Значение, на которое уменьшается интенсивность света с увеличением расстояния от источника.<br>
-В режиме, <a href="../renderers/webGLRenderer.htm#physicallyCorrectLights" onmouseover="show('WebGLRenderer.physicallyCorrectLights');" onmouseout="hide()">правильном с точки зрения физики</a>, <tt>decay = 2</tt> приводит к физически реалистичному уменьшению освещенности.
-Значение по умолчанию равно <tt>1</tt>.
-<div class=note><b>Примечание:</b> это свойство для этого типа освещения пока ещё не реализовано! (версия three.js r83).</div><br>
-
-<pre id="distance"><span onclick="showClick(type_float)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('distance - расстояние');" onmouseout="hide()">.distance</a></span></pre>
-При ненулевом значении свет будет уменьшаться линейно от максимальной интенсивности (в расположении источника света) до нуля (на расстоянии от источника света, задаваемым данным свойством).
-Значение по умолчанию равно <tt>0.0</tt>.
-<div class=note><b>Примечание:</b> это свойство для этого типа освещения пока ещё не реализовано! (версия three.js r83).</div><br>
-
-<pre id="isRectAreaLight"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is rectangular area light - является<br>освещением от прямоугольной области');" onmouseout="hide()">.isRectAreaLight</a></span></pre>
-Свойство используется для проверки, является ли данный класс и производные от него классы RectAreaLight. Значением по умолчанию является <tt>true</tt>.<br>
-Его нельзя изменять, так как оно используется внутри <em>three.js</em> для оптимизации.<br><br>
-
-<pre id="position"><a href="../math/vector3.htm" onmouseover="show('Vector3.<br>position - позиция, положение');" onmouseout="hide()">.position</a></pre>
-Это свойство устанавливается равным <tt><a href="../core/object3D.htm#DefaultUp" onmouseover="show('Object3D.DefaultUp');" onmouseout="hide()">Object3D.DefaultUp</a> (0, 1, 0)</tt>, так что свет светит сверху вниз.<br><br>
-
-<!-- <pre id="6shadow"><a href="#6.1" onmouseover="show('RectAreaLightShadow.<br>shadow - тень');" onmouseout="hide()">.shadow</a></pre>
-Для расчета теней от этого освещения используется <a href="#6.1" onmouseover="show('RectAreaLightShadow');" onmouseout="hide()">RectAreaLightShadow</a>.
-<div class=note><b>Примечание:</b> это свойство для этого типа освещения пока ещё не реализовано! (версия three.js r83).</div><br> -->
-
-<pre id="target"><a href="../core/object3D.htm" onmouseover="show('Object3D.<br>target - цель, назначение');" onmouseout="hide()">.target</a></pre>
-Свет RectAreaLight направлен из своего местоположения (свойство <tt><a href="#position" onmouseover="show('RectAreaLight.position');" onmouseout="hide()">position</a></tt>) в целевую позицию, определяемую данным свойством.
-По умолчанию <tt>target</tt> будет равен <tt>(0, 0, 0)</tt>.
-
-<div class=note><b>Примечание:</b> чтобы изменить целевую позицию на что-либо другое кроме положения по умолчанию, её нужно добавить к <a href="../scenes/scene.htm" onmouseover="show('Scene');" onmouseout="hide()">сцене</a> при помощи
-<pre>scene.add( light.target );</pre>
-Это делается для того, чтобы <tt><a href="../core/object3D.htm#matrixWorld" onmouseover="show('Object3D.matrixWorld');" onmouseout="hide()">matrixWorld</a></tt> целевой позиции автоматически обновлялся с каждым кадром.<br>
-Также возможно установить целью другой объект на сцене (любой объект со свойством <tt><a href="../core/object3D.htm#position" onmouseover="show('Object3D.position');" onmouseout="hide()">position</a></tt>), вот так:
-<pre>var targetObject = new THREE.Object3D();
-scene.add(targetObject);<br>
-light.target = targetObject;</pre>
-Теперь RectAreaLight будет отслеживать целевой объект.</div></div><br>
+Смотрите базовый класс <a href="../core/object3D.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих свойств.<br><br>
 
 <h4>Методы</h4>
 Смотрите базовый класс <a href="../core/object3D.htm" onmouseover="show('Light');" onmouseout="hide()"><tt>Light</tt></a> для общих методов.

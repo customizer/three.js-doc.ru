@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../1.css">
+<script type="text/javascript" src="../1.js"></script>
+</head>
+<body>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GLBufferAttribute</h3>
+Данный класс буферных атрибутов сам не создает <a href="https://ru.wikipedia.org/wiki/Vertex_Buffer_Object" target="_blank" onmouseover="show('Vertex Buffer Object (VBO - объект буфера вершин) — особенность OpenGL,<br>обеспечивающая методы выгрузки данных (вершин, вектора нормали, цветов,<br>и так далее.) в видеоустройство для не оперативного режима рендеринга.<br>VBO дали существенный прирост производительности над непосредственным<br>режимом визуализации, в первую очередь, потому что данные находятся<br>в памяти видеоустройства, а не в оперативной памяти и поэтому она может<br>быть отрендерена непосредственно видеоустройством.')" onmouseout="hide()">объекта буфера вершин (VBO)</a>.
+Вместо этого он использует любой VBO, переданный в конструктор, и который впоследствии может быть изменен с помощью свойства <a href="#buffer" onmouseover="show('GLBufferAttribute.buffer')" onmouseout="hide()"><tt>buffer</tt></a>.<br><br>
+
+Вместе с VBO необходимо передавать дополнительные параметры: контекст GL (свойство <tt><a href="#buffer" onmouseover="show('GLBufferAttribute.buffer')" onmouseout="hide()">buffer</a></tt>),
+тип данных GL (<tt><a href="#type" onmouseover="show('GLBufferAttribute.type')" onmouseout="hide()">type</a></tt>),
+количество компонентов на вершину (<tt><a href="#itemSize" onmouseover="show('GLBufferAttribute.itemSize')" onmouseout="hide()">itemSize</a></tt>),
+количество байтов на компонент (<tt><a href="#elementSize" onmouseover="show('GLBufferAttribute.elementSize')" onmouseout="hide()">elementSize</a></tt>)
+и число вершин (<tt><a href="#count" onmouseover="show('GLBufferAttribute.count')" onmouseout="hide()">count</a></tt>).<br><br>
+
+Наиболее часто данный класс используется когда мешает какой-то расчет GPGPU или даже производит рассматриваемые VBO.<br><br>
+
+<h4 id="constructor">Конструктор</h4><br>
+<pre>GLBufferAttribute( <span onclick="showClick('значением должен быть WebGLBuffer')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('buffer - буфер')" onmouseout="hide()">buffer</a></span>, <span onclick="showClick('GLenum')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item size - размер пункта')" onmouseout="hide()">itemSize</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('element size - размер элемента')" onmouseout="hide()">elementSize</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет, номер')" onmouseout="hide()">count</a></span> )</pre>
+
+<div class=list><tt>buffer</tt> — значением должен быть <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLBuffer" target="_blank" onmouseover="show('Интерфейс WebGLBuffer является частью API WebGL и представляет<br>собой непрозрачный буферный объект, хранящий такие данные,<br>как вершины или цвета.')" onmouseout="hide()">WebGLBuffer</a>.</div>
+<div class=list><tt>type</tt> — один из типов данных WebGL.</div>
+<div class=list><tt>itemSize</tt> — число значений массива, связанных с конкретной вершиной. Например, если этот атрибут хранит трехкомпонентный вектор (такой как <tt>position</tt> - положение, <tt>normal</tt> - нормаль или <tt>color</tt> - цвет), тогда <tt>itemSize</tt> должен быть равен&nbsp;<tt>3</tt>.</div>
+<div class=list><tt>elementSize</tt> — размер (в байтах), соответствующий заданному значению параметра <tt>type</tt>. Значением может быть&nbsp;<tt>1</tt>, <tt>2</tt> или&nbsp;<tt>4</tt>.<br>
+&nbsp; &#9679; &nbsp; <code>gl.FLOAT</code> - <tt>4</tt><br>
+&nbsp; &#9679; &nbsp; <code>gl.UNSIGNED_SHORT</code> - <tt>2</tt><br>
+&nbsp; &#9679; &nbsp; <code>gl.SHORT</code> - <tt>2</tt><br>
+&nbsp; &#9679; &nbsp; <code>gl.UNSIGNED_INT</code> - <tt>4</tt><br>
+&nbsp; &#9679; &nbsp; <code>gl.INT</code> - <tt>4</tt><br>
+&nbsp; &#9679; &nbsp; <code>gl.BYTE</code> - <tt>1</tt><br>
+&nbsp; &#9679; &nbsp; <code>gl.UNSIGNED_BYTE</code> - <tt>1</tt></div>
+<div class=list><tt>count</tt> — ожидаемое количество вершин VBO.</div><br>
+
+
+<h4>Свойства</h4>
+<div class="blockindent"><br>
+<pre id="buffer"><span onclick="showClick('значением должен быть WebGLBuffer')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('buffer - буфер')" onmouseout="hide()">.buffer</a></span></pre>
+Текущий экземпляр WebGLBuffer.<br><br>
+
+<pre id="count"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет, номер')" onmouseout="hide()">.count</a></span></pre>
+Ожидаемое количество вершин VBO<br><br>
+
+<pre id="itemSize"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item size - размер пункта')" onmouseout="hide()">.itemSize</a></span></pre>
+Свойство определяет количество значений, приходящихся на каждый пункт (вершину).<br><br>
+
+<pre id="elementSize"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('element size - размер элемента')" onmouseout="hide()">.elementSize</a></span></pre>
+Свойство хранит соответствующий размер в байтах для значения текущего свойства <tt><a href="#type" onmouseover="show('GLBufferAttribute.type')" onmouseout="hide()">type</a></tt>.<br>
+Список известных размеров <tt>type</tt> <a href="#constructor" onmouseover="show('Конструктор')" onmouseout="hide()">смотрите выше (в конструкторе)</a>.<br><br>
+
+<pre id="type"><span onclick="showClick('GLenum')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">.type</a></span></pre>
+Тип данных WebGL, описывающий основное содержимое VBO.<br>
+Установите это свойство вместе с <tt><a href="#elementSize" onmouseover="show('GLBufferAttribute.elementSize')" onmouseout="hide()">elementSize</a></tt>. Рекомендуется использовать метод <tt><a href="#setType" onmouseover="show('GLBufferAttribute.setType')" onmouseout="hide()">setType</a></tt>.<br><br>
+
+<pre id="isGLBufferAttribute"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('is GL buffer attribute - является буферным атрибутом WebGL')" onmouseout="hide()">.isGLBufferAttribute</a></span></pre>
+Свойство предназначено только для чтения. Значение всегда равно&nbsp;<tt>true</tt>.</div><br>
+
+<h4>Методы</h4>
+<div class="blockindent"><br>
+<pre id="setBuffer"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set buffer - установить буфер')" onmouseout="hide()">.setBuffer</a></span>( <span onclick="showClick('значением должен быть WebGLBuffer')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('buffer - буфер')" onmouseout="hide()">buffer</a></span> )</pre>
+Метод устанавливает свойство <tt><a href="#buffer" onmouseover="show('GLBufferAttribute.buffer')" onmouseout="hide()">buffer</a></tt>.<br><br>
+
+<pre id="setType"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set type - установить тип')" onmouseout="hide()">.setType</a></span>( <span onclick="showClick('GLenum')"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('type - тип')" onmouseout="hide()">type</a></span>, <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('element size - размер элемента')" onmouseout="hide()">elementSize</a></span> )</pre>
+Устанавливает значения свойств <tt><a href="#type" onmouseover="show('GLBufferAttribute.type')" onmouseout="hide()">type</a></tt> и <tt><a href="#elementSize" onmouseover="show('GLBufferAttribute.elementSize')" onmouseout="hide()">elementSize</a></tt>.<br><br>
+
+<pre id="setItemSize"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set item size - установить размер пункта')" onmouseout="hide()">.setItemSize</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('item size - размер пункта')" onmouseout="hide()">itemSize</a></span> )</pre>
+Устанавливает значение свойства <tt><a href="#itemSize" onmouseover="show('GLBufferAttribute.itemSize')" onmouseout="hide()">itemSize</a></tt>.<br><br>
+
+<pre id="setCount"><span onclick="showClick(type_null)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set count - установить счет')" onmouseout="hide()">.setCount</a></span>( <span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('count - счет, номер')" onmouseout="hide()">count</a></span> )</pre>
+Устанавливает значение свойства <tt><a href="#count" onmouseover="show('GLBufferAttribute.count')" onmouseout="hide()">count</a></tt>.<br><br>
+
+<pre id="version"><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('version - версия')" onmouseout="hide()">.version</a></span></pre>
+Номер версии, увеличивающийся всякий раз, когда <tt>needsUpdate</tt> устанавливается как <tt>true</tt>.<br><br>
+
+<pre id="needsUpdate"><span onclick="showClick(type_bool)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('needs update - требуется обновление')" onmouseout="hide()">.needsUpdate</a></span></pre>
+Значением по умолчанию является <tt>false</tt>. Установка значения как <tt>true</tt> увеличивает номер версии на единицу.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/core/GLBufferAttribute.js" target="_blank">GLBufferAttribute.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

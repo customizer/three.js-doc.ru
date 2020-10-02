@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Three.js - Примеры - Загрузчики</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../../1.css">
+<script type="text/javascript" src="../../1.js"></script>
+</head>
+<body>
+
+<span class="right_side"><a href="../../loaders/loader.htm" title="Переход к родительскому классу"><tt>Loader &rarr;</tt></a></span>
+<h3>3DMLoader</h3>
+Загрузчик для объектов и файлов <a href="https://ru.wikipedia.org/wiki/Rhinoceros_3D" target="_blank" onmouseover="show('Rhinoceros (Rhino) — коммерческое программное обеспечение для<br>трехмерного NURBS-моделирования разработки Robert McNeel & Associates.<br>Преимущественно используется в промышленном дизайне, архитектуре,<br>корабельном проектировании, ювелирном и автомобильном дизайне,<br>в CAD/CAM проектировании, быстром прототипировании, реверсивной<br>разработке, а также в мультимедиа и графическом дизайне.<br>Формат файла Rhino <tt>.3DM</tt>.')" onmouseout="hide()">Rhinoceros 3d</a>.
+Вот более подробно о <a href="https://www.rhino3d.com/ru/6/features" target="_blank">Rhinoceros 3D на русском языке</a>.<br><br>
+Rhinoceros - это средство 3D-моделирования, используемое для создания, редактирования, анализа, документирования, рендеринга, анимации и преобразования
+<a href="https://ru.wikipedia.org/wiki/NURBS" target="_blank" onmouseover="show('Неоднородный рациональный B-сплайн, NURBS (сокращ. англ.<br>слов non-uniform rational B-spline) — математическая форма,<br>применяемая в компьютерной графике для генерации и<br>представления кривых и поверхностей.')" onmouseout="hide()">NURBS-кривых</a>,
+поверхностей, твердых тел, облаков точек, а также полигональных сетей и объектов <a href="https://en.wikipedia.org/wiki/Subdivision_surface" target="_blank" onmouseover="show('SubD - сокращ. англ. слова subdivision - дробление, деление на отсеки.<br>В области компьютерной 3D-графики, SubD-поверхность (поверхность<br>разделения) - это метод представления гладкой поверхности посредством<br>задания более грубой полигональной сетки. Гладкую поверхность можно<br>рассчитать на основе грубой сетки как предел итерационного процесса<br>разделения каждой многоугольной грани на более мелкие грани, которые<br>лучше аппроксимируют гладкую поверхность.')" onmouseout="hide()">SubD</a>.
+<a href="https://github.com/mcneel/rhino3dm" target="_blank" onmouseover="show('<tt>rhino3dm</tt> - это набор библиотек, основанный на библиотеке<br>геометрических элементов OpenNURBS в стиле &#171;RhinoCommon&#187;.<br>Она обеспечивает возможность доступа к геометрическим<br>элементам и управления ими независимо от Rhino с помощью<br>приложений .NET, Python или JavaScript.')" onmouseout="hide()"><code>rhino3dm.js</code></a>
+компилируется в WebAssembly из библиотеки геометрических элементов с открытым исходным кодом <a href="https://github.com/mcneel/opennurbs" target="_blank">openNURBS</a>. В настоящее время используется rhino3dm.js версии 0.13.0.
+<div class=note_trans><b>Примечание переводчика:</b> Для более детального ознакомления с разделенными поверхностями посмотрите статьи <a href="https://compress.ru/article.aspx?id=17505&part=index1ext1" target="_blank">&#171;Первые шаги в Maya. Урок 9. Моделирование с применением подразбиваемых поверхностей&#187;</a> и <a href="https://ru.qwe.wiki/wiki/Subdivision_surface" target="_blank">&#171;Подразделение поверхности&#187;</a>.</div><br>
+
+<h4>Поддерживаемые преобразования</h4><br>
+3DMLoader загружает следующие объекты в соответствии с типом <em>three.js</em>:
+<table width=40% cellpadding=10 cellspacing=0 style="border-collapse:collapse;">
+<tr style="background-color:#dcdcdc; font-size:110%; white-space:nowrap; letter-spacing:2px;"><td><code>3dm</code> тип</td><td width=2%>&nbsp;</td><td><code>three.js</code> тип</td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; Point</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../objects/points.htm" onmouseover="show('Points')" onmouseout="hide()">Points</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; PointSet</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../objects/points.htm" onmouseover="show('Points')" onmouseout="hide()">Points</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; TextDot</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../objects/sprite.htm" onmouseover="show('Sprite')" onmouseout="hide()">Sprite</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; Curve</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../objects/line.htm" onmouseover="show('Line')" onmouseout="hide()">Line</a><sup>1</sup></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; Mesh</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../objects/mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">Mesh</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; Extrusion</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../objects/mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">Mesh</a><sup>2</sup></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; <a href="https://ru.wikipedia.org/wiki/%D0%93%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank" onmouseover="show('В твердотельном моделировании и компьютерном проектировании, граничное<br>представление, часто обозначаемое как B-rep или BREP (сокращ. англ. слов<br>boundary representation - граничное представление), — способ представления<br>фигур с помощью границ. Твердое тело представляет собой совокупность<br>взаимосвязанных элементов поверхности - границ между телом и окружающим<br>пространством.')" onmouseout="hide()">BREP</a></td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a><sup>2,</sup><sup>3</sup></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; SubD</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../objects/mesh.htm" onmouseover="show('Mesh')" onmouseout="hide()">Mesh</a><sup>4</sup></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; InstanceReferences</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../core/object3D.htm" onmouseover="show('Object3D')" onmouseout="hide()">Object3D</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; DirectionalLight</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../lights/directionalLight.htm" onmouseover="show('DirectionalLight')" onmouseout="hide()">DirectionalLight</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; PointLight</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../lights/pointLight.htm" onmouseover="show('PointLight')" onmouseout="hide()">PointLight</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; RectangularLight</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../lights/rectAreaLight.htm" onmouseover="show('RectAreaLight')" onmouseout="hide()">RectAreaLight</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td>&nbsp; &nbsp; SpotLight</td><td width=2%></td><td>&nbsp; &nbsp; <a href="../../lights/spotLight.htm" onmouseover="show('SpotLight')" onmouseout="hide()">SpotLight</a></td></tr>
+<tr style="border-top:1px solid #808080;"><td colspan="3"><div style="font-size:90%; margin-left:1%;"><sup>1</sup> Кривые NURBS дискретизированы с жестко заданным разрешением.<br>
+<sup>2</sup> Типы, основанные на поверхностях BREP и NURBS, представлены с помощью их «Render Mesh».<br>
+<sup>3</sup> Элементы с BREP преобразуются в Object3D со своим дочерним массивом, заполненным гранями BREP.<br>
+<sup>4</sup> Объекты SubD представлены путем деления их управляющей сети.</div></td></tr></table><br>
+
+<h4>Пример</h4>
+<pre>// Instantiate a loader (создание экземпляра загрузчика)
+var loader = new Rhino3dmLoader();<br>
+// Specify path to a folder containing WASM/JS libraries.
+// Указываем путь к папке, содержащей библиотеки WASM/JS.
+loader.setLibraryPath( '/examples/jsm/libs/rhino3dm/' );<br>
+// Load a 3DM file (загрузка 3dm-файла)
+loader.load(
+	// resource URL (адрес ресурса)
+	'model.3dm',
+	// called when the resource is loaded (вызывается по завершении загрузки)
+	function ( object ) {
+		scene.add( object );
+	},
+	// called as loading progresses (вызывается во время загрузки)
+	function ( xhr ) {
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+	},
+	// called when loading has errors (вызывается при ошибках в загрузке)
+	function ( error ) {
+		console.log( 'Произошла ошибка' );
+	}
+);</pre>
+
+<h5>Другие примеры:</h5>
+<pre><a href="https://threejs.org/examples/#webgl_loader_3dm" target="_blank">webgl / loader / 3dm</a></pre><br>
+
+<h4>Конструктор</h4>
+<pre>Rhino3dmLoader( <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager.<br>manager - менеджер, управляющий')" onmouseout="hide()">manager</a> )</pre>
+<div class=list><tt>manager</tt> — <a href="../../loaders/loadingManager.htm" onmouseover="show('LoadingManager')" onmouseout="hide()">менеджер загрузки</a>, используемый для загрузки.
+Значением по умолчанию является <a href="../../loaders/defaultLoadingManager.htm" onmouseover="show('DefaultLoadingManager')" onmouseout="hide()">THREE.DefaultLoadingManager</a>.</div>
+Создает новый Rhino3dmLoader.<br><br>
+
+<h4>Свойства</h4>
+Общие свойства смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<br><br>
+
+<h4>Методы</h4>
+Общие методы смотрите в описании базового класса <a href="../../loaders/loader.htm" onmouseover="show('Loader')" onmouseout="hide()">Loader</a>.
+<div class=blockindent><br>
+<pre id="load"><a href="../../textures/dataTexture.htm" onmouseover="show('DataTexture.<br>load - загрузить')" onmouseout="hide()">.load</a>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('url - сокращ. англ. слов Uniform Resource Locator<br>- единообразный локатор (определитель<br>местонахождения) ресурса')" onmouseout="hide()">url</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on load - на загрузку')" onmouseout="hide()">onLoad</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on progress - на ход процесса')" onmouseout="hide()">onProgress</a></span>, <span onclick="showClick(type_func)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('on error - на ошибку')" onmouseout="hide()">onError</a></span> )</pre>
+<div class=list><tt>url</tt> — строка, содержащая путь/URL-адрес <tt>.3dm</tt>-файла (обязательный аргумент).</div>
+<div class=list><tt>onLoad</tt> — функция, которая будет вызвана после успешного завершения загрузки.</div>
+<div class=list><tt>onProgress</tt> - функция, которая будет вызываться пока идет процесс загрузки.
+Аргументом будет экземпляр XMLHttpRequest, что содержит сведения о загрузке <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('total - полный (размер ресурса)')" onmouseout="hide()">total</a></span></tt>
+и <tt><span onclick="showClick(type_int)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('loaded - загружено, в данном случае<br>размер загруженного ресурса')" onmouseout="hide()">loaded</a></span></tt> в байтах.</div>
+<div class=list><tt>onError</tt> — функция, которая будет вызвана в случае ошибки при загрузке, дополнительный, необязательный параметр. Функция принимает ошибку в качестве аргумента.</div>
+Начинает загрузку с URL-адреса и после её успешного завершения вызывает функцию, указанную в <tt>onLoad</tt>, с полученным геометрическим элементом.<br><br>
+
+<pre id="setLibraryPath"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set library path - установить путь к библиотеке')" onmouseout="hide()">.setLibraryPath</a></span>( <span onclick="showClick(type_string)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('value - значение')" onmouseout="hide()">value</a></span> )</pre>
+
+<div class=list><tt>value</tt> - путь к папке, содержащей библиотеки JS и WASM.</div>
+Метод устанавливает путь к папке, содержащей библиотеки JS и WASM.<br><br>
+
+<pre id="setWorkerLimit"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('set worker limit - установить предел веб-обработчиков')" onmouseout="hide()">.setWorkerLimit</a></span>( <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('worker limit - предельное число обработчиков')" onmouseout="hide()">workerLimit</a></span> )</pre>
+
+<div class=list><tt>workerLimit</tt> - максимальное число выделяемых веб-обработчиков (web worker). Значением по умолчанию является&nbsp;<tt>4</tt>.</div>
+Устанавливает максимальное число веб-обработчиков (web worker), которое будет использовано при декодировании.
+Если веб-обработчики используются в приложении также и для других задач, то предпочтительнее может быть наименьшее их число.<br><br>
+
+<pre id="dispose"><span onclick="showClick(type_this)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - уничтожить, избавиться')" onmouseout="hide()">.dispose</a></span>()</pre>
+Метод удаляет ресурсы загрузчика и высвобождает память.</div><br>
+
+<h4>Исходники</h4>
+<div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/3DMLoader.js" target="_blank">3DMLoader.js на github.com</a></div><br><br>
+
+<br><br>
+</body></html>

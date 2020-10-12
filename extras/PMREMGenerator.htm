@@ -7,48 +7,60 @@
 </head>
 <body>
 <h3>PMREMGenerator</h3>
+Данный класс генерирует карту отражения света среды с предварительным фильтрованием и <a href="https://ru.wikipedia.org/wiki/MIP-%D1%82%D0%B5%D0%BA%D1%81%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank" onmouseover="show('MIP-текстурирование (англ. MIP mapping) — метод текстурирования, использующий<br>несколько копий одной текстуры с разной детализацией. Название происходит<br>от латинских слов <tt>multum in parvo</tt> — &#171;много в малом&#187;.')" onmouseout="hide()">MIP-текстурированием</a>
+(Prefiltered, Mipmapped Radiance Environment Map - PMREM) из кубической текстурной среды - <tt>cubeMap</tt>.
+Он позволяет получать быстрый доступ к различным уровням размытия в зависимости от шероховатости материала.
+Он упакован в специальный формат <a href="../constants/textures.htm#mappingModes" onmouseover="show('режимы картирования')" onmouseout="hide()">CubeUV</a>,
+который позволяет выполнять настраиваемую интерполяцию, чтобы поддерживать нелинейные форматы, такие как <a href="../constants/textures.htm#formats" onmouseover="show('форматы текстур')" onmouseout="hide()">RGBEFormat</a>.
+В отличие от традиционной цепочки mipmap, он только снижается до уровня <tt class="lnk" onmouseover="show('LOD_MIN - сокращ. от англ. слов level of detail minimum<br>- минимальный уровень детализации')" onmouseout="hide()">LOD_MIN</tt>
+и затем создается дополнительные, более отфильтрованные <tt>mip</tt>'ы в том же самом разрешении <tt>LOD_MIN</tt>, связанные с более высокими уровнями шероховатости.
+Таким образом сохраняется разрешение для плавной интерполяции рассеянного освещения и в тоже время ограничивается расчет выборки.<br><br>
 
-This class generates a Prefiltered, Mipmapped Radiance Environment Map (PMREM) from a cubeMap environment texture. This allows different levels of blur to be quickly accessed based on material roughness. It is packed into a special CubeUV format that allows us to perform custom interpolation so that we can support nonlinear formats such as RGBE. Unlike a traditional mipmap chain, it only goes down to the LOD_MIN level (above), and then creates extra even more filtered 'mips' at the same LOD_MIN resolution, associated with higher roughness levels. In this way we maintain resolution to smoothly interpolate diffuse lighting while limiting sampling computation.<br><br>
+<!-- The standard deviations (radians) associated with the extra mips. These are chosen to approximate a Trowbridge-Reitz distribution function times the geometric shadowing function. These sigma values squared must match the variance #defines in cube_uv_reflection_fragment.glsl.js.
+
+The maximum length of the blur for loop. Smaller sigmas will use fewer samples and exit early, but not recompile the shader. -->
 
 <h4>Конструктор</h4>
-<pre>PMREMGenerator( renderer : WebGLRenderer )</pre>
+<pre>PMREMGenerator( <a href="../renderers/webGLRenderer.htm" onmouseover="show('WebGLRenderer')" onmouseout="hide()">renderer</a> )</pre>
 Данный конструктор создает новый PMREMGenerator.<br><br>
 
 <h4>Методы</h4>
 <div class=blockindent><br>
-<pre id="fromScene">.fromScene ( scene : Scene, sigma : Number, near : Number, far : Number ) : WebGLRenderTarget</pre>
+<pre id="fromScene"><a href="../renderers/webGLRenderTarget.htm" onmouseover="show('WebGLRenderTarget<br>from scene - из сцены')" onmouseout="hide()">.fromScene</a>( <a href="../scenes/scene.htm" onmouseover="show('Scene<br>scene - сцена')" onmouseout="hide()">scene</a>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('sigma - сигма (18-ая буква греческого алфавита)<br>здесь определяет радиус размытия')" onmouseout="hide()">sigma</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('near - близкий, ближний')" onmouseout="hide()">near</a></span>, <span onclick="showClick(type_number)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('far - дальний, далекий')" onmouseout="hide()">far</a></span> )</pre>
 
-<div class=list><tt>scene</tt> - The given scene.</div>
-<div class=list><tt>sigma</tt> - (optional) Specifies a blur radius in radians to be applied to the scene before PMREM generation. Default is 0.</div>
-<div class=list><tt>near</tt> - (optional) The near plane value. Default is 0.1.</div>
-<div class=list><tt>far</tt> - (optional) The far plane value. Default is 100.</div>
+<div class=list><tt>scene</tt> - заданная сцена.</div>
+<div class=list><tt>sigma</tt> - коэффициент, определяющий радиус размытия (в радианах), применяемый к сцене перед генерацией PMREM-среды. Значение по умолчанию равно&nbsp;<tt>0</tt>. Дополнительный, необязательный параметр.</div>
+<div class=list><tt>near</tt> - значение ближней плоскости отсечения. Значение по умолчанию равно&nbsp;<tt>0.1</tt>. Дополнительный, необязательный параметр.</div>
+<div class=list><tt>far</tt> - значение дальней плоскости отсечения. Значение по умолчанию равно&nbsp;<tt>100</tt>. Дополнительный, необязательный параметр.</div>
+Создает PMREM-среду из предоставленной сцены, что при низкой пропускной способности сети может быть быстрее использования изображения.
+Дополнительные, необязательные плоскости отсечения (ближняя - <tt>near</tt> и дальняя - <tt>far</tt>) гарантируют полное отображение сцены целиком (камера <a href="../cameras/cubeCamera.htm" onmouseover="show('CubeCamera')" onmouseout="hide()">CubeCamera</a> помещается в начало координат).<br><br>
 
-Generates a PMREM from a supplied Scene, which can be faster than using an image if networking bandwidth is low. Optional near and far planes ensure the scene is rendered in its entirety (the cubeCamera is placed at the origin).<br><br>
+<pre id="fromEquirectangular"><a href="../renderers/webGLRenderTarget.htm" onmouseover="show('WebGLRenderTarget<br>from equirectangular - из равнопромежуточной (проекции)')" onmouseout="hide()">.fromEquirectangular</a>( <a href="../textures/texture.htm" onmouseover="show('Texture<br>equirectangular - равнопрямоугольная, равнопромежуточная (проекция)')" onmouseout="hide()">equirectangular</a> )</pre>
 
-<pre id="fromEquirectangular">.fromEquirectangular ( equirectangular : Texture ) : WebGLRenderTarget</pre>
+<div class=list><tt>equirectangular</tt> - <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B2%D0%BD%D0%BE%D0%BF%D1%80%D0%BE%D0%BC%D0%B5%D0%B6%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D1%8F" target="_blank" onmouseover="show('Равнопромежуточная текстура представляет вид на 360 градусов по<br>горизонтальной оси и на 180 градусов по вертикальной оси, с верхним<br>и нижним краями изображения соответствующими северному и южному<br>полюсам отображаемой сферы.')" onmouseout="hide()">равнопромежуточная текстура</a>.</div>
 
-<div class=list><tt>equirectangular</tt> - The equirectangular texture.</div>
+Создает PMREM-среду из равнопромежуточной текстуры, которая может быть либо LDR (<a href="../constants/textures.htm#formats" onmouseover="show('форматы текстур')" onmouseout="hide()">RGBFormat</a>),
+либо <a href="https://ru.wikipedia.org/wiki/High_Dynamic_Range_Imaging" target="_blank" onmouseover="show('High Dynamic Range Imaging, HDRI или просто HDR — технологии работы<br>с изображениями и видео, диапазон яркости которых превышает<br>возможности стандартных технологий.')" onmouseout="hide()">HDR</a> (<a href="../constants/textures.htm#formats" onmouseover="show('форматы текстур')" onmouseout="hide()">RGBEFormat</a>).
+Идеальный размер входного изображения - <tt>1k(1024&#215;512)</tt>, так как он лучше всего подходит для вывода кубической карты&nbsp;<tt>256&#215;256</tt>.<br><br>
 
-Generates a PMREM from an equirectangular texture, which can be either LDR (RGBFormat) or HDR (RGBEFormat). The ideal input image size is 1k (1024 x 512), as this matches best with the 256 x 256 cubemap output.<br><br>
+<pre id="fromCubemap"><a href="../renderers/webGLRenderTarget.htm" onmouseover="show('WebGLRenderTarget<br>from cube map - из карты (развертки) куба')" onmouseout="hide()">.fromCubemap</a>( <a href="../textures/cubeTexture.htm" onmouseover="show('CubeTexture<br>cube map - карта (развертка) куба')" onmouseout="hide()">cubemap</a> )</pre>
 
-<pre id="fromCubemap">.fromCubemap ( cubemap : CubeTexture ) : WebGLRenderTarget</pre>
+<div class=list><tt>cubemap</tt> - текстура кубической карты (развертки куба).</div>
+Создает PMREM-среду из кубической карты текстуры, которая может быть либо в формате LDR (RGBFormat), либо в HDR (RGBEFormat).
+Идеальный размер входной кубической текстуры равен&nbsp;<tt>256&#215;256</tt>, так он лучше всего подходит для получения на выходе кубической карты&nbsp;<tt>256&#215;256</tt>.<br><br>
 
-<div class=list><tt>cubemap</tt> - The cubemap texture.</div>
+<pre id="compileCubemapShader"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compile cubemap shader - скомпилировать шейдер<br>с кубической текстурной карты')" onmouseout="hide()">.compileCubemapShader</a></span>()</pre>
+Метод предварительно компилирует (собирает) шейдер кубической текстурной карты.
+Можно ускорить запуск вызывая данный метод во время выборки по сети текстуры для повышения параллельной обработки (увеличения многопоточности).<br><br>
 
-Generates a PMREM from an cubemap texture, which can be either LDR (RGBFormat) or HDR (RGBEFormat). The ideal input cube size is 256 x 256, as this matches best with the 256 x 256 cubemap output.<br><br>
+<pre id="compileEquirectangularShader"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('compile equirectangular shader - скомпилировать<br>равнопромежуточный шейдер')" onmouseout="hide()">.compileEquirectangularShader</a></span>()</pre>
+Метод предварительно компилирует (собирает) равнопромежуточный шейдер.
+Можно ускорить запуск вызывая данный метод во время выборки по сети текстуры для повышения параллельной обработки (увеличения многопоточности).<br><br>
 
-<pre id="compileCubemapShader">.compileCubemapShader () : void</pre>
-
-Pre-compiles the cubemap shader. You can get faster start-up by invoking this method during your texture's network fetch for increased concurrency.<br><br>
-
-<pre id="compileEquirectangularShader">.compileEquirectangularShader () : void</pre>
-
-Pre-compiles the equirectangular shader. You can get faster start-up by invoking this method during your texture's network fetch for increased concurrency.<br><br>
-
-<pre id="dispose">.dispose () : void</pre>
-
-Disposes of the PMREMGenerator's internal memory. Note that PMREMGenerator is a static class, so you should not need more than one PMREMGenerator object. If you do, calling dispose() on one of them will cause any others to also become unusable.
-</div><br>
+<pre id="dispose"><span onclick="showClick(type_void)"><a href="#" onclick="return false" onblur="hideClick()" onmouseover="show('dispose - уничтожить, выбросить')" onmouseout="hide()">.dispose</a></span>()</pre>
+Высвобождает внутреннюю память PMREMGenerator'а.
+Обратите внимание, что PMREMGenerator - это статический класс, поэтому более одного объекта PMREMGenerator не требуется.
+Если все же сделать так (т.е. создать несколько PMREMGenerator'ов), вызов <tt>dispose()</tt> для одного из них приведет к тому, что все остальные также станут непригодными для использования.</div><br>
 
 <h4>Исходники</h4>
 <div class=blockindent><a href="https://github.com/mrdoob/three.js/blob/master/src/extras/PMREMGenerator.js" target="_blank">PMREMGenerator.js на github.com</a></div><br><br>
